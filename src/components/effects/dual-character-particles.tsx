@@ -15,6 +15,9 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
   const [opacity, setOpacity] = useState(0);
   const prevThemeIdsRef = useRef<string[]>([]);
   const fadeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [performanceMode, setPerformanceMode] = useState<'high' | 'medium' | 'low'>('high');
+  const frameCountRef = useRef<number>(0);
+  const lastFpsCheckRef = useRef<number>(0);
 
   // Create particle based on theme and side
   const createParticle = useCallback((theme: CharacterTheme, side: 'left' | 'right'): any => {
@@ -150,10 +153,34 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     }
   }, []);
 
+  // Performance monitoring
+  const checkPerformance = useCallback((currentTime: number) => {
+    frameCountRef.current++;
+    
+    if (currentTime - lastFpsCheckRef.current >= 1000) { // Check every second
+      const fps = frameCountRef.current;
+      frameCountRef.current = 0;
+      lastFpsCheckRef.current = currentTime;
+      
+      if (fps < 30 && performanceMode === 'high') {
+        setPerformanceMode('medium');
+      } else if (fps < 20 && performanceMode === 'medium') {
+        setPerformanceMode('low');
+      } else if (fps > 50 && performanceMode === 'low') {
+        setPerformanceMode('medium');
+      } else if (fps > 55 && performanceMode === 'medium') {
+        setPerformanceMode('high');
+      }
+    }
+  }, [performanceMode]);
+
   // Update particles
   const updateParticles = useCallback((deltaTime: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    // Skip updates on low performance mode
+    if (performanceMode === 'low' && Math.random() > 0.5) return;
 
     particlesRef.current = particlesRef.current.filter(particle => {
       particle.life += 1;
@@ -224,7 +251,15 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     // Add new particles with enhanced rates for comparison page
     if (leftTheme) {
       const particleConfig = getComparisonParticleRates(leftTheme);
-      if (Math.random() < particleConfig.spawnChance && particlesRef.current.length < particleConfig.maxParticles) {
+      // Adjust spawn rates based on performance mode
+      const adjustedSpawnChance = performanceMode === 'high' ? particleConfig.spawnChance : 
+                                 performanceMode === 'medium' ? particleConfig.spawnChance * 0.6 : 
+                                 particleConfig.spawnChance * 0.3;
+      const adjustedMaxParticles = performanceMode === 'high' ? particleConfig.maxParticles : 
+                                  performanceMode === 'medium' ? Math.floor(particleConfig.maxParticles * 0.7) : 
+                                  Math.floor(particleConfig.maxParticles * 0.4);
+      
+      if (Math.random() < adjustedSpawnChance && particlesRef.current.length < adjustedMaxParticles) {
         // For Caesar, create mixed particle types (flow + lightning)
         if (leftTheme.id === 'caesar-bloxwright') {
           const particleType = Math.random();
@@ -255,7 +290,15 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
 
     if (rightTheme) {
       const particleConfig = getComparisonParticleRates(rightTheme);
-      if (Math.random() < particleConfig.spawnChance && particlesRef.current.length < particleConfig.maxParticles) {
+      // Adjust spawn rates based on performance mode
+      const adjustedSpawnChance = performanceMode === 'high' ? particleConfig.spawnChance : 
+                                 performanceMode === 'medium' ? particleConfig.spawnChance * 0.6 : 
+                                 particleConfig.spawnChance * 0.3;
+      const adjustedMaxParticles = performanceMode === 'high' ? particleConfig.maxParticles : 
+                                  performanceMode === 'medium' ? Math.floor(particleConfig.maxParticles * 0.7) : 
+                                  Math.floor(particleConfig.maxParticles * 0.4);
+      
+      if (Math.random() < adjustedSpawnChance && particlesRef.current.length < adjustedMaxParticles) {
         // For Caesar, create mixed particle types (flow + lightning)
         if (rightTheme.id === 'caesar-bloxwright') {
           const particleType = Math.random();
@@ -294,6 +337,9 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     if (!ctx) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Skip rendering on low performance mode occasionally
+    if (performanceMode === 'low' && Math.random() > 0.7) return;
 
     particlesRef.current.forEach(particle => {
       ctx.save();
@@ -428,11 +474,12 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     const deltaTime = currentTime - lastTimeRef.current;
     lastTimeRef.current = currentTime;
 
+    checkPerformance(currentTime);
     updateParticles(deltaTime);
     renderParticles();
 
     animationFrameRef.current = requestAnimationFrame(animate);
-  }, [updateParticles, renderParticles]);
+  }, [updateParticles, renderParticles, checkPerformance]);
 
   // Fade transition logic
   useEffect(() => {
@@ -497,6 +544,44 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
   useEffect(() => {
     particlesRef.current = [];
   }, [leftTheme, rightTheme]);
+
+  // Fallback for very low performance
+  if (performanceMode === 'low' && particlesRef.current.length === 0) {
+    return (
+      <div 
+        className="absolute inset-0 w-full h-full pointer-events-none z-0"
+        style={{ opacity, transition: 'opacity 0.8s ease-in-out' }}
+      >
+        {/* Simple CSS-based particles for low-end devices */}
+        <div className="absolute inset-0 overflow-hidden">
+          {leftTheme && (
+            <div 
+              className="absolute w-1 h-1 rounded-full animate-pulse"
+              style={{
+                backgroundColor: leftTheme.particles.color,
+                left: '20%',
+                top: '30%',
+                animationDelay: '0s',
+                animationDuration: '2s'
+              }}
+            />
+          )}
+          {rightTheme && (
+            <div 
+              className="absolute w-1 h-1 rounded-full animate-pulse"
+              style={{
+                backgroundColor: rightTheme.particles.color,
+                right: '20%',
+                top: '70%',
+                animationDelay: '1s',
+                animationDuration: '2s'
+              }}
+            />
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <canvas
