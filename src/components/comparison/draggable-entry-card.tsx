@@ -44,13 +44,12 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
       onClick={handleClick}
       className={cn(
         "group relative overflow-hidden transition-all duration-300",
-        "border-0 hover:border-primary/50",
-        !isDisabled && "cursor-grab active:cursor-grabbing hover:shadow-xl hover:shadow-primary/10",
+        "border-0",
+        !isDisabled && "cursor-grab active:cursor-grabbing",
         isDisabled && "opacity-40 cursor-not-allowed grayscale border-muted",
         isDragging && "opacity-50 rotate-3 scale-105 shadow-2xl",
         isOverlay && "z-50 rotate-6 scale-110 shadow-2xl",
         isSelected && "ring-2 ring-primary ring-offset-2 bg-primary/5",
-        "hover:scale-105"
       )}
     >
       {/* Background gradient overlay */}
@@ -62,11 +61,11 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
       <CardContent className="relative p-4">
         <div className="space-y-3">
           {/* Image container with enhanced styling */}
-          <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 group-hover:border-primary/30 transition-colors">
+          <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 transition-colors">
             <OptimizedImage
               src={getCharacterDisplayImage(entry)}
               alt={entry.title}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-300"
             />
             
             {/* Selection indicator */}

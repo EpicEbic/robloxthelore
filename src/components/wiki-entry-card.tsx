@@ -70,7 +70,7 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
               <OptimizedImage
                 src={imageUrl}
                 alt={entry.title}
-                className="w-full h-full opacity-0 animate-image-fade-in transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-full opacity-0 animate-image-fade-in transition-transform duration-500"
                 style={{ animationDelay: `${imageDelay}s` }}
               />
             </AspectRatio>
@@ -83,13 +83,13 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
             <div className="flex items-center gap-1">
               <Badge 
                 variant="outline"
-                className={cn("font-normal transition-transform duration-300 group-hover:scale-105", getCategoryStyle(entry.category))}
+                className={cn("font-normal transition-transform duration-300", getCategoryStyle(entry.category))}
               >
                 {entry.category}
               </Badge>
               <Badge 
                 variant="outline"
-                className={cn("font-normal transition-transform duration-300 group-hover:scale-105", getCategoryStyle(entry.category))}
+                className={cn("font-normal transition-transform duration-300", getCategoryStyle(entry.category))}
               >
                 {subcategoryLabel}
               </Badge>

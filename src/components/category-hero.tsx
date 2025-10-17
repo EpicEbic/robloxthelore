@@ -24,9 +24,9 @@ export function CategoryHero({ categoryType, categoryLabel, subcategoryLabel }: 
       
       <div className="relative z-10" style={{ transform: `translateY(${parallaxOffset}px)` }}>
         <div className="flex items-center justify-center text-sm lg:text-base mb-4 animate-fade-in">
-          <Link to="/" className="opacity-90 hover:opacity-100 hover:scale-105 transition-all">Home</Link>
+          <Link to="/" className="opacity-90 hover:opacity-100 transition-all">Home</Link>
           <ChevronRight className="h-4 w-4 mx-2 opacity-70" />
-          <Link to={`/category/${categoryType}/all`} className="opacity-90 hover:opacity-100 hover:scale-105 transition-all">{categoryLabel}</Link>
+          <Link to={`/category/${categoryType}/all`} className="opacity-90 hover:opacity-100 transition-all">{categoryLabel}</Link>
           {subcategoryLabel !== categoryLabel && (
             <>
               <ChevronRight className="h-4 w-4 mx-2 opacity-70" />

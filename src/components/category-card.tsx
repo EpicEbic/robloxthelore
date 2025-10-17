@@ -29,8 +29,7 @@ export function CategoryCard({
       style={{ animationDelay: `${delay}ms` }}
     >
       <Card className={cn(
-        "group relative overflow-hidden card-hover-lift border-2 transition-all duration-500",
-        "hover:border-primary/50"
+        "group relative overflow-hidden card-hover-lift border-2 transition-all duration-500"
       )}>
         {/* Background gradient overlay */}
         <div className={cn(
@@ -42,7 +41,7 @@ export function CategoryCard({
           <div className="flex items-start justify-between mb-2">
             <div className={cn(
               "p-3 rounded-lg transition-all duration-500",
-              "bg-primary/10 group-hover:bg-primary/20 group-hover:scale-110"
+              "bg-primary/10 group-hover:bg-primary/20"
             )}>
               <Icon className={cn(
                 "h-8 w-8 transition-colors duration-300",
