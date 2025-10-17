@@ -12,33 +12,54 @@ interface CharacterBasicInfoProps {
 export function CharacterBasicInfo({ species, age, alignment }: CharacterBasicInfoProps) {
   return (
     <>
-      <div className="px-4 lg:px-6 py-3 bg-muted/20">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
-          <div className="flex items-center gap-2 min-w-0">
-            <Info className="h-4 w-4 text-primary flex-shrink-0" />
-            <span className="font-medium flex-shrink-0" style={{color: 'white !important'}}>Species:</span>
-            <span className="break-words hyphens-auto min-w-0" style={{color: 'white !important'}}>{species}</span>
+      <div className="px-6 lg:px-8 py-6 bg-muted/20 rounded-lg border border-border/50">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-8">
+          {/* Species */}
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20">
+              <Info className="h-5 w-5 text-primary flex-shrink-0" />
+            </div>
+            <div className="min-w-0">
+              <div className="text-sm font-medium text-muted-foreground mb-1">Species</div>
+              <div className="text-lg font-semibold break-words hyphens-auto" style={{color: 'white !important'}}>
+                {species}
+              </div>
+            </div>
           </div>
           
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="font-medium flex-shrink-0" style={{color: 'white !important'}}>Age:</span>
-            <span className="break-words hyphens-auto min-w-0" style={{color: 'white !important'}}>{age}</span>
+          {/* Age */}
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20">
+              <span className="text-primary font-bold text-lg">#</span>
+            </div>
+            <div className="min-w-0">
+              <div className="text-sm font-medium text-muted-foreground mb-1">Age</div>
+              <div className="text-lg font-semibold break-words hyphens-auto" style={{color: 'white !important'}}>
+                {age}
+              </div>
+            </div>
           </div>
           
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="font-medium flex-shrink-0" style={{color: 'white !important'}}>Alignment:</span>
-            <div className="flex items-center gap-1 flex-wrap min-w-0">
-              {alignment.split("/").map((align, index) => (
-                <span key={index} className={`px-2 py-1 ${getAlignmentColor(align.trim())} text-white text-xs font-semibold rounded ${index > 0 ? 'ml-1' : ''} break-words`}>
-                  {align}
-                </span>
-              ))}
+          {/* Alignment */}
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20">
+              <span className="text-primary font-bold text-lg">⚖</span>
+            </div>
+            <div className="min-w-0">
+              <div className="text-sm font-medium text-muted-foreground mb-2">Alignment</div>
+              <div className="flex items-center gap-2 flex-wrap">
+                {alignment.split("/").map((align, index) => (
+                  <span key={index} className={`px-3 py-1.5 ${getAlignmentColor(align.trim())} text-white text-sm font-semibold rounded-md shadow-sm ${index > 0 ? 'ml-0' : ''} break-words`}>
+                    {align}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
       
-      <Separator className="mb-2" />
+      <Separator className="mb-4" />
     </>
   );
 }
