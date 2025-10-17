@@ -50,7 +50,7 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
         isDragging && "opacity-50 rotate-3 scale-105 shadow-2xl",
         isOverlay && "z-50 rotate-6 scale-110 shadow-2xl",
         isSelected && "ring-2 ring-primary ring-offset-2 bg-primary/5",
-        "hover:scale-105 hover:-translate-y-1"
+        "hover:scale-105"
       )}
     >
       {/* Background gradient overlay */}

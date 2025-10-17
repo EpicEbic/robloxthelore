@@ -38,7 +38,7 @@
     @apply transition-all duration-300 ease-out;
   }
   .card-hover-lift:hover {
-    @apply -translate-y-2 shadow-lg;
+    @apply shadow-lg;
   }
   
   /* Staggered animation delays */
