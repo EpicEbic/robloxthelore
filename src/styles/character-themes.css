@@ -279,6 +279,7 @@ body.character-theme-caesar-bloxwright h6 {
 }
 
 body.character-theme-caesar-bloxwright p,
+body.character-theme-caesar-bloxwright span,
 body.character-theme-caesar-bloxwright div {
   color: #60a5fa !important;
 }
@@ -304,6 +305,11 @@ body.character-theme-caesar-bloxwright button {
 
 body.character-theme-caesar-bloxwright button svg {
   color: #60a5fa !important;
+}
+
+/* Override basic info component spans to be white */
+body.character-theme-caesar-bloxwright .bg-muted\/20 span {
+  color: white !important;
 }
 
 /* Nauli-specific styling for icons, text, and links */
