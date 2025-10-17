@@ -126,13 +126,13 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
                   "w-16 h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300",
                   index === current 
                     ? "border-primary scale-110 shadow-lg shadow-primary/25" 
-                    : "border-border/50 opacity-60 hover:opacity-100 hover:scale-105 hover:border-primary/50"
+                    : "border-border/50 opacity-60 hover:opacity-100 hover:border-primary/50"
                 )}
               >
                 <OptimizedImage
                   src={item.url}
                   alt={`Thumbnail ${index + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-300"
                 />
               </button>
             ))}

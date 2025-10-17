@@ -62,7 +62,7 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
 
   return (
     <Link to={`/entry/${entry.id}`}>
-      <Card className="overflow-hidden h-full group card-hover-lift card-3d border-l-4" 
+      <Card className="overflow-hidden h-full group card-3d border-l-4" 
         style={{ borderLeftColor: `var(--wiki-${entry.category})` }}>
         {imageUrl && (
           <div className="w-full overflow-hidden relative">

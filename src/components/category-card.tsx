@@ -29,7 +29,7 @@ export function CategoryCard({
       style={{ animationDelay: `${delay}ms` }}
     >
       <Card className={cn(
-        "group relative overflow-hidden card-hover-lift border-2 transition-all duration-500"
+        "group relative overflow-hidden border-2 transition-all duration-500"
       )}>
         {/* Background gradient overlay */}
         <div className={cn(
