@@ -19,6 +19,8 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
   const frameCountRef = useRef<number>(0);
   const lastFpsCheckRef = useRef<number>(0);
   const [canvasSupported, setCanvasSupported] = useState<boolean>(true);
+  const [debugInfo, setDebugInfo] = useState<string>('');
+  const [forceFallback, setForceFallback] = useState<boolean>(false);
 
   // Create particle based on theme and side
   const createParticle = useCallback((theme: CharacterTheme, side: 'left' | 'right'): any => {
@@ -495,7 +497,16 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     
     // Initial mount
     if (prevIds.length === 0 && currentIds.length > 0) {
-      fadeTimeoutRef.current = setTimeout(() => setOpacity(1), 1000);
+      fadeTimeoutRef.current = setTimeout(() => {
+        setOpacity(1);
+        // Force fallback if no particles appear after 3 seconds
+        setTimeout(() => {
+          if (particlesRef.current.length === 0 && !forceFallback) {
+            setDebugInfo('No particles spawned, forcing fallback');
+            setForceFallback(true);
+          }
+        }, 3000);
+      }, 1000);
     }
     // Theme swap
     else if (prevIds.length > 0 && currentIds.length > 0 && prevIds.join() !== currentIds.join()) {
@@ -515,18 +526,24 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     return () => {
       if (fadeTimeoutRef.current) clearTimeout(fadeTimeoutRef.current);
     };
-  }, [leftTheme?.id, rightTheme?.id]);
+  }, [leftTheme?.id, rightTheme?.id, forceFallback]);
 
   // Canvas setup and cleanup
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      setDebugInfo('No canvas element found');
+      setForceFallback(true);
+      return;
+    }
 
     // Test canvas support
     try {
       const ctx = canvas.getContext('2d');
       if (!ctx) {
+        setDebugInfo('Canvas 2D context not supported');
         setCanvasSupported(false);
+        setForceFallback(true);
         return;
       }
       
@@ -534,8 +551,20 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
       ctx.fillStyle = '#000';
       ctx.fillRect(0, 0, 1, 1);
       ctx.clearRect(0, 0, 1, 1);
+      
+      // Test if canvas is actually visible
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) {
+        setDebugInfo(`Canvas has zero dimensions: ${rect.width}x${rect.height}`);
+        setForceFallback(true);
+        return;
+      }
+      
+      setDebugInfo(`Canvas working: ${rect.width}x${rect.height}`);
     } catch (error) {
+      setDebugInfo(`Canvas error: ${error}`);
       setCanvasSupported(false);
+      setForceFallback(true);
       return;
     }
 
@@ -566,8 +595,13 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     particlesRef.current = [];
   }, [leftTheme, rightTheme]);
 
-  // Fallback for canvas-unsupported browsers or very low performance
-  if (!canvasSupported || (performanceMode === 'low' && particlesRef.current.length === 0)) {
+  // Always show fallback if no themes or if canvas issues
+  if (!leftTheme && !rightTheme) {
+    return null;
+  }
+
+  // Fallback for canvas-unsupported browsers, very low performance, or forced fallback
+  if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0)) {
     return (
       <div 
         className="absolute inset-0 w-full h-full pointer-events-none z-0"
@@ -578,13 +612,24 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
           {leftTheme && (
             <>
               <div 
-                className="absolute w-2 h-2 rounded-full animate-pulse"
+                className="absolute w-3 h-3 rounded-full animate-pulse"
                 style={{
                   backgroundColor: leftTheme.particles.color,
                   left: '20%',
                   top: '30%',
                   animationDelay: '0s',
                   animationDuration: '2s',
+                  boxShadow: `0 0 15px ${leftTheme.particles.color}, 0 0 30px ${leftTheme.particles.color}`
+                }}
+              />
+              <div 
+                className="absolute w-2 h-2 rounded-full animate-pulse"
+                style={{
+                  backgroundColor: leftTheme.particles.color,
+                  left: '30%',
+                  top: '60%',
+                  animationDelay: '1s',
+                  animationDuration: '3s',
                   boxShadow: `0 0 10px ${leftTheme.particles.color}`
                 }}
               />
@@ -592,11 +637,11 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
                 className="absolute w-1 h-1 rounded-full animate-pulse"
                 style={{
                   backgroundColor: leftTheme.particles.color,
-                  left: '30%',
-                  top: '60%',
-                  animationDelay: '1s',
-                  animationDuration: '3s',
-                  boxShadow: `0 0 6px ${leftTheme.particles.color}`
+                  left: '15%',
+                  top: '80%',
+                  animationDelay: '2s',
+                  animationDuration: '4s',
+                  boxShadow: `0 0 8px ${leftTheme.particles.color}`
                 }}
               />
             </>
@@ -604,13 +649,24 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
           {rightTheme && (
             <>
               <div 
-                className="absolute w-2 h-2 rounded-full animate-pulse"
+                className="absolute w-3 h-3 rounded-full animate-pulse"
                 style={{
                   backgroundColor: rightTheme.particles.color,
                   right: '20%',
                   top: '70%',
                   animationDelay: '1s',
                   animationDuration: '2s',
+                  boxShadow: `0 0 15px ${rightTheme.particles.color}, 0 0 30px ${rightTheme.particles.color}`
+                }}
+              />
+              <div 
+                className="absolute w-2 h-2 rounded-full animate-pulse"
+                style={{
+                  backgroundColor: rightTheme.particles.color,
+                  right: '30%',
+                  top: '40%',
+                  animationDelay: '2s',
+                  animationDuration: '3s',
                   boxShadow: `0 0 10px ${rightTheme.particles.color}`
                 }}
               />
@@ -618,16 +674,26 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
                 className="absolute w-1 h-1 rounded-full animate-pulse"
                 style={{
                   backgroundColor: rightTheme.particles.color,
-                  right: '30%',
-                  top: '40%',
-                  animationDelay: '2s',
-                  animationDuration: '3s',
-                  boxShadow: `0 0 6px ${rightTheme.particles.color}`
+                  right: '15%',
+                  top: '20%',
+                  animationDelay: '3s',
+                  animationDuration: '4s',
+                  boxShadow: `0 0 8px ${rightTheme.particles.color}`
                 }}
               />
             </>
           )}
         </div>
+        
+        {/* Debug info (only in development) */}
+        {process.env.NODE_ENV === 'development' && debugInfo && (
+          <div 
+            className="absolute top-2 left-2 text-xs text-white bg-black bg-opacity-50 p-1 rounded"
+            style={{ zIndex: 1000 }}
+          >
+            {debugInfo}
+          </div>
+        )}
       </div>
     );
   }
