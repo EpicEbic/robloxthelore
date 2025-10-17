@@ -1,0 +1,130 @@
+import { Eye, Zap, History, Lightbulb, ScrollText, Package } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { AutoLinkedText } from "@/components/ui/auto-linked-text";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { EquipmentMultiItems } from "./equipment-multi-items";
+import { MultiItem } from "@/types/wiki-types";
+
+interface EquipmentSections {
+  overview: string[];
+  ability: string[];
+  history: string[];
+  trivia: string[];
+}
+
+interface EquipmentContentTabsProps {
+  sections: EquipmentSections;
+  multiItems?: MultiItem[];
+  currentEntryId?: string;
+}
+
+export function EquipmentContentTabs({ sections, multiItems, currentEntryId }: EquipmentContentTabsProps) {
+  const isMobile = useIsMobile();
+  const hasMultiItems = multiItems && multiItems.length > 0;
+
+  // If we have multi-items, show only the items (no redundant main sections)
+  if (hasMultiItems) {
+    return (
+      <div className="min-h-0 flex flex-col">
+        <EquipmentMultiItems items={multiItems} />
+      </div>
+    );
+  }
+
+  // For single items, show the traditional tab structure
+  return (
+    <div className="min-h-0 flex flex-col">
+      <Tabs defaultValue="overview" className="w-full h-full flex flex-col">
+        <TabsList className={`mb-4 w-full ${isMobile ? 'grid grid-cols-2 h-auto gap-2 p-2' : 'justify-start'} flex-shrink-0`}>
+          <TabsTrigger value="overview" className={`flex items-center gap-2 ${isMobile ? 'text-xs px-3 py-3 rounded-md' : ''}`}>
+            <Eye className="h-4 w-4" />
+            <span>Overview</span>
+          </TabsTrigger>
+          <TabsTrigger value="ability" className={`flex items-center gap-2 ${isMobile ? 'text-xs px-3 py-3 rounded-md' : ''}`}>
+            <Zap className="h-4 w-4" />
+            <span>Ability</span>
+          </TabsTrigger>
+          <TabsTrigger value="history" className={`flex items-center gap-2 ${isMobile ? 'text-xs px-3 py-3 rounded-md' : ''}`}>
+            <History className="h-4 w-4" />
+            <span>History</span>
+          </TabsTrigger>
+          <TabsTrigger value="trivia" className={`flex items-center gap-2 ${isMobile ? 'text-xs px-3 py-3 rounded-md' : ''}`}>
+            <ScrollText className="h-4 w-4" />
+            <span>Trivia</span>
+          </TabsTrigger>
+        </TabsList>
+        
+        <div className="flex-1 min-h-0">
+          <ScrollArea className="h-full w-full">
+            <div className="pr-4">
+              <TabsContent value="overview" className="mt-0">
+                <div className="bg-card rounded-lg p-4 border min-w-0">
+                  <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                    <Eye className="h-5 w-5 text-primary flex-shrink-0" />
+                    Overview
+                  </h2>
+                  <div className="text-foreground/90 min-w-0">
+                    {sections.overview.map((paragraph, idx) => (
+                      <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                        <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="ability" className="mt-0">
+                <div className="bg-card rounded-lg p-4 border min-w-0">
+                  <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                    <Zap className="h-5 w-5 text-primary flex-shrink-0" />
+                    Ability
+                  </h2>
+                  <div className="text-foreground/90 min-w-0">
+                    {sections.ability.map((paragraph, idx) => (
+                      <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                        <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="history" className="mt-0">
+                <div className="bg-card rounded-lg p-4 border min-w-0">
+                  <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                    <History className="h-5 w-5 text-primary flex-shrink-0" />
+                    History
+                  </h2>
+                  <div className="text-foreground/90 min-w-0">
+                    {sections.history.map((paragraph, idx) => (
+                      <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                        <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="trivia" className="mt-0">
+                <div className="bg-card rounded-lg p-4 border min-w-0">
+                  <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                    <ScrollText className="h-5 w-5 text-primary flex-shrink-0" />
+                    Trivia
+                  </h2>
+                  <ul className="list-disc space-y-3 ml-5 text-foreground/90 min-w-0">
+                    {sections.trivia.map((item, idx) => (
+                      <li key={idx} className="break-words whitespace-normal overflow-wrap-anywhere">
+                        <AutoLinkedText text={item} currentEntryId={currentEntryId} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </TabsContent>
+            </div>
+          </ScrollArea>
+        </div>
+      </Tabs>
+    </div>
+  );
+}

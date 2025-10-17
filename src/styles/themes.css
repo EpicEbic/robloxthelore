@@ -1,0 +1,181 @@
+@tailwind base;
+
+/* Theme Variables (Default, dark, and special character themes) */
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 48%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 30%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 98%;
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 18%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 0% 30%;
+
+    /* Wiki specific (black/grey) category colors */
+    --wiki: 0 0% 18%;
+    --wiki-foreground: 0 0% 98%;
+    --wiki-neutral: 0 0% 26%;
+    --wiki-good: 120 2% 28%;
+    --wiki-evil: 0 10% 18%;
+    --wiki-location: 40 5% 28%;
+    --wiki-power: 260 8% 18%;
+    --wiki-equipment: 210 6% 22%;
+    --wiki-faction: 300 5% 24%;
+    --font-sans: 'Nunito Sans', sans-serif;
+    --font-serif: 'Crimson Pro', serif;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 48%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 30%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 98%;
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 18%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 0% 30%;
+    --wiki: 0 0% 18%;
+    --wiki-foreground: 0 0% 98%;
+    --wiki-neutral: 0 0% 26%;
+    --wiki-good: 120 2% 28%;
+    --wiki-evil: 0 10% 18%;
+    --wiki-location: 40 5% 28%;
+    --wiki-power: 260 8% 18%;
+    --wiki-equipment: 210 6% 22%;
+    --wiki-faction: 300 5% 24%;
+  }
+
+  /* Minion mode Easter egg */
+  .minion-mode {
+    background: #ffff00 !important;
+    background-color: #ffff00 !important;
+  }
+  .minion-mode * {
+    background: #ffff00 !important;
+    background-color: #ffff00 !important;
+  }
+
+  /* Character Stat Chart Styles */
+  .stat-chart-default {
+    --stat-primary: var(--primary);
+    --stat-secondary: var(--secondary);
+    --stat-accent: var(--accent);
+  }
+
+  .stat-chart-default .stat-bar-filled {
+    background: hsl(var(--stat-primary));
+    border-color: hsl(var(--stat-primary));
+    box-shadow: 0 0 6px hsl(var(--stat-primary) / 0.4);
+  }
+
+  .stat-chart-default .stat-bar-empty {
+    background: transparent;
+    border-color: hsl(var(--border));
+  }
+
+  .stat-chart-default .stat-grade-text {
+    color: hsl(var(--stat-primary));
+    text-shadow: 0 0 4px hsl(var(--stat-primary) / 0.3);
+  }
+
+  .stat-chart-default .stat-chart-title {
+    color: hsl(var(--foreground));
+  }
+
+  /* Vortex-specific stat chart styles */
+  .stat-chart-vortex {
+    --stat-primary: 270 95% 65%; /* Purple from Vortex theme */
+    --stat-secondary: 270 95% 65%;
+    --stat-accent: 270 95% 65%;
+  }
+
+  .stat-chart-vortex .stat-bar-filled {
+    background: hsl(var(--stat-primary));
+    border-color: hsl(var(--stat-primary));
+    box-shadow: 0 0 6px hsl(var(--stat-primary) / 0.4);
+  }
+
+  .stat-chart-vortex .stat-bar-empty {
+    background: transparent;
+    border-color: hsl(var(--border));
+  }
+
+  .stat-chart-vortex .stat-grade-text {
+    color: hsl(var(--stat-primary));
+    text-shadow: 0 0 4px hsl(var(--stat-primary) / 0.3);
+  }
+
+  .stat-chart-vortex .stat-chart-title {
+    color: hsl(var(--foreground));
+  }
+
+  /* Caesar-specific stat chart styles */
+  .stat-chart-caesar {
+    --stat-primary: 213 94% 68%; /* Light blue from Caesar theme */
+    --stat-secondary: 213 94% 68%;
+    --stat-accent: 213 94% 68%;
+  }
+
+  .stat-chart-caesar .stat-bar-filled {
+    background: hsl(var(--stat-primary));
+    border-color: hsl(var(--stat-primary));
+    box-shadow: 0 0 6px hsl(var(--stat-primary) / 0.4);
+  }
+
+  .stat-chart-caesar .stat-bar-empty {
+    background: transparent;
+    border-color: hsl(var(--border));
+  }
+
+  .stat-chart-caesar .stat-grade-text {
+    color: hsl(var(--stat-primary));
+    text-shadow: 0 0 4px hsl(var(--stat-primary) / 0.3);
+  }
+
+  .stat-chart-caesar .stat-chart-title {
+    color: hsl(var(--foreground));
+  }
+}

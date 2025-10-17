@@ -1,0 +1,790 @@
+/* Character Theme System */
+
+/* Base theme container */
+.character-theme-container {
+  background: var(--character-gradient-background, var(--background));
+  color: var(--character-text, var(--foreground));
+  transition: background 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Apply theme to body when character theme is active */
+body.character-theme-caesar-bloxwright,
+body.character-theme-nauli-parter,
+body.character-theme-vortex-a-steele {
+  background: var(--character-gradient-background, var(--background));
+  color: var(--character-text, var(--foreground));
+}
+
+/* Debug: Make it obvious when themes are applied - REMOVED */
+
+/* Caesar's Electrogravitic Flow Theme */
+.character-theme-caesar-bloxwright {
+  --background: #0f172a !important;
+  --foreground: #60a5fa !important;
+  --card: #1e293b !important;
+  --card-foreground: #60a5fa !important;
+  --primary: #60a5fa !important;
+  --primary-foreground: #0f172a !important;
+  --secondary: #1e40af !important;
+  --secondary-foreground: #60a5fa !important;
+  --accent: #6b7280 !important;
+  --accent-foreground: #60a5fa !important;
+  --muted: #1e293b !important;
+  --muted-foreground: #94a3b8 !important;
+  --border: #6b7280 !important;
+  --input: #1e293b !important;
+  --ring: #60a5fa !important;
+}
+
+/* Nauli's Pathokinesis Theme */
+.character-theme-nauli-parter {
+  --background: #111827 !important;
+  --foreground: #16a34a !important;
+  --card: #1f2937 !important;
+  --card-foreground: #f9fafb !important;
+  --primary: #16a34a !important;
+  --primary-foreground: #111827 !important;
+  --secondary: #6b7280 !important;
+  --secondary-foreground: #f9fafb !important;
+  --accent: #f3f4f6 !important;
+  --accent-foreground: #111827 !important;
+  --muted: #1f2937 !important;
+  --muted-foreground: #9ca3af !important;
+  --border: #6b7280 !important;
+  --input: #1f2937 !important;
+  --ring: #16a34a !important;
+}
+
+/* Vortex's Chronipulation Theme */
+.character-theme-vortex-a-steele {
+  --background: #000000 !important;
+  --foreground: #eab308 !important;
+  --card: #1a1a1a !important;
+  --card-foreground: #f1f5f9 !important;
+  --primary: #eab308 !important;
+  --primary-foreground: #000000 !important;
+  --secondary: #a855f7 !important;
+  --secondary-foreground: #f1f5f9 !important;
+  --accent: #a855f7 !important;
+  --accent-foreground: #f1f5f9 !important;
+  --muted: #1a1a1a !important;
+  --muted-foreground: #94a3b8 !important;
+  --border: #f1f5f9 !important;
+  --input: #1a1a1a !important;
+  --ring: #eab308 !important;
+}
+
+/* Particle Animation Keyframes */
+@keyframes flow-particle {
+  0% { 
+    transform: translateY(100vh) translateX(0) scale(0); 
+    opacity: 0; 
+  }
+  10% { 
+    opacity: 1; 
+  }
+  90% { 
+    opacity: 1; 
+  }
+  100% { 
+    transform: translateY(-10vh) translateX(20px) scale(1); 
+    opacity: 0; 
+  }
+}
+
+@keyframes radio-wave {
+  0% { 
+    transform: scale(0); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(3); 
+    opacity: 0; 
+  }
+}
+
+@keyframes speed-line {
+  0% { 
+    transform: translateX(-100px); 
+    opacity: 0; 
+  }
+  10% { 
+    opacity: 1; 
+  }
+  90% { 
+    opacity: 1; 
+  }
+  100% { 
+    transform: translateX(100vw); 
+    opacity: 0; 
+  }
+}
+
+@keyframes organic-wave {
+  0% { 
+    transform: scale(0) rotate(0deg); 
+    opacity: 0; 
+  }
+  20% { 
+    opacity: 0.8; 
+  }
+  80% { 
+    opacity: 0.8; 
+  }
+  100% { 
+    transform: scale(2.5) rotate(180deg); 
+    opacity: 0; 
+  }
+}
+
+@keyframes geometric-clock {
+  0% { 
+    transform: rotate(0deg) scale(0); 
+    opacity: 0; 
+  }
+  20% { 
+    opacity: 0.6; 
+  }
+  80% { 
+    opacity: 0.6; 
+  }
+  100% { 
+    transform: rotate(360deg) scale(1.5); 
+    opacity: 0; 
+  }
+}
+
+@keyframes sparkle-twinkle {
+  0% { 
+    transform: scale(0) rotate(0deg); 
+    opacity: 0; 
+  }
+  30% { 
+    opacity: 1; 
+  }
+  70% { 
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(1.2) rotate(180deg); 
+    opacity: 0; 
+  }
+}
+
+@keyframes lightning-flash {
+  0% { 
+    transform: scale(0); 
+    opacity: 0; 
+  }
+  20% { 
+    opacity: 1; 
+  }
+  80% { 
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(1.1); 
+    opacity: 0; 
+  }
+}
+
+/* Particle Classes */
+.flow-particle {
+  animation: flow-particle 8s linear infinite;
+  background: radial-gradient(circle, var(--character-primary) 0%, transparent 70%);
+}
+
+.radio-particle {
+  animation: radio-wave 2s ease-out infinite;
+  border: 1px solid var(--character-text);
+  border-radius: 50%;
+}
+
+.speed-particle {
+  animation: speed-line 3s linear infinite;
+  background: linear-gradient(90deg, transparent 0%, var(--character-primary) 50%, transparent 100%);
+}
+
+.organic-particle {
+  animation: organic-wave 4s ease-out infinite;
+  border: 1px solid var(--character-accent);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--character-primary) 0%, transparent 70%);
+}
+
+.geometric-particle {
+  animation: geometric-clock 3s ease-out infinite;
+  border: 1px solid var(--character-primary);
+  background: linear-gradient(45deg, var(--character-primary) 0%, var(--character-secondary) 100%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.clock-particle {
+  animation: geometric-clock 2s ease-out infinite;
+  border: 1px solid var(--character-secondary);
+  background: radial-gradient(circle, var(--character-secondary) 0%, transparent 70%);
+}
+
+.sparkle-particle {
+  animation: sparkle-twinkle 1.5s ease-out infinite;
+  background: radial-gradient(circle, var(--character-secondary) 0%, transparent 70%);
+}
+
+.lightning-particle {
+  animation: lightning-flash 0.5s ease-out infinite;
+  background: radial-gradient(circle, var(--character-primary) 0%, transparent 70%);
+  box-shadow: 0 0 20px var(--character-primary);
+}
+
+/* Theme Transition Effects */
+.theme-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced Card Styling for Character Themes */
+.character-theme-container .card,
+.character-theme-container [class*="card"],
+.character-theme-container .bg-card {
+  background: var(--character-gradient-card, var(--card)) !important;
+  border-color: var(--character-accent, var(--border)) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.character-theme-container .card:hover,
+.character-theme-container [class*="card"]:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* Force theme colors on all card-like elements */
+body.character-theme-caesar-bloxwright .card,
+body.character-theme-caesar-bloxwright [class*="card"],
+body.character-theme-caesar-bloxwright .bg-card {
+  background: linear-gradient(145deg, #1e293b 0%, #334155 100%) !important;
+  border-color: #6b7280 !important;
+}
+
+/* Caesar-specific styling for icons, text, and links */
+body.character-theme-caesar-bloxwright {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%) !important;
+}
+
+body.character-theme-caesar-bloxwright h1,
+body.character-theme-caesar-bloxwright h2,
+body.character-theme-caesar-bloxwright h3,
+body.character-theme-caesar-bloxwright h4,
+body.character-theme-caesar-bloxwright h5,
+body.character-theme-caesar-bloxwright h6 {
+  color: #60a5fa !important;
+}
+
+body.character-theme-caesar-bloxwright p,
+body.character-theme-caesar-bloxwright span,
+body.character-theme-caesar-bloxwright div {
+  color: #60a5fa !important;
+}
+
+body.character-theme-caesar-bloxwright a {
+  color: #60a5fa !important;
+}
+
+body.character-theme-caesar-bloxwright a:hover {
+  color: #93c5fd !important;
+}
+
+body.character-theme-caesar-bloxwright svg,
+body.character-theme-caesar-bloxwright [class*="lucide"] {
+  color: #60a5fa !important;
+  stroke: #60a5fa !important;
+  fill: none !important;
+}
+
+body.character-theme-caesar-bloxwright button {
+  color: #60a5fa !important;
+}
+
+body.character-theme-caesar-bloxwright button svg {
+  color: #60a5fa !important;
+}
+
+/* Nauli-specific styling for icons, text, and links */
+body.character-theme-nauli-parter {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #111827 100%) !important;
+}
+
+body.character-theme-nauli-parter h1,
+body.character-theme-nauli-parter h2,
+body.character-theme-nauli-parter h3,
+body.character-theme-nauli-parter h4,
+body.character-theme-nauli-parter h5,
+body.character-theme-nauli-parter h6 {
+  color: #16a34a !important;
+}
+
+body.character-theme-nauli-parter p {
+  color: #f9fafb !important;
+}
+
+body.character-theme-nauli-parter div {
+  color: #f9fafb !important;
+}
+
+/* Only target specific span elements, not all spans */
+body.character-theme-nauli-parter .card span,
+body.character-theme-nauli-parter [class*="card"] span {
+  color: #f9fafb !important;
+}
+
+body.character-theme-nauli-parter a {
+  color: #16a34a !important;
+}
+
+body.character-theme-nauli-parter a:hover {
+  color: #15803d !important;
+}
+
+body.character-theme-nauli-parter svg,
+body.character-theme-nauli-parter [class*="lucide"] {
+  color: #16a34a !important;
+  stroke: #16a34a !important;
+  fill: none !important;
+}
+
+body.character-theme-nauli-parter button {
+  color: #16a34a !important;
+}
+
+body.character-theme-nauli-parter button svg {
+  color: #16a34a !important;
+}
+
+body.character-theme-nauli-parter .card,
+body.character-theme-nauli-parter [class*="card"],
+body.character-theme-nauli-parter .bg-card {
+  background: linear-gradient(145deg, #1f2937 0%, #374151 100%) !important;
+  border-color: #6b7280 !important;
+}
+
+/* Sidebar styling for Nauli's theme */
+body.character-theme-nauli-parter .sidebar,
+body.character-theme-nauli-parter [class*="sidebar"] {
+  --sidebar-foreground: #16a34a !important;
+  --sidebar-accent-foreground: #16a34a !important;
+}
+
+/* Target specific sidebar UI elements only, not content text */
+
+body.character-theme-nauli-parter .sidebar button,
+body.character-theme-nauli-parter [class*="sidebar"] button {
+  color: #16a34a !important;
+}
+
+body.character-theme-nauli-parter .sidebar button:hover,
+body.character-theme-nauli-parter [class*="sidebar"] button:hover {
+  color: #15803d !important;
+}
+
+body.character-theme-nauli-parter .sidebar a,
+body.character-theme-nauli-parter [class*="sidebar"] a {
+  color: #16a34a !important;
+}
+
+body.character-theme-nauli-parter .sidebar a:hover,
+body.character-theme-nauli-parter [class*="sidebar"] a:hover {
+  color: #15803d !important;
+}
+
+body.character-theme-nauli-parter .sidebar svg,
+body.character-theme-nauli-parter [class*="sidebar"] svg {
+  color: #16a34a !important;
+  stroke: #16a34a !important;
+}
+
+/* Specific targeting for collapsible trigger buttons */
+body.character-theme-nauli-parter .sidebar [data-state="open"] button,
+body.character-theme-nauli-parter .sidebar [data-state="closed"] button,
+body.character-theme-nauli-parter [class*="sidebar"] [data-state="open"] button,
+body.character-theme-nauli-parter [class*="sidebar"] [data-state="closed"] button {
+  color: #16a34a !important;
+}
+
+/* Target span elements within sidebar buttons */
+body.character-theme-nauli-parter .sidebar button span,
+body.character-theme-nauli-parter [class*="sidebar"] button span {
+  color: #16a34a !important;
+}
+
+/* Vortex-specific styling for icons, text, and links */
+body.character-theme-vortex-a-steele {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%) !important;
+}
+
+body.character-theme-vortex-a-steele h1,
+body.character-theme-vortex-a-steele h2,
+body.character-theme-vortex-a-steele h3,
+body.character-theme-vortex-a-steele h4,
+body.character-theme-vortex-a-steele h5,
+body.character-theme-vortex-a-steele h6 {
+  color: #eab308 !important;
+}
+
+body.character-theme-vortex-a-steele p {
+  color: #f1f5f9 !important;
+}
+
+body.character-theme-vortex-a-steele div {
+  color: #f1f5f9 !important;
+}
+
+/* Only target specific span elements, not all spans */
+body.character-theme-vortex-a-steele .card span,
+body.character-theme-vortex-a-steele [class*="card"] span {
+  color: #f1f5f9 !important;
+}
+
+body.character-theme-vortex-a-steele a {
+  color: #eab308 !important;
+}
+
+body.character-theme-vortex-a-steele a:hover {
+  color: #f59e0b !important;
+}
+
+body.character-theme-vortex-a-steele svg,
+body.character-theme-vortex-a-steele [class*="lucide"] {
+  color: #eab308 !important;
+  stroke: #eab308 !important;
+  fill: none !important;
+}
+
+body.character-theme-vortex-a-steele button {
+  color: #eab308 !important;
+}
+
+body.character-theme-vortex-a-steele button svg {
+  color: #eab308 !important;
+}
+
+body.character-theme-vortex-a-steele .card,
+body.character-theme-vortex-a-steele [class*="card"],
+body.character-theme-vortex-a-steele .bg-card {
+  background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%) !important;
+  border-color: #f1f5f9 !important;
+}
+
+/* Sidebar styling for Vortex's theme */
+body.character-theme-vortex-a-steele .sidebar,
+body.character-theme-vortex-a-steele [class*="sidebar"] {
+  --sidebar-foreground: #eab308 !important;
+  --sidebar-accent-foreground: #eab308 !important;
+}
+
+body.character-theme-vortex-a-steele .sidebar button,
+body.character-theme-vortex-a-steele [class*="sidebar"] button {
+  color: #eab308 !important;
+}
+
+body.character-theme-vortex-a-steele .sidebar button:hover,
+body.character-theme-vortex-a-steele [class*="sidebar"] button:hover {
+  color: #f59e0b !important;
+}
+
+body.character-theme-vortex-a-steele .sidebar a,
+body.character-theme-vortex-a-steele [class*="sidebar"] a {
+  color: #eab308 !important;
+}
+
+body.character-theme-vortex-a-steele .sidebar a:hover,
+body.character-theme-vortex-a-steele [class*="sidebar"] a:hover {
+  color: #f59e0b !important;
+}
+
+body.character-theme-vortex-a-steele .sidebar svg,
+body.character-theme-vortex-a-steele [class*="sidebar"] svg {
+  color: #eab308 !important;
+  stroke: #eab308 !important;
+}
+
+/* Specific targeting for collapsible trigger buttons */
+body.character-theme-vortex-a-steele .sidebar [data-state="open"] button,
+body.character-theme-vortex-a-steele .sidebar [data-state="closed"] button,
+body.character-theme-vortex-a-steele [class*="sidebar"] [data-state="open"] button,
+body.character-theme-vortex-a-steele [class*="sidebar"] [data-state="closed"] button {
+  color: #eab308 !important;
+}
+
+/* Target span elements within sidebar buttons */
+body.character-theme-vortex-a-steele .sidebar button span,
+body.character-theme-vortex-a-steele [class*="sidebar"] button span {
+  color: #eab308 !important;
+}
+
+/* Button Styling for Character Themes */
+.character-theme-container .btn-primary {
+  background: var(--character-gradient-accent, var(--primary));
+  color: var(--character-primary-foreground, var(--primary-foreground));
+  border-color: var(--character-primary, var(--primary));
+}
+
+.character-theme-container .btn-primary:hover {
+  background: var(--character-primary, var(--primary));
+  filter: brightness(1.1);
+}
+
+/* Stat Chart Enhancements */
+.character-theme-container .stat-bar-filled {
+  background: var(--character-gradient-accent, var(--primary));
+  border-color: var(--character-primary, var(--primary));
+  box-shadow: 0 0 6px var(--character-primary, var(--primary)) / 0.4;
+}
+
+.character-theme-container .stat-grade-text {
+  color: var(--character-primary, var(--primary));
+  text-shadow: 0 0 4px var(--character-primary, var(--primary)) / 0.3;
+}
+
+/* Dual Theme System for Comparison Page */
+body.dual-theme-active {
+  background: var(--clash-gradient-pageBackground, var(--clash-gradient-background, var(--background))) !important;
+  position: relative;
+}
+
+/* Fade-in animation for dual theme - ensures gradients are visible */
+body.dual-theme-fade-in::before {
+  opacity: 0.3 !important;
+  transition: opacity 0.8s ease-in-out !important;
+}
+
+body.dual-theme-fade-in::after {
+  opacity: 0.2 !important;
+  transition: opacity 0.8s ease-in-out !important;
+}
+
+body.dual-theme-fade-out::before,
+body.dual-theme-fade-out::after {
+  opacity: 0 !important;
+  transition: opacity 0.6s ease-out !important;
+}
+
+body.dual-theme-active::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--clash-gradient-diagonalClash, transparent);
+  opacity: 0.3; /* Much brighter */
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+body.dual-theme-active::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--clash-gradient-verticalBlend, transparent);
+  opacity: 0.2; /* Much brighter */
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+body.dual-theme-left-only {
+  background: var(--left-gradient-background, var(--background)) !important;
+}
+
+body.dual-theme-right-only {
+  background: var(--right-gradient-background, var(--background)) !important;
+}
+
+/* Left side theming */
+.dual-theme-left {
+  --primary: var(--left-primary, var(--primary));
+  --secondary: var(--left-secondary, var(--secondary));
+  --accent: var(--left-accent, var(--accent));
+  --background: var(--left-background, var(--background));
+  --surface: var(--left-surface, var(--surface));
+  --text: var(--left-text, var(--text));
+  background: var(--left-gradient-background, var(--left-background, var(--background)));
+  border-color: var(--left-primary, var(--border));
+}
+
+/* Right side theming */
+.dual-theme-right {
+  --primary: var(--right-primary, var(--primary));
+  --secondary: var(--right-secondary, var(--secondary));
+  --accent: var(--right-accent, var(--accent));
+  --background: var(--right-background, var(--background));
+  --surface: var(--right-surface, var(--surface));
+  --text: var(--right-text, var(--text));
+  background: var(--right-gradient-background, var(--right-background, var(--background)));
+  border-color: var(--right-primary, var(--border));
+}
+
+/* Clash zone (center) theming */
+.dual-theme-clash {
+  background: var(--clash-gradient-background, var(--background));
+  border-color: var(--clash-gradient-accent, var(--border));
+  position: relative;
+}
+
+.dual-theme-clash::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--clash-gradient-diagonalClash, transparent);
+  opacity: 0.4; /* Much brighter */
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Comparison slots with side-specific theming */
+.comparison-slot-left {
+  background: var(--left-gradient-card, var(--card));
+  border-color: var(--left-primary, var(--border));
+  position: relative;
+}
+
+.comparison-slot-left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--left-primary, transparent) 0%, transparent 50%);
+  opacity: 0.3; /* Much brighter */
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.comparison-slot-right {
+  background: var(--right-gradient-card, var(--card));
+  border-color: var(--right-primary, var(--border));
+  position: relative;
+}
+
+.comparison-slot-right::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, var(--right-primary, transparent) 50%);
+  opacity: 0.3; /* Much brighter */
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* VS divider with clash theming */
+.vs-divider {
+  background: linear-gradient(135deg, #eab308 0%, #a855f7 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.vs-divider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--clash-gradient-diagonalClash, transparent);
+  opacity: 0.5; /* Much brighter */
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Results section with clash theming */
+.comparison-results {
+  background: var(--clash-gradient-card, var(--card));
+  border-color: var(--clash-gradient-accent, var(--border));
+  position: relative;
+}
+
+.comparison-results::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--clash-gradient-verticalBlend, transparent);
+  opacity: 0.3; /* Much brighter */
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Modular character-specific classes for easy expansion */
+.character-theme-caesar-left {
+  --primary: var(--left-primary, #60a5fa);
+  --secondary: var(--left-secondary, #1e40af);
+  --accent: var(--left-accent, #6b7280);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.character-theme-nauli-left {
+  --primary: var(--left-primary, #16a34a);
+  --secondary: var(--left-secondary, #6b7280);
+  --accent: var(--left-accent, #f3f4f6);
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+}
+
+.character-theme-vortex-left {
+  --primary: var(--left-primary, #eab308);
+  --secondary: var(--left-secondary, #a855f7);
+  --accent: var(--left-accent, #a855f7);
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+}
+
+.character-theme-caesar-right {
+  --primary: var(--right-primary, #60a5fa);
+  --secondary: var(--right-secondary, #1e40af);
+  --accent: var(--right-accent, #6b7280);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.character-theme-nauli-right {
+  --primary: var(--right-primary, #16a34a);
+  --secondary: var(--right-secondary, #6b7280);
+  --accent: var(--right-accent, #f3f4f6);
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+}
+
+.character-theme-vortex-right {
+  --primary: var(--right-primary, #eab308);
+  --secondary: var(--right-secondary, #a855f7);
+  --accent: var(--right-accent, #a855f7);
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .flow-particle,
+  .radio-particle,
+  .speed-particle,
+  .organic-particle,
+  .geometric-particle,
+  .clock-particle,
+  .sparkle-particle,
+  .lightning-particle {
+    animation: none;
+  }
+  
+  .theme-transition {
+    transition: none;
+  }
+}

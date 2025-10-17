@@ -1,0 +1,26 @@
+
+@tailwind utilities;
+
+@layer utilities {
+  .wiki-category-character {
+    @apply text-wiki-foreground border-wiki-neutral;
+  }
+  .wiki-category-good {
+    @apply text-wiki-foreground border-wiki-good;
+  }
+  .wiki-category-evil {
+    @apply text-wiki-foreground border-wiki-evil;
+  }
+  .wiki-category-location {
+    @apply text-wiki-foreground border-wiki-location;
+  }
+  .wiki-category-power {
+    @apply text-wiki-foreground border-wiki-power;
+  }
+  .wiki-category-equipment {
+    @apply text-wiki-foreground border-wiki-equipment;
+  }
+  .wiki-category-faction {
+    @apply text-wiki-foreground border-wiki-faction;
+  }
+}

@@ -1,0 +1,153 @@
+
+@import "./styles/themes.css";
+@import "./styles/wiki-category-utilities.css";
+@import './styles/character-themes.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Keep any base resets, typography, etc. */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: var(--font-sans);
+    background-color: hsl(var(--background));
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    @apply font-bold text-foreground;
+  }
+  p {
+    @apply text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Card hover effects */
+  .card-hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+  .card-hover-lift:hover {
+    @apply -translate-y-2 shadow-lg;
+  }
+  
+  /* Staggered animation delays */
+  .anim-delay-100 { animation-delay: 100ms; }
+  .anim-delay-200 { animation-delay: 200ms; }
+  .anim-delay-300 { animation-delay: 300ms; }
+  .anim-delay-400 { animation-delay: 400ms; }
+  .anim-delay-500 { animation-delay: 500ms; }
+  
+  /* 3D transform effects */
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out;
+  }
+  
+  .card-3d:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-5deg) translateY(-5px);
+  }
+  
+  /* Sidebar collapse animations */
+  @keyframes collapse-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes collapse-up {
+    from {
+      height: var(--radix-collapsible-content-height);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+  
+  .animate-collapse-down {
+    animation: collapse-down 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .animate-collapse-up {
+    animation: collapse-up 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Image fade-in animation */
+  @keyframes image-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .animate-image-fade-in {
+    animation: image-fade-in 0.6s ease-out forwards;
+  }
+}
+
+/* Custom Scrollbar Styling */
+@layer base {
+  /* Webkit browsers (Chrome, Safari, Edge) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+  
+  ::-webkit-scrollbar-corner {
+    background: hsl(var(--background));
+  }
+  
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) hsl(var(--background));
+  }
+  
+  /* Custom scrollbar for specific elements */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary) / 0.3) hsl(var(--background));
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.3);
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+}
