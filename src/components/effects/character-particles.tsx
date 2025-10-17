@@ -20,11 +20,11 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }, []);
 
-  // Debug logging
+  // Check for reduced motion preference
   useEffect(() => {
-    console.log('CharacterParticles: theme received:', theme);
-    console.log('CharacterParticles: particle type:', theme.particles.type);
-    console.log('CharacterParticles: prefers reduced motion:', prefersReducedMotion());
+    if (prefersReducedMotion()) {
+      return;
+    }
   }, [theme, prefersReducedMotion]);
 
 
@@ -289,21 +289,16 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) {
-      console.log('CharacterParticles: Canvas or context not available');
       return;
     }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (particlesRef.current.length === 0) {
-      console.log('CharacterParticles: No particles to render');
       return;
     }
 
     particlesRef.current.forEach((particle, index) => {
-      if (index === 0) {
-        console.log('CharacterParticles: Rendering particle', particle);
-      }
       ctx.save();
       ctx.globalAlpha = particle.opacity;
       ctx.fillStyle = particle.color;
@@ -592,18 +587,14 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) {
-      console.log('CharacterParticles: Canvas ref is null');
       return;
     }
-
-    console.log('CharacterParticles: Initializing canvas');
 
       const resizeCanvas = () => {
         const container = canvas.parentElement;
         if (container) {
           canvas.width = container.clientWidth;
           canvas.height = container.clientHeight;
-          console.log('CharacterParticles: Canvas resized to', canvas.width, 'x', canvas.height);
         }
       };
 
@@ -612,18 +603,15 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
     // Start with empty particles array - they'll spawn naturally over time
     particlesRef.current = [];
-    console.log('CharacterParticles: Starting with empty particle array');
     lastTimeRef.current = performance.now();
 
     // Start animation
     animationRef.current = requestAnimationFrame(animate);
-    console.log('CharacterParticles: Animation started');
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
-        console.log('CharacterParticles: Animation stopped');
       }
     };
   }, [theme, animate]);
@@ -634,11 +622,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   }, [theme]);
 
   if (theme.particles.type === 'none' || prefersReducedMotion()) {
-    console.log('CharacterParticles: Not rendering - type is none or reduced motion');
     return null;
   }
-
-  console.log('CharacterParticles: Rendering canvas with theme:', theme.particles.type);
 
   return (
     <canvas

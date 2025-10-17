@@ -10,10 +10,7 @@ const characterThemes: Record<string, CharacterTheme> = {
 };
 
 export const getCharacterTheme = (characterId: string): CharacterTheme | null => {
-  console.log('getCharacterTheme called with:', characterId);
-  console.log('Available themes:', Object.keys(characterThemes));
   const theme = characterThemes[characterId] || null;
-  console.log('Returning theme:', theme);
   return theme;
 };
 
