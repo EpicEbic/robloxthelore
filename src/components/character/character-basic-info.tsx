@@ -1,5 +1,5 @@
 
-import { Info } from "lucide-react";
+import { Info, Calendar, Scale } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { getAlignmentColor } from "@/utils/character-utils";
 
@@ -16,8 +16,8 @@ export function CharacterBasicInfo({ species, age, alignment }: CharacterBasicIn
         <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-8">
           {/* Species */}
           <div className="flex items-center gap-3 min-w-0">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20">
-              <Info className="h-5 w-5 text-primary flex-shrink-0" />
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 border border-primary/20">
+              <Info className="h-6 w-6 text-primary flex-shrink-0" />
             </div>
             <div className="min-w-0">
               <div className="text-sm font-medium text-muted-foreground mb-1">Species</div>
@@ -29,8 +29,8 @@ export function CharacterBasicInfo({ species, age, alignment }: CharacterBasicIn
           
           {/* Age */}
           <div className="flex items-center gap-3 min-w-0">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20">
-              <span className="text-primary font-bold text-lg">#</span>
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 border border-primary/20">
+              <Calendar className="h-6 w-6 text-primary flex-shrink-0" />
             </div>
             <div className="min-w-0">
               <div className="text-sm font-medium text-muted-foreground mb-1">Age</div>
@@ -42,8 +42,8 @@ export function CharacterBasicInfo({ species, age, alignment }: CharacterBasicIn
           
           {/* Alignment */}
           <div className="flex items-center gap-3 min-w-0">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20">
-              <span className="text-primary font-bold text-lg">⚖</span>
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 border border-primary/20">
+              <Scale className="h-6 w-6 text-primary flex-shrink-0" />
             </div>
             <div className="min-w-0">
               <div className="text-sm font-medium text-muted-foreground mb-2">Alignment</div>
