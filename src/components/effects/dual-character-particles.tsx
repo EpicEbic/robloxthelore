@@ -18,6 +18,7 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
   const [performanceMode, setPerformanceMode] = useState<'high' | 'medium' | 'low'>('high');
   const frameCountRef = useRef<number>(0);
   const lastFpsCheckRef = useRef<number>(0);
+  const [canvasSupported, setCanvasSupported] = useState<boolean>(true);
 
   // Create particle based on theme and side
   const createParticle = useCallback((theme: CharacterTheme, side: 'left' | 'right'): any => {
@@ -179,8 +180,8 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Skip updates on low performance mode
-    if (performanceMode === 'low' && Math.random() > 0.5) return;
+    // Skip updates on low performance mode (but still allow some updates)
+    if (performanceMode === 'low' && Math.random() > 0.3) return;
 
     particlesRef.current = particlesRef.current.filter(particle => {
       particle.life += 1;
@@ -334,7 +335,10 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) {
+      setCanvasSupported(false);
+      return;
+    }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -518,6 +522,23 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Test canvas support
+    try {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        setCanvasSupported(false);
+        return;
+      }
+      
+      // Test basic canvas operations
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, 1, 1);
+      ctx.clearRect(0, 0, 1, 1);
+    } catch (error) {
+      setCanvasSupported(false);
+      return;
+    }
+
     const resizeCanvas = () => {
       const container = canvas.parentElement;
       if (container) {
@@ -545,38 +566,66 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
     particlesRef.current = [];
   }, [leftTheme, rightTheme]);
 
-  // Fallback for very low performance
-  if (performanceMode === 'low' && particlesRef.current.length === 0) {
+  // Fallback for canvas-unsupported browsers or very low performance
+  if (!canvasSupported || (performanceMode === 'low' && particlesRef.current.length === 0)) {
     return (
       <div 
         className="absolute inset-0 w-full h-full pointer-events-none z-0"
         style={{ opacity, transition: 'opacity 0.8s ease-in-out' }}
       >
-        {/* Simple CSS-based particles for low-end devices */}
+        {/* Enhanced CSS-based particles for low-end devices */}
         <div className="absolute inset-0 overflow-hidden">
           {leftTheme && (
-            <div 
-              className="absolute w-1 h-1 rounded-full animate-pulse"
-              style={{
-                backgroundColor: leftTheme.particles.color,
-                left: '20%',
-                top: '30%',
-                animationDelay: '0s',
-                animationDuration: '2s'
-              }}
-            />
+            <>
+              <div 
+                className="absolute w-2 h-2 rounded-full animate-pulse"
+                style={{
+                  backgroundColor: leftTheme.particles.color,
+                  left: '20%',
+                  top: '30%',
+                  animationDelay: '0s',
+                  animationDuration: '2s',
+                  boxShadow: `0 0 10px ${leftTheme.particles.color}`
+                }}
+              />
+              <div 
+                className="absolute w-1 h-1 rounded-full animate-pulse"
+                style={{
+                  backgroundColor: leftTheme.particles.color,
+                  left: '30%',
+                  top: '60%',
+                  animationDelay: '1s',
+                  animationDuration: '3s',
+                  boxShadow: `0 0 6px ${leftTheme.particles.color}`
+                }}
+              />
+            </>
           )}
           {rightTheme && (
-            <div 
-              className="absolute w-1 h-1 rounded-full animate-pulse"
-              style={{
-                backgroundColor: rightTheme.particles.color,
-                right: '20%',
-                top: '70%',
-                animationDelay: '1s',
-                animationDuration: '2s'
-              }}
-            />
+            <>
+              <div 
+                className="absolute w-2 h-2 rounded-full animate-pulse"
+                style={{
+                  backgroundColor: rightTheme.particles.color,
+                  right: '20%',
+                  top: '70%',
+                  animationDelay: '1s',
+                  animationDuration: '2s',
+                  boxShadow: `0 0 10px ${rightTheme.particles.color}`
+                }}
+              />
+              <div 
+                className="absolute w-1 h-1 rounded-full animate-pulse"
+                style={{
+                  backgroundColor: rightTheme.particles.color,
+                  right: '30%',
+                  top: '40%',
+                  animationDelay: '2s',
+                  animationDuration: '3s',
+                  boxShadow: `0 0 6px ${rightTheme.particles.color}`
+                }}
+              />
+            </>
           )}
         </div>
       </div>
