@@ -316,6 +316,10 @@ body.character-theme-caesar-bloxwright .bg-muted\/20 .text-lg {
   color: white !important;
 }
 
+body.character-theme-caesar-bloxwright .bg-muted\/20 span {
+  color: white !important;
+}
+
 /* Nauli-specific styling for icons, text, and links */
 body.character-theme-nauli-parter {
   background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #111827 100%) !important;
