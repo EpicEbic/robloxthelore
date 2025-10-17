@@ -13,7 +13,7 @@ export function CharacterBasicInfo({ species, age, alignment }: CharacterBasicIn
   return (
     <>
       <div className="bg-muted/20 rounded-lg border border-border/50 overflow-hidden">
-        <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6 p-6">
+        <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 p-6">
           {/* Species */}
           <div className="flex items-center gap-3 min-w-0">
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex-shrink-0">
