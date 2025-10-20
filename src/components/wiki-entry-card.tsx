@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { OptimizedImage } from "@/components/ui/optimized-image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -8,6 +8,8 @@ import { WikiEntry, CategoryType } from "@/contexts/wiki-context";
 import { cn } from "@/lib/utils";
 import { CATEGORIES } from "@/data/categories";
 import { memo } from "react";
+import { motion } from "framer-motion";
+import { getAlignmentColor } from "@/utils/character-utils";
 
 interface WikiEntryCardProps {
   entry: WikiEntry;
@@ -15,9 +17,6 @@ interface WikiEntryCardProps {
 }
 
 export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0 }: WikiEntryCardProps) {
-  const getCategoryStyle = (category: CategoryType) => {
-    return `wiki-category-${category}`;
-  };
 
   // Get the appropriate image for character entries
   const getImageUrl = () => {
@@ -49,57 +48,57 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
     return entry.description;
   };
 
-  // Get the proper subcategory label from the categories data
-  const getSubcategoryLabel = () => {
-    const categoryData = CATEGORIES.find(c => c.type === entry.category);
-    const subcategoryData = categoryData?.subcategories.find(s => s.value === entry.subcategory);
-    return subcategoryData?.label || entry.subcategory;
+  // Alignment tokens styled like entry pages
+  const renderAlignment = () => {
+    if (!entry.alignment) return null;
+    return (
+      <div className="flex items-center justify-center gap-2 flex-wrap">
+        {entry.alignment.split("/").map((align, index) => (
+          <span
+            key={index}
+            className={`px-3 py-1.5 ${getAlignmentColor(align.trim())} text-white text-sm font-semibold rounded-md shadow-sm`}
+          >
+            {align.trim()}
+          </span>
+        ))}
+      </div>
+    );
   };
 
   const imageUrl = getImageUrl();
   const previewText = getPreviewText();
-  const subcategoryLabel = getSubcategoryLabel();
-
+  // Unified layout for all entries
   return (
     <Link to={`/entry/${entry.id}`}>
-      <Card className="overflow-hidden h-full group card-3d border-l-4" 
-        style={{ borderLeftColor: `var(--wiki-${entry.category})` }}>
-        {imageUrl && (
-          <div className="w-full overflow-hidden relative">
-            <AspectRatio ratio={16/9} className="bg-muted/20">
-              <OptimizedImage
-                src={imageUrl}
-                alt={entry.title}
-                className="w-full h-full opacity-0 animate-image-fade-in transition-transform duration-500"
-                style={{ animationDelay: `${imageDelay}s` }}
-              />
-            </AspectRatio>
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-          </div>
-        )}
-        <CardHeader className="pb-2 relative z-10">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-lg font-semibold transition-colors duration-300 group-hover:text-primary">{entry.title}</CardTitle>
-            <div className="flex items-center gap-1">
-              <Badge 
-                variant="outline"
-                className={cn("font-normal transition-transform duration-300", getCategoryStyle(entry.category))}
-              >
-                {entry.category}
-              </Badge>
-              <Badge 
-                variant="outline"
-                className={cn("font-normal transition-transform duration-300", getCategoryStyle(entry.category))}
-              >
-                {subcategoryLabel}
-              </Badge>
+      <motion.div layoutId={`entry-${entry.id}-card`} className="h-full">
+        <Card className="overflow-hidden h-full group card-hover-character border-l-4 rounded-xl" 
+          style={{ borderLeftColor: `var(--wiki-${entry.category})` }}>
+          {imageUrl && (
+            <div className="w-full overflow-hidden relative">
+              <AspectRatio ratio={1} className="bg-muted/20">
+                <OptimizedImage
+                  src={imageUrl}
+                  alt={entry.title}
+                  className="w-full h-full opacity-0 animate-image-fade-in transition-transform duration-500 object-cover"
+                  style={{ animationDelay: `${imageDelay}s` }}
+                />
+              </AspectRatio>
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </div>
-          </div>
-        </CardHeader>
-        <CardContent className="relative z-10">
-          <p className="text-sm text-muted-foreground line-clamp-3 sm:line-clamp-2">{previewText}</p>
-        </CardContent>
-      </Card>
+          )}
+          <CardContent className="p-4 text-center space-y-3">
+            <h3 className="text-xl font-bold transition-colors duration-300 group-hover:text-primary">
+              {entry.title}
+            </h3>
+            {previewText && (
+              <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
+                {previewText}
+              </p>
+            )}
+            {renderAlignment()}
+          </CardContent>
+        </Card>
+      </motion.div>
     </Link>
   );
 });

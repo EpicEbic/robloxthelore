@@ -71,20 +71,20 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
       case 'radio':
         // Create radio waves that emanate from random points across the entire screen
-        // Spread them out more to cover blank spaces around cards
+        // Add subtle drift so waves continue moving as they fade
         const margin = 50; // Keep some margin from screen edges
         const centerX = margin + Math.random() * (canvas.width - 2 * margin);
         const centerY = margin + Math.random() * (canvas.height - 2 * margin);
         return {
           x: centerX,
           y: centerY,
-          vx: 0,
-          vy: 0,
+          vx: (Math.random() - 0.5) * 0.3, // gentle drift
+          vy: (Math.random() - 0.5) * 0.3,
           size: 2 + Math.random() * 3,
           opacity: particles.intensity * (0.5 + Math.random() * 0.5),
           color: particles.color,
           life: 0,
-          maxLife: 200 + Math.random() * 100,
+          maxLife: 220 + Math.random() * 120,
           type: 'radio'
         };
 
@@ -229,12 +229,10 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
         // Don't remove particles that go above container - let them fade naturally
         // Particles will be removed by lifespan, not by position
       } else if (particle.type === 'radio') {
-        // For radio waves, remove when they reach maximum expansion or expand beyond screen bounds
-        const expansionRadius = Math.min(particle.life * 1.6, 200); // Use same fixed max as rendering
-        if (expansionRadius >= 200 || expansionRadius > Math.max(canvas.width, canvas.height) * 0.8) {
-          return false; // Remove particle when it reaches max size or expands too far
-        }
-        // Radio waves don't move, so no position wrapping needed
+        // Radio waves: allow full life-based fade-out and keep drifting
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        // No wrapping; let them drift off slightly if needed
       } else {
         // For other particle types, wrap around screen edges
         if (particle.x < -50) particle.x = canvas.width + 50;
@@ -322,13 +320,13 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           break;
 
         case 'radio':
-          // Draw sonar-like expanding circles with fixed maximum size
+          // Draw sonar-like expanding circles with radius tied to life progress (keeps expanding while fading)
           ctx.strokeStyle = particle.color;
           ctx.lineWidth = 2;
           
-          // Use fixed expansion radius for consistent sizing across resolutions
-          const maxExpansionRadius = 200; // Fixed maximum radius
-          const expansionRadius = Math.min(particle.life * 1.6, maxExpansionRadius);
+          // Expansion grows proportionally to lifespan to avoid stopping before fade completes
+          const lifeProgressRadio = particle.life / particle.maxLife; // 0..1
+          const expansionRadius = 40 + lifeProgressRadio * 260; // grows from 40px up to ~300px
           
           // Calculate distance to nearest screen edge for fade effect
           const distToLeft = particle.x;
@@ -342,7 +340,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           const edgeFade = Math.min(1, minDistToEdge / edgeFadeDistance);
           
           // Calculate opacity based on both life and edge distance
-          const lifeOpacity = particle.opacity;
+          const lifeOpacity = particle.opacity * (1 - lifeProgressRadio);
           const finalOpacity = lifeOpacity * edgeFade;
           
           if (finalOpacity > 0.01) {
@@ -590,16 +588,17 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       return;
     }
 
-      const resizeCanvas = () => {
-        const container = canvas.parentElement;
-        if (container) {
-          canvas.width = container.clientWidth;
-          canvas.height = container.clientHeight;
-        }
-      };
+    const setCanvasSize = () => {
+      // Use viewport size for fixed positioning
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      console.log('Canvas resized to:', width, 'x', height);
+    };
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    setCanvasSize();
+    window.addEventListener('resize', setCanvasSize);
 
     // Start with empty particles array - they'll spawn naturally over time
     particlesRef.current = [];
@@ -609,7 +608,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     animationRef.current = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', setCanvasSize);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
@@ -632,10 +631,6 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       style={{ 
         opacity: theme.particles.intensity,
         backgroundColor: 'transparent',
-        zIndex: 1,
-        position: 'absolute',
-        top: 0,
-        left: 0,
         width: '100%',
         height: '100%',
         pointerEvents: 'none'

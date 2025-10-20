@@ -13,6 +13,7 @@ import { LocationEntryCard } from "@/components/location-entry-card";
 import { CharacterThemeProvider, useCharacterTheme } from "@/contexts/character-theme-context";
 import { CharacterParticles } from "@/components/effects/character-particles";
 import { useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const EntryPageContent = () => {
   const { id } = useParams<{ id: string }>();
@@ -47,11 +48,29 @@ const EntryPageContent = () => {
     );
   }
 
+  console.log('EntryPageContent: currentTheme =', currentTheme);
+  
   return (
     <div className="character-theme-container min-h-screen relative">
-      {currentTheme && <CharacterParticles theme={currentTheme} />}
+      {/* Keep particles mounted and only animate opacity to avoid canvas reinit timing issues */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <AnimatePresence initial={false}>
+          {currentTheme && (
+            <motion.div
+              key={currentTheme.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0"
+            >
+              <CharacterParticles theme={currentTheme} className="absolute inset-0" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
       
-      <div className="container mx-auto px-4 py-8 animate-fade-in relative z-10">
+      <motion.div layoutId={entry ? `entry-${entry.id}-card` : undefined} className="container mx-auto px-4 py-8 relative z-10">
 
         {entry.category === "character" ? (
           <div className="w-full">
@@ -121,7 +140,7 @@ const EntryPageContent = () => {
             </div>
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };

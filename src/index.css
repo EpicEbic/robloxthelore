@@ -58,6 +58,16 @@
     transform: perspective(1000px) rotateX(2deg) rotateY(-5deg) translateY(-5px);
   }
   
+  /* Character card hover effects */
+  .card-hover-character {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+  
+  .card-hover-character:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
   /* Sidebar collapse animations */
   @keyframes collapse-down {
     from {
