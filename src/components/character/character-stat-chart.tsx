@@ -165,13 +165,14 @@ export function CombatStatChart({ stats, characterId, className }: CombatStatCha
               <div
                 key={index}
                 className={cn(
-                  "w-3 h-2 sm:w-4 sm:h-3 rounded-sm border transition-all duration-500 ease-out",
+                  "w-3 h-2 sm:w-4 sm:h-3 rounded-sm border transition-all duration-500 ease-out relative",
                   index <= statValue
-                    ? "stat-bar-filled opacity-100 animate-scale-in"
+                    ? "stat-bar-filled opacity-100 animate-scale-in shadow-md"
                     : "stat-bar-empty opacity-30"
                 )}
                 style={{
-                  animationDelay: `${index * 50}ms`
+                  animationDelay: `${index * 50}ms`,
+                  filter: index <= statValue ? "drop-shadow(0 0 4px currentColor)" : "none"
                 }}
               />
             ))}
@@ -188,7 +189,7 @@ export function CombatStatChart({ stats, characterId, className }: CombatStatCha
 
   return (
     <div className={cn("stat-chart flex justify-center", getChartColorClass(), className)}>
-      <div className="bg-card/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 border stat-chart-container w-full max-w-md">
+      <div className="bg-card/80 backdrop-blur-sm rounded-xl p-4 sm:p-6 border stat-chart-container w-full max-w-md">
         <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-center stat-chart-title">
           Physical Statistics
         </h3>

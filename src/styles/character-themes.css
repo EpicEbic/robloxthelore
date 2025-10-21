@@ -11,7 +11,8 @@
 /* Apply theme to body when character theme is active */
 body.character-theme-caesar-bloxwright,
 body.character-theme-nauli-parter,
-body.character-theme-vortex-a-steele {
+body.character-theme-vortex-a-steele,
+body.character-theme-rice-farmer {
   background: var(--character-gradient-background, var(--background));
   color: var(--character-text, var(--foreground));
 }
@@ -73,6 +74,25 @@ body.character-theme-vortex-a-steele {
   --border: #f1f5f9 !important;
   --input: #1a1a1a !important;
   --ring: #eab308 !important;
+}
+
+/* Rice Farmer Theme */
+.character-theme-rice-farmer {
+  --background: #0f0d0a !important;
+  --foreground: #f5ecd9 !important;
+  --card: #221a14 !important;
+  --card-foreground: #f5ecd9 !important;
+  --primary: #8a6746 !important;
+  --primary-foreground: #0f0d0a !important;
+  --secondary: #f5ecd9 !important;
+  --secondary-foreground: #0f0d0a !important;
+  --accent: #3a7ca5 !important;
+  --accent-foreground: #0f0d0a !important;
+  --muted: #221a14 !important;
+  --muted-foreground: #c9bda8 !important;
+  --border: #8a6746 !important;
+  --input: #221a14 !important;
+  --ring: #3a7ca5 !important;
 }
 
 /* Particle Animation Keyframes */
@@ -799,3 +819,14 @@ body.dual-theme-right-only {
     transition: none;
   }
 }
+
+/* Physical Stats Override - Always White */
+.stat-chart-default .physical-stats-title,
+.stat-chart-vortex .physical-stats-title,
+.stat-chart-caesar .physical-stats-title,
+.stat-chart-container .physical-stats-title,
+h3.physical-stats-title {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.3) !important;
+}
+

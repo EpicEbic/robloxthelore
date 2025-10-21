@@ -5,7 +5,7 @@ export const theBreadwinner: WikiEntry = {
   id: "the-breadwinner",
   title: "The Breadwinner",
   description: "The Breadwinner is short-tempered, but genuine and pure in heart. He loves nothing more than to fill the stomachs of Bloxians in need, generously donating entire portions of his body to feed the starving.",
-  preview: "A sentient loaf of bread with a big heart and an even bigger appetite for helping others.",
+  preview: "A sentient loaf of bread with a big and doughy heart, aspiring to feed the hungry and defend them from the cruelties of the Bloxiverse.",
   content: "",
   category: "character",
   subcategory: "noncanon",

@@ -4,7 +4,7 @@ const bloxxanneWhelder: WikiEntry = {
   id: "bloxxanne-whelder",
   title: "Bloxxanne Whelder",
   description: "Builderman's right hand and the Buildermen's head engineer. A passionate and energetic tinkerer, Bloxxanne finds her joy in making the world a better place, one invention at a time.",
-  preview: "Builderman's energetic right hand and chief engineer of the Buildermen, Bloxxanne's determination leaves a mark on every project she touches.",
+  preview: "An engineer and right-hand-man for Builderman, Bloxxanne's ingenuity and resourcefulness is unmatched.",
   content: `
 Bloxxanne Whelder is the head engineer of the Buildermen, serving as Builderman's right hand and a cornerstone of creativity within the organization. Known for her vibrant personality and precision, her dedication to infrastructural advancement is unmatched. From elevators to hydraulic security doors, much of the Buildermen HQ owes its existence to her relentless work ethic.
 

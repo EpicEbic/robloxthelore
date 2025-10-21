@@ -1,14 +1,17 @@
-import { User, Home, Heart, Sword, Zap, ScrollText, Shirt, Drama, Shield, Wrench, AlertTriangle, Clock } from "lucide-react";
+import { User, Home, Heart, Sword, Zap, ScrollText, Shirt, Drama, Shield, Wrench, AlertTriangle, Clock, HandMetal } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useState, useEffect, useRef } from "react";
 import { CharacterTriviaItem } from "./character-trivia-item";
 import { CharacterAppearanceSwitcher } from "./character-appearance-switcher";
 import { CharacterPersonalitySwitcher } from "./character-personality-switcher";
 import { CharacterLifestyleSwitcher } from "./character-lifestyle-switcher";
 import { CharacterHistorySwitcher } from "./character-history-switcher";
 import { CharacterCombatStyleSwitcher } from "./character-combat-style-switcher";
-import { CharacterStatChart, CombatStatChart, createCharacterStats, createCombatStats, CharacterStats, CombatStats } from "./character-stat-chart";
+import { CharacterStatRadarChart } from "./character-stat-radar-chart";
+import { createCharacterStats, createCombatStats, CharacterStats, CombatStats } from "./character-stat-chart";
 import { AutoLinkedText } from "@/components/ui/auto-linked-text";
 import { AppearanceOption, PersonalityOption, HistoryOption, CombatStyleOption } from "@/types/wiki-types";
 
@@ -78,6 +81,28 @@ export function CharacterContentTabs({
   currentEntryId
 }: CharacterContentTabsProps) {
   const isMobile = useIsMobile();
+
+  // State for Physical/Ability switcher
+  const [combatView, setCombatView] = useState<'physical' | 'ability'>('physical');
+  const [displayCombatView, setDisplayCombatView] = useState<'physical' | 'ability'>('physical');
+  const [isCombatFading, setIsCombatFading] = useState(false);
+  const combatFadeTimeoutRef = useRef<number | null>(null);
+
+  // Check if abilities section has content
+  const hasAbilities = (sections.abilities && sections.abilities.length > 0) ||
+    (sections.abilityDetails && sections.abilityDetails.length > 0) ||
+    (sections.offensiveCapabilities && sections.offensiveCapabilities.length > 0) ||
+    (sections.defensiveCapabilities && sections.defensiveCapabilities.length > 0) ||
+    (sections.utilitarianCapabilities && sections.utilitarianCapabilities.length > 0) ||
+    (sections.drawbacks && sections.drawbacks.length > 0);
+
+  // Force physical view when character has no abilities
+  useEffect(() => {
+    if (!hasAbilities && combatView === 'ability') {
+      setCombatView('physical');
+      setDisplayCombatView('physical');
+    }
+  }, [hasAbilities, combatView]);
 
   // Get current appearance description
   const getCurrentAppearanceDescription = () => {
@@ -157,16 +182,6 @@ export function CharacterContentTabs({
     return combatStats;
   };
 
-  // Check if abilities section has content
-  const hasAbilities = (sections.abilities && sections.abilities.length > 0) ||
-    (sections.abilityDetails && sections.abilityDetails.length > 0) ||
-    (sections.offensiveCapabilities && sections.offensiveCapabilities.length > 0) ||
-    (sections.defensiveCapabilities && sections.defensiveCapabilities.length > 0) ||
-    (sections.utilitarianCapabilities && sections.utilitarianCapabilities.length > 0) ||
-    (sections.drawbacks && sections.drawbacks.length > 0);
-
-
-
   return (
     <div className="min-h-0 flex flex-col">
       <Tabs defaultValue="general" className="w-full h-full flex flex-col" onValueChange={onTabChange}>
@@ -191,12 +206,6 @@ export function CharacterContentTabs({
             <Sword className="h-4 w-4 " />
             <span>Combat</span>
           </TabsTrigger>
-          {hasAbilities && (
-            <TabsTrigger value="abilities" className="flex items-center gap-2 text-xs px-3 py-3 rounded-md xl:text-sm">
-              <Zap className="h-4 w-4 " />
-              <span>Abilities</span>
-            </TabsTrigger>
-          )}
           <TabsTrigger value="trivia" className="flex items-center gap-2 text-xs px-3 py-3 rounded-md xl:text-sm">
             <ScrollText className="h-4 w-4 " />
             <span>Trivia</span>
@@ -314,146 +323,200 @@ export function CharacterContentTabs({
               </TabsContent>
               
               <TabsContent value="combat" className="mt-0 space-y-4">
-                {/* Combat Stat Chart */}
-                <CombatStatChart 
-                  stats={getCurrentCombatStats() || createCombatStats("A", "A", "A", "A", "A")} 
-                  characterId={characterId}
-                  className="mb-4"
-                />
-                
-                <div className="bg-card rounded-lg p-6 border min-w-0 relative">
-                  <div className="flex items-start justify-between mb-4 gap-4">
-                    <h2 className="text-xl font-semibold flex items-center gap-2 flex-shrink-0">
-                      <Sword className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
-                      Combat Style
-                    </h2>
-                    <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
-                      <CharacterCombatStyleSwitcher
-                        combatStyles={combatStyles || []}
-                        currentStyle={currentCombatStyle}
-                        onStyleChange={onCombatStyleChange || (() => {})}
-                      />
-                    </div>
-                  </div>
-                  <div className="text-foreground/90 min-w-0">
-                    {getCurrentCombatStyleDescription().map((paragraph, idx) => (
-                      <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                        <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                      </p>
-                    ))}
+                {/* Physical/Ability Switcher Buttons */}
+                <div className="flex items-center justify-center mb-4">
+                  <div className="flex gap-2">
+                    <Button
+                      variant={combatView === 'physical' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => {
+                        if (combatView === 'physical') return;
+                        setIsCombatFading(true);
+                        combatFadeTimeoutRef.current && window.clearTimeout(combatFadeTimeoutRef.current);
+                        combatFadeTimeoutRef.current = window.setTimeout(() => {
+                          setDisplayCombatView('physical');
+                          setCombatView('physical');
+                          setIsCombatFading(false);
+                        }, 180);
+                      }}
+                      className="flex items-center gap-2"
+                    >
+                      <HandMetal className="h-4 w-4" />
+                      Physical
+                    </Button>
+                    {hasAbilities && (
+                      <Button
+                        variant={combatView === 'ability' ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => {
+                          if (combatView === 'ability') return;
+                          setIsCombatFading(true);
+                          combatFadeTimeoutRef.current && window.clearTimeout(combatFadeTimeoutRef.current);
+                          combatFadeTimeoutRef.current = window.setTimeout(() => {
+                            setDisplayCombatView('ability');
+                            setCombatView('ability');
+                            setIsCombatFading(false);
+                          }, 180);
+                        }}
+                        className="flex items-center gap-2"
+                      >
+                        <Zap className="h-4 w-4" />
+                        Ability
+                      </Button>
+                    )}
                   </div>
                 </div>
+
+                {/* Content with fade transition */}
+                <div style={{ opacity: isCombatFading ? 0 : 1, transition: 'opacity 200ms ease' }}>
+                  {displayCombatView === 'physical' && (
+                    <>
+                      {/* Combat Stat Chart */}
+                      <CharacterStatRadarChart 
+                        stats={getCurrentCombatStats() || createCombatStats("A", "A", "A", "A", "A")} 
+                        characterId={characterId}
+                        abilityName="Physical"
+                        isPhysicalStats={true}
+                        className="mb-4"
+                      />
+                      
+                      <div className="bg-card rounded-lg p-6 border min-w-0 relative">
+                        <div className="flex items-start justify-between mb-4 gap-4">
+                          <h2 className="text-xl font-semibold flex items-center gap-2 flex-shrink-0">
+                            <Sword className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            Combat Style
+                          </h2>
+                          <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
+                            <CharacterCombatStyleSwitcher
+                              combatStyles={combatStyles || []}
+                              currentStyle={currentCombatStyle}
+                              onStyleChange={onCombatStyleChange || (() => {})}
+                            />
+                          </div>
+                        </div>
+                        <div className="text-foreground/90 min-w-0">
+                          {getCurrentCombatStyleDescription().map((paragraph, idx) => (
+                            <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                              <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {hasAbilities && displayCombatView === 'ability' && (
+                    <div className="space-y-4">
+                      {/* Ability Stat Chart */}
+                      <CharacterStatRadarChart 
+                        stats={stats || createCharacterStats("A", "A", "A", "A")} 
+                        characterId={characterId}
+                        abilityName={abilityName}
+                        isPhysicalStats={false}
+                        className="mb-4"
+                      />
+                      
+                      {/* Legacy Abilities Section - fallback for existing data */}
+                      {sections.abilities && sections.abilities.length > 0 && (
+                        <div className="bg-card rounded-lg p-4 border min-w-0">
+                          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                            <Zap className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            Ability Details
+                          </h2>
+                          <div className="text-foreground/90 min-w-0">
+                            {sections.abilities?.map((paragraph, idx) => (
+                              <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                                <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* New Segmented Ability Sections */}
+                      {sections.abilityDetails && sections.abilityDetails.length > 0 && (
+                        <div className="bg-card rounded-lg p-4 border min-w-0">
+                          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                            <Zap className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            Ability Details
+                          </h2>
+                          <div className="text-foreground/90 min-w-0">
+                            {sections.abilityDetails?.map((paragraph, idx) => (
+                              <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                                <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {sections.offensiveCapabilities && sections.offensiveCapabilities.length > 0 && (
+                        <div className="bg-card rounded-lg p-4 border min-w-0">
+                          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                            <Sword className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            Offensive Capabilities
+                          </h2>
+                          <div className="text-foreground/90 min-w-0">
+                            {sections.offensiveCapabilities?.map((paragraph, idx) => (
+                              <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                                <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {sections.defensiveCapabilities && sections.defensiveCapabilities.length > 0 && (
+                        <div className="bg-card rounded-lg p-4 border min-w-0">
+                          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                            <Shield className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            Defensive Capabilities
+                          </h2>
+                          <div className="text-foreground/90 min-w-0">
+                            {sections.defensiveCapabilities?.map((paragraph, idx) => (
+                              <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                                <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {sections.utilitarianCapabilities && sections.utilitarianCapabilities.length > 0 && (
+                        <div className="bg-card rounded-lg p-4 border min-w-0">
+                          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                            <Wrench className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            Utilitarian Capabilities
+                          </h2>
+                          <div className="text-foreground/90 min-w-0">
+                            {sections.utilitarianCapabilities?.map((paragraph, idx) => (
+                              <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                                <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {sections.drawbacks && sections.drawbacks.length > 0 && (
+                        <div className="bg-card rounded-lg p-4 border min-w-0">
+                          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                            <AlertTriangle className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            Drawbacks
+                          </h2>
+                          <div className="text-foreground/90 min-w-0">
+                            {sections.drawbacks?.map((paragraph, idx) => (
+                              <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                                <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </TabsContent>
-              
-              {hasAbilities && (
-                <TabsContent value="abilities" className="mt-0 space-y-4">
-                  {/* Stat Chart */}
-                  <CharacterStatChart 
-                    stats={stats || createCharacterStats("A", "A", "A", "A")} 
-                    characterId={characterId}
-                    abilityName={abilityName}
-                    className="mb-4"
-                  />
-                  
-                  {/* Legacy Abilities Section - fallback for existing data */}
-                  {sections.abilities && sections.abilities.length > 0 && (
-                    <div className="bg-card rounded-lg p-4 border min-w-0">
-                      <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                        <Zap className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
-                        Ability Details
-                      </h2>
-                      <div className="text-foreground/90 min-w-0">
-                        {sections.abilities?.map((paragraph, idx) => (
-                          <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* New Segmented Ability Sections */}
-                  {sections.abilityDetails && sections.abilityDetails.length > 0 && (
-                    <div className="bg-card rounded-lg p-4 border min-w-0">
-                      <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                        <Zap className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
-                        Ability Details
-                      </h2>
-                      <div className="text-foreground/90 min-w-0">
-                        {sections.abilityDetails?.map((paragraph, idx) => (
-                          <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  
-                  {sections.offensiveCapabilities && sections.offensiveCapabilities.length > 0 && (
-                    <div className="bg-card rounded-lg p-4 border min-w-0">
-                      <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                        <Sword className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
-                        Offensive Capabilities
-                      </h2>
-                      <div className="text-foreground/90 min-w-0">
-                        {sections.offensiveCapabilities?.map((paragraph, idx) => (
-                          <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  
-                  {sections.defensiveCapabilities && sections.defensiveCapabilities.length > 0 && (
-                    <div className="bg-card rounded-lg p-4 border min-w-0">
-                      <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                        <Shield className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
-                        Defensive Capabilities
-                      </h2>
-                      <div className="text-foreground/90 min-w-0">
-                        {sections.defensiveCapabilities?.map((paragraph, idx) => (
-                          <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  
-                  {sections.utilitarianCapabilities && sections.utilitarianCapabilities.length > 0 && (
-                    <div className="bg-card rounded-lg p-4 border min-w-0">
-                      <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                        <Wrench className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
-                        Utilitarian Capabilities
-                      </h2>
-                      <div className="text-foreground/90 min-w-0">
-                        {sections.utilitarianCapabilities?.map((paragraph, idx) => (
-                          <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  
-                  {sections.drawbacks && sections.drawbacks.length > 0 && (
-                    <div className="bg-card rounded-lg p-4 border min-w-0">
-                      <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                        <AlertTriangle className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
-                        Drawbacks
-                      </h2>
-                      <div className="text-foreground/90 min-w-0">
-                        {sections.drawbacks?.map((paragraph, idx) => (
-                          <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </TabsContent>
-              )}
               
               <TabsContent value="trivia" className="mt-0">
                 <div className="bg-card rounded-lg p-4 border min-w-0">

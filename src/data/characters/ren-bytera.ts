@@ -6,7 +6,7 @@ export const renBytera: WikiEntry = {
   id: "ren-bytera",
   title: "Ren Bytera",
   description: "Ren is jittery, overenergetic, and can be incredibly pushy-- especially when it comes down to her line of work as a scientist. Driven by an innate curiosity and fascination for the Bloxiverse and the life within, her insatiable appetite for knowledge often has her constantly seeking an understanding to reality.",
-  preview: "A brilliant—but morally questionable—scientist who formerly worked for Bloxy Co-Operations' science division.",
+  preview: "A brilliant, yet morally questionable scientist whose experiments serve to assist her allies.",
   content: "",
   category: "character",
   subcategory: "neutral",

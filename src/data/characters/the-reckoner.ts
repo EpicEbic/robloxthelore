@@ -6,7 +6,7 @@ export const theReckoner: WikiEntry = {
   id: "the-reckoner",
   title: "The Reckoner",
   description: "The bringer of end times, an unfathomably powerful being created with the sole purpose of ending reality itself.",
-  preview: "The bringer of end times, an unfathomably powerful being created with the sole purpose of ending reality itself.",
+  preview: "The harbinger of end times, a malicious entity brought into existance with the sole purpose of bringing an end to the Bloxiverse.",
   // Cover image used for card and main entry preview
   imageUrl: "/lovable-uploads/0b4a8077-99a0-4535-a552-411748ec617e.png",
   content: "The Reckoner is an entity that was created without a tangible form of its own, existing as a 'spirit' without a body. It was born from an occult operated by 1x1x1x1, who desired a reset of the Bloxiverse—a grand purge of reality itself to refresh everything and start anew. They believed that the Reckoner could fulfill this purpose and devoted their life to its creation. Eventually, their efforts proved victorious as the Reckoner was unleashed, with an unsuspecting Builderman used as the Reckoner's first host after sacrificing his body to the Reckoner.",

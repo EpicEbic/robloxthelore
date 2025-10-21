@@ -6,7 +6,7 @@ export const builderman: WikiEntry = {
   id: "builderman",
   title: "Builderman",
   description: "The cheery and energetic leader of the Buildermen faction, bestowed with divine creation powers by Roblox themselves.",
-  preview: "The cheery and energetic leader of the Buildermen faction, bestowed with divine creation powers by Roblox themselves.",
+  preview: "A cheery and energetic leader for the Buildermen faction, gifted with the divine powers of creation by Roblox themselves.",
   content: "Builderman is the head and founder of the Buildermen, a faction dedicated to the production and distribution of homes and material goods for Bloxians in need. He is somewhat of a celebrity, recognized for his cheery disposition and incredible generosity. His powers only further his potential for good deed, which he is quick to take advantage of.",
   category: "character",
   subcategory: "neutral",

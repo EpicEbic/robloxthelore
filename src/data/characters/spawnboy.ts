@@ -6,7 +6,7 @@ export const spawnboy: WikiEntry = {
   id: "spawnboy",
   title: "Spawnboy",
   description: "Spawnboy is quiet, reserved, and lacks a general understanding of Bloxian emotions or physical attachments. Created by Roblox for a divine and sole purpose, they dedicate their body and mind to their duties, even in Roblox's own absence.",
-  preview: "A divine entity created by ROBLOX, purposed to guide fallen Bloxians to an eternal resting place in The Edge.",
+  preview: "A divine entity purposed by Roblox to watch over and lead the souls of the fallen to their eternal resting place within the Edge.",
   content: "",
   category: "character",
   subcategory: "evil",

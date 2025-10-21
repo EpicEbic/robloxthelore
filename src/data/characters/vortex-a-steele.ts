@@ -6,7 +6,7 @@ export const vortexASteele: WikiEntry = {
   id: "vortex-a-steele",
   title: "Vortex A. Steele",
   description: "Sharp, quick-witted, and stubborn, Vortex is a high-ranking Bounty Hunter for the Hunter Association who carries a small temper but has a good heart.",
-  preview: "A sharp, quick-witted and stubborn bounty hunter with unyielding dedication to his job.",
+  preview: "A stubborn, yet sharp and quick-witted bounty hunter with an unyielding dedication to his craft.",
   content: "",
   category: "character",
   subcategory: "protagonist",

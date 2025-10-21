@@ -9,6 +9,7 @@ import { CharacterBasicInfo } from "@/components/character/character-basic-info"
 import { CharacterImageCarousel } from "@/components/character/character-image-carousel";
 import { CharacterContentTabs } from "@/components/character/character-content-tabs";
 import { AppearanceOption, PersonalityOption } from "@/types/wiki-types";
+ 
 
 // Keeping the interface for backwards compatibility
 export interface CharacterInfo {
@@ -128,7 +129,7 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
   
   return (
     <div className="w-full max-w-[1400px] mx-auto animate-fade-in">
-      <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col" style={{
+      <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl" style={{
         borderLeftColor: 'var(--wiki-character)'
       }}>
         

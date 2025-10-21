@@ -30,18 +30,18 @@ export function CharacterCombatStyleSwitcher({
           variant="outline" 
           size="sm" 
           onClick={() => setIsOpen(!isOpen)} 
-          className="h-auto min-h-[32px] py-2 text-xs w-full sm:w-auto justify-between px-3"
+          className="h-auto min-h-[32px] py-2 text-xs w-full sm:w-auto justify-between px-3 rounded-lg transition-all duration-300 hover:scale-102 hover:shadow-md"
         >
           <span className="truncate">{currentLabel}</span>
           <ChevronDown className="h-3 w-3 ml-2 flex-shrink-0" />
         </Button>
         
         {isOpen && (
-          <div className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-[9999] w-full sm:min-w-[200px] sm:max-w-[300px] sm:w-auto max-h-60 overflow-y-auto">
+          <div className="absolute top-full left-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-[9999] w-full sm:min-w-[200px] sm:max-w-[300px] sm:w-auto max-h-60 overflow-y-auto">
             {combatStyles.map(style => (
               <button 
                 key={style.id} 
-                className={`w-full text-left px-3 py-2 text-xs bg-card text-card-foreground hover:bg-accent hover:text-accent-foreground first:rounded-t-md last:rounded-b-md transition-colors ${style.id === currentStyle ? 'bg-accent text-accent-foreground' : ''}`} 
+                className={`w-full text-left px-3 py-2 text-xs bg-card text-card-foreground hover:bg-accent hover:text-accent-foreground first:rounded-t-lg last:rounded-b-lg transition-colors ${style.id === currentStyle ? 'bg-accent text-accent-foreground' : ''}`} 
                 onClick={() => {
                   onStyleChange(style.id);
                   setIsOpen(false);

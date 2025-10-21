@@ -2,11 +2,13 @@ import { CharacterTheme } from '@/types/character-theme-types';
 import { caesarTheme } from './caesar-theme';
 import { nauliTheme } from './nauli-theme';
 import { vortexTheme } from './vortex-theme';
+import { riceFarmerTheme } from './rice-farmer-theme';
 
 const characterThemes: Record<string, CharacterTheme> = {
   'caesar-bloxwright': caesarTheme,
   'nauli-parter': nauliTheme,
   'vortex-a-steele': vortexTheme,
+  'rice-farmer': riceFarmerTheme,
 };
 
 export const getCharacterTheme = (characterId: string): CharacterTheme | null => {
@@ -23,4 +25,4 @@ export const hasCharacterTheme = (characterId: string): boolean => {
 };
 
 // Export individual themes
-export { caesarTheme, nauliTheme, vortexTheme };
+export { caesarTheme, nauliTheme, vortexTheme, riceFarmerTheme };

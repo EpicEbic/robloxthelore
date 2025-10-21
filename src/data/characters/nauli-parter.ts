@@ -6,7 +6,7 @@ export const nauliParter: WikiEntry = {
   id: "nauli-parter",
   title: "Nauli Parter",
   description: "A nomadic Robloxian with augmented psychic abilities, traveling the Bloxiverse to serve justice alongside her close allies.",
-  preview: "A tactical nomad with the power of pathokinesis, Nauli is ruthless to strangers but deeply caring to her friends.",
+  preview: "A tactician and effective manipulator, Nauli's split personality makes her both a strong ally and a dangerous enemy.",
   content: "Nauli Parter is a 23-year-old Robloxian with augmented psychic abilities who lives a nomadic lifestyle, wandering the Bloxiverse to fight evil wherever it may lurk.",
   category: "character",
   subcategory: "protagonist",

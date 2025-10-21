@@ -6,7 +6,7 @@ export const riceFarmer: WikiEntry = {
   id: "rice-farmer",
   title: "Rice Farmer",
   description: "A gentle and hardworking deuteragonist who tends to the rice crops in the Farmer's Sanctuary. Known for his simple lifestyle and positive outlook on life.",
-  preview: "A gentle, honorable civilian with boundless dedication to the trade of agriculture.",
+  preview: "A gentle and honorable civilian who lives a humble, pure lifestyle. Rice brings joy to those around him.",
   content: "",
   category: "character",
   subcategory: "neutral", // This maps to "Deuteragonist" in the UI

@@ -5,7 +5,7 @@ export const charlesStudson: WikiEntry = {
   id: "charles-studson",
   title: "Charles Studson",
   description: "A sharp, short-fused elite operative for the Hunter Association, ranking as the third best bounty hunter. Known for his aggressive personality and his power of Chainipulation.",
-  preview: "An elite Hunter Association operative with a sharp temper and incredible chain-manipulation abilities.",
+  preview: "An elite-level Hunter Association operative, with a short temper and a rough rivalry against Vortex.",
   content: "",
   category: "character",
   subcategory: "minor-antagonist",

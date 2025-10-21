@@ -43,6 +43,29 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     const baseSpeed = particles.speed || 1;
 
     switch (particles.type) {
+      case 'grain': {
+        // Falling rice grain: small capsule with slight rotation and sway
+        const width = 2 + Math.random() * 1.5; // 2-3.5px
+        const height = 5 + Math.random() * 3; // 5-8px
+        const angle = (Math.random() - 0.5) * 0.6; // ~-17 to 17 degrees
+        const swayPhase = 0;
+        return {
+          x: Math.random() * canvas.width,
+          y: -20 - Math.random() * canvas.height * 0.3, // some start above view for stagger
+          vx: 0, // fall straight down
+          vy: baseSpeed * (0.6 + Math.random() * 0.6), // 0.6x..1.2x
+          size: Math.max(width, height),
+          opacity: particles.intensity * (0.5 + Math.random() * 0.5),
+          color: particles.color,
+          life: 0,
+          maxLife: 600 + Math.random() * 600, // 10-20s
+          type: 'grain',
+          angle,
+          width,
+          height,
+          swayPhase
+        };
+      }
       case 'flow':
         // Use fixed travel distance instead of canvas-relative for consistent sizing
         const targetTravelDistance = 400 + Math.random() * 600; // 400-1000px fixed distance
@@ -174,6 +197,24 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
       // Update position based on type
       switch (particle.type) {
+        case 'grain': {
+          // Straight downward fall
+          particle.x += (particle.vx || 0);
+          particle.y += Math.max(0.4, particle.vy);
+          // Slight slow rotation wobble
+          if (particle.angle !== undefined) {
+            particle.angle += (Math.random() - 0.5) * 0.01;
+          }
+          // Fade only near end of lifespan (last 20%)
+          const fadeStart = particle.maxLife * 0.8;
+          if (particle.life < fadeStart) {
+            particle.opacity = theme.particles.intensity;
+          } else {
+            const fadeProgress = (particle.life - fadeStart) / (particle.maxLife - fadeStart);
+            particle.opacity = theme.particles.intensity * Math.max(0, 1 - fadeProgress);
+          }
+          break;
+        }
         case 'flow':
           particle.x += particle.vx;
           particle.y += particle.vy;
@@ -233,6 +274,19 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
         particle.x += particle.vx;
         particle.y += particle.vy;
         // No wrapping; let them drift off slightly if needed
+      } else if (particle.type === 'grain') {
+        // Wrap to top when falling past bottom, randomize x and properties a bit
+        if (particle.y > canvas.height + 30) {
+          particle.y = -20;
+          particle.x = Math.random() * canvas.width;
+          particle.life = 0;
+          particle.vx = 0;
+          particle.vy = Math.max(0.4, theme.particles.speed) * (0.6 + Math.random() * 0.6);
+          particle.opacity = theme.particles.intensity * (0.6 + Math.random() * 0.4);
+          particle.angle = (Math.random() - 0.5) * 0.6;
+          particle.width = 2 + Math.random() * 1.5;
+          particle.height = 5 + Math.random() * 3;
+        }
       } else {
         // For other particle types, wrap around screen edges
         if (particle.x < -50) particle.x = canvas.width + 50;
@@ -250,6 +304,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       spawnChance = 0.024; // 2.4% chance for radio waves
     } else if (theme.particles.type === 'speed') {
       spawnChance = 0.08; // 8% chance for speed lines (more frequent)
+    } else if (theme.particles.type === 'grain') {
+      spawnChance = 0.12; // slightly higher to reach desired count smoothly
     }
     
     const shouldAddParticle = Math.random() < spawnChance;
@@ -302,6 +358,35 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       ctx.fillStyle = particle.color;
 
       switch (particle.type) {
+        case 'grain': {
+          // Draw rotated capsule (rounded rect) to represent a rice grain
+          const w = particle.width || Math.max(1, particle.size * 0.35);
+          const h = particle.height || Math.max(3, particle.size * 0.8);
+          ctx.save();
+          ctx.translate(particle.x, particle.y);
+          ctx.rotate(particle.angle || 0);
+          ctx.fillStyle = particle.color;
+          ctx.shadowColor = particle.color + '55';
+          ctx.shadowBlur = 2;
+          const rw = w;
+          const rh = h;
+          const r = Math.min(rw, rh) * 0.5;
+          // Rounded rectangle path centered at 0,0
+          ctx.beginPath();
+          ctx.moveTo(-rw / 2 + r, -rh / 2);
+          ctx.lineTo(rw / 2 - r, -rh / 2);
+          ctx.quadraticCurveTo(rw / 2, -rh / 2, rw / 2, -rh / 2 + r);
+          ctx.lineTo(rw / 2, rh / 2 - r);
+          ctx.quadraticCurveTo(rw / 2, rh / 2, rw / 2 - r, rh / 2);
+          ctx.lineTo(-rw / 2 + r, rh / 2);
+          ctx.quadraticCurveTo(-rw / 2, rh / 2, -rw / 2, rh / 2 - r);
+          ctx.lineTo(-rw / 2, -rh / 2 + r);
+          ctx.quadraticCurveTo(-rw / 2, -rh / 2, -rw / 2 + r, -rh / 2);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+          break;
+        }
         case 'flow':
           // Draw energy orb with glow
           ctx.shadowBlur = 20;

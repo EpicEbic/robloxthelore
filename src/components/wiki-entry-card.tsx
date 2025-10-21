@@ -10,6 +10,7 @@ import { CATEGORIES } from "@/data/categories";
 import { memo } from "react";
 import { motion } from "framer-motion";
 import { getAlignmentColor } from "@/utils/character-utils";
+ 
 
 interface WikiEntryCardProps {
   entry: WikiEntry;
@@ -56,7 +57,7 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
         {entry.alignment.split("/").map((align, index) => (
           <span
             key={index}
-            className={`px-3 py-1.5 ${getAlignmentColor(align.trim())} text-white text-sm font-semibold rounded-md shadow-sm`}
+            className={`px-3 py-1.5 ${getAlignmentColor(align.trim())} text-white text-sm font-semibold rounded-full shadow-sm`}
           >
             {align.trim()}
           </span>

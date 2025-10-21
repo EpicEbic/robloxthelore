@@ -15,7 +15,7 @@ export interface CharacterTheme {
     accent: string;
   };
   particles: {
-    type: 'flow' | 'sparkle' | 'wave' | 'orb' | 'radio' | 'speed' | 'clock' | 'lightning' | 'none';
+    type: 'flow' | 'sparkle' | 'wave' | 'orb' | 'radio' | 'speed' | 'clock' | 'lightning' | 'grain' | 'none';
     color: string;
     intensity: number;
     speed: number;
@@ -27,7 +27,7 @@ export interface CharacterTheme {
   };
 }
 
-export type ParticleType = 'flow' | 'sparkle' | 'wave' | 'orb' | 'radio' | 'speed' | 'clock' | 'lightning' | 'none';
+export type ParticleType = 'flow' | 'sparkle' | 'wave' | 'orb' | 'radio' | 'speed' | 'clock' | 'lightning' | 'grain' | 'none';
 export type PatternType = 'geometric' | 'organic' | 'energy' | 'none';
 
 export interface Particle {
@@ -43,6 +43,11 @@ export interface Particle {
   type: ParticleType;
   targetY?: number; // Target position for flow particles
   fadeStartTime?: number; // When to start fading (in frames)
+  // Optional fields used by specific particle implementations
+  angle?: number; // rotation in radians for grain or rotated shapes
+  width?: number; // visual width for non-circular particles (e.g., grain capsule)
+  height?: number; // visual height for non-circular particles
+  swayPhase?: number; // phase accumulator for horizontal sway
 }
 
 export interface ThemeTransition {

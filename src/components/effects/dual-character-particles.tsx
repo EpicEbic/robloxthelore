@@ -48,6 +48,29 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
       : spawnX;
 
     switch (particles.type) {
+      case 'grain': {
+        const width = 2 + Math.random() * 1.5;
+        const height = 5 + Math.random() * 3;
+        const angle = (Math.random() - 0.5) * 0.6;
+        const swayPhase = 0;
+        return {
+          x: finalSpawnX,
+          y: -20 - Math.random() * (canvas.height * 0.3),
+          vx: 0,
+          vy: baseSpeed * (0.6 + Math.random() * 0.6),
+          size: Math.max(width, height),
+          opacity: particles.intensity * (0.5 + Math.random() * 0.5),
+          color: particles.color,
+          life: 0,
+          maxLife: 600 + Math.random() * 600,
+          type: 'grain',
+          side,
+          angle,
+          width,
+          height,
+          swayPhase
+        };
+      }
       case 'flow':
         return {
           x: finalSpawnX,
@@ -193,6 +216,23 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
       }
 
       switch (particle.type) {
+        case 'grain': {
+          // Straight downward fall
+          particle.x += (particle.vx || 0);
+          particle.y += Math.max(0.4, particle.vy || 0.6);
+          if (particle.angle !== undefined) {
+            particle.angle += (Math.random() - 0.5) * 0.01;
+          }
+          // Fade only in the last 20% of lifespan
+          const fadeStart = particle.maxLife * 0.8;
+          if (particle.life < fadeStart) {
+            particle.opacity = 0.9; // fixed high opacity for most of life
+          } else {
+            const fadeProgress = (particle.life - fadeStart) / (particle.maxLife - fadeStart);
+            particle.opacity = Math.max(0, 1 - fadeProgress);
+          }
+          break;
+        }
         case 'flow':
           particle.x += particle.vx;
           particle.y += particle.vy;
@@ -245,6 +285,18 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
         const expansionRadius = Math.min(particle.life * 1.6, 200);
         if (expansionRadius >= 200 || expansionRadius > Math.max(canvas.width, canvas.height) * 0.8) {
           return false;
+        }
+      } else if (particle.type === 'grain') {
+        if (particle.y > canvas.height + 30) {
+          particle.y = -20;
+          particle.x = Math.random() * canvas.width;
+          particle.life = 0;
+          particle.vx = 0;
+          particle.vy = 0.6 + Math.random() * 0.6;
+          particle.opacity = 0.6 + Math.random() * 0.4;
+          particle.angle = (Math.random() - 0.5) * 0.6;
+          particle.width = 2 + Math.random() * 1.5;
+          particle.height = 5 + Math.random() * 3;
         }
       }
 
