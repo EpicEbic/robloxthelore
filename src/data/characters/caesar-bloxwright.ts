@@ -6,7 +6,7 @@ export const caesarBloxwright: WikiEntry = {
   id: "caesar-bloxwright",
   title: "Caesar Bloxwright",
   description: "Caesar is kindhearted, caring, and highly respectful by nature. He deeply values his family and friends, adopting a protective nature toward those he has grown close to.",
-  preview: "A towering giant, with an equally big heart. A vigilante on a quest to rid the Bloxiverse of evil.",
+  preview: "A towering giant, with an equivocally-sized heart. A vigilante, dedicated to his quest to rid the Bloxiverse of evil.",
   content: "",
   category: "character",
   subcategory: "protagonist",

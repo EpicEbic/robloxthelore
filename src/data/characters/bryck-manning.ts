@@ -5,7 +5,7 @@ export const bryckManning: WikiEntry = {
   id: "bryck-manning",
   title: "Bryck Manning",
   description: "A minor antagonist Robloxian with a power complex, especially after coming into ownership of the Gravity Coil.",
-  preview: "A Robloxian with a power complex, especially after coming into ownership of the Gravity Coil.",
+  preview: "A mistreated civilian, driven into a god complex through the acquisition of the Gravity Coil.",
   content: "Bryck Manning is a minor antagonist character who represents the dangers of unchecked power and the cycle of trauma. Once a powerless civilian constantly displaced by disaster, he has transformed into the very problem he once faced after acquiring the Gravity Coil.",
   category: "character",
   subcategory: "minor-antagonist",
@@ -24,7 +24,7 @@ export const bryckManning: WikiEntry = {
       label: "Standard",
       combatStats: createCombatStats("E", "D", "E", "D", "F"),
       description: [
-        "Bryck is an average fighter with minimal combat intelligence. His light training at the gym has been shown to help him in combat, but he is ultimately ouclassed by basic weapons, stronger fighters, or those with an ability."
+        "Bryck is an average fighter with minimal combat intelligence. His light training at the gym has been shown to help him in combat, but he is ultimately outclassed by basic weapons, stronger fighters, or those with an ability."
       ],
       images: [
         {
@@ -66,7 +66,7 @@ export const bryckManning: WikiEntry = {
         label: "Standard",
         combatStats: createCombatStats("E", "D", "E", "D", "F"),
         description: [
-          "Bryck is an average fighter with minimal combat intelligence. His light training at the gym has been shown to help him in combat, but he is ultimately ouclassed by basic weapons, stronger fighters, or those with an ability."
+          "Bryck is an average fighter with minimal combat intelligence. His light training at the gym has been shown to help him in combat, but he is ultimately outclassed by basic weapons, stronger fighters, or those with an ability."
         ],
         images: [
           {
