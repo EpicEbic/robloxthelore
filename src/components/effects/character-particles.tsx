@@ -55,7 +55,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   }, [performanceMode]);
 
   // Create individual particle
-  const createParticle = (theme: CharacterTheme): Particle => {
+  const createParticle = useCallback((theme: CharacterTheme): Particle => {
     const canvas = canvasRef.current;
     if (!canvas) {
       return {
@@ -207,10 +207,10 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           type: particles.type
         };
     }
-  };
+  }, []);
 
   // Update particles
-  const updateParticles = useCallback((deltaTime: number, theme: CharacterTheme) => {
+  const updateParticles = useCallback((deltaTime: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -237,10 +237,10 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           // Fade only near end of lifespan (last 20%)
           const fadeStart = particle.maxLife * 0.8;
           if (particle.life < fadeStart) {
-            particle.opacity = theme.particles.intensity;
+            particle.opacity = 0.9; // fixed high opacity for most of life
           } else {
             const fadeProgress = (particle.life - fadeStart) / (particle.maxLife - fadeStart);
-            particle.opacity = theme.particles.intensity * Math.max(0, 1 - fadeProgress);
+            particle.opacity = Math.max(0, 1 - fadeProgress);
           }
           break;
         }
@@ -250,44 +250,44 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           
           // Only fade in the last 2 seconds of lifespan
           if (particle.life < particle.fadeStartTime) {
-            particle.opacity = theme.particles.intensity; // Full opacity until fade time
+            particle.opacity = 0.7; // Full opacity until fade time
           } else {
             const fadeProgress = (particle.life - particle.fadeStartTime) / (particle.maxLife - particle.fadeStartTime);
-            particle.opacity = theme.particles.intensity * (1 - fadeProgress);
+            particle.opacity = (1 - fadeProgress) * 0.7;
           }
           break;
 
         case 'radio':
           // Sonar-like expansion - particles stay in place but expand outward
           // No position changes, just expansion and opacity fade
-          particle.opacity = theme.particles.intensity * (1 - particle.life / particle.maxLife);
+          particle.opacity = 0.7 * (1 - particle.life / particle.maxLife);
           break;
 
         case 'speed':
           particle.x += particle.vx;
           particle.y += particle.vy;
-          particle.opacity = theme.particles.intensity * (1 - particle.life / particle.maxLife);
+          particle.opacity = 0.8 * (1 - particle.life / particle.maxLife);
           break;
 
         case 'clock':
           // Clock particles stay in place and just fade
-          particle.opacity = theme.particles.intensity * (1 - particle.life / particle.maxLife);
+          particle.opacity = 0.6 * (1 - particle.life / particle.maxLife);
           break;
 
         case 'sparkle':
           // Sparkle particles stay in place and just fade (no drifting)
-          particle.opacity = theme.particles.intensity * (1 - particle.life / particle.maxLife);
+          particle.opacity = 0.8 * (1 - particle.life / particle.maxLife);
           break;
 
         case 'lightning':
           // Lightning particles stay in place and just fade
-          particle.opacity = theme.particles.intensity * (1 - particle.life / particle.maxLife);
+          particle.opacity = 0.9 * (1 - particle.life / particle.maxLife);
           break;
 
         default:
           particle.x += particle.vx;
           particle.y += particle.vy;
-          particle.opacity = theme.particles.intensity * (1 - particle.life / particle.maxLife);
+          particle.opacity = 0.7 * (1 - particle.life / particle.maxLife);
       }
 
       // Handle screen edges based on particle type
@@ -310,8 +310,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           particle.x = Math.random() * canvas.width;
           particle.life = 0;
           particle.vx = 0;
-          particle.vy = Math.max(0.4, theme.particles.speed) * (0.6 + Math.random() * 0.6);
-          particle.opacity = theme.particles.intensity * (0.6 + Math.random() * 0.4);
+          particle.vy = 0.6 + Math.random() * 0.6;
+          particle.opacity = 0.6 + Math.random() * 0.4;
           particle.angle = (Math.random() - 0.5) * 0.6;
           particle.width = 2 + Math.random() * 1.5;
           particle.height = 5 + Math.random() * 3;
@@ -374,10 +374,10 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
         particlesRef.current.push(createParticle(theme));
       }
     }
-  }, [createParticle]);
+  }, [theme, createParticle, performanceMode]);
 
   // Render particles
-  const renderParticles = useCallback((theme: CharacterTheme) => {
+  const renderParticles = useCallback(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) {
@@ -389,10 +389,6 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
     // Skip rendering on low performance mode occasionally
     if (performanceMode === 'low' && Math.random() > 0.7) return;
-
-    if (particlesRef.current.length === 0) {
-      return;
-    }
 
     particlesRef.current.forEach((particle, index) => {
       ctx.save();
@@ -693,7 +689,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
       ctx.restore();
     });
-  }, []);
+  }, [performanceMode]);
 
   // Animation loop
   const animate = useCallback((currentTime: number) => {
@@ -703,11 +699,11 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     lastTimeRef.current = currentTime;
 
     checkPerformance(currentTime);
-    updateParticles(deltaTime, theme);
-    renderParticles(theme);
+    updateParticles(deltaTime);
+    renderParticles();
 
     animationRef.current = requestAnimationFrame(animate);
-  }, [updateParticles, renderParticles, theme, checkPerformance]);
+  }, [updateParticles, renderParticles, checkPerformance]);
 
   // Initialize canvas and particles
   useEffect(() => {
