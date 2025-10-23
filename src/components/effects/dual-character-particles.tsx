@@ -98,11 +98,11 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
           y: centerY,
           vx: (Math.random() - 0.5) * 0.3, // gentle drift
           vy: (Math.random() - 0.5) * 0.3,
-          size: baseSize,
+          size: 2 + Math.random() * 3, // Match single-character system: 2-5px
           opacity: particles.intensity * (0.5 + Math.random() * 0.5),
           color: particles.color,
           life: 0,
-          maxLife: 200 + Math.random() * 100,
+          maxLife: 220 + Math.random() * 120, // Match single-character system: 220-340
           type: 'radio',
           side
         };
@@ -251,9 +251,7 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
 
         case 'radio':
           // Sonar-like expansion - particles stay in place but expand outward
-          // Apply gentle drift as they fade
-          particle.x += particle.vx;
-          particle.y += particle.vy;
+          // No position changes, just expansion and opacity fade (match single-character system)
           particle.opacity = 0.7 * (1 - particle.life / particle.maxLife);
           break;
 
@@ -436,20 +434,23 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
           const distToRight = canvas.width - particle.x;
           const distToTop = particle.y;
           const distToBottom = canvas.height - particle.y;
-          const nearestEdge = Math.min(distToLeft, distToRight, distToTop, distToBottom);
+          const minDistToEdge = Math.min(distToLeft, distToRight, distToTop, distToBottom);
           
-          // Start fading when circle approaches edges - fade from 100% opacity to 0% as it gets within ~100px of edge
-          const edgeFadeThreshold = 100;
-          const edgeFadeFactor = nearestEdge < edgeFadeThreshold 
-            ? Math.max(0, nearestEdge / edgeFadeThreshold) 
-            : 1;
+          // Fade out as the wave approaches screen edges (match single-character system)
+          const edgeFadeDistance = 100; // Start fading 100px from edge
+          const edgeFade = Math.min(1, minDistToEdge / edgeFadeDistance);
           
-          const finalOpacityRadio = particle.opacity * edgeFadeFactor;
-          ctx.globalAlpha = finalOpacityRadio;
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, expansionRadiusRadio, 0, Math.PI * 2);
-          ctx.stroke();
-          ctx.globalAlpha = 1;
+          // Calculate opacity based on both life and edge distance (match single-character system)
+          const lifeOpacity = particle.opacity * (1 - lifeProgressRadio);
+          const finalOpacityRadio = lifeOpacity * edgeFade;
+          
+          if (finalOpacityRadio > 0.01) {
+            ctx.globalAlpha = finalOpacityRadio;
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, expansionRadiusRadio, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
           break;
 
         case 'speed':
