@@ -37,6 +37,43 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     }
   }, [theme, prefersReducedMotion]);
 
+  // Actively check if canvas becomes ready (runs on every render)
+  useEffect(() => {
+    console.log('[CANVAS CHECK] Checking if canvas is ready...');
+    console.log('[CANVAS CHECK] Canvas ref:', canvasRef.current);
+    console.log('[CANVAS CHECK] Current canvasReady state:', canvasReady);
+    
+    if (canvasRef.current && !canvasReady) {
+      console.log('[CANVAS CHECK] ✓✓✓ Canvas ref is ready! Testing canvas support...');
+      
+      try {
+        const ctx = canvasRef.current.getContext('2d');
+        if (ctx) {
+          // Test basic canvas operations
+          ctx.fillStyle = '#000';
+          ctx.fillRect(0, 0, 1, 1);
+          ctx.clearRect(0, 0, 1, 1);
+          
+          console.log('[CANVAS CHECK] ✓✓✓ Canvas is fully functional! Setting canvasReady = true');
+          setCanvasReady(true);
+          setCanvasSupported(true);
+        } else {
+          console.error('[CANVAS CHECK] ✗ Canvas context not available');
+          setCanvasSupported(false);
+          setForceFallback(true);
+        }
+      } catch (error) {
+        console.error('[CANVAS CHECK] ✗ Canvas error:', error);
+        setCanvasSupported(false);
+        setForceFallback(true);
+      }
+    } else if (!canvasRef.current) {
+      console.log('[CANVAS CHECK] ⏳ Canvas ref not attached yet...');
+    } else {
+      console.log('[CANVAS CHECK] ℹ️ Canvas already marked as ready');
+    }
+  }); // No dependencies - runs on every render!
+
   // Performance monitoring
   const checkPerformance = useCallback((currentTime: number) => {
     frameCountRef.current++;
