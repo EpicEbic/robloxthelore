@@ -750,26 +750,36 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
   // Fade transition logic
   useEffect(() => {
+    console.log('═══ [FADE useEffect] START ═══');
     const currentId = theme.id || '';
     const prevId = prevThemeIdRef.current;
+    console.log('[FADE] Current ID:', currentId, 'Previous ID:', prevId);
     
     // Clear existing timeout
-    if (fadeTimeoutRef.current) clearTimeout(fadeTimeoutRef.current);
+    if (fadeTimeoutRef.current) {
+      console.log('[FADE] Clearing existing fade timeout');
+      clearTimeout(fadeTimeoutRef.current);
+    }
     
     // Initial mount
     if (!prevId && currentId) {
-      console.log('[CharacterParticles] Initializing particles for:', currentId);
+      console.log('[FADE] ✓ Initial mount detected for:', currentId);
+      console.log('[FADE] Will fade in after 1 second...');
       fadeTimeoutRef.current = setTimeout(() => {
-        console.log('[CharacterParticles] Fading in particles, canvas supported:', canvasSupported);
+        console.log('[FADE] ✓✓✓ Fading in particles! ✓✓✓');
+        console.log('[FADE] Canvas supported:', canvasSupported);
+        console.log('[FADE] Setting opacity to 1');
         setOpacity(1);
         // Force fallback if no particles appear after 3 seconds
         setTimeout(() => {
-          if (particlesRef.current.length === 0 && !forceFallback) {
-            console.warn('[CharacterParticles] No particles spawned after 3s, forcing CSS fallback');
+          const count = particlesRef.current.length;
+          console.log('[FADE] 3s fallback check - particle count:', count);
+          if (count === 0 && !forceFallback) {
+            console.warn('[FADE] ⚠️ No particles spawned after 3s, forcing CSS fallback');
             setDebugInfo('No particles spawned, forcing fallback');
             setForceFallback(true);
           } else {
-            console.log('[CharacterParticles] Particles spawned successfully:', particlesRef.current.length);
+            console.log('[FADE] ✓ Particles spawned successfully:', count);
           }
         }, 3000);
       }, 1000);
@@ -796,17 +806,25 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
   // Initialize canvas and particles
   useEffect(() => {
+    console.log('═══ [INIT useEffect] START ═══');
+    console.log('[INIT] Theme ID:', theme?.id);
+    console.log('[INIT] Canvas ref current:', canvasRef.current);
+    
     const canvas = canvasRef.current;
     if (!canvas) {
-      console.warn('[CharacterParticles] Canvas ref not ready yet, will retry...');
+      console.warn('[INIT] ⚠️ Canvas ref not ready yet, will retry on next render...');
       return; // Don't set forceFallback - just wait for next render
     }
+
+    console.log('[INIT] ✓ Canvas ref found!');
 
     // Test canvas support
     try {
       const ctx = canvas.getContext('2d');
+      console.log('[INIT] Canvas 2D context:', ctx ? '✓ Found' : '✗ Not found');
+      
       if (!ctx) {
-        console.error('[CharacterParticles] Canvas 2D context not supported');
+        console.error('[INIT] ✗ Canvas 2D context not supported');
         setDebugInfo('Canvas 2D context not supported');
         setCanvasSupported(false);
         setForceFallback(true);
@@ -818,10 +836,11 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       ctx.fillRect(0, 0, 1, 1);
       ctx.clearRect(0, 0, 1, 1);
       
-      console.log('[CharacterParticles] Canvas initialized successfully');
+      console.log('[INIT] ✓ Canvas operations test passed');
+      console.log('[INIT] ✓✓✓ Canvas initialized successfully! ✓✓✓');
       setDebugInfo('Canvas working');
     } catch (error) {
-      console.error('[CharacterParticles] Canvas error:', error);
+      console.error('[INIT] ✗✗✗ Canvas error:', error);
       setDebugInfo(`Canvas error: ${error}`);
       setCanvasSupported(false);
       setForceFallback(true);
@@ -832,14 +851,20 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       // Use viewport size for fixed positioning
       const width = window.innerWidth;
       const height = window.innerHeight;
+      console.log('[INIT] Setting canvas size:', width, 'x', height);
       canvas.width = width;
       canvas.height = height;
       
       // Test if canvas is actually visible after resize
       const rect = canvas.getBoundingClientRect();
+      console.log('[INIT] Canvas bounding rect:', rect.width, 'x', rect.height);
+      
       if (rect.width === 0 || rect.height === 0) {
+        console.error('[INIT] ✗ Canvas has zero dimensions!', rect.width, 'x', rect.height);
         setDebugInfo(`Canvas has zero dimensions: ${rect.width}x${rect.height}`);
         setForceFallback(true);
+      } else {
+        console.log('[INIT] ✓ Canvas has valid dimensions');
       }
     };
 
@@ -847,36 +872,62 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     window.addEventListener('resize', setCanvasSize);
 
     // Initialize particle array and time
+    console.log('[INIT] Current particle count:', particlesRef.current.length);
     if (particlesRef.current.length === 0) {
       lastTimeRef.current = performance.now();
+      console.log('[INIT] ✓ Initialized lastTimeRef:', lastTimeRef.current);
     }
 
+    console.log('═══ [INIT useEffect] COMPLETE ═══');
+
     return () => {
+      console.log('[INIT] Cleanup: removing resize listener');
       window.removeEventListener('resize', setCanvasSize);
     };
   }, [theme]);
 
   // Manage animation lifecycle separately
   useEffect(() => {
-    if (!canvasRef.current || !canvasSupported) return;
+    console.log('═══ [ANIMATION useEffect] START ═══');
+    console.log('[ANIMATION] Canvas ref:', canvasRef.current);
+    console.log('[ANIMATION] Canvas supported:', canvasSupported);
+    console.log('[ANIMATION] Theme ID:', theme.id);
+    console.log('[ANIMATION] Animate function:', typeof animate);
     
-    console.log('[CharacterParticles] Starting animation for theme:', theme.id);
-    animationRef.current = requestAnimationFrame(animate);
+    if (!canvasRef.current) {
+      console.error('[ANIMATION] ✗ No canvas ref, cannot start animation');
+      return;
+    }
+    
+    if (!canvasSupported) {
+      console.error('[ANIMATION] ✗ Canvas not supported, cannot start animation');
+      return;
+    }
+    
+    console.log('[ANIMATION] ✓✓✓ Starting animation loop! ✓✓✓');
+    const frameId = requestAnimationFrame(animate);
+    animationRef.current = frameId;
+    console.log('[ANIMATION] Animation frame ID:', frameId);
     
     // Force fallback if no particles appear after 3 seconds
     const fallbackTimeout = setTimeout(() => {
       const count = particlesRef.current.length;
-      console.log('[CharacterParticles] 3s check - particle count:', count);
+      console.log('[ANIMATION] 3s check - particle count:', count);
       if (count === 0 && !forceFallback) {
-        console.warn('[CharacterParticles] No particles spawned in 3s, forcing fallback');
+        console.warn('[ANIMATION] ⚠️ No particles spawned in 3s, forcing fallback');
         setDebugInfo('No particles spawned, forcing fallback');
         setForceFallback(true);
+      } else {
+        console.log('[ANIMATION] ✓ Particles are spawning normally');
       }
     }, 3000);
 
+    console.log('═══ [ANIMATION useEffect] COMPLETE ═══');
+
     return () => {
+      console.log('[ANIMATION] Cleanup: stopping animation');
       if (animationRef.current) {
-        console.log('[CharacterParticles] Stopping animation');
+        console.log('[ANIMATION] Cancelling animation frame:', animationRef.current);
         cancelAnimationFrame(animationRef.current);
         animationRef.current = undefined;
       }
