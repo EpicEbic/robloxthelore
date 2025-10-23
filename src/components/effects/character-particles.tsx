@@ -59,8 +59,10 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
   // Create individual particle
   const createParticle = useCallback((theme: CharacterTheme): Particle => {
+    console.log('[createParticle] Called for theme:', theme.id, 'type:', theme.particles?.type);
     const canvas = canvasRef.current;
     if (!canvas) {
+      console.error('[createParticle] Canvas is null!');
       return {
         x: 0, y: 0, vx: 0, vy: 0, size: 0, opacity: 0,
         color: '', life: 0, maxLife: 0, type: 'none'
@@ -68,6 +70,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     }
 
     const { particles } = theme;
+    console.log('[createParticle] Canvas size:', canvas.width, 'x', canvas.height, 'Particle config:', particles);
     const baseSize = 5 + Math.random() * 3; // Fixed base size (5-8px)
     const baseSpeed = particles.speed || 1;
 
@@ -215,10 +218,18 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   // Update particles
   const updateParticles = useCallback((deltaTime: number) => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      console.error('[updateParticles] Canvas is null!');
+      return;
+    }
 
     // Skip updates on low performance mode (but still allow some updates)
-    if (performanceMode === 'low' && Math.random() > 0.3) return;
+    if (performanceMode === 'low' && Math.random() > 0.3) {
+      console.log('[updateParticles] Skipped due to low performance mode');
+      return;
+    }
+
+    console.log('[updateParticles] Running. Current particle count:', particlesRef.current.length, 'Theme:', theme?.id);
 
     particlesRef.current = particlesRef.current.filter(particle => {
       particle.life += 1; // Count frames, not time
@@ -331,6 +342,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     });
 
     // Add new particles randomly with different spawn rates
+    console.log('[updateParticles] Checking spawn conditions. Theme type:', theme.particles?.type);
+    
     let spawnChance = 0.05; // Default 5% chance
     if (theme.particles.type === 'radio') {
       spawnChance = 0.024; // 2.4% chance for radio waves
@@ -339,6 +352,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     } else if (theme.particles.type === 'grain') {
       spawnChance = 0.12; // slightly higher to reach desired count smoothly
     }
+    
+    console.log('[updateParticles] Base spawn chance:', spawnChance, 'for type:', theme.particles.type);
     
     // Adjust spawn rates based on performance mode
     const adjustedSpawnChance = performanceMode === 'high' ? spawnChance : 
@@ -349,9 +364,17 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
                                 performanceMode === 'medium' ? Math.floor(maxParticles * 0.7) : 
                                 Math.floor(maxParticles * 0.4);
     
-    const shouldAddParticle = Math.random() < adjustedSpawnChance;
-    if (shouldAddParticle && particlesRef.current.length < adjustedMaxParticles) {
-      console.log('[CharacterParticles] Spawning particle. Current count:', particlesRef.current.length, 'Max:', adjustedMaxParticles);
+    console.log('[updateParticles] Performance mode:', performanceMode);
+    console.log('[updateParticles] Adjusted spawn chance:', adjustedSpawnChance, 'Max particles:', adjustedMaxParticles);
+    
+    const randomValue = Math.random();
+    const shouldAddParticle = randomValue < adjustedSpawnChance;
+    const hasRoom = particlesRef.current.length < adjustedMaxParticles;
+    
+    console.log('[updateParticles] Random value:', randomValue, 'Should spawn:', shouldAddParticle, 'Has room:', hasRoom, '(current:', particlesRef.current.length, '/', adjustedMaxParticles + ')');
+    
+    if (shouldAddParticle && hasRoom) {
+      console.log('[CharacterParticles] ✓ SPAWNING PARTICLE! Current count:', particlesRef.current.length, 'Max:', adjustedMaxParticles);
       // For Caesar, create mixed particle types (flow + lightning)
       if (theme.id === 'caesar-bloxwright') {
         const particleType = Math.random();
@@ -385,6 +408,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) {
+      console.error('[renderParticles] Canvas or context is null!');
       setCanvasSupported(false);
       return;
     }
@@ -392,7 +416,14 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Skip rendering on low performance mode occasionally
-    if (performanceMode === 'low' && Math.random() > 0.7) return;
+    if (performanceMode === 'low' && Math.random() > 0.7) {
+      console.log('[renderParticles] Skipped due to low performance');
+      return;
+    }
+
+    if (particlesRef.current.length > 0) {
+      console.log('[renderParticles] Rendering', particlesRef.current.length, 'particles');
+    }
 
     particlesRef.current.forEach((particle, index) => {
       ctx.save();
@@ -697,14 +728,17 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
   // Animation loop
   const animate = useCallback((currentTime: number) => {
-    if (!canvasRef.current) return;
+    if (!canvasRef.current) {
+      console.error('[animate] Canvas ref is null!');
+      return;
+    }
 
     const deltaTime = currentTime - lastTimeRef.current;
     lastTimeRef.current = currentTime;
 
-    // Log once per second to avoid spam
-    if (currentTime % 1000 < 16) {
-      console.log('[CharacterParticles] Animation running. Particle count:', particlesRef.current.length);
+    // Log every 60 frames (~1 second) to avoid spam
+    if (Math.floor(currentTime / 1000) !== Math.floor((currentTime - deltaTime) / 1000)) {
+      console.log('[animate] Running. Particle count:', particlesRef.current.length, 'FPS check time:', currentTime);
     }
 
     checkPerformance(currentTime);
