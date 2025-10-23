@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { OptimizedImage } from "@/components/ui/optimized-image";
 import { cn } from "@/lib/utils";
-import { getCharacterDisplayImage } from "@/utils/image-source-utils";
 import { getSubcategoryLabel } from "@/data/categories";
 
 interface DraggableEntryCardProps {
@@ -62,39 +61,32 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
       
       <CardContent className="relative p-3">
         <div className="space-y-2">
-          {/* Image container - more rounded */}
-          <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 transition-colors">
-            <OptimizedImage
-              src={getCharacterDisplayImage(entry)}
-              alt={entry.title}
-              className="w-full h-full object-cover transition-transform duration-300"
-            />
+          {/* Character icon as main image - circular */}
+          <div className="relative aspect-square w-full">
+            <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 transition-colors border-2 border-primary/20">
+              <OptimizedImage
+                src={characterIconPath}
+                alt={entry.title}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
             
-            {/* Selection indicator */}
+            {/* Selection indicator - outside the circle */}
             {slotNumber && isSelected && (
-              <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold shadow-lg border-2 border-background">
+              <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold shadow-lg border-2 border-background z-10">
                 {slotNumber}
               </div>
             )}
-            
-            {/* Hover overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
          
-          {/* Content section - with character icon */}
+          {/* Content section - just name and badge */}
           <div className="space-y-1.5">
-            <div className="flex items-center gap-1.5">
-              <div className="w-4 h-4 rounded-full overflow-hidden flex-shrink-0 border border-primary/20">
-                <OptimizedImage
-                  src={characterIconPath}
-                  alt={`${entry.title} icon`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="font-bold text-sm leading-tight line-clamp-1 text-foreground group-hover:text-primary transition-colors">
-                {entry.title}
-              </h3>
-            </div>
+            <h3 className="font-bold text-sm leading-tight line-clamp-1 text-center text-foreground group-hover:text-primary transition-colors">
+              {entry.title}
+            </h3>
             
             {entry.subcategory && (
               <Badge 

@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { OptimizedImage } from "@/components/ui/optimized-image";
-import { getCharacterDisplayImage } from "@/utils/image-source-utils";
 import { X, Upload, Sword } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CharacterCombatStyleSwitcher } from "@/components/character/character-combat-style-switcher";
@@ -34,7 +33,7 @@ export function ComparisonSlot({
   });
   
   return (
-    <Card ref={setNodeRef} className={cn("min-h-[300px] h-full flex flex-col transition-all border-0", isOver && "ring-2 ring-primary bg-primary/5", !entry && "border-dashed border-2")}>
+    <Card ref={setNodeRef} className={cn("min-h-[300px] h-full flex flex-col transition-all border-0 rounded-2xl", isOver && "ring-2 ring-primary bg-primary/5", !entry && "border-dashed border-2")}>
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-lg">{title}</CardTitle>
         {entry && (
@@ -47,19 +46,23 @@ export function ComparisonSlot({
       <CardContent className="flex flex-col flex-1">
         {entry ? (
           <div className="flex flex-col h-full space-y-4">
-            <div className="aspect-square w-full max-w-[200px] mx-auto rounded-lg overflow-hidden bg-muted">
-              <OptimizedImage src={getCharacterDisplayImage(entry)} alt={entry.title} className="w-full h-full object-cover" />
+            <div className="aspect-square w-full max-w-[200px] mx-auto rounded-full overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border-2 border-primary/20">
+              <OptimizedImage 
+                src={`/lovable-uploads/character-icons/${entry.id}-icon.png`} 
+                alt={entry.title} 
+                className="w-full h-full object-cover" 
+              />
             </div>
             
             <div className="text-center space-y-3 flex-1 flex flex-col justify-center">
               <h3 className="font-bold text-xl">{entry.title}</h3>
               
               <div className="flex flex-wrap justify-center gap-2">
-                <Badge variant="secondary">
+                <Badge variant="secondary" className="rounded-full">
                   {entry.category}
                 </Badge>
                 {entry.subcategory && (
-                  <Badge variant="outline">
+                  <Badge variant="outline" className="rounded-full">
                     {entry.subcategory}
                   </Badge>
                 )}
