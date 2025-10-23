@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { CharacterTheme, Particle, ParticleType } from '@/types/character-theme-types';
 
 interface CharacterParticlesProps {
@@ -14,6 +14,12 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   const animationRef = useRef<number>();
   const particlesRef = useRef<Particle[]>([]);
   const lastTimeRef = useRef<number>(0);
+  const [performanceMode, setPerformanceMode] = useState<'high' | 'medium' | 'low'>('high');
+  const frameCountRef = useRef<number>(0);
+  const lastFpsCheckRef = useRef<number>(0);
+  const [canvasSupported, setCanvasSupported] = useState<boolean>(true);
+  const [debugInfo, setDebugInfo] = useState<string>('');
+  const [forceFallback, setForceFallback] = useState<boolean>(false);
 
   // Check for reduced motion preference
   const prefersReducedMotion = useCallback(() => {
@@ -27,6 +33,26 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     }
   }, [theme, prefersReducedMotion]);
 
+  // Performance monitoring
+  const checkPerformance = useCallback((currentTime: number) => {
+    frameCountRef.current++;
+    
+    if (currentTime - lastFpsCheckRef.current >= 1000) { // Check every second
+      const fps = frameCountRef.current;
+      frameCountRef.current = 0;
+      lastFpsCheckRef.current = currentTime;
+      
+      if (fps < 30 && performanceMode === 'high') {
+        setPerformanceMode('medium');
+      } else if (fps < 20 && performanceMode === 'medium') {
+        setPerformanceMode('low');
+      } else if (fps > 50 && performanceMode === 'low') {
+        setPerformanceMode('medium');
+      } else if (fps > 55 && performanceMode === 'medium') {
+        setPerformanceMode('high');
+      }
+    }
+  }, [performanceMode]);
 
   // Create individual particle
   const createParticle = (theme: CharacterTheme): Particle => {
@@ -188,6 +214,9 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Skip updates on low performance mode (but still allow some updates)
+    if (performanceMode === 'low' && Math.random() > 0.3) return;
+
     particlesRef.current = particlesRef.current.filter(particle => {
       particle.life += 1; // Count frames, not time
       
@@ -308,8 +337,17 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       spawnChance = 0.12; // slightly higher to reach desired count smoothly
     }
     
-    const shouldAddParticle = Math.random() < spawnChance;
-    if (shouldAddParticle && particlesRef.current.length < (theme.particles.count || 100)) {
+    // Adjust spawn rates based on performance mode
+    const adjustedSpawnChance = performanceMode === 'high' ? spawnChance : 
+                               performanceMode === 'medium' ? spawnChance * 0.6 : 
+                               spawnChance * 0.3;
+    const maxParticles = theme.particles.count || 100;
+    const adjustedMaxParticles = performanceMode === 'high' ? maxParticles : 
+                                performanceMode === 'medium' ? Math.floor(maxParticles * 0.7) : 
+                                Math.floor(maxParticles * 0.4);
+    
+    const shouldAddParticle = Math.random() < adjustedSpawnChance;
+    if (shouldAddParticle && particlesRef.current.length < adjustedMaxParticles) {
       // For Caesar, create mixed particle types (flow + lightning)
       if (theme.id === 'caesar-bloxwright') {
         const particleType = Math.random();
@@ -343,10 +381,14 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) {
+      setCanvasSupported(false);
       return;
     }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Skip rendering on low performance mode occasionally
+    if (performanceMode === 'low' && Math.random() > 0.7) return;
 
     if (particlesRef.current.length === 0) {
       return;
@@ -660,16 +702,42 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     const deltaTime = currentTime - lastTimeRef.current;
     lastTimeRef.current = currentTime;
 
+    checkPerformance(currentTime);
     updateParticles(deltaTime, theme);
     renderParticles(theme);
 
     animationRef.current = requestAnimationFrame(animate);
-  }, [updateParticles, renderParticles, theme]);
+  }, [updateParticles, renderParticles, theme, checkPerformance]);
 
   // Initialize canvas and particles
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) {
+      setDebugInfo('No canvas element found');
+      setForceFallback(true);
+      return;
+    }
+
+    // Test canvas support
+    try {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        setDebugInfo('Canvas 2D context not supported');
+        setCanvasSupported(false);
+        setForceFallback(true);
+        return;
+      }
+      
+      // Test basic canvas operations
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, 1, 1);
+      ctx.clearRect(0, 0, 1, 1);
+      
+      setDebugInfo('Canvas working');
+    } catch (error) {
+      setDebugInfo(`Canvas error: ${error}`);
+      setCanvasSupported(false);
+      setForceFallback(true);
       return;
     }
 
@@ -679,7 +747,13 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       const height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
-      console.log('Canvas resized to:', width, 'x', height);
+      
+      // Test if canvas is actually visible after resize
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) {
+        setDebugInfo(`Canvas has zero dimensions: ${rect.width}x${rect.height}`);
+        setForceFallback(true);
+      }
     };
 
     setCanvasSize();
@@ -691,14 +765,23 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
     // Start animation
     animationRef.current = requestAnimationFrame(animate);
+    
+    // Force fallback if no particles appear after 3 seconds
+    const fallbackTimeout = setTimeout(() => {
+      if (particlesRef.current.length === 0 && !forceFallback) {
+        setDebugInfo('No particles spawned, forcing fallback');
+        setForceFallback(true);
+      }
+    }, 3000);
 
     return () => {
       window.removeEventListener('resize', setCanvasSize);
+      clearTimeout(fallbackTimeout);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [theme, animate]);
+  }, [theme, animate, forceFallback]);
 
   // Clear particles when theme changes to prevent burst
   useEffect(() => {
@@ -707,6 +790,74 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
   if (theme.particles.type === 'none' || prefersReducedMotion()) {
     return null;
+  }
+
+  // Fallback for canvas-unsupported browsers, very low performance, or forced fallback
+  if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0)) {
+    return (
+      <div 
+        className={className}
+        style={{ opacity: theme.particles.intensity }}
+      >
+        {/* Enhanced CSS-based particles for low-end devices */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className="absolute w-3 h-3 rounded-full animate-pulse"
+            style={{
+              backgroundColor: theme.particles.color,
+              left: '20%',
+              top: '30%',
+              animationDelay: '0s',
+              animationDuration: '2s',
+              boxShadow: `0 0 15px ${theme.particles.color}, 0 0 30px ${theme.particles.color}`
+            }}
+          />
+          <div 
+            className="absolute w-2 h-2 rounded-full animate-pulse"
+            style={{
+              backgroundColor: theme.particles.color,
+              left: '60%',
+              top: '60%',
+              animationDelay: '1s',
+              animationDuration: '3s',
+              boxShadow: `0 0 10px ${theme.particles.color}`
+            }}
+          />
+          <div 
+            className="absolute w-1 h-1 rounded-full animate-pulse"
+            style={{
+              backgroundColor: theme.particles.color,
+              left: '40%',
+              top: '80%',
+              animationDelay: '2s',
+              animationDuration: '4s',
+              boxShadow: `0 0 8px ${theme.particles.color}`
+            }}
+          />
+          <div 
+            className="absolute w-2 h-2 rounded-full animate-pulse"
+            style={{
+              backgroundColor: theme.particles.color,
+              right: '30%',
+              top: '20%',
+              animationDelay: '1.5s',
+              animationDuration: '2.5s',
+              boxShadow: `0 0 12px ${theme.particles.color}`
+            }}
+          />
+        </div>
+        
+        {/* Debug info (only in development) */}
+        {process.env.NODE_ENV === 'development' && debugInfo && (
+          <div 
+            className="absolute top-2 left-2 text-xs text-white bg-black bg-opacity-50 p-1 rounded"
+            style={{ zIndex: 1000 }}
+          >
+            {debugInfo}
+          </div>
+        )}
+      </div>
+    );
   }
 
   return (
