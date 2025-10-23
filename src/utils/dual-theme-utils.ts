@@ -66,22 +66,26 @@ export const getCharacterThemeClasses = (characterId: string, side: 'left' | 'ri
  */
 export const getComparisonParticleRates = (theme: CharacterTheme) => {
   const baseRates = {
-    radio: 0.012,
-    flow: 0.025,
+    radio: 0.024, // Match single-character system (2.4%)
+    flow: 0.05,
     speed: 0.08,
-    lightning: 0.025,
-    clock: 0.025,
-    sparkle: 0.025,
-    default: 0.025
+    lightning: 0.05,
+    clock: 0.05,
+    sparkle: 0.05,
+    grain: 0.12,
+    default: 0.05
   };
   
   const particleType = theme.particles.type;
   const baseRate = baseRates[particleType] || baseRates.default;
   
+  // Use the character's own particle count to maintain visual consistency
+  const particleCount = theme.particles.count || 100;
+  
   return {
-    spawnChance: baseRate * 8, // Octupled for dramatic page-filling effect
-    maxParticles: 500, // Much higher limit to fill the page
-    intensity: theme.particles.intensity * 2.0, // Double intensity for brightness
+    spawnChance: baseRate, // Use exact same spawn rate as single-character system
+    maxParticles: particleCount, // Use character's own max particle count
+    intensity: theme.particles.intensity, // Use character's own intensity
     distribution: 'full-page' // Ensure particles fill entire page
   };
 };
