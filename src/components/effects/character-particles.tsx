@@ -25,18 +25,6 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   const [debugInfo, setDebugInfo] = useState<string>('');
   const [forceFallback, setForceFallback] = useState<boolean>(false);
 
-  // Check for reduced motion preference
-  const prefersReducedMotion = useCallback(() => {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  }, []);
-
-  // Check for reduced motion preference
-  useEffect(() => {
-    if (prefersReducedMotion()) {
-      return;
-    }
-  }, [theme, prefersReducedMotion]);
-
   // Actively check if canvas becomes ready (runs on every render)
   useEffect(() => {
     console.log('[CANVAS CHECK] Checking if canvas is ready...');
@@ -991,13 +979,12 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
   console.log('[RENDER] Determining what to render...');
   console.log('[RENDER] Particles type:', theme.particles.type);
-  console.log('[RENDER] Reduced motion:', prefersReducedMotion());
   console.log('[RENDER] Canvas supported:', canvasSupported);
   console.log('[RENDER] Force fallback:', forceFallback);
   console.log('[RENDER] Performance mode:', performanceMode);
 
-  if (theme.particles.type === 'none' || prefersReducedMotion()) {
-    console.log('[RENDER] → Returning NULL (no particles or reduced motion)');
+  if (theme.particles.type === 'none') {
+    console.log('[RENDER] → Returning NULL (no particles)');
     return null;
   }
 
