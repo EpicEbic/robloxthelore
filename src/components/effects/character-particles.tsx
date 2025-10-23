@@ -21,6 +21,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   const frameCountRef = useRef<number>(0);
   const lastFpsCheckRef = useRef<number>(0);
   const [canvasSupported, setCanvasSupported] = useState<boolean>(true);
+  const [canvasReady, setCanvasReady] = useState<boolean>(false);
   const [debugInfo, setDebugInfo] = useState<string>('');
   const [forceFallback, setForceFallback] = useState<boolean>(false);
 
@@ -838,11 +839,14 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       
       console.log('[INIT] ✓ Canvas operations test passed');
       console.log('[INIT] ✓✓✓ Canvas initialized successfully! ✓✓✓');
+      console.log('[INIT] Setting canvasReady = true');
       setDebugInfo('Canvas working');
+      setCanvasReady(true);
     } catch (error) {
       console.error('[INIT] ✗✗✗ Canvas error:', error);
       setDebugInfo(`Canvas error: ${error}`);
       setCanvasSupported(false);
+      setCanvasReady(false);
       setForceFallback(true);
       return;
     }
@@ -891,11 +895,17 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     console.log('═══ [ANIMATION useEffect] START ═══');
     console.log('[ANIMATION] Canvas ref:', canvasRef.current);
     console.log('[ANIMATION] Canvas supported:', canvasSupported);
+    console.log('[ANIMATION] Canvas ready:', canvasReady);
     console.log('[ANIMATION] Theme ID:', theme.id);
     console.log('[ANIMATION] Animate function:', typeof animate);
     
+    if (!canvasReady) {
+      console.warn('[ANIMATION] ⚠️ Canvas not ready yet, waiting...');
+      return;
+    }
+    
     if (!canvasRef.current) {
-      console.error('[ANIMATION] ✗ No canvas ref, cannot start animation');
+      console.error('[ANIMATION] ✗ No canvas ref even though canvasReady=true!');
       return;
     }
     
@@ -904,7 +914,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       return;
     }
     
-    console.log('[ANIMATION] ✓✓✓ Starting animation loop! ✓✓✓');
+    console.log('[ANIMATION] ✓✓✓ ALL CHECKS PASSED! Starting animation loop! ✓✓✓');
     const frameId = requestAnimationFrame(animate);
     animationRef.current = frameId;
     console.log('[ANIMATION] Animation frame ID:', frameId);
@@ -933,11 +943,13 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       }
       clearTimeout(fallbackTimeout);
     };
-  }, [animate, canvasSupported, theme.id, forceFallback]);
+  }, [animate, canvasSupported, canvasReady, theme.id, forceFallback]);
 
   // Clear particles when theme changes to prevent burst
   useEffect(() => {
+    console.log('[THEME CHANGE] Resetting particles and canvas ready state');
     particlesRef.current = [];
+    setCanvasReady(false); // Reset so INIT can run again
   }, [theme]);
 
   if (theme.particles.type === 'none' || prefersReducedMotion()) {
