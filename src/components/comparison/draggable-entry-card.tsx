@@ -6,6 +6,7 @@ import { OptimizedImage } from "@/components/ui/optimized-image";
 import { cn } from "@/lib/utils";
 import { getCharacterDisplayImage } from "@/utils/image-source-utils";
 import { getSubcategoryLabel } from "@/data/categories";
+import { User } from "lucide-react";
 
 interface DraggableEntryCardProps {
   entry: WikiEntry;
@@ -58,9 +59,9 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
         isSelected ? "bg-primary" : "bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5"
       )} />
       
-      <CardContent className="relative p-4">
-        <div className="space-y-3">
-          {/* Image container with enhanced styling */}
+      <CardContent className="relative p-3">
+        <div className="space-y-2">
+          {/* Image container - more compact */}
           <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 transition-colors">
             <OptimizedImage
               src={getCharacterDisplayImage(entry)}
@@ -70,7 +71,7 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
             
             {/* Selection indicator */}
             {slotNumber && isSelected && (
-              <div className="absolute top-3 right-3 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg border-2 border-background">
+              <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold shadow-lg border-2 border-background">
                 {slotNumber}
               </div>
             )}
@@ -79,28 +80,23 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
          
-          {/* Content section */}
-          <div className="space-y-2">
-            <h3 className="font-bold text-base leading-tight line-clamp-2 text-foreground group-hover:text-primary transition-colors">
-              {entry.title}
-            </h3>
-            
-            <div className="flex flex-wrap gap-1.5">
-              <Badge 
-                variant="secondary" 
-                className="text-xs font-medium px-2 py-1 bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"
-              >
-                {entry.category}
-              </Badge>
-              {entry.subcategory && (
-                <Badge 
-                  variant="outline" 
-                  className="text-xs font-medium px-2 py-1 border-primary/30 text-foreground/80 hover:border-primary/50 hover:text-foreground transition-colors"
-                >
-                  {getSubcategoryLabel(entry.category, entry.subcategory)}
-                </Badge>
-              )}
+          {/* Content section - more compact with icon */}
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-1.5">
+              <User className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+              <h3 className="font-bold text-sm leading-tight line-clamp-1 text-foreground group-hover:text-primary transition-colors">
+                {entry.title}
+              </h3>
             </div>
+            
+            {entry.subcategory && (
+              <Badge 
+                variant="outline" 
+                className="text-[10px] font-medium px-1.5 py-0.5 border-primary/30 text-foreground/80 hover:border-primary/50 hover:text-foreground transition-colors w-full justify-center"
+              >
+                {getSubcategoryLabel(entry.category, entry.subcategory)}
+              </Badge>
+            )}
           </div>
         </div>
       </CardContent>

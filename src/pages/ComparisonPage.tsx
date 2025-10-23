@@ -7,6 +7,7 @@ import { ComparisonSlot } from "@/components/comparison/comparison-slot";
 import { ComparisonResults } from "@/components/comparison/comparison-results";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { getSubcategoryLabel } from "@/data/categories";
 import { Link } from "react-router-dom";
 import { GitCompare } from "lucide-react";
@@ -219,32 +220,27 @@ function ComparisonPageContent() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {sortedGroups.map(([subcategory, entries], groupIndex) => (
                   <div key={subcategory} className="animate-fade-in" style={{ animationDelay: `${groupIndex * 100}ms` }}>
-                    {/* Enhanced category divider */}
-                    <div className="relative mb-6">
-                      <div className="flex items-center gap-4 mb-4">
+                    {/* Compact category divider */}
+                    <div className="relative mb-3">
+                      <div className="flex items-center gap-3 mb-3">
                         <div className="flex-1 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-                        <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 shadow-sm">
-                          <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                          <h3 className="text-lg font-bold text-primary">
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 shadow-sm">
+                          <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></div>
+                          <h3 className="text-sm font-bold text-primary">
                             {getSubcategoryLabel("character", subcategory)}
                           </h3>
-                          <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                          <Badge variant="secondary" className="text-[10px] px-1.5 py-0 bg-primary/20 text-primary border-0">
+                            {entries.length}
+                          </Badge>
                         </div>
                         <div className="flex-1 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-                      </div>
-                      
-                      {/* Category count badge */}
-                      <div className="flex justify-center mb-4">
-                        <div className="px-3 py-1 rounded-full bg-muted/50 border border-border/50 text-sm text-muted-foreground">
-                          {entries.length} {entries.length === 1 ? 'character' : 'characters'}
-                        </div>
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-3">
                       {entries.map((entry, index) => (
                         <div 
                           key={entry.id} 
