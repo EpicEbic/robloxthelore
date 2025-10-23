@@ -44,8 +44,10 @@ interface CharacterSections {
   lifestyle?: string[] | any[]; // Updated to handle LifestyleOption[]
   history?: string[] | any[]; // Updated to handle HistoryOption[]
   relationships?: string[];
+  relationshipsData?: any;
   combat?: string[];
   abilities?: string[];
+  abilityData?: any;
   abilityDetails?: string[];
   offensiveCapabilities?: string[];
   defensiveCapabilities?: string[];
@@ -106,6 +108,8 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
     return 'standard';
   });
   const [currentTab, setCurrentTab] = useState('general');
+  const [lifestyleHistoryView, setLifestyleHistoryView] = useState<'lifestyle' | 'history'>('lifestyle');
+  const [combatView, setCombatView] = useState<'physical' | 'ability'>('physical');
   
   console.log('Character data appearances:', characterData.appearances);
   console.log('Current appearance set to:', currentAppearance);
@@ -117,8 +121,10 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
     lifestyle: character.sections?.lifestyle || [],
     history: character.sections?.history || [],
     relationships: character.sections?.relationships || [],
+    relationshipsData: character.sections?.relationshipsData,
     combat: character.sections?.combat || [],
     abilities: character.sections?.abilities || [],
+    abilityData: character.sections?.abilityData,
     abilityDetails: character.sections?.abilityDetails || [],
     offensiveCapabilities: character.sections?.offensiveCapabilities || [],
     defensiveCapabilities: character.sections?.defensiveCapabilities || [],
@@ -147,7 +153,8 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
         {/* Main Content - Mobile: Vertical Stack, Desktop: Side by Side */}
         <div className={`gap-4 p-6 flex-1 ${isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-1 lg:grid-cols-[1fr_2fr]'}`}>
           
-          <CharacterImageCarousel 
+          <div className="min-w-0 w-full">
+            <CharacterImageCarousel 
             images={character.carouselImages || []}
             appearances={characterData.appearances}
             currentAppearance={currentAppearance}
@@ -157,9 +164,15 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
             abilityImages={character.abilityCarouselImages}
             lifestyles={Array.isArray(character.sections?.lifestyle) && typeof character.sections.lifestyle[0] === 'object' ? character.sections.lifestyle as any[] : []}
             currentLifestyle={currentLifestyle}
+            histories={Array.isArray(character.sections?.history) && typeof character.sections.history[0] === 'object' ? character.sections.history as any[] : []}
+            currentHistory={currentHistory}
+            lifestyleHistoryView={lifestyleHistoryView}
+            combatView={combatView}
           />
+          </div>
           
-          <CharacterContentTabs 
+          <div className="min-w-0 w-full">
+            <CharacterContentTabs 
             sections={characterSections} 
             appearances={characterData.appearances}
             currentAppearance={currentAppearance}
@@ -170,7 +183,7 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
         lifestyles={Array.isArray(character.sections?.lifestyle) && typeof character.sections.lifestyle[0] === 'object' ? character.sections.lifestyle as any[] : []}
         currentLifestyle={currentLifestyle}
         onLifestyleChange={setCurrentLifestyle}
-        histories={character.id === 'bryck-manning' ? undefined : character.sections?.history as any}
+        histories={Array.isArray(character.sections?.history) && typeof character.sections.history[0] === 'object' ? character.sections.history as any[] : []}
         currentHistory={currentHistory}
         onHistoryChange={setCurrentHistory}
         combatStyles={character.sections?.combatStyles || []}
@@ -182,7 +195,10 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
             combatStats={character.sections?.combatStyles?.find(style => style.id === currentCombatStyle)?.combatStats}
             onTabChange={setCurrentTab}
             currentEntryId={character.id}
+            onLifestyleHistoryViewChange={setLifestyleHistoryView}
+            onCombatViewChange={setCombatView}
           />
+          </div>
           
         </div>
       </Card>

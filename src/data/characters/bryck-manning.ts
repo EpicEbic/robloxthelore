@@ -186,6 +186,38 @@ export const bryckManning: WikiEntry = {
       "Nauli Bloxwright - Enemy: Nauli (alongside Caesar) were the ones to successfully incapacitate Bryck during his rampage in the Farmer Sanctuary, though Nauli only served to support Caesar throughout the battle. Though Bryck despises Nauli, his hatred was far more focused on the petty revenge he wished to bring upon Caesar instead.",
       "Vortex A. Steele - Enemy: Bryck has a distaste for Vortex after he had failed to complete Bryck's contract against Caesar. While normally it would've ended there, Bryck was enraged to learn that on top of failing the contract against Caesar, he had also gone on to become Caesar's close friend."
     ],
+    relationshipsData: {
+      "caesar-bloxwright": {
+        status: "Sworn Enemy and Target of Revenge",
+        history: [
+          "Bryck first encountered Caesar during his rampage at the Farmer's Sanctuary, where he was indiscriminately destroying property and terrorizing innocent civilians.",
+          "Caesar intervened to stop the destruction. Despite Bryck's serpentine agility and venomous abilities, Caesar's raw power and determination drove him back, saving countless lives.",
+          "Though Caesar was unable to permanently stop Bryck at that moment, the humiliation of being forced to retreat burned deeply. Bryck's pride was wounded, and his petty nature transformed the encounter into an obsession for revenge.",
+          "From his cell in the Hunter Association's holding facility, Bryck used his connections to Charles Studson to issue a contract on Caesar's life. When Vortex failed to complete that contract and instead befriended Caesar, Bryck's hatred only intensified.",
+          "Caesar represents everything Bryck despises: heroism, selflessness, and the ability to inspire others. Bryck dreams of the day he can escape and exact his revenge."
+        ]
+      },
+      "nauli-parter": {
+        status: "Enemy and Obstacle",
+        history: [
+          "Nauli was present during Bryck's rampage at the Farmer's Sanctuary, working alongside Caesar to stop his destruction.",
+          "While Caesar engaged Bryck directly, Nauli provided crucial psychic support—disrupting Bryck's focus, creating illusions, and coordinating the defense of innocent bystanders.",
+          "Bryck found Nauli's psychic abilities particularly frustrating. Her mental manipulation made it difficult for him to think clearly during the battle, contributing significantly to his defeat.",
+          "Though Bryck despises Nauli, his hatred for her is somewhat overshadowed by his obsession with Caesar. He sees her as an annoying obstacle rather than his primary target.",
+          "Still, Bryck would relish the opportunity to demonstrate that his venom and agility are more than a match for her psychic tricks."
+        ]
+      },
+      "vortex-a-steele": {
+        status: "Failed Contractor and Traitor",
+        history: [
+          "Bryck hired Vortex through the Hunter Association to eliminate Caesar, seeing the elite hunter as the perfect tool for his revenge.",
+          "Bryck waited eagerly from his prison cell for news of Caesar's demise. Instead, reports came back of repeated failures—Vortex couldn't defeat Caesar despite numerous attempts.",
+          "What happened next infuriated Bryck beyond measure: Vortex dropped the contract entirely and, worse, became friends with Caesar. In Bryck's eyes, this was the ultimate betrayal.",
+          "Bryck sees Vortex as a failure and a traitor who let personal feelings interfere with professional duty. The fact that someone as skilled as Vortex couldn't defeat Caesar only makes Bryck more determined to do it himself.",
+          "If Bryck ever escapes, both Caesar and Vortex will be on his list of targets—one for defeating him, the other for disappointing him."
+        ]
+      }
+    },
     combat: [
       `
 Bryck is an average fighter with minimal combat intelligence. His light training at the gym has been shown to help him in combat, but he is ultimately outclassed by basic weapons, stronger fighters, or those with an ability.

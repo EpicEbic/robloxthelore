@@ -33,7 +33,7 @@ export const vortexASteele: WikiEntry = {
         "Vortex mostly relies on his remarkable agility and precision in combat, focusing his blows and targeting weak or unstable points on his opponents. He is masterful at reading the body language and movement of targets, allowing him to accurately predict and outmaneuver his enemies.",
         "His ability (Chronipulation) only furthers his potential, turning Vortex into a blitzing powerhouse who can take quite a hit, if you're even able to strike him to begin with."
       ],
-      combatStats: createCombatStats("D", "D", "B", "B", "B"),
+      combatStats: createCombatStats("D", "D", "D", "B", "A"),
       images: [
         {
           url: "/lovable-uploads/f387ffd7-944e-4544-9123-4a4656cfc89c.png",
@@ -48,7 +48,7 @@ export const vortexASteele: WikiEntry = {
         "Vortex is armed with a high-caliber magnetic railgun, compacted down to the size and shape of a large handheld revolver. It is capable of charging and firing lethal, high-velocity rounds which can pierce multiple materials or targets at once. These rounds remain magnetically linked to the Magnetivolver as long as they remain in motion, allowing Vortex to redirect his bullets and slightly alter their trajectory even after they've been fired.",
         "The Magnetivolver was specifically designed to work in tandem with Vortex's Chronipulation, allowing Vortex to charge it with his chrono-energy. By doing so, he can decrease the charge time inbetween shots, as well as fire rounds at even higher speeds than the norm, essentially turning the Magnetivolver into a handheld railcannon."
       ],
-      combatStats: createCombatStats("D", "D", "B", "A", "B"),
+      combatStats: createCombatStats("D", "D", "D", "A", "A"),
       images: [
         {
           url: "/lovable-uploads/9289b6a9-41e2-4023-9996-72493748bd7e.png",
@@ -75,7 +75,7 @@ export const vortexASteele: WikiEntry = {
         "The Amplification Gauntlet (hereby referred to as the Amp Gauntlet) is a mountable gauntlet that Vortex can wear on his right arm. While powered, it grants Vortex a significant boost in raw strength for his arm, allowing him to effortlessly destroy concrete, rebar, etc. Vortex rarely uses the Amp Gauntlet despite the power it provides, simply because it tends to clash with his fast-foot fighting style and precise technique.",
         "The Amp Gauntlet was specifically designed to work in tandem with Vortex's Chronipulation, allowing Vortex to attune the gauntlet to his chrono-energy. While the Amp Gauntlet is attuned to his ability, Vortex can drastically increase his movement speed, despite the heavier weight that comes with wearing it. Unlike the Magnetivolver, it takes significantly more energy for Vortex to keep the Amp Gauntlet attuned. As such, Vortex only attunes the Amp Gauntlet scarcely."
       ],
-      combatStats: createCombatStats("B", "D", "D", "C", "B"),
+      combatStats: createCombatStats("C", "D", "E", "D", "A"),
       images: [
         {
           url: "/lovable-uploads/a5823d3b-ab54-46b3-8840-30841d9a26a1.png",
@@ -111,7 +111,7 @@ export const vortexASteele: WikiEntry = {
           "Vortex mostly relies on his remarkable agility and precision in combat, focusing his blows and targeting weak or unstable points on his opponents. He is masterful at reading the body language and movement of targets, allowing him to accurately predict and outmaneuver his enemies.",
           "His ability (Chronipulation) only furthers his potential, turning Vortex into a blitzing powerhouse who can take quite a hit, if you're even able to strike him to begin with."
         ],
-        combatStats: createCombatStats("D", "D", "B", "B", "B"),
+        combatStats: createCombatStats("D", "D", "D", "B", "A"),
         images: [
           {
             url: "/lovable-uploads/f387ffd7-944e-4544-9123-4a4656cfc89c.png",
@@ -126,7 +126,7 @@ export const vortexASteele: WikiEntry = {
           "Vortex is armed with a high-caliber magnetic railgun, compacted down to the size and shape of a large handheld revolver. It is capable of charging and firing lethal, high-velocity rounds which can pierce multiple materials or targets at once. These rounds remain magnetically linked to the Magnetivolver as long as they remain in motion, allowing Vortex to redirect his bullets and slightly alter their trajectory even after they've been fired.",
           "The Magnetivolver was specifically designed to work in tandem with Vortex's Chronipulation, allowing Vortex to charge it with his chrono-energy. By doing so, he can decrease the charge time inbetween shots, as well as fire rounds at even higher speeds than the norm, essentially turning the Magnetivolver into a handheld railcannon."
         ],
-        combatStats: createCombatStats("D", "D", "B", "A", "B"),
+        combatStats: createCombatStats("D", "D", "D", "A", "A"),
         images: [
           {
             url: "/lovable-uploads/9289b6a9-41e2-4023-9996-72493748bd7e.png",
@@ -153,7 +153,7 @@ export const vortexASteele: WikiEntry = {
           "The Amplification Gauntlet (hereby referred to as the Amp Gauntlet) is a mountable gauntlet that Vortex can wear on his right arm. While powered, it grants Vortex a significant boost in raw strength for his arm, allowing him to effortlessly destroy concrete, rebar, etc. Vortex rarely uses the Amp Gauntlet despite the power it provides, simply because it tends to clash with his fast-foot fighting style and precise technique.",
           "The Amp Gauntlet was specifically designed to work in tandem with Vortex's Chronipulation, allowing Vortex to attune the gauntlet to his chrono-energy. While the Amp Gauntlet is attuned to his ability, Vortex can drastically increase his movement speed, despite the heavier weight that comes with wearing it. Unlike the Magnetivolver, it takes significantly more energy for Vortex to keep the Amp Gauntlet attuned. As such, Vortex only attunes the Amp Gauntlet scarcely."
         ],
-        combatStats: createCombatStats("B", "D", "D", "C", "B"),
+        combatStats: createCombatStats("C", "D", "E", "D", "A"),
         images: [
           {
             url: "/lovable-uploads/a5823d3b-ab54-46b3-8840-30841d9a26a1.png",
@@ -227,6 +227,37 @@ export const vortexASteele: WikiEntry = {
       "Ren Bytera - Acquaintance | Through Vortex's connection to Nauli, he was able to reach out and receive assistance from Ren, who would go on to produce Vortex's signature Magnetivolver and Amplification Gauntlet. The two aren't very close and don't talk often, but Vortex admires her craft and intelligence.",
       "The Hunter Association - Employer | Vortex is irrefutably tied to the Hunter Association, as it serves as an essential lifeline for Vortex. Without his loyalty and commission to the H.A, he'd quickly lose his home and his status."
     ],
+    relationshipsData: {
+      "caesar-bloxwright": {
+        status: "Former Target, Now Close Friend and Ally",
+        history: [
+          "Vortex was originally contracted by the Hunter Association to eliminate Caesar, a contract issued by Bryck Manning in retaliation for Caesar stopping his rampage at the Farmer's Sanctuary.",
+          "What followed was an extended cat-and-mouse game. Vortex pursued Caesar relentlessly, using his time manipulation abilities to track and corner him. Despite multiple encounters, Vortex found Caesar to be a far more formidable opponent than anticipated.",
+          "After numerous failed attempts and increasingly intense battles, Vortex came to a realization: Caesar wasn't the villain Bryck had portrayed him as. In fact, Caesar was fundamentally a good person trying to protect the innocent.",
+          "Vortex made the difficult decision to drop the contract, going against the Hunter Association's wishes. He approached Caesar for a genuine conversation, and they discovered they shared similar values about justice and protecting the Bloxiverse.",
+          "Today, Caesar is one of Vortex's closest friends. Their complementary abilities—Caesar's raw power and Vortex's precision and speed—make them a formidable team. Vortex deeply respects Caesar's unwavering moral compass."
+        ]
+      },
+      "nauli-parter": {
+        status: "Close Friend and Trusted Ally",
+        history: [
+          "Vortex first encountered Nauli during his pursuit of Caesar. She was fiercely protective of her friend and immediately saw Vortex as a serious threat.",
+          "Nauli attempted to use her psychic abilities against Vortex multiple times, but his mental discipline and focus made him surprisingly resistant to her manipulation. This mutual respect for each other's skills was the first step toward understanding.",
+          "After Vortex dropped Caesar's contract, Nauli remained deeply skeptical of his intentions. She tested him repeatedly, watching for any sign of betrayal or hidden agenda.",
+          "Gradually, as Vortex proved his sincerity time and again, Nauli's distrust melted away. She came to appreciate his tactical mind, his code of honor, and his dedication to doing what's right.",
+          "Now, Nauli is one of Vortex's most trusted allies. The trio—Caesar, Nauli, and Vortex—work together seamlessly, with Vortex valuing Nauli's psychic support and strategic thinking."
+        ]
+      },
+      "ren-bytera": {
+        status: "Professional Acquaintance and Equipment Supplier",
+        history: [
+          "Vortex was introduced to Ren through Nauli, who had connections to the brilliant but ethically questionable scientist. Vortex needed specialized equipment that could keep up with his chronipulation abilities.",
+          "Ren was immediately fascinated by Vortex's time manipulation and saw it as an opportunity to test cutting-edge technology. She agreed to create custom equipment for him.",
+          "Working together, Ren designed and built Vortex's signature Magnetivolver and Amplification Gauntlet—both specifically engineered to synergize with his chronipulation.",
+          "While Vortex deeply admires Ren's craftsmanship and intelligence, he maintains a professional distance. He's aware of her questionable ethics and prefers to keep their relationship strictly business-focused."
+        ]
+      }
+    },
     combat: [
       "Combat Style information is now detailed in the Combat Styles section above."
     ],
@@ -258,5 +289,5 @@ export const vortexASteele: WikiEntry = {
   },
   
   abilityName: "Chronipulation",
-  stats: createCharacterStats("A", "B", "S", "S")
+  stats: createCharacterStats("D", "E", "A", "B")
 };

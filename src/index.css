@@ -194,6 +194,16 @@
   .animate-image-fade-in {
     animation: image-fade-in 0.6s ease-out forwards;
   }
+  
+  /* Hide scrollbar but keep scrolling functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari, and Opera */
+  }
 }
 
 /* Custom Scrollbar Styling */
@@ -242,4 +252,19 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--primary) / 0.5);
   }
+}
+
+/* Force white X icon on relationship clear button - override character themes */
+.relationship-clear-button svg,
+.relationship-clear-button svg *,
+button.relationship-clear-button svg,
+button.relationship-clear-button svg * {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+}
+
+body[class*="character-theme"] .relationship-clear-button svg,
+body[class*="character-theme"] .relationship-clear-button svg * {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
 }

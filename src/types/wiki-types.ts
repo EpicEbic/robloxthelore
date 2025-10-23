@@ -52,6 +52,34 @@ export interface LifestyleOption {
   }[];
 }
 
+export interface RelationshipData {
+  characterId: string;
+  status: string;
+  history: string[];
+}
+
+// New ability technique structure
+export interface AbilityTechnique {
+  id: string;
+  title: string;
+  description: string[];
+}
+
+export interface AbilityCategory {
+  // Can be either an array of techniques OR a text description (for categories with no techniques)
+  techniques?: AbilityTechnique[];
+  text?: string[];
+}
+
+export interface AbilityData {
+  overview?: AbilityCategory;
+  passives?: AbilityCategory;
+  offensive?: AbilityCategory;
+  defensive?: AbilityCategory;
+  utilitarian?: AbilityCategory;
+  drawbacks?: AbilityCategory;
+}
+
 export interface CombatStats {
   strength: {
     label: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
@@ -161,13 +189,15 @@ export interface WikiEntry {
     combatStyles?: CombatStyleOption[];
     lifestyle?: string[] | LifestyleOption[];
     relationships?: string[];
+    relationshipsData?: { [key: string]: { status: string; history: string[] } };
     combat?: string[];
     abilities?: string[];
-    abilityDetails?: string[];
-    offensiveCapabilities?: string[];
-    defensiveCapabilities?: string[];
-    utilitarianCapabilities?: string[];
-    drawbacks?: string[];
+    abilityData?: AbilityData; // New structured ability data
+    abilityDetails?: string[]; // Legacy field
+    offensiveCapabilities?: string[]; // Legacy field
+    defensiveCapabilities?: string[]; // Legacy field
+    utilitarianCapabilities?: string[]; // Legacy field
+    drawbacks?: string[]; // Legacy field
     trivia?: string[];
     
     // Equipment sections

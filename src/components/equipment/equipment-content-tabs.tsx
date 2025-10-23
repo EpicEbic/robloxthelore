@@ -39,7 +39,7 @@ export function EquipmentContentTabs({ sections, multiItems, currentEntryId }: E
         <TabsList className={`mb-4 w-full ${isMobile ? 'grid grid-cols-2 h-auto gap-2 p-2' : 'justify-start'} flex-shrink-0`}>
           <TabsTrigger value="overview" className={`flex items-center gap-2 ${isMobile ? 'text-xs px-3 py-3 rounded-md' : ''}`}>
             <Eye className="h-4 w-4" />
-            <span>Overview</span>
+            <span>General</span>
           </TabsTrigger>
           <TabsTrigger value="ability" className={`flex items-center gap-2 ${isMobile ? 'text-xs px-3 py-3 rounded-md' : ''}`}>
             <Zap className="h-4 w-4" />
@@ -62,7 +62,7 @@ export function EquipmentContentTabs({ sections, multiItems, currentEntryId }: E
                 <div className="bg-card rounded-lg p-4 border min-w-0">
                   <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
                     <Eye className="h-5 w-5 text-primary flex-shrink-0" />
-                    Overview
+                    General
                   </h2>
                   <div className="text-foreground/90 min-w-0">
                     {sections.overview.map((paragraph, idx) => (

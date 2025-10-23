@@ -298,10 +298,18 @@ body.character-theme-caesar-bloxwright h6 {
   color: #60a5fa !important;
 }
 
-body.character-theme-caesar-bloxwright p,
-body.character-theme-caesar-bloxwright span,
+body.character-theme-caesar-bloxwright p {
+  color: #f9fafb !important;
+}
+
 body.character-theme-caesar-bloxwright div {
-  color: #60a5fa !important;
+  color: #f9fafb !important;
+}
+
+/* Only target specific span elements, not all spans */
+body.character-theme-caesar-bloxwright .card span,
+body.character-theme-caesar-bloxwright [class*="card"] span {
+  color: #f9fafb !important;
 }
 
 body.character-theme-caesar-bloxwright a {

@@ -24,6 +24,10 @@ interface CharacterImageCarouselProps {
   abilityImages?: CarouselImage[];
   lifestyles?: LifestyleOption[];
   currentLifestyle?: string;
+  histories?: any[];
+  currentHistory?: string;
+  lifestyleHistoryView?: 'lifestyle' | 'history';
+  combatView?: 'physical' | 'ability';
 }
 
 export const CharacterImageCarousel = memo(function CharacterImageCarousel({ 
@@ -35,7 +39,11 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
   currentTab,
   abilityImages = [],
   lifestyles = [],
-  currentLifestyle = 'default'
+  currentLifestyle = 'default',
+  histories = [],
+  currentHistory = 'default',
+  lifestyleHistoryView = 'lifestyle',
+  combatView = 'physical'
 }: CharacterImageCarouselProps) {
   const isMobile = useIsMobile();
   const [api, setApi] = useState<CarouselApi>();
@@ -53,22 +61,31 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
   
   // Get the appropriate images based on current tab, combat style or appearance
   const getDisplayImages = () => {
-    // Use ability images when on the abilities tab
-    if (currentTab === 'abilities' && abilityImages.length > 0) {
-      return abilityImages;
-    }
-    // Only use combat style images when on the combat tab
-    if (currentTab === 'combat' && combatStyles && combatStyles.length > 0 && currentCombatStyle) {
-      const currentStyle = combatStyles.find(style => style.id === currentCombatStyle);
-      if (currentStyle?.images && currentStyle.images.length > 0) {
-        return currentStyle.images;
+    // When on combat tab, check if viewing ability or physical
+    if (currentTab === 'combat') {
+      if (combatView === 'ability' && abilityImages.length > 0) {
+        // Show ability images when viewing ability section
+        return abilityImages;
+      } else if (combatView === 'physical' && combatStyles && combatStyles.length > 0 && currentCombatStyle) {
+        // Show combat style images when viewing physical section
+        const currentStyle = combatStyles.find(style => style.id === currentCombatStyle);
+        if (currentStyle?.images && currentStyle.images.length > 0) {
+          return currentStyle.images;
+        }
       }
     }
-    // Use lifestyle images when on the lifestyle tab
-    if (currentTab === 'lifestyle' && lifestyles && lifestyles.length > 0 && currentLifestyle) {
-      const currentLife = lifestyles.find(life => life.id === currentLifestyle);
-      if (currentLife?.images && currentLife.images.length > 0) {
-        return currentLife.images;
+    // Use lifestyle or history images when on the timeline tab
+    if (currentTab === 'timeline') {
+      if (lifestyleHistoryView === 'lifestyle' && lifestyles && lifestyles.length > 0 && currentLifestyle) {
+        const currentLife = lifestyles.find(life => life.id === currentLifestyle);
+        if (currentLife?.images && currentLife.images.length > 0) {
+          return currentLife.images;
+        }
+      } else if (lifestyleHistoryView === 'history' && histories && histories.length > 0 && currentHistory) {
+        const currentHist = histories.find(hist => hist.id === currentHistory);
+        if (currentHist?.images && currentHist.images.length > 0) {
+          return currentHist.images;
+        }
       }
     }
     // For all other tabs, use appearance-based images
@@ -88,42 +105,44 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
   if (!displayImages.length) return null;
 
   return (
-    <div className="space-y-4 animate-fade-in">
-      <div className={isMobile ? '' : 'sticky top-4'}>
-        <Carousel setApi={setApi} className="w-full">
-          <CarouselContent>
-            {displayImages.map((item, index) => (
-              <CharacterCarouselItem
-                key={`${currentAppearance}-${currentCombatStyle}-${item.url}-${index}`}
-                item={item}
-                index={index}
-                currentAppearance={currentAppearance}
-                hoveredIndex={hoveredIndex}
-                isPermanentlyChanged={isPermanentlyChanged}
-                isGlitching={isGlitching}
-                isSpecialEffectPage={isSpecialEffectPage}
-                onThirdImageClick={handleThirdImageClick}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              />
-            ))}
-          </CarouselContent>
-          {displayImages.length > 1 && (
-            <>
-              <CarouselPrevious className="left-2 top-1/3" />
-              <CarouselNext className="right-2 top-1/3" />
-            </>
-          )}
-        </Carousel>
+    <div className="space-y-4 animate-fade-in w-full max-w-full">
+      <div className={isMobile ? 'w-full' : 'sticky top-4 w-full'}>
+        <div className="overflow-hidden">
+          <Carousel setApi={setApi} className="w-full">
+            <CarouselContent>
+              {displayImages.map((item, index) => (
+                <CharacterCarouselItem
+                  key={`${currentAppearance}-${currentCombatStyle}-${currentLifestyle}-${currentHistory}-${lifestyleHistoryView}-${combatView}-${item.url}-${index}`}
+                  item={item}
+                  index={index}
+                  currentAppearance={currentAppearance}
+                  hoveredIndex={hoveredIndex}
+                  isPermanentlyChanged={isPermanentlyChanged}
+                  isGlitching={isGlitching}
+                  isSpecialEffectPage={isSpecialEffectPage}
+                  onThirdImageClick={handleThirdImageClick}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                />
+              ))}
+            </CarouselContent>
+            {displayImages.length > 1 && (
+              <>
+                <CarouselPrevious className="left-2 top-1/3" />
+                <CarouselNext className="right-2 top-1/3" />
+              </>
+            )}
+          </Carousel>
+        </div>
         
         {displayImages.length > 1 && (
-          <div className="flex justify-center gap-2 mt-4 flex-wrap">
+          <div className="flex justify-center gap-2 mt-4 flex-wrap max-w-full overflow-visible py-2">
             {displayImages.map((item, index) => (
               <button
                 key={`thumb-${item.url}-${index}`}
                 onClick={() => api?.scrollTo(index)}
                 className={cn(
-                  "w-16 h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300",
+                  "w-16 h-16 lg:w-20 lg:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 flex-shrink-0",
                   index === current 
                     ? "border-primary scale-110 shadow-lg shadow-primary/25" 
                     : "border-border/50 opacity-60 hover:opacity-100 hover:border-primary/50"

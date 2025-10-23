@@ -26,7 +26,7 @@ export function LocationContentTabs({ sections, currentEntryId }: LocationConten
       
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="overview">General</TabsTrigger>
           <TabsTrigger value="segments">Segments</TabsTrigger>
           <TabsTrigger value="trivia">Trivia</TabsTrigger>
         </TabsList>

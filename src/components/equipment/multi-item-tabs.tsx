@@ -22,7 +22,7 @@ export function MultiItemTabs({ item, coilColor }: MultiItemTabsProps) {
       <TabsList className={`mb-6 ${isMobile ? 'grid grid-cols-2 h-auto gap-2 p-1' : 'inline-flex h-auto p-0 gap-1'} bg-muted rounded-md`}>
         <TabsTrigger value="overview" className={`flex items-center gap-2 ${isMobile ? 'text-sm px-3 py-3 rounded-md' : 'px-3 py-2 rounded-sm'}`}>
           <Eye className="h-4 w-4" />
-          <span>Overview</span>
+          <span>General</span>
         </TabsTrigger>
         <TabsTrigger value="ability" className={`flex items-center gap-2 ${isMobile ? 'text-sm px-3 py-3 rounded-md' : 'px-3 py-2 rounded-sm'}`}>
           <Zap className="h-4 w-4" />
@@ -45,7 +45,7 @@ export function MultiItemTabs({ item, coilColor }: MultiItemTabsProps) {
               <div className={`bg-card rounded-lg border-t-4 border ${isMobile ? 'p-6' : 'p-4'}`} style={{ borderTopColor: coilColor }}>
                 <h4 className={`font-semibold mb-4 flex items-center gap-2 ${isMobile ? 'text-2xl' : 'text-xl'}`}>
                   <Eye className="h-5 w-5 flex-shrink-0" style={{ color: coilColor }} />
-                  Overview
+                  General
                 </h4>
                 <div className={`text-foreground/90 min-w-0 ${isMobile ? 'text-base leading-relaxed space-y-5' : ''}`}>
                   {item.sections?.overview?.map((paragraph, idx) => (

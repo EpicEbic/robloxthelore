@@ -1,5 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
+import { HelpCircle } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface StatGrade {
   label: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
@@ -53,6 +60,7 @@ export function CharacterStatRadarChart({
   isPhysicalStats = false 
 }: CharacterStatRadarChartProps) {
   const isCombat = isCombatStats(stats);
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   
   // Get stat entries
   const statEntries = isCombat 
@@ -141,19 +149,47 @@ export function CharacterStatRadarChart({
           width: '100%'
         }}
       >
-        <h3 
-          className={`text-xl font-bold mb-6 text-center stat-chart-title ${isPhysicalStats ? 'physical-stats-title' : ''}`}
-          style={{
-            fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)',
-            letterSpacing: '0.025em',
-            ...(isPhysicalStats && {
-              color: '#ffffff !important',
-              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.3)'
-            })
-          }}
-        >
-          {isPhysicalStats ? "Physical Statistics" : (abilityName ? `${abilityName} Statistics` : "Ability Statistics")}
-        </h3>
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <h3 
+            className={`text-xl font-bold text-center stat-chart-title ${isPhysicalStats ? 'physical-stats-title' : ''}`}
+            style={{
+              fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)',
+              letterSpacing: '0.025em',
+              ...(isPhysicalStats && {
+                color: '#ffffff !important',
+                textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.3)'
+              })
+            }}
+          >
+            {isPhysicalStats ? "Physical Statistics" : (abilityName ? `${abilityName} Statistics` : "Ability Statistics")}
+          </h3>
+          {isPhysicalStats && (
+            <TooltipProvider>
+              <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>
+                <TooltipTrigger asChild>
+                  <button 
+                    className="flex-shrink-0 hover:opacity-80 transition-opacity"
+                    aria-label="Physical statistics information"
+                    onClick={() => setIsTooltipOpen(!isTooltipOpen)}
+                  >
+                    <HelpCircle 
+                      className="h-5 w-5"
+                      style={{
+                        color: '#ffffff',
+                        filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5))'
+                      }}
+                    />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="text-sm">
+                    The physical statistics does <strong>NOT</strong> account for any abilities a character may have, this is exclusively their raw, physical potential!
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </div>
         
         <div className="flex flex-col items-center gap-6">
           {/* SVG Radar Chart */}

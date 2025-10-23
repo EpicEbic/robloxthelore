@@ -38,10 +38,21 @@ export const nauliParter: WikiEntry = {
         "Nauli is agile, yet fragile when it comes to combat. Nauli aims to play a supportive role when working with her allies, using her abilities to benefit her friends and hinder any opposition. However, Nauli shouldn't be taken lightly, even as an individual. She is deceptively flexible and acrobatic, making her a hard target to hit, and giving her an edge in surprise attacks and ambushes.",
         "Nauli always tries to keep a hold of her combat dagger, which can provide a much-needed edge in more stressful situations she has found herself in."
       ],
-      combatStats: createCombatStats("F", "E", "B", "B", "C")
+      combatStats: createCombatStats("E", "E", "C", "B", "B")
     }
   ],
   sections: {
+    combatStyles: [
+      {
+        id: "standard",
+        label: "Standard",
+        description: [
+          "Nauli is agile, yet fragile when it comes to combat. Nauli aims to play a supportive role when working with her allies, using her abilities to benefit her friends and hinder any opposition. However, Nauli shouldn't be taken lightly, even as an individual. She is deceptively flexible and acrobatic, making her a hard target to hit, and giving her an edge in surprise attacks and ambushes.",
+          "Nauli always tries to keep a hold of her combat dagger, which can provide a much-needed edge in more stressful situations she has found herself in."
+        ],
+        combatStats: createCombatStats("E", "E", "C", "B", "B")
+      }
+    ],
     history: [
       "Far before meeting Caesar or Vortex, Nauli was originally a part of tests run by Ren Bytera, an unethical scientist with an insatiable desire to push the boundaries of science. Through an experiment, Nauli was augmented with permanent psy-link receivers, which were originally intended to allow telepathic, one-way communication through short messages. However, these augments proved far more capable than initially believed, as Nauli quickly learned that she had developed the ability to completely influence a Bloxian's psyche.",
       "Beyond her past with Ren, Nauli doesn't appear to be fond of discussing previous events in her life, actively dodging questions about where she used to live or any other friendships or relationships she has. Caesar has speculated that something traumatic may have occurred in Nauli's life, though she refuses to confirm or deny if he's correct in his assumption."
@@ -61,6 +72,35 @@ export const nauliParter: WikiEntry = {
       "Vortex A. Steele - Close Friend | While initially enemies, Nauli slowly grew to trust Vortex after their differences were put aside. She came to respect Vortex's dedication to his line of work, and eventually the two became good friends.",
       "Ren Bytera - Friend | While initially very skeptical of Ren and her shady proposals, Ren's enthusiasm over her passions was very endearing to Nauli. The two became decent friends, and eventually Nauli had gained enough trust to assist Ren in her experiments, eventually leading to the augmentation implant that led to Nauli acquiring her powers."
     ],
+    relationshipsData: {
+      "caesar-bloxwright": {
+        status: "Close Friend and Trusted Ally",
+        history: [
+          "Nauli and Caesar met years ago in an unexpected encounter at a fast food restaurant. Caesar found Nauli rummaging through the trash for scraps, and immediately bought her a proper meal.",
+          "This single act of kindness broke through Nauli's defensive walls. For the first time in a long while, she felt safe enough to open up to someone. Their bond grew quickly as they discovered shared values and goals.",
+          "Caesar has become one of Nauli's closest confidants—someone she trusts implicitly. She often stays at his island home when not wandering the Bloxiverse, and the two frequently work together on missions.",
+          "Nauli deeply values Caesar's unwavering kindness and protective nature. She sees him as the brother she never had, and would do anything to protect him in return."
+        ]
+      },
+      "vortex-a-steele": {
+        status: "Former Enemy, Now Close Friend and Ally",
+        history: [
+          "Nauli first encountered Vortex when he was actively hunting Caesar under a contract from the Hunter Association. She immediately saw him as a threat to her closest friend.",
+          "Their early interactions were hostile, with Nauli using her psychic abilities to try to hinder Vortex's pursuit. However, she found his mind surprisingly resilient to her manipulation.",
+          "As Vortex began to question his contract and ultimately dropped it, Nauli slowly began to trust him. She respected his dedication to his code of honor and his willingness to admit when he was wrong.",
+          "Today, Vortex has become one of Nauli's most trusted allies. The three—Caesar, Nauli, and Vortex—form a formidable team, with Nauli appreciating Vortex's tactical mind and time manipulation abilities complementing her psychic support."
+        ]
+      },
+      "ren-bytera": {
+        status: "Former Friend, Complicated Relationship",
+        history: [
+          "Nauli met Ren years ago when the scientist approached her with proposals for experimental augmentation. Initially, Nauli was extremely skeptical and distrustful.",
+          "However, Ren's genuine enthusiasm for her work and her seemingly honest intentions gradually won Nauli over. The two became friends, bonding over long conversations about science and the nature of abilities.",
+          "Eventually, Nauli agreed to participate in Ren's experiments, resulting in the psy-link receiver augmentations that granted her pathokinetic abilities. At the time, this seemed like a breakthrough that would help Nauli protect herself and others.",
+          "As time passed, Nauli began to question Ren's methods and ethics. While she doesn't regret gaining her abilities, she's grown increasingly uncomfortable with Ren's willingness to push boundaries without considering consequences. Their relationship remains cordial but distant."
+        ]
+      }
+    },
     combat: [
       "Nauli is agile, yet fragile when it comes to combat. Nauli aims to play a supportive role when working with her allies, using her abilities to benefit her friends and hinder any opposition. However, Nauli shouldn't be taken lightly, even as an individual. She is deceptively flexible and acrobatic, making her a hard target to hit, and giving her an edge in surprise attacks and ambushes.",
       "Nauli always tries to keep a hold of her combat dagger, which can provide a much-needed edge in more stressful situations she has found herself in."
@@ -89,5 +129,5 @@ export const nauliParter: WikiEntry = {
   },
   
   abilityName: "Pathokinesis",
-  stats: createCharacterStats("E", "E", "C", "E")
+  stats: createCharacterStats("F", "F", "C", "C")
 };
