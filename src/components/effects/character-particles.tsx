@@ -718,13 +718,18 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     
     // Initial mount
     if (!prevId && currentId) {
+      console.log('[CharacterParticles] Initializing particles for:', currentId);
       fadeTimeoutRef.current = setTimeout(() => {
+        console.log('[CharacterParticles] Fading in particles, canvas supported:', canvasSupported);
         setOpacity(1);
         // Force fallback if no particles appear after 3 seconds
         setTimeout(() => {
           if (particlesRef.current.length === 0 && !forceFallback) {
+            console.warn('[CharacterParticles] No particles spawned after 3s, forcing CSS fallback');
             setDebugInfo('No particles spawned, forcing fallback');
             setForceFallback(true);
+          } else {
+            console.log('[CharacterParticles] Particles spawned successfully:', particlesRef.current.length);
           }
         }, 3000);
       }, 1000);
@@ -753,6 +758,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) {
+      console.error('[CharacterParticles] No canvas element found');
       setDebugInfo('No canvas element found');
       setForceFallback(true);
       return;
@@ -762,6 +768,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     try {
       const ctx = canvas.getContext('2d');
       if (!ctx) {
+        console.error('[CharacterParticles] Canvas 2D context not supported');
         setDebugInfo('Canvas 2D context not supported');
         setCanvasSupported(false);
         setForceFallback(true);
@@ -773,8 +780,10 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       ctx.fillRect(0, 0, 1, 1);
       ctx.clearRect(0, 0, 1, 1);
       
+      console.log('[CharacterParticles] Canvas initialized successfully');
       setDebugInfo('Canvas working');
     } catch (error) {
+      console.error('[CharacterParticles] Canvas error:', error);
       setDebugInfo(`Canvas error: ${error}`);
       setCanvasSupported(false);
       setForceFallback(true);
@@ -834,6 +843,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
   // Fallback for canvas-unsupported browsers, very low performance, or forced fallback
   if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0)) {
+    console.log('[CharacterParticles] Using CSS fallback. Reason:', { canvasSupported, forceFallback, performanceMode, particleCount: particlesRef.current.length });
     return (
       <div 
         className={className}
