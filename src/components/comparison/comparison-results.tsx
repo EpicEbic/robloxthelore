@@ -118,7 +118,6 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
             </h2>
           </div>
           
-          <div className="space-y-6">
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground text-center">
               Combined ability and physical stats. Characters without abilities show N/A in all ability categories.
@@ -169,7 +168,6 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                   Ability Statistics
                 </h3>
                 
-                <div>
                 <div className="space-y-6">
                   {[
                     { key: "offense", label: "Offense", icon: Sword },
@@ -286,7 +284,6 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                 )}
               </div>
               
-              <div>
               <div className="space-y-6">
                 {[
                   { key: "strength", label: "Strength", icon: Sword },
@@ -467,7 +464,6 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
               Matchup Analysis
             </h3>
             
-            <div>
             <div className="bg-muted/50 p-4 rounded-xl">
               <div className="text-sm leading-relaxed space-y-3">
                 {matchupDescription.split('\n\n').map((paragraph, index) => (
@@ -489,8 +485,8 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
             </div>
             
             <div className="space-y-6">
-            {/* Winner/Outcome Section */}
-            <div className="text-center space-y-4">
+              {/* Winner/Outcome Section */}
+              <div className="text-center space-y-4">
               <div className="text-lg font-semibold text-muted-foreground">
                 Winner
               </div>
@@ -531,8 +527,8 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                   : verdict.explanation}
               </p>
             </div>
-          </div>
-        )}
+            </div>
+          )}
       </CardContent>
     </Card>
   );
