@@ -20,7 +20,22 @@ export const nauliParter: WikiEntry = {
   species: "Robloxian",
   age: "23",
   alignment: "Neutral / Good",
-  carouselImages: [],
+  carouselImages: [
+    {
+      url: "/images/nauli-tactical-1.png",
+      caption: "Nauli in her tactical gear, ready for combat."
+    },
+    {
+      url: "/images/nauli-combat-1.png",
+      caption: "Nauli demonstrating her agility and combat prowess."
+    }
+  ],
+  abilityCarouselImages: [
+    {
+      url: "/images/nauli-ability-1.png",
+      caption: "Nauli utilizing her Pathokinesis abilities."
+    }
+  ],
   combatStyles: [
     {
       id: "standard",
@@ -39,6 +54,12 @@ export const nauliParter: WikiEntry = {
         label: "Tactical",
         description: [
           "Nauli is an average-built Robloxian, often seen wearing a grey, white-striped tracksuit. She is equipped with a variety of green armaments, including a utility belt, scarf, and a shoulder pad. Affixed to the left of her belt is a combat knife, allowing for a quick removal if necessary. She has blonde, bobbed hair with two metal antennae protruding from either side of her head."
+        ],
+        images: [
+          {
+            url: "/images/nauli-tactical-1.png",
+            caption: "Nauli in full tactical gear with utility belt and combat knife."
+          }
         ]
       },
       {
@@ -46,6 +67,12 @@ export const nauliParter: WikiEntry = {
         label: "Casual",
         description: [
           "Nauli is an average-built Robloxian, often seen wearing a grey, white-striped tracksuit. She has blonde, bobbed hair with two metal antennae protruding from either side of her head."
+        ],
+        images: [
+          {
+            url: "/images/nauli-casual-1.png",
+            caption: "Nauli in her casual tracksuit."
+          }
         ]
       }
     ],
@@ -134,6 +161,12 @@ export const nauliParter: WikiEntry = {
           "She quickly downed the meal while chatting with the man, whom she eventually learned was Caesar, a self-proclaimed vigilante on a mission to take down as many evil Bloxians as he could. Nauli admired his noble mission, and quickly realized that the two would pair greatly together, due to their shared interests.",
           "The two began to collaborate from then and onward, and have gone on to become an incredibly dangerous duo. Nauli's skills and psychic powers support Caesar while he focuses on the offense and defense. Together, very few threats truly stand in their way, though the Bloxiverse always has a bigger fish...",
           "After working together for some time, Nauli had formed a close bond with Caesar. This eventually lead to her being introduced to his island, and subsequently receiving a small plot of land for a campsite where she continues to live on most days."
+        ],
+        images: [
+          {
+            url: "/images/nauli-caesar-1.png",
+            caption: "Nauli and Caesar, close friends and allies."
+          }
         ]
       },
       "vortex-a-steele": {
