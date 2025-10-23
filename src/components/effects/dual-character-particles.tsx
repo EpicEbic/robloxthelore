@@ -88,13 +88,15 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
         };
 
       case 'radio':
-        // Create radio waves that emanate from random points across the screen
-        // Add subtle drift so waves continue moving as they fade
+        // Create radio waves that emanate from random points respecting character side
         const margin = 50; // Keep some margin from screen edges
-        const centerX = margin + Math.random() * (canvas.width - 2 * margin);
+        // Respect side-based spawning like other particle types
+        const radioSpawnX = side === 'left' 
+          ? margin + Math.random() * ((canvas.width / 2) - margin)
+          : (canvas.width / 2) + Math.random() * ((canvas.width / 2) - margin);
         const centerY = margin + Math.random() * (canvas.height - 2 * margin);
         return {
-          x: centerX,
+          x: radioSpawnX,
           y: centerY,
           vx: (Math.random() - 0.5) * 0.3, // gentle drift
           vy: (Math.random() - 0.5) * 0.3,
