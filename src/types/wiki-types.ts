@@ -56,6 +56,10 @@ export interface RelationshipData {
   characterId: string;
   status: string;
   history: string[];
+  images?: {
+    url: string;
+    caption: string;
+  }[];
 }
 
 // New ability technique structure

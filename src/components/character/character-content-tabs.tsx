@@ -401,6 +401,7 @@ export function CharacterContentTabs({
                       <RelationshipDisplay
                         status={sections.relationshipsData[selectedRelationship.id]?.status}
                         history={sections.relationshipsData[selectedRelationship.id]?.history}
+                        images={sections.relationshipsData[selectedRelationship.id]?.images}
                         currentEntryId={currentEntryId}
                       />
                     )}

@@ -150,6 +150,16 @@ export const caesarBloxwright: WikiEntry = {
           "Caesar and Nauli met a few years ago, during an unexpected encounter at a restaurant. Caesar spotted Nauli rummaging through the trash for scraps on his way inside the building, and decided to buy and bring her a proper meal.",
           "This single act of kindness touched Nauli's heart, quickly breaking through her defensive walls as nobody had truly noticed or cared for her. For the first time in a long while, she felt safe enough to open up and the two began to chat over their meals. Their interests in one another only grew as they came to realize their shared values and goals, wishing for peace in the Bloxiverse.",
           "From then on, the pair worked together in almost all aspects, with Caesar relying on Nauli's strategizing and Nauli relying on Caesar's brute strength to take down stronger opponents through their combined efforts. Nauli also began to spend time on Caesar's Isle, breathing a sigh of relief at a place to relax and call home."
+        ],
+        images: [
+          {
+            url: "/images/relationships/caesar-nauli-1.png",
+            caption: "Caesar and Nauli's first meeting at the restaurant"
+          },
+          {
+            url: "/images/relationships/caesar-nauli-2.png",
+            caption: "Fighting side by side as close allies"
+          }
         ]
       },
       "vortex-a-steele": {
