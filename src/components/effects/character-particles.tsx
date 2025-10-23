@@ -989,13 +989,21 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     setCanvasReady(false); // Reset so INIT can run again
   }, [theme]);
 
+  console.log('[RENDER] Determining what to render...');
+  console.log('[RENDER] Particles type:', theme.particles.type);
+  console.log('[RENDER] Reduced motion:', prefersReducedMotion());
+  console.log('[RENDER] Canvas supported:', canvasSupported);
+  console.log('[RENDER] Force fallback:', forceFallback);
+  console.log('[RENDER] Performance mode:', performanceMode);
+
   if (theme.particles.type === 'none' || prefersReducedMotion()) {
+    console.log('[RENDER] → Returning NULL (no particles or reduced motion)');
     return null;
   }
 
   // Fallback for canvas-unsupported browsers, very low performance, or forced fallback
   if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0)) {
-    console.log('[CharacterParticles] Using CSS fallback. Reason:', { canvasSupported, forceFallback, performanceMode, particleCount: particlesRef.current.length });
+    console.log('[RENDER] → Returning CSS FALLBACK. Reason:', { canvasSupported, forceFallback, performanceMode, particleCount: particlesRef.current.length });
     return (
       <div 
         className={className}
@@ -1062,6 +1070,9 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     );
   }
 
+  console.log('[RENDER] → Returning CANVAS ELEMENT');
+  console.log('[RENDER] Canvas ref will be attached to:', canvasRef);
+  
   return (
     <canvas
       ref={canvasRef}
