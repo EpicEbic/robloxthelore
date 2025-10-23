@@ -112,8 +112,9 @@ export function CharacterStatRadarChart({
     `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`
   ).join(' ') + ' Z';
 
-  // Create grid circles
-  const gridLevels = [0.25, 0.5, 0.75, 1];
+  // Create grid circles - one for each grade level (F through Ø)
+  // Positions: F(0/7), E(1/7), D(2/7), C(3/7), B(4/7), A(5/7), S(6/7), Ø(7/7)
+  const gridLevels = [1/7, 2/7, 3/7, 4/7, 5/7, 6/7, 1];
   
   // Create axis lines
   const axisLines = statEntries.map((_, index) => {

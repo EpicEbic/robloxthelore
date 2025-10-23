@@ -100,6 +100,12 @@ export const caesarBloxwright: WikiEntry = {
         label: "Casual",
         description: [
           "Caesar Bloxwright is an extremely tall and widely-built Robloxian. Outside of combat or when spending time casually at home or with his allies and friends, he'll wear a simplistic outfit consisting of a black t-shirt and grey sweatpants. He has messily-parted, jet black hair with portions poking out and sticking up. Despite having no bangs or obstructions covering his eyes beyond circular glasses, a shadow always appears to hide them from view, even if a light source is directly shined in his face."
+        ],
+        images: [
+          {
+            url: "/images/caesar-casual-1.png",
+            caption: "Caesar in his casual attire, relaxing in a comfortable black t-shirt and grey sweatpants."
+          }
         ]
       }
     ],
