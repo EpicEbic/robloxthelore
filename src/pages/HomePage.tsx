@@ -132,10 +132,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* ID Display */}
-      <div className="text-center mt-16 pb-4">
-        <p className="text-xs text-muted-foreground/50">ID: no-reduced-motion-check</p>
-      </div>
     </div>;
 };
 
