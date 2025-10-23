@@ -131,6 +131,11 @@ const HomePage = () => {
           </Button>
         </div>
       </section>
+
+      {/* ID Display */}
+      <div className="text-center mt-16 pb-4">
+        <p className="text-xs text-muted-foreground/50">ID: pizza</p>
+      </div>
     </div>;
 };
 
