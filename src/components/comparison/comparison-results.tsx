@@ -109,7 +109,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
   return (
     <div className="space-y-8">
       {/* Power Percentage Analysis */}
-      <Card className="border-0 rounded-2xl bg-card/80 backdrop-blur-sm">
+      <Card className="border-0 rounded-2xl bg-transparent backdrop-blur-sm shadow-lg">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl flex items-center justify-center gap-2">
             <TrendingUp className="h-6 w-6 text-primary" />
@@ -125,7 +125,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
             
             {/* Ability status warnings - show when one character lacks abilities */}
             {(!entry1HasAbility || !entry2HasAbility) && (entry1HasAbility || entry2HasAbility) && (
-              <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3">
+              <div className="bg-amber-50/50 dark:bg-amber-950/10 border border-amber-200/50 dark:border-amber-800/50 rounded-xl p-3 backdrop-blur-sm">
                 <p className="text-sm text-amber-800 dark:text-amber-200">
                   <strong>Note:</strong> {!entry1HasAbility ? `${entry1.title} lacks` : `${entry2.title} lacks`} special abilities. 
                   They show N/A in all ability categories.
@@ -163,7 +163,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
         <>
           {/* Ability Stats - only show if at least one character has abilities */}
           {(entry1HasAbility || entry2HasAbility) && (
-            <Card className="border-0 rounded-2xl bg-card/80 backdrop-blur-sm">
+            <Card className="border-0 rounded-2xl bg-transparent backdrop-blur-sm shadow-lg">
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Zap className="h-5 w-5" />
@@ -274,7 +274,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
           )}
 
           {/* Physical Stats */}
-          <Card className="border-0 rounded-2xl bg-card/80 backdrop-blur-sm">
+          <Card className="border-0 rounded-2xl bg-transparent backdrop-blur-sm shadow-lg">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Gauge className="h-5 w-5" />
@@ -409,7 +409,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
           { entry: entry1, traits: traits1 },
           { entry: entry2, traits: traits2 }
         ].map(({ entry, traits }, index) => (
-          <Card key={entry.id} className="border-0 rounded-2xl bg-card/80 backdrop-blur-sm">
+          <Card key={entry.id} className="border-0 rounded-2xl bg-transparent backdrop-blur-sm shadow-lg">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 {entry.title}
@@ -463,7 +463,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
 
       {/* The Matchup Section */}
       {matchupDescription && (
-        <Card className="border-0 rounded-2xl bg-card/80 backdrop-blur-sm">
+        <Card className="border-0 rounded-2xl bg-transparent backdrop-blur-sm shadow-lg">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Users className="h-5 w-5" />
@@ -471,7 +471,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="bg-muted/50 p-4 rounded-xl">
+            <div className="bg-muted/20 p-4 rounded-xl backdrop-blur-sm">
               <div className="text-sm leading-relaxed space-y-3">
                 {matchupDescription.split('\n\n').map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
@@ -484,7 +484,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
 
       {/* Verdict */}
       {verdict && (
-        <Card className="border-0 rounded-2xl bg-card/80 backdrop-blur-sm">
+        <Card className="border-0 rounded-2xl bg-transparent backdrop-blur-sm shadow-lg">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center justify-center gap-3">
               <Trophy className="h-7 w-7 text-primary" />
@@ -526,7 +526,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
             </div>
             
             {/* Explanation Section */}
-            <div className="bg-muted/30 p-6 rounded-xl">
+            <div className="bg-muted/20 p-6 rounded-xl backdrop-blur-sm">
               <div className="text-lg font-semibold mb-3 text-center">Analysis</div>
               <p className="text-base leading-relaxed text-center">
                 {verdict.explanation.startsWith("Take A Wild Guess") 
