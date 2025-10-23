@@ -62,11 +62,11 @@ export const getCharacterThemeClasses = (characterId: string, side: 'left' | 'ri
 
 /**
  * Calculate particle spawn rates based on character theme
- * Quadrupled for comparison page emphasis
+ * Matches single-character system exactly for visual consistency
  */
 export const getComparisonParticleRates = (theme: CharacterTheme) => {
   const baseRates = {
-    radio: 0.012,
+    radio: 0.024, // Match single-character system exactly
     flow: 0.025,
     speed: 0.08,
     lightning: 0.025,
@@ -79,9 +79,9 @@ export const getComparisonParticleRates = (theme: CharacterTheme) => {
   const baseRate = baseRates[particleType] || baseRates.default;
   
   return {
-    spawnChance: baseRate * 8, // Octupled for dramatic page-filling effect
-    maxParticles: 500, // Much higher limit to fill the page
-    intensity: theme.particles.intensity * 2.0, // Double intensity for brightness
+    spawnChance: baseRate, // No multiplier - use character's natural rate
+    maxParticles: theme.particles.count || 100, // Use character's own count (45 for Nauli)
+    intensity: theme.particles.intensity, // Use character's own intensity (0.7 for Nauli)
     distribution: 'full-page' // Ensure particles fill entire page
   };
 };

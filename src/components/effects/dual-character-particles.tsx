@@ -446,10 +446,20 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
           
           if (finalOpacityRadio > 0.01) {
             ctx.globalAlpha = finalOpacityRadio;
+            
+            // Draw the expanding circle
             ctx.beginPath();
             ctx.arc(particle.x, particle.y, expansionRadiusRadio, 0, Math.PI * 2);
             ctx.stroke();
-            ctx.globalAlpha = 1;
+            
+            // Draw a subtle inner ring for depth (match single-character system)
+            if (expansionRadiusRadio > 40) {
+              ctx.globalAlpha = finalOpacityRadio * 0.3;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.arc(particle.x, particle.y, expansionRadiusRadio - 30, 0, Math.PI * 2);
+              ctx.stroke();
+            }
           }
           break;
 
