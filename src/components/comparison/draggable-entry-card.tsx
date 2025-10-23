@@ -6,7 +6,6 @@ import { OptimizedImage } from "@/components/ui/optimized-image";
 import { cn } from "@/lib/utils";
 import { getCharacterDisplayImage } from "@/utils/image-source-utils";
 import { getSubcategoryLabel } from "@/data/categories";
-import { User } from "lucide-react";
 
 interface DraggableEntryCardProps {
   entry: WikiEntry;
@@ -36,6 +35,8 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
     onEntryClick?.(entry);
   };
 
+  const characterIconPath = `/lovable-uploads/character-icons/${entry.id}-icon.png`;
+
   return (
     <Card
       ref={setNodeRef}
@@ -45,7 +46,7 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
       onClick={handleClick}
       className={cn(
         "group relative overflow-hidden transition-all duration-300",
-        "border-0",
+        "border-0 rounded-2xl",
         !isDisabled && "cursor-grab active:cursor-grabbing",
         isDisabled && "opacity-40 cursor-not-allowed grayscale border-muted",
         isDragging && "opacity-50 rotate-3 scale-105 shadow-2xl",
@@ -61,8 +62,8 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
       
       <CardContent className="relative p-3">
         <div className="space-y-2">
-          {/* Image container - more compact */}
-          <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 transition-colors">
+          {/* Image container - more rounded */}
+          <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 transition-colors">
             <OptimizedImage
               src={getCharacterDisplayImage(entry)}
               alt={entry.title}
@@ -80,10 +81,16 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
          
-          {/* Content section - more compact with icon */}
+          {/* Content section - with character icon */}
           <div className="space-y-1.5">
             <div className="flex items-center gap-1.5">
-              <User className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+              <div className="w-4 h-4 rounded-full overflow-hidden flex-shrink-0 border border-primary/20">
+                <OptimizedImage
+                  src={characterIconPath}
+                  alt={`${entry.title} icon`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <h3 className="font-bold text-sm leading-tight line-clamp-1 text-foreground group-hover:text-primary transition-colors">
                 {entry.title}
               </h3>
@@ -92,7 +99,7 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
             {entry.subcategory && (
               <Badge 
                 variant="outline" 
-                className="text-[10px] font-medium px-1.5 py-0.5 border-primary/30 text-foreground/80 hover:border-primary/50 hover:text-foreground transition-colors w-full justify-center"
+                className="text-[10px] font-medium px-1.5 py-0.5 border-primary/30 text-foreground/80 hover:border-primary/50 hover:text-foreground transition-colors w-full justify-center rounded-full"
               >
                 {getSubcategoryLabel(entry.category, entry.subcategory)}
               </Badge>
