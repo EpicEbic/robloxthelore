@@ -449,8 +449,8 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
               ) : (
                 <p className="text-sm text-muted-foreground italic">
                   Character analysis not available yet.
-                  </p>
-                )}
+                </p>
+              )}
               </div>
             ))}
           </div>
