@@ -109,7 +109,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
   return (
     <div className="space-y-8">
       {/* Power Percentage Analysis */}
-      <Card className="border-2 border-primary/20 rounded-2xl shadow-xl">
+      <Card className="rounded-2xl">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl flex items-center justify-center gap-2">
             <TrendingUp className="h-6 w-6 text-primary" />
@@ -163,7 +163,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
         <>
           {/* Ability Stats - only show if at least one character has abilities */}
           {(entry1HasAbility || entry2HasAbility) && (
-            <Card className="border-2 border-primary/20 rounded-2xl shadow-xl">
+            <Card className="rounded-2xl">
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Zap className="h-5 w-5" />
@@ -274,7 +274,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
           )}
 
           {/* Physical Stats */}
-          <Card className="border-2 border-primary/20 rounded-2xl shadow-xl">
+          <Card className="rounded-2xl">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Gauge className="h-5 w-5" />
@@ -409,7 +409,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
           { entry: entry1, traits: traits1 },
           { entry: entry2, traits: traits2 }
         ].map(({ entry, traits }, index) => (
-          <Card key={entry.id} className="border-2 border-primary/20 rounded-2xl shadow-xl">
+          <Card key={entry.id} className="rounded-2xl">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 {entry.title}
@@ -463,7 +463,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
 
       {/* The Matchup Section */}
       {matchupDescription && (
-        <Card className="border-2 border-primary/20 rounded-2xl shadow-xl">
+        <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Users className="h-5 w-5" />
@@ -484,7 +484,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
 
       {/* Verdict */}
       {verdict && (
-        <Card className="border-2 border-primary/20 rounded-2xl shadow-xl">
+        <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center justify-center gap-3">
               <Trophy className="h-7 w-7 text-primary" />
