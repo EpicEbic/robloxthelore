@@ -289,10 +289,10 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
           return false;
         }
       } else if (particle.type === 'radio') {
-        const expansionRadius = Math.min(particle.life * 1.6, 200);
-        if (expansionRadius >= 200 || expansionRadius > Math.max(canvas.width, canvas.height) * 0.8) {
-          return false;
-        }
+        // Radio waves: allow full life-based fade-out and keep drifting (match single-character system)
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        // No wrapping; let them drift off slightly if needed
       } else if (particle.type === 'grain') {
         if (particle.y > canvas.height + 30) {
           particle.y = -20;
