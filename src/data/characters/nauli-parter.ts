@@ -23,13 +23,13 @@ export const nauliParter: WikiEntry = {
   carouselImages: [
     {
       url: "/images/nauli-tactical-1.png",
-      caption: "Nauli in her tactical gear, ready for combat."
+      caption: "Nauli, keeping watch of the distance. You never know when a new threat might strike."
     }
   ],
   abilityCarouselImages: [
     {
       url: "/images/nauli-ability-1.png",
-      caption: "Nauli utilizing her Pathokinesis abilities."
+      caption: "Nauli's eyes form spark-like symbols, as she channels Pathokinesis to manipulate a target."
     }
   ],
   combatStyles: [
@@ -44,7 +44,7 @@ export const nauliParter: WikiEntry = {
       images: [
         {
           url: "/images/nauli-combat-1.png",
-          caption: "Nauli demonstrating her agility and combat prowess."
+          caption: "Nauli, having drawn her knife from her belt."
         }
       ]
     }
@@ -60,7 +60,7 @@ export const nauliParter: WikiEntry = {
         images: [
           {
             url: "/images/nauli-tactical-1.png",
-            caption: "Nauli in full tactical gear with utility belt and combat knife."
+            caption: "Nauli, keeping watch of the distance. You never know when a new threat might strike."
           }
         ]
       },
@@ -73,7 +73,7 @@ export const nauliParter: WikiEntry = {
         images: [
           {
             url: "/images/nauli-casual-1.png",
-            caption: "Nauli in her casual tracksuit."
+            caption: "Nauli, without the tactical gear and accessories attached to her tracksuit."
           }
         ]
       }
@@ -167,7 +167,7 @@ export const nauliParter: WikiEntry = {
         images: [
           {
             url: "/images/nauli-caesar-1.png",
-            caption: "Nauli and Caesar, close friends and allies."
+            caption: "Nauli and Caesar, walking casually together as they chat."
           }
         ]
       },
@@ -204,7 +204,7 @@ export const nauliParter: WikiEntry = {
         images: [
           {
             url: "/images/nauli-combat-1.png",
-            caption: "Nauli demonstrating her agility and combat prowess."
+            caption: "Nauli, having drawn her knife from her belt."
           }
         ]
       }
