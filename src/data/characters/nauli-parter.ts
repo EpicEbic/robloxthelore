@@ -24,10 +24,6 @@ export const nauliParter: WikiEntry = {
     {
       url: "/images/nauli-tactical-1.png",
       caption: "Nauli in her tactical gear, ready for combat."
-    },
-    {
-      url: "/images/nauli-combat-1.png",
-      caption: "Nauli demonstrating her agility and combat prowess."
     }
   ],
   abilityCarouselImages: [
@@ -44,7 +40,13 @@ export const nauliParter: WikiEntry = {
         "Nauli is quick, flexible, and sharp-witted. She is agile in combat and can issue flurries of punches or kicks with little to no warning. Her reflexes are incredibly strong, enabling her to weave and avoid the attacks of other Bloxians in most hand-to-hand combat situations.",
         "Despite Nauli's speed, she isn't particularly strong, nor durable. She takes care to avoid unnecessary risks, opting to wear opponents down slowly until she is presented an opportunity to issue a killing blow."
       ],
-      combatStats: createCombatStats("E", "E", "C", "B", "B")
+      combatStats: createCombatStats("E", "E", "C", "B", "B"),
+      images: [
+        {
+          url: "/images/nauli-combat-1.png",
+          caption: "Nauli demonstrating her agility and combat prowess."
+        }
+      ]
     }
   ],
   sections: {
@@ -198,7 +200,13 @@ export const nauliParter: WikiEntry = {
           "Nauli is quick, flexible, and sharp-witted. She is agile in combat and can issue flurries of punches or kicks with little to no warning. Her reflexes are incredibly strong, enabling her to weave and avoid the attacks of other Bloxians in most hand-to-hand combat situations.",
           "Despite Nauli's speed, she isn't particularly strong, nor durable. She takes care to avoid unnecessary risks, opting to wear opponents down slowly until she is presented an opportunity to issue a killing blow."
         ],
-        combatStats: createCombatStats("E", "E", "C", "B", "B")
+        combatStats: createCombatStats("E", "E", "C", "B", "B"),
+        images: [
+          {
+            url: "/images/nauli-combat-1.png",
+            caption: "Nauli demonstrating her agility and combat prowess."
+          }
+        ]
       }
     ],
     abilityData: {
