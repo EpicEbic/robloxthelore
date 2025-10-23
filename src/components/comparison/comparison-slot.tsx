@@ -57,16 +57,13 @@ export function ComparisonSlot({
             <div className="text-center space-y-3 flex-1 flex flex-col justify-center">
               <h3 className="font-bold text-xl">{entry.title}</h3>
               
-              <div className="flex flex-wrap justify-center gap-2">
-                <Badge variant="secondary" className="rounded-full">
-                  {entry.category}
-                </Badge>
-                {entry.subcategory && (
+              {entry.subcategory && (
+                <div className="flex flex-wrap justify-center gap-2">
                   <Badge variant="outline" className="rounded-full">
                     {entry.subcategory}
                   </Badge>
-                )}
-              </div>
+                </div>
+              )}
               
               {entry.description && (
                 <p className="text-sm text-muted-foreground line-clamp-3">
