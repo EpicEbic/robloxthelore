@@ -14,6 +14,9 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   const animationRef = useRef<number>();
   const particlesRef = useRef<Particle[]>([]);
   const lastTimeRef = useRef<number>(0);
+  const [opacity, setOpacity] = useState(0);
+  const prevThemeIdRef = useRef<string>('');
+  const fadeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [performanceMode, setPerformanceMode] = useState<'high' | 'medium' | 'low'>('high');
   const frameCountRef = useRef<number>(0);
   const lastFpsCheckRef = useRef<number>(0);
@@ -705,6 +708,47 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     animationRef.current = requestAnimationFrame(animate);
   }, [updateParticles, renderParticles, checkPerformance]);
 
+  // Fade transition logic
+  useEffect(() => {
+    const currentId = theme.id || '';
+    const prevId = prevThemeIdRef.current;
+    
+    // Clear existing timeout
+    if (fadeTimeoutRef.current) clearTimeout(fadeTimeoutRef.current);
+    
+    // Initial mount
+    if (!prevId && currentId) {
+      fadeTimeoutRef.current = setTimeout(() => {
+        setOpacity(1);
+        // Force fallback if no particles appear after 3 seconds
+        setTimeout(() => {
+          if (particlesRef.current.length === 0 && !forceFallback) {
+            setDebugInfo('No particles spawned, forcing fallback');
+            setForceFallback(true);
+          }
+        }, 3000);
+      }, 1000);
+    }
+    // Theme swap
+    else if (prevId && currentId && prevId !== currentId) {
+      setOpacity(0);
+      fadeTimeoutRef.current = setTimeout(() => {
+        particlesRef.current = [];
+        setTimeout(() => setOpacity(1), 400);
+      }, 600);
+    }
+    // Unmount
+    else if (!currentId) {
+      setOpacity(0);
+    }
+    
+    prevThemeIdRef.current = currentId;
+    
+    return () => {
+      if (fadeTimeoutRef.current) clearTimeout(fadeTimeoutRef.current);
+    };
+  }, [theme.id, forceFallback]);
+
   // Initialize canvas and particles
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -793,7 +837,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     return (
       <div 
         className={className}
-        style={{ opacity: theme.particles.intensity }}
+        style={{ opacity, transition: 'opacity 0.8s ease-in-out' }}
       >
         {/* Enhanced CSS-based particles for low-end devices */}
         <div className="absolute inset-0 overflow-hidden">
@@ -861,11 +905,9 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       ref={canvasRef}
       className={className}
       style={{ 
-        opacity: theme.particles.intensity,
-        backgroundColor: 'transparent',
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none'
+        opacity, 
+        transition: 'opacity 0.8s ease-in-out', 
+        background: 'transparent'
       }}
     />
   );

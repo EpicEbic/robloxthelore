@@ -134,7 +134,7 @@ const HomePage = () => {
 
       {/* ID Display */}
       <div className="text-center mt-16 pb-4">
-        <p className="text-xs text-muted-foreground/50">ID: chickenwing</p>
+        <p className="text-xs text-muted-foreground/50">ID: fadein</p>
       </div>
     </div>;
 };
