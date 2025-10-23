@@ -135,7 +135,7 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
   
   return (
     <div className="w-full max-w-[1400px] mx-auto animate-fade-in">
-      <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl" style={{
+      <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl overflow-hidden" style={{
         borderLeftColor: 'var(--wiki-character)'
       }}>
         
