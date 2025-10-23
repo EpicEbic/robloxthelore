@@ -758,10 +758,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) {
-      console.error('[CharacterParticles] No canvas element found');
-      setDebugInfo('No canvas element found');
-      setForceFallback(true);
-      return;
+      console.warn('[CharacterParticles] Canvas ref not ready yet, will retry...');
+      return; // Don't set forceFallback - just wait for next render
     }
 
     // Test canvas support
