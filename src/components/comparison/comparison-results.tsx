@@ -109,7 +109,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
   return (
     <div className="space-y-6">
       {/* Power Percentage Analysis */}
-      <Card className="border-0">
+      <Card className="border-0 rounded-2xl">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl flex items-center justify-center gap-2">
             <TrendingUp className="h-6 w-6 text-primary" />
@@ -125,7 +125,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
             
             {/* Ability status warnings - show when one character lacks abilities */}
             {(!entry1HasAbility || !entry2HasAbility) && (entry1HasAbility || entry2HasAbility) && (
-              <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-lg p-3">
+              <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3">
                 <p className="text-sm text-amber-800 dark:text-amber-200">
                   <strong>Note:</strong> {!entry1HasAbility ? `${entry1.title} lacks` : `${entry2.title} lacks`} special abilities. 
                   They show N/A in all ability categories.
@@ -137,7 +137,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="font-medium">{entry1.title}</span>
-                  <Badge variant={powerLevel1 > powerLevel2 ? "default" : "secondary"}>
+                  <Badge variant={powerLevel1 > powerLevel2 ? "default" : "secondary"} className="rounded-full">
                     {Math.round(powerLevel1)}%
                   </Badge>
                 </div>
@@ -147,7 +147,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="font-medium">{entry2.title}</span>
-                  <Badge variant={powerLevel2 > powerLevel1 ? "default" : "secondary"}>
+                  <Badge variant={powerLevel2 > powerLevel1 ? "default" : "secondary"} className="rounded-full">
                     {Math.round(powerLevel2)}%
                   </Badge>
                 </div>
@@ -163,7 +163,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
         <>
           {/* Ability Stats - only show if at least one character has abilities */}
           {(entry1HasAbility || entry2HasAbility) && (
-            <Card className="border-0">
+            <Card className="border-0 rounded-2xl">
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Zap className="h-5 w-5" />
@@ -194,7 +194,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                         <div className="flex flex-col sm:grid sm:grid-cols-3 gap-4 items-center">
                           {/* Mobile: Stack vertically, Desktop: 3-column grid */}
                           {/* Character 1 */}
-                          <div className={`text-center p-4 rounded-lg border-2 transition-colors ${
+                          <div className={`text-center p-4 rounded-xl border-2 transition-colors ${
                             !entry1HasAbility && display1.label === "N/A"
                               ? "border-gray-500 bg-gray-50 dark:bg-gray-950/20"
                               : comp.winner === 1 
@@ -235,7 +235,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                           </div>
                           
                           {/* Character 2 */}
-                          <div className={`text-center p-4 rounded-lg border-2 transition-colors ${
+                          <div className={`text-center p-4 rounded-xl border-2 transition-colors ${
                             !entry2HasAbility && display2.label === "N/A"
                               ? "border-gray-500 bg-gray-50 dark:bg-gray-950/20"
                               : comp.winner === 2 
@@ -274,7 +274,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
           )}
 
           {/* Physical Stats */}
-          <Card className="border-0">
+          <Card className="border-0 rounded-2xl">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Gauge className="h-5 w-5" />
@@ -323,7 +323,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                       
                       <div className="flex flex-col sm:grid sm:grid-cols-3 gap-4 items-center">
                         {/* Character 1 */}
-                        <div className={`text-center p-4 rounded-lg border-2 transition-colors ${
+                        <div className={`text-center p-4 rounded-xl border-2 transition-colors ${
                           comp.winner === 1 
                             ? "border-green-500 bg-green-50 dark:bg-green-950/20" 
                             : comp.winner === 0 
@@ -364,7 +364,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                         </div>
                         
                         {/* Character 2 */}
-                        <div className={`text-center p-4 rounded-lg border-2 transition-colors ${
+                        <div className={`text-center p-4 rounded-xl border-2 transition-colors ${
                           comp.winner === 2 
                             ? "border-green-500 bg-green-50 dark:bg-green-950/20" 
                             : comp.winner === 0 
@@ -409,11 +409,11 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
           { entry: entry1, traits: traits1 },
           { entry: entry2, traits: traits2 }
         ].map(({ entry, traits }, index) => (
-          <Card key={entry.id} className="border-0">
+          <Card key={entry.id} className="border-0 rounded-2xl">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 {entry.title}
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="outline" className="text-xs rounded-full">
                   {Math.round(index === 0 ? powerLevel1 : powerLevel2)}%
                 </Badge>
               </CardTitle>
@@ -463,7 +463,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
 
       {/* The Matchup Section */}
       {matchupDescription && (
-        <Card className="border-0">
+        <Card className="border-0 rounded-2xl">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Users className="h-5 w-5" />
@@ -471,7 +471,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="bg-muted/50 p-4 rounded-lg">
+            <div className="bg-muted/50 p-4 rounded-xl">
               <div className="text-sm leading-relaxed space-y-3">
                 {matchupDescription.split('\n\n').map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
@@ -484,7 +484,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
 
       {/* Verdict */}
       {verdict && (
-        <Card className="border-0">
+        <Card className="border-0 rounded-2xl">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center justify-center gap-3">
               <Trophy className="h-7 w-7 text-primary" />
@@ -505,7 +505,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                       ? "Take a wild guess." 
                       : (entry1.id === verdict.winner ? entry1.title : entry2.title)}
                   </div>
-                   <Badge variant="default" className="text-lg px-4 py-2 font-semibold">
+                   <Badge variant="default" className="text-lg px-4 py-2 font-semibold rounded-full">
                        {((entry1.id === "caesar-bloxwright" && entry2.id === "rice-farmer") || 
                         (entry1.id === "rice-farmer" && entry2.id === "caesar-bloxwright") ||
                         (entry1.id === "caesar-bloxwright" && entry2.id === "spawnboy") || 
@@ -526,7 +526,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
             </div>
             
             {/* Explanation Section */}
-            <div className="bg-muted/30 p-6 rounded-lg">
+            <div className="bg-muted/30 p-6 rounded-xl">
               <div className="text-lg font-semibold mb-3 text-center">Analysis</div>
               <p className="text-base leading-relaxed text-center">
                 {verdict.explanation.startsWith("Take A Wild Guess") 

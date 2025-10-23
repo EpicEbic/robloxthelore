@@ -59,7 +59,7 @@ export function ComparisonSlot({
               
               {entry.subcategory && (
                 <div className="flex flex-wrap justify-center gap-2">
-                  <Badge variant="outline" className="rounded-full">
+                  <Badge variant="outline" className="rounded-full capitalize">
                     {entry.subcategory}
                   </Badge>
                 </div>
