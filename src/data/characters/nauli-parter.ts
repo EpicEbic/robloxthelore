@@ -20,16 +20,7 @@ export const nauliParter: WikiEntry = {
   species: "Robloxian",
   age: "23",
   alignment: "Neutral / Good",
-  carouselImages: [
-    {
-      url: "/lovable-uploads/1cd20d3c-e29b-4fe3-8a40-e4732259983b.png",
-      caption: "Nauli, ready to strike while wielding her combat dagger."
-    },
-    {
-      url: "/lovable-uploads/4c3cd16b-cbb7-4492-aa35-b91fc09db63f.png",
-      caption: "Nauli, on a stroll with her close friend Caesar."
-    }
-  ],
+  carouselImages: [],
   combatStyles: [
     {
       id: "standard",
