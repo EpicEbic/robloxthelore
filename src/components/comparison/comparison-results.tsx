@@ -107,17 +107,18 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
   };
 
   return (
-    <div className="space-y-8">
-      {/* Power Percentage Analysis */}
-      <Card className="rounded-2xl">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl flex items-center justify-center gap-2">
-            <TrendingUp className="h-6 w-6 text-primary" />
-            Raw Statistics Analysis
-          </CardTitle>
-        </CardHeader>
-        
-        <CardContent className="space-y-6">
+    <Card className="rounded-2xl">
+      <CardContent className="p-0">
+        {/* Power Percentage Analysis */}
+        <div className="p-6 border-b border-border/50">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-semibold flex items-center justify-center gap-2">
+              <TrendingUp className="h-6 w-6 text-primary" />
+              Raw Statistics Analysis
+            </h2>
+          </div>
+          
+          <div className="space-y-6">
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground text-center">
               Combined ability and physical stats. Characters without abilities show N/A in all ability categories.
@@ -155,22 +156,20 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
               </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
 
-      {/* Individual Stats Comparison */}
-      {entry1.category === "character" && entry2.category === "character" && (
-        <>
-          {/* Ability Stats - only show if at least one character has abilities */}
-          {(entry1HasAbility || entry2HasAbility) && (
-            <Card className="rounded-2xl">
-              <CardHeader>
-                <CardTitle className="text-lg flex items-center gap-2">
+        {/* Individual Stats Comparison */}
+        {entry1.category === "character" && entry2.category === "character" && (
+          <>
+            {/* Ability Stats - only show if at least one character has abilities */}
+            {(entry1HasAbility || entry2HasAbility) && (
+              <div className="p-6 border-b border-border/50">
+                <h3 className="text-lg font-semibold flex items-center gap-2 mb-6">
                   <Zap className="h-5 w-5" />
                   Ability Statistics
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+                </h3>
+                
+                <div>
                 <div className="space-y-6">
                   {[
                     { key: "offense", label: "Offense", icon: Sword },
@@ -269,25 +268,25 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                     );
                   })}
                 </div>
-              </CardContent>
-            </Card>
-          )}
+              </div>
+            )}
 
-          {/* Physical Stats */}
-          <Card className="rounded-2xl">
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Gauge className="h-5 w-5" />
-                Physical Statistics
-              </CardTitle>
-              {/* Show which combat styles are being compared */}
-              {(entry1.combatStyles?.length > 1 || entry2.combatStyles?.length > 1) && (
-                <div className="text-sm text-muted-foreground">
-                  Comparing: <strong>{entry1.combatStyles?.find(s => s.id === combatStyle1)?.label || entry1.combatStyles?.[0]?.label || "Standard"}</strong> vs <strong>{entry2.combatStyles?.find(s => s.id === combatStyle2)?.label || entry2.combatStyles?.[0]?.label || "Standard"}</strong>
-                </div>
-              )}
-            </CardHeader>
-            <CardContent>
+            {/* Physical Stats */}
+            <div className="p-6 border-b border-border/50">
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold flex items-center gap-2">
+                  <Gauge className="h-5 w-5" />
+                  Physical Statistics
+                </h3>
+                {/* Show which combat styles are being compared */}
+                {(entry1.combatStyles?.length > 1 || entry2.combatStyles?.length > 1) && (
+                  <div className="text-sm text-muted-foreground mt-2">
+                    Comparing: <strong>{entry1.combatStyles?.find(s => s.id === combatStyle1)?.label || entry1.combatStyles?.[0]?.label || "Standard"}</strong> vs <strong>{entry2.combatStyles?.find(s => s.id === combatStyle2)?.label || entry2.combatStyles?.[0]?.label || "Standard"}</strong>
+                  </div>
+                )}
+              </div>
+              
+              <div>
               <div className="space-y-6">
                 {[
                   { key: "strength", label: "Strength", icon: Sword },
@@ -398,27 +397,26 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                   );
                 })}
               </div>
-            </CardContent>
-          </Card>
-        </>
-      )}
+            </div>
+          </>
+        )}
 
-      {/* Pros and Cons */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {[
-          { entry: entry1, traits: traits1 },
-          { entry: entry2, traits: traits2 }
-        ].map(({ entry, traits }, index) => (
-          <Card key={entry.id} className="rounded-2xl">
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                {entry.title}
-                <Badge variant="outline" className="text-xs rounded-full">
-                  {Math.round(index === 0 ? powerLevel1 : powerLevel2)}%
-                </Badge>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
+        {/* Pros and Cons */}
+        <div className="p-6 border-b border-border/50">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              { entry: entry1, traits: traits1 },
+              { entry: entry2, traits: traits2 }
+            ].map(({ entry, traits }, index) => (
+              <div key={entry.id} className="space-y-4">
+                <h3 className="text-lg font-semibold flex items-center gap-2">
+                  {entry.title}
+                  <Badge variant="outline" className="text-xs rounded-full">
+                    {Math.round(index === 0 ? powerLevel1 : powerLevel2)}%
+                  </Badge>
+                </h3>
+                
+                <div className="space-y-4">
               {traits ? (
                 <>
                   <div className="space-y-2">
@@ -454,23 +452,22 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
               ) : (
                 <p className="text-sm text-muted-foreground italic">
                   Character analysis not available yet.
-                </p>
-              )}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
 
-      {/* The Matchup Section */}
-      {matchupDescription && (
-        <Card className="rounded-2xl">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
+        {/* The Matchup Section */}
+        {matchupDescription && (
+          <div className="p-6 border-b border-border/50">
+            <h3 className="text-lg font-semibold flex items-center gap-2 mb-4">
               <Users className="h-5 w-5" />
               Matchup Analysis
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
+            </h3>
+            
+            <div>
             <div className="bg-muted/50 p-4 rounded-xl">
               <div className="text-sm leading-relaxed space-y-3">
                 {matchupDescription.split('\n\n').map((paragraph, index) => (
@@ -478,20 +475,20 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                 ))}
               </div>
             </div>
-          </CardContent>
-        </Card>
-      )}
+          </div>
+        )}
 
-      {/* Verdict */}
-      {verdict && (
-        <Card className="rounded-2xl">
-          <CardHeader>
-            <CardTitle className="text-2xl flex items-center justify-center gap-3">
-              <Trophy className="h-7 w-7 text-primary" />
-              Final Verdict
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
+        {/* Verdict */}
+        {verdict && (
+          <div className="p-6">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-semibold flex items-center justify-center gap-3">
+                <Trophy className="h-7 w-7 text-primary" />
+                Final Verdict
+              </h2>
+            </div>
+            
+            <div className="space-y-6">
             {/* Winner/Outcome Section */}
             <div className="text-center space-y-4">
               <div className="text-lg font-semibold text-muted-foreground">
@@ -534,9 +531,9 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                   : verdict.explanation}
               </p>
             </div>
-          </CardContent>
-        </Card>
-      )}
-    </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
