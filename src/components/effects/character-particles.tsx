@@ -351,6 +351,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     
     const shouldAddParticle = Math.random() < adjustedSpawnChance;
     if (shouldAddParticle && particlesRef.current.length < adjustedMaxParticles) {
+      console.log('[CharacterParticles] Spawning particle. Current count:', particlesRef.current.length, 'Max:', adjustedMaxParticles);
       // For Caesar, create mixed particle types (flow + lightning)
       if (theme.id === 'caesar-bloxwright') {
         const particleType = Math.random();
@@ -701,6 +702,11 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     const deltaTime = currentTime - lastTimeRef.current;
     lastTimeRef.current = currentTime;
 
+    // Log once per second to avoid spam
+    if (currentTime % 1000 < 16) {
+      console.log('[CharacterParticles] Animation running. Particle count:', particlesRef.current.length);
+    }
+
     checkPerformance(currentTime);
     updateParticles(deltaTime);
     renderParticles();
@@ -806,29 +812,43 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
-    // Start with empty particles array - they'll spawn naturally over time
-    particlesRef.current = [];
-    lastTimeRef.current = performance.now();
+    // Initialize particle array and time
+    if (particlesRef.current.length === 0) {
+      lastTimeRef.current = performance.now();
+    }
 
-    // Start animation
+    return () => {
+      window.removeEventListener('resize', setCanvasSize);
+    };
+  }, [theme]);
+
+  // Manage animation lifecycle separately
+  useEffect(() => {
+    if (!canvasRef.current || !canvasSupported) return;
+    
+    console.log('[CharacterParticles] Starting animation for theme:', theme.id);
     animationRef.current = requestAnimationFrame(animate);
     
     // Force fallback if no particles appear after 3 seconds
     const fallbackTimeout = setTimeout(() => {
-      if (particlesRef.current.length === 0 && !forceFallback) {
+      const count = particlesRef.current.length;
+      console.log('[CharacterParticles] 3s check - particle count:', count);
+      if (count === 0 && !forceFallback) {
+        console.warn('[CharacterParticles] No particles spawned in 3s, forcing fallback');
         setDebugInfo('No particles spawned, forcing fallback');
         setForceFallback(true);
       }
     }, 3000);
 
     return () => {
-      window.removeEventListener('resize', setCanvasSize);
-      clearTimeout(fallbackTimeout);
       if (animationRef.current) {
+        console.log('[CharacterParticles] Stopping animation');
         cancelAnimationFrame(animationRef.current);
+        animationRef.current = undefined;
       }
+      clearTimeout(fallbackTimeout);
     };
-  }, [theme, animate, forceFallback]);
+  }, [animate, canvasSupported, theme.id, forceFallback]);
 
   // Clear particles when theme changes to prevent burst
   useEffect(() => {
