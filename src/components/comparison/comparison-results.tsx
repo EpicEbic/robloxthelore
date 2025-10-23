@@ -451,6 +451,7 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
                   Character analysis not available yet.
                 </p>
               )}
+                </div>
               </div>
             ))}
           </div>
@@ -528,7 +529,8 @@ export function ComparisonResults({ entry1, entry2, combatStyle1, combatStyle2 }
               </p>
             </div>
             </div>
-          )}
+          </div>
+        )}
       </CardContent>
     </Card>
   );
