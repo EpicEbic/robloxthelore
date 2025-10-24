@@ -33,7 +33,7 @@ export function ComparisonSlot({
   });
   
   return (
-    <Card ref={setNodeRef} className={cn("min-h-[300px] h-full flex flex-col transition-all border-0 rounded-2xl", isOver && "ring-2 ring-primary bg-primary/5", !entry && "border-dashed border-2")}>
+    <Card ref={setNodeRef} className={cn("min-h-[300px] h-full flex flex-col transition-all border-0 rounded-2xl overflow-hidden", isOver && "ring-2 ring-primary bg-primary/5", !entry && "border-dashed border-2")}>
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-lg">{title}</CardTitle>
         {entry && (
