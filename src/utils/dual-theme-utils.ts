@@ -68,10 +68,11 @@ export const getComparisonParticleRates = (theme: CharacterTheme) => {
   const baseRates = {
     radio: 0.024, // Match single-character system exactly
     flow: 0.025,
-    speed: 0.08,
+    speed: 0.35, // Drastically increased spawn rate for Vortex's speed lines
     lightning: 0.025,
     clock: 0.025,
     sparkle: 0.025,
+    grain: 0.25, // Drastically higher spawn rate for Rice's grain particles in comparison
     default: 0.025
   };
   

@@ -18,6 +18,7 @@ import { RelationshipSelector } from "./relationship-selector";
 import { RelationshipDisplay } from "./relationship-display";
 import { sampleWikiEntries } from "@/data/sample-wiki-entries";
 import { AbilityCategory } from "./ability-category";
+import { CombatStyleCategory } from "./combat-style-category";
 
 interface CharacterSections {
   appearance?: string | AppearanceOption[]; // Made optional to match the interface in character-entry-card.tsx
@@ -483,28 +484,101 @@ export function CharacterContentTabs({
                         className="mb-4"
                       />
                       
-                      <div className="bg-card rounded-xl p-6 border min-w-0 relative">
-                        <div className="flex items-start justify-between mb-4 gap-4">
-                          <h2 className="text-xl font-semibold flex items-center gap-2 flex-shrink-0">
-                            <Sword className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
-                            Combat Style
-                          </h2>
-                          <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
-                            <CharacterCombatStyleSwitcher
-                              combatStyles={combatStyles || []}
-                              currentStyle={currentCombatStyle}
-                              onStyleChange={onCombatStyleChange || (() => {})}
-                            />
+                      {/* Combat Style Categories */}
+                      {(() => {
+                        const currentCombatStyleData = combatStyles.find(s => s.id === currentCombatStyle)?.combatStyleData;
+                        
+                        if (currentCombatStyleData) {
+                          return (
+                            <div className="space-y-4">
+                              <div className="flex items-center justify-between mb-4 gap-4">
+                                <h2 className="text-xl font-semibold flex items-center gap-2">
+                                  <Sword className="h-5 w-5 text-primary-foreground flex-shrink-0" />
+                                  {combatStyles.find(s => s.id === currentCombatStyle)?.label || "Combat Style"}
+                                </h2>
+                                {combatStyles.length > 1 && (
+                                  <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
+                                    <CharacterCombatStyleSwitcher
+                                      combatStyles={combatStyles}
+                                      currentStyle={currentCombatStyle}
+                                      onStyleChange={onCombatStyleChange || (() => {})}
+                                      align="right"
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                              
+                              <CombatStyleCategory
+                                title={`${combatStyles.find(s => s.id === currentCombatStyle)?.label || "Combat Style"} Overview`}
+                                icon={BookOpen}
+                                category={currentCombatStyleData.overview}
+                                currentEntryId={currentEntryId}
+                              />
+                              
+                              <CombatStyleCategory
+                                title="Passives"
+                                icon={Sparkles}
+                                category={currentCombatStyleData.passives}
+                                currentEntryId={currentEntryId}
+                              />
+                              
+                              <CombatStyleCategory
+                                title="Offensive Techniques"
+                                icon={Target}
+                                category={currentCombatStyleData.offensive}
+                                currentEntryId={currentEntryId}
+                              />
+                              
+                              <CombatStyleCategory
+                                title="Defensive Techniques"
+                                icon={ShieldCheck}
+                                category={currentCombatStyleData.defensive}
+                                currentEntryId={currentEntryId}
+                              />
+                              
+                              <CombatStyleCategory
+                                title="Utilitarian Techniques"
+                                icon={Briefcase}
+                                category={currentCombatStyleData.utilitarian}
+                                currentEntryId={currentEntryId}
+                              />
+                              
+                              <CombatStyleCategory
+                                title="Drawbacks"
+                                icon={AlertTriangle}
+                                category={currentCombatStyleData.drawbacks}
+                                currentEntryId={currentEntryId}
+                              />
+                            </div>
+                          );
+                        }
+                        
+                        // Fallback to old description format
+                        return (
+                          <div className="bg-card rounded-xl p-6 border min-w-0 relative">
+                            <div className="flex items-start justify-between mb-4 gap-4">
+                              <h2 className="text-xl font-semibold flex items-center gap-2 flex-shrink-0">
+                                <Sword className="h-5 w-5 text-primary-foreground flex-shrink-0" />
+                                Combat Style
+                              </h2>
+                              <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
+                                <CharacterCombatStyleSwitcher
+                                  combatStyles={combatStyles || []}
+                                  currentStyle={currentCombatStyle}
+                                  onStyleChange={onCombatStyleChange || (() => {})}
+                                />
+                              </div>
+                            </div>
+                            <div className="text-foreground/90 min-w-0">
+                              {getCurrentCombatStyleDescription().map((paragraph, idx) => (
+                                <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                                  <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                                </p>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                        <div className="text-foreground/90 min-w-0">
-                          {getCurrentCombatStyleDescription().map((paragraph, idx) => (
-                            <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                              <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                            </p>
-                          ))}
-                        </div>
-                      </div>
+                        );
+                      })()}
                     </>
                   )}
 

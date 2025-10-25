@@ -15,6 +15,8 @@ interface ComparisonSlotProps {
   selectedCombatStyle: string | null;
   onClear: () => void;
   onCombatStyleChange: (styleId: string) => void;
+  hideClearButton?: boolean;
+  slotSide?: 'left' | 'right';
 }
 
 export function ComparisonSlot({
@@ -23,7 +25,9 @@ export function ComparisonSlot({
   entry,
   selectedCombatStyle,
   onClear,
-  onCombatStyleChange
+  onCombatStyleChange,
+  hideClearButton = false,
+  slotSide = 'left'
 }: ComparisonSlotProps) {
   const {
     isOver,
@@ -33,10 +37,10 @@ export function ComparisonSlot({
   });
   
   return (
-    <Card ref={setNodeRef} className={cn("min-h-[300px] h-full flex flex-col transition-all border-0 rounded-2xl overflow-hidden", isOver && "ring-2 ring-primary bg-primary/5", !entry && "border-dashed border-2")}>
+    <Card ref={setNodeRef} className={cn("min-h-[300px] h-full flex flex-col transition-all border-0 rounded-2xl overflow-visible bg-card", isOver && "ring-2 ring-primary bg-primary/5", !entry && "border-dashed border-2")}>
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-lg">{title}</CardTitle>
-        {entry && (
+        {entry && !hideClearButton && (
           <Button variant="ghost" size="sm" onClick={onClear} className="h-8 w-8 p-0">
             <X className="h-4 w-4" />
           </Button>
@@ -46,7 +50,7 @@ export function ComparisonSlot({
       <CardContent className="flex flex-col flex-1">
         {entry ? (
           <div className="flex flex-col h-full space-y-4">
-            <div className="aspect-square w-full max-w-[200px] mx-auto rounded-full overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border-2 border-primary/20">
+            <div className="aspect-square w-full max-w-[200px] mx-auto rounded-full overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border-2 border-primary/20 shadow-sm">
               <OptimizedImage 
                 src={`/lovable-uploads/character-icons/${entry.id}-icon.png`} 
                 alt={entry.title} 
@@ -75,15 +79,16 @@ export function ComparisonSlot({
             {/* Combat Style Selector */}
             {entry.category === "character" && entry.combatStyles && entry.combatStyles.length > 1 && (
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <div className={`flex items-center gap-2 text-sm font-medium text-muted-foreground ${slotSide === 'right' ? 'justify-end' : 'justify-start'}`}>
                   <Sword className="h-4 w-4" />
                   Combat Style
                 </div>
-                <div className="flex justify-start">
+                <div className={`flex ${slotSide === 'right' ? 'justify-end' : 'justify-start'}`}>
                   <CharacterCombatStyleSwitcher
                     combatStyles={entry.sections?.combatStyles || []}
                     currentStyle={selectedCombatStyle || entry.sections?.combatStyles?.[0]?.id || 'standard'}
                     onStyleChange={onCombatStyleChange}
+                    align={slotSide}
                   />
                 </div>
               </div>

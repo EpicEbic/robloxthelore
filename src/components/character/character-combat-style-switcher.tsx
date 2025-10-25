@@ -7,12 +7,14 @@ interface CharacterCombatStyleSwitcherProps {
   combatStyles: CombatStyleOption[];
   currentStyle: string;
   onStyleChange: (styleId: string) => void;
+  align?: 'left' | 'right';
 }
 
 export function CharacterCombatStyleSwitcher({
   combatStyles,
   currentStyle,
-  onStyleChange
+  onStyleChange,
+  align = 'left'
 }: CharacterCombatStyleSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,7 +39,7 @@ export function CharacterCombatStyleSwitcher({
         </Button>
         
         {isOpen && (
-          <div className="absolute top-full left-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-[9999] w-full sm:min-w-[200px] sm:max-w-[300px] sm:w-auto max-h-60 overflow-y-auto">
+          <div className={`absolute top-full mt-1 bg-card border border-border rounded-lg shadow-lg z-[9999] w-full sm:min-w-[200px] sm:max-w-[300px] sm:w-auto max-h-60 overflow-y-auto ${align === 'right' ? 'right-0' : 'left-0'}`}>
             {combatStyles.map(style => (
               <button 
                 key={style.id} 

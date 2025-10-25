@@ -435,6 +435,57 @@ body.character-theme-nauli-parter [class*="sidebar"] a:hover {
   color: #15803d !important;
 }
 
+/* Rice-specific styling for icons, text, and links */
+body.character-theme-rice-farmer {
+  background: linear-gradient(135deg, #0f0d0a 0%, #221a14 50%, #0f0d0a 100%) !important;
+}
+
+body.character-theme-rice-farmer h1,
+body.character-theme-rice-farmer h2,
+body.character-theme-rice-farmer h3,
+body.character-theme-rice-farmer h4,
+body.character-theme-rice-farmer h5,
+body.character-theme-rice-farmer h6 {
+  color: #3a7ca5 !important;
+}
+
+body.character-theme-rice-farmer p {
+  color: #f5ecd9 !important;
+}
+
+body.character-theme-rice-farmer div {
+  color: #f5ecd9 !important;
+}
+
+/* Only target specific span elements, not all spans */
+body.character-theme-rice-farmer .card span,
+body.character-theme-rice-farmer [class*="card"] span {
+  color: #f5ecd9 !important;
+}
+
+body.character-theme-rice-farmer a {
+  color: #3a7ca5 !important;
+}
+
+body.character-theme-rice-farmer a:hover {
+  color: #5a9bd4 !important;
+}
+
+body.character-theme-rice-farmer svg,
+body.character-theme-rice-farmer [class*="lucide"] {
+  color: #3a7ca5 !important;
+  stroke: #3a7ca5 !important;
+  fill: none !important;
+}
+
+body.character-theme-rice-farmer button {
+  color: #3a7ca5 !important;
+}
+
+body.character-theme-rice-farmer button svg {
+  color: #3a7ca5 !important;
+}
+
 body.character-theme-nauli-parter .sidebar svg,
 body.character-theme-nauli-parter [class*="sidebar"] svg {
   color: #16a34a !important;

@@ -269,6 +269,7 @@ export function FusionPage() {
                 title="Fusion Candidate 1" 
                 entry={selectedEntries.slot1} 
                 onClear={() => clearSlot("slot1")}
+                hideClearButton={!!(selectedEntries.slot1 && selectedEntries.slot2)}
               />
             </div>
             <div className="animate-slide-up" style={{ animationDelay: '300ms' }}>
@@ -277,9 +278,30 @@ export function FusionPage() {
                 title="Fusion Candidate 2" 
                 entry={selectedEntries.slot2} 
                 onClear={() => clearSlot("slot2")}
+                hideClearButton={!!(selectedEntries.slot1 && selectedEntries.slot2)}
               />
             </div>
           </div>
+
+          {/* Try Another Fusion Button */}
+          {selectedEntries.slot1 && selectedEntries.slot2 && (
+            <div className="flex justify-center animate-fade-in">
+              <Button 
+                onClick={() => {
+                  setSelectedEntries({
+                    slot1: null,
+                    slot2: null
+                  });
+                }}
+                variant="outline" 
+                size="lg" 
+                className="gap-2 border-primary/20 hover:bg-primary/10 hover:border-primary/30"
+              >
+                <GitCompare className="h-5 w-5" />
+                Try Another Fusion
+              </Button>
+            </div>
+          )}
 
           {/* Fusion Divider */}
           {selectedEntries.slot1 && selectedEntries.slot2 && (

@@ -12,7 +12,7 @@ import { getSubcategoryLabel } from "@/data/categories";
 import { Link } from "react-router-dom";
 import { GitCompare } from "lucide-react";
 import { DualThemeProvider, useDualTheme } from "@/contexts/dual-theme-context";
-import { DualCharacterParticles } from "@/components/effects/dual-character-particles";
+import { DualCharacterParticles } from "@/components/effects/dual-character-particles-v2";
 import { getCharacterTheme } from "@/data/character-themes";
 function ComparisonPageContent() {
   const { applyDualTheme, resetDualTheme } = useDualTheme();
@@ -169,6 +169,17 @@ function ComparisonPageContent() {
     }));
   };
 
+  const handleTryAnotherMatchup = () => {
+    setSelectedEntries({
+      slot1: null,
+      slot2: null
+    });
+    setSelectedCombatStyles({
+      slot1: null,
+      slot2: null
+    });
+  };
+
   // Apply dual theme when both characters are selected
   useEffect(() => {
     if (selectedEntries.slot1 && selectedEntries.slot2) {
@@ -211,8 +222,9 @@ function ComparisonPageContent() {
         </div>
 
         <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-          {/* Available Entries */}
-          <Card className="border-0 shadow-xl bg-card/95 backdrop-blur-sm animate-slide-up">
+          {/* Available Entries - Only show when both characters are not selected */}
+          {!(selectedEntries.slot1 && selectedEntries.slot2) && (
+            <Card className="border-0 shadow-xl bg-card/95 backdrop-blur-sm animate-slide-up">
             <CardHeader className="pb-4">
               <CardTitle className="text-2xl flex items-center gap-3">
                 <div className="w-2 h-8 bg-gradient-to-b from-primary to-primary/50 rounded-full"></div>
@@ -263,6 +275,7 @@ function ComparisonPageContent() {
               </div>
             </CardContent>
           </Card>
+          )}
 
           {/* Comparison Slots */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -279,6 +292,8 @@ function ComparisonPageContent() {
                 selectedCombatStyle={selectedCombatStyles.slot1} 
                 onClear={() => clearSlot("slot1")} 
                 onCombatStyleChange={styleId => handleCombatStyleChange("slot1", styleId)} 
+                hideClearButton={!!(selectedEntries.slot1 && selectedEntries.slot2)}
+                slotSide="left"
               />
             </div>
             <div 
@@ -294,9 +309,26 @@ function ComparisonPageContent() {
                 selectedCombatStyle={selectedCombatStyles.slot2} 
                 onClear={() => clearSlot("slot2")} 
                 onCombatStyleChange={styleId => handleCombatStyleChange("slot2", styleId)} 
+                hideClearButton={!!(selectedEntries.slot1 && selectedEntries.slot2)}
+                slotSide="right"
               />
             </div>
           </div>
+
+          {/* Try Another Matchup Button */}
+          {selectedEntries.slot1 && selectedEntries.slot2 && (
+            <div className="flex justify-center animate-fade-in">
+              <Button 
+                onClick={handleTryAnotherMatchup}
+                variant="outline" 
+                size="lg" 
+                className="gap-2 border-primary/20 hover:bg-primary/10 hover:border-primary/30"
+              >
+                <GitCompare className="h-5 w-5" />
+                Try Another Matchup
+              </Button>
+            </div>
+          )}
 
           {/* VS Divider */}
           {selectedEntries.slot1 && selectedEntries.slot2 && (

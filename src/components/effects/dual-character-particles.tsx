@@ -42,7 +42,8 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
       : (canvas.width / 2) + Math.random() * (canvas.width / 2);
     
     // For better page coverage, allow some cross-over in the middle
-    const crossOverChance = 0.2; // 20% chance to spawn in opposite side
+    // All characters now stay strictly on their side for better containment
+    const crossOverChance = 0; // 0% crossover for all characters to maintain side separation
     const finalSpawnX = Math.random() < crossOverChance 
       ? Math.random() * canvas.width 
       : spawnX;
@@ -53,16 +54,18 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
         const height = 5 + Math.random() * 3;
         const angle = (Math.random() - 0.5) * 0.6;
         const swayPhase = 0;
+        // Increased speed variation for Rice's particles (slightly reduced)
+        const speedMultiplier = 0.4 + Math.random() * 2.2; // 0.4x to 2.6x speed variation
         return {
           x: finalSpawnX,
           y: -20 - Math.random() * (canvas.height * 0.3),
-          vx: 0,
-          vy: baseSpeed * (0.6 + Math.random() * 0.6),
+          vx: (Math.random() - 0.5) * 0.2, // Minimal horizontal drift for containment
+          vy: baseSpeed * speedMultiplier, // Much more varied speeds
           size: Math.max(width, height),
-          opacity: particles.intensity * (0.5 + Math.random() * 0.5),
+          opacity: particles.intensity * (0.6 + Math.random() * 0.4),
           color: particles.color,
           life: 0,
-          maxLife: 600 + Math.random() * 600,
+          maxLife: 400 + Math.random() * 800, // Varied lifespans
           type: 'grain',
           side,
           angle,
@@ -113,13 +116,13 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
         return {
           x: side === 'left' ? -50 - Math.random() * 100 : canvas.width + 50 + Math.random() * 100,
           y: Math.random() * canvas.height,
-          vx: side === 'left' ? baseSpeed * (2 + Math.random() * 3) : -baseSpeed * (2 + Math.random() * 3),
-          vy: (Math.random() - 0.5) * 0.5,
-          size: 3 + Math.random() * 2,
-          opacity: particles.intensity * (0.2 + Math.random() * 0.8),
+          vx: side === 'left' ? baseSpeed * (0.5 + Math.random() * 1) : -baseSpeed * (0.5 + Math.random() * 1), // Much slower speed
+          vy: (Math.random() - 0.5) * 0.2, // Minimal vertical variation
+          size: 2 + Math.random() * 1, // Smaller size: 2-3px
+          opacity: particles.intensity * (0.2 + Math.random() * 0.8), // Match single-character system
           color: particles.color,
           life: 0,
-          maxLife: 120 + Math.random() * 80,
+          maxLife: 800, // Shorter lifespan (800ms) so they don't cross centerline
           type: 'speed',
           side
         };
@@ -224,11 +227,19 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
 
       switch (particle.type) {
         case 'grain': {
-          // Straight downward fall
+          // Drastically enhanced speed and variation for comparison page
           particle.x += (particle.vx || 0);
-          particle.y += Math.max(0.4, particle.vy || 0.6);
+          particle.y += Math.max(0.3, particle.vy || 1.4); // Slightly reduced falling speed
+          
+          // Keep Rice's particles contained to their side - prevent crossover
+          if (particle.side === 'left') {
+            particle.x = Math.min(particle.x, canvas.width / 2 - 20); // Don't cross midline
+          } else if (particle.side === 'right') {
+            particle.x = Math.max(particle.x, canvas.width / 2 + 20); // Don't cross midline
+          }
+          
           if (particle.angle !== undefined) {
-            particle.angle += (Math.random() - 0.5) * 0.01;
+            particle.angle += (Math.random() - 0.5) * 0.03; // More rotation variation
           }
           // Fade only in the last 20% of lifespan
           const fadeStart = particle.maxLife * 0.8;
@@ -244,6 +255,13 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
           particle.x += particle.vx;
           particle.y += particle.vy;
           
+          // Keep Caesar's flow particles contained to their side
+          if (particle.side === 'left') {
+            particle.x = Math.min(particle.x, canvas.width / 2 - 20);
+          } else if (particle.side === 'right') {
+            particle.x = Math.max(particle.x, canvas.width / 2 + 20);
+          }
+          
           // Fade out in the last 2 seconds
           if (particle.life > particle.fadeStartTime) {
             const fadeProgress = (particle.life - particle.fadeStartTime) / (particle.maxLife - particle.fadeStartTime);
@@ -254,24 +272,47 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
         case 'radio':
           // Sonar-like expansion - particles stay in place but expand outward
           // No position changes, just expansion and opacity fade (match single-character system)
+          // Radio waves stay in place, so no movement containment needed
           particle.opacity = 0.7 * (1 - particle.life / particle.maxLife);
           break;
 
         case 'speed':
           particle.x += particle.vx;
           particle.y += particle.vy;
-          particle.opacity = 0.8 * (1 - particle.life / particle.maxLife);
+          
+          // Let speed particles travel naturally across the screen like in single-character system
+          // No movement containment - they should continue straight and vanish while moving
+          
+          // Check if this is specifically a Vortex speed line particle
+          if (particle.isVortexSpeed) {
+            // Vortex speed lines: start fading after 0.4s, fade over 0.4s (total 0.8s)
+            const fadeStartTime = 400; // 0.40 seconds
+            if (particle.life < fadeStartTime) {
+              // Full opacity for first 0.4 seconds
+              particle.opacity = 0.8;
+            } else {
+              // Fade out over the remaining 0.4 seconds
+              const fadeProgress = (particle.life - fadeStartTime) / (particle.maxLife - fadeStartTime);
+              particle.opacity = Math.max(0, 0.8 * (1 - fadeProgress));
+            }
+          } else {
+            // Other speed particles (including clocks) use normal fading
+            particle.opacity = 0.8 * (1 - particle.life / particle.maxLife);
+          }
           break;
 
         case 'lightning':
+          // Lightning particles stay in place, so no movement containment needed
           particle.opacity = 0.9 * (1 - particle.life / particle.maxLife);
           break;
 
         case 'clock':
+          // Clock particles stay in place, so no movement containment needed
           particle.opacity = 0.6 * (1 - particle.life / particle.maxLife);
           break;
 
         case 'sparkle':
+          // Sparkle particles stay in place, so no movement containment needed
           particle.opacity = 0.8 * (1 - particle.life / particle.maxLife);
           break;
 
@@ -323,7 +364,11 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
                                   performanceMode === 'medium' ? Math.floor(particleConfig.maxParticles * 0.7) : 
                                   Math.floor(particleConfig.maxParticles * 0.4);
       
-      if (Math.random() < adjustedSpawnChance && particlesRef.current.length < adjustedMaxParticles) {
+      // Count particles for left side only to prevent one character from blocking the other
+      const leftSideParticles = particlesRef.current.filter(p => p.side === 'left').length;
+      const leftMaxParticles = adjustedMaxParticles; // Each side gets full particle count independently
+      
+      if (Math.random() < adjustedSpawnChance && leftSideParticles < leftMaxParticles) {
         // For Caesar, create mixed particle types (flow + lightning)
         if (leftTheme.id === 'caesar-bloxwright') {
           const particleType = Math.random();
@@ -336,16 +381,39 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
           }
         } else if (leftTheme.id === 'vortex-a-steele') {
           const particleType = Math.random();
-          if (particleType < 0.6) {
-            // 60% speed lines
-            particlesRef.current.push(createParticle({ ...leftTheme, particles: { ...leftTheme.particles, type: 'speed' } }, 'left'));
-          } else if (particleType < 0.8) {
-            // 20% clocks
+          if (particleType < 0.8) {
+            // 80% speed lines - drastically increased for more purple lines
+            const vortexSpeedParticle = createParticle({ 
+              ...leftTheme, 
+              particles: { 
+                ...leftTheme.particles, 
+                type: 'speed',
+                speed: leftTheme.particles.speed * 3.0, // 3x faster speed
+                count: leftTheme.particles.count * 3,   // 3x more particles
+                intensity: Math.min(1.0, leftTheme.particles.intensity * 1.2) // More intense
+              } 
+            }, 'left');
+            vortexSpeedParticle.isVortexSpeed = true; // Mark as Vortex speed line
+            particlesRef.current.push(vortexSpeedParticle);
+          } else if (particleType < 0.9) {
+            // 10% clocks
             particlesRef.current.push(createParticle({ ...leftTheme, particles: { ...leftTheme.particles, type: 'clock' } }, 'left'));
           } else {
-            // 20% sparkles
+            // 10% sparkles
             particlesRef.current.push(createParticle({ ...leftTheme, particles: { ...leftTheme.particles, type: 'sparkle' } }, 'left'));
           }
+        } else if (leftTheme.id === 'rice-farmer') {
+          // Rice's grain particles - drastically enhanced for comparison page (much faster, much more volume)
+          particlesRef.current.push(createParticle({ 
+            ...leftTheme, 
+            particles: { 
+              ...leftTheme.particles, 
+              type: 'grain',
+              speed: leftTheme.particles.speed * 2.8, // 2.8x faster base speed
+              count: leftTheme.particles.count * 4,   // 4x more particles (600 total)
+              intensity: Math.min(1.0, leftTheme.particles.intensity * 1.3) // More intense
+            } 
+          }, 'left'));
         } else {
           particlesRef.current.push(createParticle(leftTheme, 'left'));
         }
@@ -362,7 +430,11 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
                                   performanceMode === 'medium' ? Math.floor(particleConfig.maxParticles * 0.7) : 
                                   Math.floor(particleConfig.maxParticles * 0.4);
       
-      if (Math.random() < adjustedSpawnChance && particlesRef.current.length < adjustedMaxParticles) {
+      // Count particles for right side only to prevent one character from blocking the other
+      const rightSideParticles = particlesRef.current.filter(p => p.side === 'right').length;
+      const rightMaxParticles = adjustedMaxParticles; // Each side gets full particle count independently
+      
+      if (Math.random() < adjustedSpawnChance && rightSideParticles < rightMaxParticles) {
         // For Caesar, create mixed particle types (flow + lightning)
         if (rightTheme.id === 'caesar-bloxwright') {
           const particleType = Math.random();
@@ -375,16 +447,39 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
           }
         } else if (rightTheme.id === 'vortex-a-steele') {
           const particleType = Math.random();
-          if (particleType < 0.6) {
-            // 60% speed lines
-            particlesRef.current.push(createParticle({ ...rightTheme, particles: { ...rightTheme.particles, type: 'speed' } }, 'right'));
-          } else if (particleType < 0.8) {
-            // 20% clocks
+          if (particleType < 0.8) {
+            // 80% speed lines - drastically increased for more purple lines
+            const vortexSpeedParticle = createParticle({ 
+              ...rightTheme, 
+              particles: { 
+                ...rightTheme.particles, 
+                type: 'speed',
+                speed: rightTheme.particles.speed * 3.0, // 3x faster speed
+                count: rightTheme.particles.count * 3,   // 3x more particles
+                intensity: Math.min(1.0, rightTheme.particles.intensity * 1.2) // More intense
+              } 
+            }, 'right');
+            vortexSpeedParticle.isVortexSpeed = true; // Mark as Vortex speed line
+            particlesRef.current.push(vortexSpeedParticle);
+          } else if (particleType < 0.9) {
+            // 10% clocks
             particlesRef.current.push(createParticle({ ...rightTheme, particles: { ...rightTheme.particles, type: 'clock' } }, 'right'));
           } else {
-            // 20% sparkles
+            // 10% sparkles
             particlesRef.current.push(createParticle({ ...rightTheme, particles: { ...rightTheme.particles, type: 'sparkle' } }, 'right'));
           }
+        } else if (rightTheme.id === 'rice-farmer') {
+          // Rice's grain particles - drastically enhanced for comparison page (much faster, much more volume)
+          particlesRef.current.push(createParticle({ 
+            ...rightTheme, 
+            particles: { 
+              ...rightTheme.particles, 
+              type: 'grain',
+              speed: rightTheme.particles.speed * 2.8, // 2.8x faster base speed
+              count: rightTheme.particles.count * 4,   // 4x more particles (600 total)
+              intensity: Math.min(1.0, rightTheme.particles.intensity * 1.3) // More intense
+            } 
+          }, 'right'));
         } else {
           particlesRef.current.push(createParticle(rightTheme, 'right'));
         }
@@ -562,6 +657,29 @@ export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterP
           ctx.beginPath();
           ctx.arc(0, 0, 2, 0, Math.PI * 2);
           ctx.fill();
+          ctx.restore();
+          break;
+
+        case 'grain':
+          ctx.save();
+          ctx.translate(particle.x, particle.y);
+          if (particle.angle !== undefined) {
+            ctx.rotate(particle.angle);
+          }
+          
+          ctx.fillStyle = particle.color;
+          ctx.shadowColor = particle.color;
+          ctx.shadowBlur = 2;
+          
+          // Draw as rounded rectangle (rice grain shape)
+          const width = particle.width || 2;
+          const height = particle.height || 5;
+          const cornerRadius = Math.min(width, height) * 0.3;
+          
+          ctx.beginPath();
+          ctx.roundRect(-width/2, -height/2, width, height, cornerRadius);
+          ctx.fill();
+          
           ctx.restore();
           break;
       }

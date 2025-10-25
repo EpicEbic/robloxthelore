@@ -107,11 +107,33 @@ export interface CombatStats {
   };
 }
 
+export interface CombatStyleTechnique {
+  id: string;
+  title: string;
+  description: string[];
+}
+
+export interface CombatStyleCategory {
+  // Can be either an array of techniques OR a text description (for categories with no techniques)
+  techniques?: CombatStyleTechnique[];
+  text?: string[];
+}
+
+export interface CombatStyleData {
+  overview?: CombatStyleCategory;
+  passives?: CombatStyleCategory;
+  offensive?: CombatStyleCategory;
+  defensive?: CombatStyleCategory;
+  utilitarian?: CombatStyleCategory;
+  drawbacks?: CombatStyleCategory;
+}
+
 export interface CombatStyleOption {
   id: string;
   label: string;
   combatStats: CombatStats;
   description: string[];
+  combatStyleData?: CombatStyleData;
   images?: {
     url: string;
     caption: string;

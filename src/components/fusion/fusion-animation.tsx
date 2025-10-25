@@ -111,11 +111,11 @@ export function FusionAnimation({ entry1, entry2, fusion, onComplete }: FusionAn
                 phase === 'merging' ? 'transform translate-x-12 scale-80 opacity-80' : 
                 phase === 'charging' ? 'transform translate-x-20 scale-60 opacity-50 blur-sm' : ''
               }`}>
-                <div className={`w-48 h-48 rounded-lg overflow-hidden border-4 shadow-2xl ${
+                <div className={`w-32 h-32 rounded-full overflow-hidden border-4 shadow-2xl ${
                   phase === 'charging' ? 'border-primary animate-pulse' : 'border-primary/50'
                 }`}>
                   <OptimizedImage
-                    src={entry1.imageUrl || "/placeholder.svg"}
+                    src={`/lovable-uploads/character-icons/${entry1.id}-icon.png`}
                     alt={entry1.title}
                     className="w-full h-full object-cover"
                   />
@@ -144,11 +144,11 @@ export function FusionAnimation({ entry1, entry2, fusion, onComplete }: FusionAn
                 phase === 'merging' ? 'transform -translate-x-12 scale-80 opacity-80' : 
                 phase === 'charging' ? 'transform -translate-x-20 scale-60 opacity-50 blur-sm' : ''
               }`}>
-                <div className={`w-48 h-48 rounded-lg overflow-hidden border-4 shadow-2xl ${
+                <div className={`w-32 h-32 rounded-full overflow-hidden border-4 shadow-2xl ${
                   phase === 'charging' ? 'border-primary animate-pulse' : 'border-primary/50'
                 }`}>
                   <OptimizedImage
-                    src={entry2.imageUrl || "/placeholder.svg"}
+                    src={`/lovable-uploads/character-icons/${entry2.id}-icon.png`}
                     alt={entry2.title}
                     className="w-full h-full object-cover"
                   />
@@ -168,7 +168,7 @@ export function FusionAnimation({ entry1, entry2, fusion, onComplete }: FusionAn
               phase === 'fusion' ? 'animate-scale-in' : phase === 'complete' ? 'scale-110' : ''
             }`}>
               <div className="text-center space-y-4">
-                <div className="w-64 h-64 rounded-lg overflow-hidden border-4 border-primary shadow-2xl mx-auto">
+                <div className="w-48 h-48 rounded-lg overflow-hidden border-4 border-primary shadow-2xl mx-auto">
                   {getFusionImage() ? (
                     <OptimizedImage
                       src={getFusionImage()!}
