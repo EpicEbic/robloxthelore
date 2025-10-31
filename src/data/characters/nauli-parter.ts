@@ -40,6 +40,8 @@ export const nauliParter: WikiEntry = {
         "Nauli is quick, flexible, and sharp-witted. She is agile in combat and can issue flurries of punches or kicks with little to no warning. Her reflexes are incredibly strong, enabling her to weave and avoid the attacks of other Bloxians in most hand-to-hand combat situations.",
         "Despite Nauli's speed, she isn't particularly strong, nor durable. She takes care to avoid unnecessary risks, opting to wear opponents down slowly until she is presented an opportunity to issue a killing blow."
       ],
+      // ESTIMATED STATS - Subject to change
+      // Strength: E (low power), Durability: E (low endurance), Agility: C (above average speed), Precision: B (high accuracy), Intelligence: B (high tactical thinking)
       combatStats: createCombatStats("E", "E", "C", "B", "B"),
       images: [
         {
@@ -200,7 +202,35 @@ export const nauliParter: WikiEntry = {
           "Nauli is quick, flexible, and sharp-witted. She is agile in combat and can issue flurries of punches or kicks with little to no warning. Her reflexes are incredibly strong, enabling her to weave and avoid the attacks of other Bloxians in most hand-to-hand combat situations.",
           "Despite Nauli's speed, she isn't particularly strong, nor durable. She takes care to avoid unnecessary risks, opting to wear opponents down slowly until she is presented an opportunity to issue a killing blow."
         ],
-        combatStats: createCombatStats("E", "E", "C", "B", "B"),
+        combatStats: createCombatStats(
+          "E", // Strength: Main category average
+          "E", // Durability: Main category average
+          "C", // Agility: Main category average
+          "B", // Precision: Main category average
+          "B", // Intelligence: Main category average
+          {
+            // Strength subcategories
+            penetration: "D",  // Uses knives/focused attacks but low base power
+            strength: "F",     // Not particularly strong
+            intensity: "E",    // Low power behind attacks
+            // Agility subcategories
+            swiftness: "C",    // Quick movement, can issue flurries
+            endurance: "C",   // Can sustain combat, wears opponents down
+            flexibility: "B",  // Very flexible and agile
+            // Precision subcategories
+            accuracy: "B",    // Master assassin, high precision
+            reactivity: "A",  // Incredibly strong reflexes, can weave attacks
+            dexterity: "B",   // Skilled with daggers and kunai
+            // Intelligence subcategories
+            tactility: "A",   // Sharp-witted tactician, cold and calculative
+            wisdom: "B",      // Master assassin, strategic thinking
+            stability: "C",  // Can remain focused, though has trauma
+            // Durability subcategories
+            vitality: "E",    // Not durable, avoids unnecessary risks
+            toughness: "E",   // Not particularly durable
+            resistance: "E"   // Low durability overall
+          }
+        ),
         images: [
           {
             url: "/images/nauli-combat-1.png",

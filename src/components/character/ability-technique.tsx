@@ -10,26 +10,33 @@ interface AbilityTechniqueProps {
 
 export function AbilityTechnique({ title, description, currentEntryId }: AbilityTechniqueProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const isVortex = currentEntryId === "vortex-a-steele";
 
   return (
-    <div className="border border-border/50 rounded-lg overflow-hidden hover:border-border transition-colors">
+    <div className="border border-border/50 rounded-lg overflow-hidden hover:border-border transition-colors" data-ability-technique={isVortex ? "true" : undefined}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full px-4 py-3 flex items-center justify-between bg-muted/30 hover:bg-muted/50 transition-colors"
       >
-        <span className="font-semibold text-left">{title}</span>
+        <span 
+          className="font-semibold text-left"
+          style={isVortex ? { color: '#a855f7' } : {}}
+        >
+          {title}
+        </span>
         <ChevronDown
           className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
+          style={isVortex ? { color: '#a855f7', stroke: '#a855f7', fill: 'none' } : {}}
         />
       </button>
       
       {isOpen && (
         <div className="px-4 py-3 bg-card/50 border-t border-border/50">
-          <div className="text-foreground/90 space-y-3">
+          <div className="text-foreground/90 space-y-3" style={isVortex ? { color: 'hsl(var(--foreground))' } : {}}>
             {description.map((paragraph, idx) => (
-              <p key={idx} className="text-sm leading-relaxed">
+              <p key={idx} className="text-sm leading-relaxed" style={isVortex ? { color: 'hsl(var(--foreground))' } : {}}>
                 <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
               </p>
             ))}

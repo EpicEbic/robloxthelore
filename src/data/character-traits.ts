@@ -43,13 +43,13 @@ export const characterTraits: CharacterTraits[] = [
       "Trained heavily to be both agile and flexible.",
       "Armed with a variety of tools at his disposal, allowing him to adapt to most opponents.",
       "Chronipulation is a deadly force to be reckoned with, allowing Vortex to achieve speeds near-invisible to the naked eye.",
-      "The Magnetivolver allows him to strike most targets from afar, using high-caliber shots that penetrate most materials and armors.",
+      "The Mag-num allows him to strike most targets from afar, using high-caliber shots that penetrate most materials and armors.",
       "The Amplification Gauntlet greatly enhances Vortex's strength, allowing him to punch through tougher materials such as rock or flimsy metal."
     ],
     cons: [
       "Vortex's durability is present, but minimal.",
       "Chronipulation is seriously draining of Vortex's energy, and can completely incapacitate him when abused.",
-      "Both the Magnetivolver and the Amplification Gauntlet rely on Chronipulation to function at their highest potential, further draining Vortex's stamina.",
+      "Both the Mag-num and the Amplification Gauntlet rely on Chronipulation to function at their highest potential, further draining Vortex's stamina.",
       "Vortex's temper and stubbornness can quickly get the best of him, causing him to act irrationally or without care."
     ]
   },

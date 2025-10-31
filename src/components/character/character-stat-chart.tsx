@@ -19,6 +19,29 @@ interface CombatStats {
   agility: StatGrade;
   precision: StatGrade;
   intelligence: StatGrade;
+  // Optional subcategory-specific stats - if not provided, subcategories inherit from main category
+  subcategories?: {
+    // Strength subcategories
+    penetration?: StatGrade;
+    strength?: StatGrade;  // Base strength subcategory
+    intensity?: StatGrade;
+    // Agility subcategories
+    swiftness?: StatGrade;
+    endurance?: StatGrade;
+    flexibility?: StatGrade;
+    // Precision subcategories
+    accuracy?: StatGrade;
+    reactivity?: StatGrade;
+    dexterity?: StatGrade;
+    // Intelligence subcategories
+    tactility?: StatGrade;
+    wisdom?: StatGrade;
+    stability?: StatGrade;
+    // Durability subcategories
+    vitality?: StatGrade;
+    toughness?: StatGrade;
+    resistance?: StatGrade;
+  };
 }
 
 export type { CharacterStats, CombatStats };
@@ -55,8 +78,8 @@ const STAT_LABELS = {
 } as const;
 
 const COMBAT_STAT_LABELS = {
-  strength: "Strength",
-  durability: "Durability",
+  strength: "Offense",
+  durability: "Defense",
   agility: "Agility",
   precision: "Precision",
   intelligence: "Intelligence"
@@ -238,13 +261,42 @@ export function createCombatStats(
   durability: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
   agility: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
   precision: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
-  intelligence: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F"
+  intelligence: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
+  subcategories?: {
+    penetration?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    strength?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    intensity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    swiftness?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    endurance?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    flexibility?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    accuracy?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    reactivity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    dexterity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    tactility?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    wisdom?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    stability?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    vitality?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    toughness?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    resistance?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+  }
 ): CombatStats {
-  return {
+  const baseStats: CombatStats = {
     strength: { label: strength, value: GRADE_VALUES[strength] },
     durability: { label: durability, value: GRADE_VALUES[durability] },
     agility: { label: agility, value: GRADE_VALUES[agility] },
     precision: { label: precision, value: GRADE_VALUES[precision] },
     intelligence: { label: intelligence, value: GRADE_VALUES[intelligence] }
   };
+  
+  if (subcategories) {
+    const subcategoryStats: any = {};
+    Object.entries(subcategories).forEach(([key, grade]) => {
+      if (grade) {
+        subcategoryStats[key] = { label: grade, value: GRADE_VALUES[grade] };
+      }
+    });
+    return { ...baseStats, subcategories: subcategoryStats };
+  }
+  
+  return baseStats;
 }

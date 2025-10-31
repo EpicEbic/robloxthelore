@@ -38,7 +38,35 @@ export const caesarBloxwright: WikiEntry = {
         "Caesar's overwhelming size and bulwark build grant him incredible physical strength and durability, qualities which are only enhanced further by his ability. Caesar relies on slow, yet sturdy and incredibly lethal blows to quickly dispatch enemies that get caught in his path. Caesar is a juggernaut, backed by power that is not to be taken lightly.",
         "Though Caesar has incredible physical potential, he lacks immensely in speed and reflexes. Opponents with proper agility and dexterity will have almost no issues avoiding Caesar and his slow-moving attacks, unless he is able to accurately predict or trick a target into attacking to counter them."
       ],
-      combatStats: createCombatStats("B", "B", "E", "E", "D")
+      combatStats: createCombatStats(
+        "B", // Strength: Main category average
+        "B", // Durability: Main category average
+        "E", // Agility: Main category average
+        "E", // Precision: Main category average
+        "D", // Intelligence: Main category average
+        {
+          // Strength subcategories
+          penetration: "C",  // Powerful but not focused on piercing
+          strength: "A",     // Raw physical power is his main attribute
+          intensity: "B",    // Incredibly lethal blows
+          // Agility subcategories
+          swiftness: "F",    // Extremely slow movement
+          endurance: "D",    // Can fight extended periods despite being slow
+          flexibility: "F",   // Large build severely limits flexibility
+          // Precision subcategories
+          accuracy: "F",     // Imprecise attacks
+          reactivity: "E",   // Slow reflexes
+          dexterity: "F",    // Poor coordination due to size
+          // Intelligence subcategories
+          tactility: "C",    // Quick-witted, can predict enemies
+          wisdom: "D",       // Strategic when he thinks ahead
+          stability: "E",    // Can go berserk, loses composure under strain
+          // Durability subcategories
+          vitality: "A",     // Can take massive punishment, keeps fighting when exhausted
+          toughness: "B",    // Bulwark build, hard to damage
+          resistance: "C"   // Vulnerable to speed/precision attacks
+        }
+      )
     }
   ],
   abilityCarouselImages: [
@@ -56,7 +84,35 @@ export const caesarBloxwright: WikiEntry = {
           "Caesar's overwhelming physical strength and bulwark build make him a slower, yet hard-hitting tank of a fighter. Caesar may be imprecise, but his attacks carry impressive power that can easily prove lethal for fragile or unexpecting opponents. He is a juggernaut, with punches that are not to be taken lightly.",
           "Caesar falters in his speed and reflexes, struggling heavily to keep up with quicker targets or those with sharp reflexes. Without thinking ahead and outsmarting his enemies, they'll often have no trouble weaving and evading any of his attacks."
         ],
-        combatStats: createCombatStats("B", "B", "E", "E", "D")
+        combatStats: createCombatStats(
+          "B", // Strength: Main category average
+          "B", // Durability: Main category average
+          "E", // Agility: Main category average
+          "E", // Precision: Main category average
+          "D", // Intelligence: Main category average
+          {
+            // Strength subcategories
+            penetration: "C",  // Powerful but not focused on piercing
+            strength: "A",     // Raw physical power is his main attribute
+            intensity: "B",    // Incredibly lethal blows
+            // Agility subcategories
+            swiftness: "F",    // Extremely slow movement
+            endurance: "D",    // Can fight extended periods despite being slow
+            flexibility: "F",   // Large build severely limits flexibility
+            // Precision subcategories
+            accuracy: "F",     // Imprecise attacks
+            reactivity: "E",   // Slow reflexes
+            dexterity: "F",    // Poor coordination due to size
+            // Intelligence subcategories
+            tactility: "C",    // Quick-witted, can predict enemies
+            wisdom: "D",       // Strategic when he thinks ahead
+            stability: "E",    // Can go berserk, loses composure under strain
+            // Durability subcategories
+            vitality: "A",     // Can take massive punishment, keeps fighting when exhausted
+            toughness: "B",    // Bulwark build, hard to damage
+            resistance: "C"   // Vulnerable to speed/precision attacks
+          }
+        )
       }
     ],
     history: [

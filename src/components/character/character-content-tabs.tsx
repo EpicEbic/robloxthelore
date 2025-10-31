@@ -1,4 +1,4 @@
-import { User, Home, Heart, Sword, Zap, ScrollText, Shirt, Drama, Shield, Wrench, AlertTriangle, Clock, HandMetal, ArrowRightFromLine, BookOpen, Sparkles, Target, ShieldCheck, Briefcase } from "lucide-react";
+import { User, Home, Heart, Sword, Swords, Zap, ScrollText, Shirt, Drama, Shield, Wrench, AlertTriangle, Clock, HandMetal, HandFist, ArrowRightFromLine, BookOpen, Sparkles, Target, ShieldCheck, Briefcase } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ import { CharacterPersonalitySwitcher } from "./character-personality-switcher";
 import { CharacterLifestyleSwitcher } from "./character-lifestyle-switcher";
 import { CharacterHistorySwitcher } from "./character-history-switcher";
 import { CharacterCombatStyleSwitcher } from "./character-combat-style-switcher";
-import { CharacterStatRadarChart } from "./character-stat-radar-chart";
+import { CharacterStatBarChart } from "./character-stat-bar-chart";
 import { createCharacterStats, createCombatStats, CharacterStats, CombatStats } from "./character-stat-chart";
 import { AutoLinkedText } from "@/components/ui/auto-linked-text";
 import { AppearanceOption, PersonalityOption, HistoryOption, CombatStyleOption, WikiEntry } from "@/types/wiki-types";
@@ -220,7 +220,7 @@ export function CharacterContentTabs({
             <span>Relationships</span>
           </TabsTrigger>
           <TabsTrigger value="combat" className="flex items-center gap-2 text-xs sm:text-sm px-3 py-2 sm:py-3 rounded-xl whitespace-nowrap">
-            <Sword className="h-4 w-4 flex-shrink-0" />
+            <Swords className="h-4 w-4 flex-shrink-0" />
             <span>Combat</span>
           </TabsTrigger>
           <TabsTrigger value="trivia" className="flex items-center gap-2 text-xs sm:text-sm px-3 py-2 sm:py-3 rounded-xl whitespace-nowrap">
@@ -444,7 +444,7 @@ export function CharacterContentTabs({
                       }}
                       className="flex items-center gap-2 rounded-xl"
                     >
-                      <HandMetal className="h-4 w-4" />
+                      <HandFist className="h-4 w-4" />
                       Physical
                     </Button>
                     {hasAbilities && (
@@ -476,12 +476,15 @@ export function CharacterContentTabs({
                   {displayCombatView === 'physical' && (
                     <>
                       {/* Combat Stat Chart */}
-                      <CharacterStatRadarChart 
+                      <CharacterStatBarChart 
                         stats={getCurrentCombatStats() || createCombatStats("A", "A", "A", "A", "A")} 
                         characterId={characterId}
                         abilityName="Physical"
                         isPhysicalStats={true}
                         className="mb-4"
+                        currentCombatStyle={currentCombatStyle}
+                        combatStyles={combatStyles}
+                        onCombatStyleChange={onCombatStyleChange}
                       />
                       
                       {/* Combat Style Categories */}
@@ -490,65 +493,57 @@ export function CharacterContentTabs({
                         
                         if (currentCombatStyleData) {
                           return (
-                            <div className="space-y-4">
+                            <div className="bg-card rounded-xl p-6 border min-w-0 relative">
                               <div className="flex items-center justify-between mb-4 gap-4">
                                 <h2 className="text-xl font-semibold flex items-center gap-2">
-                                  <Sword className="h-5 w-5 text-primary-foreground flex-shrink-0" />
+                                  <HandFist className="h-5 w-5 text-primary-foreground flex-shrink-0" />
                                   {combatStyles.find(s => s.id === currentCombatStyle)?.label || "Combat Style"}
                                 </h2>
-                                {combatStyles.length > 1 && (
-                                  <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
-                                    <CharacterCombatStyleSwitcher
-                                      combatStyles={combatStyles}
-                                      currentStyle={currentCombatStyle}
-                                      onStyleChange={onCombatStyleChange || (() => {})}
-                                      align="right"
-                                    />
-                                  </div>
-                                )}
                               </div>
                               
-                              <CombatStyleCategory
-                                title={`${combatStyles.find(s => s.id === currentCombatStyle)?.label || "Combat Style"} Overview`}
-                                icon={BookOpen}
-                                category={currentCombatStyleData.overview}
-                                currentEntryId={currentEntryId}
-                              />
-                              
-                              <CombatStyleCategory
-                                title="Passives"
-                                icon={Sparkles}
-                                category={currentCombatStyleData.passives}
-                                currentEntryId={currentEntryId}
-                              />
-                              
-                              <CombatStyleCategory
-                                title="Offensive Techniques"
-                                icon={Target}
-                                category={currentCombatStyleData.offensive}
-                                currentEntryId={currentEntryId}
-                              />
-                              
-                              <CombatStyleCategory
-                                title="Defensive Techniques"
-                                icon={ShieldCheck}
-                                category={currentCombatStyleData.defensive}
-                                currentEntryId={currentEntryId}
-                              />
-                              
-                              <CombatStyleCategory
-                                title="Utilitarian Techniques"
-                                icon={Briefcase}
-                                category={currentCombatStyleData.utilitarian}
-                                currentEntryId={currentEntryId}
-                              />
-                              
-                              <CombatStyleCategory
-                                title="Drawbacks"
-                                icon={AlertTriangle}
-                                category={currentCombatStyleData.drawbacks}
-                                currentEntryId={currentEntryId}
-                              />
+                              <div className="space-y-4">
+                                <CombatStyleCategory
+                                  title={`${combatStyles.find(s => s.id === currentCombatStyle)?.label || "Combat Style"} Overview`}
+                                  icon={BookOpen}
+                                  category={currentCombatStyleData.overview}
+                                  currentEntryId={currentEntryId}
+                                />
+                                
+                                <CombatStyleCategory
+                                  title="Passives"
+                                  icon={Sparkles}
+                                  category={currentCombatStyleData.passives}
+                                  currentEntryId={currentEntryId}
+                                />
+                                
+                                <CombatStyleCategory
+                                  title="Offensive Techniques"
+                                  icon={Sword}
+                                  category={currentCombatStyleData.offensive}
+                                  currentEntryId={currentEntryId}
+                                />
+                                
+                                <CombatStyleCategory
+                                  title="Defensive Techniques"
+                                  icon={ShieldCheck}
+                                  category={currentCombatStyleData.defensive}
+                                  currentEntryId={currentEntryId}
+                                />
+                                
+                                <CombatStyleCategory
+                                  title="Utilitarian Techniques"
+                                  icon={Briefcase}
+                                  category={currentCombatStyleData.utilitarian}
+                                  currentEntryId={currentEntryId}
+                                />
+                                
+                                <CombatStyleCategory
+                                  title="Drawbacks"
+                                  icon={AlertTriangle}
+                                  category={currentCombatStyleData.drawbacks}
+                                  currentEntryId={currentEntryId}
+                                />
+                              </div>
                             </div>
                           );
                         }
@@ -558,7 +553,7 @@ export function CharacterContentTabs({
                           <div className="bg-card rounded-xl p-6 border min-w-0 relative">
                             <div className="flex items-start justify-between mb-4 gap-4">
                               <h2 className="text-xl font-semibold flex items-center gap-2 flex-shrink-0">
-                                <Sword className="h-5 w-5 text-primary-foreground flex-shrink-0" />
+                                <HandFist className="h-5 w-5 text-primary-foreground flex-shrink-0" />
                                 Combat Style
                               </h2>
                               <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
@@ -585,7 +580,7 @@ export function CharacterContentTabs({
                   {hasAbilities && displayCombatView === 'ability' && (
                     <div className="space-y-4">
                       {/* Ability Stat Chart */}
-                      <CharacterStatRadarChart 
+                      <CharacterStatBarChart 
                         stats={stats || createCharacterStats("A", "A", "A", "A")} 
                         characterId={characterId}
                         abilityName={abilityName}
@@ -595,48 +590,50 @@ export function CharacterContentTabs({
                       
                       {/* New Structured Ability Layout */}
                       {sections.abilityData ? (
-                        <div className="space-y-4">
-                          <AbilityCategory
-                            title="Overview"
-                            icon={BookOpen}
-                            category={sections.abilityData.overview}
-                            currentEntryId={currentEntryId}
-                          />
-                          
-                          <AbilityCategory
-                            title="Passives"
-                            icon={Sparkles}
-                            category={sections.abilityData.passives}
-                            currentEntryId={currentEntryId}
-                          />
-                          
-                          <AbilityCategory
-                            title="Offensive Techniques"
-                            icon={Target}
-                            category={sections.abilityData.offensive}
-                            currentEntryId={currentEntryId}
-                          />
-                          
-                          <AbilityCategory
-                            title="Defensive Techniques"
-                            icon={ShieldCheck}
-                            category={sections.abilityData.defensive}
-                            currentEntryId={currentEntryId}
-                          />
-                          
-                          <AbilityCategory
-                            title="Utilitarian Techniques"
-                            icon={Briefcase}
-                            category={sections.abilityData.utilitarian}
-                            currentEntryId={currentEntryId}
-                          />
-                          
-                          <AbilityCategory
-                            title="Drawbacks"
-                            icon={AlertTriangle}
-                            category={sections.abilityData.drawbacks}
-                            currentEntryId={currentEntryId}
-                          />
+                        <div className="bg-card rounded-xl p-6 border min-w-0 relative">
+                          <div className="space-y-4">
+                            <AbilityCategory
+                              title="Overview"
+                              icon={BookOpen}
+                              category={sections.abilityData.overview}
+                              currentEntryId={currentEntryId}
+                            />
+                            
+                            <AbilityCategory
+                              title="Passives"
+                              icon={Sparkles}
+                              category={sections.abilityData.passives}
+                              currentEntryId={currentEntryId}
+                            />
+                            
+                            <AbilityCategory
+                              title="Offensive Techniques"
+                              icon={Target}
+                              category={sections.abilityData.offensive}
+                              currentEntryId={currentEntryId}
+                            />
+                            
+                            <AbilityCategory
+                              title="Defensive Techniques"
+                              icon={ShieldCheck}
+                              category={sections.abilityData.defensive}
+                              currentEntryId={currentEntryId}
+                            />
+                            
+                            <AbilityCategory
+                              title="Utilitarian Techniques"
+                              icon={Briefcase}
+                              category={sections.abilityData.utilitarian}
+                              currentEntryId={currentEntryId}
+                            />
+                            
+                            <AbilityCategory
+                              title="Drawbacks"
+                              icon={AlertTriangle}
+                              category={sections.abilityData.drawbacks}
+                              currentEntryId={currentEntryId}
+                            />
+                          </div>
                         </div>
                       ) : (
                         <>

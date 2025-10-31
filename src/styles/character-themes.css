@@ -60,10 +60,10 @@ body.character-theme-rice-farmer {
 /* Vortex's Chronipulation Theme */
 .character-theme-vortex-a-steele {
   --background: #000000 !important;
-  --foreground: #eab308 !important;
+  --foreground: #a855f7 !important;
   --card: #1a1a1a !important;
   --card-foreground: #f1f5f9 !important;
-  --primary: #eab308 !important;
+  --primary: #a855f7 !important;
   --primary-foreground: #000000 !important;
   --secondary: #a855f7 !important;
   --secondary-foreground: #f1f5f9 !important;
@@ -73,7 +73,7 @@ body.character-theme-rice-farmer {
   --muted-foreground: #94a3b8 !important;
   --border: #f1f5f9 !important;
   --input: #1a1a1a !important;
-  --ring: #eab308 !important;
+  --ring: #a855f7 !important;
 }
 
 /* Rice Farmer Theme */
@@ -779,7 +779,7 @@ body.dual-theme-right-only {
 
 /* VS divider with clash theming */
 .vs-divider {
-  background: linear-gradient(135deg, #eab308 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -834,7 +834,7 @@ body.dual-theme-right-only {
 }
 
 .character-theme-vortex-left {
-  --primary: var(--left-primary, #eab308);
+  --primary: var(--left-primary, #a855f7);
   --secondary: var(--left-secondary, #a855f7);
   --accent: var(--left-accent, #a855f7);
   background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
@@ -855,10 +855,91 @@ body.dual-theme-right-only {
 }
 
 .character-theme-vortex-right {
-  --primary: var(--right-primary, #eab308);
+  --primary: var(--right-primary, #a855f7);
   --secondary: var(--right-secondary, #a855f7);
   --accent: var(--right-accent, #a855f7);
   background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+}
+
+/* Force purple for Vortex ability section titles and technique titles only - highest specificity */
+body.character-theme-vortex-a-steele .stat-chart-vortex,
+body.character-theme-vortex-a-steele .stat-chart-vortex *,
+body.character-theme-vortex-a-steele [data-ability-section] h3,
+body.character-theme-vortex-a-steele [data-ability-section] h3 span,
+body.character-theme-vortex-a-steele [data-ability-section] h3 svg,
+body.character-theme-vortex-a-steele [data-ability-section] .text-primary,
+/* Only target the title span in technique buttons, not description content */
+body.character-theme-vortex-a-steele [data-ability-technique] button > span,
+body.character-theme-vortex-a-steele [data-ability-technique] button svg {
+  color: #a855f7 !important;
+}
+
+/* Explicitly keep description text white for techniques - highest specificity */
+body.character-theme-vortex-a-steele [data-ability-technique] > div,
+body.character-theme-vortex-a-steele [data-ability-technique] > div *,
+body.character-theme-vortex-a-steele [data-ability-technique] .text-foreground,
+body.character-theme-vortex-a-steele [data-ability-technique] .text-foreground *,
+body.character-theme-vortex-a-steele [data-ability-technique] .text-sm,
+body.character-theme-vortex-a-steele [data-ability-technique] p,
+body.character-theme-vortex-a-steele [data-ability-technique] p *,
+body.character-theme-vortex-a-steele [data-ability-technique] div[class*="text-foreground"],
+body.character-theme-vortex-a-steele [data-ability-technique] div[class*="text-foreground"] * {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Also keep overview description text white */
+body.character-theme-vortex-a-steele [data-ability-section] .text-foreground,
+body.character-theme-vortex-a-steele [data-ability-section] .text-foreground *,
+body.character-theme-vortex-a-steele [data-ability-section] p,
+body.character-theme-vortex-a-steele [data-ability-section] p * {
+  color: hsl(var(--foreground)) !important;
+}
+
+body.character-theme-vortex-a-steele [data-ability-section] svg,
+body.character-theme-vortex-a-steele [data-ability-technique] svg {
+  stroke: #a855f7 !important;
+  fill: none !important;
+}
+
+/* Force purple for stat chart SVG text - remove any strokes causing outlines */
+body.character-theme-vortex-a-steele .stat-chart-vortex svg text {
+  stroke: none !important;
+}
+
+/* ULTIMATE PRIORITY: Force axis label text (stat names like "Offense", "Defense", etc.) to be purple - override EVERYTHING */
+body.character-theme-vortex-a-steele .stat-chart-vortex svg g[key*="label"] > text.text-sm.font-bold,
+body.character-theme-vortex-a-steele .stat-chart-vortex svg g > text.text-sm.font-bold,
+body.character-theme-vortex-a-steele .stat-chart-vortex svg g text.text-sm.font-bold,
+body.character-theme-vortex-a-steele .stat-chart-vortex svg text.text-sm.font-bold,
+body.character-theme-vortex-a-steele .stat-chart-vortex svg g > text.text-sm,
+body.character-theme-vortex-a-steele .stat-chart-vortex svg g text.text-sm,
+body.character-theme-vortex-a-steele .stat-chart-vortex svg text.text-sm {
+  fill: #a855f7 !important;
+  stroke: none !important;
+  stroke-width: 0 !important;
+  color: #a855f7 !important;
+}
+
+/* Override ANY rules that might set axis labels to white - use attribute selector and direct child */
+body.character-theme-vortex-a-steele .stat-chart-vortex svg g > text[class*="text-sm"],
+body.character-theme-vortex-a-steele .stat-chart-vortex svg g text[class*="text-sm"],
+body.character-theme-vortex-a-steele .stat-chart-vortex svg text[class*="text-sm"] {
+  fill: #a855f7 !important;
+  stroke: none !important;
+  stroke-width: 0 !important;
+}
+
+/* Keep grade labels (D, E, A, B) white - they're inside purple circles - must come after axis label rules */
+body.character-theme-vortex-a-steele .stat-chart-vortex svg text.text-lg.font-bold {
+  fill: #ffffff !important;
+  stroke: none !important;
+  color: #ffffff !important;
+}
+
+body.character-theme-vortex-a-steele .stat-chart-vortex svg text.text-lg {
+  fill: #ffffff !important;
+  stroke: none !important;
+  color: #ffffff !important;
 }
 
 /* Reduced Motion Support */

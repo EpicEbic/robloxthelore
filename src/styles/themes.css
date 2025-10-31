@@ -149,7 +149,175 @@
   }
 
   .stat-chart-vortex .stat-chart-title {
-    color: hsl(var(--foreground));
+    color: #a855f7 !important;
+  }
+
+  /* Pulse animation for Chronipulation combat styles */
+  @keyframes pulse-white-purple {
+    0%, 100% {
+      color: #ffffff;
+      fill: #ffffff;
+      stroke: #ffffff;
+    }
+    50% {
+      color: #a855f7;
+      fill: #a855f7;
+      stroke: #a855f7;
+    }
+  }
+
+  /* Exclude question mark icon from pulse animation FIRST - highest specificity */
+  .stat-chart-pulse-purple button.no-pulse,
+  .stat-chart-pulse-purple button.no-pulse *,
+  .stat-chart-pulse-purple button.no-pulse svg,
+  .stat-chart-pulse-purple button.no-pulse svg path,
+  .stat-chart-pulse-purple button.no-pulse svg circle,
+  .stat-chart-pulse-purple .no-pulse,
+  .stat-chart-pulse-purple .no-pulse *,
+  .stat-chart-pulse-purple .no-pulse svg,
+  .stat-chart-pulse-purple .no-pulse svg path,
+  .stat-chart-pulse-purple .no-pulse svg circle,
+  .stat-chart-pulse-purple [aria-label*="Physical statistics"] button,
+  .stat-chart-pulse-purple [aria-label*="Physical statistics"] button *,
+  .stat-chart-pulse-purple [aria-label*="Physical statistics"] button svg,
+  .stat-chart-pulse-purple [aria-label*="Physical statistics"] button svg path,
+  .stat-chart-pulse-purple [aria-label*="Physical statistics"] button svg circle {
+    animation: none !important;
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    stroke-width: inherit !important;
+    fill: none !important;
+  }
+  
+  /* Also ensure no inheritance from parent containers */
+  .stat-chart-pulse-purple .stat-chart-container button.no-pulse,
+  .stat-chart-pulse-purple .stat-chart-container button.no-pulse *,
+  .stat-chart-pulse-purple .stat-chart-container button.no-pulse svg,
+  .stat-chart-pulse-purple .stat-chart-container button.no-pulse svg *,
+  .stat-chart-pulse-purple .stat-chart-container button.no-pulse svg path,
+  .stat-chart-pulse-purple .stat-chart-container button.no-pulse svg circle,
+  .stat-chart-pulse-purple .pulse-container button.no-pulse,
+  .stat-chart-pulse-purple .pulse-container button.no-pulse *,
+  .stat-chart-pulse-purple .pulse-container button.no-pulse svg,
+  .stat-chart-pulse-purple .pulse-container button.no-pulse svg *,
+  .stat-chart-pulse-purple .pulse-container button.no-pulse svg path,
+  .stat-chart-pulse-purple .pulse-container button.no-pulse svg circle {
+    animation: none !important;
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    fill: none !important;
+  }
+
+  /* Apply pulse animation to physical stats chart when viewing Chronipulation combat styles */
+  .stat-chart-pulse-purple .stat-chart-title:not(.no-pulse),
+  .stat-chart-pulse-purple .physical-stats-title:not(.no-pulse),
+  .stat-chart-pulse-purple svg text:not(.no-pulse),
+  .stat-chart-pulse-purple svg text.text-sm:not(.no-pulse),
+  .stat-chart-pulse-purple svg text.text-lg:not(.no-pulse),
+  .stat-chart-pulse-purple svg .stat-radar-point:not(.no-pulse),
+  .stat-chart-pulse-purple svg circle:not(.no-pulse),
+  .stat-chart-pulse-purple .stat-chart-legend:not(.no-pulse),
+  .stat-chart-pulse-purple .stat-chart-legend span:not(.no-pulse) {
+    animation: pulse-white-purple 3s ease-in-out infinite;
+  }
+
+  /* Grid should NOT pulse - keep it white and semi-transparent */
+  .stat-chart-pulse-purple svg polygon.stat-radar-grid,
+  .stat-chart-pulse-purple svg line.stat-radar-grid {
+    opacity: 0.2 !important;
+    stroke: #ffffff !important;
+    color: #ffffff !important;
+    /* No animation on grid */
+  }
+
+  /* Data area - filled path should have 40% fill opacity and full stroke opacity */
+  .stat-chart-pulse-purple svg path.stat-radar-area {
+    animation: pulse-white-purple 3s ease-in-out infinite;
+  }
+
+  /* Filled data area path (the one with fill="currentColor") - 40% fill opacity */
+  .stat-chart-pulse-purple svg path.stat-radar-area[fill="currentColor"] {
+    fill: currentColor !important;
+    fill-opacity: 0.4 !important;
+    opacity: 1 !important; /* Keep element opacity at 1, use fill-opacity for transparency */
+  }
+
+  /* Stroke data area path (the one with fill="none") - full opacity stroke */
+  .stat-chart-pulse-purple svg path.stat-radar-area[fill="none"] {
+    stroke: currentColor !important;
+    stroke-opacity: 1 !important;
+    fill: none !important;
+    opacity: 1 !important;
+  }
+
+  .stat-chart-pulse-purple svg text {
+    fill: currentColor;
+  }
+
+  .stat-chart-pulse-purple svg polygon,
+  .stat-chart-pulse-purple svg line {
+    stroke: currentColor;
+  }
+
+  .stat-chart-pulse-purple svg path.stat-radar-area {
+    fill: currentColor;
+    stroke: currentColor;
+  }
+
+  .stat-chart-pulse-purple svg circle.stat-radar-point {
+    fill: currentColor;
+  }
+
+  /* Radar chart elements for Vortex */
+  .stat-chart-vortex svg {
+    color: #a855f7 !important;
+  }
+
+  /* SVG text elements for Vortex - but only axis labels (Offense, Defense, etc.), not grade labels */
+  .stat-chart-vortex svg g > text.text-sm,
+  .stat-chart-vortex svg text.text-sm {
+    fill: #a855f7 !important;
+    color: #a855f7 !important;
+    stroke: none !important;
+  }
+  
+  /* Keep grade labels white */
+  .stat-chart-vortex svg text.text-lg {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+  }
+  
+  /* Allow description text to remain readable */
+  .stat-chart-vortex .text-foreground,
+  .stat-chart-vortex .text-muted-foreground {
+    color: inherit !important;
+  }
+
+  .stat-chart-vortex .stat-radar-grid,
+  .stat-chart-vortex .stat-radar-area,
+  .stat-chart-vortex .stat-radar-point {
+    color: #a855f7 !important;
+    stroke: #a855f7 !important;
+  }
+
+  /* Legend text for Vortex ability stats */
+  .stat-chart-vortex .stat-chart-legend,
+  .stat-chart-vortex .stat-chart-legend span,
+  .stat-chart-vortex .grid,
+  .stat-chart-vortex .grid span {
+    color: #a855f7 !important;
+  }
+
+  /* Force purple for all text in Vortex stat chart */
+  .stat-chart-vortex * {
+    color: #a855f7 !important;
+  }
+
+  /* But allow background and border colors to remain */
+  .stat-chart-vortex .bg-card,
+  .stat-chart-vortex .border,
+  .stat-chart-vortex .text-foreground {
+    color: inherit !important;
   }
 
   /* Caesar-specific stat chart styles */

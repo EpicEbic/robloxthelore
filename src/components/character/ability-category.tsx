@@ -23,11 +23,19 @@ export function AbilityCategory({
 
   if (!hasTechniques && !hasText) return null;
 
+  const isVortex = currentEntryId === "vortex-a-steele";
+  
   return (
-    <div className="bg-card rounded-xl p-4 border min-w-0">
-      <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-        <Icon className="h-5 w-5 text-primary flex-shrink-0" />
-        {title}
+    <div className="bg-card rounded-xl p-4 border min-w-0" data-ability-section={isVortex ? "true" : undefined}>
+      <h3 
+        className="text-lg font-semibold mb-3 flex items-center gap-2"
+        style={isVortex ? { color: '#a855f7' } : {}}
+      >
+        <Icon 
+          className="h-5 w-5 text-primary flex-shrink-0" 
+          style={isVortex ? { color: '#a855f7', stroke: '#a855f7', fill: 'none' } : {}}
+        />
+        <span style={isVortex ? { color: '#a855f7' } : {}}>{title}</span>
       </h3>
       
       {hasTechniques && (

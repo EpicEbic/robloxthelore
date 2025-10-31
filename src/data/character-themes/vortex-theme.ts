@@ -4,7 +4,7 @@ export const vortexTheme: CharacterTheme = {
   id: 'vortex-a-steele',
   name: 'Chronipulation',
   colors: {
-    primary: '#eab308',      // Yellow
+    primary: '#a855f7',      // Purple
     secondary: '#a855f7',    // Purple
     accent: '#a855f7',       // Purple
     background: '#000000',   // Pure black
@@ -14,7 +14,7 @@ export const vortexTheme: CharacterTheme = {
   gradients: {
     background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)',
     card: 'linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%)',
-    accent: 'linear-gradient(45deg, #eab308 0%, #a855f7 100%)',
+    accent: 'linear-gradient(45deg, #a855f7 0%, #9333ea 100%)',
   },
   particles: {
     type: 'speed',
