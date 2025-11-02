@@ -23,7 +23,7 @@ interface CombatStats {
   subcategories?: {
     // Strength subcategories
     penetration?: StatGrade;
-    strength?: StatGrade;  // Base strength subcategory
+    power?: StatGrade;  // Base strength subcategory (renamed from 'strength' to avoid confusion with main category)
     intensity?: StatGrade;
     // Agility subcategories
     swiftness?: StatGrade;
@@ -264,7 +264,7 @@ export function createCombatStats(
   intelligence: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
   subcategories?: {
     penetration?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    strength?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    power?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
     intensity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
     swiftness?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
     endurance?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";

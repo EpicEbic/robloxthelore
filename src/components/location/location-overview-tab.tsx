@@ -12,7 +12,7 @@ export function LocationOverviewTab({ overview, currentEntryId }: LocationOvervi
     <Card>
       <CardContent className="prose dark:prose-invert max-w-none pt-6">
         {overview.map((paragraph, index) => (
-          <p key={index} className="mb-4 leading-relaxed text-foreground force-text-wrap">
+          <p key={index} className="mb-4 leading-relaxed text-base text-foreground force-text-wrap">
             <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
           </p>
         ))}

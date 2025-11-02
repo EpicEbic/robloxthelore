@@ -206,25 +206,25 @@ export function CharacterContentTabs({
   return (
     <div className="min-h-0 flex flex-col">
       <Tabs defaultValue="general" className="w-full h-full flex flex-col" onValueChange={onTabChange}>
-        <TabsList className="mb-4 w-full flex flex-wrap justify-center lg:w-auto lg:mx-auto gap-2 p-2 h-auto rounded-xl">
-          <TabsTrigger value="general" className="flex items-center gap-2 text-xs sm:text-sm px-3 py-2 sm:py-3 rounded-xl whitespace-nowrap">
-            <User className="h-4 w-4 flex-shrink-0" />
+        <TabsList className="mb-6 w-full flex flex-wrap justify-center lg:w-auto lg:mx-auto gap-3 p-3 h-auto rounded-xl">
+          <TabsTrigger value="general" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
+            <User className="h-5 w-5 flex-shrink-0" />
             <span>Overview</span>
           </TabsTrigger>
-          <TabsTrigger value="timeline" className="flex items-center gap-2 text-xs sm:text-sm px-3 py-2 sm:py-3 rounded-xl whitespace-nowrap">
-            <ArrowRightFromLine className="h-4 w-4 flex-shrink-0" />
+          <TabsTrigger value="timeline" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
+            <ArrowRightFromLine className="h-5 w-5 flex-shrink-0" />
             <span>Timeline</span>
           </TabsTrigger>
-          <TabsTrigger value="relationships" className="flex items-center gap-2 text-xs sm:text-sm px-3 py-2 sm:py-3 rounded-xl whitespace-nowrap">
-            <Heart className="h-4 w-4 flex-shrink-0" />
+          <TabsTrigger value="relationships" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
+            <Heart className="h-5 w-5 flex-shrink-0" />
             <span>Relationships</span>
           </TabsTrigger>
-          <TabsTrigger value="combat" className="flex items-center gap-2 text-xs sm:text-sm px-3 py-2 sm:py-3 rounded-xl whitespace-nowrap">
-            <Swords className="h-4 w-4 flex-shrink-0" />
+          <TabsTrigger value="combat" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
+            <Swords className="h-5 w-5 flex-shrink-0" />
             <span>Combat</span>
           </TabsTrigger>
-          <TabsTrigger value="trivia" className="flex items-center gap-2 text-xs sm:text-sm px-3 py-2 sm:py-3 rounded-xl whitespace-nowrap">
-            <ScrollText className="h-4 w-4 flex-shrink-0" />
+          <TabsTrigger value="trivia" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
+            <ScrollText className="h-5 w-5 flex-shrink-0" />
             <span>Trivia</span>
           </TabsTrigger>
         </TabsList>
@@ -233,10 +233,10 @@ export function CharacterContentTabs({
           <ScrollArea className="h-full w-full">
             <div className="pr-4">
               <TabsContent value="general" className="space-y-4 mt-0">
-                <div className="bg-card rounded-xl p-6 border min-w-0 min-h-[120px] relative">
+                <div className="bg-card rounded-xl p-8 border min-w-0 min-h-[120px] relative">
                   <div className="flex items-start justify-between mb-4 gap-4">
-                    <h2 className="text-xl font-semibold flex items-center gap-2 flex-shrink-0">
-                      <Shirt className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                    <h2 className="text-2xl font-semibold flex items-center gap-2 flex-shrink-0">
+                      <Shirt className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                       Appearance
                     </h2>
                     <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
@@ -247,7 +247,7 @@ export function CharacterContentTabs({
                       />
                     </div>
                   </div>
-                  <div className="text-foreground/90 min-w-0">
+                  <div className="text-foreground/90 min-w-0 text-base">
                     {getCurrentAppearanceDescription().map((paragraph, idx) => (
                       <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                         <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -256,10 +256,10 @@ export function CharacterContentTabs({
                   </div>
                 </div>
 
-                <div className="bg-card rounded-xl p-4 border min-w-0">
+                <div className="bg-card rounded-xl p-6 border min-w-0">
                   <div className="flex items-center justify-between mb-3">
-                    <h2 className="text-xl font-semibold flex items-center gap-2">
-                      <Drama className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                    <h2 className="text-2xl font-semibold flex items-center gap-2">
+                      <Drama className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                       Personality
                     </h2>
                     {personalities.length > 0 && onPersonalityChange && (
@@ -270,7 +270,7 @@ export function CharacterContentTabs({
                       />
                     )}
                   </div>
-                  <div className="text-foreground/90 min-w-0">
+                  <div className="text-foreground/90 min-w-0 text-base">
                     {getCurrentPersonalityDescription().map((paragraph, idx) => (
                       <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                         <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -287,7 +287,6 @@ export function CharacterContentTabs({
                     <div className="flex gap-2">
                       <Button
                         variant={timelineView === 'lifestyle' ? 'default' : 'outline'}
-                        size="sm"
                         onClick={() => {
                           if (timelineView === 'lifestyle') return;
                           setIsTimelineFading(true);
@@ -299,14 +298,13 @@ export function CharacterContentTabs({
                             setIsTimelineFading(false);
                           }, 180);
                         }}
-                        className="flex items-center gap-2 rounded-xl"
+                        className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
                       >
-                        <Home className="h-4 w-4" />
+                        <Home className="h-5 w-5" />
                         Lifestyle
                       </Button>
                       <Button
                         variant={timelineView === 'history' ? 'default' : 'outline'}
-                        size="sm"
                         onClick={() => {
                           if (timelineView === 'history') return;
                           setIsTimelineFading(true);
@@ -318,9 +316,9 @@ export function CharacterContentTabs({
                             setIsTimelineFading(false);
                           }, 180);
                         }}
-                        className="flex items-center gap-2 rounded-xl"
+                        className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
                       >
-                        <Clock className="h-4 w-4" />
+                        <Clock className="h-5 w-5" />
                         History
                       </Button>
                     </div>
@@ -330,10 +328,10 @@ export function CharacterContentTabs({
                 {/* Content with fade transition */}
                 <div style={{ opacity: isTimelineFading ? 0 : 1, transition: 'opacity 200ms ease' }}>
                   {displayTimelineView === 'lifestyle' && (
-                    <div className="bg-card rounded-xl p-4 border min-w-0">
+                    <div className="bg-card rounded-xl p-6 border min-w-0">
                       <div className="flex justify-between items-center mb-3">
-                        <h2 className="text-xl font-semibold flex items-center gap-2">
-                          <Home className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                        <h2 className="text-2xl font-semibold flex items-center gap-2">
+                          <Home className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                           Lifestyle
                         </h2>
                         {lifestyles.length > 1 && onLifestyleChange && (
@@ -344,7 +342,7 @@ export function CharacterContentTabs({
                           />
                         )}
                       </div>
-                      <div className="text-foreground/90 min-w-0">
+                      <div className="text-foreground/90 min-w-0 text-base">
                         {getCurrentLifestyleDescription().map((paragraph, idx) => (
                           <p key={idx} className="mb-4 text-left break-words whitespace-normal overflow-wrap-anywhere">
                             <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -355,10 +353,10 @@ export function CharacterContentTabs({
                   )}
 
                   {sections.history && Array.isArray(sections.history) && sections.history.length > 0 && displayTimelineView === 'history' && (
-                    <div className="bg-card rounded-xl p-4 border min-w-0">
+                    <div className="bg-card rounded-xl p-6 border min-w-0">
                       <div className="flex items-center justify-between mb-3">
-                        <h2 className="text-xl font-semibold flex items-center gap-2">
-                          <Clock className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                        <h2 className="text-2xl font-semibold flex items-center gap-2">
+                          <Clock className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                           History
                         </h2>
                         {histories.length > 1 && onHistoryChange && (
@@ -369,7 +367,7 @@ export function CharacterContentTabs({
                           />
                         )}
                       </div>
-                      <div className="text-foreground/90 min-w-0">
+                      <div className="text-foreground/90 min-w-0 text-base">
                         {getCurrentHistoryDescription().map((paragraph, idx) => (
                           <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                             <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -385,8 +383,8 @@ export function CharacterContentTabs({
                 {sections.relationshipsData && currentEntryId ? (
                   <div className="space-y-4">
                     <div className="bg-card rounded-xl p-6 border min-w-0">
-                      <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                        <Heart className="h-5 w-5 text-primary-foreground flex-shrink-0" />
+                      <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                        <Heart className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                         Relationships
                       </h2>
                       <RelationshipSelector
@@ -408,12 +406,12 @@ export function CharacterContentTabs({
                     )}
                   </div>
                 ) : (
-                  <div className="bg-card rounded-xl p-4 border min-w-0">
-                    <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                      <Heart className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                  <div className="bg-card rounded-xl p-6 border min-w-0">
+                    <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
+                      <Heart className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                       Relationships
                     </h2>
-                    <div className="text-foreground/90 min-w-0">
+                    <div className="text-foreground/90 min-w-0 text-base">
                       {sections.relationships?.map((paragraph, idx) => (
                         <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                           <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -430,7 +428,6 @@ export function CharacterContentTabs({
                   <div className="flex gap-2">
                     <Button
                       variant={combatView === 'physical' ? 'default' : 'outline'}
-                      size="sm"
                       onClick={() => {
                         if (combatView === 'physical') return;
                         setIsCombatFading(true);
@@ -442,15 +439,14 @@ export function CharacterContentTabs({
                           setIsCombatFading(false);
                         }, 180);
                       }}
-                      className="flex items-center gap-2 rounded-xl"
+                      className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
                     >
-                      <HandFist className="h-4 w-4" />
+                      <HandFist className="h-5 w-5" />
                       Physical
                     </Button>
                     {hasAbilities && (
                       <Button
                         variant={combatView === 'ability' ? 'default' : 'outline'}
-                        size="sm"
                         onClick={() => {
                           if (combatView === 'ability') return;
                           setIsCombatFading(true);
@@ -462,9 +458,9 @@ export function CharacterContentTabs({
                             setIsCombatFading(false);
                           }, 180);
                         }}
-                        className="flex items-center gap-2 rounded-xl"
+                        className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
                       >
-                        <Zap className="h-4 w-4" />
+                        <Zap className="h-5 w-5" />
                         Ability
                       </Button>
                     )}
@@ -495,8 +491,8 @@ export function CharacterContentTabs({
                           return (
                             <div className="bg-card rounded-xl p-6 border min-w-0 relative">
                               <div className="flex items-center justify-between mb-4 gap-4">
-                                <h2 className="text-xl font-semibold flex items-center gap-2">
-                                  <HandFist className="h-5 w-5 text-primary-foreground flex-shrink-0" />
+                                <h2 className="text-2xl font-semibold flex items-center gap-2">
+                                  <HandFist className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                                   {combatStyles.find(s => s.id === currentCombatStyle)?.label || "Combat Style"}
                                 </h2>
                               </div>
@@ -552,8 +548,8 @@ export function CharacterContentTabs({
                         return (
                           <div className="bg-card rounded-xl p-6 border min-w-0 relative">
                             <div className="flex items-start justify-between mb-4 gap-4">
-                              <h2 className="text-xl font-semibold flex items-center gap-2 flex-shrink-0">
-                                <HandFist className="h-5 w-5 text-primary-foreground flex-shrink-0" />
+                              <h2 className="text-2xl font-semibold flex items-center gap-2 flex-shrink-0">
+                                <HandFist className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                                 Combat Style
                               </h2>
                               <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
@@ -564,7 +560,7 @@ export function CharacterContentTabs({
                                 />
                               </div>
                             </div>
-                            <div className="text-foreground/90 min-w-0">
+                            <div className="text-foreground/90 min-w-0 text-base">
                               {getCurrentCombatStyleDescription().map((paragraph, idx) => (
                                 <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                                   <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -639,12 +635,12 @@ export function CharacterContentTabs({
                         <>
                           {/* Legacy Abilities Section - fallback for existing data */}
                           {sections.abilities && sections.abilities.length > 0 && (
-                            <div className="bg-card rounded-xl p-4 border min-w-0">
-                              <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                                <Zap className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            <div className="bg-card rounded-xl p-6 border min-w-0">
+                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
+                                <Zap className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                                 Ability Details
                               </h2>
-                              <div className="text-foreground/90 min-w-0">
+                              <div className="text-foreground/90 min-w-0 text-base">
                                 {sections.abilities?.map((paragraph, idx) => (
                                   <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -655,12 +651,12 @@ export function CharacterContentTabs({
                           )}
                           
                           {sections.abilityDetails && sections.abilityDetails.length > 0 && (
-                            <div className="bg-card rounded-xl p-4 border min-w-0">
-                              <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                                <ScrollText className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            <div className="bg-card rounded-xl p-6 border min-w-0">
+                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
+                                <ScrollText className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                                 Ability Details
                               </h2>
-                              <div className="text-foreground/90 min-w-0">
+                              <div className="text-foreground/90 min-w-0 text-base">
                                 {sections.abilityDetails?.map((paragraph, idx) => (
                                   <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -671,12 +667,12 @@ export function CharacterContentTabs({
                           )}
                           
                           {sections.offensiveCapabilities && sections.offensiveCapabilities.length > 0 && (
-                            <div className="bg-card rounded-xl p-4 border min-w-0">
-                              <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                                <Sword className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            <div className="bg-card rounded-xl p-6 border min-w-0">
+                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
+                                <Sword className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                                 Offensive Capabilities
                               </h2>
-                              <div className="text-foreground/90 min-w-0">
+                              <div className="text-foreground/90 min-w-0 text-base">
                                 {sections.offensiveCapabilities?.map((paragraph, idx) => (
                                   <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -687,12 +683,12 @@ export function CharacterContentTabs({
                           )}
                           
                           {sections.defensiveCapabilities && sections.defensiveCapabilities.length > 0 && (
-                            <div className="bg-card rounded-xl p-4 border min-w-0">
-                              <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                                <Shield className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            <div className="bg-card rounded-xl p-6 border min-w-0">
+                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
+                                <Shield className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                                 Defensive Capabilities
                               </h2>
-                              <div className="text-foreground/90 min-w-0">
+                              <div className="text-foreground/90 min-w-0 text-base">
                                 {sections.defensiveCapabilities?.map((paragraph, idx) => (
                                   <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -703,12 +699,12 @@ export function CharacterContentTabs({
                           )}
                           
                           {sections.utilitarianCapabilities && sections.utilitarianCapabilities.length > 0 && (
-                            <div className="bg-card rounded-xl p-4 border min-w-0">
-                              <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                                <Wrench className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            <div className="bg-card rounded-xl p-6 border min-w-0">
+                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
+                                <Wrench className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                                 Utilitarian Capabilities
                               </h2>
-                              <div className="text-foreground/90 min-w-0">
+                              <div className="text-foreground/90 min-w-0 text-base">
                                 {sections.utilitarianCapabilities?.map((paragraph, idx) => (
                                   <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -719,12 +715,12 @@ export function CharacterContentTabs({
                           )}
                           
                           {sections.drawbacks && sections.drawbacks.length > 0 && (
-                            <div className="bg-card rounded-xl p-4 border min-w-0">
-                              <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                                <AlertTriangle className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                            <div className="bg-card rounded-xl p-6 border min-w-0">
+                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
+                                <AlertTriangle className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                                 Drawbacks
                               </h2>
-                              <div className="text-foreground/90 min-w-0">
+                              <div className="text-foreground/90 min-w-0 text-base">
                                 {sections.drawbacks?.map((paragraph, idx) => (
                                   <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -741,9 +737,9 @@ export function CharacterContentTabs({
               </TabsContent>
               
               <TabsContent value="trivia" className="mt-0">
-                <div className="bg-card rounded-xl p-4 border min-w-0">
-                  <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                    <ScrollText className="h-5 w-5 text-primary-foreground flex-shrink-0 " />
+                <div className="bg-card rounded-xl p-6 border min-w-0">
+                  <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
+                    <ScrollText className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
                     Trivia
                   </h2>
                   <ul className="list-disc space-y-3 ml-5 text-foreground/90 min-w-0">

@@ -25,6 +25,60 @@
   p {
     @apply text-foreground;
   }
+  
+  /* Prevent unwanted text selection on interactive UI elements */
+  button,
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"],
+  [data-radix-collection-item],
+  .cursor-pointer,
+  select,
+  /* Badge component */
+  [class*="badge"]:not([class*="prose"]),
+  /* Tab triggers */
+  [data-state="active"],
+  [data-state="inactive"],
+  /* UI components that shouldn't be selectable */
+  [class*="TabsTrigger"],
+  [class*="TabTrigger"],
+  /* Prevent selection on label elements that are part of UI */
+  label:not([for]) {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: default;
+  }
+  
+  /* But buttons should have pointer cursor */
+  button,
+  [role="button"],
+  [role="tab"] {
+    cursor: pointer;
+  }
+  
+  /* Input fields and textareas should allow text selection */
+  input,
+  textarea {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+  }
+  
+  /* Allow text selection in actual content areas */
+  p,
+  li,
+  .prose,
+  .prose *,
+  [class*="text-"]:not(button):not([role="button"]):not([role="tab"]) {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+  }
 }
 
 @layer utilities {

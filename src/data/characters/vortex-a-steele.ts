@@ -32,7 +32,35 @@ export const vortexASteele: WikiEntry = {
       description: [
         "Vortex primarily relies on his heightened agility, quick thinking, and incredible precision in combat. He is a master of body language, and can often predict the movements of his targets and react before they even begin to attack. Though he lacks natural strength or integrity, his ability to effortlessly avoid the attacks of combatants easily makes up for this."
       ],
-      combatStats: createCombatStats("D", "D", "B", "B", "A"),
+      combatStats: createCombatStats(
+        "D", // Strength: Main category average
+        "D", // Durability: Main category average
+        "B", // Agility: Main category average
+        "B", // Precision: Main category average
+        "A", // Intelligence: Main category average
+        {
+          // Strength subcategories
+          penetration: "E",
+          power: "D",
+          intensity: "B",
+          // Agility subcategories
+          swiftness: "D",
+          endurance: "B",
+          flexibility: "C",
+          // Precision subcategories
+          accuracy: "B",
+          reactivity: "C",
+          dexterity: "B",
+          // Intelligence subcategories
+          tactility: "A",
+          wisdom: "D",
+          stability: "C",
+          // Durability subcategories
+          vitality: "C",
+          toughness: "D",
+          resistance: "E"
+        }
+      ),
       images: [
         {
           url: "/lovable-uploads/f387ffd7-944e-4544-9123-4a4656cfc89c.png",
@@ -46,7 +74,35 @@ export const vortexASteele: WikiEntry = {
       description: [
         "Vortex is armed with a high-caliber magnetic railgun created by Ren Bytera, which has been compacted down into the size and shape of a large handheld revolver. Through the use of electromagnets, the Mag-num can fire almost anything made of magnetized metal at extremely high velocities, so long as it can fit inside of the barrel-- though it does come with specialized ammunition designed for use with the gun."
       ],
-      combatStats: createCombatStats("D", "D", "D", "A", "A"),
+      combatStats: createCombatStats(
+        "D", // Strength: Main category average
+        "D", // Durability: Main category average
+        "D", // Agility: Main category average
+        "A", // Precision: Main category average
+        "A", // Intelligence: Main category average
+        {
+          // Strength subcategories
+          penetration: "C",
+          power: "D",
+          intensity: "A",
+          // Agility subcategories
+          swiftness: "D",
+          endurance: "B",
+          flexibility: "C",
+          // Precision subcategories
+          accuracy: "A",
+          reactivity: "C",
+          dexterity: "B",
+          // Intelligence subcategories
+          tactility: "A",
+          wisdom: "D",
+          stability: "C",
+          // Durability subcategories
+          vitality: "C",
+          toughness: "D",
+          resistance: "E"
+        }
+      ),
       images: [
         {
           url: "/lovable-uploads/9289b6a9-41e2-4023-9996-72493748bd7e.png",
@@ -64,7 +120,35 @@ export const vortexASteele: WikiEntry = {
       description: [
         "Vortex can channel the raw energy produced by Chronipulation and imbue it into his Mag-num. This temporarily overclocks his weapon, transforming it into a devastating hand-cannon with new (and enhanced) effects that give it an extra edge in dire combat situations that deem it necessary."
       ],
-      combatStats: createCombatStats("C", "D", "D", "S", "A"),
+      combatStats: createCombatStats(
+        "C", // Strength: Main category average
+        "D", // Durability: Main category average
+        "D", // Agility: Main category average
+        "S", // Precision: Main category average
+        "A", // Intelligence: Main category average
+        {
+          // Strength subcategories
+          penetration: "A",
+          power: "D",
+          intensity: "S",
+          // Agility subcategories
+          swiftness: "D",
+          endurance: "B",
+          flexibility: "C",
+          // Precision subcategories
+          accuracy: "A",
+          reactivity: "C",
+          dexterity: "B",
+          // Intelligence subcategories
+          tactility: "A",
+          wisdom: "D",
+          stability: "C",
+          // Durability subcategories
+          vitality: "C",
+          toughness: "D",
+          resistance: "E"
+        }
+      ),
       images: [
         {
           url: "/lovable-uploads/c8949ba7-0df2-4911-bf84-9f38cdf51816.png",
@@ -83,7 +167,35 @@ export const vortexASteele: WikiEntry = {
         "The Amplification Gauntlet (informally known as the Amp Gauntlet) is a large, right-handed gauntlet which provides a significant boost to Vortex's physical strength, allowing him to achieve feats he couldn't achieve without it. With it, he can destroy most armor and reinforced structures through effort and dedication.",
         "It is an effective tool for tougher opponents or materials that require raw strength to bypass, though it is extremely heavy and greatly inhibits Vortex's speed while worn."
       ],
-      combatStats: createCombatStats("C", "D", "E", "D", "A"),
+      combatStats: createCombatStats(
+        "C", // Strength: Main category average
+        "C", // Durability: Main category average
+        "D", // Agility: Main category average
+        "D", // Precision: Main category average
+        "A", // Intelligence: Main category average
+        {
+          // Strength subcategories
+          penetration: "C",
+          power: "B",
+          intensity: "D",
+          // Agility subcategories
+          swiftness: "D",
+          endurance: "B",
+          flexibility: "E",
+          // Precision subcategories
+          accuracy: "E",
+          reactivity: "E",
+          dexterity: "D",
+          // Intelligence subcategories
+          tactility: "A",
+          wisdom: "D",
+          stability: "C",
+          // Durability subcategories
+          vitality: "C",
+          toughness: "C",
+          resistance: "E"
+        }
+      ),
       images: [
         {
           url: "/lovable-uploads/a5823d3b-ab54-46b3-8840-30841d9a26a1.png",
@@ -101,7 +213,35 @@ export const vortexASteele: WikiEntry = {
       description: [
         "By pouring vast quantities of the energy produced by Chronipulation into the Amp Gauntlet, Vortex can imbue the gauntlet with his energy, drastically improving the strength and speed behind it, alongside unlocking new techniques."
       ],
-      combatStats: createCombatStats("B", "D", "D", "D", "A"),
+      combatStats: createCombatStats(
+        "B", // Strength: Main category average
+        "C", // Durability: Main category average
+        "C", // Agility: Main category average
+        "D", // Precision: Main category average
+        "A", // Intelligence: Main category average
+        {
+          // Strength subcategories
+          penetration: "B",
+          power: "A",
+          intensity: "C",
+          // Agility subcategories
+          swiftness: "C",
+          endurance: "B",
+          flexibility: "D",
+          // Precision subcategories
+          accuracy: "D",
+          reactivity: "D",
+          dexterity: "C",
+          // Intelligence subcategories
+          tactility: "A",
+          wisdom: "D",
+          stability: "C",
+          // Durability subcategories
+          vitality: "C",
+          toughness: "C",
+          resistance: "E"
+        }
+      ),
       images: [
         {
           url: "/lovable-uploads/8fe6a2a9-d1d8-4851-8279-6fffdb700310.png",
@@ -136,25 +276,25 @@ export const vortexASteele: WikiEntry = {
           "A", // Intelligence: Main category average
           {
             // Strength subcategories
-            penetration: "D",  // Lacks natural strength, below average
-            strength: "E",     // Below average physical strength
-            intensity: "E",    // Low power behind attacks
+            penetration: "E",  // Very low penetration
+            power: "D",        // Weak physical strength
+            intensity: "B",    // Can maintain good pressure in combat
             // Agility subcategories
-            swiftness: "A",    // Extreme speed through Chronipulation
-            endurance: "C",    // Can maintain high speeds but stamina intensive
-            flexibility: "B",  // Flexible and agile, trained extensively
+            swiftness: "D",    // Moderate speed
+            endurance: "B",    // Good stamina
+            flexibility: "C",  // Moderate flexibility
             // Precision subcategories
-            accuracy: "A",    // Master marksman, incredible precision
-            reactivity: "A",  // Master of body language, can predict movements
-            dexterity: "B",   // Excellent hand-eye coordination
+            accuracy: "B",    // Good accuracy
+            reactivity: "C",  // Moderate reflexes
+            dexterity: "B",   // Good motor control
             // Intelligence subcategories
-            tactility: "A",   // Master of reading body language, quick-thinking
-            wisdom: "A",      // Elite hunter, very high tactical thinking
-            stability: "B",   // Generally maintains composure (can dissociate from time manipulation)
+            tactility: "A",   // Excellent tactical thinking
+            wisdom: "D",      // Below average general intelligence
+            stability: "C",  // Moderate mental stability
             // Durability subcategories
-            vitality: "D",    // Below average, not particularly resilient
-            toughness: "D",   // Lacks natural integrity
-            resistance: "E"   // Low durability, relies on speed to avoid damage
+            vitality: "C",    // Moderate health
+            toughness: "D",   // Below average toughness
+            resistance: "E"   // Low environmental resistance
           }
         ),
         combatStyleData: {
@@ -177,7 +317,35 @@ export const vortexASteele: WikiEntry = {
         description: [
           "Vortex is armed with a high-caliber magnetic railgun created by Ren Bytera, which has been compacted down into the size and shape of a large handheld revolver. Through the use of electromagnets, the Mag-num can fire almost anything made of magnetized metal at extremely high velocities, so long as it can fit inside of the barrel-- though it does come with specialized ammunition designed for use with the gun."
         ],
-        combatStats: createCombatStats("D", "D", "D", "A", "A"),
+        combatStats: createCombatStats(
+          "D", // Strength: Main category average
+          "D", // Durability: Main category average
+          "D", // Agility: Main category average
+          "A", // Precision: Main category average
+          "A", // Intelligence: Main category average
+          {
+            // Strength subcategories
+            penetration: "C",  // Moderate penetration with weapon
+            power: "D",        // Weak physical strength
+            intensity: "A",    // High pressure in combat
+            // Agility subcategories
+            swiftness: "D",    // Moderate speed
+            endurance: "B",    // Good stamina
+            flexibility: "C",  // Moderate flexibility
+            // Precision subcategories
+            accuracy: "A",    // Excellent accuracy with weapon
+            reactivity: "C",  // Moderate reflexes
+            dexterity: "B",   // Good motor control
+            // Intelligence subcategories
+            tactility: "A",   // Excellent tactical thinking
+            wisdom: "D",      // Below average general intelligence
+            stability: "C",  // Moderate mental stability
+            // Durability subcategories
+            vitality: "C",    // Moderate health
+            toughness: "D",   // Below average toughness
+            resistance: "E"   // Low environmental resistance
+          }
+        ),
         combatStyleData: {
           overview: {
             text: [
@@ -279,7 +447,35 @@ export const vortexASteele: WikiEntry = {
       description: [
         "Vortex can channel the raw energy produced by Chronipulation and imbue it into his Mag-num. This temporarily overclocks his weapon, transforming it into a devastating hand-cannon with new (and enhanced) effects that give it an extra edge in dire combat situations that deem it necessary."
       ],
-        combatStats: createCombatStats("C", "D", "D", "S", "A"),
+        combatStats: createCombatStats(
+          "C", // Strength: Main category average
+          "D", // Durability: Main category average
+          "D", // Agility: Main category average
+          "S", // Precision: Main category average
+          "A", // Intelligence: Main category average
+          {
+            // Strength subcategories
+            penetration: "A",  // High penetration with enhanced weapon
+            power: "D",        // Weak physical strength
+            intensity: "S",    // Supreme pressure in combat
+            // Agility subcategories
+            swiftness: "D",    // Moderate speed
+            endurance: "B",    // Good stamina
+            flexibility: "C",  // Moderate flexibility
+            // Precision subcategories
+            accuracy: "A",    // Excellent accuracy with enhanced weapon
+            reactivity: "C",  // Moderate reflexes
+            dexterity: "B",   // Good motor control
+            // Intelligence subcategories
+            tactility: "A",   // Excellent tactical thinking
+            wisdom: "D",      // Below average general intelligence
+            stability: "C",  // Moderate mental stability
+            // Durability subcategories
+            vitality: "C",    // Moderate health
+            toughness: "D",   // Below average toughness
+            resistance: "E"   // Low environmental resistance
+          }
+        ),
         combatStyleData: {
           overview: {
             text: [
@@ -363,24 +559,52 @@ export const vortexASteele: WikiEntry = {
         }
       },
       images: [
-        {
-          url: "/lovable-uploads/c8949ba7-0df2-4911-bf84-9f38cdf51816.png",
+          {
+            url: "/lovable-uploads/c8949ba7-0df2-4911-bf84-9f38cdf51816.png",
           caption: "Vortex, overclocking his Mag-num through Chronipulation."
-        },
-        {
-          url: "/lovable-uploads/ecc55a94-b059-4587-8989-39cac284c31a.png",
+          },
+          {
+            url: "/lovable-uploads/ecc55a94-b059-4587-8989-39cac284c31a.png",
           caption: "A close-up of Vortex's Mag-num, when charged with his chrono-energy."
-        }
-      ]
-    },
-    {
-      id: "amplification-gauntlet",
-      label: "Amplification Gauntlet",
-      description: [
+          }
+        ]
+      },
+      {
+        id: "amplification-gauntlet",
+        label: "Amplification Gauntlet",
+        description: [
         "The Amplification Gauntlet (informally known as the Amp Gauntlet) is a large, right-handed gauntlet which provides a significant boost to Vortex's physical strength, allowing him to achieve feats he couldn't achieve without it. With it, he can destroy most armor and reinforced structures through effort and dedication.",
         "It is an effective tool for tougher opponents or materials that require raw strength to bypass, though it is extremely heavy and greatly inhibits Vortex's speed while worn."
       ],
-        combatStats: createCombatStats("C", "D", "E", "D", "A"),
+        combatStats: createCombatStats(
+          "C", // Strength: Main category average
+          "C", // Durability: Main category average
+          "D", // Agility: Main category average
+          "D", // Precision: Main category average
+          "A", // Intelligence: Main category average
+          {
+            // Strength subcategories
+            penetration: "C",  // Moderate penetration with gauntlet
+            power: "B",        // Enhanced physical strength with gauntlet
+            intensity: "D",    // Low pressure due to weight
+            // Agility subcategories
+            swiftness: "D",    // Slow due to heavy gauntlet
+            endurance: "B",    // Good stamina
+            flexibility: "E",  // Poor flexibility due to heavy gauntlet
+            // Precision subcategories
+            accuracy: "E",    // Poor accuracy due to weight
+            reactivity: "E",  // Poor reflexes due to weight
+            dexterity: "D",   // Poor motor control due to weight
+            // Intelligence subcategories
+            tactility: "A",   // Excellent tactical thinking
+            wisdom: "D",      // Below average general intelligence
+            stability: "C",  // Moderate mental stability
+            // Durability subcategories
+            vitality: "C",    // Moderate health
+            toughness: "C",   // Moderate toughness with gauntlet protection
+            resistance: "E"   // Low environmental resistance
+          }
+        ),
         combatStyleData: {
           overview: {
             text: [
@@ -431,13 +655,13 @@ export const vortexASteele: WikiEntry = {
         }
       },
       images: [
-        {
-          url: "/lovable-uploads/a5823d3b-ab54-46b3-8840-30841d9a26a1.png",
-          caption: "Vortex, having donned the Amplification Gauntlet. The heavy weight of the gauntlet has him tilting over a bit."
-        },
-        {
-          url: "/lovable-uploads/4dabb92d-56c7-4bcd-8c0c-a4d961d400b7.png",
-          caption: "A close up of the Amplification Gauntlet."
+          {
+            url: "/lovable-uploads/a5823d3b-ab54-46b3-8840-30841d9a26a1.png",
+            caption: "Vortex, having donned the Amplification Gauntlet. The heavy weight of the gauntlet has him tilting over a bit."
+          },
+          {
+            url: "/lovable-uploads/4dabb92d-56c7-4bcd-8c0c-a4d961d400b7.png",
+            caption: "A close up of the Amplification Gauntlet."
         }
       ]
     },
@@ -447,7 +671,35 @@ export const vortexASteele: WikiEntry = {
       description: [
         "By pouring vast quantities of the energy produced by Chronipulation into the Amp Gauntlet, Vortex can imbue the gauntlet with his energy, drastically improving the strength and speed behind it, alongside unlocking new techniques."
       ],
-        combatStats: createCombatStats("B", "D", "D", "D", "A"),
+        combatStats: createCombatStats(
+          "B", // Strength: Main category average
+          "C", // Durability: Main category average
+          "C", // Agility: Main category average
+          "D", // Precision: Main category average
+          "A", // Intelligence: Main category average
+          {
+            // Strength subcategories
+            penetration: "B",  // Good penetration with enhanced gauntlet
+            power: "A",        // High physical strength with enhanced gauntlet
+            intensity: "C",    // Moderate pressure
+            // Agility subcategories
+            swiftness: "C",    // Moderate speed (improved from base gauntlet)
+            endurance: "B",    // Good stamina
+            flexibility: "D",  // Below average flexibility
+            // Precision subcategories
+            accuracy: "D",    // Below average accuracy
+            reactivity: "D",  // Below average reflexes
+            dexterity: "C",   // Moderate motor control (improved from base)
+            // Intelligence subcategories
+            tactility: "A",   // Excellent tactical thinking
+            wisdom: "D",      // Below average general intelligence
+            stability: "C",  // Moderate mental stability
+            // Durability subcategories
+            vitality: "C",    // Moderate health
+            toughness: "C",   // Moderate toughness with gauntlet protection
+            resistance: "E"   // Low environmental resistance
+          }
+        ),
         combatStyleData: {
           overview: {
             text: [
@@ -517,17 +769,17 @@ export const vortexASteele: WikiEntry = {
         }
       },
       images: [
-        {
-          url: "/lovable-uploads/8fe6a2a9-d1d8-4851-8279-6fffdb700310.png",
-          caption: "Vortex, cycling his energy into the Amplification Gauntlet. The effort it takes to keep the Gauntlet attuned is exhausting."
-        },
-        {
-          url: "/lovable-uploads/bba97565-da04-4abf-a43f-7651050e7c93.png",
-          caption: "A close-up of the Amplification Gauntlet, when attuned to Vortex's Chronipulation."
-        }
-      ]
-    }
-  ],
+          {
+            url: "/lovable-uploads/8fe6a2a9-d1d8-4851-8279-6fffdb700310.png",
+            caption: "Vortex, cycling his energy into the Amplification Gauntlet. The effort it takes to keep the Gauntlet attuned is exhausting."
+          },
+          {
+            url: "/lovable-uploads/bba97565-da04-4abf-a43f-7651050e7c93.png",
+            caption: "A close-up of the Amplification Gauntlet, when attuned to Vortex's Chronipulation."
+          }
+        ]
+      }
+    ],
     appearance: [
       {
         id: "tactical",

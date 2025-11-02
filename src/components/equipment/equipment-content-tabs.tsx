@@ -36,21 +36,21 @@ export function EquipmentContentTabs({ sections, multiItems, currentEntryId }: E
   return (
     <div className="min-h-0 flex flex-col">
       <Tabs defaultValue="overview" className="w-full h-full flex flex-col">
-        <TabsList className={`mb-4 w-full ${isMobile ? 'grid grid-cols-2 h-auto gap-2 p-2' : 'justify-start'} flex-shrink-0`}>
-          <TabsTrigger value="overview" className={`flex items-center gap-2 ${isMobile ? 'text-xs px-3 py-3 rounded-md' : ''}`}>
-            <Eye className="h-4 w-4" />
+        <TabsList className={`mb-6 w-full ${isMobile ? 'grid grid-cols-2 h-auto gap-3 p-3' : 'justify-start'} flex-shrink-0`}>
+          <TabsTrigger value="overview" className={`flex items-center gap-2 ${isMobile ? 'text-sm px-4 py-3 rounded-md' : 'text-sm sm:text-base px-4 py-3 sm:py-4'}`}>
+            <Eye className="h-5 w-5" />
             <span>General</span>
           </TabsTrigger>
-          <TabsTrigger value="ability" className={`flex items-center gap-2 ${isMobile ? 'text-xs px-3 py-3 rounded-md' : ''}`}>
-            <Zap className="h-4 w-4" />
+          <TabsTrigger value="ability" className={`flex items-center gap-2 ${isMobile ? 'text-sm px-4 py-3 rounded-md' : 'text-sm sm:text-base px-4 py-3 sm:py-4'}`}>
+            <Zap className="h-5 w-5" />
             <span>Ability</span>
           </TabsTrigger>
-          <TabsTrigger value="history" className={`flex items-center gap-2 ${isMobile ? 'text-xs px-3 py-3 rounded-md' : ''}`}>
-            <History className="h-4 w-4" />
+          <TabsTrigger value="history" className={`flex items-center gap-2 ${isMobile ? 'text-sm px-4 py-3 rounded-md' : 'text-sm sm:text-base px-4 py-3 sm:py-4'}`}>
+            <History className="h-5 w-5" />
             <span>History</span>
           </TabsTrigger>
-          <TabsTrigger value="trivia" className={`flex items-center gap-2 ${isMobile ? 'text-xs px-3 py-3 rounded-md' : ''}`}>
-            <ScrollText className="h-4 w-4" />
+          <TabsTrigger value="trivia" className={`flex items-center gap-2 ${isMobile ? 'text-sm px-4 py-3 rounded-md' : 'text-sm sm:text-base px-4 py-3 sm:py-4'}`}>
+            <ScrollText className="h-5 w-5" />
             <span>Trivia</span>
           </TabsTrigger>
         </TabsList>
@@ -59,12 +59,12 @@ export function EquipmentContentTabs({ sections, multiItems, currentEntryId }: E
           <ScrollArea className="h-full w-full">
             <div className="pr-4">
               <TabsContent value="overview" className="mt-0">
-                <div className="bg-card rounded-lg p-4 border min-w-0">
-                  <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                    <Eye className="h-5 w-5 text-primary flex-shrink-0" />
+                <div className="bg-card rounded-lg p-6 border min-w-0">
+                  <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                    <Eye className="h-6 w-6 text-primary flex-shrink-0" />
                     General
                   </h2>
-                  <div className="text-foreground/90 min-w-0">
+                  <div className="text-foreground/90 min-w-0 text-base">
                     {sections.overview.map((paragraph, idx) => (
                       <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                         <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
@@ -107,12 +107,12 @@ export function EquipmentContentTabs({ sections, multiItems, currentEntryId }: E
               </TabsContent>
               
               <TabsContent value="trivia" className="mt-0">
-                <div className="bg-card rounded-lg p-4 border min-w-0">
-                  <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                    <ScrollText className="h-5 w-5 text-primary flex-shrink-0" />
+                <div className="bg-card rounded-lg p-6 border min-w-0">
+                  <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                    <ScrollText className="h-6 w-6 text-primary flex-shrink-0" />
                     Trivia
                   </h2>
-                  <ul className="list-disc space-y-3 ml-5 text-foreground/90 min-w-0">
+                  <ul className="list-disc space-y-3 ml-5 text-foreground/90 min-w-0 text-base">
                     {sections.trivia.map((item, idx) => (
                       <li key={idx} className="break-words whitespace-normal overflow-wrap-anywhere">
                         <AutoLinkedText text={item} currentEntryId={currentEntryId} />

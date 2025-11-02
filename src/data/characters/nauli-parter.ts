@@ -210,23 +210,23 @@ export const nauliParter: WikiEntry = {
           "B", // Intelligence: Main category average
           {
             // Strength subcategories
-            penetration: "D",  // Uses knives/focused attacks but low base power
-            strength: "F",     // Not particularly strong
-            intensity: "E",    // Low power behind attacks
+            penetration: "F",  // Very low penetration capability
+            power: "E",        // Weak but not completely powerless
+            intensity: "C",    // Moderate pressure in combat
             // Agility subcategories
             swiftness: "C",    // Quick movement, can issue flurries
             endurance: "C",   // Can sustain combat, wears opponents down
-            flexibility: "B",  // Very flexible and agile
+            flexibility: "C",  // Moderate flexibility
             // Precision subcategories
-            accuracy: "B",    // Master assassin, high precision
-            reactivity: "A",  // Incredibly strong reflexes, can weave attacks
-            dexterity: "B",   // Skilled with daggers and kunai
+            accuracy: "C",    // Moderate accuracy
+            reactivity: "C",  // Moderate reflexes
+            dexterity: "C",   // Moderate motor control
             // Intelligence subcategories
-            tactility: "A",   // Sharp-witted tactician, cold and calculative
-            wisdom: "B",      // Master assassin, strategic thinking
-            stability: "C",  // Can remain focused, though has trauma
+            tactility: "B",   // Good tactical thinking
+            wisdom: "C",      // Average intelligence
+            stability: "A",  // Exceptional mental stability
             // Durability subcategories
-            vitality: "E",    // Not durable, avoids unnecessary risks
+            vitality: "D",    // Below average health
             toughness: "E",   // Not particularly durable
             resistance: "E"   // Low durability overall
           }

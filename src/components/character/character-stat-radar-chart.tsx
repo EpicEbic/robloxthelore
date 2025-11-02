@@ -132,7 +132,7 @@ export function CharacterStatRadarChart({
   const reorderedPhysicalSubcategories = [
     // Strength (Offense) - indices 0-2
     { key: 'penetration', label: 'Penetration', category: 'Strength', stat: 'strength' },
-    { key: 'strength', label: 'Strength', category: 'Strength', stat: 'strength' },
+    { key: 'power', label: 'Power', category: 'Strength', stat: 'strength' },
     { key: 'intensity', label: 'Intensity', category: 'Strength', stat: 'strength' },
     // Agility - indices 3-5
     { key: 'swiftness', label: 'Swiftness', category: 'Agility', stat: 'agility' },

@@ -98,7 +98,7 @@ export function LocationSegmentsTab({
           <div className="leading-relaxed space-y-4">
             {/* Header with title and dropdown switcher */}
             <div className="flex justify-between items-start mb-6 border-b border-border pb-4">
-              <h2 className="text-2xl font-bold text-foreground force-text-wrap">
+              <h2 className="text-3xl font-bold text-foreground force-text-wrap">
                 {currentSegmentData.title}
               </h2>
               <div className="ml-4 flex-shrink-0">
@@ -112,7 +112,7 @@ export function LocationSegmentsTab({
             
             {/* Display the formatted content paragraphs - constant static effect for The Null Zone */}
             {formatSegmentContent(currentSegmentData.description, currentSegmentData.title).map((paragraph, index) => (
-              <p key={index} className={`mb-4 leading-relaxed force-text-wrap ${isNullZone ? 'tv-static-text text-red-300' : 'text-foreground'}`}>
+              <p key={index} className={`mb-4 leading-relaxed text-base force-text-wrap ${isNullZone ? 'tv-static-text text-red-300' : 'text-foreground'}`}>
                 {paragraph}
               </p>
             ))}

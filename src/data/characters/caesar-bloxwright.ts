@@ -46,25 +46,25 @@ export const caesarBloxwright: WikiEntry = {
         "D", // Intelligence: Main category average
         {
           // Strength subcategories
-          penetration: "C",  // Powerful but not focused on piercing
-          strength: "A",     // Raw physical power is his main attribute
-          intensity: "B",    // Incredibly lethal blows
+          penetration: "B",  // Moderate penetration capability
+          power: "B",        // Strong but not overwhelming
+          intensity: "E",    // Low pressure/maintains aggression poorly
           // Agility subcategories
-          swiftness: "F",    // Extremely slow movement
-          endurance: "D",    // Can fight extended periods despite being slow
-          flexibility: "F",   // Large build severely limits flexibility
+          swiftness: "E",    // Below average speed
+          endurance: "D",    // Moderate endurance
+          flexibility: "F",  // Extremely rigid, poor flexibility
           // Precision subcategories
-          accuracy: "F",     // Imprecise attacks
-          reactivity: "E",   // Slow reflexes
-          dexterity: "F",    // Poor coordination due to size
+          accuracy: "E",     // Below average accuracy
+          reactivity: "D",   // Moderate reflexes
+          dexterity: "E",    // Below average motor control
           // Intelligence subcategories
-          tactility: "C",    // Quick-witted, can predict enemies
-          wisdom: "D",       // Strategic when he thinks ahead
-          stability: "E",    // Can go berserk, loses composure under strain
+          tactility: "D",    // Basic tactical thinking
+          wisdom: "D",       // Average intelligence
+          stability: "E",    // Fragile mental stability under pressure
           // Durability subcategories
-          vitality: "A",     // Can take massive punishment, keeps fighting when exhausted
-          toughness: "B",    // Bulwark build, hard to damage
-          resistance: "C"   // Vulnerable to speed/precision attacks
+          vitality: "C",     // Moderate health and recovery
+          toughness: "B",    // Resilient build
+          resistance: "D"    // Below average environmental resistance
         }
       )
     }
@@ -92,25 +92,25 @@ export const caesarBloxwright: WikiEntry = {
           "D", // Intelligence: Main category average
           {
             // Strength subcategories
-            penetration: "C",  // Powerful but not focused on piercing
-            strength: "A",     // Raw physical power is his main attribute
-            intensity: "B",    // Incredibly lethal blows
+            penetration: "B",  // Moderate penetration capability
+            power: "B",        // Strong but not overwhelming
+            intensity: "E",    // Low pressure/maintains aggression poorly
             // Agility subcategories
-            swiftness: "F",    // Extremely slow movement
-            endurance: "D",    // Can fight extended periods despite being slow
-            flexibility: "F",   // Large build severely limits flexibility
+            swiftness: "E",    // Below average speed
+            endurance: "D",    // Moderate endurance
+            flexibility: "F",  // Extremely rigid, poor flexibility
             // Precision subcategories
-            accuracy: "F",     // Imprecise attacks
-            reactivity: "E",   // Slow reflexes
-            dexterity: "F",    // Poor coordination due to size
+            accuracy: "E",     // Below average accuracy
+            reactivity: "D",   // Moderate reflexes
+            dexterity: "E",    // Below average motor control
             // Intelligence subcategories
-            tactility: "C",    // Quick-witted, can predict enemies
-            wisdom: "D",       // Strategic when he thinks ahead
-            stability: "E",    // Can go berserk, loses composure under strain
+            tactility: "D",    // Basic tactical thinking
+            wisdom: "D",       // Average intelligence
+            stability: "E",    // Fragile mental stability under pressure
             // Durability subcategories
-            vitality: "A",     // Can take massive punishment, keeps fighting when exhausted
-            toughness: "B",    // Bulwark build, hard to damage
-            resistance: "C"   // Vulnerable to speed/precision attacks
+            vitality: "C",     // Moderate health and recovery
+            toughness: "B",    // Resilient build
+            resistance: "D"    // Below average environmental resistance
           }
         )
       }

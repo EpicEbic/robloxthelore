@@ -25,10 +25,10 @@ export function LocationContentTabs({ sections, currentEntryId }: LocationConten
       <LocationContentStyles />
       
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="overview">General</TabsTrigger>
-          <TabsTrigger value="segments">Segments</TabsTrigger>
-          <TabsTrigger value="trivia">Trivia</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 mb-6 gap-3 p-3">
+          <TabsTrigger value="overview" className="text-sm sm:text-base px-4 py-3 sm:py-4">General</TabsTrigger>
+          <TabsTrigger value="segments" className="text-sm sm:text-base px-4 py-3 sm:py-4">Segments</TabsTrigger>
+          <TabsTrigger value="trivia" className="text-sm sm:text-base px-4 py-3 sm:py-4">Trivia</TabsTrigger>
         </TabsList>
         
         <TabsContent value="overview" className="space-y-4">
