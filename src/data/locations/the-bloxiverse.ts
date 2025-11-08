@@ -29,9 +29,12 @@ export const theBloxiverse: WikiEntry = {
   sections: {
     overview: [
       "The Bloxiverse is a coined term referring to a collective of Robloxian Worlds and celestial bodies, which have been interconnected through cosmic strings that weave the very fabric of reality and hold them together. It stretches out seemingly infinite distances from the center, where a mass of pure energy known as the Heart resides. Beyond the interiors of Worlds and other important landmarks, the Bloxiverse is devoid of any tangible matter such as air.",
+      
       "The Bloxiverse is primarily inhabited by Bloxians and the various Bloxian subspecies, who have spread far and wide across its reaches throughout history. Life within the Bloxiverse is chaotic and unruly, as no major forces of power exist (or are strong/widespread enough) to govern it or maintain order. As a result, many Bloxians have banded together to create smaller-scale civilizations or factions across one or multiple worlds, in an attempt to create a sense of order or law within such a nomadic reality. Of course, there is no good without bad; unruly Bloxians have sought darker paths which has led to disarray and chaos for many.",
+      
       "The creator of the Bloxiverse was a deity known as Roblox, who has long since disappeared after the inception of the Bloxiverse. His fate is undetermined, but many believe him to be deceased or otherwise imprisoned in some way."
     ],
+    
     segments: [
       "**The Miasma** - The Miasma is a cosmic slurry that occupies the space between worlds, made up of celestial residue such as stardust and antimatter. It is present within every major segment of the Bloxiverse, existing everywhere that matter (such as air) does not. It has no texture and cannot be \"felt\" by one's touch, nor moved through any standard methods. The Miasma is primordially tied to Bloxians, and reacts to their presence. Those that enter the Miasma can freely move themselves within it, attaining a form of flight so long as they are surrounded by it. They can breathe normally as though surrounded by oxygen, despite no need to inhale or exhale. The speeds at which they can travel depend on their fitness, equipment, and any abilities they may have. Some have even gone on to craft inter-world vessels, capable of travelling across entire segments in minutes.",
       
@@ -51,8 +54,10 @@ export const theBloxiverse: WikiEntry = {
       
       "**The Null Zone** - NULL // NULL // NULL - SEGMENT DOES NOT EXIST. SEGMENT CANNOT EXIST. - NULL // NULL // NULL"
     ],
+    
     trivia: [
       "The Bloxiverse's total size equals roughly the size of an actual Roblox experience, or approximately 340,282,366,920,938,463,463,374,607,431,768,211,456 studs.",
+      
       "The name 'Bloxiverse' is a play on the words Roblox and Universe."
     ]
   }
