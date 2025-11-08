@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Sidebar, SidebarContent, SidebarHeader, SidebarTrigger } from "@/components/ui/sidebar";
@@ -17,6 +17,9 @@ export function WikiSidebar({
   const location = useLocation();
   const navigate = useNavigate();
   const isEntryPage = location.pathname.startsWith('/entry/');
+  const isWorldMap = location.pathname === '/world';
+  const fromParam = useMemo(() => new URLSearchParams(location.search).get("from"), [location.search]);
+  const fromBloxiverse = fromParam === 'bloxiverse';
   
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(CATEGORIES.reduce((acc, category) => ({
     ...acc,
@@ -39,12 +42,18 @@ export function WikiSidebar({
         </div>
       </SidebarHeader>
       <SidebarContent className="px-4 py-6 space-y-6 custom-scrollbar">
-        {/* Back Button - Only show on entry pages */}
-        {isEntryPage && (
+        {/* Back Button - Entry pages or world map */}
+        {(isEntryPage || isWorldMap) && (
           <div className="mb-6 flex justify-center">
             <Button 
               variant="ghost" 
-              onClick={() => navigate(-1)}
+              onClick={() => {
+                if (isWorldMap && fromBloxiverse) {
+                  navigate("/entry/the-bloxiverse");
+                } else {
+                  navigate(-1);
+                }
+              }}
               className="justify-center p-4 rounded-lg hover:bg-sidebar-accent/50 transition-all duration-200 group"
             >
               <ArrowLeft className="h-6 w-6 mr-3 text-sidebar-foreground/70 group-hover:text-sidebar-accent-foreground transition-colors" />
@@ -65,9 +74,24 @@ export function WikiSidebar({
               </CollapsibleTrigger>
               <CollapsibleContent className="overflow-hidden transition-all duration-300 ease-in-out data-[state=closed]:animate-collapse-up data-[state=open]:animate-collapse-down">
                 <div className="flex flex-col space-y-1 pl-2 mt-2">
-                  {category.subcategories.map(subcategory => <Link key={`${category.type}-${subcategory.value}`} to={`/category/${category.type}/${subcategory.value}`} className={cn("text-sm px-3 py-2.5 rounded-md hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all duration-200 font-medium text-sidebar-foreground/80 hover:text-sidebar-accent-foreground", `wiki-category-${category.type}`)}>
-                      {subcategory.label}
-                    </Link>)}
+                  {category.subcategories.map(subcategory => {
+                    const target =
+                      category.type === "location" && subcategory.value === "world-map"
+                        ? "/world"
+                        : `/category/${category.type}/${subcategory.value}`;
+                    return (
+                      <Link
+                        key={`${category.type}-${subcategory.value}`}
+                        to={target}
+                        className={cn(
+                          "text-sm px-3 py-2.5 rounded-md hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all duration-200 font-medium text-sidebar-foreground/80 hover:text-sidebar-accent-foreground",
+                          `wiki-category-${category.type}`
+                        )}
+                      >
+                        {subcategory.label}
+                      </Link>
+                    );
+                  })}
                 </div>
               </CollapsibleContent>
             </Collapsible>)}
@@ -103,12 +127,6 @@ export function WikiSidebar({
               <Button variant="ghost" className="w-full justify-start p-3 rounded-lg hover:bg-sidebar-accent/50 transition-all duration-200 group">
                 <Zap className="h-5 w-5 mr-3 text-sidebar-foreground/70 group-hover:text-sidebar-accent-foreground transition-colors" />
                 <span className="font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">Fusion</span>
-              </Button>
-            </Link>
-            <Link to="/world">
-              <Button variant="ghost" className="w-full justify-start p-3 rounded-lg hover:bg-sidebar-accent/50 transition-all duration-200 group">
-                <Globe className="h-5 w-5 mr-3 text-sidebar-foreground/70 group-hover:text-sidebar-accent-foreground transition-colors" />
-                <span className="font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">World</span>
               </Button>
             </Link>
           </div>

@@ -41,6 +41,7 @@ function dotsOverlap(dot1: Dot, dot2: Dot, minDistance: number): boolean {
 function generateDistributedDots(
   segments: Array<{ id: string; startRadius: number; endRadius: number }>,
   rng: SeededRandom,
+  innerBufferRadius: number,
   minDistance: number = 8
 ): Dot[] {
   const dots: Dot[] = [];
@@ -85,13 +86,16 @@ function generateDistributedDots(
         if (segment.id === 'the-midzone') {
           // Use exponential distribution to cluster near inner edge
           const t = Math.pow(rng.next(), 2); // Square to weight toward 0
-          radius = segment.startRadius + t * (segment.endRadius - segment.startRadius);
+          const minRadius = Math.max(segment.startRadius, innerBufferRadius);
+          radius = minRadius + t * (segment.endRadius - minRadius);
         } else if (segment.id === 'the-inner-circle') {
           // Evenly distributed but dense
-          radius = segment.startRadius + rng.next() * (segment.endRadius - segment.startRadius);
+          const minRadius = Math.max(segment.startRadius, innerBufferRadius);
+          radius = minRadius + rng.next() * (segment.endRadius - minRadius);
         } else {
           // Sparse segments - more random
-          radius = segment.startRadius + rng.next() * (segment.endRadius - segment.startRadius);
+          const minRadius = Math.max(segment.startRadius, innerBufferRadius);
+          radius = minRadius + rng.next() * (segment.endRadius - minRadius);
         }
         
         // Convert polar to cartesian
@@ -129,13 +133,17 @@ export function DecorativeDots({
   maxRadius,
   animationDelay = 1000 
 }: DecorativeDotsProps) {
+  const heartSegment = segments.find(seg => seg.id === 'the-heart');
+  const heartBoundary = heartSegment ? heartSegment.endRadius : 0;
+  const innerBufferRadius = heartBoundary + 200;
+
   const [textureUrl, setTextureUrl] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const rng = new SeededRandom(42);
-    const dots = generateDistributedDots(segments, rng);
+    const dots = generateDistributedDots(segments, rng, innerBufferRadius);
     const viewSize = maxRadius * 2.4;
     const offset = maxRadius * 1.2;
     const targetTextureSize = Math.min(4096, Math.max(1024, Math.ceil(viewSize / 4)));

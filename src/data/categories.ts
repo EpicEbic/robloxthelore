@@ -30,6 +30,7 @@ export const CATEGORIES: CategoryStructure[] = [
     label: "Locations",
     subcategories: [
       { value: "all", label: "All Locations" },
+      { value: "world-map", label: "World Map" },
       { value: "bloxiverse", label: "The Bloxiverse" },
       { value: "primarylocations", label: "Primary Locations" },
       { value: "secondarylocations", label: "Secondary Locations" }

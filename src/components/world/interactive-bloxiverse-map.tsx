@@ -27,7 +27,10 @@ export function InteractiveBloxiverseMap() {
   const maxRadius = BLOXIVERSE_SEGMENTS.find(seg => seg.id === 'the-null-boundary')?.endRadius || 1600;
 
   useEffect(() => {
-    setHasAnimated(true);
+    const timer = setTimeout(() => {
+      setHasAnimated(true);
+    }, 1100);
+    return () => clearTimeout(timer);
   }, []);
 
   // Prevent page scroll when hovering over map
@@ -38,9 +41,13 @@ export function InteractiveBloxiverseMap() {
     const preventScroll = (e: WheelEvent) => {
       e.preventDefault();
       e.stopPropagation();
-      
-      const delta = e.deltaY > 0 ? -0.1 : 0.1;
-      setZoom((prev) => Math.max(minZoom, Math.min(maxZoom, prev + delta)));
+      if (!hasAnimated) return;
+
+      const scaleFactor = e.deltaY > 0 ? 0.9 : 1.1;
+      setZoom((prev) => {
+        const next = prev * scaleFactor;
+        return Math.max(minZoom, Math.min(maxZoom, next));
+      });
     };
 
     container.addEventListener('wheel', preventScroll, { passive: false });
@@ -48,9 +55,10 @@ export function InteractiveBloxiverseMap() {
     return () => {
       container.removeEventListener('wheel', preventScroll);
     };
-  }, [minZoom, maxZoom]);
+  }, [minZoom, maxZoom, hasAnimated]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    if (!hasAnimated) return;
     if (e.button === 0) { // Left mouse button
       setIsDragging(true);
       setDragMoved(false);
@@ -59,6 +67,7 @@ export function InteractiveBloxiverseMap() {
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (!hasAnimated) return;
     if (isDragging) {
       const deltaX = e.clientX - dragStart.x;
       const deltaY = e.clientY - dragStart.y;
@@ -92,14 +101,23 @@ export function InteractiveBloxiverseMap() {
   };
 
   const handleZoomIn = () => {
-    setZoom((prev) => Math.min(maxZoom, prev + 0.2));
+    if (!hasAnimated) return;
+    setZoom((prev) => {
+      const next = prev * 1.15;
+      return Math.min(maxZoom, next);
+    });
   };
 
   const handleZoomOut = () => {
-    setZoom((prev) => Math.max(minZoom, prev - 0.2));
+    if (!hasAnimated) return;
+    setZoom((prev) => {
+      const next = prev / 1.15;
+      return Math.max(minZoom, next);
+    });
   };
 
   const handleSegmentClick = (segment: BloxiverseSegment) => {
+    if (!hasAnimated) return;
     if (isDragging || dragMoved) {
       return;
     }
@@ -108,6 +126,7 @@ export function InteractiveBloxiverseMap() {
   };
 
   const handleWorldClick = (world: RobloxianWorld) => {
+    if (!hasAnimated) return;
     if (isDragging || dragMoved) {
       return;
     }
@@ -125,6 +144,7 @@ export function InteractiveBloxiverseMap() {
           onClick={handleZoomIn}
           className="bg-card/95 backdrop-blur-sm"
           title="Zoom In"
+          disabled={!hasAnimated}
         >
           <Plus className="h-4 w-4" />
         </Button>
@@ -134,6 +154,7 @@ export function InteractiveBloxiverseMap() {
           onClick={handleZoomOut}
           className="bg-card/95 backdrop-blur-sm"
           title="Zoom Out"
+          disabled={!hasAnimated}
         >
           <Minus className="h-4 w-4" />
         </Button>
@@ -148,8 +169,9 @@ export function InteractiveBloxiverseMap() {
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
         style={{
-          cursor: isDragging ? 'grabbing' : 'grab',
+          cursor: hasAnimated ? (isDragging ? 'grabbing' : 'grab') : 'default',
           userSelect: 'none',
+          pointerEvents: hasAnimated ? 'auto' : 'none',
         }}
       >
         <svg
@@ -171,7 +193,6 @@ export function InteractiveBloxiverseMap() {
 
           {/* Segment Rings */}
           {BLOXIVERSE_SEGMENTS.filter(seg => seg.id !== 'the-null-zone').map((segment, index) => {
-            const isHovered = hoveredSegment === segment.id;
             const animationDelay = 600 + index * 100;
             const isHeart = segment.id === 'the-heart';
 
