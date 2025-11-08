@@ -27,6 +27,12 @@ export class ParticleUpdater {
       case 'sparkle':
         this.updateSparkleParticle(particle, deltaTime, canvas);
         break;
+      case 'cosmic-wave':
+        this.updateCosmicWaveParticle(particle, deltaTime, canvas);
+        break;
+      case 'stardust':
+        this.updateStardustParticle(particle, deltaTime, canvas);
+        break;
     }
   }
 
@@ -132,5 +138,82 @@ export class ParticleUpdater {
   private static updateSparkleParticle(particle: Particle, deltaTime: number, canvas: HTMLCanvasElement): void {
     // Sparkle particles stay in place and just fade
     particle.opacity = 0.8 * (1 - particle.life / particle.maxLife);
+  }
+
+  private static updateCosmicWaveParticle(particle: Particle, deltaTime: number, canvas: HTMLCanvasElement): void {
+    // Move particle in its direction
+    particle.x += particle.vx;
+    particle.y += particle.vy;
+    
+    // Update sway phase for wave motion
+    if (particle.swayPhase !== undefined) {
+      particle.swayPhase += 0.02;
+    }
+    
+    // Add gentle drift
+    particle.vx += (Math.random() - 0.5) * 0.02;
+    particle.vy += (Math.random() - 0.5) * 0.02;
+    
+    // Wrap around screen edges for continuous flow
+    if (particle.x < -particle.size * 2) {
+      particle.x = canvas.width + particle.size * 2;
+    } else if (particle.x > canvas.width + particle.size * 2) {
+      particle.x = -particle.size * 2;
+    }
+    
+    if (particle.y < -particle.size * 2) {
+      particle.y = canvas.height + particle.size * 2;
+    } else if (particle.y > canvas.height + particle.size * 2) {
+      particle.y = -particle.size * 2;
+    }
+    
+    // Slow fade in at the beginning (1 second)
+    if (particle.life < 60) {
+      const fadeProgress = particle.life / 60;
+      particle.opacity = fadeProgress * 0.3;
+    } 
+    // Slow fade out at the end (2 seconds)
+    else if (particle.life > particle.maxLife - 120) {
+      const fadeProgress = (particle.maxLife - particle.life) / 120;
+      particle.opacity = fadeProgress * 0.3;
+    } 
+    // Full opacity in the middle
+    else {
+      particle.opacity = 0.3;
+    }
+  }
+
+  private static updateStardustParticle(particle: Particle, deltaTime: number, canvas: HTMLCanvasElement): void {
+    // Move particle quickly in its direction
+    particle.x += particle.vx;
+    particle.y += particle.vy;
+    
+    // Wrap around screen edges for continuous effect
+    if (particle.x < -10) {
+      particle.x = canvas.width + 10;
+    } else if (particle.x > canvas.width + 10) {
+      particle.x = -10;
+    }
+    
+    if (particle.y < -10) {
+      particle.y = canvas.height + 10;
+    } else if (particle.y > canvas.height + 10) {
+      particle.y = -10;
+    }
+    
+    // Quick fade in at the beginning (0.5 seconds)
+    if (particle.life < 30) {
+      const fadeProgress = particle.life / 30;
+      particle.opacity = fadeProgress * 0.7;
+    } 
+    // Quick fade out at the end (1 second)
+    else if (particle.life > particle.maxLife - 60) {
+      const fadeProgress = (particle.maxLife - particle.life) / 60;
+      particle.opacity = fadeProgress * 0.7;
+    } 
+    // Full opacity in the middle
+    else {
+      particle.opacity = 0.7;
+    }
   }
 }

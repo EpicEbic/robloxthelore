@@ -11,6 +11,21 @@ interface CharacterStats {
   defense: StatGrade;
   utility: StatGrade;
   potential: StatGrade;
+  // Optional subcategory-specific stats - if not provided, subcategories inherit from main category
+  subcategories?: {
+    // Offense subcategories
+    power?: StatGrade;
+    penetration?: StatGrade;
+    potency?: StatGrade;
+    // Defense subcategories
+    guard?: StatGrade;
+    evasion?: StatGrade;
+    mitigation?: StatGrade;
+    // Utility subcategories
+    versatility?: StatGrade;
+    support?: StatGrade;
+    manipulation?: StatGrade;
+  };
 }
 
 interface CombatStats {
@@ -245,14 +260,37 @@ export function createCharacterStats(
   offense: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
   defense: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F", 
   utility: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
-  potential: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F"
+  potential: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
+  subcategories?: {
+    power?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    penetration?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    potency?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    guard?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    evasion?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    mitigation?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    versatility?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    support?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    manipulation?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+  }
 ): CharacterStats {
-  return {
+  const baseStats: CharacterStats = {
     offense: { label: offense, value: GRADE_VALUES[offense] },
     defense: { label: defense, value: GRADE_VALUES[defense] },
     utility: { label: utility, value: GRADE_VALUES[utility] },
     potential: { label: potential, value: GRADE_VALUES[potential] }
   };
+  
+  if (subcategories) {
+    const subcategoryStats: any = {};
+    Object.entries(subcategories).forEach(([key, grade]) => {
+      if (grade) {
+        subcategoryStats[key] = { label: grade, value: GRADE_VALUES[grade] };
+      }
+    });
+    return { ...baseStats, subcategories: subcategoryStats };
+  }
+  
+  return baseStats;
 }
 
 // Helper function to create combat stats object easily

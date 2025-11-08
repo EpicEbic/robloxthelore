@@ -12,12 +12,88 @@
 body.character-theme-caesar-bloxwright,
 body.character-theme-nauli-parter,
 body.character-theme-vortex-a-steele,
-body.character-theme-rice-farmer {
+body.character-theme-rice-farmer,
+body.character-theme-the-bloxiverse {
   background: var(--character-gradient-background, var(--background));
   color: var(--character-text, var(--foreground));
 }
 
 /* Debug: Make it obvious when themes are applied - REMOVED */
+
+/* The Bloxiverse Theme - Purple, Pink, and White Gradient */
+.character-theme-the-bloxiverse {
+  --background: #1a0a2e !important;
+  --foreground: #ffffff !important;
+  --card: #2d1b4e !important;
+  --card-foreground: #ffffff !important;
+  --primary: #e879f9 !important;
+  --primary-foreground: #1a0a2e !important;
+  --secondary: #f0abfc !important;
+  --secondary-foreground: #1a0a2e !important;
+  --accent: #ffffff !important;
+  --accent-foreground: #1a0a2e !important;
+  --muted: #2d1b4e !important;
+  --muted-foreground: #f0abfc !important;
+  --border: #e879f9 !important;
+  --input: #2d1b4e !important;
+  --ring: #e879f9 !important;
+}
+
+body.character-theme-the-bloxiverse {
+  background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 25%, #4a1a5e 50%, #2d1b4e 75%, #1a0a2e 100%) !important;
+}
+
+body.character-theme-the-bloxiverse h1,
+body.character-theme-the-bloxiverse h2,
+body.character-theme-the-bloxiverse h3,
+body.character-theme-the-bloxiverse h4,
+body.character-theme-the-bloxiverse h5,
+body.character-theme-the-bloxiverse h6 {
+  color: #e879f9 !important;
+}
+
+body.character-theme-the-bloxiverse p {
+  color: #ffffff !important;
+}
+
+body.character-theme-the-bloxiverse div {
+  color: #ffffff !important;
+}
+
+body.character-theme-the-bloxiverse .card span,
+body.character-theme-the-bloxiverse [class*="card"] span {
+  color: #ffffff !important;
+}
+
+body.character-theme-the-bloxiverse a {
+  color: #e879f9 !important;
+}
+
+body.character-theme-the-bloxiverse a:hover {
+  color: #f0abfc !important;
+}
+
+body.character-theme-the-bloxiverse svg,
+body.character-theme-the-bloxiverse [class*="lucide"] {
+  color: #e879f9 !important;
+  stroke: #e879f9 !important;
+  fill: none !important;
+}
+
+body.character-theme-the-bloxiverse button {
+  color: #e879f9 !important;
+}
+
+body.character-theme-the-bloxiverse button svg {
+  color: #e879f9 !important;
+}
+
+body.character-theme-the-bloxiverse .card,
+body.character-theme-the-bloxiverse [class*="card"],
+body.character-theme-the-bloxiverse .bg-card {
+  background: linear-gradient(145deg, #2d1b4e 0%, #3d2b5e 100%) !important;
+  border-color: #e879f9 !important;
+}
 
 /* Caesar's Electrogravitic Flow Theme */
 .character-theme-caesar-bloxwright {

@@ -1,33 +1,33 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { CharacterTheme } from '@/types/character-theme-types';
 
-interface CharacterThemeContextType {
+interface LocationThemeContextType {
   currentTheme: CharacterTheme | null;
   setCurrentTheme: (theme: CharacterTheme | null) => void;
   applyTheme: (theme: CharacterTheme) => void;
   resetTheme: () => void;
 }
 
-const CharacterThemeContext = createContext<CharacterThemeContextType | undefined>(undefined);
+const LocationThemeContext = createContext<LocationThemeContextType | undefined>(undefined);
 
-interface CharacterThemeProviderProps {
+interface LocationThemeProviderProps {
   children: ReactNode;
-  characterId?: string;
+  locationId?: string;
 }
 
-export const CharacterThemeProvider: React.FC<CharacterThemeProviderProps> = ({ 
+export const LocationThemeProvider: React.FC<LocationThemeProviderProps> = ({ 
   children, 
-  characterId 
+  locationId 
 }) => {
   const [currentTheme, setCurrentTheme] = useState<CharacterTheme | null>(null);
   
-  console.log('CharacterThemeProvider rendered with characterId:', characterId);
+  console.log('LocationThemeProvider rendered with locationId:', locationId);
 
   const applyTheme = (theme: CharacterTheme) => {
-    console.log('Applying theme:', theme);
+    console.log('Applying location theme:', theme);
     const root = document.documentElement;
     
-    // Apply color variables
+    // Apply color variables (using character- prefix for compatibility)
     Object.entries(theme.colors).forEach(([key, value]) => {
       root.style.setProperty(`--character-${key}`, value);
       console.log(`Set --character-${key}: ${value}`);
@@ -40,7 +40,7 @@ export const CharacterThemeProvider: React.FC<CharacterThemeProviderProps> = ({
     });
     
     // Add theme class to body
-    document.body.className = document.body.className.replace(/character-theme-\w+/g, '');
+    document.body.className = document.body.className.replace(/character-theme-[\w-]+/g, '');
     document.body.classList.add(`character-theme-${theme.id}`);
     console.log('Added body class:', `character-theme-${theme.id}`);
     
@@ -68,28 +68,28 @@ export const CharacterThemeProvider: React.FC<CharacterThemeProviderProps> = ({
     });
     
     // Remove theme class from body
-    document.body.className = document.body.className.replace(/character-theme-\w+/g, '');
+    document.body.className = document.body.className.replace(/character-theme-[\w-]+/g, '');
     
     setCurrentTheme(null);
   };
 
-  // Load theme when characterId changes
+  // Load theme when locationId changes
   useEffect(() => {
-    console.log('CharacterThemeProvider: characterId changed to:', characterId);
-    if (characterId) {
+    console.log('LocationThemeProvider: locationId changed to:', locationId);
+    if (locationId) {
       // Dynamic import to avoid circular dependencies
-      import('@/data/character-themes').then(({ getCharacterTheme }) => {
-        const theme = getCharacterTheme(characterId);
-        console.log('Loaded theme for', characterId, ':', theme);
+      import('@/data/location-themes').then(({ getLocationTheme }) => {
+        const theme = getLocationTheme(locationId);
+        console.log('Loaded theme for', locationId, ':', theme);
         if (theme) {
           applyTheme(theme);
         } else {
-          console.log('No theme found for', characterId, ', resetting theme');
+          console.log('No theme found for', locationId, ', resetting theme');
           resetTheme();
         }
       });
     } else {
-      console.log('No characterId, resetting theme');
+      console.log('No locationId, resetting theme');
       resetTheme();
     }
 
@@ -97,9 +97,9 @@ export const CharacterThemeProvider: React.FC<CharacterThemeProviderProps> = ({
     return () => {
       resetTheme();
     };
-  }, [characterId]);
+  }, [locationId]);
 
-  const value: CharacterThemeContextType = {
+  const value: LocationThemeContextType = {
     currentTheme,
     setCurrentTheme,
     applyTheme,
@@ -107,16 +107,16 @@ export const CharacterThemeProvider: React.FC<CharacterThemeProviderProps> = ({
   };
 
   return (
-    <CharacterThemeContext.Provider value={value}>
+    <LocationThemeContext.Provider value={value}>
       {children}
-    </CharacterThemeContext.Provider>
+    </LocationThemeContext.Provider>
   );
 };
 
-export const useCharacterTheme = (): CharacterThemeContextType => {
-  const context = useContext(CharacterThemeContext);
+export const useLocationTheme = (): LocationThemeContextType => {
+  const context = useContext(LocationThemeContext);
   if (context === undefined) {
-    // Return a default context if not within provider (to allow conditional usage)
+    // Return a default context if not within provider
     return {
       currentTheme: null,
       setCurrentTheme: () => {},
@@ -126,3 +126,4 @@ export const useCharacterTheme = (): CharacterThemeContextType => {
   }
   return context;
 };
+

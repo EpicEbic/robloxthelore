@@ -57,6 +57,10 @@ export class ParticleFactory {
         return this.createClockParticle(config);
       case 'sparkle':
         return this.createSparkleParticle(config);
+      case 'cosmic-wave':
+        return this.createCosmicWaveParticle(config);
+      case 'stardust':
+        return this.createStardustParticle(config);
       default:
         return null;
     }
@@ -331,6 +335,113 @@ export class ParticleFactory {
       life: 0,
       maxLife: maxLife,
       type: 'sparkle',
+      side
+    };
+  }
+
+  private static createCosmicWaveParticle(config: ParticleSystemConfig): Particle {
+    const { canvas, theme, side, particleConfig } = config;
+    const { particles } = theme;
+
+    // Random colors: purple, pink, and blue shades
+    const colors = [
+      '#e879f9', // Bright fuchsia
+      '#f0abfc', // Light fuchsia  
+      '#c084fc', // Purple
+      '#a855f7', // Deeper purple
+      '#d946ef', // Magenta
+      '#ec4899', // Hot pink
+      '#8b5cf6', // Violet
+      '#6366f1', // Indigo
+      '#3b82f6', // Blue
+      '#60a5fa', // Light blue
+    ];
+    
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+    // Spawn anywhere in the canvas for full coverage
+    const spawnX = Math.random() * canvas.width;
+    const spawnY = Math.random() * canvas.height;
+
+    // Use configuration for velocity ranges
+    const vx = particleConfig.baseVelocity.x[0] + Math.random() * (particleConfig.baseVelocity.x[1] - particleConfig.baseVelocity.x[0]);
+    const vy = particleConfig.baseVelocity.y[0] + Math.random() * (particleConfig.baseVelocity.y[1] - particleConfig.baseVelocity.y[0]);
+
+    // Use configuration for size range
+    const size = particleConfig.sizeRange[0] + Math.random() * (particleConfig.sizeRange[1] - particleConfig.sizeRange[0]);
+
+    // Use configuration for life range
+    const maxLife = particleConfig.lifeRange[0] + Math.random() * (particleConfig.lifeRange[1] - particleConfig.lifeRange[0]);
+
+    // Use configuration for opacity range
+    const opacity = particleConfig.opacityRange[0] + Math.random() * (particleConfig.opacityRange[1] - particleConfig.opacityRange[0]);
+
+    return {
+      x: spawnX,
+      y: spawnY,
+      vx: vx,
+      vy: vy,
+      size: size,
+      opacity: opacity * particles.intensity,
+      color: randomColor,
+      life: 0,
+      maxLife: maxLife,
+      type: 'cosmic-wave',
+      side,
+      fadeStartTime: particleConfig.fadeStartDelay,
+      swayPhase: Math.random() * Math.PI * 2 // Random starting phase for wave motion
+    };
+  }
+
+  private static createStardustParticle(config: ParticleSystemConfig): Particle {
+    const { canvas, theme, side, particleConfig } = config;
+    const { particles } = theme;
+
+    // Random colors: purple, pink, and blue shades for stardust
+    const colors = [
+      '#e879f9', // Bright fuchsia
+      '#f0abfc', // Light fuchsia  
+      '#c084fc', // Purple
+      '#a855f7', // Deeper purple
+      '#d946ef', // Magenta
+      '#ec4899', // Hot pink
+      '#8b5cf6', // Violet
+      '#6366f1', // Indigo
+      '#3b82f6', // Blue
+      '#60a5fa', // Light blue
+      '#ffffff', // White for extra sparkle
+    ];
+    
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+    // Spawn anywhere in the canvas
+    const spawnX = Math.random() * canvas.width;
+    const spawnY = Math.random() * canvas.height;
+
+    // Use configuration for velocity ranges - fast streaking particles
+    const vx = particleConfig.baseVelocity.x[0] + Math.random() * (particleConfig.baseVelocity.x[1] - particleConfig.baseVelocity.x[0]);
+    const vy = particleConfig.baseVelocity.y[0] + Math.random() * (particleConfig.baseVelocity.y[1] - particleConfig.baseVelocity.y[0]);
+
+    // Use configuration for size range - tiny particles
+    const size = particleConfig.sizeRange[0] + Math.random() * (particleConfig.sizeRange[1] - particleConfig.sizeRange[0]);
+
+    // Use configuration for life range
+    const maxLife = particleConfig.lifeRange[0] + Math.random() * (particleConfig.lifeRange[1] - particleConfig.lifeRange[0]);
+
+    // Use configuration for opacity range
+    const opacity = particleConfig.opacityRange[0] + Math.random() * (particleConfig.opacityRange[1] - particleConfig.opacityRange[0]);
+
+    return {
+      x: spawnX,
+      y: spawnY,
+      vx: vx,
+      vy: vy,
+      size: size,
+      opacity: opacity * particles.intensity,
+      color: randomColor,
+      life: 0,
+      maxLife: maxLife,
+      type: 'stardust',
       side
     };
   }

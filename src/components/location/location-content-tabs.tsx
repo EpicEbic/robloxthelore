@@ -1,4 +1,5 @@
 
+import { BookOpen, Map, Lightbulb } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { LocationContentStyles } from "./location-content-styles";
@@ -21,21 +22,30 @@ export function LocationContentTabs({ sections, currentEntryId }: LocationConten
   const [currentSegment, setCurrentSegment] = useState('segment-0');
 
   return (
-    <div className="relative bg-background">
-      <LocationContentStyles />
-      
-      <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-6 gap-3 p-3">
-          <TabsTrigger value="overview" className="text-sm sm:text-base px-4 py-3 sm:py-4">General</TabsTrigger>
-          <TabsTrigger value="segments" className="text-sm sm:text-base px-4 py-3 sm:py-4">Segments</TabsTrigger>
-          <TabsTrigger value="trivia" className="text-sm sm:text-base px-4 py-3 sm:py-4">Trivia</TabsTrigger>
+    <div className="min-h-0 flex flex-col">
+      <Tabs defaultValue="overview" className="w-full h-full flex flex-col">
+        <TabsList className="mb-6 w-full flex flex-wrap justify-center lg:w-auto lg:mx-auto gap-3 p-3 h-auto rounded-xl">
+          <TabsTrigger value="overview" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
+            <BookOpen className="h-5 w-5 flex-shrink-0" />
+            <span>General</span>
+          </TabsTrigger>
+          <TabsTrigger value="segments" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
+            <Map className="h-5 w-5 flex-shrink-0" />
+            <span>Segments</span>
+          </TabsTrigger>
+          <TabsTrigger value="trivia" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
+            <Lightbulb className="h-5 w-5 flex-shrink-0" />
+            <span>Trivia</span>
+          </TabsTrigger>
         </TabsList>
         
-        <TabsContent value="overview" className="space-y-4">
+        <LocationContentStyles />
+        
+        <TabsContent value="overview" className="space-y-4 mt-0 flex-1">
           <LocationOverviewTab overview={sections.overview} currentEntryId={currentEntryId} />
         </TabsContent>
         
-        <TabsContent value="segments" className="space-y-4">
+        <TabsContent value="segments" className="space-y-4 mt-0 flex-1">
           <LocationSegmentsTab 
             segments={sections.segments}
             currentSegment={currentSegment}
@@ -43,7 +53,7 @@ export function LocationContentTabs({ sections, currentEntryId }: LocationConten
           />
         </TabsContent>
         
-        <TabsContent value="trivia" className="space-y-4">
+        <TabsContent value="trivia" className="space-y-4 mt-0 flex-1">
           <LocationTriviaTab trivia={sections.trivia} currentEntryId={currentEntryId} />
         </TabsContent>
       </Tabs>

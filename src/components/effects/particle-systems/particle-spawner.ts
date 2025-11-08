@@ -47,6 +47,8 @@ export class ParticleSpawner {
         return 'grain'; // Rice spawns grain particles
       case 'nauli-parter': // Fixed the ID to match the theme
         return 'radio'; // Nauli spawns radio particles
+      case 'the-bloxiverse':
+        return 'stardust'; // Bloxiverse primarily spawns stardust (with some waves)
       default:
         return theme.particles.type; // Use theme's default type
     }
@@ -107,6 +109,17 @@ export class ParticleSpawner {
         // 20% sparkles (purple circles)
         const sparkleConfig = ParticleConfigManager.getParticleConfig(theme, 'sparkle', config.performanceMode, config.side);
         return ParticleFactory.createParticle({ ...config, particleConfig: sparkleConfig }, 'sparkle');
+      }
+    } else if (theme.id === 'the-bloxiverse') {
+      const particleType = Math.random();
+      if (particleType < 0.3) {
+        // 30% cosmic waves
+        const waveConfig = ParticleConfigManager.getParticleConfig(theme, 'cosmic-wave', config.performanceMode, config.side);
+        return ParticleFactory.createParticle({ ...config, particleConfig: waveConfig }, 'cosmic-wave');
+      } else {
+        // 70% stardust
+        const stardustConfig = ParticleConfigManager.getParticleConfig(theme, 'stardust', config.performanceMode, config.side);
+        return ParticleFactory.createParticle({ ...config, particleConfig: stardustConfig }, 'stardust');
       }
     } else {
       // For other characters, use their default particle type

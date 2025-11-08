@@ -208,6 +208,97 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           type: 'lightning'
         };
 
+      case 'cosmic-wave': {
+        // Random colors: purple, pink, and blue shades
+        const colors = [
+          '#e879f9', '#f0abfc', '#c084fc', '#a855f7', '#d946ef',
+          '#ec4899', '#8b5cf6', '#6366f1', '#3b82f6', '#60a5fa'
+        ];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 1.0, // -0.5 to 0.5
+          vy: (Math.random() - 0.5) * 0.6, // -0.3 to 0.3
+          size: 100 + Math.random() * 100, // 100-200px (twice as large)
+          opacity: particles.intensity * (0.2 + Math.random() * 0.2), // 0.2-0.4
+          color: randomColor,
+          life: 0,
+          maxLife: 600 + Math.random() * 300, // 10-15 seconds
+          type: 'cosmic-wave',
+          swayPhase: Math.random() * Math.PI * 2
+        };
+      }
+
+      case 'shooting-star': {
+        // Shooting stars always spawn from edges and shoot across
+        const side = Math.floor(Math.random() * 4); // 0=top, 1=right, 2=bottom, 3=left
+        let startX, startY, vx, vy;
+        
+        switch (side) {
+          case 0: // Top
+            startX = Math.random() * canvas.width;
+            startY = -20;
+            vx = (Math.random() - 0.5) * 8;
+            vy = 8 + Math.random() * 4;
+            break;
+          case 1: // Right
+            startX = canvas.width + 20;
+            startY = Math.random() * canvas.height;
+            vx = -(8 + Math.random() * 4);
+            vy = (Math.random() - 0.5) * 8;
+            break;
+          case 2: // Bottom
+            startX = Math.random() * canvas.width;
+            startY = canvas.height + 20;
+            vx = (Math.random() - 0.5) * 8;
+            vy = -(8 + Math.random() * 4);
+            break;
+          default: // Left
+            startX = -20;
+            startY = Math.random() * canvas.height;
+            vx = 8 + Math.random() * 4;
+            vy = (Math.random() - 0.5) * 8;
+            break;
+        }
+        
+        return {
+          x: startX,
+          y: startY,
+          vx: vx,
+          vy: vy,
+          size: 3 + Math.random() * 2, // 3-5px
+          opacity: particles.intensity * (0.8 + Math.random() * 0.2), // 0.8-1.0
+          color: '#ffffff', // Always white
+          life: 0,
+          maxLife: 180 + Math.random() * 120, // 3-5 seconds
+          type: 'shooting-star'
+        };
+      }
+
+      case 'stardust': {
+        // Random colors: purple, pink, blue, and white
+        const colors = [
+          '#e879f9', '#f0abfc', '#c084fc', '#a855f7', '#d946ef',
+          '#ec4899', '#8b5cf6', '#6366f1', '#3b82f6', '#60a5fa', '#ffffff'
+        ];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 5.0, // -2.5 to 2.5
+          vy: (Math.random() - 0.5) * 5.0, // -2.5 to 2.5
+          size: 1 + Math.random() * 2, // 1-3px
+          opacity: particles.intensity * (0.4 + Math.random() * 0.4), // 0.4-0.8
+          color: randomColor,
+          life: 0,
+          maxLife: 120 + Math.random() * 120, // 2-4 seconds
+          type: 'stardust'
+        };
+      }
+
       default:
         return {
           x: Math.random() * canvas.width,
@@ -303,6 +394,60 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           particle.opacity = 0.9 * (1 - particle.life / particle.maxLife);
           break;
 
+        case 'cosmic-wave':
+          // Move particle gently
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          
+          // Update sway phase
+          if (particle.swayPhase !== undefined) {
+            particle.swayPhase += 0.02;
+          }
+          
+          // Add gentle drift
+          particle.vx += (Math.random() - 0.5) * 0.02;
+          particle.vy += (Math.random() - 0.5) * 0.02;
+          
+          // Slow fade in/out
+          if (particle.life < 60) {
+            particle.opacity = (particle.life / 60) * 0.3;
+          } else if (particle.life > particle.maxLife - 120) {
+            particle.opacity = ((particle.maxLife - particle.life) / 120) * 0.3;
+          } else {
+            particle.opacity = 0.3;
+          }
+          break;
+
+        case 'stardust':
+          // Move particle quickly
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          
+          // Quick fade in/out
+          if (particle.life < 30) {
+            particle.opacity = (particle.life / 30) * 0.7;
+          } else if (particle.life > particle.maxLife - 60) {
+            particle.opacity = ((particle.maxLife - particle.life) / 60) * 0.7;
+          } else {
+            particle.opacity = 0.7;
+          }
+          break;
+
+        case 'shooting-star':
+          // Move very quickly across screen
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          
+          // Quick fade in at start, maintain brightness, then fade out
+          if (particle.life < 20) {
+            particle.opacity = (particle.life / 20) * 0.9;
+          } else if (particle.life > particle.maxLife - 40) {
+            particle.opacity = ((particle.maxLife - particle.life) / 40) * 0.9;
+          } else {
+            particle.opacity = 0.9;
+          }
+          break;
+
         default:
           particle.x += particle.vx;
           particle.y += particle.vy;
@@ -335,6 +480,21 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           particle.width = 2 + Math.random() * 1.5;
           particle.height = 5 + Math.random() * 3;
         }
+      } else if (particle.type === 'cosmic-wave' || particle.type === 'stardust') {
+        // Wrap around screen edges
+        if (particle.x < -particle.size * 2) {
+          particle.x = canvas.width + particle.size * 2;
+        } else if (particle.x > canvas.width + particle.size * 2) {
+          particle.x = -particle.size * 2;
+        }
+        if (particle.y < -particle.size * 2) {
+          particle.y = canvas.height + particle.size * 2;
+        } else if (particle.y > canvas.height + particle.size * 2) {
+          particle.y = -particle.size * 2;
+        }
+      } else if (particle.type === 'shooting-star') {
+        // Remove shooting stars when they go off screen
+        // No wrapping - they should disappear
       } else {
         // For other particle types, wrap around screen edges
         if (particle.x < -50) particle.x = canvas.width + 50;
@@ -354,6 +514,10 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       spawnChance = 0.08; // 8% chance for speed lines (more frequent)
     } else if (theme.particles.type === 'grain') {
       spawnChance = 0.12; // slightly higher to reach desired count smoothly
+    } else if (theme.particles.type === 'cosmic-wave') {
+      spawnChance = 0.15; // 15% chance for cosmic effects (high spawn for stardust)
+    } else if (theme.particles.type === 'stardust') {
+      spawnChance = 0.15; // 15% chance for cosmic effects
     }
     
     // Adjust spawn rates based on performance mode
@@ -366,8 +530,25 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
                                 Math.floor(maxParticles * 0.4);
     
     if (Math.random() < adjustedSpawnChance && particlesRef.current.length < adjustedMaxParticles) {
+      // For The Bloxiverse, create mixed particle types (cosmic waves + stardust + shooting stars)
+      if (theme.id === 'the-bloxiverse') {
+        const particleType = Math.random();
+        if (particleType < 0.2) {
+          // 20% cosmic waves
+          const waveParticle = createParticle({ ...theme, particles: { ...theme.particles, type: 'cosmic-wave' } });
+          particlesRef.current.push(waveParticle);
+        } else if (particleType < 0.35) {
+          // 15% shooting stars
+          const shootingStarParticle = createParticle({ ...theme, particles: { ...theme.particles, type: 'shooting-star' } });
+          particlesRef.current.push(shootingStarParticle);
+        } else {
+          // 65% stardust
+          const stardustParticle = createParticle({ ...theme, particles: { ...theme.particles, type: 'stardust' } });
+          particlesRef.current.push(stardustParticle);
+        }
+      }
       // For Caesar, create mixed particle types (flow + lightning)
-      if (theme.id === 'caesar-bloxwright') {
+      else if (theme.id === 'caesar-bloxwright') {
         const particleType = Math.random();
         if (particleType < 0.7) {
           // 70% flow particles
@@ -584,6 +765,154 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           
           ctx.restore();
           break;
+
+        case 'cosmic-wave': {
+          ctx.save();
+          
+          // Draw multiple concentric rippling waves
+          const numRipples = 3;
+          const time = particle.life * 0.05;
+          
+          for (let i = 0; i < numRipples; i++) {
+            const ripplePhase = (i / numRipples) * Math.PI * 2;
+            const rippleSize = particle.size * (1 + i * 0.4);
+            const rippleOpacity = particle.opacity * (1 - i * 0.3);
+            
+            // Create gradient for each ripple
+            const gradient = ctx.createRadialGradient(
+              particle.x,
+              particle.y,
+              0,
+              particle.x,
+              particle.y,
+              rippleSize
+            );
+            
+            // Use particle's assigned color with transparency
+            gradient.addColorStop(0, particle.color + Math.floor(rippleOpacity * 100).toString(16).padStart(2, '0'));
+            gradient.addColorStop(0.6, particle.color + Math.floor(rippleOpacity * 60).toString(16).padStart(2, '0'));
+            gradient.addColorStop(1, particle.color + '00');
+            
+            ctx.fillStyle = gradient;
+            ctx.globalAlpha = rippleOpacity;
+            
+            // Add pulsing glow
+            ctx.shadowBlur = 40;
+            ctx.shadowColor = particle.color;
+            
+            // Draw wavy, organic shape
+            ctx.beginPath();
+            const points = 8;
+            for (let j = 0; j <= points; j++) {
+              const angle = (j / points) * Math.PI * 2;
+              const wave = Math.sin(angle * 3 + time + ripplePhase) * 0.3;
+              const radius = rippleSize * (1 + wave);
+              const x = particle.x + Math.cos(angle) * radius;
+              const y = particle.y + Math.sin(angle) * radius * 0.7; // Elongate vertically
+              
+              if (j === 0) {
+                ctx.moveTo(x, y);
+              } else {
+                ctx.lineTo(x, y);
+              }
+            }
+            ctx.closePath();
+            ctx.fill();
+          }
+          
+          ctx.restore();
+          break;
+        }
+
+        case 'stardust': {
+          ctx.save();
+          
+          // Add glow effect
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = particle.color;
+          
+          // Draw small circular particle
+          ctx.fillStyle = particle.color;
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Add motion trail
+          const trailLength = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy) * 3;
+          if (trailLength > 0) {
+            const gradient = ctx.createLinearGradient(
+              particle.x,
+              particle.y,
+              particle.x - particle.vx * 3,
+              particle.y - particle.vy * 3
+            );
+            
+            gradient.addColorStop(0, particle.color);
+            gradient.addColorStop(1, particle.color + '00');
+            
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = particle.size * 0.8;
+            ctx.lineCap = 'round';
+            
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(particle.x - particle.vx * 2, particle.y - particle.vy * 2);
+            ctx.stroke();
+          }
+          
+          ctx.restore();
+          break;
+        }
+
+        case 'shooting-star': {
+          ctx.save();
+          
+          // Bright white glow
+          ctx.shadowBlur = 20;
+          ctx.shadowColor = '#ffffff';
+          
+          // Draw bright core
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Add long trailing streak
+          const trailLength = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
+          if (trailLength > 0) {
+            const gradient = ctx.createLinearGradient(
+              particle.x,
+              particle.y,
+              particle.x - particle.vx * 8,
+              particle.y - particle.vy * 8
+            );
+            
+            gradient.addColorStop(0, '#ffffff');
+            gradient.addColorStop(0.3, '#ffffff99');
+            gradient.addColorStop(0.7, '#ffffff44');
+            gradient.addColorStop(1, '#ffffff00');
+            
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = particle.size * 1.5;
+            ctx.lineCap = 'round';
+            
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(particle.x - particle.vx * 6, particle.y - particle.vy * 6);
+            ctx.stroke();
+            
+            // Add secondary fainter trail
+            ctx.globalAlpha = 0.5;
+            ctx.lineWidth = particle.size * 2;
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(particle.x - particle.vx * 8, particle.y - particle.vy * 8);
+            ctx.stroke();
+          }
+          
+          ctx.restore();
+          break;
+        }
 
         case 'lightning':
           // Draw lightning that starts as a ball and expands/branches outward

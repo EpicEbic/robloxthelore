@@ -370,5 +370,18 @@ export const caesarBloxwright: WikiEntry = {
   },
   
   abilityName: "The Electrogravitic Flow",
-  stats: createCharacterStats("C", "B", "C", "S")
+  stats: createCharacterStats("C", "B", "C", "S", {
+    // Offense subcategories
+    power: "C",
+    penetration: "C",
+    potency: "D",
+    // Defense subcategories
+    guard: "B",
+    evasion: "D",
+    mitigation: "C",
+    // Utility subcategories
+    versatility: "C",
+    support: "D",
+    manipulation: "C"
+  })
 };

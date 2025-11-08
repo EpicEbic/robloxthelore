@@ -9,14 +9,16 @@ interface LocationOverviewTabProps {
 
 export function LocationOverviewTab({ overview, currentEntryId }: LocationOverviewTabProps) {
   return (
-    <Card>
-      <CardContent className="prose dark:prose-invert max-w-none pt-6">
-        {overview.map((paragraph, index) => (
-          <p key={index} className="mb-4 leading-relaxed text-base text-foreground force-text-wrap">
-            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-          </p>
-        ))}
-      </CardContent>
-    </Card>
+    <div className="space-y-4">
+      <div className="bg-card rounded-xl p-6 border min-w-0">
+        <div className="space-y-4">
+          {overview.map((paragraph, index) => (
+            <p key={index} className="leading-relaxed text-base text-foreground/90 force-text-wrap">
+              <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

@@ -297,49 +297,151 @@ export default function StatisticInfoPage() {
     }
   };
 
-  // Ability Statistics structure (to be updated later with subcategories)
+  // Ability Statistics structure with subcategories
   const abilityStats = {
     "Offense": {
-      description: "Measures a character's ability to deal damage and harm opponents through their abilities, weapons, or techniques.",
+      description: "An ability's potential for injury and destruction.",
+      subcategories: [
+        { 
+          name: "Power", 
+          description: "The raw strength and destructive potential of an ability.",
+          grades: {
+            "Ø": "This ability's raw strength and destructive potential transcends all known limits, capable of obliterating entire Worlds or portions of the Bloxiverse with trivial effort. The destructive power is immeasurable and effectively infinite.",
+            "S": "This ability bears world-shattering destructive power, capable of reshaping continents of land or puncturing even Bloxite-reinforced structures with relative ease. The raw strength enables devastating attacks that can level entire cities.",
+            "A": "This ability can, with some effort, level entire portions of larger cities or obliterate smaller settlements with enough focus. The destructive potential is remarkable and can easily destroy reinforced structures.",
+            "B": "This ability has little difficulty levelling large buildings, and even structures that have been reinforced with enough power. The raw strength enables significant destruction through focused attacks.",
+            "C": "This ability enables the destruction of smaller-scale structures and vehicles, such as shops or cars. The destructive potential is notable but limited to moderate-scale targets.",
+            "D": "This ability grants notable increases in destructive potential, allowing for a wielder to damage or destroy small objects such as cars or armored doors with effort. The power is above average but not exceptional.",
+            "E": "This ability grants a slightly notable boost in power over civilians with no power to their name. May be able to damage or destroy objects and terrain made of weaker metals, stone, and wood.",
+            "F": "This ability does not grant any boosts or increases in a user's destructive potential, whatsoever. Comparable damage to that of a civilian."
+          }
+        },
+        { 
+          name: "Penetration", 
+          description: "How easy an ability can bypass the defenses of others.",
+          grades: {
+            "Ø": "This ability's capability to bypass defenses transcends all forms of protection, allowing attacks to connect with absolute power. They can bypass and ignore any and all lines of defense, no matter what conditions may be in place.",
+            "S": "This ability has no difficulty obliterating all known lines of defense, regardless of abilities or materials. Their penetrating power enables them to always attack with maximum lethality, with no amount of Bloxite armor saving them.",
+            "A": "This ability can tear through the strongest of defenses with ease, even multi-layered levels of equipment and other abilities stacked into the mix. Bloxite-reinforced structures and armor may hold, but nothing below stands much of a chance.",
+            "B": "This ability can easily penetrate specialized equipment and abilities, shattering through lines of defense as they're cut like butter. At this stage, only the toughest lines of defense and extremely defensive-oriented abilities may resist the fine-tuned destruction this ability can issue.",
+            "C": "This ability can bypass most standard materials, as well as medium-class armors formed of stronger metals such as iron and titanium. The penetrating power makes it easy to overcome most targets who aren't using advanced equipment or specialized abilities.",
+            "D": "This ability can bypass most low-end abilities as well as medium-class armor, including those formed of weaker materials such as stone and wood. Through focus and effort, flimsy armor formed of gold or other weaker metal may also be bypassed.",
+            "E": "This ability has above-average penetrating power, enabling it to bypass the weakest of barriers, or targets wearing cheap protective gear formed of wood-level material.",
+            "F": "This ability has no capabilities to penetrate the defenses of others by any means, at least beyond that of typical civilians."
+          }
+        },
+        { 
+          name: "Potency", 
+          description: "How long the damaging or dangerous effects of an ability linger, and how deadly they are.",
       grades: {
-        "Ø": "An ability with transcendent power that carries strength immeasurable by standard metric units. Entire worlds or portions of the Bloxiverse would be trivial to wipe clean, and the user may be capable of obliterating esoteric materials such as concepts.",
-        "S": "An ability that bears world-shattering destructive power, likely capable of reshaping continents of land or puncturing even Bloxite-reinforced structures.",
-        "A": "An ability that, with some effort, could level entire portions of larger cities or obliterate smaller settlements with enough focus.",
-        "B": "An ability that has little difficulty levelling large buildings, and even structures that have been reinforced with enough power.",
-        "C": "An ability that enables the destruction of smaller-scale structures and vehicles, such as shops or cars.",
-        "D": "An ability granting notable increases in destructive potential, allowing for a wielder to damage or destroy small objects such as cars or armored doors with effort.",
-        "E": "An ability that grants a slightly notable boost in power over civilians with no power to their name. May be able to damage or destroy objects and terrain made of weaker metals, stone, and wood.",
-        "F": "An ability that does not grant any boosts or increases in a user's destructive potential, whatsoever. Comparable damage to that of a civilian."
-      }
+            "Ø": "This ability's damaging or dangerous effects are permanent and unending, persisting indefinitely regardless of time or intervention. The lingering effects are so deadly that they cannot be mitigated or reversed by any means.",
+            "S": "This ability's effects linger for extremely long periods, often persisting for days, weeks, or even permanently without specialized intervention. The dangerous effects are exceptionally deadly and difficult to counteract.",
+            "A": "This ability's effects can persist for extended periods, often lasting hours or even days before naturally dissipating. The lingering effects are quite dangerous and may require specialized treatment to mitigate.",
+            "B": "This ability's effects can linger for moderate periods, typically lasting minutes to hours depending on the severity. The dangerous effects are notable and may require attention to fully resolve.",
+            "C": "This ability's effects can persist for short periods, typically lasting several minutes before naturally fading. The lingering effects are moderately dangerous but manageable with time.",
+            "D": "This ability's effects may linger briefly, typically lasting a minute or two before dissipating. The dangerous effects are mild and often resolve on their own.",
+            "E": "This ability's effects linger for only very short periods, typically lasting seconds before fading. The dangerous effects are minimal and rarely cause lasting issues.",
+            "F": "This ability's effects do not linger at all, dissipating immediately or within moments. The effects are transient and pose no lasting danger."
+          }
+        }
+      ]
     },
     "Defense": {
-      description: "Represents how well a character can protect themselves from incoming attacks, whether through armor, shields, or defensive abilities.",
+      description: "An ability's potential to defend the user or others.",
+      subcategories: [
+        { 
+          name: "Guard", 
+          description: "How well an ability can directly defend against damage, through shields, barriers, etc.",
+          grades: {
+            "Ø": "This ability grants an absolute defense, preventing any and all conceivable forms of harm from ever inflicting injury on a user. This protection may be extendable to other beings or objects beyond the user themselves, and is effectively impenetrable.",
+            "S": "This ability grants the user a means to defend themself against many or all standard forms of harm, including physical trauma, ability-based trauma. Rail-cannon impacts and mountain-shattering blows are tolerable in smaller numbers. Likely capable of resisting or negating most environmental hazards such as heat, frost, radiation, and/or toxicity.",
+            "A": "This ability enables a user to defend themselves against a majority of stronger blunt-force trauma, and ability-based trauma. Can likely endure most weaker explosives, and ability-amplified physical attacks. Likely resistant to one or more environmental hazards, such as heat, frost, and/or electricity.",
+            "B": "This ability allows the user to protect themselves against a majority of standard blunt-force trauma, and certain abilities. May resist certain weak environmental hazards, such as fire or frost. The defensive capabilities are solid and reliable.",
+            "C": "This ability grants the user a decent means to defend themselves, typically against common physical-based attacks. It may be able to resist the effects of certain abilities under specific circumstances, though not consistently.",
+            "D": "This ability grants a notable defense against weaker forms of physical-based damage including punches and kicks, and weaker firearms. Very situationally, it may work as a form of defense against other abilities on a weaker scale.",
+            "E": "This ability grants a slight enhancement to a user's defense, typically against extremely weak forms of blunt-force trauma, such as punches and kicks. May be able to tolerate weaker firearms. Likely ineffective against ability-based attacks.",
+            "F": "This ability offers no defensive applications in combat whatsoever, comparable to that of a civilian."
+          }
+        },
+        { 
+          name: "Evasion", 
+          description: "How well a Bloxian can evade danger, through mobility, phasing, misdirection, etc.",
+          grades: {
+            "Ø": "This ability enables a Bloxian to evade danger through means that transcend physical limitations, allowing them to be completely untouchable and impossible to target. They can avoid any and all forms of harm through mobility, phasing, misdirection, or other esoteric means.",
+            "S": "This ability enables a Bloxian to evade danger with near-perfect efficiency, through exceptional mobility, phasing, or misdirection. They become nearly impossible to hit, even by the fastest of attacks or most precise targeting systems.",
+            "A": "This ability enables a Bloxian to evade danger with remarkable effectiveness, through high-speed mobility, brief phasing, or effective misdirection. They can avoid most attacks and threats with relative ease.",
+            "B": "This ability enables a Bloxian to evade danger with good effectiveness, through improved mobility, situational phasing, or tactical misdirection. They can avoid many attacks, though not all.",
+            "C": "This ability enables a Bloxian to evade danger with moderate effectiveness, through enhanced mobility or basic misdirection. They can avoid some attacks but remain vulnerable to faster or more precise threats.",
+            "D": "This ability enables a Bloxian to evade danger with limited effectiveness, through slight mobility improvements or simple misdirection. They can avoid weak attacks but struggle against stronger or faster threats.",
+            "E": "This ability enables a Bloxian to evade danger with minimal effectiveness, providing only slight improvements to mobility or basic misdirection. The evasion capabilities are barely above civilian level.",
+            "F": "This ability offers no means to evade danger, providing no mobility, phasing, or misdirection benefits. The user is as vulnerable as a civilian."
+          }
+        },
+        { 
+          name: "Mitigation", 
+          description: "How well an ability can mitigate harm after it has already occurred, through healing, dampening, etc.",
       grades: {
-        "Ø": "An ability that grants an absolute defense, preventing any and all conceivable forms of harm from ever inflicting injury on a user. This protection may be extendable to other beings or objects beyond the user themselves.",
-        "S": "An ability granting the user a means to defend themself against many or all standard forms of harm, including physical trauma, ability-based trauma. Rail-cannon impacts and mountain-shattering blows are tolerable in smaller numbers. Likely capable of resisting or negating most environmental hazards such as heat, frost, radiation, and/or toxicity.",
-        "A": "An ability that enables a user to defend themselves against a majority of stronger blunt-force trauma, and ability-based trauma. Can likely endure most weaker explosives, and ability-amplified physical attacks. Likely resistant to one or more environmental hazards, such as heat, frost, and/or electricity.",
-        "B": "An ability which allows the user to protect themselves against a majority of standard blunt-force trauma, and certain abilities. May resist certain weak environmental hazards, such as fire or frost.",
-        "C": "An ability granting the user a decent means to defend themselves, typically against common physical-based attacks. It may be able to resist the effects of certain abilities under specific circumstances.",
-        "D": "An ability granting a notable defense against weaker forms of physical-based damage including punches and kicks, and weaker firearms. Very situationally, it may work as a form of defense against other abilities on a weaker scale.",
-        "E": "An ability granting a slight enhancement to a user's defense, typically against extremely weak forms of blunt-force trauma, such as punches and kicks. May be able to tolerate weaker firearms. Likely ineffective against ability-based attacks.",
-        "F": "An ability that offers no defensive applications in combat whatsoever, comparable to that of a civilian."
-      }
+            "Ø": "This ability can completely mitigate any harm after it has occurred, regardless of severity or type. Through healing, dampening, or other means, all injuries and negative effects can be instantly and fully reversed, even from fatal wounds or complete destruction.",
+            "S": "This ability can mitigate severe harm with exceptional efficiency, healing fatal injuries or dampening catastrophic effects within seconds. The mitigation capabilities are remarkable and can restore a user from near-death states.",
+            "A": "This ability can mitigate significant harm effectively, healing serious injuries or dampening major negative effects within minutes. The mitigation is reliable and can handle most forms of damage.",
+            "B": "This ability can mitigate moderate harm reliably, healing moderate injuries or dampening notable negative effects. The mitigation capabilities are solid and can handle common forms of damage.",
+            "C": "This ability can mitigate minor harm with decent effectiveness, healing minor injuries or dampening weak negative effects. The mitigation is functional but limited in scope.",
+            "D": "This ability can mitigate very minor harm with limited effectiveness, providing slight healing or basic dampening of weak effects. The mitigation capabilities are minimal but present.",
+            "E": "This ability can mitigate harm with minimal effectiveness, providing only the slightest of healing or dampening effects. The mitigation is barely functional and offers little benefit.",
+            "F": "This ability offers no means to mitigate harm after it has occurred, providing no healing, dampening, or recovery capabilities whatsoever."
+          }
+        }
+      ]
     },
     "Utility": {
-      description: "Evaluates the versatility and practical applications of a character's abilities outside of direct combat scenarios.",
+      description: "An ability's potential as an accessory or tool for the user.",
+      subcategories: [
+        { 
+          name: "Versatility", 
+          description: "How practical of a tool this ability is in general, in and/or out of a combat.",
+          grades: {
+            "Ø": "This ability has near-limitless potential for applications, both in and out of combat. Thought alone can accomplish a majority of the user's desires, potentially allowing them to manipulate entire segments of reality or alter causality on a whim. May be able to fathom physical materials or constructs of any scale into existence from nothing.",
+            "S": "This ability has countless practical uses in application, both in and out of combat. With negligible effort, one could perform miraculous feats such as ecosystem-reshaping, reality-scale teleportation, or alchemy allowing them to turn any material into another.",
+            "A": "This ability has remarkable utilitarian potential, likely in circumstances both related to-- and out-- of combat. Feats may include an exceptional one-fits-all tool, or offer an extremely powerful means of transportation, or perhaps heal biological entities with slight effort.",
+            "B": "This ability has smaller-scaled utilitarian applications, mostly combat-oriented. Such feats may include local-ranged teleportation, entity/structure scanning, psychic awareness or manipulation, and minor injury healing.",
+            "C": "This ability has some offensive-oriented utilitarian applications. Feats could include basic medical applications, generic scanning and/or analyzing, or minor psychic abilities.",
+            "D": "This ability has notable potential as a utility, exclusively for combat. May include sensory enhancement, improved mobility, or specialized tools applicable in certain situations or circumstances.",
+            "E": "This ability has slight enhancements to a user's potential as a utilitarian. Likely has extremely specific tools or situational abilities that are impractical unless applied in hyper-circumstantial combat situations.",
+            "F": "This ability offers no utilitarian potential in combat, equivalent and comparable to that of a civilian."
+          }
+        },
+        { 
+          name: "Support", 
+          description: "How well an ability can benefit the user or the user's allies, such as healing, boosts, etc.",
+          grades: {
+            "Ø": "This ability can provide transcendent support benefits to the user and their allies, offering unlimited healing, infinite boosts, or other benefits that can elevate any being to godlike levels. The support capabilities are effectively infinite and can affect unlimited targets.",
+            "S": "This ability can provide exceptional support benefits to the user and their allies, offering powerful healing, significant boosts, or other major benefits. The support can affect multiple targets and can dramatically enhance capabilities.",
+            "A": "This ability can provide remarkable support benefits to the user and their allies, offering strong healing, notable boosts, or other substantial benefits. The support is reliable and can significantly improve performance.",
+            "B": "This ability can provide good support benefits to the user and their allies, offering moderate healing, decent boosts, or other useful benefits. The support is functional and can improve capabilities.",
+            "C": "This ability can provide moderate support benefits to the user and their allies, offering minor healing, slight boosts, or other basic benefits. The support is helpful but limited in scope.",
+            "D": "This ability can provide limited support benefits to the user and their allies, offering very minor healing, weak boosts, or other minimal benefits. The support exists but is barely functional.",
+            "E": "This ability can provide minimal support benefits, offering only the slightest of healing or boosts that are barely noticeable. The support capabilities are essentially non-functional.",
+            "F": "This ability offers no support benefits whatsoever, providing no healing, boosts, or other assistance to the user or their allies."
+          }
+        },
+        { 
+          name: "Manipulation", 
+          description: "How well an ability can interact with the environment, systems, beings, or other miscellaneous conditions.",
       grades: {
-        "Ø": "An ability with near-limitless potential for applications, both in and out of combat. Thought alone can accomplish a majority of the user's desires, potentially allowing them to manipulate entire segments of reality or alter causality on a whim. May be able to fathom physical materials or constructs of any scale into existence from nothing.",
-        "S": "An ability that has countless practical uses in application, both in and out of combat. With negligible effort, one could perform miraculous feats such as ecosystem-reshaping, reality-scale teleportation, or alchemy allowing them to turn any material into another.",
-        "A": "An ability with remarkable utilitarian potential, likely in circumstances both related to-- and out-- of combat. Feats may include an exceptional one-fits-all tool, or offer an extremely powerful means of transportation, or perhaps heal biological entities with slight effort.",
-        "B": "An ability with smaller-scaled utilitarian applications, mostly combat-oriented. Such feats may include local-ranged teleportation, entity/structure scanning, psychic awareness or manipulation, and minor injury healing.",
-        "C": "An ability with some offensive-oriented utilitarian applications. Feats could include basic medical applications, generic scanning and/or analyzing, or minor psychic abilities.",
-        "D": "An ability with notable potential as a utility, exclusively for combat. May include sensory enhancement, improved mobility, or specialized tools applicable in certain situations or circumstances.",
-        "E": "An ability with slight enhancements to a user's potential as a utilitarian. Likely has extremely specific tools or situational abilities that are impractical unless applied in hyper-circumstantial combat situations.",
-        "F": "An ability that offers no utilitarian potential in combat, equivalent and comparable to that of a civilian."
-      }
+            "Ø": "This ability can interact with and manipulate the environment, systems, beings, or other miscellaneous conditions with transcendent power. It can control reality itself, manipulate concepts, or interact with any aspect of existence without limitation.",
+            "S": "This ability can interact with and manipulate the environment, systems, beings, or other miscellaneous conditions with exceptional power. It can control large-scale environments, manipulate complex systems, or interact with multiple beings simultaneously.",
+            "A": "This ability can interact with and manipulate the environment, systems, beings, or other miscellaneous conditions with remarkable effectiveness. It can control moderate-scale environments, manipulate standard systems, or interact with several beings.",
+            "B": "This ability can interact with and manipulate the environment, systems, beings, or other miscellaneous conditions with good effectiveness. It can control small-scale environments, manipulate basic systems, or interact with a few beings.",
+            "C": "This ability can interact with and manipulate the environment, systems, beings, or other miscellaneous conditions with moderate effectiveness. It can control limited environments, manipulate simple systems, or interact with individual beings.",
+            "D": "This ability can interact with and manipulate the environment, systems, beings, or other miscellaneous conditions with limited effectiveness. It can control very small environments, manipulate basic elements, or interact with minimal conditions.",
+            "E": "This ability can interact with and manipulate the environment, systems, beings, or other miscellaneous conditions with minimal effectiveness. It can barely control any elements or interact with the simplest of conditions.",
+            "F": "This ability offers no means to interact with or manipulate the environment, systems, beings, or other miscellaneous conditions whatsoever."
+          }
+        }
+      ]
     },
     "Potential": {
-      description: "Assesses the theoretical maximum power or growth capacity of a character's abilities under optimal conditions.",
+      description: "An ability's potential for growth and development.",
       grades: {
         "Ø": "An ability offering an infinite capacity for growth, with no conceivable limits or ceiling for improvement. With effort, one could transcend the known boundaries or limits established by reality itself.",
         "S": "An ability with near-boundless potential yet to be tapped into, with the possibility to reach planetary or cosmic levels of influence. The user may develop and improve their skills and power rapidly.",
@@ -527,11 +629,15 @@ export default function StatisticInfoPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {Object.entries(abilityStats).map(([statName, statData]) => (
+              {Object.entries(abilityStats).map(([categoryName, categoryData]) => {
+                // Check if this category has subcategories
+                const hasSubcategories = 'subcategories' in categoryData && Array.isArray(categoryData.subcategories);
+                
+                return (
                   <Collapsible
-                    key={statName}
-                  open={openStats[`ability-${statName}`]}
-                  onOpenChange={() => toggleStat(`ability-${statName}`)}
+                    key={categoryName}
+                    open={openStats[`ability-${categoryName}`]}
+                    onOpenChange={() => toggleStat(`ability-${categoryName}`)}
                   >
                     <CollapsibleTrigger className="flex items-center justify-between w-full p-5 rounded-xl border-2 bg-card/50 hover:bg-card/80 hover:shadow-lg hover:scale-[1.01] transition-all duration-200">
                       <div className="text-left flex-1">
@@ -540,49 +646,108 @@ export default function StatisticInfoPage() {
                             variant="secondary"
                             className="font-bold text-base px-3 py-1"
                           >
-                            {statName}
+                            {categoryName}
                           </Badge>
                         </div>
                         <p className="text-sm text-muted-foreground pr-4">
-                        {statData.description}
+                          {categoryData.description}
                         </p>
                       </div>
                       <ChevronDown
                         className={cn(
                           "h-6 w-6 text-primary transition-all duration-300 ease-out flex-shrink-0",
-                        openStats[`ability-${statName}`] ? "rotate-180" : "rotate-0"
+                          openStats[`ability-${categoryName}`] ? "rotate-180" : "rotate-0"
                         )}
                       />
                     </CollapsibleTrigger>
                     <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                      <div className="px-5 pb-5 pt-4">
-                        <div className="grid gap-3">
-                        {Object.entries(statData.grades).map(([grade, description]) => {
-                            const gradeInfo = grades.find((g) => g.grade === grade);
-                            return (
-                              <div
-                                key={grade}
-                                className="flex items-start space-x-3 p-4 rounded-xl border-2 bg-background/50 backdrop-blur-sm hover:shadow-md transition-shadow"
-                              >
-                                <Badge
-                                  variant="outline"
-                                  className={`text-base font-bold min-w-[40px] h-10 justify-center ${gradeInfo?.color} text-white border-none shadow-md flex-shrink-0`}
-                                >
-                                  {grade}
-                                </Badge>
-                                <div className="flex-1">
-                                  <div className="text-sm text-foreground leading-relaxed">
-                                    {description}
+                      <div className="px-5 pb-5 pt-4 space-y-3">
+                        {hasSubcategories ? (
+                          // Render with subcategories
+                          categoryData.subcategories.map((subcat) => (
+                            <Collapsible
+                              key={subcat.name}
+                              open={openStats[`subcat-ability-${categoryName}-${subcat.name}`]}
+                              onOpenChange={() => toggleStat(`subcat-ability-${categoryName}-${subcat.name}`)}
+                            >
+                              <CollapsibleTrigger className="flex items-center justify-between w-full p-4 rounded-lg border-2 bg-background/30 hover:bg-background/50 hover:shadow-md transition-all duration-200">
+                                <div className="text-left flex-1">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <Badge variant="outline" className="text-xs font-medium">
+                                      {subcat.name}
+                                    </Badge>
+                                  </div>
+                                  <p className="text-xs text-muted-foreground pr-4">
+                                    {subcat.description}
+                                  </p>
+                                </div>
+                                <ChevronDown
+                                  className={cn(
+                                    "h-5 w-5 text-primary transition-all duration-300 ease-out flex-shrink-0",
+                                    openStats[`subcat-ability-${categoryName}-${subcat.name}`] ? "rotate-180" : "rotate-0"
+                                  )}
+                                />
+                              </CollapsibleTrigger>
+                              <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                                <div className="px-4 pb-4 pt-3 mt-2 ml-4 border-l-2 border-primary/20">
+                                  <div className="grid gap-2">
+                                    {Object.entries(subcat.grades).map(([grade, description]) => {
+                                      const gradeInfo = grades.find((g) => g.grade === grade);
+                                      return (
+                                        <div
+                                          key={grade}
+                                          className="flex items-start space-x-3 p-3 rounded-lg border-2 bg-background/40 backdrop-blur-sm hover:shadow-sm transition-shadow"
+                                        >
+                                          <Badge
+                                            variant="outline"
+                                            className={`text-sm font-bold min-w-[36px] h-9 justify-center ${gradeInfo?.color} text-white border-none shadow-sm flex-shrink-0`}
+                                          >
+                                            {grade}
+                                          </Badge>
+                                          <div className="flex-1">
+                                            <div className="text-xs text-foreground leading-relaxed">
+                                              {description}
+                                            </div>
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
                                   </div>
                                 </div>
-                              </div>
-                            );
-                          })}
-                        </div>
+                              </CollapsibleContent>
+                            </Collapsible>
+                          ))
+                        ) : (
+                          // Render without subcategories (Potential)
+                          <div className="grid gap-3">
+                            {Object.entries(categoryData.grades).map(([grade, description]) => {
+                              const gradeInfo = grades.find((g) => g.grade === grade);
+                              return (
+                                <div
+                                  key={grade}
+                                  className="flex items-start space-x-3 p-4 rounded-xl border-2 bg-background/50 backdrop-blur-sm hover:shadow-md transition-shadow"
+                                >
+                                  <Badge
+                                    variant="outline"
+                                    className={`text-base font-bold min-w-[40px] h-10 justify-center ${gradeInfo?.color} text-white border-none shadow-md flex-shrink-0`}
+                                  >
+                                    {grade}
+                                  </Badge>
+                                  <div className="flex-1">
+                                    <div className="text-sm text-foreground leading-relaxed">
+                                      {description}
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
                       </div>
                     </CollapsibleContent>
                   </Collapsible>
-              ))}
+                );
+              })}
             </div>
           </CardContent>
         </Card>

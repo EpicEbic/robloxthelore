@@ -44,6 +44,8 @@ export interface ParticleSystemConfig {
   lightning: ParticleTypeConfig;
   clock: ParticleTypeConfig;
   sparkle: ParticleTypeConfig;
+  'cosmic-wave': ParticleTypeConfig;
+  stardust: ParticleTypeConfig;
 }
 
 export class ParticleConfigManager {
@@ -154,6 +156,36 @@ export class ParticleConfigManager {
       wrapAround: false,
       gravity: 0,
       drift: 0
+    },
+    
+    'cosmic-wave': {
+      spawnChance: 0.4, // Gentle, consistent spawning
+      maxParticles: 20,
+      fadeInTime: 60, // Slow fade in over 1 second
+      fadeOutTime: 120, // Slow fade out over 2 seconds
+      fadeStartDelay: 0,
+      baseVelocity: { x: [-0.5, 0.5], y: [-0.3, 0.3] }, // Gentle flow
+      sizeRange: [50, 100], // Large wave particles
+      opacityRange: [0.2, 0.4], // Very transparent for subtle effect
+      lifeRange: [600, 900], // 10-15 seconds - long-lived
+      wrapAround: true, // Wrap around to create continuous flow
+      gravity: 0,
+      drift: 0.15 // Gentle drift for organic movement
+    },
+    
+    stardust: {
+      spawnChance: 2.0, // High spawn rate for numerous particles
+      maxParticles: 80,
+      fadeInTime: 30, // Quick fade in
+      fadeOutTime: 60, // Quick fade out
+      fadeStartDelay: 0,
+      baseVelocity: { x: [-2.5, 2.5], y: [-2.5, 2.5] }, // Fast flying particles
+      sizeRange: [1, 3], // Tiny particles
+      opacityRange: [0.4, 0.8], // Visible but not too bright
+      lifeRange: [120, 240], // 2-4 seconds - short-lived
+      wrapAround: true, // Wrap around for continuous effect
+      gravity: 0,
+      drift: 0.1 // Slight drift
     }
   };
 

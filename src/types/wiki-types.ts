@@ -207,6 +207,12 @@ export interface WikiEntry {
     url: string;
     caption: string;
   }[];
+  
+  // Location-specific fields
+  locationType?: string;
+  locationSize?: string;
+  locationRegion?: string;
+  
   sections?: {
     // Character sections - flexible to support both old string format and new option types
     appearance?: string | AppearanceOption[];
@@ -246,6 +252,17 @@ export interface WikiEntry {
     defense: { label: string; value: number };
     utility: { label: string; value: number };
     potential: { label: string; value: number };
+    subcategories?: {
+      power?: { label: string; value: number };
+      penetration?: { label: string; value: number };
+      potency?: { label: string; value: number };
+      guard?: { label: string; value: number };
+      evasion?: { label: string; value: number };
+      mitigation?: { label: string; value: number };
+      versatility?: { label: string; value: number };
+      support?: { label: string; value: number };
+      manipulation?: { label: string; value: number };
+    };
   };
   
   // Ability name for character entries

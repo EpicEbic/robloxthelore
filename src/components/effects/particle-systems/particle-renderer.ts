@@ -29,6 +29,12 @@ export class ParticleRenderer {
       case 'sparkle':
         this.renderSparkleParticle(ctx, particle);
         break;
+      case 'cosmic-wave':
+        this.renderCosmicWaveParticle(ctx, particle);
+        break;
+      case 'stardust':
+        this.renderStardustParticle(ctx, particle);
+        break;
     }
 
     ctx.restore();
@@ -282,6 +288,105 @@ export class ParticleRenderer {
     ctx.beginPath();
     ctx.arc(0, 0, 2, 0, Math.PI * 2);
     ctx.fill();
+    
+    ctx.restore();
+  }
+
+  private static renderCosmicWaveParticle(ctx: CanvasRenderingContext2D, particle: Particle): void {
+    ctx.save();
+    
+    // Draw multiple concentric rippling waves
+    const numRipples = 3;
+    const time = particle.life * 0.05;
+    
+    for (let i = 0; i < numRipples; i++) {
+      const ripplePhase = (i / numRipples) * Math.PI * 2;
+      const rippleSize = particle.size * (1 + i * 0.4);
+      const rippleOpacity = particle.opacity * (1 - i * 0.3);
+      
+      // Create gradient for each ripple
+      const gradient = ctx.createRadialGradient(
+        particle.x,
+        particle.y,
+        0,
+        particle.x,
+        particle.y,
+        rippleSize
+      );
+      
+      // Use particle's assigned color with transparency
+      gradient.addColorStop(0, particle.color + Math.floor(rippleOpacity * 100).toString(16).padStart(2, '0'));
+      gradient.addColorStop(0.6, particle.color + Math.floor(rippleOpacity * 60).toString(16).padStart(2, '0'));
+      gradient.addColorStop(1, particle.color + '00');
+      
+      ctx.fillStyle = gradient;
+      ctx.globalAlpha = rippleOpacity;
+      
+      // Add pulsing glow
+      ctx.shadowBlur = 40;
+      ctx.shadowColor = particle.color;
+      
+      // Draw wavy, organic shape
+      ctx.beginPath();
+      const points = 8;
+      for (let j = 0; j <= points; j++) {
+        const angle = (j / points) * Math.PI * 2;
+        const wave = Math.sin(angle * 3 + time + ripplePhase) * 0.3;
+        const radius = rippleSize * (1 + wave);
+        const x = particle.x + Math.cos(angle) * radius;
+        const y = particle.y + Math.sin(angle) * radius * 0.7; // Elongate vertically
+        
+        if (j === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.closePath();
+      ctx.fill();
+    }
+    
+    ctx.restore();
+  }
+
+  private static renderStardustParticle(ctx: CanvasRenderingContext2D, particle: Particle): void {
+    ctx.save();
+    
+    // Draw tiny glowing particle with trail effect
+    ctx.globalAlpha = particle.opacity;
+    
+    // Add glow effect
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = particle.color;
+    
+    // Draw small circular particle
+    ctx.fillStyle = particle.color;
+    ctx.beginPath();
+    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Add motion trail
+    const trailLength = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy) * 3;
+    if (trailLength > 0) {
+      const gradient = ctx.createLinearGradient(
+        particle.x,
+        particle.y,
+        particle.x - particle.vx * 3,
+        particle.y - particle.vy * 3
+      );
+      
+      gradient.addColorStop(0, particle.color);
+      gradient.addColorStop(1, particle.color + '00');
+      
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = particle.size * 0.8;
+      ctx.lineCap = 'round';
+      
+      ctx.beginPath();
+      ctx.moveTo(particle.x, particle.y);
+      ctx.lineTo(particle.x - particle.vx * 2, particle.y - particle.vy * 2);
+      ctx.stroke();
+    }
     
     ctx.restore();
   }

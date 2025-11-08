@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useWiki } from "@/contexts/wiki-context";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,16 +11,22 @@ import { CharacterEntryCard } from "@/components/character-entry-card";
 import { EquipmentEntryCard } from "@/components/equipment-entry-card";
 import { LocationEntryCard } from "@/components/location-entry-card";
 import { CharacterThemeProvider, useCharacterTheme } from "@/contexts/character-theme-context";
+import { LocationThemeProvider, useLocationTheme } from "@/contexts/location-theme-context";
 import { CharacterParticles } from "@/components/effects/character-particles";
 import { useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const EntryPageContent = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { getEntryById, entries } = useWiki();
-  const { currentTheme } = useCharacterTheme();
+  const { currentTheme: characterTheme } = useCharacterTheme();
+  const { currentTheme: locationTheme } = useLocationTheme();
   
   const entry = getEntryById(id || "");
+  
+  // Use location theme for locations, character theme for characters
+  const currentTheme = entry?.category === 'location' ? locationTheme : characterTheme;
 
   // Memoize related entries calculation
   const relatedEntries = useMemo(() => {
@@ -152,9 +158,22 @@ const EntryPage = () => {
 
   console.log('EntryPage: id =', id, 'entry =', entry);
 
+  // Use appropriate theme provider based on entry category
+  if (entry?.category === 'location') {
+    return (
+      <LocationThemeProvider locationId={entry?.id}>
+        <CharacterThemeProvider>
+          <EntryPageContent />
+        </CharacterThemeProvider>
+      </LocationThemeProvider>
+    );
+  }
+
   return (
     <CharacterThemeProvider characterId={entry?.id}>
-      <EntryPageContent />
+      <LocationThemeProvider>
+        <EntryPageContent />
+      </LocationThemeProvider>
     </CharacterThemeProvider>
   );
 };

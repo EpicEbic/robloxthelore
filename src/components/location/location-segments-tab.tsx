@@ -92,13 +92,13 @@ export function LocationSegmentsTab({
   };
 
   return (
-    <Card>
-      <CardContent className="prose dark:prose-invert max-w-none pt-6">
+    <div className="space-y-4">
+      <div className="bg-card rounded-xl p-6 border min-w-0">
         {currentSegmentData && (
           <div className="leading-relaxed space-y-4">
             {/* Header with title and dropdown switcher */}
             <div className="flex justify-between items-start mb-6 border-b border-border pb-4">
-              <h2 className="text-3xl font-bold text-foreground force-text-wrap">
+              <h2 className="text-2xl font-semibold text-primary force-text-wrap">
                 {currentSegmentData.title}
               </h2>
               <div className="ml-4 flex-shrink-0">
@@ -112,13 +112,13 @@ export function LocationSegmentsTab({
             
             {/* Display the formatted content paragraphs - constant static effect for The Null Zone */}
             {formatSegmentContent(currentSegmentData.description, currentSegmentData.title).map((paragraph, index) => (
-              <p key={index} className={`mb-4 leading-relaxed text-base force-text-wrap ${isNullZone ? 'tv-static-text text-red-300' : 'text-foreground'}`}>
+              <p key={index} className={`mb-4 leading-relaxed text-base force-text-wrap ${isNullZone ? 'tv-static-text text-red-300' : 'text-foreground/90'}`}>
                 {paragraph}
               </p>
             ))}
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
