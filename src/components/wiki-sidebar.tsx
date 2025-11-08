@@ -5,7 +5,7 @@ import { Sidebar, SidebarContent, SidebarHeader, SidebarTrigger } from "@/compon
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
-import { ChevronDown, GitCompare, BarChart3, Zap, ArrowLeft } from "lucide-react";
+import { ChevronDown, GitCompare, BarChart3, Zap, ArrowLeft, Globe } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
 import { CategoryType, Subcategory } from "@/contexts/wiki-context";
 interface WikiSidebarProps {
@@ -103,6 +103,12 @@ export function WikiSidebar({
               <Button variant="ghost" className="w-full justify-start p-3 rounded-lg hover:bg-sidebar-accent/50 transition-all duration-200 group">
                 <Zap className="h-5 w-5 mr-3 text-sidebar-foreground/70 group-hover:text-sidebar-accent-foreground transition-colors" />
                 <span className="font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">Fusion</span>
+              </Button>
+            </Link>
+            <Link to="/world">
+              <Button variant="ghost" className="w-full justify-start p-3 rounded-lg hover:bg-sidebar-accent/50 transition-all duration-200 group">
+                <Globe className="h-5 w-5 mr-3 text-sidebar-foreground/70 group-hover:text-sidebar-accent-foreground transition-colors" />
+                <span className="font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">World</span>
               </Button>
             </Link>
           </div>

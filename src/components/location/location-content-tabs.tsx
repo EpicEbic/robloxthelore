@@ -1,7 +1,8 @@
 
 import { BookOpen, Map, Lightbulb } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { LocationContentStyles } from "./location-content-styles";
 import { LocationOverviewTab } from "./location-overview-tab";
 import { LocationSegmentsTab } from "./location-segments-tab";
@@ -19,11 +20,32 @@ interface LocationContentTabsProps {
 }
 
 export function LocationContentTabs({ sections, currentEntryId }: LocationContentTabsProps) {
+  const [searchParams] = useSearchParams();
   const [currentSegment, setCurrentSegment] = useState('segment-0');
+  const [currentTab, setCurrentTab] = useState('overview');
+
+  // Handle segment URL parameter
+  useEffect(() => {
+    const segmentParam = searchParams.get('segment');
+    if (segmentParam && sections.segments.length > 0) {
+      // Map segment IDs to indices
+      const segmentIndex = sections.segments.findIndex((seg) => {
+        const titleMatch = seg.match(/^\*\*(.+?)\*\*/);
+        const title = titleMatch ? titleMatch[1] : '';
+        const segmentId = title.toLowerCase().replace(/\s+/g, '-');
+        return segmentId === segmentParam;
+      });
+
+      if (segmentIndex !== -1) {
+        setCurrentTab('segments');
+        setCurrentSegment(`segment-${segmentIndex}`);
+      }
+    }
+  }, [searchParams, sections.segments]);
 
   return (
     <div className="min-h-0 flex flex-col">
-      <Tabs defaultValue="overview" className="w-full h-full flex flex-col">
+      <Tabs value={currentTab} onValueChange={setCurrentTab} className="w-full h-full flex flex-col">
         <TabsList className="mb-6 w-full flex flex-wrap justify-center lg:w-auto lg:mx-auto gap-3 p-3 h-auto rounded-xl">
           <TabsTrigger value="overview" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
             <BookOpen className="h-5 w-5 flex-shrink-0" />

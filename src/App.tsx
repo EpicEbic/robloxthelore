@@ -21,6 +21,7 @@ import { ComparisonPage } from "./pages/ComparisonPage";
 import { FusionPage } from "./pages/FusionPage";
 import StatisticInfoPage from "./pages/StatisticInfoPage";
 import WhatsNewPage from "./pages/WhatsNewPage";
+import WorldMapPage from "./pages/WorldMapPage";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => {
                       <Route path="/statistics" element={<StatisticInfoPage />} />
                       <Route path="/comparison" element={<ComparisonPage />} />
                       <Route path="/fusion" element={<FusionPage />} />
+                      <Route path="/world" element={<WorldMapPage />} />
                       <Route path="/whats-new" element={<WhatsNewPage />} />
                       <Route path="/secret" element={<SecretPage />} />
                       <Route path="/secret-alternate" element={<AlternateSecretPage />} />

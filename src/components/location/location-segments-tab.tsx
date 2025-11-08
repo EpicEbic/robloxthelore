@@ -35,17 +35,8 @@ export function LocationSegmentsTab({
     // Remove the title prefix
     const cleanContent = content.replace(/^\*\*(.+?)\*\* - /, '');
     
-    // Split into sentences and group them into reasonable paragraphs
-    const sentences = cleanContent.split(/\. (?=[A-Z])/);
-    const paragraphs = [];
-    
-    // Group sentences into paragraphs (2-3 sentences per paragraph)
-    for (let i = 0; i < sentences.length; i += 2) {
-      const paragraph = sentences.slice(i, i + 2).join('. ');
-      if (paragraph.trim()) {
-        paragraphs.push(paragraph + (paragraph.endsWith('.') ? '' : '.'));
-      }
-    }
+    // Split by explicit paragraph breaks (\n\n)
+    const paragraphs = cleanContent.split('\n\n').filter(p => p.trim());
     
     // If no paragraphs were created, return the whole content as one paragraph
     if (paragraphs.length === 0) {
