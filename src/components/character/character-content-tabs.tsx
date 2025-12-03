@@ -92,6 +92,8 @@ export function CharacterContentTabs({
   onCombatViewChange
 }: CharacterContentTabsProps) {
   const isMobile = useIsMobile();
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const scrollPositionRef = useRef<number>(0);
 
   // State for Physical/Ability switcher
   const [combatView, setCombatView] = useState<'physical' | 'ability'>('physical');
@@ -203,9 +205,35 @@ export function CharacterContentTabs({
     return combatStats;
   };
 
+  // Handle tab change and preserve scroll position
+  const handleTabChange = (value: string) => {
+    // Save current scroll position
+    if (scrollAreaRef.current) {
+      const viewport = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]') as HTMLElement;
+      if (viewport) {
+        scrollPositionRef.current = viewport.scrollTop;
+      }
+    }
+    
+    // Call the original onTabChange if provided
+    onTabChange?.(value);
+    
+    // Restore scroll position after content renders
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (scrollAreaRef.current) {
+          const viewport = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]') as HTMLElement;
+          if (viewport) {
+            viewport.scrollTop = scrollPositionRef.current;
+          }
+        }
+      });
+    });
+  };
+
   return (
     <div className="min-h-0 flex flex-col">
-      <Tabs defaultValue="general" className="w-full h-full flex flex-col" onValueChange={onTabChange}>
+      <Tabs defaultValue="general" className="w-full h-full flex flex-col" onValueChange={handleTabChange}>
         <TabsList className="mb-6 w-full flex flex-wrap justify-center lg:w-auto lg:mx-auto gap-3 p-3 h-auto rounded-xl">
           <TabsTrigger value="general" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
             <User className="h-5 w-5 flex-shrink-0" />
@@ -230,7 +258,7 @@ export function CharacterContentTabs({
         </TabsList>
         
         <div className="flex-1 min-h-0">
-          <ScrollArea className="h-full w-full">
+          <ScrollArea ref={scrollAreaRef} className="h-full w-full">
             <div className="pr-4">
               <TabsContent value="general" className="space-y-4 mt-0">
                 <div className="bg-card rounded-xl p-8 border min-w-0 min-h-[120px] relative">

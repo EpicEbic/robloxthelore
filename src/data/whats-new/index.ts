@@ -2,35 +2,20 @@ import { WhatsNewEntry } from "@/types/whats-new-types";
 
 export const whatsNewEntries: WhatsNewEntry[] = [
   {
-    id: "clean-classy-p2-update",
-    date: "2025-10-17T12:00:00",
-    title: "The Clean & Classy Update (Part 2 of 3)",
-    description: "Introduces further upgrades to the website's interface, along with new and improved dedicated themes with particles and more!",
+    id: "clean-classy-update",
+    date: "2025-12-02",
+    title: "The Clean & Classy Update",
+    description: "After a long break, The Lore is back with a major overhaul to the website's UI system, alongside new visual enhancements, character reworks, a new character, and more!",
     changes: [
-      "The sidebar UI menu has been reworked to be less intrusive. The new bar takes up less space and is more obviously-pronounced with its categories.",
-      "Entry themes have been remade from the ground-up, with improved coloring! This also includes brand-new particle and VFX decorations! Each character will be given their own custom particles and themed entries, though for now this system has only been applied for the Protagonists.",
-      "The Comparison System has been given a semi-rework, overhauling a majority of the visuals while otherwise keeping the same layout and premise. Additionally, the custom VFX and decorations now appear in the comparison system when matching two valid characters that both have complete themes.",
-      "The Fusion system has been given a semi-rework, overhauling some of its visuals. The core functionality of the system remains unchanged.",
-      "Custom scroll bars have been implemented, replacing the default microsoft/apple scroll bars when possible. This change won't affect mobile/tablet users due to limitations.",
-      "As per-usual, a ton of optimization work has been done-- especially so due to the major graphical improvements and adjustments made.",
-      "A TON of bugs were fixed, some introduced in Clean & Classy (Part 1 of 3) and others introduced and patched in the making of Clean & Classy (Part 2 of 3).",
-      "This update is Part 2 out of 3 for the Clean & Classy Update, adding in core systems that will make way for the final part, primarily themes and the layout/visual changes to multiple pages on the site. Particles were fun to figure out!"
+      "The entire website has recieved a visual rework, along with a new layout and animation overhauls. Transitions between pages are smoother, and are accompinied by subtle effects and animations.",
+      "The original theming system for entries has recieved a complete overhaul, now supporting multiple themes per-entry and dynamic particles that can be added just about anywhere. Only some entries have custom themes and particles for now, but with time every entry will recieve a theme!",
+      "Touchups have been made to both the Comparison System and the Fusion system, primarily to make them compatible with the new themeing/particle system, but also for their own planned rework sometime in the future!",
+      "An experimental \"World Map\" feature has been added alongside a reworked Bloxiverse entry! This new map will be expanded on later, especially as the Bloxiverse is further expanded on!",
+      "Many entries were entirely reworked, though some will see future changes. But just for now, only Caesar, Nauli, Vortex and Bryck have had upgrades. These are not final and will have more information added later, as always!",
+      "A new entry was added for the Bounceman! It is a completed entry with a full theme and particles!",
+      "An impossibly large list of bug fixes and optimizations have been made, boosting loading times and navigation speeds across the entire website!"
     ],
     isNew: true
-  },
-  {
-    id: "clean-classy-p1-update",
-    date: "2025-10-13",
-    title: "The Clean & Classy Update (Part 1)",
-    description: "Introduces significant upgrades to the website's interface, along with multiple enhancements and quality of life features.",
-    changes: [
-      "Made multiple changes and enhancements to the website's UI, modernizing it further with a handful of new animations and visual effects for different entries.",
-      "Layout adjustments for character entries have been made, for future-planned changes not introduced in Part 1 of Clean & Classy.",
-      "Characters and objects with multiple images now have small lists allowing a reader to click directly to a specific image if they wish.",
-      "A ton of bug fixing and heavy optimization work has been done to further improve loading speeds, and performance on memory-hungry browsers.",
-      "This update is Part 1 out of 3 for the Clean & Classy update, designed to give the website a fresh and fancy layout and UI. These changes not only look nicer, but will make way for several new features and quality of life changes in the future!"
-    ],
-    isNew: false
   },
   {
     id: "bryck-update",

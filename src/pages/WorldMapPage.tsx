@@ -11,7 +11,7 @@ const WorldMapPageContent = () => {
   return (
     <div className="character-theme-container min-h-screen relative">
       {/* Themed particle background */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="fixed inset-0 pointer-events-none z-[1]">
         <AnimatePresence initial={false}>
           {currentTheme && (
             <motion.div

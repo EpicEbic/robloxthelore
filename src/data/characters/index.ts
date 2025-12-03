@@ -12,6 +12,7 @@ import { theReckoner } from "./the-reckoner";
 import { builderman } from "./builderman";
 import { bloxxanneWhelder } from "./bloxxanne-whelder";
 import { theBreadwinner } from "./the-breadwinner";
+import { theBounceman } from "./the-bounceman";
 
 // Export all character entries
 export const allCharacters: WikiEntry[] = [
@@ -26,7 +27,8 @@ export const allCharacters: WikiEntry[] = [
   theReckoner,
   builderman,
   bloxxanneWhelder,
-  theBreadwinner
+  theBreadwinner,
+  theBounceman
 ];
 
 // Export individual characters for easy access
@@ -42,5 +44,6 @@ export {
   theReckoner,
   builderman,
   bloxxanneWhelder,
-  theBreadwinner
+  theBreadwinner,
+  theBounceman
 };

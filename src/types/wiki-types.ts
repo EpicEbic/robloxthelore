@@ -40,6 +40,10 @@ export interface HistoryOption {
   id: string;
   label: string;
   description: string[];
+  images?: {
+    url: string;
+    caption: string;
+  }[];
 }
 
 export interface LifestyleOption {

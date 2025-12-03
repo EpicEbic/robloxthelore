@@ -687,6 +687,19 @@ body.character-theme-vortex-a-steele [class*="sidebar"] button span {
   color: #eab308 !important;
 }
 
+/* Bounceman-specific styling for icons */
+body.character-theme-the-bounceman svg,
+body.character-theme-the-bounceman [class*="lucide"] {
+  color: #ef4444 !important;
+  stroke: #ef4444 !important;
+  fill: none !important;
+}
+
+body.character-theme-the-bounceman button svg {
+  color: #ef4444 !important;
+  stroke: #ef4444 !important;
+}
+
 /* Button Styling for Character Themes */
 .character-theme-container .btn-primary {
   background: var(--character-gradient-accent, var(--primary));

@@ -14,6 +14,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   const animationRef = useRef<number>();
   const particlesRef = useRef<Particle[]>([]);
   const lastTimeRef = useRef<number>(0);
+  const scrollOffsetRef = useRef<number>(0); // For bounce pattern scrolling
   const [opacity, setOpacity] = useState(0);
   const prevThemeIdRef = useRef<string>('');
   const fadeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -299,6 +300,34 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
         };
       }
 
+      case 'bounce': {
+        // Polka-dot pattern: create a full grid that will scroll continuously
+        const gridSpacing = 80; // Spacing between dots
+        const dotSize = 8; // Fixed size for symmetry
+        const speed = particles.speed || 0.5;
+        
+        // Calculate grid dimensions
+        const gridCols = Math.ceil(canvas.width / gridSpacing) + 2; // Extra columns for seamless wrap
+        const gridRows = Math.ceil(canvas.height / gridSpacing) + 4; // Extra rows for seamless scroll
+        
+        // Create particles in a complete grid pattern
+        const gridX = Math.floor(Math.random() * gridCols);
+        const gridY = Math.floor(Math.random() * gridRows);
+        
+        return {
+          x: (gridX * gridSpacing) + (gridSpacing / 2),
+          y: (gridY * gridSpacing) + (gridSpacing / 2),
+          vx: 0, // No horizontal movement
+          vy: speed, // Slow downward scroll
+          size: dotSize,
+          opacity: particles.intensity * 0.7,
+          color: particles.color || '#991b1b', // Dark red
+          life: 0,
+          maxLife: 100000, // Very long lifespan - pattern should persist
+          type: 'bounce'
+        };
+      }
+
       default:
         return {
           x: Math.random() * canvas.width,
@@ -317,6 +346,10 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
   // Update particles
   const updateParticles = useCallback((deltaTime: number) => {
+    // Skip particle updates for bounce type - it's rendered as a pattern
+    if (theme.particles.type === 'bounce') {
+      return;
+    }
     const canvas = canvasRef.current;
     if (!canvas) {
       return;
@@ -448,6 +481,14 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           }
           break;
 
+        case 'bounce':
+          // Polka-dot pattern: continuous downward scroll
+          particle.y += particle.vy;
+          
+          // Maintain consistent opacity (no fading)
+          particle.opacity = particles.intensity * 0.7;
+          break;
+
         default:
           particle.x += particle.vx;
           particle.y += particle.vy;
@@ -495,6 +536,24 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       } else if (particle.type === 'shooting-star') {
         // Remove shooting stars when they go off screen
         // No wrapping - they should disappear
+      } else if (particle.type === 'bounce') {
+        // Wrap to top when scrolling past bottom, maintaining exact grid position
+        const gridSpacing = 80;
+        if (particle.y > canvas.height + gridSpacing) {
+          // Calculate which grid row this particle belongs to
+          const gridY = Math.floor((particle.y - (gridSpacing / 2)) / gridSpacing);
+          const gridRows = Math.ceil(canvas.height / gridSpacing) + 4;
+          // Wrap to equivalent position at top
+          const newGridY = gridY - gridRows;
+          particle.y = (newGridY * gridSpacing) + (gridSpacing / 2);
+        }
+        // Also handle wrapping from top (for particles starting above)
+        if (particle.y < -gridSpacing) {
+          const gridY = Math.floor((particle.y - (gridSpacing / 2)) / gridSpacing);
+          const gridRows = Math.ceil(canvas.height / gridSpacing) + 4;
+          const newGridY = gridY + gridRows;
+          particle.y = (newGridY * gridSpacing) + (gridSpacing / 2);
+        }
       } else {
         // For other particle types, wrap around screen edges
         if (particle.x < -50) particle.x = canvas.width + 50;
@@ -518,6 +577,19 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       spawnChance = 0.15; // 15% chance for cosmic effects (high spawn for stardust)
     } else if (theme.particles.type === 'stardust') {
       spawnChance = 0.15; // 15% chance for cosmic effects
+    } else if (theme.particles.type === 'bounce') {
+      // Higher spawn rate initially to fill the grid, then maintain
+      const currentBounceCount = particlesRef.current.filter(p => p.type === 'bounce').length;
+      const gridSpacing = 80;
+      const expectedCols = Math.ceil(canvas.width / gridSpacing) + 2;
+      const expectedRows = Math.ceil(canvas.height / gridSpacing) + 4;
+      const targetCount = expectedCols * expectedRows;
+      
+      if (currentBounceCount < targetCount) {
+        spawnChance = 0.3; // High spawn rate to fill grid quickly
+      } else {
+        spawnChance = 0.05; // Lower rate to maintain pattern
+      }
     }
     
     // Adjust spawn rates based on performance mode
@@ -528,6 +600,11 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     const adjustedMaxParticles = performanceMode === 'high' ? maxParticles : 
                                 performanceMode === 'medium' ? Math.floor(maxParticles * 0.7) : 
                                 Math.floor(maxParticles * 0.4);
+    
+    // Skip particle spawning for bounce type - it's rendered as a pattern
+    if (theme.particles.type === 'bounce') {
+      return;
+    }
     
     if (Math.random() < adjustedSpawnChance && particlesRef.current.length < adjustedMaxParticles) {
       // For The Bloxiverse, create mixed particle types (cosmic waves + stardust + shooting stars)
@@ -586,12 +663,53 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Special rendering for bounce pattern - draw repeating polka-dot pattern
+    if (theme.particles.type === 'bounce') {
+      const gridSpacing = 80;
+      const dotSize = 16; // Doubled from 8 to 16
+      const speed = theme.particles.speed || 0.5;
+      const color = theme.particles.color || '#dc2626';
+      const opacity = theme.particles.intensity * 0.7;
+      
+      // Update scroll offset
+      scrollOffsetRef.current += speed;
+      if (scrollOffsetRef.current >= gridSpacing) {
+        scrollOffsetRef.current -= gridSpacing;
+      }
+      
+      ctx.globalAlpha = opacity;
+      ctx.fillStyle = color;
+      
+      // Draw dots in a repeating grid pattern
+      const cols = Math.ceil(canvas.width / gridSpacing) + 1;
+      const rows = Math.ceil(canvas.height / gridSpacing) + 2;
+      
+      for (let col = 0; col < cols; col++) {
+        for (let row = -1; row < rows; row++) {
+          const x = (col * gridSpacing) + (gridSpacing / 2);
+          const y = (row * gridSpacing) + (gridSpacing / 2) - scrollOffsetRef.current;
+          
+          // Only draw if visible on canvas
+          if (y > -dotSize && y < canvas.height + dotSize) {
+            ctx.beginPath();
+            ctx.arc(x, y, dotSize / 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+      }
+      
+      return; // Skip particle rendering for bounce type
+    }
+
     // Skip rendering on low performance mode occasionally
     if (performanceMode === 'low' && Math.random() > 0.7) {
       return;
     }
 
-    particlesRef.current.forEach((particle, index) => {
+    // Filter out any bounce particles - they should only be rendered via pattern rendering
+    const particlesToRender = particlesRef.current.filter(p => p.type !== 'bounce');
+
+    particlesToRender.forEach((particle, index) => {
       ctx.save();
       ctx.globalAlpha = particle.opacity;
       ctx.fillStyle = particle.color;
@@ -1029,6 +1147,16 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           ctx.restore();
           break;
 
+        case 'bounce':
+          // Draw polka-dot: simple dark red circle
+          ctx.globalAlpha = particle.opacity;
+          ctx.shadowBlur = 0; // No shadow for cleaner polka-dot look
+          ctx.fillStyle = particle.color;
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+          break;
+
         default:
           // Default circle
           ctx.beginPath();
@@ -1038,7 +1166,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
       ctx.restore();
     });
-  }, [performanceMode]);
+  }, [performanceMode, theme]);
 
   // Animation loop
   const animate = useCallback((currentTime: number) => {
@@ -1071,8 +1199,9 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       fadeTimeoutRef.current = setTimeout(() => {
         setOpacity(1);
         // Force fallback if no particles appear after 3 seconds
+        // Skip this check for bounce type since it uses pattern rendering, not individual particles
         setTimeout(() => {
-          if (particlesRef.current.length === 0 && !forceFallback) {
+          if (particlesRef.current.length === 0 && !forceFallback && theme.particles.type !== 'bounce') {
             setForceFallback(true);
           }
         }, 3000);
@@ -1121,6 +1250,12 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       ctx.clearRect(0, 0, 1, 1);
       
       setCanvasReady(true);
+      
+      // Bounce type uses pattern rendering, not individual particles
+      // Clear any existing bounce particles that might have been created
+      if (theme.particles.type === 'bounce') {
+        particlesRef.current = particlesRef.current.filter(p => p.type !== 'bounce');
+      }
     } catch (error) {
       setCanvasSupported(false);
       setCanvasReady(false);
@@ -1150,6 +1285,12 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     if (particlesRef.current.length === 0) {
       lastTimeRef.current = performance.now();
     }
+    
+    // Bounce type uses pattern rendering, not individual particles
+    // Clear any existing bounce particles that might have been created
+    if (theme.particles.type === 'bounce') {
+      particlesRef.current = particlesRef.current.filter(p => p.type !== 'bounce');
+    }
 
     return () => {
       window.removeEventListener('resize', setCanvasSize);
@@ -1166,8 +1307,9 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     animationRef.current = frameId;
     
     // Force fallback if no particles appear after 3 seconds
+    // Skip this check for bounce type since it uses pattern rendering, not individual particles
     const fallbackTimeout = setTimeout(() => {
-      if (particlesRef.current.length === 0 && !forceFallback) {
+      if (particlesRef.current.length === 0 && !forceFallback && theme.particles.type !== 'bounce') {
         setForceFallback(true);
       }
     }, 3000);
@@ -1185,14 +1327,16 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   useEffect(() => {
     particlesRef.current = [];
     setCanvasReady(false); // Reset so INIT can run again
-  }, [theme]);
+  }, [theme.id]);
+
 
   if (theme.particles.type === 'none') {
     return null;
   }
 
   // Fallback for canvas-unsupported browsers, very low performance, or forced fallback
-  if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0)) {
+  // Skip fallback check for bounce type since it uses pattern rendering, not individual particles
+  if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0 && theme.particles.type !== 'bounce')) {
     return (
       <div 
         className={className}

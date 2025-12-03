@@ -59,7 +59,7 @@ const EntryPageContent = () => {
   return (
     <div className="character-theme-container min-h-screen relative">
       {/* Keep particles mounted and only animate opacity to avoid canvas reinit timing issues */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="fixed inset-0 pointer-events-none z-[1]">
         <AnimatePresence initial={false}>
           {currentTheme && (
             <motion.div
@@ -76,7 +76,8 @@ const EntryPageContent = () => {
         </AnimatePresence>
       </div>
       
-      <motion.div layoutId={entry ? `entry-${entry.id}-card` : undefined} className="container mx-auto px-4 py-8 relative z-10">
+      <motion.div className="absolute inset-0 overflow-y-auto z-10" style={{ top: 0, left: 0, right: 0, bottom: 0 }}>
+        <div className="container mx-auto px-4 py-8 relative">
 
         {entry.category === "character" ? (
           <div className="w-full">
@@ -146,6 +147,7 @@ const EntryPageContent = () => {
             </div>
           </div>
         )}
+        </div>
       </motion.div>
     </div>
   );

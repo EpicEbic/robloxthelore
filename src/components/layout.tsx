@@ -2,7 +2,6 @@
 import { ReactNode } from "react";
 import { WikiSidebar } from "@/components/wiki-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Footer } from "@/components/footer";
 
 interface LayoutProps {
   children: ReactNode;
@@ -17,7 +16,6 @@ export function Layout({ children }: LayoutProps) {
           <main className="relative flex-1">
             {children}
           </main>
-          <Footer />
         </div>
       </div>
     </SidebarProvider>
