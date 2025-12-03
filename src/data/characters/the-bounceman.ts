@@ -194,6 +194,7 @@ export const theBounceman: WikiEntry = {
     
     relationshipsData: {
       "rovan-macov": {
+        characterId: "rovan-macov",
         status: "Partial Creator",
         history: [
           "Rovan Macov is a lunatic, as well as the biomechanical engineer responsible for the creation of the Bounceman. As a normal Bloxian, Boris never knew Rovan as they only met long after Boris had gone comatose.",

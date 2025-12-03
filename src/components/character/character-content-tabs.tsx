@@ -421,6 +421,7 @@ export function CharacterContentTabs({
                         selectedCharacter={selectedRelationship}
                         onSelectCharacter={setSelectedRelationship}
                         allCharacters={sampleWikiEntries}
+                        relationshipsData={sections.relationshipsData}
                       />
                     </div>
                     

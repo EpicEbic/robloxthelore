@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { WikiEntry } from "@/types/wiki-types";
+import { useState, useMemo } from "react";
+import { WikiEntry, RelationshipData } from "@/types/wiki-types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { OptimizedImage } from "@/components/ui/optimized-image";
@@ -20,6 +20,8 @@ const characterIcons: Record<string, string> = {
   "charles-studson": "/lovable-uploads/character-icons/charles-studson-icon.png",
   "the-reckoner": "/lovable-uploads/character-icons/the-reckoner-icon.png",
   "the-breadwinner": "/lovable-uploads/character-icons/the-breadwinner-icon.png",
+  "the-bounceman": "/images/bouncemanicon.png",
+  "rovan-macov": "/images/rovanicon.png",
 };
 
 const getCharacterIcon = (characterId: string): string => {
@@ -32,6 +34,7 @@ interface RelationshipSelectorProps {
   onSelectCharacter: (character: WikiEntry | null) => void;
   selectedCharacter: WikiEntry | null;
   allCharacters: WikiEntry[];
+  relationshipsData?: Record<string, RelationshipData>;
 }
 
 export function RelationshipSelector({
@@ -39,14 +42,50 @@ export function RelationshipSelector({
   availableCharacterIds,
   onSelectCharacter,
   selectedCharacter,
-  allCharacters
+  allCharacters,
+  relationshipsData
 }: RelationshipSelectorProps) {
   const [isSelectingCharacter, setIsSelectingCharacter] = useState(false);
 
+  // Create placeholder entries for characters in relationshipsData that don't have full entries
+  const placeholderCharacters = useMemo(() => {
+    if (!relationshipsData) return [];
+    
+    return availableCharacterIds
+      .filter(id => !allCharacters.find(c => c.id === id))
+      .map(id => {
+        const relData = relationshipsData[id];
+        // Extract name from characterId (convert "rovan-macov" to "Rovan Macov")
+        const name = id
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+        
+        return {
+          id,
+          title: name,
+          description: relData?.status || "",
+          content: relData?.history?.join(" ") || "",
+          category: "character" as const,
+          subcategory: "neutral" as const,
+          lastUpdated: new Date().toISOString().split('T')[0],
+          imageUrl: getCharacterIcon(id)
+        } as WikiEntry;
+      });
+  }, [availableCharacterIds, allCharacters, relationshipsData]);
+
   // Filter to only show characters that have relationship data
-  const availableCharacters = allCharacters.filter(c => 
-    availableCharacterIds.includes(c.id) && c.id !== currentCharacter.id
-  );
+  const availableCharacters = useMemo(() => {
+    const fullEntries = allCharacters.filter(c => 
+      availableCharacterIds.includes(c.id) && c.id !== currentCharacter.id
+    );
+    
+    const placeholders = placeholderCharacters.filter(c => 
+      c.id !== currentCharacter.id
+    );
+    
+    return [...fullEntries, ...placeholders];
+  }, [allCharacters, availableCharacterIds, currentCharacter.id, placeholderCharacters]);
 
   const handleCharacterClick = (character: WikiEntry) => {
     onSelectCharacter(character);
