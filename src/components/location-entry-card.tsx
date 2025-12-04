@@ -9,6 +9,7 @@ import { LocationImageCarousel } from "@/components/location/location-image-caro
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Compass } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface LocationSections {
   overview: string[];
@@ -47,7 +48,12 @@ export function LocationEntryCard({ location }: LocationEntryCardProps) {
   const displayImages = getCarouselImages();
   const isBloxiverse = location.id === "the-bloxiverse";
   return (
-    <div className="w-full max-w-[1400px] mx-auto animate-fade-in">
+    <motion.div 
+      layoutId={`entry-${location.id}-card`}
+      className="w-full max-w-[1400px] mx-auto"
+      initial={false}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
       <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl overflow-hidden" style={{
         borderLeftColor: 'var(--wiki-location)'
       }}>
@@ -106,6 +112,6 @@ export function LocationEntryCard({ location }: LocationEntryCardProps) {
           
         </div>
       </Card>
-    </div>
+    </motion.div>
   );
 }

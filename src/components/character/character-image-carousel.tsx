@@ -106,7 +106,15 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
 
   return (
     <div className="space-y-4 animate-fade-in w-full max-w-full">
-      <div className={isMobile ? 'w-full' : 'sticky top-4 w-full'}>
+      <div 
+        className={isMobile ? 'w-full' : 'w-full self-start z-10'}
+        style={!isMobile ? { 
+          position: 'sticky', 
+          top: '1rem',
+          alignSelf: 'flex-start',
+          willChange: 'transform'
+        } : undefined}
+      >
         <div className="overflow-hidden">
           <Carousel setApi={setApi} className="w-full">
             <CarouselContent>

@@ -76,7 +76,7 @@ const EntryPageContent = () => {
         </AnimatePresence>
       </div>
       
-      <motion.div className="absolute inset-0 overflow-y-auto z-10" style={{ top: 0, left: 0, right: 0, bottom: 0 }}>
+      <div className="relative z-10">
         <div className="container mx-auto px-4 py-8 relative">
 
         {entry.category === "character" ? (
@@ -92,7 +92,12 @@ const EntryPageContent = () => {
             <LocationEntryCard location={entry} />
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <motion.div 
+            layoutId={`entry-${entry.id}-card`}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+            initial={false}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          >
             <div className="lg:col-span-2">
               <div className="flex flex-wrap items-center justify-between mb-4 gap-2">
                 <h1 className="text-3xl font-bold">{entry.title}</h1>
@@ -145,10 +150,10 @@ const EntryPageContent = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

@@ -5,9 +5,13 @@ import { Sidebar, SidebarContent, SidebarHeader, SidebarTrigger } from "@/compon
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
-import { ChevronDown, GitCompare, BarChart3, Zap, ArrowLeft, Globe } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { ChevronDown, GitCompare, BarChart3, Zap, ArrowLeft, Globe, Settings } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
 import { CategoryType, Subcategory } from "@/contexts/wiki-context";
+import { useParticleSettings } from "@/contexts/particle-settings-context";
 interface WikiSidebarProps {
   className?: string;
 }
@@ -20,11 +24,14 @@ export function WikiSidebar({
   const isWorldMap = location.pathname === '/world';
   const fromParam = useMemo(() => new URLSearchParams(location.search).get("from"), [location.search]);
   const fromBloxiverse = fromParam === 'bloxiverse';
+  const { particlesEnabled, toggleParticles } = useParticleSettings();
   
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(CATEGORIES.reduce((acc, category) => ({
     ...acc,
     [category.type]: true
   }), {}));
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  
   const toggleCategory = (category: CategoryType) => {
     setOpenCategories(prev => ({
       ...prev,
@@ -32,21 +39,22 @@ export function WikiSidebar({
     }));
   };
   return <Sidebar className={cn("z-[99999] transition-all duration-300 ease-in-out", className)}>
-      <SidebarHeader className="flex items-center justify-between px-6 py-6 relative border-b border-sidebar-border/50">
-        <Link to="/" className="flex items-center space-x-3 group">
-          <h2 className="font-bold text-4xl text-sidebar-foreground group-hover:text-primary transition-colors duration-200">The Lore</h2>
-        </Link>
+      <SidebarHeader className="flex flex-col items-center px-6 py-6 relative border-b border-sidebar-border/50">
         {/* Sidebar trigger positioned to extend beyond sidebar bounds */}
         <div className="absolute top-0 right-0 translate-x-full h-12 flex items-center z-[99999]">
           <SidebarTrigger className="h-12 w-12 bg-background/90 hover:bg-background border border-border/50 border-l-0 border-t-0 rounded-br-lg shadow-lg text-foreground hover:text-primary transition-all duration-300 flex items-center justify-center" />
         </div>
-      </SidebarHeader>
-      <SidebarContent className="px-4 py-6 space-y-6 custom-scrollbar">
-        {/* Back Button - Entry pages or world map */}
-        {(isEntryPage || isWorldMap) && (
-          <div className="mb-6 flex justify-center">
+        {/* Title */}
+        <Link to="/" className="flex items-center space-x-3 group mb-2">
+          <h2 className="font-bold text-4xl text-sidebar-foreground group-hover:text-primary transition-colors duration-200">The Lore</h2>
+        </Link>
+        {/* Action Buttons - Back and Options */}
+        <div className="flex items-center gap-2">
+          {/* Back Button - Entry pages or world map */}
+          {(isEntryPage || isWorldMap) && (
             <Button 
               variant="ghost" 
+              size="sm"
               onClick={() => {
                 if (isWorldMap && fromBloxiverse) {
                   navigate("/entry/the-bloxiverse");
@@ -54,14 +62,48 @@ export function WikiSidebar({
                   navigate(-1);
                 }
               }}
-              className="justify-center p-4 rounded-lg hover:bg-sidebar-accent/50 transition-all duration-200 group"
+              className="h-8 w-8 p-0 rounded-full border border-sidebar-border/50 bg-sidebar-accent/20 hover:bg-sidebar-accent/50 transition-all duration-200 text-sidebar-foreground/70 hover:text-sidebar-accent-foreground hover:border-sidebar-accent-foreground/50"
             >
-              <ArrowLeft className="h-6 w-6 mr-3 text-sidebar-foreground/70 group-hover:text-sidebar-accent-foreground transition-colors" />
-              <span className="font-bold text-lg text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">Back</span>
+              <ArrowLeft className="h-4 w-4" />
             </Button>
-          </div>
-        )}
-        
+          )}
+          {/* Options Menu */}
+          <Dialog open={optionsOpen} onOpenChange={setOptionsOpen}>
+            <DialogTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 w-8 p-0 rounded-full border border-sidebar-border/50 bg-sidebar-accent/20 hover:bg-sidebar-accent/50 transition-all duration-200 text-sidebar-foreground/70 hover:text-sidebar-accent-foreground hover:border-sidebar-accent-foreground/50"
+              >
+                <Settings className="h-4 w-4" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]" style={{ backgroundColor: '#000000', color: '#ffffff', borderColor: '#ffffff', borderWidth: '1px' }}>
+              <DialogHeader>
+                <DialogTitle className="!text-foreground">Options</DialogTitle>
+              </DialogHeader>
+              <div className="flex items-center justify-between py-4">
+                <div className="space-y-0.5">
+                  <Label htmlFor="particles-toggle" className="text-base !text-foreground">
+                    Disable All Particles / VFX
+                  </Label>
+                  <p className="text-sm !text-muted-foreground">
+                    This will disable ALL particles across ALL entries. Enable this if you have a low-end device, a poor internet connection, or if you're seeing weird glitches.
+                  </p>
+                </div>
+                <Switch
+                  id="particles-toggle"
+                  checked={!particlesEnabled}
+                  onCheckedChange={toggleParticles}
+                  className="border-2 border-white data-[state=checked]:bg-muted/30 data-[state=unchecked]:bg-muted/30"
+                  thumbClassName="data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-red-600"
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </SidebarHeader>
+      <SidebarContent className="px-4 py-6 space-y-6 custom-scrollbar">
         {/* Main Categories Section */}
         <div className="space-y-4">
           <h3 className="text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider px-2">Browse Categories</h3>

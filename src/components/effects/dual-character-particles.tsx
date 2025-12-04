@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { CharacterTheme } from '@/types/character-theme-types';
 import { getComparisonParticleRates } from '@/utils/dual-theme-utils';
+import { useParticleSettings } from '@/contexts/particle-settings-context';
 
 interface DualCharacterParticlesProps {
   leftTheme: CharacterTheme | null;
@@ -8,6 +9,12 @@ interface DualCharacterParticlesProps {
 }
 
 export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterParticlesProps) {
+  const { particlesEnabled } = useParticleSettings();
+  
+  // Early return if particles are disabled
+  if (!particlesEnabled) {
+    return null;
+  }
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number>();
   const particlesRef = useRef<any[]>([]);

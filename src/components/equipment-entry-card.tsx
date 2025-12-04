@@ -4,6 +4,7 @@ import { WikiEntry } from "@/contexts/wiki-context";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { EquipmentHeader } from "@/components/equipment/equipment-header";
 import { EquipmentContentTabs } from "@/components/equipment/equipment-content-tabs";
+import { motion } from "framer-motion";
 
 interface EquipmentSections {
   overview: string[];
@@ -30,7 +31,12 @@ export function EquipmentEntryCard({ equipment }: EquipmentEntryCardProps) {
   };
   
   return (
-    <div className="w-full max-w-[1400px] mx-auto animate-fade-in">
+    <motion.div 
+      layoutId={`entry-${equipment.id}-card`}
+      className="w-full max-w-[1400px] mx-auto"
+      initial={false}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
       <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col" style={{
         borderLeftColor: 'var(--wiki-equipment)'
       }}>
@@ -51,6 +57,6 @@ export function EquipmentEntryCard({ equipment }: EquipmentEntryCardProps) {
           />
         </div>
       </Card>
-    </div>
+    </motion.div>
   );
 }

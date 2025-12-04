@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { CharacterTheme, Particle, ParticleType } from '@/types/character-theme-types';
+import { useParticleSettings } from '@/contexts/particle-settings-context';
 
 interface CharacterParticlesProps {
   theme: CharacterTheme;
@@ -10,6 +11,12 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   theme, 
   className = "fixed inset-0 pointer-events-none z-0" 
 }) => {
+  const { particlesEnabled } = useParticleSettings();
+  
+  // Early return if particles are disabled
+  if (!particlesEnabled) {
+    return null;
+  }
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const particlesRef = useRef<Particle[]>([]);

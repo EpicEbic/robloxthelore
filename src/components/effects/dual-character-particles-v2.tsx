@@ -4,6 +4,7 @@ import { Particle } from './particle-systems/particle-factory';
 import { ParticleUpdater } from './particle-systems/particle-updater';
 import { ParticleRenderer } from './particle-systems/particle-renderer';
 import { ParticleSpawner } from './particle-systems/particle-spawner';
+import { useParticleSettings } from '@/contexts/particle-settings-context';
 
 interface DualCharacterParticlesProps {
   leftTheme: CharacterTheme | null;
@@ -11,6 +12,12 @@ interface DualCharacterParticlesProps {
 }
 
 export function DualCharacterParticles({ leftTheme, rightTheme }: DualCharacterParticlesProps) {
+  const { particlesEnabled } = useParticleSettings();
+  
+  // Early return if particles are disabled
+  if (!particlesEnabled) {
+    return null;
+  }
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number>();
   const particlesRef = useRef<Particle[]>([]);

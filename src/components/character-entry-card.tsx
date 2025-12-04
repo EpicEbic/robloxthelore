@@ -9,6 +9,7 @@ import { CharacterBasicInfo } from "@/components/character/character-basic-info"
 import { CharacterImageCarousel } from "@/components/character/character-image-carousel";
 import { CharacterContentTabs } from "@/components/character/character-content-tabs";
 import { AppearanceOption, PersonalityOption } from "@/types/wiki-types";
+import { motion } from "framer-motion";
  
 
 // Keeping the interface for backwards compatibility
@@ -134,26 +135,33 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
   };
   
   return (
-    <div className="w-full max-w-[1400px] mx-auto animate-fade-in">
-      <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl overflow-hidden" style={{
+    <motion.div 
+      layoutId={`entry-${character.id}-card`}
+      className="w-full max-w-[1400px] mx-auto"
+      initial={false}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
+      <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl" style={{
         borderLeftColor: 'var(--wiki-character)'
       }}>
         
-        <CharacterHeader 
-          title={character.title} 
-          quote={characterData.quote} 
-        />
-        
-        <CharacterBasicInfo 
-          species={characterData.species}
-          age={characterData.age}
-          alignment={characterData.alignment}
-        />
+        <div className="overflow-hidden rounded-t-xl">
+          <CharacterHeader 
+            title={character.title} 
+            quote={characterData.quote} 
+          />
+          
+          <CharacterBasicInfo 
+            species={characterData.species}
+            age={characterData.age}
+            alignment={characterData.alignment}
+          />
+        </div>
         
         {/* Main Content - Mobile: Vertical Stack, Desktop: Side by Side */}
-        <div className={`gap-4 p-6 flex-1 ${isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-1 lg:grid-cols-[1fr_2fr]'}`}>
+        <div className={`gap-4 p-6 flex-1 ${isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-1 lg:grid-cols-[1fr_2fr] items-start'}`}>
           
-          <div className="min-w-0 w-full">
+          <div className="min-w-0 w-full" style={{ height: 'fit-content' }}>
             <CharacterImageCarousel 
             images={character.carouselImages || []}
             appearances={characterData.appearances}
@@ -202,6 +210,6 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
           
         </div>
       </Card>
-    </div>
+    </motion.div>
   );
 }
