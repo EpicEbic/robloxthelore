@@ -52,7 +52,7 @@ export function ComparisonSlot({
           <div className="flex flex-col h-full space-y-4">
             <div className="aspect-square w-full max-w-[200px] mx-auto rounded-full overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border-2 border-primary/20 shadow-sm">
               <OptimizedImage 
-                src={`/lovable-uploads/character-icons/${entry.id}-icon.png`} 
+                src={`/images/character-icons/${entry.id}-icon.png`} 
                 alt={entry.title} 
                 className="w-full h-full object-cover" 
               />

@@ -14,8 +14,10 @@ import { GitCompare } from "lucide-react";
 import { DualThemeProvider, useDualTheme } from "@/contexts/dual-theme-context";
 import { DualCharacterParticles } from "@/components/effects/dual-character-particles-v2";
 import { getCharacterTheme } from "@/data/character-themes";
+import { useEasterEgg } from "@/contexts/easter-egg-context";
 function ComparisonPageContent() {
   const { applyDualTheme, resetDualTheme } = useDualTheme();
+  const { isEntryUnlocked } = useEasterEgg();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [selectedEntries, setSelectedEntries] = useState<{
     slot1: WikiEntry | null;
@@ -33,8 +35,6 @@ function ComparisonPageContent() {
   });
 
   // Filter for only characters and group by subcategory
-  // Characters temporarily disabled from comparison
-  const disabledCharacters = ['builderman', 'bloxxanne-whelder', 'charles-studson', 'the-reckoner', 'the-breadwinner'];
   const comparableEntries = sampleWikiEntries.filter(entry => entry.category === "character");
 
   // Group characters by subcategory
@@ -74,7 +74,7 @@ function ComparisonPageContent() {
       return;
     }
     const draggedEntry = comparableEntries.find(entry => entry.id === active.id);
-    if (!draggedEntry || disabledCharacters.includes(draggedEntry.id)) {
+    if (!draggedEntry || !isEntryUnlocked(draggedEntry.id)) {
       setActiveId(null);
       return;
     }
@@ -115,8 +115,8 @@ function ComparisonPageContent() {
     }));
   };
   const handleEntryClick = (entry: WikiEntry) => {
-    // Don't allow interaction with disabled characters
-    if (disabledCharacters.includes(entry.id)) {
+    // Don't allow interaction with locked characters
+    if (!isEntryUnlocked(entry.id)) {
       return;
     }
 
@@ -263,7 +263,7 @@ function ComparisonPageContent() {
                             entry={entry} 
                             isDragging={activeId === entry.id} 
                             isSelected={isEntrySelected(entry.id)} 
-                            isDisabled={disabledCharacters.includes(entry.id)} 
+                            isDisabled={!isEntryUnlocked(entry.id)} 
                             onEntryClick={handleEntryClick} 
                             slotNumber={selectedEntries.slot1?.id === entry.id ? 1 : selectedEntries.slot2?.id === entry.id ? 2 : null} 
                           />
@@ -355,28 +355,6 @@ function ComparisonPageContent() {
             </div>
           )}
 
-          {/* Fusion System Link */}
-          <div className="text-center py-8 animate-fade-in">
-            <Card className="border-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 backdrop-blur-sm">
-              <CardContent className="pt-6">
-                <div className="space-y-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 mb-2">
-                    <GitCompare className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold">Want to try something different?</h3>
-                  <p className="text-muted-foreground max-w-md mx-auto">
-                    Combine two characters of your choice to create a new being with a merged appearance and personality!
-                  </p>
-                  <Button asChild size="lg" className="gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg">
-                    <Link to="/fusion">
-                      <GitCompare className="h-5 w-5" />
-                      Try Character Fusion
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
 
           {/* Drag Overlay */}
           <DragOverlay>

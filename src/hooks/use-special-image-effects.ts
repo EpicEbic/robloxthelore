@@ -13,7 +13,7 @@ export const useSpecialImageEffects = () => {
   // Helper function to check if we're on a page that should have special effects
   const isSpecialEffectPage = () => {
     const currentPath = window.location.pathname;
-    return currentPath === "/entry/rice-farmer" || currentPath === "/entry/builderman";
+    return currentPath === "/entry/builderman";
   };
   
   // Reset the permanently changed state when the path changes or component unmounts
@@ -42,14 +42,12 @@ export const useSpecialImageEffects = () => {
   const handleMouseEnter = (index: number) => {
     console.log("Mouse entered image:", index, "Current path:", window.location.pathname);
     
-    // Only apply special hover effects on Rice Farmer and Builderman pages
+    // Only apply special hover effects on Builderman page
     if (isSpecialEffectPage()) {
-      const isRiceFarmerPage = window.location.pathname === "/entry/rice-farmer";
       const isBuildermanPage = window.location.pathname === "/entry/builderman";
       
-      // Rice Farmer has 5 images, so we check for index 4 (fifth image)
       // Builderman has 3 images, so we check for index 2 (third image)
-      const isSpecialImage = (isRiceFarmerPage && index === 4) || (isBuildermanPage && index === 2);
+      const isSpecialImage = isBuildermanPage && index === 2;
       
       if (isSpecialImage) {
         console.log("Starting hover timer for special image");

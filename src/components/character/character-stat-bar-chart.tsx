@@ -599,7 +599,8 @@ export function CharacterStatBarChart({
   // Render a single stat bar
   const renderStatBar = (label: string, stat: StatGrade, description?: string, gradeDescription?: string, isSubcategory: boolean = false, statKey?: string, isAbilityStats?: boolean) => {
     const statValue = GRADE_VALUES[stat.label];
-    const barWidth = `${(statValue / 7) * 100}%`;
+    // Ensure minimum width of 3% so F-grade stats still show a visible bar
+    const barWidth = `${Math.max((statValue / 7) * 100, 3)}%`;
     
     // Get stat difference if available
     const statDiff = statKey && getStatDifference ? getStatDifference[statKey] : null;
@@ -924,15 +925,15 @@ export function CharacterStatBarChart({
     <div className={cn("flex justify-center items-center p-4", className)}>
       <div 
         className={cn(
-          "bg-card/80 backdrop-blur-sm rounded-2xl border stat-chart-container w-full max-w-4xl",
+          "bg-card/80 backdrop-blur-sm rounded-2xl border stat-chart-container w-full max-w-4xl overflow-visible",
           isPhysicalStats ? "p-8" : "p-6",
           getChartColorClass()
         )}
       >
         {/* Title with help icon and combat style switcher */}
-        <div className={`flex flex-col gap-4 mb-6 ${shouldPulse ? 'pulse-container' : ''}`}>
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center justify-center gap-2 flex-1">
+        <div className={`flex flex-col gap-4 mb-6 ${shouldPulse ? 'pulse-container' : ''} overflow-visible`}>
+          <div className="flex items-center justify-between gap-4 overflow-visible">
+            <div className="flex items-center justify-center gap-2 flex-1 relative overflow-visible">
               <h3 
                 className={`text-xl font-bold text-center stat-chart-title ${isPhysicalStats ? 'physical-stats-title' : ''}`}
                 style={{
@@ -954,7 +955,7 @@ export function CharacterStatBarChart({
                     <TooltipTrigger asChild>
                       <button
                         type="button"
-                        className="flex-shrink-0"
+                        className="flex-shrink-0 relative z-10"
                         onClick={() => setIsTooltipOpen(!isTooltipOpen)}
                       >
                         <HelpCircle 
@@ -969,8 +970,13 @@ export function CharacterStatBarChart({
                         />
                       </button>
                     </TooltipTrigger>
-                    <TooltipContent className="max-w-md">
-                      <p className="text-sm leading-relaxed">
+                    <TooltipContent 
+                      className="max-w-lg z-[9999] p-4" 
+                      side="bottom"
+                      sideOffset={8}
+                      align="start"
+                    >
+                      <p className="text-sm leading-relaxed break-words whitespace-normal overflow-wrap-anywhere">
                         By default, physical statistics do <strong>NOT</strong> account for the ability of a character if they have one. This is only their raw physical potential!
                         
                         <br /><br />

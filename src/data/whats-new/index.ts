@@ -35,7 +35,6 @@ export const whatsNewEntries: WhatsNewEntry[] = [
     date: "2025-09-11",
     title: "The Fusion & Fixes Update",
     description: "An experimental \"Fusion\" system has been added, along with various bug fixes.",
-    link: "/fusion",
     changes: [
       "Added an experimental \"Fusion\" system that'll let you mix two characters together. It's purely for fun, and no characters produced through the fusion system are canon. I may remove it later depending on how I feel.",
       "Fixed a visual bug that would prevent you from scrolling the sidebar list if the mouse couldn't properly focus on it.",

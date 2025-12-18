@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { ChevronDown, GitCompare, BarChart3, Zap, ArrowLeft, Globe, Settings } from "lucide-react";
+import { ChevronDown, GitCompare, BarChart3, ArrowLeft, Globe, Settings, Trophy } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
 import { CategoryType, Subcategory } from "@/contexts/wiki-context";
 import { useParticleSettings } from "@/contexts/particle-settings-context";
@@ -104,6 +104,15 @@ export function WikiSidebar({
         </div>
       </SidebarHeader>
       <SidebarContent className="px-4 py-6 space-y-6 custom-scrollbar">
+        {/* Plot Timeline shortcut */}
+        <div className="space-y-2">
+          <Link to="/plot-timeline">
+            <Button variant="ghost" className="w-full justify-center py-3 rounded-lg font-semibold hover:bg-sidebar-accent/50 transition-all duration-200">
+              Plot Timeline
+            </Button>
+          </Link>
+        </div>
+
         {/* Main Categories Section */}
         <div className="space-y-4">
           <h3 className="text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider px-2">Browse Categories</h3>
@@ -118,7 +127,7 @@ export function WikiSidebar({
                 <div className="flex flex-col space-y-1 pl-2 mt-2">
                   {category.subcategories.map(subcategory => {
                     const target =
-                      category.type === "location" && subcategory.value === "world-map"
+                      category.type === "location" && `${subcategory.value}` === "world-map"
                         ? "/world"
                         : `/category/${category.type}/${subcategory.value}`;
                     return (
@@ -165,10 +174,10 @@ export function WikiSidebar({
                 <span className="font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">Comparison</span>
               </Button>
             </Link>
-            <Link to="/fusion">
+            <Link to="/tournament">
               <Button variant="ghost" className="w-full justify-start p-3 rounded-lg hover:bg-sidebar-accent/50 transition-all duration-200 group">
-                <Zap className="h-5 w-5 mr-3 text-sidebar-foreground/70 group-hover:text-sidebar-accent-foreground transition-colors" />
-                <span className="font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">Fusion</span>
+                <Trophy className="h-5 w-5 mr-3 text-sidebar-foreground/70 group-hover:text-sidebar-accent-foreground transition-colors" />
+                <span className="font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">Tournament</span>
               </Button>
             </Link>
           </div>

@@ -8,20 +8,22 @@ import { cn } from "@/lib/utils";
 
 // Character icon mapping - circular character icons
 const characterIcons: Record<string, string> = {
-  "caesar-bloxwright": "/lovable-uploads/character-icons/caesar-bloxwright-icon.png",
-  "nauli-parter": "/lovable-uploads/character-icons/nauli-parter-icon.png",
-  "vortex-a-steele": "/lovable-uploads/character-icons/vortex-a-steele-icon.png",
-  "rice-farmer": "/lovable-uploads/character-icons/rice-farmer-icon.png",
-  "ren-bytera": "/lovable-uploads/character-icons/ren-bytera-icon.png",
-  "bryck-manning": "/lovable-uploads/character-icons/bryck-manning-icon.png",
-  "spawnboy": "/lovable-uploads/character-icons/spawnboy-icon.png",
-  "builderman": "/lovable-uploads/character-icons/builderman-icon.png",
-  "bloxxanne-whelder": "/lovable-uploads/character-icons/bloxxanne-whelder-icon.png",
-  "charles-studson": "/lovable-uploads/character-icons/charles-studson-icon.png",
-  "the-reckoner": "/lovable-uploads/character-icons/the-reckoner-icon.png",
-  "the-breadwinner": "/lovable-uploads/character-icons/the-breadwinner-icon.png",
+  "caesar-bloxwright": "/images/character-icons/caesar-bloxwright-icon.png",
+  "nauli-parter": "/images/character-icons/nauli-parter-icon.png",
+  "vortex-a-steele": "/images/character-icons/vortex-a-steele-icon.png",
+  "rice-farmer": "/images/character-icons/rice-farmer-icon.png",
+  "ren-bytera": "/images/character-icons/ren-bytera-icon.png",
+  "bryck-manning": "/images/character-icons/bryck-manning-icon.png",
+  "spawnboy": "/images/character-icons/spawnboy-icon.png",
+  "builderman": "/images/character-icons/builderman-icon.png",
+  "bloxxanne-whelder": "/images/character-icons/bloxxanne-whelder-icon.png",
+  "charles-studson": "/images/character-icons/charles-studson-icon.png",
+  "the-reckoner": "/images/character-icons/the-reckoner-icon.png",
+  "the-breadwinner": "/images/character-icons/the-breadwinner-icon.png",
   "the-bounceman": "/images/bouncemanicon.png",
   "rovan-macov": "/images/rovanicon.png",
+  "peaches": "/images/character-icons/peaches-icon.png",
+  "whyeet": "/images/character-icons/whyeet-icon.png",
 };
 
 const getCharacterIcon = (characterId: string): string => {

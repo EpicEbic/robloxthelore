@@ -39,11 +39,11 @@ export function CharacterCombatStyleSwitcher({
         </Button>
         
         {isOpen && (
-          <div className={`absolute top-full mt-1 bg-card border border-border rounded-lg shadow-lg z-[9999] w-full sm:min-w-[200px] sm:max-w-[300px] sm:w-auto max-h-60 overflow-y-auto ${align === 'right' ? 'right-0' : 'left-0'}`}>
+          <div className={`absolute top-full mt-1 bg-background border rounded-lg shadow-lg z-[9999] w-full sm:min-w-[200px] sm:max-w-[300px] sm:w-auto max-h-60 overflow-y-auto ${align === 'right' ? 'right-0' : 'left-0'}`}>
             {combatStyles.map(style => (
               <button 
                 key={style.id} 
-                className={`w-full text-left px-3 py-2 text-xs bg-card text-card-foreground hover:bg-accent hover:text-accent-foreground first:rounded-t-lg last:rounded-b-lg transition-colors ${style.id === currentStyle ? 'bg-accent text-accent-foreground' : ''}`} 
+                className={`w-full text-left px-3 py-2 text-xs hover:bg-accent hover:text-accent-foreground first:rounded-t-lg last:rounded-b-lg transition-colors ${style.id === currentStyle ? 'bg-accent text-accent-foreground' : ''}`} 
                 onClick={() => {
                   onStyleChange(style.id);
                   setIsOpen(false);

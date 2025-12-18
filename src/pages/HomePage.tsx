@@ -11,6 +11,7 @@ import { Shuffle, Calendar, Users, Sword, MapPin, Flag } from "lucide-react";
 import { whatsNewEntries } from "@/data/whats-new";
 import { CATEGORIES } from "@/data/categories";
 import { TimelineItem } from "@/components/timeline-item";
+import { useEasterEgg } from "@/contexts/easter-egg-context";
 
 const HomePage = () => {
   // Sort entries by date (newest first) 
@@ -22,11 +23,12 @@ const HomePage = () => {
     entries
   } = useWiki();
   const navigate = useNavigate();
+  const { isEntryUnlocked } = useEasterEgg();
 
-  // Filter out The Reckoner from all random entries
+  // Filter out locked entries from all random entries
   const availableEntries = useMemo(() => {
-    return entries.filter(entry => entry.id !== "the-reckoner");
-  }, [entries]);
+    return entries.filter(entry => isEntryUnlocked(entry.id));
+  }, [entries, isEntryUnlocked]);
 
   // Generate 3 random entries (excluding The Reckoner)
   const randomEntries = useMemo(() => {

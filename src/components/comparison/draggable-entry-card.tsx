@@ -34,7 +34,7 @@ export function DraggableEntryCard({ entry, isDragging = false, isOverlay = fals
     onEntryClick?.(entry);
   };
 
-  const characterIconPath = `/lovable-uploads/character-icons/${entry.id}-icon.png`;
+  const characterIconPath = `/images/character-icons/${entry.id}-icon.png`;
 
   return (
     <Card

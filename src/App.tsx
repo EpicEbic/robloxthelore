@@ -20,10 +20,11 @@ import SecretPage from "./pages/SecretPage";
 import AlternateSecretPage from "./pages/AlternateSecretPage";
 import NotFound from "./pages/NotFound";
 import { ComparisonPage } from "./pages/ComparisonPage";
-import { FusionPage } from "./pages/FusionPage";
+import { TournamentPage } from "./pages/TournamentPage";
 import StatisticInfoPage from "./pages/StatisticInfoPage";
 import WhatsNewPage from "./pages/WhatsNewPage";
 import WorldMapPage from "./pages/WorldMapPage";
+import PlotTimelinePage from "./pages/PlotTimelinePage";
 
 const queryClient = new QueryClient();
 
@@ -55,9 +56,9 @@ const App = () => {
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={location.pathname}
-                    initial={shouldFade ? { opacity: 0 } : false}
-                    animate={shouldFade ? { opacity: 1 } : { opacity: 1 }}
-                    exit={shouldFade ? { opacity: 0 } : false}
+                    initial={shouldFade ? { opacity: 0 } : undefined}
+                    animate={{ opacity: 1 }}
+                    exit={shouldFade ? { opacity: 0 } : undefined}
                     transition={shouldFade ? { duration: 0.25, ease: 'easeInOut' } : { duration: 0 }}
                   >
                     <Routes location={location} key={location.pathname}>
@@ -67,9 +68,10 @@ const App = () => {
                       <Route path="/entry/:id" element={<EntryPage />} />
                       <Route path="/statistics" element={<StatisticInfoPage />} />
                       <Route path="/comparison" element={<ComparisonPage />} />
-                      <Route path="/fusion" element={<FusionPage />} />
+                      <Route path="/tournament" element={<TournamentPage />} />
                       <Route path="/world" element={<WorldMapPage />} />
                       <Route path="/whats-new" element={<WhatsNewPage />} />
+                      <Route path="/plot-timeline" element={<PlotTimelinePage />} />
                       <Route path="/secret" element={<SecretPage />} />
                       <Route path="/secret-alternate" element={<AlternateSecretPage />} />
                       <Route path="*" element={<NotFound />} />

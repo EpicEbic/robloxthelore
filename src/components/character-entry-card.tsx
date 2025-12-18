@@ -159,7 +159,9 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
         </div>
         
         {/* Main Content - Mobile: Vertical Stack, Desktop: Side by Side */}
-        <div className={`gap-4 p-6 flex-1 ${isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-1 lg:grid-cols-[1fr_2fr] items-start'}`}>
+        <div 
+          className={`gap-4 p-6 flex-1 ${isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-1 lg:grid-cols-[1fr_2fr] items-start'}`}
+        >
           
           <div className="min-w-0 w-full" style={{ height: 'fit-content' }}>
             <CharacterImageCarousel 
@@ -179,7 +181,9 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
           />
           </div>
           
-          <div className="min-w-0 w-full">
+          <div 
+            className="min-w-0 w-full"
+          >
             <CharacterContentTabs 
             sections={characterSections} 
             appearances={characterData.appearances}

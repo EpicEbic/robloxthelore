@@ -15,6 +15,7 @@ import { LocationThemeProvider, useLocationTheme } from "@/contexts/location-the
 import { CharacterParticles } from "@/components/effects/character-particles";
 import { useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useEasterEgg } from "@/contexts/easter-egg-context";
 
 const EntryPageContent = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,8 +23,22 @@ const EntryPageContent = () => {
   const { getEntryById, entries } = useWiki();
   const { currentTheme: characterTheme } = useCharacterTheme();
   const { currentTheme: locationTheme } = useLocationTheme();
+  const { isEntryUnlocked } = useEasterEgg();
   
   const entry = getEntryById(id || "");
+  
+  // Check if entry is locked
+  if (entry && !isEntryUnlocked(entry.id)) {
+    return (
+      <div className="container mx-auto px-4 py-16 text-center">
+        <h1 className="text-3xl font-bold mb-4">Entry Locked</h1>
+        <p className="mb-6">This entry is currently locked and cannot be accessed.</p>
+        <Button onClick={() => navigate("/")} variant="default">
+          Back to Home
+        </Button>
+      </div>
+    );
+  }
   
   // Use location theme for locations, character theme for characters
   const currentTheme = entry?.category === 'location' ? locationTheme : characterTheme;

@@ -4,7 +4,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useSpecialImageEffects } from "@/hooks/use-special-image-effects";
 import { getImagesForAppearance } from "@/utils/character-utils";
 import { CombatStyle, AppearanceOption, LifestyleOption } from "@/types/wiki-types";
-import { memo, useState, useEffect } from "react";
+import { memo, useState, useEffect, useMemo, useRef } from "react";
 import { CharacterCarouselItem } from "./character-carousel-item";
 import { OptimizedImage } from "../ui/optimized-image";
 import { cn } from "@/lib/utils";
@@ -48,6 +48,7 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
   const isMobile = useIsMobile();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const previousImagesRef = useRef<string>('');
 
   const {
     hoveredIndex,
@@ -92,7 +93,62 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
     return getImagesForAppearance(appearances, currentAppearance, images);
   };
   
-  const displayImages = getDisplayImages();
+  // Create stable keys for complex dependencies to properly memoize
+  const abilityImagesKey = useMemo(() => abilityImages.map(img => img.url).join('|'), [abilityImages]);
+  const imagesKey = useMemo(() => images.map(img => img.url).join('|'), [images]);
+  const appearancesKey = useMemo(() => {
+    if (!appearances || appearances.length === 0) return '';
+    return appearances.map(app => `${app.id}:${app.images?.map(img => img.url).join(',') || ''}`).join('|');
+  }, [appearances]);
+  const combatStylesKey = useMemo(() => {
+    if (!combatStyles || combatStyles.length === 0) return '';
+    return combatStyles.map(style => `${style.id}:${style.images?.map(img => img.url).join(',') || ''}`).join('|');
+  }, [combatStyles]);
+  const lifestylesKey = useMemo(() => {
+    if (!lifestyles || lifestyles.length === 0) return '';
+    return lifestyles.map(life => `${life.id}:${life.images?.map(img => img.url).join(',') || ''}`).join('|');
+  }, [lifestyles]);
+  const historiesKey = useMemo(() => {
+    if (!histories || histories.length === 0) return '';
+    return histories.map(hist => `${hist.id}:${hist.images?.map(img => img.url).join(',') || ''}`).join('|');
+  }, [histories]);
+
+  // Memoize display images and only recalculate when dependencies actually change
+  const displayImages = useMemo(() => {
+    return getDisplayImages();
+  }, [
+    currentTab,
+    combatView,
+    abilityImagesKey,
+    combatStylesKey,
+    currentCombatStyle,
+    lifestyleHistoryView,
+    lifestylesKey,
+    currentLifestyle,
+    historiesKey,
+    currentHistory,
+    appearancesKey,
+    currentAppearance,
+    imagesKey
+  ]);
+
+  // Create a stable key based on image URLs to detect actual changes
+  const displayImagesKey = useMemo(() => {
+    return displayImages.map(img => img.url).join('|');
+  }, [displayImages]);
+
+  // Only reset carousel position if images actually changed
+  useEffect(() => {
+    if (displayImagesKey !== previousImagesRef.current && api) {
+      // Images changed, reset to first image
+      api.scrollTo(0);
+      setCurrent(0);
+      previousImagesRef.current = displayImagesKey;
+    } else if (displayImagesKey === previousImagesRef.current) {
+      // Images are the same, preserve current position
+      previousImagesRef.current = displayImagesKey;
+    }
+  }, [displayImagesKey, api]);
 
   useEffect(() => {
     if (!api) return;
@@ -120,7 +176,7 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
             <CarouselContent>
               {displayImages.map((item, index) => (
                 <CharacterCarouselItem
-                  key={`${currentAppearance}-${currentCombatStyle}-${currentLifestyle}-${currentHistory}-${lifestyleHistoryView}-${combatView}-${item.url}-${index}`}
+                  key={`${item.url}-${index}`}
                   item={item}
                   index={index}
                   currentAppearance={currentAppearance}

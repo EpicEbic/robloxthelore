@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -17,13 +17,16 @@ import {
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover";
+import { useEasterEgg } from "@/contexts/easter-egg-context";
 
 export function SearchBar() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const { searchEntries, categories } = useWiki();
   const navigate = useNavigate();
+  const { isEntryUnlocked } = useEasterEgg();
 
+  // Show all results, locked ones will be greyed out and non-clickable in the UI
   const results = searchEntries(value);
 
   function getCategoryColor(category: string) {
@@ -68,25 +71,30 @@ export function SearchBar() {
               <CommandEmpty>No results found.</CommandEmpty>
               {results.length > 0 && (
                 <CommandGroup>
-                  {results.map((entry) => (
-                    <CommandItem
-                      key={entry.id}
-                      className="flex items-center justify-between"
-                      onSelect={() => {
-                        navigate(`/entry/${entry.id}`);
-                        setOpen(false);
-                        setValue("");
-                      }}
-                    >
-                      <div className="flex flex-col">
-                        <span className="font-medium">{entry.title}</span>
-                        <span className="text-xs text-muted-foreground">{entry.description}</span>
-                      </div>
-                      <span className={`text-xs px-2 py-1 rounded-full border ${getCategoryColor(entry.category)}`}>
-                        {getCategoryLabel(entry.category)}
-                      </span>
-                    </CommandItem>
-                  ))}
+                  {results.map((entry) => {
+                    const isLocked = !isEntryUnlocked(entry.id);
+                    return (
+                      <CommandItem
+                        key={entry.id}
+                        className={isLocked ? "flex items-center justify-between opacity-50 grayscale cursor-not-allowed" : "flex items-center justify-between"}
+                        onSelect={() => {
+                          if (!isLocked) {
+                            navigate(`/entry/${entry.id}`);
+                            setOpen(false);
+                            setValue("");
+                          }
+                        }}
+                      >
+                        <div className="flex flex-col">
+                          <span className="font-medium">{entry.title}</span>
+                          <span className="text-xs text-muted-foreground">{entry.description}</span>
+                        </div>
+                        <span className={`text-xs px-2 py-1 rounded-full border ${getCategoryColor(entry.category)}`}>
+                          {getCategoryLabel(entry.category)}
+                        </span>
+                      </CommandItem>
+                    );
+                  })}
                 </CommandGroup>
               )}
             </CommandList>

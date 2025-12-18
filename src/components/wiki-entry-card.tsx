@@ -10,6 +10,7 @@ import { CATEGORIES } from "@/data/categories";
 import { memo } from "react";
 import { motion } from "framer-motion";
 import { getAlignmentColor } from "@/utils/character-utils";
+import { useEasterEgg } from "@/contexts/easter-egg-context";
  
 
 interface WikiEntryCardProps {
@@ -18,6 +19,8 @@ interface WikiEntryCardProps {
 }
 
 export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0 }: WikiEntryCardProps) {
+  const { isEntryUnlocked } = useEasterEgg();
+  const isLocked = !isEntryUnlocked(entry.id);
 
   // Get the appropriate image for character entries
   const getImageUrl = () => {
@@ -69,11 +72,13 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
   const imageUrl = getImageUrl();
   const previewText = getPreviewText();
   // Unified layout for all entries
-  return (
-    <Link to={`/entry/${entry.id}`}>
-      <motion.div layoutId={`entry-${entry.id}-card`} className="h-full">
-        <Card className="overflow-hidden h-full group card-hover-character border-l-4 rounded-xl" 
-          style={{ borderLeftColor: `var(--wiki-${entry.category})` }}>
+  const cardContent = (
+    <motion.div layoutId={`entry-${entry.id}-card`} className="h-full">
+      <Card className={cn(
+        "overflow-hidden h-full group border-l-4 rounded-xl",
+        isLocked ? "opacity-50 grayscale cursor-not-allowed" : "card-hover-character"
+      )} 
+        style={{ borderLeftColor: `var(--wiki-${entry.category})` }}>
           {imageUrl && (
             <div className="w-full overflow-hidden relative">
               <AspectRatio ratio={1} className="bg-muted/20">
@@ -100,6 +105,15 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
           </CardContent>
         </Card>
       </motion.div>
+  );
+
+  if (isLocked) {
+    return cardContent;
+  }
+
+  return (
+    <Link to={`/entry/${entry.id}`}>
+      {cardContent}
     </Link>
   );
 });

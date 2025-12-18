@@ -6,12 +6,14 @@ import { SearchBar } from "@/components/search-bar";
 import { getSubcategoryLabel } from "@/data/categories";
 import { useMemo } from "react";
 import { CategoryHero } from "@/components/category-hero";
+import { useEasterEgg } from "@/contexts/easter-egg-context";
 
 const CategoryPage = () => {
   const { categoryType, subcategory: subcategoryParam } = useParams<{ categoryType: string; subcategory?: string }>();
   const subcategory = subcategoryParam || 'all';
   
   const { getEntriesByCategory, categories } = useWiki();
+  const { isEntryUnlocked } = useEasterEgg();
 
   // Memoize validation to avoid recalculation
   const { validatedCategoryType, validatedSubcategory } = useMemo(() => {
@@ -28,7 +30,7 @@ const CategoryPage = () => {
     return { validatedCategoryType: validCategoryType, validatedSubcategory: validSubcategory };
   }, [categoryType, subcategory, categories]);
 
-  // Memoize entries to avoid recalculation
+  // Memoize entries to avoid recalculation (show all entries, locked ones will be greyed out in WikiEntryCard)
   const entries = useMemo(() => {
     return getEntriesByCategory(validatedCategoryType, validatedSubcategory);
   }, [getEntriesByCategory, validatedCategoryType, validatedSubcategory]);
