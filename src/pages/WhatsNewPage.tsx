@@ -1,9 +1,12 @@
 import { useMemo } from "react";
 import { whatsNewEntries } from "@/data/whats-new";
+import { qAndAEntries } from "@/data/q-and-a";
 import { TimelineItem } from "@/components/timeline-item";
+import { QandAItem } from "@/components/q-and-a-item";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 const WhatsNewPage = () => {
   const sortedWhatsNewEntries = useMemo(() => {
@@ -30,6 +33,22 @@ const WhatsNewPage = () => {
             key={item.id}
             item={item}
             isLast={index === sortedWhatsNewEntries.length - 1}
+          />
+        ))}
+      </div>
+      
+      <Separator className="my-12 max-w-3xl mx-auto" />
+      
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold">Questions & Answers</h2>
+        <p className="text-muted-foreground mt-2">Frequently asked questions about The Lore.</p>
+      </div>
+      <div className="relative max-w-3xl mx-auto">
+        {qAndAEntries.map((item, index) => (
+          <QandAItem 
+            key={item.id}
+            item={item}
+            isLast={index === qAndAEntries.length - 1}
           />
         ))}
       </div>

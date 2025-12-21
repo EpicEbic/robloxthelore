@@ -2,6 +2,32 @@ import { WhatsNewEntry } from "@/types/whats-new-types";
 
 export const whatsNewEntries: WhatsNewEntry[] = [
   {
+    id: "sodas-seltzers-update",
+    date: "2025-12-21",
+    title: "The Sodas and Seltzers Update",
+    description: "Reintroducing the Bloxy Cola and the Witches Brew to the modern Lore!",
+    changes: [
+      "Completely reworked Equipment entries to modernize them, similarly to the new character UI systems.",
+      "Reworked the Bloxy Cola entry to use the new modern UI system. It has been completely rewritten, and has been given a custom theme!",
+      "Reworked the Witches Brew entry to use the new modern UI system. It has been completely rewritten, and has been given a custom theme!",
+      "The 'Coils of Power' entry is no more, I plan to rework it completely. The other entry, the 'Banhammer', has been locked and is pending a rework very soon!",
+      "A small handful of bugs were fixed up, I forget most of them lol"
+    ],
+    isNew: true
+  },
+  {
+    id: "rice-refocus-update",
+    date: "2025-12-20",
+    title: "The Rice & Refocus Update",
+    description: "Rice Farmer's much-needed overhaul is finally here, plus a shift in direction for the website, with some features added and some removed.",
+    changes: [
+      "Rice Farmer was given a complete rework, both visually and as a character! He's still a lovable softie, not to worry.",
+      "As a ton of characters are pending updates, changes, or adaptations to the new systems in place-- I've locked a majority of entries on the site. They'll slowly be re-enabled as I work on each one individually.",
+      "The Fusion system has been removed, I didn't have as much fun working on it as I thought I would, and it's been sitting indefinitely on the backburner. I'm working on something much new and much cooler to replace it, so hang tight! (Rest in peace to the one fusion character, Spawnsar Bloxwright...)"
+    ],
+    isNew: true
+  },
+  {
     id: "clean-classy-update",
     date: "2025-12-02",
     title: "The Clean & Classy Update",

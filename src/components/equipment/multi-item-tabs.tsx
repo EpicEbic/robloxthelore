@@ -4,13 +4,15 @@ import { Zap, Eye, History, ScrollText } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { AutoLinkedText } from "@/components/ui/auto-linked-text";
 
 interface MultiItemTabsProps {
   item: MultiItem;
   coilColor: string;
+  currentEntryId?: string;
 }
 
-export function MultiItemTabs({ item, coilColor }: MultiItemTabsProps) {
+export function MultiItemTabs({ item, coilColor, currentEntryId }: MultiItemTabsProps) {
   const isMobile = useIsMobile();
 
   // Debug logging to see what data we're receiving
@@ -92,7 +94,7 @@ export function MultiItemTabs({ item, coilColor }: MultiItemTabsProps) {
                 <ul className={`list-disc text-foreground/90 min-w-0 ${isMobile ? 'space-y-4 ml-6 text-base leading-relaxed' : 'space-y-3 ml-5'}`}>
                   {item.sections?.trivia?.map((triviaItem, idx) => (
                     <li key={idx} className="break-words whitespace-normal overflow-wrap-anywhere">
-                      {triviaItem}
+                      <AutoLinkedText text={triviaItem} currentEntryId={currentEntryId} />
                     </li>
                   ))}
                 </ul>

@@ -189,6 +189,15 @@ const EntryPage = () => {
         </CharacterThemeProvider>
       </LocationThemeProvider>
     );
+  } else if (entry?.category === 'equipment') {
+    // Equipment entries use character themes (like bloxy-cola theme)
+    return (
+      <CharacterThemeProvider characterId={entry?.id}>
+        <LocationThemeProvider>
+          <EntryPageContent />
+        </LocationThemeProvider>
+      </CharacterThemeProvider>
+    );
   }
 
   return (

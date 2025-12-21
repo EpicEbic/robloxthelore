@@ -862,7 +862,7 @@ export function CharacterContentTabs({
                   <ul className="list-disc space-y-3 ml-5 text-foreground/90 min-w-0">
                     {sections.trivia?.map((item, idx) => (
                       <li key={idx} className="break-words whitespace-normal overflow-wrap-anywhere">
-                        <CharacterTriviaItem item={item} />
+                        <CharacterTriviaItem item={item} currentEntryId={currentEntryId} />
                       </li>
                     ))}
                   </ul>

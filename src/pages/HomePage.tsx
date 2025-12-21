@@ -9,9 +9,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Shuffle, Calendar, Users, Sword, MapPin, Flag } from "lucide-react";
 import { whatsNewEntries } from "@/data/whats-new";
+import { qAndAEntries } from "@/data/q-and-a";
 import { CATEGORIES } from "@/data/categories";
 import { TimelineItem } from "@/components/timeline-item";
+import { QandAItem } from "@/components/q-and-a-item";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
+import { Separator } from "@/components/ui/separator";
 
 const HomePage = () => {
   // Sort entries by date (newest first) 
@@ -131,6 +134,21 @@ const HomePage = () => {
           <Button asChild>
             <Link to="/whats-new">View All Updates</Link>
           </Button>
+        </div>
+      </section>
+
+      <Separator className="my-12 max-w-3xl mx-auto" />
+
+      <section>
+        <h2 className="text-3xl font-semibold mb-6 text-foreground animate-slide-in">Questions & Answers</h2>
+        <div className="relative max-w-3xl mx-auto">
+          {qAndAEntries.map((item, index) => (
+            <QandAItem 
+              key={item.id}
+              item={item}
+              isLast={index === qAndAEntries.length - 1}
+            />
+          ))}
         </div>
       </section>
 

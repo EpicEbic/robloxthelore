@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useWiki } from "@/contexts/wiki-context";
+import { useEasterEgg } from "@/contexts/easter-egg-context";
 import { WikiEntry } from "@/types/wiki-types";
 import { CharacterSelector } from "@/components/tournament/character-selector";
 import { VisualBracket } from "@/components/tournament/visual-bracket";
@@ -21,6 +23,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export function TournamentPage() {
   const { entries } = useWiki();
+  const { isTournamentUnlocked } = useEasterEgg();
+  const navigate = useNavigate();
   const [selectedCharacters, setSelectedCharacters] = useState<WikiEntry[]>([]);
   const [bracket, setBracket] = useState<TournamentBracketType | null>(null);
   const [tournamentMode, setTournamentMode] = useState<"automatic" | "manual">("manual");
@@ -123,6 +127,19 @@ export function TournamentPage() {
     setShowModeSelector(false);
     setTournamentMode("manual");
   };
+
+  // Check if tournament is unlocked
+  if (!isTournamentUnlocked) {
+    return (
+      <div className="container mx-auto px-4 py-16 text-center">
+        <h1 className="text-3xl font-bold mb-4">Tournament Locked</h1>
+        <p className="mb-6">The Tournament feature is currently locked and cannot be accessed.</p>
+        <Button onClick={() => navigate("/")} variant="default">
+          Back to Home
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">

@@ -4,40 +4,93 @@ import { WikiEntry } from "@/types/wiki-types";
 export const bloxyCola: WikiEntry = {
   id: "bloxy-cola",
   title: "Bloxy Cola",
-  description: "A fizzy, refreshing beverage. When chilled, it's perfect for the hotter days.",
+  description: "A fizzy, refreshing beverage created by Blox Co. that has become the most popular drink in the Bloxiverse.",
   content: "",
   category: "equipment",
   subcategory: "standard",
-  lastUpdated: "2025-01-26",
-  imageUrl: "/lovable-uploads/9aad9d11-0028-4c15-a2dd-215ada9fb67f.png",
+  lastUpdated: "2025-12-21",
+  imageUrl: "/images/bloxy-cola-can-1.png",
   
   carouselImages: [
     {
-      url: "/lovable-uploads/9aad9d11-0028-4c15-a2dd-215ada9fb67f.png",
-      caption: "Nothing beats the refreshing taste of a chilled Bloxy Cola, the most-popular drink in the Bloxiverse!"
+      url: "/images/bloxy-cola-can-1.png",
+      caption: "Blox your thirst with the refreshing taste of Bloxy Cola, the most-popular drink in the Bloxiverse!"
+    },
+    {
+      url: "/images/bloxycolacan-2.png",
+      caption: "The iconic brownish-orange can design of Bloxy Cola, featuring the classic logo and Builderman's depiction."
+    },
+    {
+      url: "/images/bloxycolabottle-1.png", 
+      caption: "A rare glass bottle of Bloxy Cola, with its slimmed-down label design perfectly fitted to the bottle's elegant shape."
     }
   ],
   
   quote: {
-    text: "Nothing beats the refreshing taste of a chilled Bloxy Cola, the most-popular drink in the Bloxiverse!",
-    context: "Popular beverage slogan"
+    text: "Blox your thirst with the refreshing taste of Bloxy Cola, the most-popular drink in the Bloxiverse!",
+    context: "One of the many commercials for Bloxy Cola"
   },
   
   sections: {
-    overview: [
-      "The Bloxy Cola is a wonderfully tasteful beverage, a product created and distributed by Blox Co. to all corners of the Bloxiverse. It has an unmistakable design, featuring the Bloxy Cola's logo, as well as a depiction of Builderman on the cover. They're sold in single cans, packs, and kegs for all kinds of occasions!",
-      "The Bloxy Cola tastes somewhat like a mix of standard cola, with a hint of root beer. Some Bloxians also report hints of vanilla, especially when the drink has first been chilled."
+    appearance: [
+      {
+        id: "can",
+        label: "Can",
+        description: [
+          "Bloxy Cola is most often found in brownish-orange cans. The label typically displays the phrase \"Bloxy Cola\" somewhere, and certain cans also display a depiction of a younger Builderman. Canned Bloxy Cola is usually sold either in packs of one and six."
+        ],
+        images: [
+          {
+            url: "/images/bloxy-cola-can-1.png",
+            caption: "A standard can of the beloved Bloxy Cola."
+          },
+          {
+            url: "/images/bloxy-cola-can-2.png",
+            caption: "A case of Bloxy Cola cans, perfect for sharing!"
+          }
+        ]
+      },
+      {
+        id: "bottle",
+        label: "Bottle", 
+        description: [
+          "Glass bottles of Bloxy Cola are rare, but not unheard of. They have a similar label to the ones seen on their canned cousins, though slimmed down to match the physique of the bottle. Bottled Bloxy Cola is only sold as an individual unit, never seen in packs or cases."
+        ],
+        images: [
+          {
+            url: "/images/bloxy-cola-bottle-1.png",
+            caption: "A glass bottle of Bloxy Cola. Some people swear it tastes better out of a bottle, compared to a can."
+          }
+        ]
+      }
     ],
-    ability: [
-      "Despite containing no anomalous ingredients or chemicals, the Bloxy Cola has been known to invigorate those who consume it. Despite its high sugar content, people report feeling healthier and revitalized for a short while after consumption. Whether these effects are physical or nothing more than a mere placebo is unknown."
+    generalInformation: [
+      "The Bloxy Cola soda is a delicious beverage created and shipped by Blox Co., renowned universally for its cheap price and delicious flavor. Many Bloxians describe it as a mix between typical cola, with a hint of root beer. A splash of vanilla can be tasted, especially when the drink has first been chilled before consumption."
     ],
-    history: [
-      "The Bloxy Cola was the first product to be produced by Blox Co., existing before Blox Co. had become an established company. It served as the foundation for their profits and income, instantly becoming an intergalactic success. Blox Co.'s rise to fame can almost solely be attributed to just how successful the Bloxy Cola would go on to become.",
-      "Nowadays, it's sold commercially at just about every vendor and convenience store, even in the farthest reaches of the Bloxiverse's miasma. Entire factories are dedicated exclusively to the production of Bloxy Cola, while Blox Co. plants and industrial sites manage the gathering and production of ingredients used in the Bloxy Cola's recipe. The recipe for Bloxy Cola has always been obscure, known only by the prestigious workers belonging to Blox Co. and its owned factories."
+    functionality: [
+      "The Bloxy Cola is designed to quench your thirst on a hot day, or give you a splash of flavor when water simply isn't cutting it. The high sugar content, when paired with the handful of chemicals used to create the Bloxy Cola's signature taste, cause those who drink it to become temporarily invigorated, and even restored to health by the drink. The specific formula used when crafting the beverage is unknown, and attempts to study and explain this phenomenon have failed thus far.",
+      "Whether these anomalous effects are physical or nothing more than a mere placebo is unknown."
+    ],
+    timeline: [
+      {
+        id: "inception",
+        label: "Inception",
+        description: [
+          "The Bloxy Cola was among the first products to be produced by Blox Co., with a formula created by Mr. Bloxton himself. It was released before Blox Co. had become a properly-established company, aimed at bringing in a small amount of funds to help kickstart the business. Very shortly after launch, the Bloxy Cola immediately picked up traction and popularity grew extremely quickly. Blox Co. was singlehandedly brought to an enterprise-level status through the beverage alone, establishing a large presence for both the Bloxy Cola— and by extension— Blox Co. as a whole."
+        ]
+      },
+      {
+        id: "present-day",
+        label: "Present Day",
+        description: [
+          "Nowadays, the Bloxy Cola is sold commercially at just about any vendor and convenience store that can be found in the Bloxiverse. Even in the farthest reaches of locations like the Midzone and Outer Circle, the beverage finds a way to make itself available for purchase. Blox Co. has since expanded their operations ten-fold to account for the insane demand the product has, with entire worlds dedicated exclusively to the mass production of Bloxy Cola alone.",
+          "The factories are entirely automated aside from select workers, specialized elites within Blox Co.'s employee hierarchy. Only Mr. Bloxton and his elites are aware of the recipe for the Bloxy Cola. This entire time, the recipe has remained a trade secret of Blox Co., although it is debatable whether that is due to the fear of any repercussions, or due to the raw loyalty of the elites."
+        ]
+      }
     ],
     trivia: [
-      "The Bloxy Cola is a favorite of many, many Bloxians. This includes Caesar!",
-      "The Bloxy Cola's healing property is based off of an old functionality of the gear, where taking a sip would heal the player for 5 health.",
+      "Bloxy Cola is Caesar Bloxwright's favorite beverage!",
+      "The Bloxy Cola's healing properties is based off of an old functionality for the gear, where sipping the drink would heal the player for 5 health each time.",
       "The Bloxy Cola is based off of a Roblox gear of the same name."
     ]
   }

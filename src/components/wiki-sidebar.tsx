@@ -12,6 +12,7 @@ import { ChevronDown, GitCompare, BarChart3, ArrowLeft, Globe, Settings, Trophy 
 import { CATEGORIES } from "@/data/categories";
 import { CategoryType, Subcategory } from "@/contexts/wiki-context";
 import { useParticleSettings } from "@/contexts/particle-settings-context";
+import { useEasterEgg } from "@/contexts/easter-egg-context";
 interface WikiSidebarProps {
   className?: string;
 }
@@ -25,6 +26,7 @@ export function WikiSidebar({
   const fromParam = useMemo(() => new URLSearchParams(location.search).get("from"), [location.search]);
   const fromBloxiverse = fromParam === 'bloxiverse';
   const { particlesEnabled, toggleParticles } = useParticleSettings();
+  const { isTournamentUnlocked } = useEasterEgg();
   
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(CATEGORIES.reduce((acc, category) => ({
     ...acc,
@@ -174,12 +176,14 @@ export function WikiSidebar({
                 <span className="font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">Comparison</span>
               </Button>
             </Link>
-            <Link to="/tournament">
-              <Button variant="ghost" className="w-full justify-start p-3 rounded-lg hover:bg-sidebar-accent/50 transition-all duration-200 group">
-                <Trophy className="h-5 w-5 mr-3 text-sidebar-foreground/70 group-hover:text-sidebar-accent-foreground transition-colors" />
-                <span className="font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">Tournament</span>
-              </Button>
-            </Link>
+            {isTournamentUnlocked && (
+              <Link to="/tournament">
+                <Button variant="ghost" className="w-full justify-start p-3 rounded-lg hover:bg-sidebar-accent/50 transition-all duration-200 group">
+                  <Trophy className="h-5 w-5 mr-3 text-sidebar-foreground/70 group-hover:text-sidebar-accent-foreground transition-colors" />
+                  <span className="font-medium text-sidebar-foreground group-hover:text-sidebar-accent-foreground transition-colors">Tournament</span>
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </SidebarContent>

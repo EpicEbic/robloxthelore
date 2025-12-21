@@ -9,9 +9,10 @@ import { MultiItemFallback } from "./multi-item-fallback";
 interface MultiItemCardProps {
   item: MultiItem;
   coilColor: string;
+  currentEntryId?: string;
 }
 
-export function MultiItemCard({ item, coilColor }: MultiItemCardProps) {
+export function MultiItemCard({ item, coilColor, currentEntryId }: MultiItemCardProps) {
   return (
     <Card className="overflow-hidden border-l-4 border-l-8" style={{
       borderLeftColor: coilColor
@@ -33,7 +34,7 @@ export function MultiItemCard({ item, coilColor }: MultiItemCardProps) {
             
             {/* If the item has full sections, show tabs */}
             {item.sections ? (
-              <MultiItemTabs item={item} coilColor={coilColor} />
+              <MultiItemTabs item={item} coilColor={coilColor} currentEntryId={currentEntryId} />
             ) : (
               <MultiItemFallback item={item} coilColor={coilColor} />
             )}

@@ -7,3 +7,9 @@ export interface WhatsNewEntry {
   changes?: string[];
   isNew?: boolean; // For highlighting recent entries
 }
+
+export interface QandAEntry {
+  id: string;
+  question: string;
+  answer: string[];
+}

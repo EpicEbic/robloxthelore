@@ -4,6 +4,7 @@ import { MultiItemCard } from "./multi-item-card";
 
 interface EquipmentMultiItemsProps {
   items: MultiItem[];
+  currentEntryId?: string;
 }
 
 // Define colors for each coil type
@@ -14,7 +15,7 @@ const getCoilColor = (title: string): string => {
   return `hsl(${(Math.random() * 360)}, 50%, 50%)`; // Fallback
 };
 
-export function EquipmentMultiItems({ items }: EquipmentMultiItemsProps) {
+export function EquipmentMultiItems({ items, currentEntryId }: EquipmentMultiItemsProps) {
   return (
     <div className="space-y-8">
       {items.map((item, index) => {
@@ -24,7 +25,8 @@ export function EquipmentMultiItems({ items }: EquipmentMultiItemsProps) {
           <MultiItemCard 
             key={item.id} 
             item={item} 
-            coilColor={coilColor} 
+            coilColor={coilColor}
+            currentEntryId={currentEntryId}
           />
         );
       })}

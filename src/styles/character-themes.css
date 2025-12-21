@@ -13,7 +13,9 @@ body.character-theme-caesar-bloxwright,
 body.character-theme-nauli-parter,
 body.character-theme-vortex-a-steele,
 body.character-theme-rice-farmer,
-body.character-theme-the-bloxiverse {
+body.character-theme-the-bloxiverse,
+body.character-theme-bloxy-cola,
+body.character-theme-witches-brew {
   background: var(--character-gradient-background, var(--background));
   color: var(--character-text, var(--foreground));
 }
@@ -169,6 +171,25 @@ body.character-theme-the-bloxiverse .bg-card {
   --border: #8a6746 !important;
   --input: #221a14 !important;
   --ring: #3a7ca5 !important;
+}
+
+/* Bloxy Cola Theme */
+.character-theme-bloxy-cola {
+  --background: #5a1f0a !important;
+  --foreground: #fef3c7 !important;
+  --card: #7c2d12 !important;
+  --card-foreground: #fef3c7 !important;
+  --primary: #9a3412 !important;
+  --primary-foreground: #5a1f0a !important;
+  --secondary: #7c2d12 !important;
+  --secondary-foreground: #fef3c7 !important;
+  --accent: #fbbf24 !important;
+  --accent-foreground: #5a1f0a !important;
+  --muted: #7c2d12 !important;
+  --muted-foreground: #fde68a !important;
+  --border: #9a3412 !important;
+  --input: #7c2d12 !important;
+  --ring: #fbbf24 !important;
 }
 
 /* Particle Animation Keyframes */
@@ -560,6 +581,169 @@ body.character-theme-rice-farmer button {
 
 body.character-theme-rice-farmer button svg {
   color: #3a7ca5 !important;
+}
+
+/* Bloxy Cola Theme Styling */
+.character-theme-bloxy-cola {
+  --background: #0a0a0a !important;
+  --foreground: #ffffff !important;
+  --card: #1a0a0a !important;
+  --card-foreground: #ffffff !important;
+  --primary: #ea580c !important;
+  --primary-foreground: #0a0a0a !important;
+  --secondary: #c2410c !important;
+  --secondary-foreground: #ffffff !important;
+  --accent: #fbbf24 !important;
+  --accent-foreground: #0a0a0a !important;
+  --muted: #1a0a0a !important;
+  --muted-foreground: #fbbf24 !important;
+  --border: #ea580c !important;
+  --input: #1a0a0a !important;
+  --ring: #fbbf24 !important;
+}
+
+body.character-theme-bloxy-cola {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 30%, #2a1a0a 60%, #1a0a0a 100%) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Wavy background effect removed - bubbles provide the visual effect */
+
+@keyframes wave-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes wave-move-vertical {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Additional wavy effect removed */
+.character-theme-container.character-theme-bloxy-cola {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 30%, #2a1a0a 60%, #1a0a0a 100%) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body.character-theme-bloxy-cola h1,
+body.character-theme-bloxy-cola h2,
+body.character-theme-bloxy-cola h3,
+body.character-theme-bloxy-cola h4,
+body.character-theme-bloxy-cola h5,
+body.character-theme-bloxy-cola h6 {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-bloxy-cola p {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-bloxy-cola div {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-bloxy-cola .card span,
+body.character-theme-bloxy-cola [class*="card"] span {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-bloxy-cola a {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-bloxy-cola a:hover {
+  color: #fcd34d !important;
+}
+
+body.character-theme-bloxy-cola svg,
+body.character-theme-bloxy-cola [class*="lucide"] {
+  color: #06b6d4 !important;
+  stroke: #06b6d4 !important;
+  fill: none !important;
+}
+
+body.character-theme-bloxy-cola button {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-bloxy-cola button svg {
+  color: #06b6d4 !important;
+}
+
+body.character-theme-bloxy-cola .card,
+body.character-theme-bloxy-cola [class*="card"],
+body.character-theme-bloxy-cola .bg-card {
+  background: linear-gradient(145deg, #1a0a0a 0%, #2a1a0a 100%) !important;
+  border-color: #ea580c !important;
+}
+
+/* Witches Brew Theme - Green with Yellow highlights and Red icons */
+.character-theme-container.character-theme-witches-brew {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 30%, #1a2a1a 60%, #1a0a0a 100%) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body.character-theme-witches-brew h1,
+body.character-theme-witches-brew h2,
+body.character-theme-witches-brew h3,
+body.character-theme-witches-brew h4,
+body.character-theme-witches-brew h5,
+body.character-theme-witches-brew h6 {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-witches-brew p {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-witches-brew div {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-witches-brew .card span,
+body.character-theme-witches-brew [class*="card"] span {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-witches-brew a {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-witches-brew a:hover {
+  color: #fcd34d !important;
+}
+
+body.character-theme-witches-brew svg,
+body.character-theme-witches-brew [class*="lucide"] {
+  color: #ef4444 !important;
+  stroke: #ef4444 !important;
+  fill: none !important;
+}
+
+body.character-theme-witches-brew button {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-witches-brew button svg {
+  color: #ef4444 !important;
+}
+
+body.character-theme-witches-brew .card,
+body.character-theme-witches-brew [class*="card"],
+body.character-theme-witches-brew .bg-card {
+  background: linear-gradient(145deg, #1a0a0a 0%, #1a2a1a 100%) !important;
+  border-color: #22c55e !important;
 }
 
 body.character-theme-nauli-parter .sidebar svg,

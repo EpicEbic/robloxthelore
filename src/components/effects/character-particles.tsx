@@ -116,30 +116,48 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
         };
       }
       case 'flow':
-        // Use fixed travel distance instead of canvas-relative for consistent sizing
-        const targetTravelDistance = 400 + Math.random() * 600; // 400-1000px fixed distance
-        
-        // Calculate required velocity to reach target in reasonable time (15-25 seconds)
-        const travelTime = 15 + Math.random() * 10; // 15-25 seconds
-        const requiredVelocity = targetTravelDistance / (travelTime * 60); // Convert to pixels per frame
-        
-        const particle = {
-          x: Math.random() * canvas.width,
-          y: canvas.height + Math.random() * 50, // Start from bottom of container
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: -requiredVelocity, // Precise velocity to reach target distance
-          size: baseSize,
-          opacity: particles.intensity, // Start at full opacity
-          color: particles.color,
-          life: 0,
-          maxLife: travelTime * 60, // Lifespan in frames (15-25 seconds)
-          type: 'flow' as const,
-          targetY: undefined, // No longer needed with fixed distance
-          fadeStartTime: (travelTime - 2) * 60 // Start fading 2 seconds before death
-        };
-        
-        
-        return particle;
+        // For bloxy-cola and witches-brew: bubbles shoot straight up with minimal drift
+        if (theme.id === 'bloxy-cola' || theme.id === 'witches-brew') {
+          const travelTime = 2.5 + Math.random() * 3; // 2.5-5.5 seconds (varying speeds)
+          const speedVariation = 0.8 + Math.random() * 0.4; // 0.8x to 1.2x speed multiplier
+          const requiredVelocity = (canvas.height / (travelTime * 60)) * speedVariation; // Varied velocity
+          
+          return {
+            x: Math.random() * canvas.width,
+            y: canvas.height + Math.random() * 30,
+            vx: (Math.random() - 0.5) * 0.05, // Extremely minimal horizontal movement
+            vy: -requiredVelocity, // Varying upward speed
+            size: 5 + Math.random() * 3, // 5-8px bubbles (less size variation)
+            opacity: particles.intensity,
+            color: particles.color,
+            life: 0,
+            maxLife: travelTime * 60, // Varying lifespan (2.5-5.5 seconds)
+            type: 'flow' as const,
+            fadeStartTime: (travelTime - 0.3) * 60 // Start fading 0.3 seconds before death (right at top)
+          };
+        } else {
+          // Original flow particle logic for other themes
+          const targetTravelDistance = 400 + Math.random() * 600;
+          const travelTime = 15 + Math.random() * 10;
+          const requiredVelocity = targetTravelDistance / (travelTime * 60);
+          
+          const particle = {
+            x: Math.random() * canvas.width,
+            y: canvas.height + Math.random() * 50,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: -requiredVelocity,
+            size: baseSize,
+            opacity: particles.intensity,
+            color: particles.color,
+            life: 0,
+            maxLife: travelTime * 60,
+            type: 'flow' as const,
+            targetY: undefined,
+            fadeStartTime: (travelTime - 2) * 60
+          };
+          
+          return particle;
+        }
 
       case 'radio':
         // Create radio waves that emanate from random points across the entire screen
@@ -335,6 +353,21 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
         };
       }
 
+      case 'bubble':
+        // Soda bubbles: simpler approach - start from bottom, rise quickly
+        return {
+          x: Math.random() * canvas.width,
+          y: canvas.height + Math.random() * 20, // Start from bottom
+          vx: (Math.random() - 0.5) * 0.3, // Slight horizontal drift
+          vy: -(2 + Math.random() * 2), // Fast upward movement
+          size: 4 + Math.random() * 6, // 4-10px bubbles
+          opacity: particles.intensity, // Start at full opacity
+          color: '#ffffff',
+          life: 0,
+          maxLife: 180 + Math.random() * 120, // 3-5 seconds (shorter)
+          type: 'bubble' as const
+        };
+
       default:
         return {
           x: Math.random() * canvas.width,
@@ -358,8 +391,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       return;
     }
     const canvas = canvasRef.current;
-    if (!canvas) {
-      return;
+    if (!canvas || canvas.width === 0 || canvas.height === 0) {
+      return; // Don't update if canvas isn't ready
     }
 
     // Skip updates on low performance mode (but still allow some updates)
@@ -496,6 +529,14 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           particle.opacity = particles.intensity * 0.7;
           break;
 
+        case 'bubble':
+          // Simple bubble movement and fading
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          // Simple fade over lifespan
+          particle.opacity = particles.intensity * (1 - particle.life / particle.maxLife);
+          break;
+
         default:
           particle.x += particle.vx;
           particle.y += particle.vy;
@@ -561,6 +602,11 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           const newGridY = gridY + gridRows;
           particle.y = (newGridY * gridSpacing) + (gridSpacing / 2);
         }
+      } else if (particle.type === 'bubble') {
+        // Bubbles: remove when they go off screen or reach top
+        if (particle.x < -50 || particle.x > canvas.width + 50 || particle.y < -50) {
+          return false; // Remove bubble
+        }
       } else {
         // For other particle types, wrap around screen edges
         if (particle.x < -50) particle.x = canvas.width + 50;
@@ -584,6 +630,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       spawnChance = 0.15; // 15% chance for cosmic effects (high spawn for stardust)
     } else if (theme.particles.type === 'stardust') {
       spawnChance = 0.15; // 15% chance for cosmic effects
+    } else if (theme.particles.type === 'bubble') {
+      spawnChance = 0.15; // 15% chance for bubbles (higher spawn rate)
     } else if (theme.particles.type === 'bounce') {
       // Higher spawn rate initially to fill the grid, then maintain
       const currentBounceCount = particlesRef.current.filter(p => p.type === 'bounce').length;
@@ -752,20 +800,42 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           break;
         }
         case 'flow':
-          // Draw energy orb with glow
-          ctx.shadowBlur = 20;
-          ctx.shadowColor = particle.color;
-          ctx.fillStyle = particle.color;
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          ctx.fill();
-          
-          // Add inner glow
-          ctx.shadowBlur = 0;
-          ctx.fillStyle = '#93c5fd';
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, particle.size * 0.5, 0, Math.PI * 2);
-          ctx.fill();
+          // Check if this is bloxy-cola or witches-brew theme for hollow bubbles
+          if (theme.id === 'bloxy-cola' || theme.id === 'witches-brew') {
+            // Draw hollow bubble (light brown for bloxy-cola, green for witches-brew)
+            ctx.strokeStyle = particle.color;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Add small highlight
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(
+              particle.x - particle.size * 0.3,
+              particle.y - particle.size * 0.3,
+              particle.size * 0.2,
+              0,
+              Math.PI * 2
+            );
+            ctx.fill();
+          } else {
+            // Original flow particle rendering for other themes
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = particle.color;
+            ctx.fillStyle = particle.color;
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add inner glow
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = '#93c5fd';
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.size * 0.5, 0, Math.PI * 2);
+            ctx.fill();
+          }
           break;
 
         case 'radio':
@@ -1164,6 +1234,23 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
           ctx.fill();
           break;
 
+        case 'bubble':
+          // Draw EXACTLY like flow particles for testing
+          ctx.shadowBlur = 20;
+          ctx.shadowColor = '#ffffff';
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Add inner glow
+          ctx.shadowBlur = 0;
+          ctx.fillStyle = '#fbbf24';
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size * 0.5, 0, Math.PI * 2);
+          ctx.fill();
+          break;
+
         default:
           // Default circle
           ctx.beginPath();
@@ -1292,6 +1379,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     if (particlesRef.current.length === 0) {
       lastTimeRef.current = performance.now();
     }
+    
     
     // Bounce type uses pattern rendering, not individual particles
     // Clear any existing bounce particles that might have been created

@@ -10,6 +10,7 @@ interface EasterEggContextType {
   unlockedEntries: Set<string>;
   unlockEntry: (entryId: string) => void;
   isEntryUnlocked: (entryId: string) => boolean;
+  isTournamentUnlocked: boolean;
 }
 
 const EasterEggContext = createContext<EasterEggContextType | undefined>(undefined);
@@ -35,6 +36,7 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
   const [isCaesarSaladMode, setIsCaesarSaladMode] = useState(false);
   const [keySequence, setKeySequence] = useState('');
   const [unlockedEntries, setUnlockedEntries] = useState<Set<string>>(new Set());
+  const [isTournamentUnlocked, setIsTournamentUnlocked] = useState(false);
   const location = useLocation();
   const minionGifUrl = 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeW84Znptazc2NDJqM24yejdzOGNxcjhuejduemlxbWh2aWJwbWdpZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HIL3ItbTpfhGzbeXd5/giphy.gif';
   const caesarSaladImageUrl = '/lovable-uploads/a420f003-49ae-47d8-86ae-86a7be043834.png';
@@ -56,6 +58,8 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
       } else if (newSequence.includes('unlock')) {
         // Unlock all locked entries
         setUnlockedEntries(new Set(LOCKED_ENTRIES));
+        // Unlock Tournament feature
+        setIsTournamentUnlocked(true);
         setKeySequence(''); // Reset sequence after activation
       }
     };
@@ -91,7 +95,8 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
     caesarSaladImageUrl,
     unlockedEntries,
     unlockEntry,
-    isEntryUnlocked
+    isEntryUnlocked,
+    isTournamentUnlocked
   };
 
   return (

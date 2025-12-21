@@ -1,67 +1,41 @@
 
-import { Badge } from "@/components/ui/badge";
-import { EquipmentImageCarousel } from "./equipment-image-carousel";
-import { useParallax } from "@/hooks/use-parallax";
+import { Separator } from "@/components/ui/separator";
 
 interface EquipmentHeaderProps {
   title: string;
-  description: string;
-  imageUrl?: string;
-  carouselImages?: {
-    url: string;
-    caption: string;
-  }[];
+  quote?: {
+    text: string;
+    context?: string;
+  };
 }
 
-export function EquipmentHeader({
-  title,
-  description,
-  imageUrl,
-  carouselImages = []
-}: EquipmentHeaderProps) {
-  // Get the appropriate images for the carousel
-  const getCarouselImages = () => {
-    if (carouselImages.length > 0) {
-      return carouselImages;
-    }
-    if (imageUrl) {
-      return [{
-        url: imageUrl,
-        caption: `${title} equipment image`
-      }];
-    }
-    return [];
-  };
-
-  const displayImages = getCarouselImages();
-  const parallaxOffset = useParallax(0.3);
-
+export function EquipmentHeader({ title, quote }: EquipmentHeaderProps) {
   return (
-    <div className="border-b bg-gradient-to-br from-card via-card/95 to-muted/30 relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
-      
-      <div className="relative p-6 lg:p-8" style={{ transform: `translateY(${parallaxOffset}px)` }}>
-        {/* Title and Description Section - Centered */}
-        <div className="space-y-6 mb-8 text-center">
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent animate-rotate-in">
-              {title}
-            </h1>
-          </div>
-          
-          <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto animate-fade-in anim-delay-100">
-            {description}
-          </p>
-        </div>
+    <>
+      <div className="sticky top-0 z-10 relative overflow-hidden bg-gradient-to-br from-card via-card/95 to-muted/30">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
         
-        {/* Image Carousel Section - Centered with much larger size */}
-        {displayImages.length > 0 && (
-          <div className="w-fit max-w-4xl mx-auto animate-fade-in anim-delay-200">
-            <EquipmentImageCarousel images={displayImages} />
-          </div>
-        )}
+        <div className="relative p-6 lg:p-8 pb-4">
+          <h1 className="text-3xl lg:text-5xl font-bold mb-6 break-words hyphens-auto bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent animate-rotate-in">
+            {title}
+          </h1>
+          {quote && (
+            <div className="mt-6 p-4 lg:p-6 rounded-lg border-l-4 border-primary/50 bg-muted/30 backdrop-blur-sm italic animate-fade-in anim-delay-100">
+              <p className="text-lg lg:text-xl text-foreground/90 break-words hyphens-auto leading-relaxed">
+                "{quote.text}"
+              </p>
+              {quote.context && (
+                <p className="text-sm lg:text-base text-muted-foreground mt-3 break-words hyphens-auto">
+                  — {quote.context}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+      
+      <Separator className="my-0" />
+    </>
   );
 }

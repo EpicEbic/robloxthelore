@@ -56,6 +56,27 @@ export interface LifestyleOption {
   }[];
 }
 
+// Equipment section option interfaces
+export interface EquipmentOverviewOption {
+  id: string;
+  label: string;
+  description: string[];
+  images?: {
+    url: string;
+    caption: string;
+  }[];
+}
+
+export interface EquipmentTimelineOption {
+  id: string;
+  label: string;
+  description: string[];
+  images?: {
+    url: string;
+    caption: string;
+  }[];
+}
+
 export interface RelationshipData {
   characterId: string;
   status: string;
@@ -236,9 +257,13 @@ export interface WikiEntry {
     drawbacks?: string[]; // Legacy field
     trivia?: string[];
     
-    // Equipment sections
-    overview?: string[];
-    ability?: string[];
+    // Equipment sections - flexible to support both old string format and new option types
+    overview?: string[] | EquipmentOverviewOption[];
+    appearance?: string[];
+    generalInformation?: string[];
+    functionality?: string[]; // Renamed from "ability"
+    timeline?: string[] | EquipmentTimelineOption[];
+    history?: string[]; // Can be part of timeline or standalone
     
     // Location sections
     segments?: string[];
