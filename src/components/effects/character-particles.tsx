@@ -632,6 +632,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       spawnChance = 0.15; // 15% chance for cosmic effects
     } else if (theme.particles.type === 'bubble') {
       spawnChance = 0.15; // 15% chance for bubbles (higher spawn rate)
+    } else if (theme.particles.type === 'hammer') {
+      spawnChance = 0.08; // 8% chance for hammers (moderate spawn rate)
     } else if (theme.particles.type === 'bounce') {
       // Higher spawn rate initially to fill the grid, then maintain
       const currentBounceCount = particlesRef.current.filter(p => p.type === 'bounce').length;
@@ -754,6 +756,105 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       }
       
       return; // Skip particle rendering for bounce type
+    }
+
+    // Special rendering for Builderman blueprint grid pattern
+    if (theme.id === 'builderman') {
+      const mainGridSpacing = 100;
+      const secondaryGridSpacing = 20;
+      const fineGridSpacing = 5;
+      const speed = 0.5; // Scroll speed
+      
+      // Update scroll offset
+      scrollOffsetRef.current += speed;
+      if (scrollOffsetRef.current >= mainGridSpacing) {
+        scrollOffsetRef.current -= mainGridSpacing;
+      }
+      
+      const offsetX = scrollOffsetRef.current;
+      const offsetY = scrollOffsetRef.current;
+      
+      // Draw fine grid lines (dark blue) - 5px spacing
+      ctx.strokeStyle = 'rgba(30, 58, 138, 0.05)';
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.5;
+      
+      // Vertical fine lines
+      for (let x = -fineGridSpacing; x < canvas.width + fineGridSpacing; x += fineGridSpacing) {
+        const drawX = x - (offsetX % fineGridSpacing);
+        if (drawX >= -fineGridSpacing && drawX <= canvas.width + fineGridSpacing) {
+          ctx.beginPath();
+          ctx.moveTo(drawX, 0);
+          ctx.lineTo(drawX, canvas.height);
+          ctx.stroke();
+        }
+      }
+      
+      // Horizontal fine lines
+      for (let y = -fineGridSpacing; y < canvas.height + fineGridSpacing; y += fineGridSpacing) {
+        const drawY = y - (offsetY % fineGridSpacing);
+        if (drawY >= -fineGridSpacing && drawY <= canvas.height + fineGridSpacing) {
+          ctx.beginPath();
+          ctx.moveTo(0, drawY);
+          ctx.lineTo(canvas.width, drawY);
+          ctx.stroke();
+        }
+      }
+      
+      // Draw secondary grid lines (grey) - 20px spacing
+      ctx.strokeStyle = 'rgba(107, 114, 128, 0.08)';
+      ctx.lineWidth = 1;
+      
+      // Vertical secondary lines
+      for (let x = -secondaryGridSpacing; x < canvas.width + secondaryGridSpacing; x += secondaryGridSpacing) {
+        const drawX = x - (offsetX % secondaryGridSpacing);
+        if (drawX >= -secondaryGridSpacing && drawX <= canvas.width + secondaryGridSpacing) {
+          ctx.beginPath();
+          ctx.moveTo(drawX, 0);
+          ctx.lineTo(drawX, canvas.height);
+          ctx.stroke();
+        }
+      }
+      
+      // Horizontal secondary lines
+      for (let y = -secondaryGridSpacing; y < canvas.height + secondaryGridSpacing; y += secondaryGridSpacing) {
+        const drawY = y - (offsetY % secondaryGridSpacing);
+        if (drawY >= -secondaryGridSpacing && drawY <= canvas.height + secondaryGridSpacing) {
+          ctx.beginPath();
+          ctx.moveTo(0, drawY);
+          ctx.lineTo(canvas.width, drawY);
+          ctx.stroke();
+        }
+      }
+      
+      // Draw main grid lines (orange) - 100px spacing
+      ctx.strokeStyle = 'rgba(249, 115, 22, 0.15)';
+      ctx.lineWidth = 1;
+      
+      // Vertical main lines
+      for (let x = -mainGridSpacing; x < canvas.width + mainGridSpacing; x += mainGridSpacing) {
+        const drawX = x - (offsetX % mainGridSpacing);
+        if (drawX >= -mainGridSpacing && drawX <= canvas.width + mainGridSpacing) {
+          ctx.beginPath();
+          ctx.moveTo(drawX, 0);
+          ctx.lineTo(drawX, canvas.height);
+          ctx.stroke();
+        }
+      }
+      
+      // Horizontal main lines
+      for (let y = -mainGridSpacing; y < canvas.height + mainGridSpacing; y += mainGridSpacing) {
+        const drawY = y - (offsetY % mainGridSpacing);
+        if (drawY >= -mainGridSpacing && drawY <= canvas.height + mainGridSpacing) {
+          ctx.beginPath();
+          ctx.moveTo(0, drawY);
+          ctx.lineTo(canvas.width, drawY);
+          ctx.stroke();
+        }
+      }
+      
+      ctx.globalAlpha = 1;
+      return; // Skip particle rendering for Builderman
     }
 
     // Skip rendering on low performance mode occasionally
@@ -1293,9 +1394,9 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       fadeTimeoutRef.current = setTimeout(() => {
         setOpacity(1);
         // Force fallback if no particles appear after 3 seconds
-        // Skip this check for bounce type since it uses pattern rendering, not individual particles
+        // Skip this check for bounce type and Builderman since they use pattern rendering, not individual particles
         setTimeout(() => {
-          if (particlesRef.current.length === 0 && !forceFallback && theme.particles.type !== 'bounce') {
+          if (particlesRef.current.length === 0 && !forceFallback && theme.particles.type !== 'bounce' && theme.id !== 'builderman') {
             setForceFallback(true);
           }
         }, 3000);
@@ -1425,13 +1526,14 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   }, [theme.id]);
 
 
-  if (theme.particles.type === 'none') {
+  // Allow rendering for Builderman even with 'none' particles type since we render blueprint grid pattern
+  if (theme.particles.type === 'none' && theme.id !== 'builderman') {
     return null;
   }
 
   // Fallback for canvas-unsupported browsers, very low performance, or forced fallback
-  // Skip fallback check for bounce type since it uses pattern rendering, not individual particles
-  if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0 && theme.particles.type !== 'bounce')) {
+  // Skip fallback check for bounce type and Builderman since they use pattern rendering, not individual particles
+  if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0 && theme.particles.type !== 'bounce' && theme.id !== 'builderman')) {
     return (
       <div 
         className={className}

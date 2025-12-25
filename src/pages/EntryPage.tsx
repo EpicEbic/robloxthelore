@@ -107,11 +107,8 @@ const EntryPageContent = () => {
             <LocationEntryCard location={entry} />
           </div>
         ) : (
-          <motion.div 
-            layoutId={`entry-${entry.id}-card`}
+          <div 
             className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-            initial={false}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             <div className="lg:col-span-2">
               <div className="flex flex-wrap items-center justify-between mb-4 gap-2">
@@ -165,7 +162,7 @@ const EntryPageContent = () => {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
         </div>
       </div>

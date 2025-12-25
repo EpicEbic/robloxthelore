@@ -26,19 +26,31 @@ export function ImageZoomDialog({ src, alt, className }: ImageZoomDialogProps) {
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogOverlay 
-          className="bg-black/90 cursor-pointer" 
+          className="bg-black/90 cursor-pointer !z-40" 
+          style={{ 
+            left: '16rem', // Start after sidebar width
+            width: 'calc(100% - 16rem)', // Adjust width to account for sidebar
+          }}
           onClick={() => setIsOpen(false)}
         />
         <DialogContent 
-          className="p-0 border-none shadow-none bg-transparent flex items-center justify-center w-screen h-screen max-w-none max-h-none [&>button]:hidden"
+          className="p-0 border-none shadow-none bg-transparent flex items-center justify-center w-screen h-screen max-w-none max-h-none [&>button]:hidden !z-50"
           onPointerDownOutside={(e) => {
+            // Don't close if clicking on sidebar area
+            const target = e.target as HTMLElement;
+            if (target.closest('[data-sidebar="sidebar"]') || 
+                target.closest('[data-sidebar="trigger"]') ||
+                target.closest('[data-sidebar="rail"]')) {
+              return;
+            }
             // Close when clicking outside the image
             setIsOpen(false);
           }}
         >
           <div 
-            className="relative"
+            className="relative pointer-events-auto"
             onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
             <OptimizedImage
               src={src}
@@ -48,7 +60,7 @@ export function ImageZoomDialog({ src, alt, className }: ImageZoomDialogProps) {
             {/* Custom Close Button */}
             <DialogClose asChild>
               <button
-                className="absolute top-4 right-4 h-12 w-12 rounded-full border-2 border-white/80 bg-black/60 hover:bg-black/80 hover:border-white transition-all duration-200 flex items-center justify-center z-50 shadow-lg"
+                className="absolute top-4 right-4 h-12 w-12 rounded-full border-2 border-white/80 bg-black/60 hover:bg-black/80 hover:border-white transition-all duration-200 flex items-center justify-center z-[60] shadow-lg pointer-events-auto"
                 aria-label="Close"
               >
                 <X className="h-6 w-6 text-white" />

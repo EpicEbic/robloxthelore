@@ -135,11 +135,8 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
   };
   
   return (
-    <motion.div 
-      layoutId={`entry-${character.id}-card`}
+    <div 
       className="w-full max-w-[1400px] mx-auto"
-      initial={false}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl" style={{
         borderLeftColor: 'var(--wiki-character)'
@@ -214,6 +211,6 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
           
         </div>
       </Card>
-    </motion.div>
+    </div>
   );
 }

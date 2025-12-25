@@ -57,11 +57,8 @@ export function EquipmentEntryCard({ equipment }: EquipmentEntryCardProps) {
   };
   
   return (
-    <motion.div 
-      layoutId={`entry-${equipment.id}-card`}
+    <div
       className="w-full max-w-[1400px] mx-auto"
-      initial={false}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl" style={{
         borderLeftColor: 'var(--wiki-equipment)'
@@ -111,6 +108,6 @@ export function EquipmentEntryCard({ equipment }: EquipmentEntryCardProps) {
           
         </div>
       </Card>
-    </motion.div>
+    </div>
   );
 }

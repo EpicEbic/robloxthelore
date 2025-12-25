@@ -82,7 +82,7 @@ const HomePage = () => {
 
       {/* Category Navigation Section */}
       <section className="mb-12">
-        <h2 className="text-3xl font-semibold mb-6 text-foreground animate-slide-in">Explore Categories</h2>
+        <h2 className="text-3xl font-semibold mb-6 text-foreground animate-slide-in text-center">Explore Categories</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {CATEGORIES.map((category, index) => (
             <CategoryCard
@@ -100,7 +100,7 @@ const HomePage = () => {
       </section>
 
       <section className="mb-12">
-        <h2 className="text-3xl font-semibold mb-6 text-foreground animate-slide-in">Browse Random Entry</h2>
+        <h2 className="text-3xl font-semibold mb-6 text-foreground animate-slide-in text-center">Browse Random Entry</h2>
         {randomEntries.length > 0 ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             {randomEntries.map((entry, index) => <div key={entry.id} className="opacity-0 animate-card-fade-in" style={{
           animationDelay: `${index * 0.1}s`
@@ -120,7 +120,7 @@ const HomePage = () => {
       </section>
 
       <section>
-        <h2 className="text-3xl font-semibold mb-6 text-foreground animate-slide-in">What's New</h2>
+        <h2 className="text-3xl font-semibold mb-6 text-foreground animate-slide-in text-center">What's New</h2>
         <div className="relative max-w-3xl mx-auto">
           {sortedWhatsNewEntries.slice(0, 3).map((item, index) => (
             <TimelineItem 
@@ -140,7 +140,7 @@ const HomePage = () => {
       <Separator className="my-12 max-w-3xl mx-auto" />
 
       <section>
-        <h2 className="text-3xl font-semibold mb-6 text-foreground animate-slide-in">Questions & Answers</h2>
+        <h2 className="text-3xl font-semibold mb-6 text-foreground animate-slide-in text-center">Questions & Answers</h2>
         <div className="relative max-w-3xl mx-auto">
           {qAndAEntries.map((item, index) => (
             <QandAItem 

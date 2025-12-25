@@ -2,6 +2,19 @@ import { WhatsNewEntry } from "@/types/whats-new-types";
 
 export const whatsNewEntries: WhatsNewEntry[] = [
   {
+    id: "buildup-banishment-update",
+    date: "2025-12-24",
+    title: "The Buildup & Banishment Update",
+    description: "Merry Christmas, reader! Builderman and his trusty Banhammer have been reintroduced into The Lore, how jolly!",
+    changes: [
+      "Builderman received a complete overhaul, updated for the modern systems and lore! He also has a theme and effects now!",
+      "The Banhammer has received a partial rework, featuring updated text and new images! It also has a custom theme and flashy effects now!",
+      "A \"Questions & Answers\" section has been added towards the bottom of the homepage with a few questions I assume people would wish to know the answer to. More questions may be added later on.",
+      "I removed a weird smoothing effect the site would apply when the total vertical height of the page changed, typically when viewing different text in an entry. I plan to implement a smoother transition later, one that doesn't trigger my own vertigo, haha."
+    ],
+    isNew: true
+  },
+  {
     id: "sodas-seltzers-update",
     date: "2025-12-21",
     title: "The Sodas and Seltzers Update",

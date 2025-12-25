@@ -22,7 +22,6 @@ interface EasterEggProviderProps {
 // List of locked entry IDs
 const LOCKED_ENTRIES = [
   'ren-bytera',
-  'builderman',
   'bloxxanne-whelder',
   'spawnboy',
   'charles-studson',

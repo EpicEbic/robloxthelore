@@ -5,7 +5,6 @@ import { AutoLinkedText } from "@/components/ui/auto-linked-text";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { EquipmentMultiItems } from "./equipment-multi-items";
 import { MultiItem, EquipmentOverviewOption, EquipmentTimelineOption } from "@/types/wiki-types";
-import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { CharacterTriviaItem } from "../character/character-trivia-item";
 import { EquipmentAppearanceSwitcher } from "./equipment-appearance-switcher";
@@ -46,9 +45,9 @@ export function EquipmentContentTabs({
   const hasMultiItems = multiItems && multiItems.length > 0;
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const scrollPositionRef = useRef<number>(0);
-  const contentHeightRef = useRef<number>(0);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [shouldAnimateLayout, setShouldAnimateLayout] = useState(false);
+  // Disabled layout animations - always false
+  const shouldAnimateLayout = false;
   
   // Use props if provided, otherwise use local state
   const [localCurrentAppearance, setLocalCurrentAppearance] = useState<string>(() => {
@@ -90,57 +89,16 @@ export function EquipmentContentTabs({
   };
 
 
-  // Track content height changes and only animate when height actually changes
-  useEffect(() => {
-    if (!contentRef.current) return;
-    
-    let timeoutId: number | undefined;
-    
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const newHeight = entry.contentRect.height;
-        const oldHeight = contentHeightRef.current;
-        
-        // Only animate if height changes by more than 10px (threshold to avoid minor jitter)
-        if (oldHeight > 0 && Math.abs(newHeight - oldHeight) > 10) {
-          setShouldAnimateLayout(true);
-          // Reset after animation completes
-          if (timeoutId) clearTimeout(timeoutId);
-          timeoutId = window.setTimeout(() => setShouldAnimateLayout(false), 600);
-        } else if (oldHeight === 0) {
-          // Initial measurement, don't animate
-          contentHeightRef.current = newHeight;
-        } else {
-          // Height stayed roughly the same, don't animate
-          setShouldAnimateLayout(false);
-        }
-        
-        contentHeightRef.current = newHeight;
-      }
-    });
-    
-    observer.observe(contentRef.current);
-    
-    return () => {
-      observer.disconnect();
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, []);
+  // ResizeObserver completely removed - was causing stretching effect
 
-  // Handle tab change and preserve scroll position
   const handleTabChange = (value: string) => {
-    // Save current scroll position
     if (scrollAreaRef.current) {
       const viewport = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]') as HTMLElement;
       if (viewport) {
         scrollPositionRef.current = viewport.scrollTop;
       }
     }
-    
-    // Notify parent about tab change for image carousel
     onTabChange?.(value);
-    
-    // Restore scroll position after content renders
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         if (scrollAreaRef.current) {
@@ -196,6 +154,7 @@ export function EquipmentContentTabs({
             <div 
               ref={contentRef}
               className="pr-4"
+              style={{ transition: 'none' }}
             >
               {hasOverview && (
                 <TabsContent value="overview" className="mt-0 space-y-4">
@@ -203,10 +162,8 @@ export function EquipmentContentTabs({
                   
                   {/* Appearance section - with dropdown switcher like character entries */}
                   {sections.appearance && sections.appearance.length > 0 && (
-                    <motion.div 
-                      layout={shouldAnimateLayout}
+                    <div 
                       className="bg-card rounded-xl p-8 border min-w-0 min-h-[120px] relative"
-                      transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                     >
                       <div className="flex items-start justify-between mb-4 gap-4">
                         <h2 className="text-2xl font-semibold flex items-center gap-2 flex-shrink-0">
@@ -223,10 +180,8 @@ export function EquipmentContentTabs({
                           </div>
                         )}
                       </div>
-                      <motion.div 
-                        layout={shouldAnimateLayout}
+                      <div 
                         className="text-foreground/90 min-w-0 text-base"
-                        transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                       >
                         {(Array.isArray(sections.appearance) && typeof sections.appearance[0] === 'object'
                           ? (sections.appearance as EquipmentOverviewOption[]).find(app => app.id === currentAppearance)?.description || (sections.appearance as EquipmentOverviewOption[])[0]?.description || []
@@ -236,8 +191,8 @@ export function EquipmentContentTabs({
                             <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                           </p>
                         ))}
-                      </motion.div>
-                    </motion.div>
+                      </div>
+                    </div>
                   )}
 
                   {/* General Information section - handle both structured and simple arrays */}
@@ -245,52 +200,44 @@ export function EquipmentContentTabs({
                     Array.isArray(sections.generalInformation) && typeof sections.generalInformation[0] === 'object' ? (
                       // Structured general information with subsections
                       (sections.generalInformation as EquipmentOverviewOption[]).map((infoOption) => (
-                        <motion.div 
+                        <div 
                           key={infoOption.id}
-                          layout={shouldAnimateLayout}
                           className="bg-card rounded-xl p-6 border min-w-0"
-                          transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                         >
                           <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
                             <FileText className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                             {infoOption.label}
                           </h2>
-                          <motion.div 
-                            layout={shouldAnimateLayout}
+                          <div 
                             className="text-foreground/90 min-w-0 text-base"
-                            transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                           >
                             {infoOption.description.map((paragraph, idx) => (
                               <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                                 <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                               </p>
                             ))}
-                          </motion.div>
-                        </motion.div>
+                          </div>
+                        </div>
                       ))
                     ) : (
                       // Simple general information array
-                      <motion.div 
-                        layout={shouldAnimateLayout}
-                        className="bg-card rounded-xl p-6 border min-w-0"
-                        transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
-                      >
+                    <div 
+                      className="bg-card rounded-xl p-6 border min-w-0"
+                    >
                         <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
                           <FileText className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                           General Information
                         </h2>
-                        <motion.div 
-                          layout={shouldAnimateLayout}
+                        <div 
                           className="text-foreground/90 min-w-0 text-base"
-                          transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                         >
                           {(sections.generalInformation as string[]).map((paragraph, idx) => (
                             <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                               <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                             </p>
                           ))}
-                        </motion.div>
-                      </motion.div>
+                        </div>
+                      </div>
                     )
                   )}
 
@@ -298,65 +245,55 @@ export function EquipmentContentTabs({
                   {sections.overview && sections.overview.length > 0 && 
                    !(sections.appearance && sections.appearance.length > 0) && 
                    !(sections.generalInformation && sections.generalInformation.length > 0) && (
-                    <motion.div 
-                      layout={shouldAnimateLayout}
+                    <div 
                       className="bg-card rounded-xl p-8 border min-w-0 min-h-[120px] relative"
-                      transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                     >
                       <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
                         <Package className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                         Overview
                       </h2>
-                      <motion.div 
-                        layout={shouldAnimateLayout}
+                      <div 
                         className="text-foreground/90 min-w-0 text-base"
-                        transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                       >
                         {(sections.overview as string[]).map((paragraph, idx) => (
                           <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                             <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                           </p>
                         ))}
-                      </motion.div>
-                    </motion.div>
+                      </div>
+                    </div>
                   )}
                 </TabsContent>
               )}
               
               {hasFunctionality && (
                 <TabsContent value="functionality" className="mt-0 space-y-4">
-                  <motion.div 
-                    layout={shouldAnimateLayout}
-                    className="bg-card rounded-xl p-6 border min-w-0"
-                    transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
-                  >
+                    <div 
+                      className="bg-card rounded-xl p-6 border min-w-0"
+                    >
                     <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
                       <Zap className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                       Functionality
                     </h2>
-                    <motion.div 
-                      layout={shouldAnimateLayout}
+                    <div 
                       className="text-foreground/90 min-w-0 text-base"
-                      transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                     >
                       {sections.functionality!.map((paragraph, idx) => (
                         <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                           <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                         </p>
                       ))}
-                    </motion.div>
-                  </motion.div>
+                    </div>
+                  </div>
                 </TabsContent>
               )}
 
               {hasTimeline && (
                 <TabsContent value="timeline" className="mt-0 space-y-4">
                   {/* Timeline section - with dropdown switcher like character history */}
-                  <motion.div 
-                    layout={shouldAnimateLayout}
-                    className="bg-card rounded-xl p-6 border min-w-0"
-                    transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
-                  >
+                    <div 
+                      className="bg-card rounded-xl p-6 border min-w-0"
+                    >
                     <div className="flex items-center justify-between mb-3">
                       <h2 className="text-2xl font-semibold flex items-center gap-2">
                         <Clock className="h-6 w-6 text-primary-foreground flex-shrink-0" />
@@ -370,10 +307,8 @@ export function EquipmentContentTabs({
                         />
                       )}
                     </div>
-                    <motion.div 
-                      layout={shouldAnimateLayout}
+                    <div 
                       className="text-foreground/90 min-w-0 text-base"
-                      transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                     >
                       {(Array.isArray(sections.timeline) && typeof sections.timeline[0] === 'object'
                         ? (sections.timeline as EquipmentTimelineOption[]).find(t => t.id === currentTimeline)?.description || (sections.timeline as EquipmentTimelineOption[])[0]?.description || []
@@ -383,8 +318,8 @@ export function EquipmentContentTabs({
                           <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                         </p>
                       ))}
-                    </motion.div>
-                  </motion.div>
+                    </div>
+                  </div>
                 </TabsContent>
               )}
               

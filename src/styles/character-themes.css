@@ -15,7 +15,9 @@ body.character-theme-vortex-a-steele,
 body.character-theme-rice-farmer,
 body.character-theme-the-bloxiverse,
 body.character-theme-bloxy-cola,
-body.character-theme-witches-brew {
+body.character-theme-witches-brew,
+body.character-theme-builderman,
+body.character-theme-the-banhammer {
   background: var(--character-gradient-background, var(--background));
   color: var(--character-text, var(--foreground));
 }
@@ -746,6 +748,147 @@ body.character-theme-witches-brew .bg-card {
   border-color: #22c55e !important;
 }
 
+/* Builderman Theme - Grey and Orange with Yellow highlights, Dark Blue hints, and Red icons */
+body.character-theme-builderman {
+  position: relative;
+  overflow-x: hidden;
+}
+
+body.character-theme-builderman h1,
+body.character-theme-builderman h2,
+body.character-theme-builderman h3,
+body.character-theme-builderman h4,
+body.character-theme-builderman h5,
+body.character-theme-builderman h6 {
+  color: #f97316 !important;
+}
+
+body.character-theme-builderman p {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-builderman div {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-builderman .card span,
+body.character-theme-builderman [class*="card"] span {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-builderman a {
+  color: #f97316 !important;
+}
+
+body.character-theme-builderman a:hover {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-builderman svg,
+body.character-theme-builderman [class*="lucide"] {
+  color: #ef4444 !important;
+  stroke: #ef4444 !important;
+  fill: none !important;
+}
+
+body.character-theme-builderman button {
+  color: #f97316 !important;
+}
+
+body.character-theme-builderman button svg {
+  color: #ef4444 !important;
+}
+
+body.character-theme-builderman .card,
+body.character-theme-builderman [class*="card"],
+body.character-theme-builderman .bg-card {
+  background: linear-gradient(145deg, #1a0a0a 0%, #2a1a0a 50%, #1a1a2a 100%) !important;
+  border-color: #f97316 !important;
+}
+
+/* The Banhammer Theme - Grey and Blue with Yellow accents */
+.character-theme-the-banhammer {
+  --background: #0a0a0a !important;
+  --foreground: #ffffff !important;
+  --card: #1a0a0a !important;
+  --card-foreground: #ffffff !important;
+  --primary: #3b82f6 !important;
+  --primary-foreground: #0a0a0a !important;
+  --secondary: #6b7280 !important;
+  --secondary-foreground: #ffffff !important;
+  --accent: #fbbf24 !important;
+  --accent-foreground: #0a0a0a !important;
+  --muted: #1a0a0a !important;
+  --muted-foreground: #fbbf24 !important;
+  --border: #3b82f6 !important;
+  --input: #1a0a0a !important;
+  --ring: #fbbf24 !important;
+}
+
+body.character-theme-the-banhammer {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 20%, #1a1a2a 35%, #1a2a3a 50%, #1a1a2a 65%, #1a0a0a 80%, #0a0a0a 100%) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.character-theme-container.character-theme-the-banhammer {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 20%, #1a1a2a 35%, #1a2a3a 50%, #1a1a2a 65%, #1a0a0a 80%, #0a0a0a 100%) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body.character-theme-the-banhammer h1,
+body.character-theme-the-banhammer h2,
+body.character-theme-the-banhammer h3,
+body.character-theme-the-banhammer h4,
+body.character-theme-the-banhammer h5,
+body.character-theme-the-banhammer h6 {
+  color: #3b82f6 !important;
+}
+
+body.character-theme-the-banhammer p {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-the-banhammer div {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-the-banhammer .card span,
+body.character-theme-the-banhammer [class*="card"] span {
+  color: #fef3c7 !important;
+}
+
+body.character-theme-the-banhammer a {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-the-banhammer a:hover {
+  color: #fcd34d !important;
+}
+
+body.character-theme-the-banhammer svg,
+body.character-theme-the-banhammer [class*="lucide"] {
+  color: #fbbf24 !important;
+  stroke: #fbbf24 !important;
+  fill: none !important;
+}
+
+body.character-theme-the-banhammer button {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-the-banhammer button svg {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-the-banhammer .card,
+body.character-theme-the-banhammer [class*="card"],
+body.character-theme-the-banhammer .bg-card {
+  background: linear-gradient(145deg, #1a0a0a 0%, #1a1a2a 50%, #1a2a3a 100%) !important;
+  border-color: #3b82f6 !important;
+}
+
 body.character-theme-nauli-parter .sidebar svg,
 body.character-theme-nauli-parter [class*="sidebar"] svg {
   color: #16a34a !important;
@@ -769,6 +912,10 @@ body.character-theme-nauli-parter [class*="sidebar"] button span {
 /* Vortex-specific styling for icons, text, and links */
 body.character-theme-vortex-a-steele {
   background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%) !important;
+  --primary-foreground: #a855f7 !important; /* Override primary-foreground for purple icons */
+  --primary: #a855f7 !important; /* Override primary for purple icons */
+  --muted: #1a1a1a !important; /* Base muted color (grey) */
+  --muted-rgb: 26, 26, 26; /* RGB values for opacity variants */
 }
 
 body.character-theme-vortex-a-steele h1,
@@ -802,26 +949,183 @@ body.character-theme-vortex-a-steele a:hover {
   color: #f59e0b !important;
 }
 
+/* Comprehensive rules for ALL Lucide icons in Vortex's entry */
 body.character-theme-vortex-a-steele svg,
-body.character-theme-vortex-a-steele [class*="lucide"] {
-  color: #eab308 !important;
-  stroke: #eab308 !important;
+body.character-theme-vortex-a-steele [class*="lucide"],
+body.character-theme-vortex-a-steele svg[class*="text-primary-foreground"],
+body.character-theme-vortex-a-steele [class*="lucide"][class*="text-primary-foreground"],
+body.character-theme-vortex-a-steele svg[class*="text-primary"],
+body.character-theme-vortex-a-steele [class*="lucide"][class*="text-primary"],
+body.character-theme-vortex-a-steele svg[class*="text-muted-foreground"],
+body.character-theme-vortex-a-steele [class*="lucide"][class*="text-muted-foreground"],
+body.character-theme-vortex-a-steele svg[class*="text-foreground"],
+body.character-theme-vortex-a-steele [class*="lucide"][class*="text-foreground"] {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
   fill: none !important;
 }
 
 body.character-theme-vortex-a-steele button {
-  color: #eab308 !important;
+  color: #a855f7 !important;
 }
 
 body.character-theme-vortex-a-steele button svg {
-  color: #eab308 !important;
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+}
+
+/* Target icons with text-primary-foreground class specifically */
+body.character-theme-vortex-a-steele .text-primary-foreground svg,
+body.character-theme-vortex-a-steele svg.text-primary-foreground,
+body.character-theme-vortex-a-steele [class*="text-primary-foreground"] svg,
+body.character-theme-vortex-a-steele svg[class*="text-primary-foreground"],
+body.character-theme-vortex-a-steele [class*="lucide"].text-primary-foreground {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+  fill: none !important;
+}
+
+/* Target icons with text-primary class */
+body.character-theme-vortex-a-steele .text-primary svg,
+body.character-theme-vortex-a-steele svg.text-primary,
+body.character-theme-vortex-a-steele [class*="text-primary"] svg,
+body.character-theme-vortex-a-steele svg[class*="text-primary"],
+body.character-theme-vortex-a-steele [class*="lucide"].text-primary {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+  fill: none !important;
+}
+
+/* Target icons with text-muted-foreground class */
+body.character-theme-vortex-a-steele .text-muted-foreground svg,
+body.character-theme-vortex-a-steele svg.text-muted-foreground,
+body.character-theme-vortex-a-steele [class*="text-muted-foreground"] svg,
+body.character-theme-vortex-a-steele svg[class*="text-muted-foreground"],
+body.character-theme-vortex-a-steele [class*="lucide"].text-muted-foreground {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+  fill: none !important;
+}
+
+/* Catch-all: Force ALL Lucide SVG elements to be purple (highest specificity) */
+body.character-theme-vortex-a-steele svg[class*="lucide"],
+body.character-theme-vortex-a-steele [class*="lucide"],
+body.character-theme-vortex-a-steele svg[data-lucide],
+body.character-theme-vortex-a-steele [data-lucide] {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+  fill: none !important;
+}
+
+/* Ensure icons inside any container are purple */
+body.character-theme-vortex-a-steele * > svg[class*="lucide"],
+body.character-theme-vortex-a-steele * > [class*="lucide"],
+body.character-theme-vortex-a-steele div svg[class*="lucide"],
+body.character-theme-vortex-a-steele div [class*="lucide"],
+body.character-theme-vortex-a-steele span svg[class*="lucide"],
+body.character-theme-vortex-a-steele span [class*="lucide"] {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+  fill: none !important;
+}
+
+/* Target icons in TabsTrigger (tab navigation icons) */
+body.character-theme-vortex-a-steele [role="tab"] svg,
+body.character-theme-vortex-a-steele [data-state] svg,
+body.character-theme-vortex-a-steele button[role="tab"] svg,
+body.character-theme-vortex-a-steele .TabsTrigger svg,
+body.character-theme-vortex-a-steele [class*="TabsTrigger"] svg {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+  fill: none !important;
+}
+
+/* Ultra-specific: Target ALL SVG elements regardless of classes or parents */
+body.character-theme-vortex-a-steele svg {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+  fill: none !important;
+}
+
+/* Override any inline styles or computed styles */
+body.character-theme-vortex-a-steele svg[style*="color"],
+body.character-theme-vortex-a-steele svg[style*="stroke"] {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+  fill: none !important;
+}
+
+/* Maximum specificity: Override Tailwind utility classes */
+body.character-theme-vortex-a-steele svg.text-primary,
+body.character-theme-vortex-a-steele svg.text-primary-foreground,
+body.character-theme-vortex-a-steele svg.text-muted-foreground,
+body.character-theme-vortex-a-steele svg.text-foreground,
+body.character-theme-vortex-a-steele svg.text-muted,
+body.character-theme-vortex-a-steele svg.text-accent,
+body.character-theme-vortex-a-steele svg.text-secondary {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+  fill: none !important;
+}
+
+/* Target icons in all possible containers with maximum specificity */
+body.character-theme-vortex-a-steele .character-theme-container svg,
+body.character-theme-vortex-a-steele .character-theme-container [class*="lucide"],
+body.character-theme-vortex-a-steele .card svg,
+body.character-theme-vortex-a-steele .card [class*="lucide"],
+body.character-theme-vortex-a-steele [class*="card"] svg,
+body.character-theme-vortex-a-steele [class*="card"] [class*="lucide"] {
+  color: #a855f7 !important;
+  stroke: #a855f7 !important;
+  fill: none !important;
 }
 
 body.character-theme-vortex-a-steele .card,
 body.character-theme-vortex-a-steele [class*="card"],
 body.character-theme-vortex-a-steele .bg-card {
-  background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%) !important;
+  background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 60%, #2d1a3d 100%) !important;
   border-color: #f1f5f9 !important;
+}
+
+/* Add subtle gradient to all grey/muted backgrounds */
+body.character-theme-vortex-a-steele [class*="bg-muted"] {
+  background-image: linear-gradient(135deg, rgba(26, 26, 26, 0.2) 0%, rgba(45, 26, 61, 0.25) 100%) !important;
+}
+
+/* Override for different opacity levels */
+body.character-theme-vortex-a-steele [class*="bg-muted"][class*="20"],
+body.character-theme-vortex-a-steele [class*="bg-muted"][class*="30"],
+body.character-theme-vortex-a-steele [class*="bg-muted"][class*="10"] {
+  background-image: linear-gradient(135deg, rgba(26, 26, 26, 0.2) 0%, rgba(45, 26, 61, 0.25) 100%) !important;
+}
+
+/* Add subtle grey-to-purple gradient to muted backgrounds */
+/* Target all elements with bg-muted classes - Tailwind generates these with escaped slashes */
+body.character-theme-vortex-a-steele [class*="bg-muted"] {
+  background-image: linear-gradient(135deg, rgba(26, 26, 26, 0.2) 0%, rgba(45, 26, 61, 0.25) 100%) !important;
+}
+
+/* Target specific muted background elements found in components */
+body.character-theme-vortex-a-steele .bg-muted\/20,
+body.character-theme-vortex-a-steele .bg-muted\/30,
+body.character-theme-vortex-a-steele .bg-muted\/10 {
+  background-image: linear-gradient(135deg, rgba(26, 26, 26, 0.2) 0%, rgba(45, 26, 61, 0.25) 100%) !important;
+}
+
+/* Target carousel item backgrounds */
+body.character-theme-vortex-a-steele [class*="AspectRatio"][class*="bg-muted"],
+body.character-theme-vortex-a-steele [class*="aspect-ratio"][class*="bg-muted"] {
+  background-image: linear-gradient(135deg, rgba(26, 26, 26, 0.2) 0%, rgba(45, 26, 61, 0.25) 100%) !important;
+}
+
+/* Target basic info section */
+body.character-theme-vortex-a-steele [class*="bg-muted"][class*="rounded-xl"] {
+  background-image: linear-gradient(135deg, rgba(26, 26, 26, 0.2) 0%, rgba(45, 26, 61, 0.25) 100%) !important;
+}
+
+/* Target quote box and caption backgrounds */
+body.character-theme-vortex-a-steele [class*="bg-muted"][class*="rounded"] {
+  background-image: linear-gradient(135deg, rgba(26, 26, 26, 0.3) 0%, rgba(45, 26, 61, 0.35) 100%) !important;
 }
 
 /* Sidebar styling for Vortex's theme */

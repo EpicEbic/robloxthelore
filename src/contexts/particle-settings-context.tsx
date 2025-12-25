@@ -7,40 +7,43 @@ interface ParticleSettingsContextType {
 
 const ParticleSettingsContext = createContext<ParticleSettingsContextType | undefined>(undefined);
 
-const PARTICLES_COOKIE_NAME = 'lore_particles_enabled';
-const COOKIE_EXPIRY_DAYS = 365;
+const PARTICLES_STORAGE_KEY = 'lore_particles_enabled';
 
-// Cookie helper functions
-const setCookie = (name: string, value: string, days: number) => {
-  const expires = new Date();
-  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+// localStorage helper functions
+const getStoredParticlesSetting = (): boolean | null => {
+  try {
+    const stored = localStorage.getItem(PARTICLES_STORAGE_KEY);
+    if (stored === null) {
+      return null;
+    }
+    return stored === 'true';
+  } catch (error) {
+    console.error('Failed to read particles setting from localStorage:', error);
+    return null;
+  }
 };
 
-const getCookie = (name: string): string | null => {
-  const nameEQ = name + '=';
-  const ca = document.cookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+const setStoredParticlesSetting = (value: boolean): void => {
+  try {
+    localStorage.setItem(PARTICLES_STORAGE_KEY, value.toString());
+  } catch (error) {
+    console.error('Failed to save particles setting to localStorage:', error);
   }
-  return null;
 };
 
 export const ParticleSettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Default to true (particles enabled), unless cookie says otherwise
+  // Default to true (particles enabled), unless localStorage says otherwise
   const [particlesEnabled, setParticlesEnabled] = useState<boolean>(() => {
-    const cookieValue = getCookie(PARTICLES_COOKIE_NAME);
-    if (cookieValue === null) {
+    const storedValue = getStoredParticlesSetting();
+    if (storedValue === null) {
       return true; // Default enabled
     }
-    return cookieValue === 'true';
+    return storedValue;
   });
 
   useEffect(() => {
-    // Save to cookie whenever it changes
-    setCookie(PARTICLES_COOKIE_NAME, particlesEnabled.toString(), COOKIE_EXPIRY_DAYS);
+    // Save to localStorage whenever it changes
+    setStoredParticlesSetting(particlesEnabled);
   }, [particlesEnabled]);
 
   const toggleParticles = () => {

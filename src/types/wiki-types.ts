@@ -106,6 +106,7 @@ export interface AbilityData {
   offensive?: AbilityCategory;
   defensive?: AbilityCategory;
   utilitarian?: AbilityCategory;
+  ultimate?: AbilityCategory;
   drawbacks?: AbilityCategory;
 }
 

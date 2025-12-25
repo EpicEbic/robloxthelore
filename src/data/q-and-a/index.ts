@@ -13,16 +13,16 @@ export const qAndAEntries: QandAEntry[] = [
     id: "who-is-working-on-the-lore",
     question: "Who is working on The Lore?",
     answer: [
-      "<strong><u>As of writing, I (EpicEbic) am the sole project owner and director, any text and images you see are made by me!</u></strong> I'm unsure if this project will remain exclusively worked on by me, but for the forseeable future I will be the only man behind The Lore."
+      "<strong><u>As of writing, I (EpicEbic) am the sole project owner and director. Any text and imagery seen within this website is made exclusively by me!</u></strong> This may change in the future, but for now I will be the only man behind The Lore."
     ]
   },
   {
     id: "how-does-this-project-use-ai",
     question: "How does this project use AI?",
     answer: [
-      "I would like to immediately clarify, <strong><u>The Lore does NOT make use of generative AI in any shape or form for the story content, including text and imagery. All writing and images are original, done by me (EpicEbic) and me alone.</u></strong>",
-      "<strong><u>That being said, a small handful of AI assistants have been used to help develop the website you're currently browsing</u></strong>, as I lack the coding experience necessary to make a functioning website that I'd be happy with. I assure you, I detest AI as much as the next person, but this help was necessary if I didn't want to spend years figuring out coding to reach a level I'd be happy making a website with.",
-      "<strong><u>There are NO plans to apply AI anywhere beyond the development of the website</u></strong>, I do not believe in AI replacing human creativity. <strong><u>The Lore's characters and world will always remain untouched by AI, that is a promise.</u></strong>"
+      "I would like to clarify right away, <strong><u>The Lore does NOT make use of generative AI for any aspects of the story, all work (text and imagery) is done by me (EpicEbic) and me alone.</u></strong>",
+      "<strong><u>I will clearly state that the website you're currently browsing has been partially co-developed with AI</u></strong>, as I lack the required experience as a coder to create a website I'd be satisfied with. I wish I did not have to use this tool, but it was necessary for this website to exist.",
+      "<strong><u>There are NO plans to apply AI anywhere beyond the development of the website, The Lore as a series will remain untouched by any AI, whatsoever.</u></strong> I do not believe in AI replacing human creativity."
     ]
   }
 ];

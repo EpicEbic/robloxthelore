@@ -6,6 +6,8 @@ import { riceFarmerTheme } from './rice-farmer-theme';
 import { bouncemanTheme } from './bounceman-theme';
 import { bloxyColaTheme } from './bloxy-cola-theme';
 import { witchesBrewTheme } from './witches-brew-theme';
+import { buildermanTheme } from './builderman-theme';
+import { banhammerTheme } from './banhammer-theme';
 
 const characterThemes: Record<string, CharacterTheme> = {
   'caesar-bloxwright': caesarTheme,
@@ -15,6 +17,8 @@ const characterThemes: Record<string, CharacterTheme> = {
   'the-bounceman': bouncemanTheme,
   'bloxy-cola': bloxyColaTheme,
   'witches-brew': witchesBrewTheme,
+  'builderman': buildermanTheme,
+  'the-banhammer': banhammerTheme,
 };
 
 export const getCharacterTheme = (characterId: string): CharacterTheme | null => {
@@ -31,4 +35,4 @@ export const hasCharacterTheme = (characterId: string): boolean => {
 };
 
 // Export individual themes
-export { caesarTheme, nauliTheme, vortexTheme, riceFarmerTheme, bouncemanTheme, bloxyColaTheme, witchesBrewTheme };
+export { caesarTheme, nauliTheme, vortexTheme, riceFarmerTheme, bouncemanTheme, bloxyColaTheme, witchesBrewTheme, buildermanTheme, banhammerTheme };

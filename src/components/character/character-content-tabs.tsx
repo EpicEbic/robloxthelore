@@ -4,7 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+// Removed framer-motion - no animations needed
 import { CharacterTriviaItem } from "./character-trivia-item";
 import { CharacterAppearanceSwitcher } from "./character-appearance-switcher";
 import { CharacterPersonalitySwitcher } from "./character-personality-switcher";
@@ -95,9 +95,9 @@ export function CharacterContentTabs({
   const isMobile = useIsMobile();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const scrollPositionRef = useRef<number>(0);
-  const contentHeightRef = useRef<number>(0);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [shouldAnimateLayout, setShouldAnimateLayout] = useState(false);
+  // Disabled layout animations - always false
+  const shouldAnimateLayout = false;
 
   // State for Physical/Ability switcher
   const [combatView, setCombatView] = useState<'physical' | 'ability'>('physical');
@@ -131,42 +131,7 @@ export function CharacterContentTabs({
     }
   }, [hasAbilities, combatView]);
 
-  // Track content height changes and only animate when height actually changes
-  useEffect(() => {
-    if (!contentRef.current) return;
-    
-    let timeoutId: number | undefined;
-    
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const newHeight = entry.contentRect.height;
-        const oldHeight = contentHeightRef.current;
-        
-        // Only animate if height changes by more than 10px (threshold to avoid minor jitter)
-        if (oldHeight > 0 && Math.abs(newHeight - oldHeight) > 10) {
-          setShouldAnimateLayout(true);
-          // Reset after animation completes
-          if (timeoutId) clearTimeout(timeoutId);
-          timeoutId = window.setTimeout(() => setShouldAnimateLayout(false), 600);
-        } else if (oldHeight === 0) {
-          // Initial measurement, don't animate
-          contentHeightRef.current = newHeight;
-        } else {
-          // Height stayed roughly the same, don't animate
-          setShouldAnimateLayout(false);
-        }
-        
-        contentHeightRef.current = newHeight;
-      }
-    });
-    
-    observer.observe(contentRef.current);
-    
-    return () => {
-      observer.disconnect();
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, [currentAppearance, currentPersonality, currentLifestyle, currentHistory, currentCombatStyle, displayCombatView, displayTimelineView]);
+  // ResizeObserver completely removed - was causing stretching effect
 
   // Get current appearance description
   const getCurrentAppearanceDescription = () => {
@@ -246,20 +211,14 @@ export function CharacterContentTabs({
     return combatStats;
   };
 
-  // Handle tab change and preserve scroll position
   const handleTabChange = (value: string) => {
-    // Save current scroll position
     if (scrollAreaRef.current) {
       const viewport = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]') as HTMLElement;
       if (viewport) {
         scrollPositionRef.current = viewport.scrollTop;
       }
     }
-    
-    // Call the original onTabChange if provided
     onTabChange?.(value);
-    
-    // Restore scroll position after content renders
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         if (scrollAreaRef.current) {
@@ -303,12 +262,12 @@ export function CharacterContentTabs({
             <div 
               ref={contentRef}
               className="pr-4"
+              style={{ transition: 'none' }}
             >
               <TabsContent value="general" className="space-y-4 mt-0">
-                <motion.div 
-                  layout={shouldAnimateLayout}
+                <div 
                   className="bg-card rounded-xl p-8 border min-w-0 min-h-[120px] relative"
-                  transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
+                  style={{ transition: 'none' }}
                 >
                   <div className="flex items-start justify-between mb-4 gap-4">
                     <h2 className="text-2xl font-semibold flex items-center gap-2 flex-shrink-0">
@@ -323,23 +282,20 @@ export function CharacterContentTabs({
                       />
                     </div>
                   </div>
-                  <motion.div 
-                    layout={shouldAnimateLayout}
+                  <div 
                     className="text-foreground/90 min-w-0 text-base"
-                    transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                   >
                     {getCurrentAppearanceDescription().map((paragraph, idx) => (
                       <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                         <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                       </p>
                     ))}
-                  </motion.div>
-                </motion.div>
+                  </div>
+                </div>
 
-                <motion.div 
-                  layout={shouldAnimateLayout}
+                <div 
                   className="bg-card rounded-xl p-6 border min-w-0"
-                  transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
+                  style={{ transition: 'none' }}
                 >
                   <div className="flex items-center justify-between mb-3">
                     <h2 className="text-2xl font-semibold flex items-center gap-2">
@@ -354,18 +310,16 @@ export function CharacterContentTabs({
                       />
                     )}
                   </div>
-                  <motion.div 
-                    layout={shouldAnimateLayout}
+                  <div 
                     className="text-foreground/90 min-w-0 text-base"
-                    transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                   >
                     {getCurrentPersonalityDescription().map((paragraph, idx) => (
                       <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                         <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                       </p>
                     ))}
-                  </motion.div>
-                </motion.div>
+                  </div>
+                </div>
               </TabsContent>
               
               <TabsContent value="timeline" className="mt-0 space-y-4">
@@ -416,11 +370,10 @@ export function CharacterContentTabs({
                 {/* Content with fade transition */}
                 <div style={{ opacity: isTimelineFading ? 0 : 1, transition: 'opacity 200ms ease' }}>
                   {displayTimelineView === 'lifestyle' && (
-                    <motion.div 
-                      layout={shouldAnimateLayout}
-                      className="bg-card rounded-xl p-6 border min-w-0"
-                      transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
-                    >
+                <div 
+                  className="bg-card rounded-xl p-6 border min-w-0"
+                  style={{ transition: 'none' }}
+                >
                       <div className="flex justify-between items-center mb-3">
                         <h2 className="text-2xl font-semibold flex items-center gap-2">
                           <Home className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
@@ -434,26 +387,23 @@ export function CharacterContentTabs({
                           />
                         )}
                       </div>
-                      <motion.div 
-                        layout={shouldAnimateLayout}
+                      <div 
                         className="text-foreground/90 min-w-0 text-base"
-                        transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                       >
                         {getCurrentLifestyleDescription().map((paragraph, idx) => (
                           <p key={idx} className="mb-4 text-left break-words whitespace-normal overflow-wrap-anywhere">
                             <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                           </p>
                         ))}
-                      </motion.div>
-                    </motion.div>
+                      </div>
+                    </div>
                   )}
 
                   {sections.history && Array.isArray(sections.history) && sections.history.length > 0 && displayTimelineView === 'history' && (
-                    <motion.div 
-                      layout={shouldAnimateLayout}
-                      className="bg-card rounded-xl p-6 border min-w-0"
-                      transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
-                    >
+                <div 
+                  className="bg-card rounded-xl p-6 border min-w-0"
+                  style={{ transition: 'none' }}
+                >
                       <div className="flex items-center justify-between mb-3">
                         <h2 className="text-2xl font-semibold flex items-center gap-2">
                           <Clock className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
@@ -467,18 +417,16 @@ export function CharacterContentTabs({
                           />
                         )}
                       </div>
-                      <motion.div 
-                        layout={shouldAnimateLayout}
+                      <div 
                         className="text-foreground/90 min-w-0 text-base"
-                        transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                       >
                         {getCurrentHistoryDescription().map((paragraph, idx) => (
                           <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                             <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                           </p>
                         ))}
-                      </motion.div>
-                    </motion.div>
+                      </div>
+                    </div>
                   )}
                 </div>
               </TabsContent>
@@ -594,11 +542,9 @@ export function CharacterContentTabs({
                         
                         if (currentCombatStyleData) {
                           return (
-                            <motion.div 
-                              layout={shouldAnimateLayout}
-                              className="bg-card rounded-xl p-6 border min-w-0 relative"
-                              transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
-                            >
+                    <div 
+                      className="bg-card rounded-xl p-6 border min-w-0 relative"
+                    >
                               <div className="flex items-center justify-between mb-4 gap-4">
                                 <h2 className="text-2xl font-semibold flex items-center gap-2">
                                   <HandFist className="h-6 w-6 text-primary-foreground flex-shrink-0" />
@@ -649,16 +595,14 @@ export function CharacterContentTabs({
                                   currentEntryId={currentEntryId}
                                 />
                               </div>
-                            </motion.div>
+                            </div>
                           );
                         }
                         
                         // Fallback to old description format
                         return (
-                          <motion.div 
-                            layout={shouldAnimateLayout}
+                          <div 
                             className="bg-card rounded-xl p-6 border min-w-0 relative"
-                            transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                           >
                             <div className="flex items-start justify-between mb-4 gap-4">
                               <h2 className="text-2xl font-semibold flex items-center gap-2 flex-shrink-0">
@@ -673,18 +617,16 @@ export function CharacterContentTabs({
                                 />
                               </div>
                             </div>
-                            <motion.div 
-                              layout={shouldAnimateLayout}
+                            <div 
                               className="text-foreground/90 min-w-0 text-base"
-                              transition={shouldAnimateLayout ? { duration: 0.5, ease: "easeOut" } : { duration: 0 }}
                             >
                               {getCurrentCombatStyleDescription().map((paragraph, idx) => (
                                 <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
                                   <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                                 </p>
                               ))}
-                            </motion.div>
-                          </motion.div>
+                            </div>
+                          </div>
                         );
                       })()}
                     </>
@@ -739,6 +681,15 @@ export function CharacterContentTabs({
                               category={sections.abilityData.utilitarian}
                               currentEntryId={currentEntryId}
                             />
+                            
+                            {sections.abilityData.ultimate && (
+                              <AbilityCategory
+                                title="Ultimate Techniques"
+                                icon={Zap}
+                                category={sections.abilityData.ultimate}
+                                currentEntryId={currentEntryId}
+                              />
+                            )}
                             
                             <AbilityCategory
                               title="Drawbacks"

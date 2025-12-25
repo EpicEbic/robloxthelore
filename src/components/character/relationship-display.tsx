@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, CarouselApi } from "@/components/ui/carousel";
-import { FileText, Clock3, Heart, Images } from "lucide-react";
+import { FileText, Clock3, Heart } from "lucide-react";
 import { AutoLinkedText } from "@/components/ui/auto-linked-text";
 import { OptimizedImage } from "@/components/ui/optimized-image";
+import { ImageZoomDialog } from "@/components/ui/image-zoom-dialog";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
@@ -51,13 +52,7 @@ export function RelationshipDisplay({
     <div className="space-y-6">
       {/* Image Carousel */}
       {images && images.length > 0 && (
-        <Card className="border-0 rounded-xl overflow-hidden">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Images className="h-5 w-5" />
-              Relationship Gallery
-            </CardTitle>
-          </CardHeader>
+        <Card className="rounded-xl border overflow-hidden">
           <CardContent className="p-0">
             <Carousel setApi={setApi} className="w-full">
               <CarouselContent>
@@ -69,6 +64,10 @@ export function RelationshipDisplay({
                         alt={image.caption}
                         className="w-full h-full object-cover"
                         loading="lazy"
+                      />
+                      <ImageZoomDialog
+                        src={image.url}
+                        alt={image.caption}
                       />
                       {/* Caption Overlay */}
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
@@ -118,7 +117,7 @@ export function RelationshipDisplay({
 
       {/* Status - Large Prominent Display */}
       {status && (
-        <Card className="border-0 rounded-xl">
+        <Card className="rounded-xl border">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center justify-center gap-3">
               <Heart className="h-7 w-7 text-primary" />
@@ -143,7 +142,7 @@ export function RelationshipDisplay({
 
       {/* History - Detailed Information */}
       {history && history.length > 0 && (
-        <Card className="border-0 rounded-xl">
+        <Card className="rounded-xl border">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Clock3 className="h-5 w-5" />

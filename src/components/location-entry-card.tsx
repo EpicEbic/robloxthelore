@@ -48,11 +48,8 @@ export function LocationEntryCard({ location }: LocationEntryCardProps) {
   const displayImages = getCarouselImages();
   const isBloxiverse = location.id === "the-bloxiverse";
   return (
-    <motion.div 
-      layoutId={`entry-${location.id}-card`}
+    <div
       className="w-full max-w-[1400px] mx-auto"
-      initial={false}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl overflow-hidden" style={{
         borderLeftColor: 'var(--wiki-location)'
@@ -112,6 +109,6 @@ export function LocationEntryCard({ location }: LocationEntryCardProps) {
           
         </div>
       </Card>
-    </motion.div>
+    </div>
   );
 }

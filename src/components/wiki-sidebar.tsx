@@ -42,8 +42,8 @@ export function WikiSidebar({
   };
   return <Sidebar className={cn("z-[99999] transition-all duration-300 ease-in-out", className)}>
       <SidebarHeader className="flex flex-col items-center px-6 py-6 relative border-b border-sidebar-border/50">
-        {/* Sidebar trigger positioned to extend beyond sidebar bounds */}
-        <div className="absolute top-0 right-0 translate-x-full h-12 flex items-center z-[99999]">
+        {/* Sidebar trigger positioned to extend beyond sidebar bounds - hidden on mobile */}
+        <div className="absolute top-0 right-0 translate-x-full h-12 flex items-center z-[99999] hidden md:flex">
           <SidebarTrigger className="h-12 w-12 bg-background/90 hover:bg-background border border-border/50 border-l-0 border-t-0 rounded-br-lg shadow-lg text-foreground hover:text-primary transition-all duration-300 flex items-center justify-center" />
         </div>
         {/* Title */}
