@@ -44,9 +44,15 @@ const HomePage = () => {
     
     // 1/100 chance for secret page
     if (Math.random() < 0.01) {
-      // 50/50 chance between original and alternate secret page
-      const useAlternate = Math.random() < 0.5;
-      navigate(useAlternate ? '/secret-alternate' : '/secret');
+      // 33.33% chance for each of the three secret pages
+      const secretChoice = Math.random();
+      if (secretChoice < 0.333) {
+        navigate('/secret');
+      } else if (secretChoice < 0.666) {
+        navigate('/secret-alternate');
+      } else {
+        navigate('/secret-l');
+      }
       return;
     }
     

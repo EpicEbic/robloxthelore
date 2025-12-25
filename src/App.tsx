@@ -18,6 +18,7 @@ import CategoryPage from "./pages/CategoryPage";
 import EntryPage from "./pages/EntryPage";
 import SecretPage from "./pages/SecretPage";
 import AlternateSecretPage from "./pages/AlternateSecretPage";
+import SecretLPage from "./pages/SecretLPage";
 import NotFound from "./pages/NotFound";
 import { ComparisonPage } from "./pages/ComparisonPage";
 import { TournamentPage } from "./pages/TournamentPage";
@@ -74,6 +75,7 @@ const App = () => {
                       <Route path="/plot-timeline" element={<PlotTimelinePage />} />
                       <Route path="/secret" element={<SecretPage />} />
                       <Route path="/secret-alternate" element={<AlternateSecretPage />} />
+                      <Route path="/secret-l" element={<SecretLPage />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </motion.div>
