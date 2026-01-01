@@ -48,7 +48,8 @@ const WhyBotherPage = () => {
     "I'm sorry if you went through this expecting some hidden lore or content, this truly just was my own personal reflection on this series.",
     "I love it dearly, and progress will continue so long as that remains possible.",
     "It truly has been so fun to work on, and I'm sure that won't be changing anytime soon.",
-    "Enjoy your stay."
+    "Enjoy your stay.",
+    "- Sincerely, EpicEbic"
   ];
 
   const handleNext = () => {
