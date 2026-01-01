@@ -2,6 +2,20 @@ import { WhatsNewEntry } from "@/types/whats-new-types";
 
 export const whatsNewEntries: WhatsNewEntry[] = [
   {
+    id: "characteristics-coils-update",
+    date: "2026-01-01",
+    title: "The Characteristics & Coils Update",
+    description: "Happy New Year, let us hope for a good 2026! Starting strong; A final, definitive version of the character grading system has been implemented, alongside character classifications known as Archetypes-- replacing the old alignment system.",
+    changes: [
+      "The Statistics Page has recieved a complete and final overhaul, adding new categories to widely cover all kinds of Bloxians! Every character has had their stats adjusted in one way or another, so check to see how characters you like have been changed!",
+      "The alignment system (Chaotic/Good, Lawful/Evil, etc.) has been expanded from the standard 9 types, to 25! Each character will be classified under one of the 25 different archetypes! Info for Archetypes can be found in the reworked Statistics Page.",
+      "The Coils of Power have been reintroduced after going through a complete overhaul. Each coil is complete with their own themes and effects!",
+      "The \"Equipment\" section has been reworked into \"Objects\", with a new Materials subcategory for future additions such as Bloxite.",
+      "A ton of old and unused code and images have been completely deleted or otherwise repurposed, speeding up loading times and preventing a handful of glitches that would occur if you swapped pages too quickly."
+    ],
+    isNew: true
+  },
+  {
     id: "buildup-banishment-update",
     date: "2025-12-24",
     title: "The Buildup & Banishment Update",
