@@ -11,6 +11,7 @@ import { banhammerTheme } from './banhammer-theme';
 import { gravityCoilTheme } from './gravity-coil-theme';
 import { speedCoilTheme } from './speed-coil-theme';
 import { regenerationCoilTheme } from './regeneration-coil-theme';
+import { coilsOfPowerTheme } from './coils-of-power-theme';
 
 const characterThemes: Record<string, CharacterTheme> = {
   'caesar-bloxwright': caesarTheme,
@@ -25,6 +26,7 @@ const characterThemes: Record<string, CharacterTheme> = {
   'gravity-coil': gravityCoilTheme,
   'speed-coil': speedCoilTheme,
   'regeneration-coil': regenerationCoilTheme,
+  'coils-of-power': coilsOfPowerTheme,
 };
 
 export const getCharacterTheme = (characterId: string): CharacterTheme | null => {
@@ -41,4 +43,4 @@ export const hasCharacterTheme = (characterId: string): boolean => {
 };
 
 // Export individual themes
-export { caesarTheme, nauliTheme, vortexTheme, riceFarmerTheme, bouncemanTheme, bloxyColaTheme, witchesBrewTheme, buildermanTheme, banhammerTheme, gravityCoilTheme, speedCoilTheme, regenerationCoilTheme };
+export { caesarTheme, nauliTheme, vortexTheme, riceFarmerTheme, bouncemanTheme, bloxyColaTheme, witchesBrewTheme, buildermanTheme, banhammerTheme, gravityCoilTheme, speedCoilTheme, regenerationCoilTheme, coilsOfPowerTheme };
