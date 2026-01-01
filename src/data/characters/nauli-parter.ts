@@ -19,7 +19,8 @@ export const nauliParter: WikiEntry = {
   },
   species: "Robloxian",
   age: "23",
-  alignment: "Neutral / Good",
+  alignment: "Rebel/Moral",
+  role: "Protestor",
   carouselImages: [
     {
       url: "/images/nauli-tactical-1.png",
@@ -40,9 +41,40 @@ export const nauliParter: WikiEntry = {
         "Nauli is quick, flexible, and sharp-witted. She is agile in combat and can issue flurries of punches or kicks with little to no warning. Her reflexes are incredibly strong, enabling her to weave and avoid the attacks of other Bloxians in most hand-to-hand combat situations.",
         "Despite Nauli's speed, she isn't particularly strong, nor durable. She takes care to avoid unnecessary risks, opting to wear opponents down slowly until she is presented an opportunity to issue a killing blow."
       ],
-      // ESTIMATED STATS - Subject to change
-      // Strength: E (low power), Durability: E (low endurance), Agility: C (above average speed), Precision: B (high accuracy), Intelligence: B (high tactical thinking)
-      combatStats: createCombatStats("E", "E", "C", "B", "B"),
+      combatStats: createCombatStats(
+        "E", // Strength
+        "E", // Durability
+        "C", // Agility
+        "B", // Precision
+        "B", // Intelligence
+        {
+          // Strength subcategories
+          power: "E",
+          lift: "F",
+          penetration: "F",
+          intensity: "B",
+          // Durability subcategories
+          toughness: "E",
+          vitality: "C",
+          thermostability: "C",
+          esotolerance: "F",
+          // Agility subcategories
+          swiftness: "C",
+          acceleration: "B",
+          flexibility: "C",
+          endurance: "B",
+          // Precision subcategories
+          accuracy: "A",
+          range: "D",
+          dexterity: "B",
+          reactivity: "C",
+          // Intelligence subcategories
+          tactility: "B",
+          wisdom: "D",
+          foresight: "B",
+          sanity: "A"
+        }
+      ),
       images: [
         {
           url: "/images/nauli-combat-1.png",
@@ -203,32 +235,37 @@ export const nauliParter: WikiEntry = {
           "Despite Nauli's speed, she isn't particularly strong, nor durable. She takes care to avoid unnecessary risks, opting to wear opponents down slowly until she is presented an opportunity to issue a killing blow."
         ],
         combatStats: createCombatStats(
-          "E", // Strength: Main category average
-          "E", // Durability: Main category average
-          "C", // Agility: Main category average
-          "B", // Precision: Main category average
-          "B", // Intelligence: Main category average
+          "E", // Strength
+          "E", // Durability
+          "C", // Agility
+          "B", // Precision
+          "B", // Intelligence
           {
             // Strength subcategories
-            penetration: "F",  // Very low penetration capability
-            power: "E",        // Weak but not completely powerless
-            intensity: "C",    // Moderate pressure in combat
-            // Agility subcategories
-            swiftness: "C",    // Quick movement, can issue flurries
-            endurance: "C",   // Can sustain combat, wears opponents down
-            flexibility: "C",  // Moderate flexibility
-            // Precision subcategories
-            accuracy: "C",    // Moderate accuracy
-            reactivity: "C",  // Moderate reflexes
-            dexterity: "C",   // Moderate motor control
-            // Intelligence subcategories
-            tactility: "B",   // Good tactical thinking
-            wisdom: "C",      // Average intelligence
-            stability: "A",  // Exceptional mental stability
+            power: "E",
+            lift: "F",
+            penetration: "F",
+            intensity: "B",
             // Durability subcategories
-            vitality: "D",    // Below average health
-            toughness: "E",   // Not particularly durable
-            resistance: "E"   // Low durability overall
+            toughness: "E",
+            vitality: "C",
+            thermostability: "C",
+            esotolerance: "F",
+            // Agility subcategories
+            swiftness: "C",
+            acceleration: "B",
+            flexibility: "C",
+            endurance: "B",
+            // Precision subcategories
+            accuracy: "A",
+            range: "D",
+            dexterity: "B",
+            reactivity: "C",
+            // Intelligence subcategories
+            tactility: "B",
+            wisdom: "D",
+            foresight: "B",
+            sanity: "A"
           }
         ),
         images: [

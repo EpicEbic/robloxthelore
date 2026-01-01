@@ -1,5 +1,52 @@
 /* Character Theme System */
 
+/* ========================================
+   THEME EXEMPTION SYSTEM
+   Use .icon-theme-exempt class on SVG elements
+   to prevent them from being colored by themes.
+   Use .icon-force-black for black icons.
+   Use .icon-force-white for white icons.
+   ======================================== */
+
+/* Force black icons - exempt from ALL theme coloring */
+.icon-force-black,
+.icon-force-black svg,
+svg.icon-force-black {
+  color: #1f2937 !important;
+  stroke: #1f2937 !important;
+  fill: none !important;
+}
+
+/* Force white icons - exempt from ALL theme coloring */
+.icon-force-white,
+.icon-force-white svg,
+svg.icon-force-white {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+/* Force white text - exempt from ALL theme coloring */
+.text-force-white,
+.text-force-white * {
+  color: #ffffff !important;
+}
+
+/* Force black text - exempt from ALL theme coloring */
+.text-force-black,
+.text-force-black * {
+  color: #1f2937 !important;
+}
+
+/* General theme exempt - uses inherited color */
+.icon-theme-exempt,
+.icon-theme-exempt svg,
+svg.icon-theme-exempt {
+  color: inherit !important;
+  stroke: currentColor !important;
+  fill: none !important;
+}
+
 /* Base theme container */
 .character-theme-container {
   background: var(--character-gradient-background, var(--background));
@@ -13,13 +60,18 @@ body.character-theme-caesar-bloxwright,
 body.character-theme-nauli-parter,
 body.character-theme-vortex-a-steele,
 body.character-theme-rice-farmer,
+body.character-theme-the-bounceman,
 body.character-theme-the-bloxiverse,
 body.character-theme-bloxy-cola,
 body.character-theme-witches-brew,
 body.character-theme-builderman,
-body.character-theme-the-banhammer {
+body.character-theme-the-banhammer,
+body.character-theme-gravity-coil,
+body.character-theme-speed-coil,
+body.character-theme-regeneration-coil {
   background: var(--character-gradient-background, var(--background));
   color: var(--character-text, var(--foreground));
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 /* Debug: Make it obvious when themes are applied - REMOVED */
@@ -379,13 +431,20 @@ body.character-theme-the-bloxiverse .bg-card {
 body.character-theme-caesar-bloxwright .card,
 body.character-theme-caesar-bloxwright [class*="card"],
 body.character-theme-caesar-bloxwright .bg-card {
-  background: linear-gradient(145deg, #1e293b 0%, #334155 100%) !important;
-  border-color: #6b7280 !important;
+  background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
+  border-color: #60a5fa !important;
 }
 
 /* Caesar-specific styling for icons, text, and links */
+.character-theme-container.character-theme-caesar-bloxwright {
+  background: linear-gradient(135deg, #0a0a0a 0%, #0f172a 30%, #1e293b 60%, #0f172a 100%) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
 body.character-theme-caesar-bloxwright {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%) !important;
+  background: linear-gradient(135deg, #0a0a0a 0%, #0f172a 30%, #1e293b 60%, #0f172a 100%) !important;
+  transition: background 0.5s ease;
 }
 
 body.character-theme-caesar-bloxwright h1,
@@ -448,8 +507,16 @@ body.character-theme-caesar-bloxwright .bg-muted\/20 span {
 }
 
 /* Nauli-specific styling for icons, text, and links */
+/* Nauli-specific styling for icons, text, and links */
+.character-theme-container.character-theme-nauli-parter {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1f2937 30%, #e5e7eb 50%, #d1fae5 60%, #1f2937 100%) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
 body.character-theme-nauli-parter {
-  background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #111827 100%) !important;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1f2937 30%, #e5e7eb 50%, #d1fae5 60%, #1f2937 100%) !important;
+  transition: background 0.5s ease;
 }
 
 body.character-theme-nauli-parter h1,
@@ -501,8 +568,8 @@ body.character-theme-nauli-parter button svg {
 body.character-theme-nauli-parter .card,
 body.character-theme-nauli-parter [class*="card"],
 body.character-theme-nauli-parter .bg-card {
-  background: linear-gradient(145deg, #1f2937 0%, #374151 100%) !important;
-  border-color: #6b7280 !important;
+  background: linear-gradient(145deg, #1f2937 0%, #374151 50%, #4b5563 100%) !important;
+  border-color: #16a34a !important;
 }
 
 /* Sidebar styling for Nauli's theme */
@@ -535,8 +602,16 @@ body.character-theme-nauli-parter [class*="sidebar"] a:hover {
 }
 
 /* Rice-specific styling for icons, text, and links */
+/* Rice Farmer-specific styling for icons, text, and links */
+.character-theme-container.character-theme-rice-farmer {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1f150a 30%, #4a3420 50%, #2e5d7a 60%, #1f150a 100%) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
 body.character-theme-rice-farmer {
-  background: linear-gradient(135deg, #0f0d0a 0%, #221a14 50%, #0f0d0a 100%) !important;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1f150a 30%, #4a3420 50%, #2e5d7a 60%, #1f150a 100%) !important;
+  transition: background 0.5s ease;
 }
 
 body.character-theme-rice-farmer h1,
@@ -583,6 +658,13 @@ body.character-theme-rice-farmer button {
 
 body.character-theme-rice-farmer button svg {
   color: #3a7ca5 !important;
+}
+
+body.character-theme-rice-farmer .card,
+body.character-theme-rice-farmer [class*="card"],
+body.character-theme-rice-farmer .bg-card {
+  background: linear-gradient(145deg, #1f150a 0%, #2a1a0f 50%, #3d2817 100%) !important;
+  border-color: #3a7ca5 !important;
 }
 
 /* Bloxy Cola Theme Styling */
@@ -1175,7 +1257,48 @@ body.character-theme-vortex-a-steele [class*="sidebar"] button span {
   color: #eab308 !important;
 }
 
-/* Bounceman-specific styling for icons */
+/* Bounceman-specific styling for icons, text, and links */
+.character-theme-container.character-theme-the-bounceman {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1f2937 30%, #4b5563 50%, #dc2626 60%, #1f2937 100%) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body.character-theme-the-bounceman {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1f2937 30%, #4b5563 50%, #dc2626 60%, #1f2937 100%) !important;
+  transition: background 0.5s ease;
+}
+
+body.character-theme-the-bounceman h1,
+body.character-theme-the-bounceman h2,
+body.character-theme-the-bounceman h3,
+body.character-theme-the-bounceman h4,
+body.character-theme-the-bounceman h5,
+body.character-theme-the-bounceman h6 {
+  color: #ef4444 !important;
+}
+
+body.character-theme-the-bounceman p {
+  color: #f9fafb !important;
+}
+
+body.character-theme-the-bounceman div {
+  color: #f9fafb !important;
+}
+
+body.character-theme-the-bounceman .card span,
+body.character-theme-the-bounceman [class*="card"] span {
+  color: #f9fafb !important;
+}
+
+body.character-theme-the-bounceman a {
+  color: #ef4444 !important;
+}
+
+body.character-theme-the-bounceman a:hover {
+  color: #dc2626 !important;
+}
+
 body.character-theme-the-bounceman svg,
 body.character-theme-the-bounceman [class*="lucide"] {
   color: #ef4444 !important;
@@ -1183,9 +1306,20 @@ body.character-theme-the-bounceman [class*="lucide"] {
   fill: none !important;
 }
 
+body.character-theme-the-bounceman button {
+  color: #ef4444 !important;
+}
+
 body.character-theme-the-bounceman button svg {
   color: #ef4444 !important;
   stroke: #ef4444 !important;
+}
+
+body.character-theme-the-bounceman .card,
+body.character-theme-the-bounceman [class*="card"],
+body.character-theme-the-bounceman .bg-card {
+  background: linear-gradient(145deg, #1f2937 0%, #374151 50%, #4b5563 100%) !important;
+  border-color: #ef4444 !important;
 }
 
 /* Button Styling for Character Themes */
@@ -1545,5 +1679,154 @@ body.character-theme-vortex-a-steele .stat-chart-vortex svg text.text-lg {
 h3.physical-stats-title {
   color: #ffffff !important;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Gravity Coil Theme - Blue and Grey with White accents */
+body.character-theme-gravity-coil {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 30%, #1a1a2a 50%, #1a2a3a 60%, #1a1a2a 70%, #1a0a0a 100%) !important;
+  transition: background 0.5s ease;
+}
+
+body.character-theme-gravity-coil h1,
+body.character-theme-gravity-coil h2,
+body.character-theme-gravity-coil h3,
+body.character-theme-gravity-coil h4,
+body.character-theme-gravity-coil h5,
+body.character-theme-gravity-coil h6 {
+  color: #3b82f6 !important;
+}
+
+body.character-theme-gravity-coil svg,
+body.character-theme-gravity-coil [class*="lucide"] {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+body.character-theme-gravity-coil .card,
+body.character-theme-gravity-coil [class*="card"],
+body.character-theme-gravity-coil .bg-card {
+  background: linear-gradient(145deg, #1a0a0a 0%, #1a1a2a 50%, #2a2a3a 100%) !important;
+  border-color: #3b82f6 !important;
+}
+
+/* Speed Coil Theme - Red and Grey with White accents */
+body.character-theme-speed-coil {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 30%, #2a1a1a 50%, #3a1a1a 60%, #2a1a1a 70%, #1a0a0a 100%) !important;
+  transition: background 0.5s ease;
+}
+
+body.character-theme-speed-coil h1,
+body.character-theme-speed-coil h2,
+body.character-theme-speed-coil h3,
+body.character-theme-speed-coil h4,
+body.character-theme-speed-coil h5,
+body.character-theme-speed-coil h6 {
+  color: #ef4444 !important;
+}
+
+body.character-theme-speed-coil svg,
+body.character-theme-speed-coil [class*="lucide"] {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+body.character-theme-speed-coil .card,
+body.character-theme-speed-coil [class*="card"],
+body.character-theme-speed-coil .bg-card {
+  background: linear-gradient(145deg, #1a0a0a 0%, #2a1a1a 50%, #3a2a2a 100%) !important;
+  border-color: #ef4444 !important;
+}
+
+/* Regeneration Coil Theme - Green and Grey with White accents */
+body.character-theme-regeneration-coil {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 30%, #1a2a1a 50%, #1a3a1a 60%, #1a2a1a 70%, #1a0a0a 100%) !important;
+  transition: background 0.5s ease;
+}
+
+body.character-theme-regeneration-coil h1,
+body.character-theme-regeneration-coil h2,
+body.character-theme-regeneration-coil h3,
+body.character-theme-regeneration-coil h4,
+body.character-theme-regeneration-coil h5,
+body.character-theme-regeneration-coil h6 {
+  color: #22c55e !important;
+}
+
+body.character-theme-regeneration-coil svg,
+body.character-theme-regeneration-coil [class*="lucide"] {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+body.character-theme-regeneration-coil .card,
+body.character-theme-regeneration-coil [class*="card"],
+body.character-theme-regeneration-coil .bg-card {
+  background: linear-gradient(145deg, #1a0a0a 0%, #1a2a1a 50%, #2a3a2a 100%) !important;
+  border-color: #22c55e !important;
+}
+
+/* ========================================
+   THEME EXEMPTION OVERRIDES
+   These rules MUST come at the end to override
+   all theme-specific icon coloring.
+   Maximum specificity to ensure they work.
+   ======================================== */
+
+/* Override ALL theme icon coloring for .icon-force-black */
+body[class*="character-theme-"] .icon-force-black,
+body[class*="character-theme-"] .icon-force-black svg,
+body[class*="character-theme-"] svg.icon-force-black,
+body[class*="character-theme-"] .icon-force-black [class*="lucide"],
+body[class*="character-theme-"] [class*="lucide"].icon-force-black,
+[class*="character-theme-"] .icon-force-black,
+[class*="character-theme-"] svg.icon-force-black {
+  color: #1f2937 !important;
+  stroke: #1f2937 !important;
+  fill: none !important;
+}
+
+/* Override ALL theme icon coloring for .icon-force-white */
+body[class*="character-theme-"] .icon-force-white,
+body[class*="character-theme-"] .icon-force-white svg,
+body[class*="character-theme-"] svg.icon-force-white,
+body[class*="character-theme-"] .icon-force-white [class*="lucide"],
+body[class*="character-theme-"] [class*="lucide"].icon-force-white,
+[class*="character-theme-"] .icon-force-white,
+[class*="character-theme-"] svg.icon-force-white {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+/* Override ALL theme icon coloring for .icon-theme-exempt */
+body[class*="character-theme-"] .icon-theme-exempt,
+body[class*="character-theme-"] .icon-theme-exempt svg,
+body[class*="character-theme-"] svg.icon-theme-exempt,
+body[class*="character-theme-"] .icon-theme-exempt [class*="lucide"],
+body[class*="character-theme-"] [class*="lucide"].icon-theme-exempt,
+[class*="character-theme-"] .icon-theme-exempt,
+[class*="character-theme-"] svg.icon-theme-exempt {
+  color: inherit !important;
+  stroke: currentColor !important;
+  fill: none !important;
+}
+
+/* Override ALL theme text coloring for .text-force-white */
+body[class*="character-theme-"] .text-force-white,
+body[class*="character-theme-"] .text-force-white *,
+[class*="character-theme-"] .text-force-white,
+[class*="character-theme-"] .text-force-white * {
+  color: #ffffff !important;
+}
+
+/* Override ALL theme text coloring for .text-force-black */
+body[class*="character-theme-"] .text-force-black,
+body[class*="character-theme-"] .text-force-black *,
+[class*="character-theme-"] .text-force-black,
+[class*="character-theme-"] .text-force-black * {
+  color: #1f2937 !important;
 }
 

@@ -3,14 +3,13 @@ import { useWiki, CategoryType, Subcategory } from "@/contexts/wiki-context";
 import { WikiEntryCard } from "@/components/wiki-entry-card";
 import { Card } from "@/components/ui/card";
 import { SearchBar } from "@/components/search-bar";
-import { getSubcategoryLabel } from "@/data/categories";
+import { getSubcategoryLabel, getDefaultSubcategory } from "@/data/categories";
 import { useMemo } from "react";
 import { CategoryHero } from "@/components/category-hero";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
 
 const CategoryPage = () => {
   const { categoryType, subcategory: subcategoryParam } = useParams<{ categoryType: string; subcategory?: string }>();
-  const subcategory = subcategoryParam || 'all';
   
   const { getEntriesByCategory, categories } = useWiki();
   const { isEntryUnlocked } = useEasterEgg();
@@ -21,14 +20,18 @@ const CategoryPage = () => {
       ? categoryType as CategoryType
       : "character";
 
+    // Get default subcategory if none provided
+    const defaultSubcategory = getDefaultSubcategory(validCategoryType);
+    const subcategory = subcategoryParam || defaultSubcategory;
+
     const validSubcategory = categories
       .find(c => c.type === validCategoryType)
       ?.subcategories.some(s => s.value === subcategory)
       ? subcategory as Subcategory
-      : "all";
+      : defaultSubcategory as Subcategory;
 
     return { validatedCategoryType: validCategoryType, validatedSubcategory: validSubcategory };
-  }, [categoryType, subcategory, categories]);
+  }, [categoryType, subcategoryParam, categories]);
 
   // Memoize entries to avoid recalculation (show all entries, locked ones will be greyed out in WikiEntryCard)
   const entries = useMemo(() => {

@@ -94,26 +94,31 @@ export function CharacterStatRadarChart({
   // Each category's 3 subcategories are clustered around the main category position
   // Main categories are evenly spaced (72° = 2.4 hours apart) to prevent flat bottom
   const SUBCATEGORY_CLOCK_POSITIONS = [
-    // Strength - clustered around 12:00 (top)
-    11.4,   // 0: Penetration (left of center)
-    12.0,   // 1: Strength (center at top)
-    12.6,   // 2: Intensity (right of center)
+    // Strength (Offense) - clustered around 12:00 (top)
+    11.4,   // 0: Power (left of center)
+    11.7,   // 1: Lift (left-center)
+    12.3,   // 2: Penetration (right-center)
+    12.6,   // 3: Intensity (right of center)
     // Agility - clustered around 2.4 hours (72° clockwise from top)
-    1.8,    // 3: Swiftness (left of center)
-    2.4,    // 4: Endurance (center)
-    3.0,    // 5: Flexibility (right of center)
+    1.8,    // 4: Swiftness (left of center)
+    2.1,    // 5: Acceleration (left-center)
+    2.7,    // 6: Flexibility (right-center)
+    3.0,    // 7: Endurance (right of center)
     // Precision - clustered around 4.8 hours (144° clockwise from top)
-    4.2,    // 6: Accuracy (left of center)
-    4.8,    // 7: Reactivity (center)
-    5.4,    // 8: Dexterity (right of center)
+    4.2,    // 8: Accuracy (left of center)
+    4.5,    // 9: Range (left-center)
+    5.1,    // 10: Dexterity (right-center)
+    5.4,    // 11: Reactivity (right of center)
     // Intelligence - clustered around 7.2 hours (216° clockwise from top)
-    6.6,    // 9: Tactility (left of center)
-    7.2,    // 10: Wisdom (center)
-    7.8,    // 11: Stability (right of center)
-    // Durability - clustered around 9.6 hours (288° clockwise from top)
-    9.0,    // 12: Vitality (left of center)
-    9.6,    // 13: Toughness (center)
-    10.2    // 14: Resistance (right of center)
+    6.6,    // 12: Tactility (left of center)
+    6.9,    // 13: Wisdom (left-center)
+    7.5,    // 14: Foresight (right-center)
+    7.8,    // 15: Sanity (right of center)
+    // Durability (Defense) - clustered around 9.6 hours (288° clockwise from top)
+    9.0,    // 16: Toughness (left of center)
+    9.3,    // 17: Vitality (left-center)
+    9.9,    // 18: Thermostability (right-center)
+    10.2   // 19: Esotolerance (right of center)
   ];
   
   // Main category label positions - evenly spaced (72° apart = 2.4 hours)
@@ -130,26 +135,31 @@ export function CharacterStatRadarChart({
   
   // Reorganize physicalSubcategories to match the category-grouped order
   const reorderedPhysicalSubcategories = [
-    // Strength (Offense) - indices 0-2
-    { key: 'penetration', label: 'Penetration', category: 'Strength', stat: 'strength' },
+    // Strength (Offense) - indices 0-3
     { key: 'power', label: 'Power', category: 'Strength', stat: 'strength' },
+    { key: 'lift', label: 'Lift', category: 'Strength', stat: 'strength' },
+    { key: 'penetration', label: 'Penetration', category: 'Strength', stat: 'strength' },
     { key: 'intensity', label: 'Intensity', category: 'Strength', stat: 'strength' },
-    // Agility - indices 3-5
+    // Agility - indices 4-7
     { key: 'swiftness', label: 'Swiftness', category: 'Agility', stat: 'agility' },
-    { key: 'endurance', label: 'Endurance', category: 'Agility', stat: 'agility' },
+    { key: 'acceleration', label: 'Acceleration', category: 'Agility', stat: 'agility' },
     { key: 'flexibility', label: 'Flexibility', category: 'Agility', stat: 'agility' },
-    // Precision - indices 6-8
+    { key: 'endurance', label: 'Endurance', category: 'Agility', stat: 'agility' },
+    // Precision - indices 8-11
     { key: 'accuracy', label: 'Accuracy', category: 'Precision', stat: 'precision' },
-    { key: 'reactivity', label: 'Reactivity', category: 'Precision', stat: 'precision' },
+    { key: 'range', label: 'Range', category: 'Precision', stat: 'precision' },
     { key: 'dexterity', label: 'Dexterity', category: 'Precision', stat: 'precision' },
-    // Intelligence - indices 9-11
+    { key: 'reactivity', label: 'Reactivity', category: 'Precision', stat: 'precision' },
+    // Intelligence - indices 12-15
     { key: 'tactility', label: 'Tactility', category: 'Intelligence', stat: 'intelligence' },
     { key: 'wisdom', label: 'Wisdom', category: 'Intelligence', stat: 'intelligence' },
-    { key: 'stability', label: 'Stability', category: 'Intelligence', stat: 'intelligence' },
-    // Durability (Defense) - indices 12-14
-    { key: 'vitality', label: 'Vitality', category: 'Durability', stat: 'durability' },
+    { key: 'foresight', label: 'Foresight', category: 'Intelligence', stat: 'intelligence' },
+    { key: 'sanity', label: 'Sanity', category: 'Intelligence', stat: 'intelligence' },
+    // Durability (Defense) - indices 16-19
     { key: 'toughness', label: 'Toughness', category: 'Durability', stat: 'durability' },
-    { key: 'resistance', label: 'Resistance', category: 'Durability', stat: 'durability' }
+    { key: 'vitality', label: 'Vitality', category: 'Durability', stat: 'durability' },
+    { key: 'thermostability', label: 'Thermostability', category: 'Durability', stat: 'durability' },
+    { key: 'esotolerance', label: 'Esotolerance', category: 'Durability', stat: 'durability' }
   ];
   
   // Get stat entries

@@ -20,7 +20,8 @@ export const riceFarmer: WikiEntry = {
   },
   species: "Noob",
   age: "55",
-  alignment: "Lawful / Good",
+  alignment: "Neutral/Moral",
+  role: "Altruist",
   
   carouselImages: [
     {
@@ -49,24 +50,34 @@ export const riceFarmer: WikiEntry = {
         "F", // Strength
         "F", // Durability
         "F", // Agility
-        "E", // Precision
-        "B", // Intelligence
+        "F", // Precision
+        "E", // Intelligence
         {
+          // Strength subcategories
           power: "F",
+          lift: "F",
           penetration: "F",
           intensity: "F",
+          // Durability subcategories
           toughness: "F",
-          vitality: "E",
-          resistance: "E",
+          vitality: "D",
+          thermostability: "C",
+          esotolerance: "F",
+          // Agility subcategories
           swiftness: "F",
-          endurance: "E",
-          flexibility: "F",
-          accuracy: "E",
+          acceleration: "F",
+          flexibility: "E",
+          endurance: "D",
+          // Precision subcategories
+          accuracy: "F",
+          range: "F",
           dexterity: "E",
-          reactivity: "E",
-          tactility: "E",
-          wisdom: "B",
-          stability: "C"
+          reactivity: "F",
+          // Intelligence subcategories
+          tactility: "F",
+          wisdom: "C",
+          foresight: "E",
+          sanity: "B"
         }
       )
     },
@@ -80,27 +91,37 @@ export const riceFarmer: WikiEntry = {
         "Rice struggles to swing the rake accurately or consistently, so he'll often stick it outwards, aiming towards enemies to keep them at bay. Even so, Rice is slow to turn when extending the rake far out, mainly due to the significant weight of the large tool."
       ],
       combatStats: createCombatStats(
-        "F", // Strength
+        "E", // Strength
         "F", // Durability
         "F", // Agility
-        "E", // Precision
-        "B", // Intelligence
+        "F", // Precision
+        "E", // Intelligence
         {
-          power: "F",
-          penetration: "D",
+          // Strength subcategories
+          power: "E",
+          lift: "F",
+          penetration: "E",
           intensity: "F",
+          // Durability subcategories
           toughness: "F",
-          vitality: "E",
-          resistance: "E",
+          vitality: "D",
+          thermostability: "C",
+          esotolerance: "F",
+          // Agility subcategories
           swiftness: "F",
-          endurance: "E",
-          flexibility: "F",
-          accuracy: "E",
+          acceleration: "F",
+          flexibility: "E",
+          endurance: "D",
+          // Precision subcategories
+          accuracy: "F",
+          range: "F",
           dexterity: "E",
-          reactivity: "E",
-          tactility: "E",
-          wisdom: "B",
-          stability: "C"
+          reactivity: "F",
+          // Intelligence subcategories
+          tactility: "F",
+          wisdom: "C",
+          foresight: "E",
+          sanity: "B"
         }
       ),
       combatStyleData: {
@@ -259,24 +280,34 @@ export const riceFarmer: WikiEntry = {
           "F", // Strength
           "F", // Durability
           "F", // Agility
-          "E", // Precision
-          "B", // Intelligence
+          "F", // Precision
+          "E", // Intelligence
           {
+            // Strength subcategories
             power: "F",
+            lift: "F",
             penetration: "F",
             intensity: "F",
+            // Durability subcategories
             toughness: "F",
-            vitality: "E",
-            resistance: "E",
+            vitality: "D",
+            thermostability: "C",
+            esotolerance: "F",
+            // Agility subcategories
             swiftness: "F",
-            endurance: "E",
-            flexibility: "F",
-            accuracy: "E",
+            acceleration: "F",
+            flexibility: "E",
+            endurance: "D",
+            // Precision subcategories
+            accuracy: "F",
+            range: "F",
             dexterity: "E",
-            reactivity: "E",
-            tactility: "E",
-            wisdom: "B",
-            stability: "C"
+            reactivity: "F",
+            // Intelligence subcategories
+            tactility: "F",
+            wisdom: "C",
+            foresight: "E",
+            sanity: "B"
           }
         ),
       combatStyleData: {
@@ -314,27 +345,37 @@ export const riceFarmer: WikiEntry = {
           "Rice struggles to swing the rake accurately or consistently, so he'll often stick it outwards, aiming towards enemies to keep them at bay. Even so, Rice is slow to turn when extending the rake far out, mainly due to the significant weight of the large tool."
         ],
         combatStats: createCombatStats(
-          "F", // Strength
+          "E", // Strength
           "F", // Durability
           "F", // Agility
-          "E", // Precision
-          "B", // Intelligence
+          "F", // Precision
+          "E", // Intelligence
           {
-            power: "F",
-            penetration: "D",
+            // Strength subcategories
+            power: "E",
+            lift: "F",
+            penetration: "E",
             intensity: "F",
+            // Durability subcategories
             toughness: "F",
-            vitality: "E",
-            resistance: "E",
+            vitality: "D",
+            thermostability: "C",
+            esotolerance: "F",
+            // Agility subcategories
             swiftness: "F",
-            endurance: "E",
-            flexibility: "F",
-            accuracy: "E",
+            acceleration: "F",
+            flexibility: "E",
+            endurance: "D",
+            // Precision subcategories
+            accuracy: "F",
+            range: "F",
             dexterity: "E",
-            reactivity: "E",
-            tactility: "E",
-            wisdom: "B",
-            stability: "C"
+            reactivity: "F",
+            // Intelligence subcategories
+            tactility: "F",
+            wisdom: "C",
+            foresight: "E",
+            sanity: "B"
           }
         ),
         combatStyleData: {

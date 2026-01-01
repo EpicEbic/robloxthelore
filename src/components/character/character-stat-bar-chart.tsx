@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
-import { HelpCircle, TrendingUp, TrendingDown } from "lucide-react";
+import { HelpCircle, TrendingUp, TrendingDown, Sword, Shield, Zap, Target, Brain } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,21 +31,31 @@ interface CombatStats {
   precision: StatGrade;
   intelligence: StatGrade;
   subcategories?: {
-    penetration?: StatGrade;
+    // Offense (Strength)
     power?: StatGrade;
+    lift?: StatGrade;
+    penetration?: StatGrade;
     intensity?: StatGrade;
+    // Defense (Durability)
+    toughness?: StatGrade;
+    vitality?: StatGrade;
+    thermostability?: StatGrade;
+    esotolerance?: StatGrade;
+    // Agility
     swiftness?: StatGrade;
-    endurance?: StatGrade;
+    acceleration?: StatGrade;
     flexibility?: StatGrade;
+    endurance?: StatGrade;
+    // Precision
     accuracy?: StatGrade;
-    reactivity?: StatGrade;
+    range?: StatGrade;
     dexterity?: StatGrade;
+    reactivity?: StatGrade;
+    // Intelligence
     tactility?: StatGrade;
     wisdom?: StatGrade;
-    stability?: StatGrade;
-    vitality?: StatGrade;
-    toughness?: StatGrade;
-    resistance?: StatGrade;
+    foresight?: StatGrade;
+    sanity?: StatGrade;
   };
 }
 
@@ -71,6 +81,18 @@ const GRADE_VALUES = {
   "Ø": 7
 } as const;
 
+// Grade colors matching the statistics page
+const GRADE_COLORS = {
+  "Ø": { bg: "bg-gradient-to-r from-purple-500 to-pink-500", border: "border-purple-400", text: "text-purple-300" },
+  "S": { bg: "bg-gradient-to-r from-blue-500 to-cyan-500", border: "border-blue-400", text: "text-blue-300" },
+  "A": { bg: "bg-gradient-to-r from-green-500 to-emerald-500", border: "border-green-400", text: "text-green-300" },
+  "B": { bg: "bg-gradient-to-r from-yellow-400 to-yellow-500", border: "border-yellow-400", text: "text-yellow-300" },
+  "C": { bg: "bg-gradient-to-r from-orange-400 to-amber-500", border: "border-orange-400", text: "text-orange-300" },
+  "D": { bg: "bg-gradient-to-r from-orange-700 to-red-700", border: "border-orange-500", text: "text-orange-400" },
+  "E": { bg: "bg-gradient-to-r from-red-500 to-rose-600", border: "border-red-400", text: "text-red-300" },
+  "F": { bg: "bg-gradient-to-r from-gray-600 to-gray-700", border: "border-gray-400", text: "text-gray-300" }
+} as const;
+
 // Grade descriptions for each subcategory - FULL DESCRIPTIONS from StatisticInfoPage
 const STAT_GRADE_DESCRIPTIONS: Record<string, Record<string, string>> = {
   penetration: {
@@ -84,14 +106,14 @@ const STAT_GRADE_DESCRIPTIONS: Record<string, Record<string, string>> = {
     "F": "This Bloxian has no capabilities to penetrate the defenses of others by any means, at least beyond that of typical civilians."
   },
   power: {
-    "Ø": "This Bloxian's raw strength is so immeasurably high that destroying entire Worlds (or even groups of Worlds at a time) is child's play. A flick of their finger could reshape entire portions of the Bloxiverse. A sigh could kill millions from the deathly winds that follow.",
-    "S": "This Bloxian is capable of reshaping entire portions of land with minimal effort, waving their hand to obliterate large-scale cities or mountain ranges. Their lifting capacity allows them to manipulate entire islands of weight at a time as though it were a toy.",
-    "A": "This Bloxian can level outposts or smaller cities in just a punch or two. Reinforced structures are trivial to destroy, ripped apart with their bare hands alone. They can take on the entire weight of tall buildings, throwing them like a spear.",
-    "B": "This Bloxian's raw strength enables them to destroy entire buildings and other structures through their fists alone. They can perform remarkable feats, benchpressing vehicles with one hand and kicking boulders as if they were soccer balls. With effort, they can likely pry through reinforced structures if given the time to do so.",
-    "C": "This Bloxian can manhandle larger and heavier objects such as motorcycles and small boulders. Through their strength, they can bring harm to most natural resources including wood, stone, and weaker metals with relative ease.",
-    "D": "This Bloxian has strength which allows them to damage a majority of weaker materials, such as wood and stone. When pouring all of their strength into an attack, they may be able to dent weaker metals such as gold. Their lifting capacity enables them to handle larger and bulkier objects with relative ease.",
-    "E": "This Bloxian has slightly above-average strength, giving them a small edge in hand-to-hand combat against civilians. With significant effort, they may be able to damage materials such as wood and brittle stone. They're capable of lifting a decent amount of weight, such as bulky rocks.",
-    "F": "This Bloxian has no notable strength beyond a standard civilian. They struggle to bring harm to any others beyond their own level of strength, and have a limited lifting capacity."
+    "Ø": "This Bloxian's destructive potential is so immeasurably high that obliterating entire Worlds is child's play. A flick of their finger could reshape vast portions of the Bloxiverse. The sheer force behind their movements could level civilizations without a second thought.",
+    "S": "This Bloxian can reshape entire landscapes with minimal effort, annihilating large-scale cities or mountain ranges with a single strike. Their destructive output rivals natural disasters, leaving devastation in their wake.",
+    "A": "This Bloxian can level outposts or smaller cities in just a punch or two. Reinforced structures crumble before them, and their strikes carry enough force to cause localized earthquakes.",
+    "B": "This Bloxian's power enables them to destroy entire buildings through their fists alone. They can shatter boulders like glass and punch through reinforced walls with focused effort.",
+    "C": "This Bloxian can bring harm to most natural materials including wood, stone, and weaker metals with relative ease. Their strikes carry significant force behind them.",
+    "D": "This Bloxian has strength allowing them to damage weaker materials such as wood and stone. With focused effort, they may dent weaker metals.",
+    "E": "This Bloxian has slightly above-average strength, giving them a small edge in hand-to-hand combat. They can damage materials such as wood with significant effort.",
+    "F": "This Bloxian has no notable strength beyond a standard civilian. They struggle to bring harm beyond their own level."
   },
   intensity: {
     "Ø": "This Bloxian is impossibly efficient at applying unyielding pressure, capable of attacking continuously without any reprieve for the opponent. Their assault is perpetual and inescapable by all means.",
@@ -104,14 +126,14 @@ const STAT_GRADE_DESCRIPTIONS: Record<string, Record<string, string>> = {
     "F": "This Bloxian fails to apply any pressure in combat, either due to their weakness, their style of combat, or their physique."
   },
   swiftness: {
-    "Ø": "This Bloxian can achieve speeds comparable to that of teleportation, leaving vacuums behind that explode and compress anything nearby as they travel. If oxygen is present when they travel, it combusts from the friction they can generate by moving. Entire regions of the Bloxiverse can be crossed in the blink of an eye—a \"casual\" walk may mean travelling the entire known span of the Bloxiverse.",
-    "S": "This Bloxian travels at excessive speeds that can shatter the sound barrier on a whim, quickly reaching velocities that can cover entire Worlds in mere minutes or seconds depending on the size.",
-    "A": "This Bloxian can rapidly accelerate and match the speeds of sports cars and other specialized vehicles designed to travel extremely fast. Entire regions can be ran across with enough time.",
-    "B": "This Bloxian can outrun most motorized vehicles when given enough time to build up to their maximum. Crossing large fields becomes trivial as most can be cleared in seconds.",
-    "C": "This Bloxian is capable of quickly reaching and maintaining a fast pace that allows them to outrun manual vehicles and equipment such as bicycles. Navigating smaller cities is relatively easy to do on foot.",
-    "D": "This Bloxian can achieve speeds comparable to that of a trained athlete, often requiring minimal time to build up their speeds.",
-    "E": "This Bloxian can sprint and reach speeds above civilians, but can still be outpaced by vehicles and trained athletes.",
-    "F": "This Bloxian isn't capable of reaching speeds beyond an average citizen, easily outpaced by stronger runners, vehicles, and those with abilities that enhance their mobility."
+    "Ø": "This Bloxian moves at speeds comparable to teleportation. Entire regions of the Bloxiverse can be crossed in the blink of an eye.",
+    "S": "This Bloxian travels at excessive speeds that shatter the sound barrier on a whim, covering entire Worlds in seconds.",
+    "A": "This Bloxian rapidly matches the speeds of sports cars and specialized high-speed vehicles.",
+    "B": "This Bloxian can outrun most motorized vehicles when at maximum speed. Large fields are cleared in seconds.",
+    "C": "This Bloxian quickly reaches and maintains a fast pace, outrunning manual vehicles like bicycles with ease.",
+    "D": "This Bloxian achieves speeds comparable to trained athletes, moving notably faster than civilians.",
+    "E": "This Bloxian can sprint faster than civilians but is still outpaced by vehicles and trained athletes.",
+    "F": "This Bloxian isn't capable of reaching speeds beyond an average citizen."
   },
   endurance: {
     "Ø": "This Bloxian has boundless stamina and endurance that physically cannot run dry. They constantly operate at peak physical capacity, and often do not require food, sleep, or any other form of sustenance.",
@@ -134,14 +156,14 @@ const STAT_GRADE_DESCRIPTIONS: Record<string, Record<string, string>> = {
     "F": "This Bloxian lacks any flexibility beyond the average civilian, unable to perform advanced stretches or maneuvers."
   },
   accuracy: {
-    "Ø": "This Bloxian's accuracy is absolute, allowing improbable attacks to land with flawless execution. They can strike freely, remaining ignorant of any conditions, distance or complexity. Obstacles are irrelevant to them.",
-    "S": "This Bloxian can handle any weapons, regardless of their typing or range. Their attacks strike with the utmost precision, nailing their targets almost without fail even in extremely hostile conditions. Only specialized abilities and equipment can hinder their ability to issue these definitive strikes.",
-    "A": "This Bloxian can attack while handling both melee and ranged with incredible accuracy. Their attacks strike with incredible precision, landing almost always and only struggling against the nimblest of opponents or those who have defensive abilities enabling them to evade.",
-    "B": "This Bloxian has remarkable accuracy with most weaponry, allowing them to remain precise and dangerous even in unfortunate conditions or situations. They can handle most melee encounters, and operate ranged weapons with remarkable accuracy.",
-    "C": "This Bloxian can consistently manage to strike most targets within a moderate range, handling firearms with notable precision above casuals and the unexperienced. Stressful situations or other factors may hinder their capabilities.",
-    "D": "This Bloxian can maintain decent accuracy in hand-to-hand combat, though quick opponents or tough conditions can still easily overwhelm their senses and have them struggling to land a hit.",
-    "E": "This Bloxian can somewhat handle close-range encounters with slight accuracy and edge above untrained combatants, but will struggle with most longer-ranged weaponry and long handheld weapons.",
-    "F": "This Bloxian is either extremely inaccurate, or lacks any control beyond a civilian. Their attacks are thrown without much care or precision. Alternatively, they may simply be too explosive to control."
+    "Ø": "This Bloxian's accuracy is absolute. Every strike lands exactly where intended with flawless precision, regardless of conditions or obstacles. They never miss their mark.",
+    "S": "This Bloxian strikes with near-perfect precision, nailing their intended targets almost without fail even in extremely hostile conditions or against evasive opponents.",
+    "A": "This Bloxian attacks with incredible accuracy, consistently landing hits on their targets. They struggle only against the nimblest opponents who can actively evade.",
+    "B": "This Bloxian has remarkable accuracy, remaining precise and dangerous even in unfortunate conditions. Most of their attacks connect as intended.",
+    "C": "This Bloxian consistently strikes their targets with notable precision above casual combatants. They can reliably hit intended body parts or weak points.",
+    "D": "This Bloxian maintains decent accuracy in combat, though quick opponents or stressful situations may cause them to miss more frequently.",
+    "E": "This Bloxian handles combat with slight accuracy above untrained combatants, but many attacks may miss or hit unintended areas.",
+    "F": "This Bloxian is extremely inaccurate, throwing attacks without care or precision. They frequently miss their intended targets entirely."
   },
   reactivity: {
     "Ø": "This Bloxian's reflexes transcend time, allowing them to initiate countermeasures at speeds beyond comprehension. They react with absolute certainty, knowing and bringing an end to almost any threat before it even has a chance to become a threat in the first place.",
@@ -183,15 +205,76 @@ const STAT_GRADE_DESCRIPTIONS: Record<string, Record<string, string>> = {
     "E": "This Bloxian displays notable intelligence and understandings in life, capable of thinking quickly and acting resourcefully. Stressful situations may cause them to lock up.",
     "F": "This Bloxian shows intelligence consistent with (or below) the average IQ of a civilian, capable of basic problem solving and reasoning."
   },
-  stability: {
-    "Ø": "This Bloxian's mind exists beyond the concepts of sanity and insanity, operating on a level of consciousness that transcends all conventional understanding. Their mental fortitude is absolute and impenetrable, rendering them completely immune to any and all forms of manipulation, deception, or mental intrusion regardless of the methods or abilities employed. No force, ability, or entity can compromise their mind.",
-    "S": "This Bloxian possesses extraordinary mental stability and clarity, maintaining perfect composure even when subjected to extreme psychological torture, trauma, or stress. Their mind is a fortress that resists virtually all forms of manipulation, trickery, and mental abilities. Only the most powerful reality-warping abilities might have a chance, though even those would require tremendous effort.",
-    "A": "This Bloxian has exceptional mental fortitude and remarkable emotional control, remaining calm and rational even in the most dire and stressful circumstances. They can easily identify and resist most forms of manipulation, deception, and mental intrusion. Advanced mental abilities may affect them, but they'll likely recognize the attempt and work to counteract it.",
-    "B": "This Bloxian maintains strong mental stability and composure across most situations, rarely losing their cool or breaking under pressure. They can identify and resist common forms of manipulation and trickery with relative ease. More sophisticated mental manipulation or abilities may affect them, though they'll often realize something is amiss.",
-    "C": "This Bloxian has good mental stability and generally maintains their composure in stressful situations. They can resist basic manipulation attempts and recognize obvious deception. More advanced or subtle manipulation techniques may succeed, especially when combined with abilities or prolonged exposure.",
-    "D": "This Bloxian maintains decent mental stability under normal circumstances, though stressful situations may cause them to falter. They remain susceptible to skilled manipulation and deception, particularly when caught off-guard or under duress. Mental abilities and sustained psychological pressure can compromise their judgment.",
-    "E": "This Bloxian has fragile mental stability and struggles to maintain composure when under significant stress or pressure. They are easily manipulated through common tactics such as lies, guilt-tripping, or emotional exploitation. Their judgment becomes clouded quickly in high-stress situations.",
-    "F": "This Bloxian is either severely mentally unstable or pathetically easy to manipulate—often both. They may suffer from delusions, paranoia, or other mental conditions that severely impair their judgment. Even the most basic manipulation tactics work effortlessly on them, and they can be tricked or deceived with minimal effort."
+  sanity: {
+    "Ø": "This Bloxian's mind exists beyond sanity and insanity, operating on transcendent consciousness. No force can compromise their mind.",
+    "S": "This Bloxian possesses extraordinary mental stability, maintaining composure under extreme psychological torture. Their mind is a fortress.",
+    "A": "This Bloxian has exceptional mental fortitude, remaining calm in dire circumstances and resisting most manipulation attempts.",
+    "B": "This Bloxian maintains strong mental stability, rarely breaking under pressure and identifying common manipulation.",
+    "C": "This Bloxian has good mental stability, maintaining composure in stress and resisting basic manipulation.",
+    "D": "This Bloxian maintains decent stability normally, though stress may cause them to falter. Skilled manipulation can affect them.",
+    "E": "This Bloxian has fragile stability, struggling under stress and easily manipulated through common tactics.",
+    "F": "This Bloxian is severely unstable or easily manipulated—often both. Basic tactics work effortlessly on them."
+  },
+  // New subcategories
+  lift: {
+    "Ø": "This Bloxian can manipulate objects of any mass as though they were weightless. Planets, stars, and celestial bodies pose no challenge.",
+    "S": "This Bloxian can manipulate entire islands of weight at a time as though they were toys. Massive structures like skyscrapers can be hoisted and thrown with ease.",
+    "A": "This Bloxian can take on the entire weight of tall buildings, lifting and throwing them like projectiles. Heavy military vehicles are manageable with effort.",
+    "B": "This Bloxian can perform remarkable feats, benchpressing vehicles with one hand and tossing boulders as if they were soccer balls.",
+    "C": "This Bloxian can manhandle larger and heavier objects such as motorcycles and small boulders with relative comfort.",
+    "D": "This Bloxian's lifting capacity enables them to handle larger and bulkier objects with relative ease, such as heavy furniture or small vehicles.",
+    "E": "This Bloxian is capable of lifting a decent amount of weight, such as bulky rocks or heavy equipment, with noticeable strain.",
+    "F": "This Bloxian has a limited lifting capacity consistent with an average civilian, struggling with anything particularly heavy."
+  },
+  acceleration: {
+    "Ø": "This Bloxian achieves maximum velocity instantaneously. There is no buildup—they simply move at their desired speed the moment they choose to.",
+    "S": "This Bloxian accelerates to their top speed in fractions of a second, appearing to teleport to observers.",
+    "A": "This Bloxian reaches maximum speed almost instantly, requiring only a step or two to achieve full velocity.",
+    "B": "This Bloxian accelerates remarkably fast, reaching top speed in just a few strides with minimal buildup.",
+    "C": "This Bloxian builds speed quickly, reaching their maximum within several seconds of beginning movement.",
+    "D": "This Bloxian accelerates faster than average, requiring less time than most to reach their top speed.",
+    "E": "This Bloxian accelerates at a slightly above-average rate, reaching speed faster than untrained individuals.",
+    "F": "This Bloxian accelerates slowly, requiring significant time and distance to reach their maximum speed."
+  },
+  range: {
+    "Ø": "This Bloxian can engage targets at any distance with perfect effectiveness. Range is meaningless—they strike with equal lethality across dimensions and vast distances.",
+    "S": "This Bloxian operates effectively at extreme distances that would be impossible for others, engaging targets miles away with full combat effectiveness.",
+    "A": "This Bloxian excels at very long ranges, comfortably engaging targets hundreds of meters away while maintaining full combat capability.",
+    "B": "This Bloxian operates effectively at long range, comfortable with distances that would challenge most marksmen and remaining dangerous from afar.",
+    "C": "This Bloxian handles moderate ranges well, effective with ranged weapons at reasonable distances where they can still apply pressure.",
+    "D": "This Bloxian is comfortable at shorter ranges, preferring closer combat but capable of engaging at modest distances when necessary.",
+    "E": "This Bloxian struggles at range, most effective only at close quarters where distance is not a factor.",
+    "F": "This Bloxian can only fight effectively at point-blank range, if at all. Any meaningful distance severely hampers their combat effectiveness."
+  },
+  foresight: {
+    "Ø": "This Bloxian perceives all possible futures with perfect clarity. Every eventuality is known and accounted for before it happens.",
+    "S": "This Bloxian plans many steps ahead with near-perfect accuracy, anticipating outcomes that others couldn't conceive.",
+    "A": "This Bloxian excels at long-term planning, anticipating consequences far in advance and preparing contingencies.",
+    "B": "This Bloxian plans several steps ahead effectively, considering multiple outcomes and preparing accordingly.",
+    "C": "This Bloxian has good foresight, planning ahead for likely outcomes and adapting when things change.",
+    "D": "This Bloxian thinks ahead in general terms, considering immediate consequences but struggling with long-term planning.",
+    "E": "This Bloxian has limited foresight, occasionally planning ahead but often caught off-guard by developments.",
+    "F": "This Bloxian rarely thinks beyond the immediate moment, frequently blindsided by foreseeable consequences."
+  },
+  thermostability: {
+    "Ø": "This Bloxian is completely immune to all temperature extremes. Whether plunged into absolute zero or the heart of a star, they remain entirely unaffected.",
+    "S": "This Bloxian can withstand temperatures that would vaporize or freeze ordinary matter, including the surface of stars or the void of deep space.",
+    "A": "This Bloxian handles extreme temperatures with ease, from volcanic heat to arctic cold, barely noticing conditions that would kill others instantly.",
+    "B": "This Bloxian withstands most temperature extremes with minimal effort, shrugging off severe heat and cold that would incapacitate others.",
+    "C": "This Bloxian has strong tolerance toward temperature extremes, handling harsh heat or bitter cold better than most.",
+    "D": "This Bloxian can tolerate most standard environments, ignoring bitter cold or sweltering heat that would discomfort others.",
+    "E": "This Bloxian may tolerate extreme temperatures for longer periods, but not indefinitely. Without protection, they will eventually succumb.",
+    "F": "This Bloxian cannot tolerate temperature extremes without special protection, vulnerable to both extreme heat and cold."
+  },
+  esotolerance: {
+    "Ø": "This Bloxian is completely immune to all esoteric hazards. Radiation, electricity, cosmic forces, and any other exotic dangers are entirely harmless to them.",
+    "S": "This Bloxian can tolerate exceptionally lethal hazards such as the rupturing gravity of black holes or concentrated cosmic radiation without issue.",
+    "A": "This Bloxian withstands most esoteric hazards like radiation, electricity, and cosmic energy with ease, perhaps not even noticing them.",
+    "B": "This Bloxian can tolerate advanced hazards such as radiation and electricity in large quantities with minimal discomfort.",
+    "C": "This Bloxian may handle advanced hazards including electricity and radiation, having notable resistance to one or more.",
+    "D": "This Bloxian may be resistant to esoteric hazards such as radiation or electricity, tolerating exposure better than average.",
+    "E": "This Bloxian may tolerate minor exposure to esoteric hazards, but extended contact will cause harm.",
+    "F": "This Bloxian has no special tolerance for esoteric hazards, fully vulnerable to radiation, electricity, and other exotic dangers."
   },
   vitality: {
     "Ø": "This Bloxian's body is completely immune to all forms of physical degradation, illness, or aging. Their natural health cannot be diminished by any means, nor can any substances or materials harm them in any way.",
@@ -213,18 +296,8 @@ const STAT_GRADE_DESCRIPTIONS: Record<string, Record<string, string>> = {
     "E": "This Bloxian's body can tolerate injury better than most, preventing them from being cut or bruised as easily. They remain just as vulnerable to most basic weaponry.",
     "F": "This Bloxian is just as susceptible to injury as any other civilian, easily injured by common accidents including falls, bumps, etc."
   },
-  resistance: {
-    "Ø": "This Bloxian is completely immune and incapable of being affected by environmental hazards, regardless of type or intensity. No natural threat poses any feasible harm to them.",
-    "S": "This Bloxian, on top of handling almost all typical hazards seen in the environment, they may be able to tolerate exceptionally lethal hazards, such as the rupturing gravity produced by black holes.",
-    "A": "This Bloxian can likely withstand extreme temperatures and most natural hazards such as radiation or electricity. This can be done with relative ease, perhaps not even noticing the danger at all.",
-    "B": "This Bloxian can withstand most temperatures, shrugged off with minimal effort. Advanced hazards such as radiation and electricity can likely be tolerated in large quantities.",
-    "C": "This Bloxian likely has strong tolerance towards one or more natural hazards, and may be able to handle advanced hazards including electricity and radiation.",
-    "D": "This Bloxian can tolerate most standard environments, ignoring the bitter cold or the sweltering heat. Alternatively (or additionally), they may be resistant to other esoteric hazards, such as radiation.",
-    "E": "This Bloxian may tolerate extreme environments for longer, but not forever. Without equipment or protection, they will inevitably fall victim to harsh climates.",
-    "F": "This Bloxian cannot tolerate any environmental hazards without special protection, making them susceptible to extremely hot and extremely cold climates."
-  },
   // Ability stat subcategories - Offense
-  power: {
+  "ability-power": {
     "Ø": "This ability's raw strength and destructive potential transcends all known limits, capable of obliterating entire Worlds or portions of the Bloxiverse with trivial effort. The destructive power is immeasurable and effectively infinite.",
     "S": "This ability bears world-shattering destructive power, capable of reshaping continents of land or puncturing even Bloxite-reinforced structures with relative ease. The raw strength enables devastating attacks that can level entire cities.",
     "A": "This ability can, with some effort, level entire portions of larger cities or obliterate smaller settlements with enough focus. The destructive potential is remarkable and can easily destroy reinforced structures.",
@@ -234,7 +307,7 @@ const STAT_GRADE_DESCRIPTIONS: Record<string, Record<string, string>> = {
     "E": "This ability grants a slightly notable boost in power over civilians with no power to their name. May be able to damage or destroy objects and terrain made of weaker metals, stone, and wood.",
     "F": "This ability does not grant any boosts or increases in a user's destructive potential, whatsoever. Comparable damage to that of a civilian."
   },
-  penetration: {
+  "ability-penetration": {
     "Ø": "This ability's capability to bypass defenses transcends all forms of protection, allowing attacks to connect with absolute power. They can bypass and ignore any and all lines of defense, no matter what conditions may be in place.",
     "S": "This ability has no difficulty obliterating all known lines of defense, regardless of abilities or materials. Their penetrating power enables them to always attack with maximum lethality, with no amount of Bloxite armor saving them.",
     "A": "This ability can tear through the strongest of defenses with ease, even multi-layered levels of equipment and other abilities stacked into the mix. Bloxite-reinforced structures and armor may hold, but nothing below stands much of a chance.",
@@ -342,24 +415,29 @@ function hasAbilitySubcategories(stats: CharacterStats): boolean {
 const PHYSICAL_SUBCATEGORIES = [
   // Strength subcategories (Offense)
   { key: 'power', label: 'Power', category: 'Strength', stat: 'strength' },
+  { key: 'lift', label: 'Lift', category: 'Strength', stat: 'strength' },
   { key: 'penetration', label: 'Penetration', category: 'Strength', stat: 'strength' },
   { key: 'intensity', label: 'Intensity', category: 'Strength', stat: 'strength' },
   // Durability subcategories (Defense)
   { key: 'toughness', label: 'Toughness', category: 'Durability', stat: 'durability' },
   { key: 'vitality', label: 'Vitality', category: 'Durability', stat: 'durability' },
-  { key: 'resistance', label: 'Resistance', category: 'Durability', stat: 'durability' },
+  { key: 'thermostability', label: 'Thermostability', category: 'Durability', stat: 'durability' },
+  { key: 'esotolerance', label: 'Esotolerance', category: 'Durability', stat: 'durability' },
   // Agility subcategories
   { key: 'swiftness', label: 'Swiftness', category: 'Agility', stat: 'agility' },
-  { key: 'endurance', label: 'Endurance', category: 'Agility', stat: 'agility' },
+  { key: 'acceleration', label: 'Acceleration', category: 'Agility', stat: 'agility' },
   { key: 'flexibility', label: 'Flexibility', category: 'Agility', stat: 'agility' },
+  { key: 'endurance', label: 'Endurance', category: 'Agility', stat: 'agility' },
   // Precision subcategories
   { key: 'accuracy', label: 'Accuracy', category: 'Precision', stat: 'precision' },
+  { key: 'range', label: 'Range', category: 'Precision', stat: 'precision' },
   { key: 'dexterity', label: 'Dexterity', category: 'Precision', stat: 'precision' },
   { key: 'reactivity', label: 'Reactivity', category: 'Precision', stat: 'precision' },
   // Intelligence subcategories
   { key: 'tactility', label: 'Tactility', category: 'Intelligence', stat: 'intelligence' },
   { key: 'wisdom', label: 'Wisdom', category: 'Intelligence', stat: 'intelligence' },
-  { key: 'stability', label: 'Stability', category: 'Intelligence', stat: 'intelligence' }
+  { key: 'foresight', label: 'Foresight', category: 'Intelligence', stat: 'intelligence' },
+  { key: 'sanity', label: 'Sanity', category: 'Intelligence', stat: 'intelligence' }
 ];
 
 const ABILITY_SUBCATEGORIES = [
@@ -420,60 +498,75 @@ const MAIN_CATEGORIES = [
   { 
     name: 'Strength', 
     description: "Measures a character's offensive capabilities through physical power and combat effectiveness.",
+    icon: Sword,
+    iconColor: "from-gray-100 to-gray-300",
     subcategories: PHYSICAL_SUBCATEGORIES.filter(s => s.category === 'Strength').map(subcat => ({
       ...subcat,
       description: {
-        power: "The raw physical potential of a Bloxian, as well as their lifting capacity.",
-        penetration: "The amount of armor or other lines of defense that a Bloxian can penetrate with their attacks.",
-        intensity: "How relentless and pressuring a Bloxian is when in combat."
+        power: "How physically powerful a Bloxian's body is, including their destructive potential.",
+        lift: "How much weight a Bloxian can comfortably (or uncomfortably) tolerate at one time.",
+        penetration: "How easily a Bloxian can bypass or pierce through defensive layers.",
+        intensity: "How much consistent pressure a Bloxian can apply against their opponent."
       }[subcat.key] || ""
     }))
   },
   { 
     name: 'Durability', 
     description: "Represents a character's defensive capabilities and resistance to damage.",
+    icon: Shield,
+    iconColor: "from-gray-100 to-gray-300",
     subcategories: PHYSICAL_SUBCATEGORIES.filter(s => s.category === 'Durability').map(subcat => ({
       ...subcat,
       description: {
-        toughness: "The amount and intensity of physical injuries a Bloxian can sustain before becoming incapacitated.",
-        vitality: "The overall physical health of a Bloxian, accounting for their fitness and any conditions they may have.",
-        resistance: "How well a Bloxian is able to tolerate harsh environmental conditions and hazards before suffering from their effects."
+        toughness: "How many injuries (and the intensity of these injuries) a Bloxian can sustain before becoming incapacitated.",
+        vitality: "How healthy a Bloxian is generally, including their fitness and tolerance to disease, poisons, etc.",
+        thermostability: "How well a Bloxian can withstand harsh environmental conditions, such as extreme heat or frost.",
+        esotolerance: "How well a Bloxian can tolerate rarer hazards, such as cosmic energy, electricity, or radiation."
       }[subcat.key] || ""
     }))
   },
   { 
     name: 'Agility', 
     description: "Speed, reflexes, and nimbleness - how quickly and gracefully a character can move and react.",
+    icon: Zap,
+    iconColor: "from-gray-100 to-gray-300",
     subcategories: PHYSICAL_SUBCATEGORIES.filter(s => s.category === 'Agility').map(subcat => ({
       ...subcat,
       description: {
-        swiftness: "How quickly a Bloxian can move, as well as how quickly they can reach that speed.",
-        endurance: "The amount of general stamina a Bloxian has, as well as how quickly they burn through it.",
-        flexibility: "How easily and gracefully a Bloxian can weave, bend, and maneuver themselves through fast or complicated attacks."
+        swiftness: "How quickly a Bloxian can move from one point to another.",
+        acceleration: "How quickly a Bloxian can reach their top speeds.",
+        flexibility: "How easily and gracefully a Bloxian can maneuver through complicated environments.",
+        endurance: "How much stamina a Bloxian has, as well as how quickly they burn through it."
       }[subcat.key] || ""
     }))
   },
   { 
     name: 'Precision', 
     description: "Accuracy and fine motor control - the ability to perform precise movements and hit targets consistently.",
+    icon: Target,
+    iconColor: "from-gray-100 to-gray-300",
     subcategories: PHYSICAL_SUBCATEGORIES.filter(s => s.category === 'Precision').map(subcat => ({
       ...subcat,
       description: {
-        accuracy: "How good a Bloxian is at connecting their attacks, especially when attacking from a distance.",
-        dexterity: "A Bloxian's motor control, primarily how steady and quick their hands are, especially under stress.",
-        reactivity: "How sharp a Bloxian's reflexes are, and how good they are at counteracting with their reflexes."
+        accuracy: "How consistently a Bloxian will land hits on their target.",
+        range: "How far of a distance a Bloxian can comfortably and consistently fight from.",
+        dexterity: "How fine a Bloxian's motor control is, as well as how quick and steady their hands are while under pressure.",
+        reactivity: "How quickly and effectively a Bloxian can react to sources of danger."
       }[subcat.key] || ""
     }))
   },
   { 
     name: 'Intelligence', 
     description: "Mental acuity, strategic thinking, and problem-solving capabilities in combat and general situations.",
+    icon: Brain,
+    iconColor: "from-gray-100 to-gray-300",
     subcategories: PHYSICAL_SUBCATEGORIES.filter(s => s.category === 'Intelligence').map(subcat => ({
       ...subcat,
       description: {
-        tactility: "How intelligent a Bloxian is in combat situations, including their ability to think quickly, plan ahead, and remain cool under pressure.",
-        wisdom: "The general intelligence and clarity of Bloxians, specifically outside of combat situations.",
-        stability: "How mentally sane or stable a Bloxian is, including how resistant they are to mental manipulation."
+        tactility: "How clever a Bloxian acts in combat, making smart and careful choices to bring down enemies.",
+        wisdom: "How smart a Bloxian is in everyday life, including emotional maturity and common skillsets.",
+        foresight: "How far and easily a Bloxian can plan ahead, both in and out of combat situations.",
+        sanity: "How mentally-stable or sane a Bloxian is, including how resistant they are to mental manipulation."
       }[subcat.key] || ""
     }))
   }
@@ -549,11 +642,11 @@ export function CharacterStatBarChart({
 
     // Compare subcategory stats
     const allSubcategories = [
-      'penetration', 'power', 'intensity',
-      'toughness', 'vitality', 'resistance',
-      'swiftness', 'endurance', 'flexibility',
-      'accuracy', 'dexterity', 'reactivity',
-      'tactility', 'wisdom', 'stability'
+      'power', 'lift', 'penetration', 'intensity',
+      'toughness', 'vitality', 'thermostability', 'esotolerance',
+      'swiftness', 'acceleration', 'flexibility', 'endurance',
+      'accuracy', 'range', 'dexterity', 'reactivity',
+      'tactility', 'wisdom', 'foresight', 'sanity'
     ] as const;
 
     allSubcategories.forEach(subcatKey => {
@@ -561,10 +654,10 @@ export function CharacterStatBarChart({
       const currentSubcat = currentStats.subcategories?.[subcatKey];
       
       // Get effective values (use main category if subcategory doesn't exist)
-      const defaultMainCategory = subcatKey === 'penetration' || subcatKey === 'power' || subcatKey === 'intensity' ? 'strength' :
-                                 subcatKey === 'toughness' || subcatKey === 'vitality' || subcatKey === 'resistance' ? 'durability' :
-                                 subcatKey === 'swiftness' || subcatKey === 'endurance' || subcatKey === 'flexibility' ? 'agility' :
-                                 subcatKey === 'accuracy' || subcatKey === 'dexterity' || subcatKey === 'reactivity' ? 'precision' :
+      const defaultMainCategory = subcatKey === 'power' || subcatKey === 'lift' || subcatKey === 'penetration' || subcatKey === 'intensity' ? 'strength' :
+                                 subcatKey === 'toughness' || subcatKey === 'vitality' || subcatKey === 'thermostability' || subcatKey === 'esotolerance' ? 'durability' :
+                                 subcatKey === 'swiftness' || subcatKey === 'acceleration' || subcatKey === 'flexibility' || subcatKey === 'endurance' ? 'agility' :
+                                 subcatKey === 'accuracy' || subcatKey === 'range' || subcatKey === 'dexterity' || subcatKey === 'reactivity' ? 'precision' :
                                  'intelligence';
       
       const defaultValue = getStatValue(defaultSubcat || defaultStats[defaultMainCategory]);
@@ -663,15 +756,13 @@ export function CharacterStatBarChart({
                 </span>
               </div>
             )}
+            {/* Colored grade badge */}
             <span 
               className={cn(
-                "font-bold",
-                usePhysicalStyle ? "text-base" : "text-sm"
+                "font-bold rounded-xl px-3 py-1.5 text-white shadow-sm",
+                usePhysicalStyle ? "text-sm" : "text-xs",
+                GRADE_COLORS[stat.label as keyof typeof GRADE_COLORS]?.bg || "bg-gray-600"
               )}
-              style={{
-                color: shouldPulse ? undefined : (usePhysicalStyle ? '#ffffff' : undefined),
-                textShadow: usePhysicalStyle ? '0.5px 0.5px 1px rgba(0, 0, 0, 0.5)' : undefined
-              }}
             >
               {stat.label}
             </span>
@@ -681,11 +772,11 @@ export function CharacterStatBarChart({
           <div
             className={cn(
               "h-full rounded-full transition-all duration-500 ease-out",
-              shouldPulse ? "bg-current" : (usePhysicalStyle ? "bg-white" : "bg-primary")
+              shouldPulse ? "bg-current" : GRADE_COLORS[stat.label as keyof typeof GRADE_COLORS]?.bg || "bg-primary"
             )}
             style={{
               width: barWidth,
-              opacity: shouldPulse ? undefined : (usePhysicalStyle ? 0.9 : undefined)
+              opacity: 0.9
             }}
           />
         </div>
@@ -790,6 +881,14 @@ export function CharacterStatBarChart({
                       {/* Main Category Label */}
                       <div className="flex flex-col border-b border-border/50 gap-1 pb-2">
                         <div className="flex items-center gap-2">
+                          {category.icon && (
+                            <div 
+                              className="w-7 h-7 rounded-xl flex items-center justify-center shrink-0 shadow-sm"
+                              style={{ background: 'linear-gradient(to bottom right, #f3f4f6, #d1d5db)' }}
+                            >
+                              <category.icon className="w-4 h-4 icon-force-black" />
+                            </div>
+                          )}
                           <h4 
                             className="font-extrabold text-lg"
                             style={{
@@ -819,7 +918,11 @@ export function CharacterStatBarChart({
                           const subcategoryStat = getSubcategoryStat(subcat.key, mainCategoryStat);
                           const subcatDescription = (subcat as any).description;
                           const statKey = subcat.key;
-                          const gradeDescription = STAT_GRADE_DESCRIPTIONS[subcat.key]?.[subcategoryStat.label];
+                          // Map ability stat keys to their renamed descriptions
+                          const descriptionKey = (subcat.key === 'power' || subcat.key === 'penetration') 
+                            ? `ability-${subcat.key}` 
+                            : subcat.key;
+                          const gradeDescription = STAT_GRADE_DESCRIPTIONS[descriptionKey]?.[subcategoryStat.label];
                           return (
                             <div key={subcat.key}>
                               {renderStatBar(subcat.label, subcategoryStat, subcatDescription, gradeDescription, true, statKey, true)}
@@ -1029,6 +1132,19 @@ export function CharacterStatBarChart({
                           isPhysicalStats ? "gap-1 pb-2" : "gap-0.5 pb-1.5"
                         )}>
                           <div className="flex items-center gap-2">
+                            {category.icon && (
+                              <div 
+                                className={cn(
+                                  "rounded-xl flex items-center justify-center shrink-0 shadow-sm",
+                                  isPhysicalStats ? "w-7 h-7" : "w-5 h-5"
+                                )}
+                                style={{ background: 'linear-gradient(to bottom right, #f3f4f6, #d1d5db)' }}
+                              >
+                                <category.icon 
+                                  className={cn("icon-force-black", isPhysicalStats ? "w-4 h-4" : "w-3 h-3")} 
+                                />
+                              </div>
+                            )}
                             <h4 
                               className={cn(
                                 "font-extrabold",

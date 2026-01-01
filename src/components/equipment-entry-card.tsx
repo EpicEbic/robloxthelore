@@ -6,6 +6,7 @@ import { EquipmentHeader } from "@/components/equipment/equipment-header";
 import { EquipmentBasicInfo } from "@/components/equipment/equipment-basic-info";
 import { EquipmentImageCarousel } from "@/components/equipment/equipment-image-carousel";
 import { EquipmentContentTabs } from "@/components/equipment/equipment-content-tabs";
+import { EquipmentTabbedMultiEntry } from "@/components/equipment/equipment-tabbed-multi-entry";
 import { EquipmentOverviewOption, EquipmentTimelineOption } from "@/types/wiki-types";
 import { motion } from "framer-motion";
 
@@ -43,6 +44,9 @@ export function EquipmentEntryCard({ equipment }: EquipmentEntryCardProps) {
   
   const [currentTab, setCurrentTab] = useState<string>('overview');
   
+  // Check if this is a tabbed multi-entry (Coils of Power)
+  const isTabbedMultiEntry = equipment.id === "coils-of-power" && equipment.multiItems && equipment.multiItems.length > 0;
+  
   // Extract equipment-specific sections
   const equipmentSections: EquipmentSections = {
     overview: equipment.sections?.overview || [],
@@ -75,38 +79,48 @@ export function EquipmentEntryCard({ equipment }: EquipmentEntryCardProps) {
           />
         </div>
         
-        {/* Main Content - Mobile: Vertical Stack, Desktop: Side by Side */}
-        <div 
-          className={`gap-4 p-6 flex-1 ${isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-1 lg:grid-cols-[1fr_2fr] items-start'}`}
-        >
-          
-          <div className="min-w-0 w-full" style={{ height: 'fit-content' }}>
-            <EquipmentImageCarousel 
-              images={equipment.carouselImages || []}
-              imageUrl={equipment.imageUrl}
-              sections={equipmentSections}
-              currentAppearance={currentAppearance}
-              currentTimeline={currentTimeline}
-              currentTab={currentTab}
-            />
-          </div>
-          
-          <div 
-            className="min-w-0 w-full"
-          >
-            <EquipmentContentTabs 
-              sections={equipmentSections} 
-              multiItems={equipment.multiItems}
+        {/* Tabbed Multi-Entry Layout (Coils of Power) */}
+        {isTabbedMultiEntry ? (
+          <div className="p-6 flex-1">
+            <EquipmentTabbedMultiEntry 
+              items={equipment.multiItems}
               currentEntryId={equipment.id}
-              currentAppearance={currentAppearance}
-              onAppearanceChange={setCurrentAppearance}
-              currentTimeline={currentTimeline}
-              onTimelineChange={setCurrentTimeline}
-              onTabChange={setCurrentTab}
             />
           </div>
-          
-        </div>
+        ) : (
+          /* Standard Equipment Layout */
+          <div 
+            className={`gap-4 p-6 flex-1 ${isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-1 lg:grid-cols-[1fr_2fr] items-start'}`}
+          >
+            
+            <div className="min-w-0 w-full" style={{ height: 'fit-content' }}>
+              <EquipmentImageCarousel 
+                images={equipment.carouselImages || []}
+                imageUrl={equipment.imageUrl}
+                sections={equipmentSections}
+                currentAppearance={currentAppearance}
+                currentTimeline={currentTimeline}
+                currentTab={currentTab}
+              />
+            </div>
+            
+            <div 
+              className="min-w-0 w-full"
+            >
+              <EquipmentContentTabs 
+                sections={equipmentSections} 
+                multiItems={equipment.multiItems}
+                currentEntryId={equipment.id}
+                currentAppearance={currentAppearance}
+                onAppearanceChange={setCurrentAppearance}
+                currentTimeline={currentTimeline}
+                onTimelineChange={setCurrentTimeline}
+                onTabChange={setCurrentTab}
+              />
+            </div>
+            
+          </div>
+        )}
       </Card>
     </div>
   );

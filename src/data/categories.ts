@@ -18,11 +18,11 @@ export const CATEGORIES: CategoryStructure[] = [
   },
   {
     type: "equipment",
-    label: "Equipment",
+    label: "Objects",
     subcategories: [
-      { value: "all", label: "All Equipment" },
-      { value: "standard", label: "Ordinary" },
-      { value: "artifacts", label: "Artifacts" }
+      { value: "artifacts", label: "Artifacts" },
+      { value: "standard", label: "Standard" },
+      { value: "materials", label: "Materials" }
     ]
   },
   {
@@ -55,4 +55,16 @@ export function getSubcategoryLabel(category: string, subcategory: string): stri
   
   const subcategoryData = categoryData.subcategories.find(sub => sub.value === subcategory);
   return subcategoryData?.label || subcategory;
+}
+
+// Utility function to get the default subcategory for a category
+export function getDefaultSubcategory(categoryType: string): string {
+  const categoryData = CATEGORIES.find(cat => cat.type === categoryType);
+  if (!categoryData || categoryData.subcategories.length === 0) return 'all';
+  
+  // For equipment, return the first subcategory (artifacts)
+  // For other categories, return 'all' if it exists, otherwise first subcategory
+  const hasAll = categoryData.subcategories.some(sub => sub.value === 'all');
+  if (hasAll) return 'all';
+  return categoryData.subcategories[0].value;
 }

@@ -10,7 +10,10 @@ interface EquipmentBasicInfoProps {
 export function EquipmentBasicInfo({ subcategory }: EquipmentBasicInfoProps) {
   const getSubcategoryLabel = () => {
     if (!subcategory) return null;
-    return subcategory === "artifacts" ? "Artifact" : "Standard Equipment";
+    if (subcategory === "artifacts") return "Artifact";
+    if (subcategory === "standard") return "Standard";
+    if (subcategory === "materials") return "Material";
+    return "Standard"; // Fallback
   };
 
   const getSubcategoryIcon = () => {

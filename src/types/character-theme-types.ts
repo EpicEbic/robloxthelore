@@ -15,11 +15,13 @@ export interface CharacterTheme {
     accent: string;
   };
   particles: {
-    type: 'flow' | 'sparkle' | 'wave' | 'orb' | 'radio' | 'speed' | 'clock' | 'lightning' | 'grain' | 'cosmic-wave' | 'stardust' | 'shooting-star' | 'bounce' | 'bubble' | 'none';
+    type: 'flow' | 'sparkle' | 'wave' | 'orb' | 'radio' | 'speed' | 'clock' | 'lightning' | 'grain' | 'cosmic-wave' | 'stardust' | 'shooting-star' | 'bounce' | 'bubble' | 'squiggle' | 'none';
     color: string;
     intensity: number;
     speed: number;
     count: number;
+    rotationSpeedMultiplier?: number; // Multiplier for spiral rotation speed (default 1.0)
+    scrollDirection?: 'up' | 'down' | 'left' | 'right'; // Scroll direction for spiral patterns (default 'down')
   };
   patterns: {
     type: 'geometric' | 'organic' | 'energy' | 'none';
@@ -27,7 +29,7 @@ export interface CharacterTheme {
   };
 }
 
-export type ParticleType = 'flow' | 'sparkle' | 'wave' | 'orb' | 'radio' | 'speed' | 'clock' | 'lightning' | 'grain' | 'cosmic-wave' | 'stardust' | 'shooting-star' | 'bounce' | 'bubble' | 'none';
+export type ParticleType = 'flow' | 'sparkle' | 'wave' | 'orb' | 'radio' | 'speed' | 'clock' | 'lightning' | 'grain' | 'cosmic-wave' | 'stardust' | 'shooting-star' | 'bounce' | 'bubble' | 'squiggle' | 'none';
 export type PatternType = 'geometric' | 'organic' | 'energy' | 'none';
 
 export interface Particle {

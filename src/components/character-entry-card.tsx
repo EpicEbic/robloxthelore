@@ -142,17 +142,20 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
         borderLeftColor: 'var(--wiki-character)'
       }}>
         
-        <div className="overflow-hidden rounded-t-xl">
+        <div className="rounded-t-xl">
           <CharacterHeader 
             title={character.title} 
             quote={characterData.quote} 
           />
           
-          <CharacterBasicInfo 
-            species={characterData.species}
-            age={characterData.age}
-            alignment={characterData.alignment}
-          />
+          <div className="px-6">
+            <CharacterBasicInfo 
+              species={characterData.species}
+              age={characterData.age}
+              alignment={characterData.alignment}
+              role={characterData.role}
+            />
+          </div>
         </div>
         
         {/* Main Content - Mobile: Vertical Stack, Desktop: Side by Side */}

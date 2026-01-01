@@ -18,29 +18,47 @@ export const theBounceman: WikiEntry = {
   },
   species: "Robloxian (Modified)",
   age: "Unknown",
-  alignment: "Chaotic Evil",
+  alignment: "Rebel/Impure",
+  role: "Marauder",
   
   combatStyles: [
     {
       id: "atomic-trampoline",
       label: "Atomic Trampoline",
-      combatStats: createCombatStats("B", "A", "S", "D", "F", {
-        power: "D",
-        penetration: "C",
-        intensity: "A",
-        toughness: "A",
-        vitality: "A",
-        resistance: "B",
-        swiftness: "S",
-        endurance: "A",
-        flexibility: "E",
-        accuracy: "C",
-        dexterity: "F",
-        reactivity: "E",
-        tactility: "E",
-        wisdom: "F",
-        stability: "F"
-      }),
+      combatStats: createCombatStats(
+        "A", // Strength
+        "A", // Durability
+        "S", // Agility
+        "E", // Precision
+        "F", // Intelligence
+        {
+          // Strength subcategories
+          power: "A",
+          lift: "F",
+          penetration: "A",
+          intensity: "S",
+          // Durability subcategories
+          toughness: "A",
+          vitality: "S",
+          thermostability: "D",
+          esotolerance: "B",
+          // Agility subcategories
+          swiftness: "S",
+          acceleration: "B",
+          flexibility: "F",
+          endurance: "S",
+          // Precision subcategories
+          accuracy: "E",
+          range: "E",
+          dexterity: "F",
+          reactivity: "D",
+          // Intelligence subcategories
+          tactility: "E",
+          wisdom: "F",
+          foresight: "E",
+          sanity: "F"
+        }
+      ),
       description: [
         "The Bounceman relies on an internal device known as the Atomic Trampoline to remain incredibly bouncy and mobile while in combat. He'll slam into his targets at incredibly lethal velocities, beating his victims into submission and their eventual death.",
         "He is mostly immune to physical weaponry, mainly due to his unique body structure. Most of his body is protected by a thick rubbery material, while his bones have been cast into a metal skeleton. While puncturing him with sharp weapons is possible, the ultra-dense rubber seals most wounds immediately."
@@ -208,23 +226,40 @@ export const theBounceman: WikiEntry = {
       {
         id: "atomic-trampoline",
         label: "Atomic Trampoline",
-        combatStats: createCombatStats("B", "A", "S", "D", "F", {
-          power: "D",
-          penetration: "C",
-          intensity: "A",
-          toughness: "A",
-          vitality: "A",
-          resistance: "B",
-          swiftness: "S",
-          endurance: "A",
-          flexibility: "E",
-          accuracy: "C",
-          dexterity: "F",
-          reactivity: "E",
-          tactility: "E",
-          wisdom: "F",
-          stability: "F"
-        }),
+        combatStats: createCombatStats(
+          "A", // Strength
+          "A", // Durability
+          "S", // Agility
+          "E", // Precision
+          "F", // Intelligence
+          {
+            // Strength subcategories
+            power: "A",
+            lift: "F",
+            penetration: "A",
+            intensity: "S",
+            // Durability subcategories
+            toughness: "A",
+            vitality: "S",
+            thermostability: "D",
+            esotolerance: "B",
+            // Agility subcategories
+            swiftness: "S",
+            acceleration: "B",
+            flexibility: "F",
+            endurance: "S",
+            // Precision subcategories
+            accuracy: "E",
+            range: "E",
+            dexterity: "F",
+            reactivity: "D",
+            // Intelligence subcategories
+            tactility: "E",
+            wisdom: "F",
+            foresight: "E",
+            sanity: "F"
+          }
+        ),
         description: [
           "The Bounceman relies on an internal device known as the Atomic Trampoline to remain incredibly bouncy and mobile while in combat. He'll slam into his targets at incredibly lethal velocities, beating his victims into submission and their eventual death.",
           "He is mostly immune to physical weaponry, mainly due to his unique body structure. Most of his body is protected by a thick rubbery material, while his bones have been cast into a metal skeleton. While puncturing him with sharp weapons is possible, the ultra-dense rubber seals most wounds immediately."

@@ -22,6 +22,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   const particlesRef = useRef<Particle[]>([]);
   const lastTimeRef = useRef<number>(0);
   const scrollOffsetRef = useRef<number>(0); // For bounce pattern scrolling
+  const spiralScrollOffsetRef = useRef<number>(0); // Separate scroll offset for spirals (never resets)
+  const rotationTimeRef = useRef<number>(0); // Continuous rotation time for spirals
   const [opacity, setOpacity] = useState(0);
   const prevThemeIdRef = useRef<string>('');
   const fadeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -386,8 +388,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
   // Update particles
   const updateParticles = useCallback((deltaTime: number) => {
-    // Skip particle updates for bounce type - it's rendered as a pattern
-    if (theme.particles.type === 'bounce') {
+    // Skip particle updates for bounce and squiggle types - they're rendered as patterns
+    if (theme.particles.type === 'bounce' || theme.particles.type === 'squiggle') {
       return;
     }
     const canvas = canvasRef.current;
@@ -658,8 +660,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
                                 performanceMode === 'medium' ? Math.floor(maxParticles * 0.7) : 
                                 Math.floor(maxParticles * 0.4);
     
-    // Skip particle spawning for bounce type - it's rendered as a pattern
-    if (theme.particles.type === 'bounce') {
+    // Skip particle spawning for bounce and squiggle types - they're rendered as patterns
+    if (theme.particles.type === 'bounce' || theme.particles.type === 'squiggle') {
       return;
     }
     
@@ -756,6 +758,112 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       }
       
       return; // Skip particle rendering for bounce type
+    }
+
+    // Special rendering for squiggle pattern - draw scrolling spirals
+    if (theme.particles.type === 'squiggle') {
+      const spiralSpacing = 150;
+      const spiralSize = 60; // Radius of each spiral
+      const color = theme.particles.color || '#ffffff';
+      const opacity = theme.particles.intensity * 0.7;
+      const rotationSpeedMultiplier = theme.particles.rotationSpeedMultiplier ?? 1.0;
+      const scrollDirection = theme.particles.scrollDirection || 'down';
+      
+      ctx.globalAlpha = opacity;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      
+      // Draw multiple spirals in a grid pattern with extra for seamless wrapping
+      const cols = Math.ceil(canvas.width / spiralSpacing) + 2;
+      const rows = Math.ceil(canvas.height / spiralSpacing) + 2;
+      
+      // Use modulo for seamless wrapping - never reset the offset, just wrap the calculation
+      const wrappedOffset = spiralScrollOffsetRef.current % spiralSpacing;
+      
+      // Calculate which cell in the infinite grid corresponds to the edge of the visible area
+      // This lets us track each spiral's true identity in the infinite pattern
+      const scrolledCells = Math.floor(spiralScrollOffsetRef.current / spiralSpacing);
+      
+      // Determine if scrolling horizontally or vertically
+      const isHorizontal = scrollDirection === 'left' || scrollDirection === 'right';
+      const isReversed = scrollDirection === 'up' || scrollDirection === 'left';
+      
+      for (let col = -1; col < cols; col++) {
+        for (let row = -1; row < rows; row++) {
+          let centerX: number;
+          let centerY: number;
+          let gridCol: number;
+          let gridRow: number;
+          
+          if (isHorizontal) {
+            // Horizontal scrolling: offset X position
+            if (isReversed) {
+              // Left: spirals move from right to left (X decreases)
+              centerX = (col * spiralSpacing) + (spiralSpacing / 2) - wrappedOffset;
+            } else {
+              // Right: spirals move from left to right (X increases)
+              centerX = (col * spiralSpacing) + (spiralSpacing / 2) + wrappedOffset;
+            }
+            centerY = (row * spiralSpacing) + (spiralSpacing / 2);
+            gridCol = isReversed ? col + scrolledCells : col - scrolledCells;
+            gridRow = row;
+          } else {
+            // Vertical scrolling: offset Y position
+            centerX = (col * spiralSpacing) + (spiralSpacing / 2);
+            if (isReversed) {
+              // Up: spirals move from bottom to top (Y decreases)
+              centerY = (row * spiralSpacing) + (spiralSpacing / 2) - wrappedOffset;
+            } else {
+              // Down: spirals move from top to bottom (Y increases)
+              centerY = (row * spiralSpacing) + (spiralSpacing / 2) + wrappedOffset;
+            }
+            gridCol = col;
+            gridRow = isReversed ? row + scrolledCells : row - scrolledCells;
+          }
+          
+          // Only draw if visible on canvas
+          const isVisible = centerX > -spiralSize && centerX < canvas.width + spiralSize &&
+                           centerY > -spiralSize && centerY < canvas.height + spiralSize;
+          
+          if (isVisible) {
+            // Use the grid identity (not screen position) for rotation properties
+            // This ensures each spiral maintains consistent rotation as it scrolls
+            const patternCol = ((gridCol % 5) + 5) % 5;
+            const patternRow = ((gridRow % 5) + 5) % 5;
+            const baseRotationSpeed = 0.3 + ((patternCol + patternRow) % 5) * 0.15; // Different speeds: 0.3 to 0.9
+            const rotationSpeed = baseRotationSpeed * rotationSpeedMultiplier;
+            
+            // Each spiral has a unique base rotation offset based on its grid identity
+            const baseRotationOffset = (gridCol * 0.7 + gridRow * 1.3) * Math.PI; // Unique offset per spiral
+            // Calculate dynamic rotation continuously - don't use modulo to avoid visual jumps
+            const dynamicRotation = rotationTimeRef.current * rotationSpeed * Math.PI * 2;
+            const rotation = baseRotationOffset + dynamicRotation; // Combined: unique starting angle + continuous rotation
+            
+            ctx.beginPath();
+            
+            // Draw spiral (Archimedean spiral) with rotation
+            const turns = 2; // Number of full rotations
+            const points = 100; // Number of points in the spiral
+            
+            for (let i = 0; i <= points; i++) {
+              const t = (i / points) * turns * Math.PI * 2 + rotation;
+              const radius = (i / points) * spiralSize;
+              const x = centerX + Math.cos(t) * radius;
+              const y = centerY + Math.sin(t) * radius;
+              
+              if (i === 0) {
+                ctx.moveTo(x, y);
+              } else {
+                ctx.lineTo(x, y);
+              }
+            }
+            
+            ctx.stroke();
+          }
+        }
+      }
+      
+      return; // Skip particle rendering for squiggle type
     }
 
     // Special rendering for Builderman blueprint grid pattern
@@ -862,8 +970,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       return;
     }
 
-    // Filter out any bounce particles - they should only be rendered via pattern rendering
-    const particlesToRender = particlesRef.current.filter(p => p.type !== 'bounce');
+    // Filter out any bounce and squiggle particles - they should only be rendered via pattern rendering
+    const particlesToRender = particlesRef.current.filter(p => p.type !== 'bounce' && p.type !== 'squiggle');
 
     particlesToRender.forEach((particle, index) => {
       ctx.save();
@@ -1371,13 +1479,24 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
     const deltaTime = currentTime - lastTimeRef.current;
     lastTimeRef.current = currentTime;
+    
+    // Update continuous rotation time for spirals (always increment, never reset)
+    // Don't use modulo here - let it grow continuously to maintain smooth rotation
+    rotationTimeRef.current += deltaTime * 0.001; // Increment in seconds
+    
+    // Update spiral scroll offset continuously (frame-rate independent, never resets)
+    // Don't use modulo here - let it grow continuously, use modulo only in rendering
+    if (theme.particles.type === 'squiggle') {
+      const scrollSpeed = (theme.particles.speed || 0.5) * (deltaTime / 16.67); // Normalize to 60fps
+      spiralScrollOffsetRef.current += scrollSpeed;
+    }
 
     checkPerformance(currentTime);
     updateParticles(deltaTime);
     renderParticles();
 
     animationRef.current = requestAnimationFrame(animate);
-  }, [updateParticles, renderParticles, checkPerformance]);
+  }, [updateParticles, renderParticles, checkPerformance, theme.particles.type]);
 
   // Fade transition logic
   useEffect(() => {
@@ -1394,9 +1513,12 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       fadeTimeoutRef.current = setTimeout(() => {
         setOpacity(1);
         // Force fallback if no particles appear after 3 seconds
-        // Skip this check for bounce type and Builderman since they use pattern rendering, not individual particles
+        // Skip this check for bounce, squiggle types and Builderman since they use pattern rendering, not individual particles
+        if (theme.particles.type === 'bounce' || theme.particles.type === 'squiggle' || theme.id === 'builderman') {
+          return;
+        }
         setTimeout(() => {
-          if (particlesRef.current.length === 0 && !forceFallback && theme.particles.type !== 'bounce' && theme.id !== 'builderman') {
+          if (particlesRef.current.length === 0 && !forceFallback && theme.particles.type !== 'bounce' && theme.particles.type !== 'squiggle' && theme.id !== 'builderman') {
             setForceFallback(true);
           }
         }, 3000);
@@ -1447,9 +1569,9 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       setCanvasReady(true);
       
       // Bounce type uses pattern rendering, not individual particles
-      // Clear any existing bounce particles that might have been created
-      if (theme.particles.type === 'bounce') {
-        particlesRef.current = particlesRef.current.filter(p => p.type !== 'bounce');
+      // Clear any existing bounce and squiggle particles that might have been created
+      if (theme.particles.type === 'bounce' || theme.particles.type === 'squiggle') {
+        particlesRef.current = particlesRef.current.filter(p => p.type !== 'bounce' && p.type !== 'squiggle');
       }
     } catch (error) {
       setCanvasSupported(false);
@@ -1482,10 +1604,10 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     }
     
     
-    // Bounce type uses pattern rendering, not individual particles
-    // Clear any existing bounce particles that might have been created
-    if (theme.particles.type === 'bounce') {
-      particlesRef.current = particlesRef.current.filter(p => p.type !== 'bounce');
+    // Bounce and squiggle types use pattern rendering, not individual particles
+    // Clear any existing bounce and squiggle particles that might have been created
+    if (theme.particles.type === 'bounce' || theme.particles.type === 'squiggle') {
+      particlesRef.current = particlesRef.current.filter(p => p.type !== 'bounce' && p.type !== 'squiggle');
     }
 
     return () => {
@@ -1503,21 +1625,26 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     animationRef.current = frameId;
     
     // Force fallback if no particles appear after 3 seconds
-    // Skip this check for bounce type since it uses pattern rendering, not individual particles
-    const fallbackTimeout = setTimeout(() => {
-      if (particlesRef.current.length === 0 && !forceFallback && theme.particles.type !== 'bounce') {
-        setForceFallback(true);
-      }
-    }, 3000);
+    // Skip this check for bounce and squiggle types since they use pattern rendering, not individual particles
+    let fallbackTimeout: NodeJS.Timeout | undefined;
+    if (theme.particles.type !== 'bounce' && theme.particles.type !== 'squiggle' && theme.id !== 'builderman') {
+      fallbackTimeout = setTimeout(() => {
+        if (particlesRef.current.length === 0 && !forceFallback) {
+          setForceFallback(true);
+        }
+      }, 3000);
+    }
 
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
         animationRef.current = undefined;
       }
-      clearTimeout(fallbackTimeout);
+      if (fallbackTimeout) {
+        clearTimeout(fallbackTimeout);
+      }
     };
-  }, [animate, canvasSupported, canvasReady, theme.id, forceFallback]);
+  }, [animate, canvasSupported, canvasReady, theme.id, theme.particles.type, forceFallback]);
 
   // Clear particles when theme changes to prevent burst
   useEffect(() => {
@@ -1527,13 +1654,14 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
 
   // Allow rendering for Builderman even with 'none' particles type since we render blueprint grid pattern
-  if (theme.particles.type === 'none' && theme.id !== 'builderman') {
+  // Also allow rendering for bounce and squiggle types since they use pattern rendering
+  if (theme.particles.type === 'none' && theme.id !== 'builderman' && theme.particles.type !== 'bounce' && theme.particles.type !== 'squiggle') {
     return null;
   }
 
   // Fallback for canvas-unsupported browsers, very low performance, or forced fallback
-  // Skip fallback check for bounce type and Builderman since they use pattern rendering, not individual particles
-  if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0 && theme.particles.type !== 'bounce' && theme.id !== 'builderman')) {
+  // Skip fallback check for bounce, squiggle types and Builderman since they use pattern rendering, not individual particles
+  if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0 && theme.particles.type !== 'bounce' && theme.particles.type !== 'squiggle' && theme.id !== 'builderman')) {
     return (
       <div 
         className={className}

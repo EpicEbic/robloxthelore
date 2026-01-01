@@ -19,6 +19,7 @@ export const builderman: WikiEntry = {
   species: "Noob",
   age: "N/A (Divine Youth)",
   alignment: "Lawful/Good",
+  role: "Paladin",
   
   carouselImages: [
     {
@@ -35,32 +36,37 @@ export const builderman: WikiEntry = {
         "Builderman is a smart, physically-blessed fighter who is dangerous even without the use of his ability. His countless years of war and battle have turned him into an effective tactician, capable of quickly analyzing and creating counters for his opponents mid-combat. He aims to maintain consistent pressure on his opponents, striking carefully and critically to quickly break the defenses of his targets down."
       ],
       combatStats: createCombatStats(
-        "C", // Strength: Main category average
-        "B", // Durability: Main category average
-        "A", // Agility: Main category average
-        "B", // Precision: Main category average
-        "A", // Intelligence: Main category average
+        "B", // Strength
+        "B", // Durability
+        "A", // Agility
+        "B", // Precision
+        "A", // Intelligence
         {
           // Strength subcategories
-          penetration: "C",
-          power: "C",
-          intensity: "C",
+          power: "B",
+          lift: "B",
+          penetration: "B",
+          intensity: "A",
+          // Durability subcategories
+          toughness: "B",
+          vitality: "S",
+          thermostability: "A",
+          esotolerance: "A",
           // Agility subcategories
           swiftness: "A",
-          endurance: "A",
+          acceleration: "A",
           flexibility: "B",
+          endurance: "A",
           // Precision subcategories
           accuracy: "B",
-          dexterity: "C",
-          reactivity: "C",
+          range: "C",
+          dexterity: "S",
+          reactivity: "S",
           // Intelligence subcategories
           tactility: "B",
           wisdom: "A",
-          stability: "D",
-          // Durability subcategories
-          vitality: "S",
-          toughness: "B",
-          resistance: "B"
+          foresight: "C",
+          sanity: "A"
         }
       ),
       images: []
@@ -73,32 +79,37 @@ export const builderman: WikiEntry = {
         "Certain matter is impossible for the Banhammer to erase, primarily gasses (including air) and specific liquids."
       ],
       combatStats: createCombatStats(
-        "Ø", // Strength: Main category average
-        "B", // Durability: Main category average
-        "A", // Agility: Main category average
-        "B", // Precision: Main category average
-        "A", // Intelligence: Main category average
+        "Ø", // Strength
+        "B", // Durability
+        "A", // Agility
+        "B", // Precision
+        "A", // Intelligence
         {
           // Strength subcategories
-          penetration: "Ø",
           power: "Ø",
-          intensity: "C",
+          lift: "B",
+          penetration: "Ø",
+          intensity: "S",
+          // Durability subcategories
+          toughness: "B",
+          vitality: "S",
+          thermostability: "A",
+          esotolerance: "A",
           // Agility subcategories
           swiftness: "A",
-          endurance: "A",
+          acceleration: "A",
           flexibility: "B",
+          endurance: "A",
           // Precision subcategories
           accuracy: "B",
-          dexterity: "C",
-          reactivity: "C",
+          range: "B",
+          dexterity: "S",
+          reactivity: "S",
           // Intelligence subcategories
           tactility: "B",
           wisdom: "A",
-          stability: "D",
-          // Durability subcategories
-          vitality: "S",
-          toughness: "B",
-          resistance: "B"
+          foresight: "C",
+          sanity: "A"
         }
       ),
       images: []
@@ -114,32 +125,37 @@ export const builderman: WikiEntry = {
           "Builderman is a smart, physically-blessed fighter who is dangerous even without the use of his ability. His countless years of war and battle have turned him into an effective tactician, capable of quickly analyzing and creating counters for his opponents mid-combat. He aims to maintain consistent pressure on his opponents, striking carefully and critically to quickly break the defenses of his targets down."
         ],
         combatStats: createCombatStats(
-          "C", // Strength: Main category average
-          "B", // Durability: Main category average
-          "A", // Agility: Main category average
-          "B", // Precision: Main category average
-          "A", // Intelligence: Main category average
+          "B", // Strength
+          "B", // Durability
+          "A", // Agility
+          "B", // Precision
+          "A", // Intelligence
           {
             // Strength subcategories
-            penetration: "C",
-            power: "C",
-            intensity: "C",
+            power: "B",
+            lift: "B",
+            penetration: "B",
+            intensity: "A",
+            // Durability subcategories
+            toughness: "B",
+            vitality: "S",
+            thermostability: "A",
+            esotolerance: "A",
             // Agility subcategories
             swiftness: "A",
-            endurance: "A",
+            acceleration: "A",
             flexibility: "B",
+            endurance: "A",
             // Precision subcategories
             accuracy: "B",
-            dexterity: "C",
-            reactivity: "C",
+            range: "C",
+            dexterity: "S",
+            reactivity: "S",
             // Intelligence subcategories
             tactility: "B",
             wisdom: "A",
-            stability: "D",
-            // Durability subcategories
-            vitality: "S",
-            toughness: "B",
-            resistance: "B"
+            foresight: "C",
+            sanity: "A"
           }
         ),
         combatStyleData: {
@@ -170,32 +186,37 @@ export const builderman: WikiEntry = {
           "Certain matter is impossible for the Banhammer to erase, primarily gasses (including air) and specific liquids."
         ],
         combatStats: createCombatStats(
-          "Ø", // Strength: Main category average
-          "B", // Durability: Main category average
-          "A", // Agility: Main category average
-          "B", // Precision: Main category average
-          "A", // Intelligence: Main category average
+          "Ø", // Strength
+          "B", // Durability
+          "A", // Agility
+          "B", // Precision
+          "A", // Intelligence
           {
             // Strength subcategories
-            penetration: "Ø",
             power: "Ø",
-            intensity: "C",
+            lift: "B",
+            penetration: "Ø",
+            intensity: "S",
+            // Durability subcategories
+            toughness: "B",
+            vitality: "S",
+            thermostability: "A",
+            esotolerance: "A",
             // Agility subcategories
             swiftness: "A",
-            endurance: "A",
+            acceleration: "A",
             flexibility: "B",
+            endurance: "A",
             // Precision subcategories
             accuracy: "B",
-            dexterity: "C",
-            reactivity: "C",
+            range: "B",
+            dexterity: "S",
+            reactivity: "S",
             // Intelligence subcategories
             tactility: "B",
             wisdom: "A",
-            stability: "D",
-            // Durability subcategories
-            vitality: "S",
-            toughness: "B",
-            resistance: "B"
+            foresight: "C",
+            sanity: "A"
           }
         ),
         combatStyleData: {

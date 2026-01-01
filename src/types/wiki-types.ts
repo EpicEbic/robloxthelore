@@ -9,7 +9,7 @@ export type CategoryType =
 // Define subcategories for each category
 export type CharacterSubcategory = "all" | "protagonist" | "neutral" | "evil" | "minor-antagonist" | "major-antagonist" | "noncanon";
 export type LocationSubcategory = "all" | "bloxiverse" | "primarylocations" | "secondarylocations";
-export type EquipmentSubcategory = "all" | "artifacts" | "standard";
+export type EquipmentSubcategory = "artifacts" | "standard" | "materials";
 export type FactionSubcategory = "all" | "friendly" | "neutral" | "hostile";
 
 export type Subcategory = 
@@ -190,16 +190,20 @@ export interface MultiItem {
   title: string;
   description: string;
   imageUrl?: string;
-  abilities: string[];
-  lore: string;
+  abilities?: string[];
+  lore?: string;
   carouselImages?: {
     url: string;
     caption: string;
   }[];
   sections?: {
     overview?: string[];
+    appearance?: string[];
+    generalInformation?: string[];
+    functionality?: string[];
     ability?: string[];
     history?: string[];
+    timeline?: EquipmentTimelineOption[];
     trivia?: string[];
   };
 }
@@ -225,6 +229,7 @@ export interface WikiEntry {
   species?: string;
   age?: string;
   alignment?: string;
+  role?: string;
   carouselImages?: {
     url: string;
     caption: string;

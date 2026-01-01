@@ -19,6 +19,7 @@ export const vortexASteele: WikiEntry = {
   species: "Noob",
   age: "21",
   alignment: "Lawful/Neutral",
+  role: "Judge",
   carouselImages: [
     {
       url: "/lovable-uploads/1eb00c46-6380-421c-85e0-473d69b1d989.png",
@@ -33,32 +34,37 @@ export const vortexASteele: WikiEntry = {
         "Vortex primarily relies on his heightened agility, quick thinking, and incredible precision in combat. He is a master of body language, and can often predict the movements of his targets and react before they even begin to attack. Though he lacks natural strength or integrity, his ability to effortlessly avoid the attacks of combatants easily makes up for this."
       ],
       combatStats: createCombatStats(
-        "D", // Strength: Main category average
-        "D", // Durability: Main category average
-        "B", // Agility: Main category average
-        "B", // Precision: Main category average
-        "A", // Intelligence: Main category average
+        "D", // Strength
+        "D", // Durability
+        "B", // Agility
+        "B", // Precision
+        "B", // Intelligence
         {
           // Strength subcategories
-          penetration: "E",
           power: "D",
+          lift: "E",
+          penetration: "E",
           intensity: "B",
-          // Agility subcategories
-          swiftness: "D",
-          endurance: "B",
-          flexibility: "C",
-          // Precision subcategories
-          accuracy: "B",
-          reactivity: "C",
-          dexterity: "B",
-          // Intelligence subcategories
-          tactility: "A",
-          wisdom: "D",
-          stability: "C",
           // Durability subcategories
-          vitality: "C",
           toughness: "D",
-          resistance: "E"
+          vitality: "C",
+          thermostability: "C",
+          esotolerance: "F",
+          // Agility subcategories
+          swiftness: "B",
+          acceleration: "B",
+          flexibility: "A",
+          endurance: "A",
+          // Precision subcategories
+          accuracy: "S",
+          range: "D",
+          dexterity: "A",
+          reactivity: "B",
+          // Intelligence subcategories
+          tactility: "C",
+          wisdom: "E",
+          foresight: "B",
+          sanity: "B"
         }
       ),
       images: [
@@ -75,32 +81,37 @@ export const vortexASteele: WikiEntry = {
         "Vortex is armed with a high-caliber magnetic railgun created by Ren Bytera, which has been compacted down into the size and shape of a large handheld revolver. Through the use of electromagnets, the Mag-num can fire almost anything made of magnetized metal at extremely high velocities, so long as it can fit inside of the barrel-- though it does come with specialized ammunition designed for use with the gun."
       ],
       combatStats: createCombatStats(
-        "D", // Strength: Main category average
-        "D", // Durability: Main category average
-        "D", // Agility: Main category average
-        "A", // Precision: Main category average
-        "A", // Intelligence: Main category average
+        "C", // Strength
+        "D", // Durability
+        "B", // Agility
+        "S", // Precision
+        "B", // Intelligence
         {
           // Strength subcategories
+          power: "C",
+          lift: "E",
           penetration: "C",
-          power: "D",
           intensity: "A",
-          // Agility subcategories
-          swiftness: "D",
-          endurance: "B",
-          flexibility: "C",
-          // Precision subcategories
-          accuracy: "A",
-          reactivity: "C",
-          dexterity: "B",
-          // Intelligence subcategories
-          tactility: "A",
-          wisdom: "D",
-          stability: "C",
           // Durability subcategories
-          vitality: "C",
           toughness: "D",
-          resistance: "E"
+          vitality: "C",
+          thermostability: "C",
+          esotolerance: "F",
+          // Agility subcategories
+          swiftness: "B",
+          acceleration: "B",
+          flexibility: "A",
+          endurance: "A",
+          // Precision subcategories
+          accuracy: "S",
+          range: "D",
+          dexterity: "A",
+          reactivity: "B",
+          // Intelligence subcategories
+          tactility: "C",
+          wisdom: "E",
+          foresight: "B",
+          sanity: "B"
         }
       ),
       images: [
@@ -121,32 +132,37 @@ export const vortexASteele: WikiEntry = {
         "Vortex can channel the raw energy produced by Chronipulation and imbue it into his Mag-num. This temporarily overclocks his weapon, transforming it into a devastating hand-cannon with new (and enhanced) effects that give it an extra edge in dire combat situations that deem it necessary."
       ],
       combatStats: createCombatStats(
-        "C", // Strength: Main category average
-        "D", // Durability: Main category average
-        "D", // Agility: Main category average
-        "S", // Precision: Main category average
-        "A", // Intelligence: Main category average
+        "B", // Strength
+        "D", // Durability
+        "B", // Agility
+        "S", // Precision
+        "B", // Intelligence
         {
           // Strength subcategories
-          penetration: "A",
-          power: "D",
+          power: "B",
+          lift: "E",
+          penetration: "B",
           intensity: "S",
-          // Agility subcategories
-          swiftness: "D",
-          endurance: "B",
-          flexibility: "C",
-          // Precision subcategories
-          accuracy: "A",
-          reactivity: "C",
-          dexterity: "B",
-          // Intelligence subcategories
-          tactility: "A",
-          wisdom: "D",
-          stability: "C",
           // Durability subcategories
-          vitality: "C",
           toughness: "D",
-          resistance: "E"
+          vitality: "C",
+          thermostability: "C",
+          esotolerance: "F",
+          // Agility subcategories
+          swiftness: "B",
+          acceleration: "B",
+          flexibility: "A",
+          endurance: "A",
+          // Precision subcategories
+          accuracy: "S",
+          range: "A",
+          dexterity: "A",
+          reactivity: "B",
+          // Intelligence subcategories
+          tactility: "C",
+          wisdom: "E",
+          foresight: "B",
+          sanity: "B"
         }
       ),
       images: [
@@ -168,32 +184,37 @@ export const vortexASteele: WikiEntry = {
         "It is an effective tool for tougher opponents or materials that require raw strength to bypass, though it is extremely heavy and greatly inhibits Vortex's speed while worn."
       ],
       combatStats: createCombatStats(
-        "C", // Strength: Main category average
-        "C", // Durability: Main category average
-        "D", // Agility: Main category average
-        "D", // Precision: Main category average
-        "A", // Intelligence: Main category average
+        "B", // Strength
+        "C", // Durability
+        "E", // Agility
+        "E", // Precision
+        "B", // Intelligence
         {
           // Strength subcategories
-          penetration: "C",
           power: "B",
-          intensity: "D",
+          lift: "E",
+          penetration: "C",
+          intensity: "E",
+          // Durability subcategories
+          toughness: "C",
+          vitality: "C",
+          thermostability: "C",
+          esotolerance: "E",
           // Agility subcategories
-          swiftness: "D",
-          endurance: "B",
+          swiftness: "E",
+          acceleration: "E",
           flexibility: "E",
+          endurance: "A",
           // Precision subcategories
           accuracy: "E",
-          reactivity: "E",
-          dexterity: "D",
+          range: "E",
+          dexterity: "A",
+          reactivity: "B",
           // Intelligence subcategories
-          tactility: "A",
-          wisdom: "D",
-          stability: "C",
-          // Durability subcategories
-          vitality: "C",
-          toughness: "C",
-          resistance: "E"
+          tactility: "C",
+          wisdom: "E",
+          foresight: "B",
+          sanity: "B"
         }
       ),
       images: [
@@ -214,32 +235,37 @@ export const vortexASteele: WikiEntry = {
         "By pouring vast quantities of the energy produced by Chronipulation into the Amp Gauntlet, Vortex can imbue the gauntlet with his energy, drastically improving the strength and speed behind it, alongside unlocking new techniques."
       ],
       combatStats: createCombatStats(
-        "B", // Strength: Main category average
-        "C", // Durability: Main category average
-        "C", // Agility: Main category average
-        "D", // Precision: Main category average
-        "A", // Intelligence: Main category average
+        "B", // Strength
+        "C", // Durability
+        "D", // Agility
+        "E", // Precision
+        "B", // Intelligence
         {
           // Strength subcategories
-          penetration: "B",
-          power: "A",
-          intensity: "C",
-          // Agility subcategories
-          swiftness: "C",
-          endurance: "B",
-          flexibility: "D",
-          // Precision subcategories
-          accuracy: "D",
-          reactivity: "D",
-          dexterity: "C",
-          // Intelligence subcategories
-          tactility: "A",
-          wisdom: "D",
-          stability: "C",
+          power: "B",
+          lift: "E",
+          penetration: "C",
+          intensity: "E",
           // Durability subcategories
-          vitality: "C",
           toughness: "C",
-          resistance: "E"
+          vitality: "C",
+          thermostability: "C",
+          esotolerance: "E",
+          // Agility subcategories
+          swiftness: "D",
+          acceleration: "D",
+          flexibility: "E",
+          endurance: "A",
+          // Precision subcategories
+          accuracy: "E",
+          range: "E",
+          dexterity: "A",
+          reactivity: "B",
+          // Intelligence subcategories
+          tactility: "C",
+          wisdom: "E",
+          foresight: "B",
+          sanity: "B"
         }
       ),
       images: [
@@ -269,32 +295,37 @@ export const vortexASteele: WikiEntry = {
           "Vortex primarily relies on his heightened agility, quick thinking, and incredible precision in combat. He is a master of body language, and can often predict the movements of his targets and react before they even begin to attack. Though he lacks natural strength or integrity, his ability to effortlessly avoid the attacks of combatants easily makes up for this."
         ],
         combatStats: createCombatStats(
-          "D", // Strength: Main category average
-          "D", // Durability: Main category average
-          "B", // Agility: Main category average
-          "B", // Precision: Main category average
-          "A", // Intelligence: Main category average
+          "D", // Strength
+          "D", // Durability
+          "B", // Agility
+          "B", // Precision
+          "B", // Intelligence
           {
             // Strength subcategories
-            penetration: "E",  // Very low penetration
-            power: "D",        // Weak physical strength
-            intensity: "B",    // Can maintain good pressure in combat
-            // Agility subcategories
-            swiftness: "D",    // Moderate speed
-            endurance: "B",    // Good stamina
-            flexibility: "C",  // Moderate flexibility
-            // Precision subcategories
-            accuracy: "B",    // Good accuracy
-            reactivity: "C",  // Moderate reflexes
-            dexterity: "B",   // Good motor control
-            // Intelligence subcategories
-            tactility: "A",   // Excellent tactical thinking
-            wisdom: "D",      // Below average general intelligence
-            stability: "C",  // Moderate mental stability
+            power: "D",
+            lift: "E",
+            penetration: "E",
+            intensity: "B",
             // Durability subcategories
-            vitality: "C",    // Moderate health
-            toughness: "D",   // Below average toughness
-            resistance: "E"   // Low environmental resistance
+            toughness: "D",
+            vitality: "C",
+            thermostability: "C",
+            esotolerance: "F",
+            // Agility subcategories
+            swiftness: "B",
+            acceleration: "B",
+            flexibility: "A",
+            endurance: "A",
+            // Precision subcategories
+            accuracy: "S",
+            range: "D",
+            dexterity: "A",
+            reactivity: "B",
+            // Intelligence subcategories
+            tactility: "C",
+            wisdom: "E",
+            foresight: "B",
+            sanity: "B"
           }
         ),
         combatStyleData: {
@@ -318,32 +349,37 @@ export const vortexASteele: WikiEntry = {
           "Vortex is armed with a high-caliber magnetic railgun created by Ren Bytera, which has been compacted down into the size and shape of a large handheld revolver. Through the use of electromagnets, the Mag-num can fire almost anything made of magnetized metal at extremely high velocities, so long as it can fit inside of the barrel-- though it does come with specialized ammunition designed for use with the gun."
         ],
         combatStats: createCombatStats(
-          "D", // Strength: Main category average
-          "D", // Durability: Main category average
-          "D", // Agility: Main category average
-          "A", // Precision: Main category average
-          "A", // Intelligence: Main category average
+          "C", // Strength
+          "D", // Durability
+          "B", // Agility
+          "S", // Precision
+          "B", // Intelligence
           {
             // Strength subcategories
-            penetration: "C",  // Moderate penetration with weapon
-            power: "D",        // Weak physical strength
-            intensity: "A",    // High pressure in combat
-            // Agility subcategories
-            swiftness: "D",    // Moderate speed
-            endurance: "B",    // Good stamina
-            flexibility: "C",  // Moderate flexibility
-            // Precision subcategories
-            accuracy: "A",    // Excellent accuracy with weapon
-            reactivity: "C",  // Moderate reflexes
-            dexterity: "B",   // Good motor control
-            // Intelligence subcategories
-            tactility: "A",   // Excellent tactical thinking
-            wisdom: "D",      // Below average general intelligence
-            stability: "C",  // Moderate mental stability
+            power: "C",
+            lift: "E",
+            penetration: "C",
+            intensity: "A",
             // Durability subcategories
-            vitality: "C",    // Moderate health
-            toughness: "D",   // Below average toughness
-            resistance: "E"   // Low environmental resistance
+            toughness: "D",
+            vitality: "C",
+            thermostability: "C",
+            esotolerance: "F",
+            // Agility subcategories
+            swiftness: "B",
+            acceleration: "B",
+            flexibility: "A",
+            endurance: "A",
+            // Precision subcategories
+            accuracy: "S",
+            range: "D",
+            dexterity: "A",
+            reactivity: "B",
+            // Intelligence subcategories
+            tactility: "C",
+            wisdom: "E",
+            foresight: "B",
+            sanity: "B"
           }
         ),
         combatStyleData: {
@@ -448,32 +484,37 @@ export const vortexASteele: WikiEntry = {
         "Vortex can channel the raw energy produced by Chronipulation and imbue it into his Mag-num. This temporarily overclocks his weapon, transforming it into a devastating hand-cannon with new (and enhanced) effects that give it an extra edge in dire combat situations that deem it necessary."
       ],
         combatStats: createCombatStats(
-          "C", // Strength: Main category average
-          "D", // Durability: Main category average
-          "D", // Agility: Main category average
-          "S", // Precision: Main category average
-          "A", // Intelligence: Main category average
+          "B", // Strength
+          "D", // Durability
+          "B", // Agility
+          "S", // Precision
+          "B", // Intelligence
           {
             // Strength subcategories
-            penetration: "A",  // High penetration with enhanced weapon
-            power: "D",        // Weak physical strength
-            intensity: "S",    // Supreme pressure in combat
-            // Agility subcategories
-            swiftness: "D",    // Moderate speed
-            endurance: "B",    // Good stamina
-            flexibility: "C",  // Moderate flexibility
-            // Precision subcategories
-            accuracy: "A",    // Excellent accuracy with enhanced weapon
-            reactivity: "C",  // Moderate reflexes
-            dexterity: "B",   // Good motor control
-            // Intelligence subcategories
-            tactility: "A",   // Excellent tactical thinking
-            wisdom: "D",      // Below average general intelligence
-            stability: "C",  // Moderate mental stability
+            power: "B",
+            lift: "E",
+            penetration: "B",
+            intensity: "S",
             // Durability subcategories
-            vitality: "C",    // Moderate health
-            toughness: "D",   // Below average toughness
-            resistance: "E"   // Low environmental resistance
+            toughness: "D",
+            vitality: "C",
+            thermostability: "C",
+            esotolerance: "F",
+            // Agility subcategories
+            swiftness: "B",
+            acceleration: "B",
+            flexibility: "A",
+            endurance: "A",
+            // Precision subcategories
+            accuracy: "S",
+            range: "A",
+            dexterity: "A",
+            reactivity: "B",
+            // Intelligence subcategories
+            tactility: "C",
+            wisdom: "E",
+            foresight: "B",
+            sanity: "B"
           }
         ),
         combatStyleData: {
@@ -577,32 +618,37 @@ export const vortexASteele: WikiEntry = {
         "It is an effective tool for tougher opponents or materials that require raw strength to bypass, though it is extremely heavy and greatly inhibits Vortex's speed while worn."
       ],
         combatStats: createCombatStats(
-          "C", // Strength: Main category average
-          "C", // Durability: Main category average
-          "D", // Agility: Main category average
-          "D", // Precision: Main category average
-          "A", // Intelligence: Main category average
+          "B", // Strength
+          "C", // Durability
+          "E", // Agility
+          "E", // Precision
+          "B", // Intelligence
           {
             // Strength subcategories
-            penetration: "C",  // Moderate penetration with gauntlet
-            power: "B",        // Enhanced physical strength with gauntlet
-            intensity: "D",    // Low pressure due to weight
-            // Agility subcategories
-            swiftness: "D",    // Slow due to heavy gauntlet
-            endurance: "B",    // Good stamina
-            flexibility: "E",  // Poor flexibility due to heavy gauntlet
-            // Precision subcategories
-            accuracy: "E",    // Poor accuracy due to weight
-            reactivity: "E",  // Poor reflexes due to weight
-            dexterity: "D",   // Poor motor control due to weight
-            // Intelligence subcategories
-            tactility: "A",   // Excellent tactical thinking
-            wisdom: "D",      // Below average general intelligence
-            stability: "C",  // Moderate mental stability
+            power: "B",
+            lift: "E",
+            penetration: "C",
+            intensity: "E",
             // Durability subcategories
-            vitality: "C",    // Moderate health
-            toughness: "C",   // Moderate toughness with gauntlet protection
-            resistance: "E"   // Low environmental resistance
+            toughness: "C",
+            vitality: "C",
+            thermostability: "C",
+            esotolerance: "E",
+            // Agility subcategories
+            swiftness: "E",
+            acceleration: "E",
+            flexibility: "E",
+            endurance: "A",
+            // Precision subcategories
+            accuracy: "E",
+            range: "E",
+            dexterity: "A",
+            reactivity: "B",
+            // Intelligence subcategories
+            tactility: "C",
+            wisdom: "E",
+            foresight: "B",
+            sanity: "B"
           }
         ),
         combatStyleData: {
@@ -672,32 +718,37 @@ export const vortexASteele: WikiEntry = {
         "By pouring vast quantities of the energy produced by Chronipulation into the Amp Gauntlet, Vortex can imbue the gauntlet with his energy, drastically improving the strength and speed behind it, alongside unlocking new techniques."
       ],
         combatStats: createCombatStats(
-          "B", // Strength: Main category average
-          "C", // Durability: Main category average
-          "C", // Agility: Main category average
-          "D", // Precision: Main category average
-          "A", // Intelligence: Main category average
+          "B", // Strength
+          "C", // Durability
+          "D", // Agility
+          "E", // Precision
+          "B", // Intelligence
           {
             // Strength subcategories
-            penetration: "B",  // Good penetration with enhanced gauntlet
-            power: "A",        // High physical strength with enhanced gauntlet
-            intensity: "C",    // Moderate pressure
-            // Agility subcategories
-            swiftness: "C",    // Moderate speed (improved from base gauntlet)
-            endurance: "B",    // Good stamina
-            flexibility: "D",  // Below average flexibility
-            // Precision subcategories
-            accuracy: "D",    // Below average accuracy
-            reactivity: "D",  // Below average reflexes
-            dexterity: "C",   // Moderate motor control (improved from base)
-            // Intelligence subcategories
-            tactility: "A",   // Excellent tactical thinking
-            wisdom: "D",      // Below average general intelligence
-            stability: "C",  // Moderate mental stability
+            power: "B",
+            lift: "E",
+            penetration: "C",
+            intensity: "E",
             // Durability subcategories
-            vitality: "C",    // Moderate health
-            toughness: "C",   // Moderate toughness with gauntlet protection
-            resistance: "E"   // Low environmental resistance
+            toughness: "C",
+            vitality: "C",
+            thermostability: "C",
+            esotolerance: "E",
+            // Agility subcategories
+            swiftness: "D",
+            acceleration: "D",
+            flexibility: "E",
+            endurance: "A",
+            // Precision subcategories
+            accuracy: "E",
+            range: "E",
+            dexterity: "A",
+            reactivity: "B",
+            // Intelligence subcategories
+            tactility: "C",
+            wisdom: "E",
+            foresight: "B",
+            sanity: "B"
           }
         ),
         combatStyleData: {

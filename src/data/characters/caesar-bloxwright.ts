@@ -20,6 +20,7 @@ export const caesarBloxwright: WikiEntry = {
   species: "Robloxian",
   age: "24",
   alignment: "Chaotic/Good",
+  role: "Chaperone",
   carouselImages: [
     {
       url: "/lovable-uploads/178545b6-1a7e-4ec0-ba7c-b7c3472a7b06.png",
@@ -42,29 +43,34 @@ export const caesarBloxwright: WikiEntry = {
         "B", // Strength: Main category average
         "B", // Durability: Main category average
         "E", // Agility: Main category average
-        "E", // Precision: Main category average
-        "D", // Intelligence: Main category average
+        "D", // Precision: Main category average
+        "E", // Intelligence: Main category average
         {
           // Strength subcategories
-          penetration: "B",  // Moderate penetration capability
-          power: "B",        // Strong but not overwhelming
-          intensity: "E",    // Low pressure/maintains aggression poorly
-          // Agility subcategories
-          swiftness: "E",    // Below average speed
-          endurance: "D",    // Moderate endurance
-          flexibility: "F",  // Extremely rigid, poor flexibility
-          // Precision subcategories
-          accuracy: "E",     // Below average accuracy
-          reactivity: "D",   // Moderate reflexes
-          dexterity: "E",    // Below average motor control
-          // Intelligence subcategories
-          tactility: "D",    // Basic tactical thinking
-          wisdom: "D",       // Average intelligence
-          stability: "E",    // Fragile mental stability under pressure
+          power: "B",
+          lift: "B",
+          penetration: "C",
+          intensity: "D",
           // Durability subcategories
-          vitality: "C",     // Moderate health and recovery
-          toughness: "B",    // Resilient build
-          resistance: "D"    // Below average environmental resistance
+          toughness: "B",
+          vitality: "B",
+          thermostability: "D",
+          esotolerance: "B",
+          // Agility subcategories
+          swiftness: "E",
+          acceleration: "E",
+          flexibility: "F",
+          endurance: "C",
+          // Precision subcategories
+          accuracy: "D",
+          range: "D",
+          dexterity: "E",
+          reactivity: "D",
+          // Intelligence subcategories
+          tactility: "D",
+          wisdom: "E",
+          foresight: "D",
+          sanity: "E"
         }
       )
     }
@@ -88,29 +94,34 @@ export const caesarBloxwright: WikiEntry = {
           "B", // Strength: Main category average
           "B", // Durability: Main category average
           "E", // Agility: Main category average
-          "E", // Precision: Main category average
-          "D", // Intelligence: Main category average
+          "D", // Precision: Main category average
+          "E", // Intelligence: Main category average
           {
             // Strength subcategories
-            penetration: "B",  // Moderate penetration capability
-            power: "B",        // Strong but not overwhelming
-            intensity: "E",    // Low pressure/maintains aggression poorly
-            // Agility subcategories
-            swiftness: "E",    // Below average speed
-            endurance: "D",    // Moderate endurance
-            flexibility: "F",  // Extremely rigid, poor flexibility
-            // Precision subcategories
-            accuracy: "E",     // Below average accuracy
-            reactivity: "D",   // Moderate reflexes
-            dexterity: "E",    // Below average motor control
-            // Intelligence subcategories
-            tactility: "D",    // Basic tactical thinking
-            wisdom: "D",       // Average intelligence
-            stability: "E",    // Fragile mental stability under pressure
+            power: "B",
+            lift: "B",
+            penetration: "C",
+            intensity: "D",
             // Durability subcategories
-            vitality: "C",     // Moderate health and recovery
-            toughness: "B",    // Resilient build
-            resistance: "D"    // Below average environmental resistance
+            toughness: "B",
+            vitality: "B",
+            thermostability: "D",
+            esotolerance: "B",
+            // Agility subcategories
+            swiftness: "E",
+            acceleration: "E",
+            flexibility: "F",
+            endurance: "C",
+            // Precision subcategories
+            accuracy: "D",
+            range: "D",
+            dexterity: "E",
+            reactivity: "D",
+            // Intelligence subcategories
+            tactility: "D",
+            wisdom: "E",
+            foresight: "D",
+            sanity: "E"
           }
         )
       }

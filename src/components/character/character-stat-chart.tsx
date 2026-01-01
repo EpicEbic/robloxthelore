@@ -36,26 +36,31 @@ interface CombatStats {
   intelligence: StatGrade;
   // Optional subcategory-specific stats - if not provided, subcategories inherit from main category
   subcategories?: {
-    // Strength subcategories
+    // Strength (Offense) subcategories
+    power?: StatGrade;
+    lift?: StatGrade;
     penetration?: StatGrade;
-    power?: StatGrade;  // Base strength subcategory (renamed from 'strength' to avoid confusion with main category)
     intensity?: StatGrade;
+    // Durability (Defense) subcategories
+    toughness?: StatGrade;
+    vitality?: StatGrade;
+    thermostability?: StatGrade;
+    esotolerance?: StatGrade;
     // Agility subcategories
     swiftness?: StatGrade;
-    endurance?: StatGrade;
+    acceleration?: StatGrade;
     flexibility?: StatGrade;
+    endurance?: StatGrade;
     // Precision subcategories
     accuracy?: StatGrade;
-    reactivity?: StatGrade;
+    range?: StatGrade;
     dexterity?: StatGrade;
+    reactivity?: StatGrade;
     // Intelligence subcategories
     tactility?: StatGrade;
     wisdom?: StatGrade;
-    stability?: StatGrade;
-    // Durability subcategories
-    vitality?: StatGrade;
-    toughness?: StatGrade;
-    resistance?: StatGrade;
+    foresight?: StatGrade;
+    sanity?: StatGrade;
   };
 }
 
@@ -301,21 +306,31 @@ export function createCombatStats(
   precision: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
   intelligence: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
   subcategories?: {
-    penetration?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    // Strength (Offense) subcategories
     power?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    lift?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    penetration?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
     intensity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    // Durability (Defense) subcategories
+    toughness?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    vitality?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    thermostability?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    esotolerance?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    // Agility subcategories
     swiftness?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    endurance?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    acceleration?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
     flexibility?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    endurance?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    // Precision subcategories
     accuracy?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    reactivity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    range?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
     dexterity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    reactivity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    // Intelligence subcategories
     tactility?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
     wisdom?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    stability?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    vitality?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    toughness?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    resistance?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    foresight?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
+    sanity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
   }
 ): CombatStats {
   const baseStats: CombatStats = {

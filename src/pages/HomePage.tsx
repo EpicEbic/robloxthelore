@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Shuffle, Calendar, Users, Sword, MapPin, Flag } from "lucide-react";
 import { whatsNewEntries } from "@/data/whats-new";
 import { qAndAEntries } from "@/data/q-and-a";
-import { CATEGORIES } from "@/data/categories";
+import { CATEGORIES, getDefaultSubcategory } from "@/data/categories";
 import { TimelineItem } from "@/components/timeline-item";
 import { QandAItem } from "@/components/q-and-a-item";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
@@ -96,7 +96,7 @@ const HomePage = () => {
               title={category.label}
               description={`Browse all ${category.label.toLowerCase()}`}
               icon={categoryIcons[category.type as keyof typeof categoryIcons]}
-              path={`/category/${category.type}/all`}
+              path={`/category/${category.type}/${getDefaultSubcategory(category.type)}`}
               count={categoryCounts[category.type] || 0}
               colorClass={`bg-wiki-${category.type}`}
               delay={index * 100}

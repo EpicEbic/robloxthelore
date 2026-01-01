@@ -18,6 +18,7 @@ export const getCharacterData = (character: WikiEntry) => {
     species: character.species || "Robloxian",
     age: character.age || "Unknown",
     alignment: character.alignment || "Unknown",
+    role: character.role,
     quote: character.quote || { text: "", context: "" },
     carousel: character.carouselImages || [],
     sections: character.sections || {
