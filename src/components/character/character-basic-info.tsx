@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Info, Calendar, Scale, X, Quote, Compass, User } from "lucide-react";
+import { Info, Calendar, Scale, X, Quote, Compass } from "lucide-react";
 import { getArchetypeByAlignment } from "@/data/character-archetypes";
 import { cn } from "@/lib/utils";
 
@@ -69,10 +69,9 @@ interface CharacterBasicInfoProps {
   species: string;
   age: number | string;
   alignment: string;
-  role?: string;
 }
 
-export function CharacterBasicInfo({ species, age, alignment, role }: CharacterBasicInfoProps) {
+export function CharacterBasicInfo({ species, age, alignment }: CharacterBasicInfoProps) {
   const [showArchetypeCard, setShowArchetypeCard] = useState(false);
   
   // Parse alignment string (e.g., "Chaotic/Good" -> column: "chaotic", row: "good")
@@ -114,21 +113,6 @@ export function CharacterBasicInfo({ species, age, alignment, role }: CharacterB
               </div>
             </div>
           </div>
-          
-          {/* Role */}
-          {role && (
-            <div className="flex items-center gap-4 p-5 flex-1">
-              <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-gray-100 to-gray-300 flex-shrink-0 shadow-lg">
-                <User className="h-5 w-5 icon-force-black" />
-              </div>
-              <div className="min-w-0">
-                <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-0.5">Role</div>
-                <div className="text-base font-semibold text-foreground">
-                  {role}
-                </div>
-              </div>
-            </div>
-          )}
           
           {/* Alignment & Archetype */}
           <div className="flex items-center gap-4 p-5 flex-1">

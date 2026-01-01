@@ -153,7 +153,6 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
               species={characterData.species}
               age={characterData.age}
               alignment={characterData.alignment}
-              role={characterData.role}
             />
           </div>
         </div>
