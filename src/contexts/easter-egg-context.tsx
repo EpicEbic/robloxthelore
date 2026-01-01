@@ -1,6 +1,7 @@
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { SecretPhraseIndicator } from '@/components/secret-phrase-indicator';
 
 interface EasterEggContextType {
   isMinionMode: boolean;
@@ -30,28 +31,110 @@ const LOCKED_ENTRIES = [
   'the-breadwinner'
 ];
 
+// Valid secret phrases to track
+const VALID_PHRASES = ['minion', 'whybother'];
+
 export function EasterEggProvider({ children }: EasterEggProviderProps) {
   const [isMinionMode, setIsMinionMode] = useState(false);
   const [isCaesarSaladMode, setIsCaesarSaladMode] = useState(false);
   const [keySequence, setKeySequence] = useState('');
   const [unlockedEntries, setUnlockedEntries] = useState<Set<string>>(new Set());
   const [isTournamentUnlocked, setIsTournamentUnlocked] = useState(false);
+  
+  // Typing indicator state
+  const [typingText, setTypingText] = useState('');
+  const [isTypingError, setIsTypingError] = useState(false);
+  const [isTypingVisible, setIsTypingVisible] = useState(false);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const minionGifUrl = 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeW84Znptazc2NDJqM24yejdzOGNxcjhuejduemlxbWh2aWJwbWdpZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HIL3ItbTpfhGzbeXd5/giphy.gif';
   const caesarSaladImageUrl = '/lovable-uploads/a420f003-49ae-47d8-86ae-86a7be043834.png';
 
   // Check if we're on Caesar's entry page
   const isOnCaesarPage = location.pathname === '/entry/caesar-bloxwright';
 
+  // Check if a character matches any valid phrase
+  const checkCharacterMatch = (currentText: string, newChar: string): boolean => {
+    // If we have existing text, check if adding the new char continues a valid phrase
+    if (currentText) {
+      const newText = currentText + newChar;
+      return VALID_PHRASES.some(phrase => phrase.startsWith(newText));
+    }
+    // If we're starting fresh, check if the new char could start any valid phrase
+    return VALID_PHRASES.some(phrase => phrase.startsWith(newChar));
+  };
+
+  // Reset typing indicator after timeout
+  const resetTypingIndicator = () => {
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+    typingTimeoutRef.current = setTimeout(() => {
+      setIsTypingVisible(false);
+      setTypingText('');
+      setIsTypingError(false);
+    }, 5000);
+  };
+
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      const newSequence = (keySequence + event.key.toLowerCase()).slice(-6);
+      // Only track alphanumeric characters
+      const key = event.key.toLowerCase();
+      if (!/^[a-z0-9]$/.test(key)) {
+        return;
+      }
+      
+      // Check if this character matches any valid phrase
+      const matches = checkCharacterMatch(typingText, key);
+      
+      if (matches) {
+        // Valid character - update typing indicator
+        const newTypingText = typingText + key;
+        setTypingText(newTypingText);
+        setIsTypingError(false);
+        setIsTypingVisible(true);
+        resetTypingIndicator();
+        
+        // Check if we completed a phrase
+        if (newTypingText === 'minion') {
+          setIsMinionMode(!isMinionMode);
+          setTypingText('');
+          setIsTypingVisible(false);
+          if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+          }
+        } else if (newTypingText === 'whybother') {
+          navigate('/whybother');
+          setTypingText('');
+          setIsTypingVisible(false);
+          if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+          }
+        }
+      } else {
+        // Invalid character - show error with the incorrect character, then reset
+        if (typingTimeoutRef.current) {
+          clearTimeout(typingTimeoutRef.current);
+        }
+        
+        setIsTypingError(true);
+        setTypingText(key.toUpperCase()); // Show the incorrect character
+        setIsTypingVisible(true);
+        
+        // Clear error state and hide after showing it briefly
+        setTimeout(() => {
+          setTypingText('');
+          setIsTypingError(false);
+          setIsTypingVisible(false);
+        }, 300);
+      }
+      
+      // Continue with existing sequence tracking for other phrases
+      const newSequence = (keySequence + key).slice(-10);
       setKeySequence(newSequence);
       
-      if (newSequence.includes('minion')) {
-        setIsMinionMode(!isMinionMode);
-        setKeySequence(''); // Reset sequence after activation
-      } else if (newSequence.includes('salad') && isOnCaesarPage) {
+      if (newSequence.includes('salad') && isOnCaesarPage) {
         setIsCaesarSaladMode(!isCaesarSaladMode);
         setKeySequence(''); // Reset sequence after activation
       } else if (newSequence.includes('unlock')) {
@@ -64,8 +147,13 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
     };
 
     window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [keySequence, isMinionMode, isCaesarSaladMode, isOnCaesarPage]);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+    };
+  }, [keySequence, isMinionMode, isCaesarSaladMode, isOnCaesarPage, navigate, typingText]);
 
   // Reset Caesar salad mode when leaving Caesar's page
   useEffect(() => {
@@ -101,6 +189,11 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
   return (
     <EasterEggContext.Provider value={value}>
       <div className={isMinionMode ? 'minion-mode' : ''}>
+        <SecretPhraseIndicator
+          text={typingText.toUpperCase()}
+          isError={isTypingError}
+          isVisible={isTypingVisible}
+        />
         {children}
       </div>
     </EasterEggContext.Provider>

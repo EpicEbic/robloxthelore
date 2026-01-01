@@ -19,6 +19,7 @@ import EntryPage from "./pages/EntryPage";
 import SecretPage from "./pages/SecretPage";
 import AlternateSecretPage from "./pages/AlternateSecretPage";
 import SecretLPage from "./pages/SecretLPage";
+import WhyBotherPage from "./pages/WhyBotherPage";
 import NotFound from "./pages/NotFound";
 import { ComparisonPage } from "./pages/ComparisonPage";
 import { TournamentPage } from "./pages/TournamentPage";
@@ -76,6 +77,7 @@ const App = () => {
                       <Route path="/secret" element={<SecretPage />} />
                       <Route path="/secret-alternate" element={<AlternateSecretPage />} />
                       <Route path="/secret-l" element={<SecretLPage />} />
+                      <Route path="/whybother" element={<WhyBotherPage />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </motion.div>

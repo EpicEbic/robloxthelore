@@ -40,7 +40,7 @@ export const CharacterThemeProvider: React.FC<CharacterThemeProviderProps> = ({
     });
     
     // Add theme class to body
-    document.body.className = document.body.className.replace(/character-theme-\w+/g, '');
+    document.body.className = document.body.className.replace(/character-theme-[a-z0-9-]+/g, '').trim();
     document.body.classList.add(`character-theme-${theme.id}`);
     console.log('Added body class:', `character-theme-${theme.id}`);
     
@@ -68,7 +68,7 @@ export const CharacterThemeProvider: React.FC<CharacterThemeProviderProps> = ({
     });
     
     // Remove theme class from body
-    document.body.className = document.body.className.replace(/character-theme-\w+/g, '');
+    document.body.className = document.body.className.replace(/character-theme-[a-z0-9-]+/g, '').trim();
     
     setCurrentTheme(null);
   };
