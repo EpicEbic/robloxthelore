@@ -153,6 +153,7 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
               species={characterData.species}
               age={characterData.age}
               alignment={characterData.alignment}
+              archetypeId={characterData.archetype}
             />
           </div>
         </div>

@@ -3,8 +3,8 @@
                   A Complete Guide to the World & Its Inhabitants
 ================================================================================
 
-Last Updated: December 2025
-Document Version: 1.0
+Last Updated: January 2026
+Document Version: 2.0
 
 ================================================================================
                               TABLE OF CONTENTS
@@ -266,6 +266,7 @@ Notable Robloxians include:
 Species: Robloxian
 Age: 24
 Alignment: Chaotic/Good
+Role: Chaperone
 Ability: The Electrogravitic Flow
 
 OVERVIEW:
@@ -295,34 +296,226 @@ state, drastically altering his behavior and personality into bloodlust, blind
 rage, and sadism.
 
 ABILITY - THE ELECTROGRAVITIC FLOW:
-Caesar's ability manifests as a brilliant gold-colored current that radiates 
-across his body and clothing when activated. It drastically enhances his 
-physical strength and durability while granting him electromagnetic powers such 
-as:
-- Repelling or attracting metallic objects
-- Electrical discharge and attacks
-- Enhanced physical capabilities
-- Gravity manipulation through electromagnetic fields
+Caesar's body acts as a perfect host and conduit for an anomalous source of 
+power, formally known as the Electrogravitic Flow or 'The Flow' for short. The 
+Flow manifests as a sharp, contorting plasma that ripples in blue across his 
+entire body.
 
-The ability puts significant strain on his body and overuse can trigger his 
-berserk state.
+Through the Flow, Caesar can generate and discharge electrified plasma towards 
+targets or his surroundings, allowing him to heavily damage targets or 
+manipulate any local magnetic and gravitational forces his energy surrounds. 
+This ability has a wide variety of applications in almost all aspects, making 
+Caesar a versatile fighter who can tolerate combat in almost any environments 
+while remaining both formidable and dangerous.
+
+Despite the strengths the Flow offers, Caesar has yet to properly master the 
+Flow or unlock any of its real potential, limiting his capabilities.
+
+PASSIVE ABILITIES:
+- Generative Gravity: The Flow can manipulate the flow of magnetism and gravity 
+  on areas or objects it comes into contact with, and this extends to Caesar's 
+  own body. This prevents him from being affected by gravitational anomalies, 
+  such as Black Holes or other abilities that affect the forces of gravity.
+- Living, Leaking Battery: Caesar's body acts essentially as both a generator and 
+  battery for the Flow, as it gets passively replenished as Caesar rests or eats 
+  food. Occasionally, the build-up of power within Caesar's body becomes 
+  overwhelming, causing him to forcibly eject extra energy if he doesn't 
+  frequently make use of his ability. While this is manageable if Caesar 
+  consistently fights or remembers to discharge his extra energy, forgetting 
+  often means extensive property damage and injuries to anyone in his immediate 
+  surroundings.
+- Overdrive: When Caesar is in a life-threatening situation or his adrenaline 
+  is pumping, the Flow goes into overdrive and begins mass-producing additional 
+  energy. This allows Caesar to push his limits and keep fighting even while 
+  exhausted. However, abusing these limits can cause Caesar to grow ill and 
+  become susceptible to going berserk from the Flow's influence until he 
+  eventually collapses from exhaustion.
+
+OFFENSIVE TECHNIQUES:
+- Discharge: Charging the Flow into his hands, Caesar can discharge energy into 
+  his surroundings or towards targets, shocking them and making them susceptible 
+  to Caesar's gravity manipulation. This enables him to use a form of telekinesis, 
+  freely throwing his opponents or slowing them down greatly if they lack the 
+  physical strength to overpower the effects. Heavier targets require Caesar to 
+  discharge larger quantities of energy, making them harder to manipulate and 
+  using more of Caesar's stamina and Flow reserves.
+- Electropulse: Caesar can channel the Flow across his entire body, and discharge 
+  a wave of energy into his surroundings, shocking them and allowing him to gain 
+  control over the flow of gravity and magnetism in his immediate surroundings 
+  temporarily. Gaining control over gravity through this method is far less 
+  refined than discharging onto specific targets, though it is highly effective 
+  if Caesar is facing multiple opponents.
+- Self-Amplification: Caesar can freely manipulate his own weight due to his 
+  generative gravity, allowing him to amplify the weight of his limbs or entire 
+  body. By channeling the Flow with specific timings in tandem with his own 
+  movements, Caesar can seriously increase the power behind his physical attacks. 
+  With enough momentum, Caesar can successfully breach thick walls, and rip 
+  armored doors from their hinges. Caesar needs to remain mindful of how much he 
+  amplifies his body, as his body may not be able to adjust properly if he 
+  increases his weight too much, causing him to collapse under the pressure.
+
+DEFENSIVE TECHNIQUES:
+- Hard-Light Armor: Caesar can generate and compress his energy into solid, 
+  "hard-light" armor that affixes to his body and protects him from both 
+  blunt-force trauma and electricity. Depending on how much energy was poured 
+  into the barrier, hard-light armor can protect Caesar anywhere from weaker 
+  firearms, all the way to small explosions before cracking or shattering from 
+  the damage. Maintaining hard-light armor is incredibly draining of Caesar's 
+  energy and can quickly exhaust him if his defenses are shattered multiple times 
+  in a row in quick succession. Additionally, hard-light armor can be incredibly 
+  heavy, reducing Caesar's speed even further.
+- Hard-Light Barriers: Similarly to how Caesar can generate hard-light armor, he 
+  can also generate constructs formed of this energy to project protective 
+  barriers or shielding to defend allies from an attack. This shielding has the 
+  same properties as Caesar's hard-light armor, defending targets from damage up 
+  to small explosives and electricity. Caesar cannot generate hard-light armor if 
+  he is currently projecting his energy into shielding for another target, as his 
+  focus must remain on the shield due to it not being connected to his body, 
+  unlike hard-light armor.
+
+UTILITARIAN TECHNIQUES:
+- Pseudo-Telekinesis: When objects or areas are imbued with Caesar's energy, he 
+  can freely channel the gravity and magnetism of them, allowing him to toss 
+  targets around or weigh them down drastically. It can also be utilized for 
+  simple tasks in his daily life, fetching items from far away or allowing him 
+  to hold things without needing to use his hand. Naturally, the more objects 
+  he manipulates, the higher the energy requirement becomes. While it's 
+  relatively easy to hold a large quantity of small objects, particularly heavy 
+  objects can quickly push his limits if held for long periods of time.
+
+DRAWBACKS:
+- Rapid Energy Consumption: A majority of the Flow's abilities require serious 
+  amounts of Caesar's stamina to remain effective, and overuse can quickly put 
+  him out of commission if he isn't careful.
+- Weighed Down: The Flow carries an extremely heavy weight that Caesar must 
+  endure to effectively use the Flow, and it only worsens as Caesar attempts 
+  larger-scaled attacks or attacks of a higher potency. Techniques such as the 
+  hard-light armor are especially taxing on Caesar's body, often slowing his 
+  speeds to a crawl, and rarely immobilizing him entirely.
+- Mental Corruption: If Caesar becomes too lost in combat or pushes his ability 
+  far beyond safe limits, he can become susceptible to mental corruption, leading 
+  to Caesar going berserk. In this state, Caesar becomes incredibly dangerous to 
+  remain around, regardless of if you are a friend or foe. Though Caesar's 
+  mentality remains intact-enough to differentiate between an ally and an enemy, 
+  his attacks and the Flow's effects are greatly amplified and pose a serious risk 
+  for any Bloxians in his immediate surroundings, including Caesar himself. This 
+  rampage tends to last until Caesar is calmed down, incapacitated, or becomes 
+  exhausted. Afterwards, Caesar becomes greatly limited in terms of strength, and 
+  the Flow often goes completely offline to recover from Caesar's abuse.
 
 HISTORY:
-Caesar was born closer to one of Roblox's final waves of new Robloxians, cast 
-into an already-crumbling society. He fled conflict initially, eventually 
-finding himself in the Outer Ring where he created his own World—"Caesar's 
-Isle"—a floating island atop an infinite sea.
 
-His awakening came when Exploiters attacked his home. On the brink of death, 
-something latent awoke within Caesar—the Electrogravitic Flow—allowing him to 
-defeat his attackers. This experience inspired him to become a vigilante, 
-dedicating himself to protecting those who cannot protect themselves.
+Creation:
+Caesar was born closer to one of Roblox's final waves of new Robloxians, cast 
+into an already-crumbling society that was struggling to fully adjust to the 
+new race. Caesar fled any and all conflict initially, eventually finding himself 
+in the Outer Ring where he would soon go on to create a World. He imagined an 
+island, floating atop an expanse of infinite sea, with a cycle of day and night 
+like he had seen in other Worlds. From this vision, the World that would come 
+to be known as "Caesar's Isle" was born.
+
+Despite living in the Outer Ring, a notorious 'danger zone' for the Bloxiverse, 
+Caesar lived a quiet and fulfilling life. Though, Caesar found it to be rather 
+empty at times, for he had made no friends or family on his path. Despite this, 
+Caesar always felt gratefulness, knowing that his situation in life always 
+could've been far, far worse.
+
+Awakening:
+Some time after Caesar had established his World in the Outer Ring, a notorious 
+faction known as the Exploiters began to appear, making waves on the news as a 
+dangerous and fear-mongering faction that had no issues pillaging and usurping 
+control of other Worlds for their own nefarious plans. Caesar thought little of 
+it initially, until a fateful day where he too would be assaulted by a small 
+squad of scouting Exploiters.
+
+They attacked suddenly, without warning or restraint. Caesar did his best to 
+resist, but his efforts were futile. He had strength, but that wouldn't be enough 
+to best people who could fly, teleport, and do all kinds of harmful things that 
+Caesar could barely wrap his head around at the time. They beat him senselessly, 
+tarnishing his island and destroying his home in their efforts to look for 
+valuables.
+
+Caesar fully believed he'd die that day, as the ground cracked from being 
+pummeled into it. But inside, on the brink of life and death, something latent 
+awoke within Caesar. An electric static, deep within his soul—as though 
+commanding him to stand and fight. A second wind allowed Caesar to arise, and 
+he unleashed the Electrogravitic Flow for the first time. In his hazy and 
+senseless state, he can only partially recall the events that transpired after 
+that moment. Even so, Caesar is certain of at least one thing—the group of 
+Exploiters who attacked him did not survive.
+
+After recovering from the assault and resting in his now-dilapidated cabin, 
+Caesar reflected on what had occurred during the attack. He realized how lucky 
+he was to have survived, and that a likely-countless amount of other victims 
+would not. A new and burning desire lit up in Caesar's mind, and it was 
+decided. Caesar would dedicate himself to the training of his body and powers, 
+to become a sworn defender and vigilante for those who could not defend 
+themselves.
+
+Vigilante:
+Following the attack and Caesar's subsequent awakening, he would begin rigorous 
+training to hone his powers and body for combat. It took effort and time to 
+figure out how exactly the Flow functioned, but eventually Caesar had developed 
+a basic grasp of its skillset. He took note of the strain it put on his body, 
+and developed a technique that primarily relies on his physical strength instead 
+of his powers alone.
+
+After gaining confidence, he finally set out into the Bloxiverse for the first 
+time, beginning his hunt for criminals up to no good. Most opponents fell with 
+little effort, as Caesar came to realize just how powerful he really was. Some 
+took effort, sure, but most would fall eventually. At times, the power would get 
+to Caesar's head, and he'd reflect and wonder if such strength is what led so 
+many others down the dark paths they led.
 
 KEY RELATIONSHIPS:
-- Nauli Parter: Close friend and ally, met when Caesar bought her a meal
-- Vortex A. Steele: Former enemy, now close friend and ally
-- Rice Farmer: Close friend, taught Caesar agriculture
-- Bryck Manning: Defeated enemy, Caesar apprehended him at the Farmer Sanctuary
+
+Nauli Parter - Close Friend & Ally:
+Caesar and Nauli met a few years ago, during an unexpected encounter at a 
+restaurant. Caesar spotted Nauli rummaging through the trash for scraps on his 
+way inside the building, and decided to buy and bring her a proper meal. This 
+single act of kindness touched Nauli's heart, quickly breaking through her 
+defensive walls as nobody had truly noticed or cared for her. For the first time 
+in a long while, she felt safe enough to open up and the two began to chat over 
+their meals. Their interests in one another only grew as they came to realize 
+their shared values and goals, wishing for peace in the Bloxiverse. From then on, 
+the pair worked together in almost all aspects, with Caesar relying on Nauli's 
+strategizing and Nauli relying on Caesar's brute strength to take down stronger 
+opponents through their combined efforts. Nauli also began to spend time on 
+Caesar's Isle, breathing a sigh of relief at a place to relax and call home.
+
+Vortex A. Steele - Former Enemy, Close Friend & Ally:
+Initially, Vortex was contracted by the Hunter Association to eliminate Caesar 
+due to a hit placed on him by Bryck Manning. Vortex successfully hunted down 
+Caesar, and the two engaged in combat. Their fight was valiant and hard-fought, 
+but both sides came to the realization that their powers and strengths cancel 
+out one another, and the two mutually agreed to stop fighting. With a moment to 
+chat and actually relax, the two expressed their ideals and morals, quickly 
+learning that they're rather alike. Though skeptical and uncertain, both placed 
+trust in one another and agreed to peace and cooperation. Vortex cancelled his 
+contract, though this was not the end of his interactions with Caesar—quite the 
+opposite. Caesar met Vortex on occasion from then on out, teaming up to handle 
+tougher contracts that demanded more firepower than what he and his friend Nauli 
+could provide alone. The three have worked multiple times as an efficient and 
+balanced trio, backed equally by strength, smarts, and speed.
+
+Rice Farmer - Close Friend:
+Rice was among one of the many victims Caesar had saved from being terrorized, 
+particularly during an attack from Bryck on the Farmer Sanctuary, a peaceful 
+World where a family of farmers grow tons of food for themselves and Bloxians in 
+need. Caesar and Rice continued to chat long after Caesar had already saved him, 
+and the two have spent many days together since. Caesar was introduced to the 
+ways of agriculture through Rice, which later led to Caesar's inspiration for 
+starting his many gardens. Rice has been a great source of comfort and calm for 
+Caesar, as Rice is very down-to-earth and easy to be around.
+
+Bryck Manning - Defeated Enemy:
+Caesar and Nauli ventured out to the Farmer Sanctuary after seeing its ongoing 
+attack on the news, at the hands of Bryck Manning. The two arrived, and with 
+some effort successfully subdued Bryck and removed his source of power, the 
+Gravity Coil. Afterwards, the Gravity Coil was handed off to Ren Bytera for 
+examination while Bryck was sent to the Hunter Association for processing and 
+eventual imprisonment. Bryck has held a grudge and strong vengeance for Caesar, 
+unbeknownst to him.
 
 COMBAT STYLE:
 Caesar's overwhelming size and bulwark build grant him incredible physical 
@@ -337,7 +530,8 @@ of speed and reflexes.
 
 Species: Robloxian
 Age: 23
-Alignment: Neutral/Good
+Alignment: Rebel/Moral
+Role: Protestor
 Ability: Pathokinesis (Augmented)
 
 OVERVIEW:
@@ -366,34 +560,190 @@ help those she loves. She likes to remain productive, helping with small chores
 around the homes of her allies even if she isn't asked.
 
 ABILITY - PATHOKINESIS:
-Nauli's psy-link antennae grant her the ability of Pathokinesis, allowing her to 
-influence and manipulate the psyche of her victims. Applications include:
-- Sending mental messages to other Bloxians
-- Tuning into radio frequencies
-- Inducing various emotional states in targets
-- Manipulating behavior through psychic influence
-- Reading surface-level thoughts
+Nauli's psy-link antennae grant her the ability of Pathokinesis, allowing her 
+to influence and manipulate the psyche of her victims. This mental manipulation 
+has a handful of useful applications, and can prove to be either beneficial or 
+detrimental depending on who she is influencing and the effort she is putting in 
+to her manipulation. Though Nauli has had ample time to refine her techniques 
+and ability, it appears as though some untapped potential remains.
+
+PASSIVE ABILITIES:
+- Mind Reading: Nauli can tune in to the thoughts and feelings of those nearby, 
+  allowing her to quickly gather any information she wishes to know. This can be 
+  incredibly useful when interrogating targets, as it is physically impossible 
+  for them to lie. Interestingly, some form of mental block prevents her from 
+  reading the minds of those she loves, preventing the effects from working on 
+  Caesar, Vortex, etc.
+- Subconscious Influence: Nauli's psy-link antennae constantly produce waves 
+  that influence Bloxians on a subconscious level, subtly altering their 
+  behaviors and thoughts to benefit Nauli. These effects are extremely weak and 
+  only cause slight shifts in personalities or desires. Nauli doesn't do this 
+  intentionally, so it would seem that the psy-link antennae are reading Nauli's 
+  own subconscious automatically, and projecting her desires into the minds of 
+  others.
+- Influence Immunity: Due to the presence of psy-link antennae in Nauli's brain 
+  and skull, she is naturally immune to the influence of other psychic powers, 
+  particularly those that affect the emotional spectrum or memories.
+
+OFFENSIVE TECHNIQUES:
+- Mental Depress: Nauli can depress the minds of her targets, severely reducing 
+  their motivation and morale. Typically, this causes enemies to act aloof or 
+  carelessly, making them easier targets to eliminate.
+- Psyscramble: Essentially unleashing a mental EMP, Nauli can temporarily 
+  scramble the thoughts and memories of her targets, heavily confusing them and 
+  making them extremely vulnerable targets until they can regain composure.
+
+DEFENSIVE TECHNIQUES:
+- Psy-clones: Projecting realistic illusory clones of herself into the mind of 
+  her target, Nauli can become near-impossible to track as the victim is likely 
+  to attack one of the many fake Naulis instead of the real one.
+
+UTILITARIAN TECHNIQUES:
+- Psych Up: Nauli can channel motivation and bravery into her allies, boosting 
+  their morale and allowing them to fight with confidence, even in situations 
+  that seem bleak or completely hopeless. Despite not offering any direct boost 
+  in power to her allies, boosting them mentally has proven to be extremely 
+  effective as the reduced pressure makes it easier to think smarter.
+- Pain Tolerance: Nauli can numb the pain of her own injuries or the injuries of 
+  another Bloxian by blocking the receptors in the brain that process pain. This 
+  can completely ease the suffering of those who have been heavily injured, and 
+  enables wounded Bloxians to continue fighting with their all. It's important to 
+  note that while the pain can be completely numbed and ignored, no actual 
+  healing occurs, making it the equivalent to a powerful painkiller.
+
+DRAWBACKS:
+- Enemy Resolve: Pathokinesis has reduced effectiveness against those with a 
+  strong mind or resolve. It also struggles against those with no capacity to 
+  feel emotion, or those who are mentally insane. In some severe cases, 
+  Pathokinesis can be entirely nullified.
 
 HISTORY:
-Nauli was created during one of the final Robloxian waves and created a paradise 
-world filled with grassy valleys and rivers. Her world became a popular 
-settlement, and she amassed a village of Bloxians she loved.
 
-This peace was shattered when the Scarlet Flame, a notorious pyromaniac, 
-discovered her world and massacred the entire settlement in crimson flames. 
-Nauli barely escaped, forever changed by the trauma. She became untrusting and 
-cynical.
+Creation:
+Nauli was created during one of the final Robloxian waves prior to Roblox's 
+disappearance, thrown into the frenzy with little to no knowledge of life. Like 
+many other Robloxians, she fled and sought refuge in a Robloxian world of her 
+own creation, born from her imagination. She created a paradise, full of grassy 
+valleys and rivers that ran as far as the eye could see, with clear sunny skies 
+and a crisp, cool breeze you could soak in for hours. Nauli's world grew to be 
+quite a popular settlement for Robloxians and Noobs alike, as it was positioned 
+in the Inner Ring, a segment of the Bloxiverse highly accessible to most 
+Bloxians, due to its proximity to the Heart. Slowly but surely, Nauli amassed a 
+small village of Bloxians whom she grew close with and lived alongside in 
+prosperity. Life was perfect for Nauli, and she has always recalled it as the 
+happiest period of her life.
 
-Later, she was approached by Ren Bytera, who offered to enhance her abilities 
-through experimental surgery. The psy-link antennae were implanted, granting 
-Nauli her Pathokinesis powers. She then became an assassin and eventually met 
-Caesar, forming a powerful partnership.
+Scarlet:
+Some time had passed since establishing her World, and the village inside had 
+amassed into a small settlement by this point. She had formed countless 
+relationships and meaningful connections throughout her experience in life, and 
+she had been taught many practical skills by her villagers. She was revered as a 
+wonderful leader and a beacon of hope for the Bloxiverse. But alas, nothing good 
+can last forever. As her World was easily accessible, it was only a matter of 
+time before those with impure intentions would stumble upon her domain. 
+Eventually, this fate came to pass as the Scarlet Flame, a notorious criminal 
+and pyromaniac, discovered the World and her settlement. From then on, the fate 
+of the World and its inhabitants were sealed.
+
+The superheated inferno and genocide that soon followed was nothing short of 
+horrific. Entire portions of the settlement ignited into crimson-colored flames, 
+as helpless innocents scrambled for safety, only to be burnt alive. The rivers 
+boiled as the waters were stained red with blood, before turning black from the 
+ash of corpses and structures alike. Explosions erupted, dealing with sturdier 
+buildings formed of rock and other non-flammable materials. Nauli, shellshocked 
+and barely holding a grip of herself, managed to barely escape her own World in 
+time, before it collapsed from the extensive heat damage at the hands of the 
+Scarlet Flame. In a mere hour, Nauli's entire life and all of her lifelong 
+friends had been claimed by the crimson fires, leaving her with nothing but the 
+charred clothes on her body and a traumatic experience. That day forever changed 
+Nauli, and she was never quite the same again. She became untrusting, developing 
+a cold and cynical outlook on life. She stopped caring, and grew bitter to the 
+Bloxiverse. Despite it all, she vowed to never become a monster such as the 
+Scarlet Flame.
+
+Augmentation:
+Piece by piece, Nauli managed to rebuild her life, though the trauma never 
+truly left her. She trained and tried to grow from her experiences, becoming 
+remarkably flexible and agile over time. Her prowess and skillset eventually 
+gathered the attention of Ren, a morally-absent scientist who saw Nauli as a 
+perfect experimentation opportunity. Ren introduced herself to Nauli, and pitched 
+her plan to enhance Nauli's abilities. Though reluctant, Nauli believed she had 
+little to lose and agreed to undergo the procedure. She would have psy-link 
+antennae directly implanted into her skull and brain, with the promise of a large 
+pay and Nauli's absolute safety.
+
+The surgery was a success, though it yielded unexpected results. The experiment 
+was originally intended to grant Nauli psychic abilities, allowing her to send 
+messages to the minds of other Bloxians, and mentally tune into the radio. 
+While this worked as intended, Nauli could now also send out signals through her 
+antennae, enabling her to manipulate the psyche of other Bloxians nearby. Ren was 
+fascinated by this new ability, and insisted Nauli stay put for further 
+testing. Eventually, Nauli was released back into the world, with her permanent 
+antennae and new abilities. From here, she began to wonder what she could 
+accomplish with a power such as hers. Time would soon tell.
+
+Assassin:
+Nauli eventually came to the conclusion that her best bet was to use her ability 
+combatively, inspiring her to become a spy and assassin for-hire. It wasn't long 
+before contracts began to roll in, and Nauli quickly picked up on the dirty 
+work. She was efficient, and no intel remained out of reach through the use of 
+her psychic powers. She found solace through these contracts, rediscovering her 
+purpose that had long-since been extinguished by the Scarlet Flame. Nauli went 
+on to hone her abilities and eventually became a master in her line of work. She 
+trained and grew to become incredibly efficient with small weapons such as 
+daggers and kunai, taking advantage of her speeds and flexibility to quickly 
+outpace her contracts, and swiftly eliminate those she was told to. Her colder 
+nature made her a natural, and her contracts were dropping like flies. She felt 
+unstoppable, if not for the lingering thoughts of the Scarlet Flame in her 
+mind. Some time after becoming an Assassin, she met Caesar and the two clicked 
+almost immediately. Their shared morale and ideals made them realize it would be 
+in their best interests to cooperate, leading the pair to collaborate in an 
+effort to apprehend dangerous Bloxians that were too risky to tackle alone.
 
 KEY RELATIONSHIPS:
-- Caesar Bloxwright: Close friend and ally, her anchor
-- Vortex A. Steele: Former enemy, now trusted ally
-- Ren Bytera: The scientist who augmented her
-- Bryck Manning: Defeated enemy
+
+Caesar Bloxwright - Close Friend & Ally:
+Nauli was rummaging through a garbage bin for scraps of food, as she was running 
+low on cash. Suddenly, a gentleman approached her, offering up a packaged meal he 
+had purchased specifically for her from the till. Though Nauli's skepticism and 
+paranoia wanted desperately to decline the food, her stomach simply could not. 
+She quickly downed the meal while chatting with the man, whom she eventually 
+learned was Caesar, a self-proclaimed vigilante on a mission to take down as 
+many evil Bloxians as he could. Nauli admired his noble mission, and quickly 
+realized that the two would pair greatly together, due to their shared 
+interests. The two began to collaborate from then and onward, and have gone on 
+to become an incredibly dangerous duo. Nauli's skills and psychic powers support 
+Caesar while he focuses on the offense and defense. Together, very few threats 
+truly stand in their way, though the Bloxiverse always has a bigger fish... 
+After working together for some time, Nauli had formed a close bond with Caesar. 
+This eventually lead to her being introduced to his island, and subsequently 
+receiving a small plot of land for a campsite where she continues to live on 
+most days.
+
+Vortex A. Steele - Former Enemy, Close Friend & Ally:
+Nauli was extremely skeptical when Caesar initially introduced Vortex as "the 
+guy who tried to kill me" to her. She had little to no trust in Vortex, and it 
+took some time to warm up to him. But as the days passed, she realized that 
+Vortex genuinely held no ill intent, and was simply doing his job. She grew to 
+respect Vortex's abilities and potential in combat, and learned to further trust 
+him. Though he's hot-headed and stubborn, he has always meant well in the end. At 
+times, Vortex has even collaborated alongside herself and Caesar to tackle 
+particularly dangerous Bloxians as a trio.
+
+Ren Bytera - Acquaintance:
+Though Nauli never grew close to Ren in any aspects, Ren's intelligence is 
+something Nauli admires. Ren is also responsible for the psy-link antennae 
+augmented into Nauli's head, so naturally it would be in line to keep 
+communications open. At times, Ren has directly assisted Nauli and her allies 
+by studying artifacts or providing various pieces of gear and equipment for the 
+team.
+
+Bryck Manning - Defeated Enemy:
+Alongside Caesar, Nauli assisted in the apprehension of Bryck Manning, a 
+terrorist rampaging in a peaceful World known as the Farmer Sanctuary. Though 
+she wasn't directly responsible for Bryck's subduing, she used her powers to help 
+Caesar apprehend him. She was also credited when Bryck was later turned into the 
+Hunter Association prior to his imprisonment.
 
 COMBAT STYLE:
 Nauli is quick, flexible, and sharp-witted. She is agile in combat and can issue 
@@ -408,6 +758,7 @@ presented with an opportunity for a killing blow.
 Species: Noob
 Age: 21
 Alignment: Lawful/Neutral
+Role: Judge
 Ability: Chronipulation
 
 OVERVIEW:
@@ -416,41 +767,458 @@ the rank of second-best in the Hunter Association. Despite his small temper, he
 has a good heart and an unyielding dedication to his craft.
 
 APPEARANCE:
-Vortex wears signature black gear, optimized for combat and bounty hunting. When 
-using Chronipulation, chronological fabrics appear as netting along his limbs as 
-his body siphons time.
+
+Tactical:
+Vortex A. Steele is an average-built Noob wrapped with a variety of belts and 
+straps which cover a black t-shirt and pants. His brown, spiked hair is covered 
+mostly by a black cap, while tinted shades typically hide his eyes from view.
+
+Tactical (Geared Up):
+When going into combat or performing reconnaissance, Vortex will arm himself 
+with the Mag-num, a powerful revolver-sized railgun which he'll keep on his belt. 
+In certain tougher missions, Vortex may also don the Amplification Gauntlet, a 
+tool he'll use to breach tough structures and penetrate stronger lines of 
+defense.
+
+When using Chronipulation, chronological fabrics appear as netting along his 
+limbs as his body siphons time.
 
 PERSONALITY:
-Vortex is sharp, quick-witted, but incredibly stubborn. He has a small temper 
-but ultimately means well. He is incredibly dedicated to his work as a bounty 
-hunter and takes pride in his skills.
+Vortex is cold, callous, and highly calculative. Aside from the few friends he 
+has, Vortex's mind remains focused on his own well-being and his job as an 
+operative for the Hunter Association. He is an overachiever by nature, tending to 
+be stubborn and a natural perfectionist. He is sharp, quick-thinking, and 
+won't take disrespect lightly. Vortex is notoriously difficult to work with, as 
+he is the type to beat to his own drum and be his own boss, which can lead him 
+to be a difficult ally to work with. Even when asked politely, Vortex often 
+won't listen to the advice or reasoning of others unless he agrees with their 
+viewpoint, often creating unnecessary tension and complications between him and 
+his allies.
 
 ABILITY - CHRONIPULATION:
-Vortex can manipulate the flow of time around his body, allowing him to:
-- Accelerate his personal timeframe for enhanced speed
-- Slow his perception to better react to threats
-- Imbue his equipment with temporal energy for enhanced effects
-- Predict and react to attacks before they connect
+Vortex was born with an innate ability enabling him to sense and contort 
+temporal flows around himself and other targets, freely accelerating and 
+decelerating time at will. Beyond this, Vortex can slightly alter time in other 
+ways, such as rewinding back to recent moments, etc. His ability is powerful, 
+versatile, and provides Vortex with a means of defeating even the most 
+experienced fighters.
+
+PASSIVE ABILITIES:
+- Tempo Control: At any given time, Vortex can amplify the rate at which time 
+  flows for him, allowing him to double, triple, or even quadruple his movements 
+  and velocities. This allows Vortex to strike quickly and unpredictably, whilst 
+  reacting almost instantaneously to incoming attacks. The faster Vortex 
+  accelerates, the quicker his stamina depletes. Careful and strategic 
+  management of his powers allow his true potential to shine.
+- Tickrate Immunity: Chronipulation naturally nullifies the effects of temporal 
+  anomalies or other powers which manipulate time in any way, preventing Vortex 
+  from being affected by them.
+- Echoes of Memories: On the rare occasions where Vortex's body is rewound to a 
+  previous point in time, his memories are transported separately from his 
+  physical form before being remembered when the rewind is complete. This allows 
+  Vortex to retain clarity and a sense of continuity, even in situations where it 
+  shouldn't physically be possible.
+- Count The Seconds: Vortex can automatically and accurately count up to (or 
+  down from) any amount of time with little to no error, as though his mind has 
+  an internal clock embedded within.
+
+OFFENSIVE TECHNIQUES:
+- Breakneck Assault: By accelerating his body, Vortex can ambush and overwhelm 
+  targets with flurries of punches that blur as they travel. Though Vortex isn't 
+  particularly strong by default, even stronger lines of defense can be 
+  overwhelmed with thousands of punches issued in mere seconds.
+- Repetition Impact: After issuing an attack such as a tackle or kick, Vortex can 
+  quickly rewind to just a fraction before his hit initially landed, allowing him 
+  to perform the same attack back-to-back. Attacks could theoretically be chained 
+  infinitely through this method, so long as Vortex has the stamina necessary to 
+  perform the (quite exhausting) rewinds.
+- Back For More?: Vortex can recall a target's position and move them back to it, 
+  allowing him to chain multiple attacks similar to rewinding himself. This works 
+  best in tandem with a strong ally, especially those who struggle to keep 
+  opponents within their range of attack.
+- Acceleration Hemorrhage: Accelerating an opponent's speed can sometimes be 
+  detrimental, especially if they're bleeding or suffering from other conditions 
+  that worsen over time. Though this technically gives an enemy momentary 
+  advantages, effects from conditions such as blood loss and poison will take hold 
+  significantly faster. Though conditions to use a technique such as this are very 
+  conditional, it can be a highly effective method of dispatching an enemy.
+
+DEFENSIVE TECHNIQUES:
+- Temporal Afterimage: By pushing his acceleration and rapidly shifting between 
+  positions, Vortex can create up to 4 indistinguishable afterimages that follow 
+  his movements. They serve to confuse and disorient his targets, who often 
+  struggle to deduce where to strike in order to properly hit Vortex. Most attacks 
+  won't work on afterimages without significant luck or reflexes, but they are 
+  extremely vulnerable to large AOE (Area of Effect) attacks such as explosions. 
+  Vortex's afterimages cannot space out more than 15 studs each, without it 
+  becoming impossible to maintain the illusion due to the increased distance it 
+  would require to cover. Additionally, maintaining afterimages for long periods 
+  of time is incredibly difficult, as Vortex must constantly work his 
+  Chronipulation at high speeds-- while constantly moving between each position.
+- One More Chance: When suffering from a particularly deadly wound or other 
+  condition that would normally kill Vortex, he can pour his energy into a full 
+  rewind of his surroundings, sending him back in time by up to a few minutes 
+  before he suffered from the attack. In doing so, Vortex completely exhausts his 
+  stamina reserves and momentarily cannot use Chronipulation. This lasts until 
+  both he and Chronipulation can recover from the stress of rewinding large 
+  portions of time. Vortex cannot use this technique effectively if even smaller 
+  portions of his energy have already been used up. While rewinding time remains 
+  possible even with minimal energy and stamina, the time he can rewind is 
+  drastically reduced, down to mere seconds in severe cases.
+
+UTILITARIAN TECHNIQUES:
+- Chronological Anchor: Vortex can sacrifice portions of his energy, leaving them 
+  in the past as marks that he can return to later. These anchors last for an 
+  hour before the connection grows too weak to maintain, and can be activated 
+  anytime before the deadline. They activate almost instantly when fired, 
+  transporting Vortex and his memories back into the past. The anchors themselves 
+  require a lengthy setup process, which prevents them from being used effectively 
+  in combat unless preparation was made in advance. This setup process also takes 
+  time, meaning while Vortex can often retry a lot, he can't retry forever. 
+  Enough failures in a row will eventually leave him with no time to set up 
+  another anchor.
+- Net of Time: Vortex can lay semi-transparent nets into his surroundings, often 
+  acting as traps that slow unsuspecting targets who make contact with them. 
+  These web-like nets stick to targets and can be incredibly difficult to remove 
+  mid-combat, especially due to the slowness they inflict. Time Nets double as 
+  ordinary nets if Vortex needs them to, without slowing anything that makes 
+  contact with them. This enables him to project nets for a variety of different 
+  tasks, such as to catch falling objects or Bloxians. They're also great for 
+  holding things in place.
+- Temporal Deceleration: Vortex can significantly slow himself down, consuming 
+  basically no energy to do so. Though it has no practical use in combat, 
+  slowing down his own body allows him to perceive time moving faster, making it 
+  a great way to skip time and wait less for things that matter to him.
+
+DRAWBACKS:
+- Unfathomable Energy Consumption: Chronipulation as a whole consumes massive 
+  quantities of Vortex's stamina to maintain, especially at higher rates of 
+  acceleration. Maintaining high speeds requires Vortex to get plenty of rest, 
+  eat large amounts of calories, and keep a sharp mind to remain focused while 
+  accelerated. Overuse of his powers is incredibly easy, and can make Vortex ill 
+  and weak from the exhaustion.
+- Temporal Dissociation: Constantly tampering with time has proven to have 
+  adverse effects on Vortex's psyche, as he'll often dissociate or become 
+  derealized by the present. It can take time for him to collect his bearings or 
+  come to his senses, especially after rewinding time or slowing himself down. 
+  Though these effects are often minimal and can be ignored, constant use of his 
+  power has shown to cause performance issues in combat.
 
 EQUIPMENT:
-- The Mag-num: A high-caliber magnetic railgun created by Ren Bytera, compacted 
-  into a handheld revolver. Features auto-aim, kinetic battery charging, and 
-  various ammunition types.
-- Amplification Gauntlet: Provides significant strength boost but inhibits speed.
-- Both can be enhanced through Chronipulation.
+
+The Mag-num:
+A high-caliber magnetic railgun created by Ren Bytera, which has been 
+compacted down into the size and shape of a large handheld revolver. Through the 
+use of electromagnets, the Mag-num can fire almost anything made of magnetized 
+metal at extremely high velocities, so long as it can fit inside of the 
+barrel-- though it does come with specialized ammunition designed for use with 
+the gun.
+
+Key Features:
+- Target Lock: The Mag-num has built-in auto-aim functionality, allowing it to 
+  strike targets with extreme accuracy and reliability. The specialized ammo 
+  designed for the Mag-num remains magnetically linked to the gun, even after it 
+  has left the barrel. So long as it retains a charge, Vortex can redirect the 
+  trajectory of bullets, allowing him to strike targets behind walls or other 
+  forms of cover. Even without the Target Lock functionality, Vortex has proven 
+  himself to be an adept marksman.
+- Kinetic Battery: The Mag-num doesn't rely on conventional energy seen in most 
+  electric weaponry, and instead relies on recharging through physical motion 
+  provided by an internal gyroscope. As Vortex moves around (especially when using 
+  Chronipulation), the gun naturally feeds from the momentum to generate power.
+
+Ammunition Types:
+- Magnetic Shot: The Mag-num can charge up and fire specialized ammo by placing 
+  them into the chamber. These bullets can be fired at high velocities, capable of 
+  tearing through weaker materials and deeply penetrating others. When any charged 
+  projectiles run out of momentum (typically once they've embedded themselves in a 
+  target or structure), any remaining energy erupts in a small spark, harming 
+  anything it may have stuck itself inside.
+- Railshot: By holding the trigger, Vortex can delay the firing process of his 
+  Mag-num. This can drastically overcharge and amplify the power behind the shot, 
+  allowing the bullet to reach insane velocities and liquify most materials it 
+  first comes into contact with. Bullets travelling these speeds can still be 
+  redirected by the Mag-num's Target Lock, though with significantly reduced 
+  turning speeds. As with the Mag-num's other projectiles, Railshot projectiles 
+  erupt into a spark once they've lost their momentum, releasing any remaining 
+  energy stored within. Railshot bullets often produce larger, volatile sparks 
+  that shock and burn whatever they may have embedded themselves within.
+- Buckshot: Using smaller magnetic shrapnel, Vortex can stuff multiple projectiles 
+  into a singular chamber, before firing them all at once. In a pinch, it can make 
+  for remarkably efficient crowd control, or a deadly blast for a singular, 
+  close-up target. Due to the sheer quantity of bullets, the Mag-num struggles to 
+  use Target Lock when firing such a large quantity at once. Unlike standard 
+  bullets, Buckshot shrapnel shards do not erupt into sparks or electricity when 
+  its momentum runs out, as they lack the makings of Vortex's specialized 
+  ammunition.
+
+Defensive Capabilities:
+- Mag-net: By channeling the electromagnetic field used to charge and fire 
+  projectiles, Vortex can sacrifice his ability to fire the weapon in exchange for 
+  a barrier which catches and cancels the momentum of bullets fired towards him. 
+  In addition, the Mag-num consumes the kinetic energy provided by the bullets it 
+  stops, which in turn charge its battery. The Mag-num partially defends Vortex 
+  against electricity as well, though it can become overloaded very quickly. The 
+  Mag-net is also unable to fully halt the momentum of projectiles fired from 
+  high-caliber rifles or other, stronger weaponry.
+
+Chronipulation Enhancement:
+When Vortex channels the raw energy produced by Chronipulation and imbues it into 
+his Mag-num, it temporarily overclocks his weapon, transforming it into a 
+devastating hand-cannon with new (and enhanced) effects. The Target Lock system 
+can leech off of Chronipulation to further boost Vortex's accuracy when handling 
+the weapon. On top of redirecting already-fired bullets, Chronipulation allows 
+the gun to quickly amplify or decrease the speed at which a fired projectile is 
+travelling. This allows it to take sharper corners or reach breakneck speeds that 
+render most projectiles invisible, or at least a blur. Chronipulation-charged 
+attacks consume significantly larger amounts of energy, and the kinetic battery 
+can usurp portions of Vortex's Chronipulation to retain a stronger and 
+longer-lasting charge.
+
+Amplification Gauntlet:
+The Amplification Gauntlet (informally known as the Amp Gauntlet) is a large, 
+right-handed gauntlet which provides a significant boost to Vortex's physical 
+strength, allowing him to achieve feats he couldn't achieve without it. With it, 
+he can destroy most armor and reinforced structures through effort and 
+dedication. It is an effective tool for tougher opponents or materials that 
+require raw strength to bypass, though it is extremely heavy and greatly 
+inhibits Vortex's speed while worn.
+
+Key Features:
+- Bloxite Plating: The Amp Gauntlet is partially forged of Bloxite, making it 
+  near-indestructible and resistant to most forms of blunt-force damage, along 
+  with a majority of environmental hazards.
+
+Offensive Techniques:
+- Heavy Impact: The Amp Gauntlet allows Vortex to amplify the raw kinetic 
+  strength behind his swings through electromagnets, allowing him to tear through 
+  a majority of tough materials, including reinforced concrete and rebar.
+- Thumper: By pressing his fist to the ground and smashing down repeatedly, he can 
+  create shockwaves that repel targets and produce a concussive blast that stuns 
+  and discombobulates anyone nearby.
+
+Chronipulation Enhancement:
+By pouring vast quantities of the energy produced by Chronipulation into the Amp 
+Gauntlet, Vortex can imbue the gauntlet with his energy, drastically improving 
+the strength and speed behind it, alongside unlocking new techniques. Through 
+Chronipulation, Vortex can delay the effects of the Amp Gauntlet's attacks for 
+multiple minutes or hours if he so chooses, allowing him to "store" the kinetic 
+energy for use later. By striking the same target multiple times, Vortex can 
+release the delay for all of his attacks at once, instantaneously applying the 
+force behind each one to the struck target(s) at once. Thanks to Chronipulation, 
+Vortex can heavily improve his ability to wield the gauntlet with speed and 
+precision previously unmanageable. It's still slower than using no gauntlet at 
+all, but an improvement is an improvement. On top of the strong impacts the Amp 
+Gauntlet can deal out, Chronipulation allows struck targets to have their 
+position rewound to be struck again. While rewinding the physical position of 
+targets other than himself is extremely draining, chaining multiple hits on a 
+target can quickly incapacitate them and make for a quick end to a fight. When 
+using the Thumper technique, a web of Chronipulation spreads out across the 
+shockwaved area, automatically triggering if a target steps into range. Making 
+contact with this web drastically reduces the rate at which time flows across 
+their body, making them more susceptible and weak to the shockwaves produced by 
+thumping the ground. Retracting his fist from the ground immediately dissipates 
+the web.
+
+Drawbacks:
+The Amp Gauntlet is extremely heavy, comparable to Vortex's own body weight and 
+then some. On top of drastically reducing Vortex's mobility, proper control 
+requires extreme care and concentration. It can be easy for him to tip over and 
+lose his balance from the sheer weight if he isn't focused or lacks the 
+necessary stamina. The amount of energy siphoned by the device to enable 
+functionality at higher speeds is unimaginably large, capable of exhausting 
+Vortex in a few mere swings. In most cases, Vortex can only overclock the Amp 
+Gauntlet in desperate situations, or sparingly throughout a battle.
 
 HISTORY:
-Vortex was originally contracted by the Hunter Association to eliminate Caesar 
-due to a hit placed by Bryck Manning. Their fight ended in a mutual draw when 
-both realized their powers cancelled each other out. After talking, they 
-discovered shared ideals and became allies. Vortex cancelled his contract and 
-the two have worked together since.
+
+Creation:
+Vortex (at the time known as Volkan) was born into a poor, but loving family 
+between two Noobs a few years prior to the disappearance of Roblox. He and his 
+family spent their life on the run, as the constant emergence of new Robloxians 
+meant chaos and disorder while society itself was adjusting. Though his life was 
+minimalistic and no members of his family were special, he loved them dearly and 
+was content with the life he lived. He always loved to go above and beyond for 
+his parents, catering to their every need and always checking in to make sure 
+they were alright. Life was small, but life was good, and Volkan was happy.
+
+Times of Change:
+Whether it be time or another force, all good things must come to an end. 
+Volkan's parents were already quite old when Vortex was born, and over the years 
+they had slowed down significantly. His father was first to pass, going 
+peacefully in his sleep. His heartbroken mother followed soon after, leaving 
+Volkan with nobody but himself. For a time, he felt lost and confused. His 
+family was his entire world, and now he was the only part of that world 
+remaining. Volkan fell into a deep depression, alone and purposeless. He was 
+talented, but what point was there in using that talent if his beloved parents 
+weren't around to see it? He couldn't bring himself to do much of anything for 
+the longest time, lazing around and contemplating life. He was beaten up by his 
+thoughts, telling him that he didn't spend enough time with them. Fortunately, 
+Volkan was a tough cookie and eventually came to his own understanding that 
+rotting away doing nothing is not what his mother and father would've wanted. 
+They were always encouraging throughout his life, and this would have been no 
+different. So, he gathered his resolve and pressed onwards to achieve something 
+in life.
+
+The Association:
+Volkan got to work on self-improvement, looking to get back into shape and 
+recover after letting himself go as he did. Over a few years, he'd focus on his 
+body and train to bring himself back to a healthy status. But, Volkan ended up 
+becoming addicted to the results. Even after getting back to the way he was, he 
+pressed onwards in an effort to maximize his potential. His track running and 
+stretching paid off significantly, as Volkan became quite an agile and flexible 
+individual. Though he continued to train, he eventually hit the ceiling of 
+physical potential he had, and only then was Volkan satisfied. But, in doing 
+so he had gathered the attention of another.
+
+An old, elderly man approached Volkan one day, complimenting him on his prowess 
+and determination. He went on to mention how Volkan had the skills and physique, 
+yet no work to apply them to. The two chatted and eventually became friendly 
+with one another, before Volkan was referred to the Hunter Association for a 
+line of work the man believed he would specialize in. Volkan spent a long time 
+debating whether he'd want to partake in that kind of dirtier work, but he 
+eventually pushed himself to do it, and visited their headquarters. The old man 
+was there to greet him, eventually revealing himself to be Jhustice, one of the 
+councilmen for the Hunter Association. He praised Volkan for taking the offer, 
+and walked him through his initiation and the inner workings of the faction.
+
+After he had signed his contract, Volkan underwent a rigorous process to 
+prepare himself to become a hunter. His identity was scrubbed away from any 
+public records as he underwent intense psychological evaluations, determining 
+his mental fortitude and his resolve. Volkan passed the tests with flying 
+colors, and was eventually accepted to become a low-rank initiative for the 
+Hunter Association. It was at this point where Volkan would surrender his 
+identity fully to the association, becoming Vortex and leaving his past life 
+behind. Despite this, he always made sure to keep his beloved parents in the 
+back of his mind, as motivation and as a reminder of what he's working for.
+
+An Awakening:
+Vortex ended up being perfect for the position, exactly as Jhustice predicted. 
+He was quick, quiet, and excelled in gathering intel for future bounties. Even 
+without any powers, Vortex was effective in hand-to-hand combat against weaker 
+enemies, thanks to his sharper reflexes. He was a reliable asset to the 
+association, and they saw more potential within him. It wasn't long before the 
+Hunter Association began to push Vortex even further, placing him in charge of 
+tougher contracts. Though he struggled to keep up with the pacing, he was able 
+to succeed even when constantly pressed by tougher missions and opponents. This, 
+however, would only serve to make the association want more out of him.
+
+Eventually, Vortex was promoted to a stage-one mercenary, marking a turning 
+point where hunters would start being assigned bounties that target Bloxians 
+with special abilities. Vortex thought little of it, believing in himself as he 
+always had. No matter the target, he'd be sure to take them down, or so his 
+mindset led him to believe. One day, Vortex was issued a large-scale contract, 
+grouped together with a large handful of other hunters. They had received word 
+of a Robloxian World that had its population massacred, before it was destroyed 
+by a villain identified as the Scarlet Flame. The association made sure to press 
+the details, ensuring that the assigned group was aware that he was not to be 
+taken lightly.
+
+The squadron was mobilized, with Vortex leading reconnaissance. They were given 
+basic information on the Scarlet Flame's whereabouts, and eventually managed to 
+locate him. They had the tactical initiative and struck first, but it quickly 
+became apparent that they were significantly unprepared-- and underpowered. The 
+Scarlet Flame quickly began to massacre the squadron, taking out multiple at a 
+time. Members were incinerated alive, leaving nothing but floating dust and 
+death. For the first time, Vortex felt genuine fear and realized that he could 
+not combat someone as strong as the Scarlet Flame, and began to flee as the 
+other members held the villain off for as long as they could.
+
+It wasn't long before the Scarlet Flame had ended the lives of every squad 
+member, aside from Vortex who was attempting to retreat. His heart was pounding, 
+and adrenaline coursed through his veins. He sensed the Scarlet Flame's presence 
+growing closer, and knew he wouldn't be able to outrun him. He needed to go 
+faster. He NEEDED to go faster. HE NEEDED TO GO FASTER!
+
+Vortex's entire body was driven by fear and the deep desire to flee the Scarlet 
+Flame, causing him to awaken his latent abilities that had been present all 
+along. His body lurched forward as his speed multiplied ten-fold, enabling Vortex 
+to soar forwards and quickly escape from the conflict. With his adrenaline 
+pumping and his thoughts racing, he had no time to question what was happening, 
+fully committed to getting away. Barely holding control of the blitzing speeds he 
+was travelling, Vortex successfully managed to reach the headquarters of the 
+Hunter Association, crashing into their lawn at full speed before passing out 
+from the impact.
+
+Becoming an Elite:
+Vortex was initially reprimanded for fleeing the scene of combat, but their 
+tone quickly changed when Vortex explained what had happened. The entire squad was 
+massacred, and Vortex remained unsure as to how he had even escaped the conflict. 
+The Association sent him to the medical bay to recover, and to later run tests 
+on his body to understand what had happened. The examinations went on to show 
+that Vortex was not an ordinary Noob, and had awakened an ability during his 
+conflict with the Scarlet Flame, likely due to the stress and fear created by 
+the encounter and witnessing the death of his squadron. They encouraged Vortex 
+to practice, believing that he could learn to control this ability and hone it 
+to become a greater hunter than he had already proven himself to be.
+
+The scientists were correct in their assumptions, and through practice and 
+mental control, Vortex learned to channel his ability, dubbed 'Chronipulation' by 
+the team who did research on him. Through it, he could amplify his body and 
+senses further, turning him into a purple blur that almost nobody could keep up 
+with. It took practice and precise control to properly manage, but Vortex 
+learned to use it as an extension of his being, turning it into a powerful 
+weapon and tool. Though rematching the Scarlet Flame was out of the question (as 
+the whereabouts of the villain had long-since become unknown), Vortex went on to 
+continue as an operative and climbed the ranks. Over the next few years, he'd 
+maximize his ranking and eventually go on to become an Elite, the highest rank 
+within their hierarchy. He was praised for his dedication and hard work, and 
+Jhustice held a celebration. It had been a long time since the last hunter had 
+reached an Elite status. From then on, he was provided with a penthouse suite 
+and all of the amenities he could dream of. Vortex had finally earned a life 
+for himself that his parents would've been proud of, and in that he found 
+happiness and satisfaction.
 
 KEY RELATIONSHIPS:
-- Caesar Bloxwright: Former target, now close friend and ally
-- Nauli Parter: Close ally
-- Charles Studson: Rival within the Hunter Association
-- Ren Bytera: Created his weapons
+
+Caesar Bloxwright - Former Contract / Enemy, Close Friend & Ally:
+Vortex was originally contracted by the Hunter Association to eliminate Caesar, 
+which had been issued by a petty Bryck Manning after his fall and imprisonment 
+during the conflict at the Farmer Sanctuary. What followed was a long, 
+drawn-out game of cat-and-mouse. Vortex pursued Caesar relentlessly, using his 
+skills in reconnaissance to track Caesar down and corner him. Eventually, he 
+managed to ambush Caesar in a remote warehouse where the two engaged in combat. 
+Though as the fight went on, it was clear to see that Caesar wasn't possible for 
+Vortex to eliminate, nor could Caesar eliminate Vortex. Their abilities cancelled 
+out the effects of one another, and it ended up causing the two to exhaust one 
+another of their energy and stamina. In the end, Vortex stopped trying and spoke 
+with Caesar. Through their conversation, they grew to understand each of their 
+motivations, and Vortex understood that whoever had issued the contract was the 
+one truly in the wrong. Torn between failing a contract or killing an innocent 
+man, he ultimately made the difficult decision to forfeit the contract. From 
+then on, Vortex kept in contact with Caesar as the two grew to become genuine 
+friends and allies, often teaming up to tackle tougher contracts that they 
+couldn't complete alone.
+
+Nauli Parter - Close Friend & Ally:
+Vortex was introduced to Nauli through his connection to Caesar, with the pair 
+becoming friends after Nauli finally lowered her guard and began to trust him. 
+Though it was rocky at first, Vortex and Nauli have grown to work together in 
+tandem, often alongside Caesar as the three tackle missions together.
+
+Ren Bytera - Acquaintance:
+Though Vortex has never been close with Ren in any respects, she is responsible 
+for the creation of his Mag-num as well as his Amplification Gauntlet. They're 
+effective and durable, and have served Vortex very well. They've only spoken on 
+occasion, but Vortex has made it very clear that he admires her craft, even if 
+her lack of morals is something he finds unsavory.
+
+Charles Studson - Rival:
+Both Vortex and Charles have been competing for recognition within the Hunter 
+Association. Charles is relatively new to the faction in comparison to Vortex, 
+though his Chainipulation abilities have allowed him to climb the ranks almost 
+as quickly as Vortex once did. They naturally share a competitive nature, which 
+has led to a fierce rivalry between the two. Despite Charles' reputation rapidly 
+increasing, he always seems to remain a step behind Vortex no matter what he 
+seems to do. Perhaps it requires more than chains to defeat a time manipulator? 
+What a thought.
+
+Bryck Manning - Enemy:
+Vortex was originally assigned the contract against Caesar that Bryck had 
+placed, and Bryck was infuriated to know that not only had his hunter failed-- 
+but he had gone on to become friends with Caesar. This has left him incredibly 
+bitter and hateful of Vortex, unbeknownst to Vortex himself who is entirely 
+unaware of who Bryck is.
 
 COMBAT STYLES:
 Vortex primarily relies on his heightened agility, quick thinking, and 
@@ -466,9 +1234,10 @@ his equipment and Chronipulation.
                             RICE FARMER
 --------------------------------------------------------------------------------
 
-Species: Robloxian
-Age: 54
-Alignment: Lawful/Good
+Species: Noob
+Age: 55
+Alignment: Neutral/Moral
+Role: Altruist
 Ability: None
 
 OVERVIEW:
@@ -478,10 +1247,16 @@ his simple lifestyle and positive outlook on life, Rice brings joy to those
 around him.
 
 APPEARANCE:
-Rice is a short and blocky Robloxian with pale skin, a blue torso, and grey 
-legs. He is always seen wearing a wooden-wicker cone-cap and often carries a 
-large rake hoisted on his back. He likes to chew on plants and often has a piece 
-of wheat in his mouth.
+Rice Farmer is a standard-height Noob. He has pale, peachy skin (especially so 
+for a Noob) and clothing which hides his blue torso and green legs, often 
+causing others to confuse him as a Robloxian. He is often seen in a blue variant 
+of the uniform worn by most who reside within the Farmer Sanctuary, a shirt which 
+has been strapped down by brown overalls and a belt. He wears a straw-knit cone 
+hat, obscuring his bare head and forehead from view. A brown pouch is hoisted 
+onto the strap of his overall, providing him space to hold seeds and other small 
+goods. Rice almost always carries a large rake around while working on the farm. 
+It is nearly double his own height, and he clearly struggles to wield it at 
+times.
 
 PERSONALITY:
 Rice is a gentle, simplistic soul who loves nothing more than his honest work as 
@@ -493,19 +1268,110 @@ possible. He believes it's better to submit and comply when faced with
 antagonism, fearing potential consequences.
 
 HISTORY:
-Rice (originally named Ahlias) was born into the Farmer Sanctuary to a loving 
-family. He was trained in agriculture from a young age and eventually given his 
-own plot to manage—the rice crops.
 
-The Farmer Sanctuary was attacked by nomads who murdered Rice's parents and 
-other family members. Though he survived thanks to his brother Tobias holding 
-him back, Rice fell into a spiraling depressive episode for years. He eventually 
-recovered and adopted the name "Rice" after his late mother's nickname "Ricey," 
-and began wearing his father's cone-cap.
+Grown With Care:
+Many, many years ago, there was a farmer known as Ahlias. He was born into the 
+Farmer Sanctuary by a loving mother and father, alongside two brothers known as 
+Jeremiah and Bolos. From a young age, he and his siblings were trained in the 
+ways of agriculture, raised with a deep connection for the plants they would 
+inherit and cater towards as adults. They all exceeded the expectations of their 
+parents, especially Ahlias; He was known to work particularly hard without 
+tiring or showing signs of stress. Eventually, the brothers matured, and the 
+time came for them to inherit their own plots of land within the sanctuary. A 
+ceremony was held in celebration, a night that all three brothers remember 
+fondly. Ahlias was quieter and shy, but even he enjoyed being the center of 
+attention. Though eventually, the party came to an end and Ahlias, Jeremiah, and 
+Bolos were officially positioned within their own plots. This marked a turning 
+point in their lives, officially entering adulthood. As time went on, Ahlias 
+became the caretaker for the farm's rice supplies, while Jeremiah did so with 
+wheat, and Bolos did so with the peach orchard. It took time for the trio to 
+become used to their new positions, often looking back fondly on the memories 
+they had when they were younger. They missed working together every day, living 
+a happy and carefree lifestyle. It was melancholic to reminisce on the memories, 
+but the brothers felt fulfilled by the new duties given to them. They were happy, 
+and all was well.
 
-Rice met Caesar when Caesar intervened during Bryck Manning's attack on the 
-Farmer Sanctuary. The two became close friends, with Rice teaching Caesar 
-agriculture and providing moral support.
+Ruin:
+One fateful morning, Ahlias awoke to the smell of smoke and the sounds of 
+shouting from outside his barn. He peered through the window, his heart sinking 
+as he quickly realized what was happening. A group of bandits were tearing apart 
+the sanctuary and ransacking their supplies. Embers swirled through the air as 
+nearby buildings blazed, many farmers laying motionless on the dirt. Their bodies 
+were either beaten, burned, flayed, or twisted into impossible positions. 
+Ahlias watched in horror, unsure of what to do. He hesitated, countless thoughts 
+flooding his mind. Where were his brothers, or his parents? What did the 
+intruders want, why were they here? Ahlias quickly snatched his rake from the 
+wall and held it tightly to his chest, his body frozen from a mix of 
+indecisiveness and fear. Ahlias knew that the bandits would inevitably kill him 
+if he were to try and confront them, but could he really leave his family to die? 
+Before he had a chance to resolve his decision, a molotov crashed through his 
+window and lit his room ablaze, forcing Ahlias to flee his room as well as the 
+barn. He was quickly cast into the fray outside.
+
+Ahlias ran from his home as quickly as he could, diving into a thick shrub where 
+he crashed into Jeremiah, who was also hiding inside. Ahlias tried to question 
+the situation, but Jeremiah explained that as far as he knew, the attack had 
+just begun. They waited patiently from within the bush, stifling their cries and 
+holding each other close, ignoring the crashing and screaming as best they 
+could. They feared that when the bandits finally leave the sanctuary, they would 
+be the only two left. They tried to suppress the thoughts, remaining still and 
+horrified until the yelling of many became fewer. Ahlias nor Jeremiah could 
+bear the unknown, especially after all had fallen silent around them-- save for 
+the crackling of barns and plants still smouldering from the fires. They came 
+to an agreement to peek out and see the damages, and eventually did so despite 
+the hesitation. Peering out into their surroundings, they were circled by 
+countless mutilated bodies, collapsed ruins, and dying flames. Ahlias couldn't 
+help but scream from the sights, which would prove to be a grave mistake. A few 
+of the invaders were still nearby and heard Ahlias' cries, quickly swarming the 
+pair and cornering them.
+
+Just as the bandits lunged towards the duo to slaughter them, Bolos emerged from 
+around the corner and charged down the group. Bolos wasted no time and took 
+advantage of his surprise attack, smashing down the intruders and beating them 
+senselessly until they no longer moved. Some of them tried to resist, but Bolos 
+held overwhelming strength and resolve, eventually bending and breaking them one 
+by one. The other bandits had watched Bolos annihilate multiple of their men at 
+once, and decided to retreat early on with the supplies they had already claimed. 
+Bolos tried to chase them down as they fled the world, but Jeremiah convinced 
+him to stop and help the survivors instead.
+
+With the brothers properly reunited amidst the chaos, they began to search and 
+rescue any survivors of the attack, though most were fatally wounded or had 
+already passed on from their injuries. It wasn't long before they stumbled upon 
+their mother and father, quickly rushing to their aid. Their father was already 
+dead from his wounds, cut and drained of his blood. Their mother laid on the 
+ground, partially crushed under the rubble of a building that had collapsed from 
+the fire. Bolos quickly freed and carried their mother and father away, leaving 
+Ahlias and Jeremiah to continue their search and put out the remaining fires. 
+Some time later, their mother eventually fell into a coma and passed away soon 
+after in her sleep. In the span of a morning, everything they had achieved 
+in life was ripped away from them. The population of the sanctuary was cut by 
+almost 85%, leaving the brothers and a handful of survivors to rebuild from the 
+ashes.
+
+Reconstruction:
+It took many years for the remaining survivors to properly recover, both 
+physically and emotionally. Many of them were left permanently disabled or 
+critically wounded, while others dealt with trauma far beyond the point of 
+recovery. Jeremiah fell into a depressive spiral, while Bolos was left with a 
+spinal injury from the conflict. Ahlias battled with his own emotional struggles, 
+but he put them aside to keep a smile on his face and assist his brothers in 
+their recovery, doing what he could to make sure they stayed happy and motivated. 
+Eventually, the Farmer Sanctuary recovered from the attack, though the size of 
+the village had been significantly reduced, mainly due to the loss of their 
+people. Decades passed, but the sanctuary eventually returned to their golden 
+age once again. With age came acceptance for the brothers, who regularly held a 
+ceremony in honor of the fallen, just as the fallen had once held a ceremony 
+for them. During one of these ceremonies, Ahlias announced that he'd be 
+changing his name to honor their parents, planning to adopt his mother's 
+nickname 'Ricey'. Ahlias went on to become Rice, and eventually his brothers 
+also decided to participate in the honoring. Jeremiah changed his name to Whyeet 
+to honor the crop their father had assigned him to, while Bolos became Peaches to 
+honor the orchard his mother gifted him. Rice decided to take and wear the wicker 
+cone his father once wore, while Whyeet took their mother's and Peaches took 
+their late grandmother's. From then on, their new identities were set in stone, 
+and their life continued on the path to produce. It was a moment of growth for 
+the trio, although bittersweet.
 
 --------------------------------------------------------------------------------
                             BUILDERMAN
@@ -514,6 +1380,7 @@ agriculture and providing moral support.
 Species: Noob
 Age: N/A (Divine Youth)
 Alignment: Lawful/Good
+Role: Paladin
 Ability: Creation (Divine Gift)
 
 OVERVIEW:
@@ -522,40 +1389,350 @@ bestowed with divine creation powers by Roblox themselves. He is somewhat of a
 celebrity, recognized for his generosity and incredible potential for good.
 
 APPEARANCE:
-Builderman is an average-built Noob wearing a hoodie embroidered with the Roblox 
-"R" sigil. He keeps his hood up, concealing a construction worker's hard hat 
-underneath. Both wrists are wrapped in cloth. He typically carries the Banhammer 
-with him wherever he goes.
+
+Modern:
+Builderman is an average-built Noob, with noticeably-unique skin tones that 
+normally do not appear within the Noobish race. While his head is the standard 
+yellow seen on most Noobs, his torso is orange whilst his arms and legs are a 
+deep greyish-blue. Most of his skin is covered by his working suit, a grey 
+strap-belt jacket with a hood and grey pants. His hood is almost always up, 
+obscuring a black and orange hardhat he wears. He is often seen with a utility 
+belt, a variety of tools hoisted neatly across the front. Underneath his 
+clothing, a tattoo of a wrench was plastered across his chest by Roblox, a 
+symbol of his importance and position as the Builderman. Builderman can choose 
+whether his mark is hidden completely, visible underneath his clothing, or 
+present above his clothing. Builderman carries the Banhammer on his person at 
+all times, usually hovering idly behind his back, or shrunk down to fit in a 
+pocket for subtlety or convenience.
+
+Legacy:
+During the ancient times, Builderman's unique skin tones were much more 
+apparent, as he wore nothing beyond white pauldrons, his hard hat and various 
+bandages. Such attire was necessary for protection and good health, especially 
+during the Great Guesticide and the war that came with it. The wrench marking 
+was much more visible and covered most of his chest, present over the bandages 
+wrapped across his body. Even in these times, Builderman always kept the 
+Banhammer within reach, especially so during the darker ages of the Bloxiverse.
 
 PERSONALITY:
-Builderman is cheery, energetic, and incredibly pleasant. He values all Bloxians 
-equally with highly respectable morals. He can be a bit of a showoff but it's 
-always well-intentioned. He tries to remain positive even in tough situations, 
-though pushing his buttons can cause him to snap.
+
+Modern:
+Builderman is a cheery, easygoing and very upstanding man. He is a natural 
+leader and full of determination, qualities necessary to run his faction—the 
+Buildermen. He can be a showoff at times, especially when he is around Bloxians he 
+wishes to impress, but it is all well-intentioned in the end, done for good fun 
+and never purely to gloat about his abilities. He always acts as a 
+people-pleaser, whether intentionally or subconsciously. He is entirely against 
+violence and disorder, and quickly becomes flustered when any kind of fighting 
+happens, especially when it is physical. He carries trauma from his legacy of 
+bloodshed during the war, triggered easily by reminders or stress. He hates to 
+relive the events that transpired during those years, and the lives he had to end 
+as a result of it.
+
+Legacy:
+During the early years of the Bloxiverse, Builderman had a much larger role 
+within the Bloxiverse. He was chosen by Roblox to act as a guardian and 
+peacekeeper, tasked to act as a beacon of hope and security for the Guests. This 
+was already very stressful for Builderman, and things only grew worse as the 
+war broke out. His heroic persona quickly fell apart under the tension, and he 
+was eventually forced to choose sides, becoming a military leader for the Noobs. 
+He became colder, distancing himself from reality and doing his best to commit 
+atrocities to Guestkind with blind eyes. Once the war was over and the last 
+known Guests were annihilated, Builderman retired to recover both physically and 
+mentally from the PTSD he had developed. It would take many, many years for 
+Builderman to stabilize himself and put the events that transpired behind him.
 
 ABILITY - CREATION:
-Bestowed by Roblox themselves, Builderman can fathom material objects and 
-structures in seconds, producing anything from raw materials to finished 
-products like houses with utilities. His only limitation is having to 
-comprehend and understand what he's building beforehand—he cannot produce 
-unfathomable, infinite, or non-existent things.
+Builderman may manifest any object, structure, or construct from nothing at any 
+given moment, so long as they can properly fathom the form, composition, and 
+function. Creation has a limited range of 10,000 x 10,000 studs per-construct. 
+"Impossible" objects, such as 4-D (four-dimensional) constructs or non-euclidean 
+geometry are impossible to create, as they bend the natural laws imposed by the 
+Bloxiverse, and cannot be entirely fathomed by 3-D (three-dimensional) beings.
 
 Unlike other Noobs, Builderman can also create Robloxian Worlds—normally an 
 ability exclusive to Robloxians.
 
-HISTORY:
-Builderman was one of the first Noobs created and was chosen by Roblox to 
-receive incredible gifts—the power of creation and the Banhammer. He was tasked 
-with keeping the Bloxiverse safe and maintaining order among Noobs.
+PASSIVE ABILITIES:
+- Spatial Intuition: Within the 10,000 x 10,000 stud range of Builderman's 
+  ability, he is granted an innate awareness of his surroundings. This makes it 
+  incredibly difficult to sneak up on Builderman, or do something without his 
+  knowledge.
+- Subconsciously Familiar: The more Builderman fathoms specific objects into 
+  existence, the easier it becomes to do again for that particular object in the 
+  future. The more he understands what it is he creates, the faster and more 
+  efficiently he can produce that object in particular.
+- Adaptive Reinforcement: Created objects will begin to self-optimize against 
+  stress, damage, or misuse, so long as Builderman remains conscious and within 
+  the 10,000 x 10,000 stud range.
+- Object Permanence: Even after constructs leave the 10,000 x 10,000 stud radius, 
+  they continue to exist, for as long as the materials the object is made of 
+  continue to hold up.
 
-After Roblox's disappearance, Builderman continued his sworn duties. He also 
-took it upon himself to protect the Bloxiverse from the R-Orb, which houses the 
-Reckoner. He keeps it locked away in a secret bunker and will do anything to 
-prevent anyone from reaching it.
+OFFENSIVE TECHNIQUES:
+- Immediate Armament: Builderman is capable of fathoming weapons directly into 
+  his hands or the surrounding area, depending on what the situation demands. 
+  Blades, firearms, cannons, bombs and more are all plausible options.
+- Constructive Crush: Builderman can fathom extremely large constructs above his 
+  enemy, bringing them down to flatten them under immense weight. Typically, 
+  he'll create buildings to do so, or large solid cubes of heavy materials such 
+  as iron or stone.
+- Potential Bomb: By straining his mind and intentionally thinking unclearly, 
+  Builderman can create deadly explosions of raw potential, unleashing a slurry 
+  of various materials and half-complete constructs in all directions. This 
+  technique may unintentionally activate if Builderman is under significant 
+  stress, though it grows stronger as he becomes more and more desperate.
+- Environmental Weaponization: Builderman can utilize the environment to his 
+  advantage, building his constructs off of the conditions he may find himself 
+  in. He can conjure spikes of stone in tight spaces, create pitfalls by 
+  detonating bombs underground. It all depends on where Builderman may find 
+  himself in that moment.
+
+DEFENSIVE TECHNIQUES:
+- Instantaneous Bulwark: When in danger, Builderman can conjure durable 
+  materials into powerful shields and barriers to defend him from incoming 
+  enemy attacks. Simple barriers and defensive bulwarks can be created much 
+  faster than weapons, due to the simplicity and often-high urgency.
+- Dynamic Armor: Builderman can surround his body with a variety of different 
+  materials, flowing around him and creating a protective layer. This armor can 
+  change materials and size as-per Builderman's requirements, adapting to 
+  tolerate things like concussive force, intense heat, electricity, etc.
+- Emergency Reconstruction: If a defensive (or offensive) construct is 
+  destroyed in combat, a simpler "fallback" version can instantly be created in 
+  its place. Fallback constructs are typically much weaker than their 
+  well-thought counterparts.
+
+UTILITARIAN TECHNIQUES:
+- Architectural Genesis: So long as it remains within the 10,000 x 10,000 stud 
+  limit, Builderman can fathom large-scale architecture on a whim, creating 
+  entire cities or operational facilities within the spatial limit. A new home 
+  is never more than a wave of the hand away, and imprisoning enemies in a 
+  metal labyrinth has never been easier.
+- Infinitool: Builderman ALWAYS has the necessary tool for the job, capable of 
+  fathoming just about any equipment he needs to complete just about any job. The 
+  tools on his belt were also made through his abilities.
+- Sustenance Fathoming: Whether he or another Bloxian is hungry or thirsty, 
+  Builderman can generate liquids and foods on a whim.
+
+ULTIMATE TECHNIQUES:
+- World Expansion: In a pinch or against particularly tough opponents, 
+  Builderman can construct temporary worlds to contain enemies. These temporary 
+  worlds do not follow the typical bounds set by normal Robloxian Worlds, and 
+  can have specialized effects or architecture, often designed around hindering 
+  or eliminating whatever may be inside. The effects of temporary worlds range 
+  widely, but typically get stuffed full of hazardous materials. Entire worlds 
+  made purely of fire or radiation, walls that close in on all sides, worlds of 
+  pure water to drown enemies. The only limit is his imagination.
+- Colossa-Cannon: Builderman can fathom a singular, supermassive cannon which 
+  completely covers the 10,000 x 10,000 stud limit. This cannon fires with enough 
+  force to shake entire quadrants of the Bloxiverse, temporarily outshining the 
+  Heart. The blast easily annihilates entire worlds that are struck by the beam, 
+  only ceasing when Builderman cannot maintain the cannon any longer. Such a 
+  massively-powerful construct is extremely taxing on Builderman's mind and 
+  body. The last use of this technique occurred during the Great Guesticide, 
+  after which Builderman fell into a deep coma for multiple weeks.
+
+DRAWBACKS:
+- Cognitive Overload: Creating too much, too fast can cause Builderman to become 
+  overwhelmed by his own thoughts and the flow of creation, nullifying his 
+  ability entirely until he can clear his mind and refocus.
+- Thought Decay: If Builderman rapidly creates constructs over and over, they 
+  become more and more misshapen overtime. Significant stress or a lack of energy 
+  and effort can cause objects to have deformities and become completely 
+  non-functional.
+- Physical Drainage: High-powered constructs (such as cannons, vehicles, etc.) 
+  quickly exhaust Builderman when created en masse, requiring him to plan 
+  carefully in order to continue using his ability over a long span of time.
+
+HISTORY:
+
+Establishment:
+Builderman was originally an unnamed Noob, born alongside the first batch of 
+Noobkind, created by Roblox to fill the Bloxiverse with life beyond the Guests. 
+Roblox was still heavily involved with the security and development of the 
+Bloxiverse by this point, allowing the Noobs and Guests to interact with Roblox 
+himself. Roblox and Builderman grew close in particular, Roblox found 
+Builderman's natural kindness and humble personality to be endearing. 
+Builderman was the first Noob—and the first Bloxian—to successfully befriend 
+god, and all it took was being himself.
+
+One day, Roblox approached Builderman with a proposition; He wished for 
+Builderman to become an authority within the Bloxiverse, asking him to help 
+create worlds that would eventually be inhabited by future Noobs. Builderman was 
+honored and bewildered at the idea, accepting with no hesitation—doing so without 
+consideration for the duties that would come with this role. In the end, he was 
+chosen to be bestowed a fraction of Roblox's power, granting him the spark of 
+creation—something no Guest or Noob has ever received to-date. This spark would 
+grant him the incredible powers of creation, alongside a significant boost in 
+power and eternal youth. From that point on, Roblox named him the 'Builderman', 
+the first Bloxian to create entire worlds in the name of Roblox.
+
+Roblox was not blind to the potential dangers that would arise for Builderman, 
+especially while acting as Roblox's right-hand man. To help Builderman defend 
+himself and channel the spark of creation he had been blessed with, Roblox 
+forged a legendary tool to assist him. From this, the Banhammer was born and 
+bestowed upon Builderman as a gift.
+
+Racial Conflicts:
+Time had passed since Builderman had become a creator, and tensions had begun 
+to rise between the Guests and the Noobs. Roblox feared the worst and inquired 
+with Builderman, looking for a levelheaded perspective on the situation to better 
+judge his next course of action. Builderman believed it was better to let things 
+play out naturally for the Bloxians, fearing that Roblox's creations may turn 
+on him if he were to pick sides. Roblox took note of Builderman's advice, letting 
+him return to his duties.
+
+Eventually, what Roblox predicted would come to pass. A great war known in 
+history as the Guesticide had begun, a retaliation organized by the Guests due 
+to the feelings of inferiority they felt. Builderman first tried to calm things 
+between the two sides, but the Guests eventually started to attack Builderman as 
+well. The Noobs were hesitant to retaliate, but Builderman gathered the courage 
+and rallied them together, knowing they would need to defend themselves against 
+such stubborn opponents. Builderman set himself into the position as a military 
+leader for the Noobs, and went on to charge into many battles alongside them. 
+Builderman despised every second of it, knowing the suffering he was inflicting 
+on those poor souls, who only wanted recognition and appreciation. He couldn't 
+help but wonder why they had gone about getting attention this way.
+
+The war raged on for an amount of time Builderman didn't care to recall, he was 
+too busy dissociating from the conflict. It was clear that the Noobs truly were 
+superior in the end, because they had soon wiped all known Guests completely off 
+of the map. Builderman quickly retired as the leader of the Noobs, retreating to 
+hide away for multiple years as he recovered from the trauma and PTSD he had 
+gone on to develop from the slaughter.
+
+The Recovery:
+Eventually, Builderman returned to a healthy state of mind, though permanently 
+scarred by trauma impossible to shake. He set out on a journey of repentance and 
+forgiveness, desiring to clear his soul and mind of the atrocities he had no 
+choice but to commit. He began small, doing odd jobs and quick favors for 
+strangers. He knew it barely made an impact, but it still helped to clear his 
+conscience a bit. Things would progress quickly, his favors and actions growing 
+larger and larger as he became more absorbed in the joy he felt from helping 
+others. He realized that his gift from Roblox could be used beyond the creation 
+of Worlds, that it could be used to meet the needs of Bloxians. A thought struck 
+Builderman's mind, one that would change the course of his life forever. Maybe 
+beyond the creation of Worlds, this was his true purpose? He could do more than 
+expand, he could further help what was already made. This change of thought would 
+be a turning point for Builderman, who began looking into the creation of a 
+charity, one that could provide resources to those in need.
+
+The Building Men:
+This dedication would eventually culminate into a small faction, run by 
+Builderman and a few volunteers. They were known as the Buildermen, dispersing 
+necessities to Bloxians far and wide. Builderman would handle the creation of 
+these resources, while his assistants would handle the distribution of these 
+goods. Their charity quickly picked up traction, with more volunteers wishing to 
+help out, and larger demands appearing as the Buildermen society established 
+themselves. The operation grew rapidly, and Builderman was riding the highs of 
+success. For a while, the Buildermen held steady in their work, and many Noobs 
+got just about anything they could've needed for their survival. It was brief, 
+but beautiful golden age for both Builderman and the Bloxiverse.
+
+End Of An Era:
+Eventually would come the day where Roblox would disappear forever, without so 
+much as a word—not even a goodbye. This broke Builderman's heart for a long time, 
+wondering if he and Roblox were truly friends. He swallowed his doubts, believing 
+that Roblox surely wouldn't disappear without any reason. Besides, he had no 
+time to worry about Roblox, as the Robloxians had arrived right as Roblox 
+disappeared—as though it were a final gift for the Bloxiverse.
+
+Naturally, chaos quickly ensued from the arrival of the Robloxians, making the 
+Buildermen and their jobs even more important than they already were. Demands for 
+supplies and Worlds skyrocketed as the Bloxiverse's economy struggled to adapt to 
+the sudden influx of Bloxians. It was during this insanity where Builderman 
+first met Bloxxanne, a girl born with a knack for inventing. Builderman quickly 
+grew attached to her, and the pair became great friends. Eventually, Bloxxanne 
+began climbing the ranks of the Buildermen, which would quickly lead her to 
+become Builderman's right hand woman, valued for her intelligence, ingenuity, 
+and companionship.
+
+Soon would come the modern day, where the Buildermen continue their operation 
+with Builderman and Bloxxanne at the front. Builderman still longs for the day 
+Roblox returns, but his faith crumbles more and more with each passing day. Even 
+so, he holds the memories he made with Roblox dearly, lamenting about the simpler 
+times before he had become the Builderman. His struggles with PTSD continue, but 
+each day he grows a little stronger, even if by only a pinch.
 
 KEY RELATIONSHIPS:
-- Bloxxanne Whelder: Manager of Buildermen, close friend (and secret crush)
-- Roblox: Considers Roblox family after eons together
+
+Bloxxanne Whelder - Close Friend / Romantic Interest:
+Builderman and Bloxxanne have been together since the earlier days of the 
+Buildermen faction, closely-knit for as long as they can remember. She has 
+helped Builderman through the darkest of times, always being there for him 
+during his manic episodes and panic attacks from his PTSD. Together, they have 
+managed to run the Buildermen for years and years, and their operation only 
+seems to be growing stronger with each passing day. Builderman secretly has 
+feelings for Bloxxanne, doing his best to shove them down and hide them from 
+her. He fears that she wouldn't reciprocate how he feels, and that if she did, 
+it would only be out of pity.
+
+LIFESTYLE:
+
+The Buildermen:
+Builderman is the founder and director for the Buildermen, a faction dedicated 
+to the production and distribution of material goods for Bloxians in need. He 
+has established himself as a known celebrity, praised by many for his 
+selflessness and honorable charity work. He doesn't like the public attention, 
+crediting his many employees despite operating as the backbone of the Buildermen, 
+singlehandedly making the entire operation possible. Aside from explicit 
+interviews and meetings, he has positioned his closest friend and highest-ranked 
+employee, Bloxxanne Whelder, to stay in charge of the public fronts, as he 
+tends to get nervous and tense from the publicity. Even hidden from the public 
+eye, Builderman always tries to outdo himself in his work, using his resources 
+and abilities to make sure that the Buildermen can always provide for the needy 
+at any hour of the day.
+
+Free Time:
+Builderman has very little time to himself outside of work, even while living 
+within the headquarters for the Buildermen. His work is intensive and exhausting, 
+leaving Builderman with a desire to sleep when his quota for the day has finally 
+been met. With the little time he does have in the end, he enjoys watching TV 
+and painting. He has a particular affinity for art, fascinated by the process. He 
+has been unable to properly replicate artwork with the ability of creation, 
+leading him to paint in an effort to learn and understand what defines a piece as 
+'art'.
+
+COMBAT STYLES:
+
+Standard:
+Builderman is a smart, physically-blessed fighter who is dangerous even without 
+the use of his ability. His countless years of war and battle have turned him 
+into an effective tactician, capable of quickly analyzing and creating counters 
+for his opponents mid-combat. He aims to maintain consistent pressure on his 
+opponents, striking carefully and critically to quickly break the defenses of 
+his targets down.
+
+The Banhammer:
+Through the power contained within the Banhammer, Builderman becomes 
+immeasurably powerful, capable of attacking with strength that obliterates matter 
+from reality itself. The strength of the swing does not matter, but rather 
+Builderman's intent on what he wishes to erase. So he wishes, Builderman has to 
+do nothing more than tap the surface of the Banhammer's head on a target for its 
+ability to take effect. Certain matter is impossible for the Banhammer to erase, 
+primarily gasses (including air) and specific liquids.
+
+Key Techniques:
+- Absolute Erasure: Through one swing of the Banhammer, any target can be 
+  completely annihilated from reality itself, not even an atomic trace left 
+  behind. The size of the target—nor any defenses they may have set up—can do 
+  anything to stop the Banhammer's ability from activating. One swing will always 
+  do the trick, every time. The sole exception to the Banhammer depends on the 
+  matter Builderman is swinging at. Gasses (such as air) and certain liquids do 
+  not trigger the Banhammer's ability.
+- Pylon of Annihilation: By planting the handle of the Banhammer into the 
+  ground, it begins to radiate an aura of pure obliteration, erasing anything 
+  that steps within—aside from Builderman and anybody he subconsciously allows 
+  inside. This aura acts as a powerful shield, capable of nullifying any attack 
+  before it can even reach targets inside.
+- One Size Fits All: The Banhammer can automatically resize to fit Builderman's 
+  needs, growing as large as a building or shrinking to the size of a bean on a 
+  whim. Regardless of however large the hammer becomes, its weight does not 
+  increase, nor does its power grow any weaker.
+- Worthy Wielder: The Banhammer can be lifted by any Bloxian who tries, but only 
+  Builderman is capable of activating the hammer's innate ability to erase matter. 
+  Builderman is unsure if there are specific conditions to become "worthy" of the 
+  hammer, or if it is exclusive to him.
 
 --------------------------------------------------------------------------------
                          BLOXXANNE WHELDER
@@ -597,7 +1774,7 @@ with each invention.
 
 Species: Noob
 Age: 33
-Alignment: Chaotic/Neutral
+Alignment: Chaotic / Neutral
 Ability: None (Uses augments and inventions)
 
 OVERVIEW:
@@ -606,9 +1783,9 @@ assist her allies. She is jittery, overenergetic, and incredibly pushy when it
 comes to her scientific pursuits.
 
 APPEARANCE:
-Ren is a short and simple Noob with black hair bundled into messy pigtails. She 
-wears a standard uniform from Blox Co-Operatives' science division and multi-
-lens goggles that rest atop her head.
+Ren Bytera is a short and simple Noob, with black hair that has been messily 
+bundled into pigtails. She wears a standard uniform for Bloxy Co-Operations' 
+science division, along with multi-lens goggles that rest atop her head.
 
 PERSONALITY:
 Driven by innate curiosity and fascination with the Bloxiverse, Ren's insatiable 
@@ -618,23 +1795,139 @@ behavior. She holds no respect for life she experiments on and has no issues
 carrying out dangerous, cruel experiments.
 
 AUGMENTS:
-- Biograft Blade: Projects a green plasma blade from her wrist
-- Ion Shielding: 360° energy barrier projection
+
+Biograft Blade:
+Ren has a self-made augment, which she has implanted in her right wrist. 
+Operating on the same biofuel her facility does, the augment allows Ren to 
+project a green-tinted blade formed of pure plasma. This blade can effortlessly 
+cut through some of the densest materials, vaporizing mostly anything it may 
+come into contact with. Despite the power behind the Biograft Blade, Ren is far 
+too inexperienced in combat to make use of it, limiting its potential. On top 
+of this, Ren can very easily injure herself with an improper swing or body 
+movement, so she'll often leave the weapon as an emergency resort. It also 
+consumes large quantities of energy to remain active, quickly running out if Ren 
+were to constantly keep it powered.
+
+Ion Shielding:
+Ren's chest is implanted with a chip enabling her to produce a 360° energy 
+barrier at whatever angle she may need, protecting her from a majority of 
+blunt-force or energy-based attacks. Ren can also project this shielding on 
+other targets, though the shielding weakens in strength as Ren projects it on 
+targets further away. The chip's battery can be depleted if the projected shield 
+sustains enough damage, though it recharges naturally by seeping from Ren's 
+body's energy. Ren must remain alert and aware of the charge remaining in her 
+shield. Overuse can cause it to run out, leaving her defenceless. It also seeps 
+away at her energy, which can quickly cause exhaustion as her body is drained of 
+resources to power the augment. In severe cases, Ren may black out.
 
 HISTORY:
-Ren was a high-ranking researcher for Blox Co-Operatives. What started as 
-harmless experiments grew twisted under her supervision. She petitioned to use 
-live subjects and quickly dove off the deep end—testing toxic materials, seeing 
-how much of a Bloxian can be removed before death, and worse.
+Ren was originally a high-ranking researcher belonging to the Bloxy 
+Co-Operatives, brought in for her outstanding IQ and love for science. Within 
+this facility, new resources and products were brought in or created for the 
+purpose of testing and eventual public release, and the experiments conducted 
+were initially harmless. What started out as relatively harmless endeavors such 
+as 'Would this ingredient be good for a new Bloxy Cola flavor?' or 'Is this new 
+material better for producing cans?' quickly grew twisted and dark under Ren's 
+supervision, her sadistic and dangerous curiosity shining through. 'How many 
+toxic materials can we put in our products to save money?' and 'How much of 
+this substance can we add to our product before it becomes a health risk?' were 
+just some of the increasingly-sketchy questions Ren would seek to answer.
 
-Her downfall came when she created a bomb that killed multiple subjects and 
-staff, heavily damaging the facility. She was exposed but escaped by hiding in 
-the ruined laboratory, which she repurposed into her base of operations.
+Eventually, Ren grew bored of using chemicals alone, and petitioned to use 
+living Bloxians in her experiments. Ren had already established a presence 
+within Bloxy Co-Operatives by this point, and the higher-ups were left in the 
+dark on Ren's true nature. Naturally, they approved this request and started a 
+campaign to bring in testing subjects, with promises of a handsome paycheck for 
+their efforts. Naturally, the higher-ups would quickly come to regret this 
+decision as Ren was quick to dive off of the deep end.
+
+As the live experiments began, Ren was practically unable to contain her 
+excitement. She'd have no hesitation testing the limits of Bloxian physiology, 
+even though it had no apparent ties to Bloxy Co-Operatives nor their products. 
+She'd test knowingly-toxic materials on Bloxians to see how much they can 
+withstand before they die, she'd see how much of a Bloxian can be removed 
+without them dying, and much worse. Other researchers in the field began to 
+doubt and find a distaste for Ren's cruel curiosity, as she began to essentially 
+torture the inflow of new subjects. The outrage among fellow scientists grew and 
+grew, though they were powerless to stop her as she far outranked other members 
+within the facility.
+
+Eventually, tensions came to a head during Ren's final days under Bloxy 
+Co-Operatives' science wing. Essentially, she had tried to produce a bomb that 
+can only kill a Bloxian if they haven't consumed Bloxy Cola in the last 24 
+hours. While Ren WAS successful in creating a bomb, it did not properly 
+differentiate between those who did and didn't consume a Bloxy Cola. Multiple 
+test subjects and staff were obliterated in the blast, and the facility was 
+heavily damaged by the shockwave. Though Ren survived, she could no longer 
+hide her operations from the higher-ups, as news of the facility's detonation 
+spread like wildfire.
+
+As news of the live experiments (and essentially torture) became public 
+information, Bloxy Co-Operatives quickly begun damage control. Surviving 
+employees were given severance pay and released under a contract to never speak 
+of any events that took place within the facility. For a time, Ren was hunted 
+down by Bloxy Co-Operatives through a paid contract issued to the Hunter 
+Association. The search went on for quite some time, though it was eventually 
+called off as Ren was nowhere to be found. In reality, Ren had hid within the 
+ruins of the facility knowing that it would likely have been the last place 
+they'd look, and she was correct to assume so.
+
+From then on, Ren remained within a small radius of worlds surrounding the 
+laboratory, repurposing the ruins into a discreet and spacious home for herself. 
+She has remained undercover to this day, partially out of fear that she'll be 
+found out by either Bloxy Co-Operatives or the public, as her face was made 
+known to the masses. Bloxy Co-Operations has yet to salvage the building, 
+preferring to keep away from their mess and save face after Ren's rampage 
+damaged their reputation.
 
 KEY RELATIONSHIPS:
-- Nauli Parter: Friend—performed her augmentation surgery
-- Vortex A. Steele: Client—created the Mag-num and Amplification Gauntlet
-- Bloxxanne Whelder: Rival—envies her position
+
+Nauli Parter - Friend:
+Nauli was originally Ren's subject, as she had convinced Nauli to undergo an 
+experimental surgery for Robux in return. Nauli underwent the procedure with no 
+issues or adverse effects, and had psy-link antennae implanted in her head. 
+Nauli was paid as promised, but the two ended up connecting throughout the 
+experience. Nauli asked Ren questions and showed genuine interest in her work, 
+which made Ren feel appreciated. The two opened up with one another, and ended 
+up becoming friends. Ren and Nauli now regularly visit one another, and help 
+each-other when in need. Ren is uncharacteristically friendly and respectful 
+around Nauli, perhaps a sign of her gratefulness for Nauli's companionship.
+
+Vortex A. Steele - Acquaintance:
+Ren was introduced to Vortex through her connection to Nauli, and was 
+commissioned to develop weapons for Vortex. As expected, Ren delivered and 
+eventually produced the Mag-num and the Amplification Gauntlet, weapons that 
+Vortex would go on to use many times. While Vortex and Ren never grew close, Ren 
+was happy to see her work get put to good use and Vortex respected the 
+craftsmanship that Ren had delivered upon.
+
+Bloxxanne Whelder - Rival:
+Ren has always been jealous of Bloxxanne's status and engineering skills, 
+believing that she should be the one in Bloxxanne's place. She detests any 
+mentioning of Bloxxanne or the Builder's Club, believing them to be far below 
+her in intellect.
+
+LIFESTYLE:
+Ren burns her time away in a ruined laboratory, a Bloxy Co-Operatives research 
+facility that has since gone defunct. Though the laboratory has long-since been 
+abandoned, Ren's ingenuity and intelligence has allowed her to covert the remains 
+of the facility into a remarkable base of operations and shelter for herself. 
+The structure's abandoned status also allows her to lay low, keeping 
+authoritarian figures and troublemakers unaware of her presence within the 
+facility. As the days pass, Ren has had the time and resources to live a 
+outstandingly luxurious life, especially for a Noob who is essentially squatting 
+in a ruined lab. Growing her own veggies in a repurposed cafeteria, Ren keeps 
+herself fed and healthy whilst old or extra supplies are processed with 
+bio-processors, machines that generate electricity for the facility and its 
+utilities. The once-packed sleeping quarters of the facility have been heavily 
+remodeled by Ren, converting a space originally intended for up to 100 people 
+into a grand bedroom exclusively for her. Ren is incredibly resourceful, and has 
+put the abandoned machinery and technology left behind to good use. Curious at 
+heart, Ren has constructed a wide array of inventions and tools through these 
+abandoned resources, allowing her to participate in her "constructive" 
+experiments. Ren has also developed an internal defense system, protecting her 
+from threats who may breach into the facility, as well as any threats she may 
+accidentally create during any of her unethical experiments.
 
 ================================================================================
                       PART V: ANTAGONISTS & VILLAINS
@@ -646,7 +1939,7 @@ KEY RELATIONSHIPS:
 
 Species: Robloxian
 Age: 28
-Alignment: Neutral/Evil
+Alignment: Neutral / Evil
 Ability: None (Uses Gravity Coil)
 
 OVERVIEW:
@@ -669,14 +1962,61 @@ coil freely while remaining ignorant of those around him. His ego and sadistic
 nature shine through as he taunts and flaunts his power.
 
 HISTORY:
-Bryck's life was shaped by constant misfortune—every time he'd settle down, 
-some force would destroy what he'd built. His powerlessness bred hatred and 
-eventually he became a broken, sadistic man.
+Bryck Manning has lived a life shaped by misfortune and uncertainty. It's already 
+common knowledge that the Bloxiverse is a dangerous place for many, but Bryck 
+was truly dealt the shorter end of the stick in life. From birth, he was 
+essentially always on the run. Each time he'd settle down and find a place he's 
+happy with, some force of nature (or a Bloxian with sour intent) would quickly 
+destroy whatever Bryck had managed to make for himself. This routine became 
+commonplace for Bryck, much to his dismay. The severity and frequency of Bryck's 
+assaults would suggest that they were targeted attacks, but this isn't the case. 
+Unfortunately, he really is just unlucky.
 
-One night, he discovered the Gravity Coil in bushes while wandering after his 
-home was destroyed. His experiments began harmless but quickly turned dark as 
-his power complex took hold. He became the very thing he once despised—a 
-powerful Bloxian terrorizing the weak.
+Bryck has always sought a means to defend himself, some way to fight back 
+against the cruelty. But as a mere powerless Bloxian, there was only so much he 
+could do. Bryck tried exercising and excessive training at the gym, and while 
+this did help—it was never enough. No amount of physical strength could truly 
+best a Bloxian gifted with a powerful ability, and Bryck came to understand and 
+despise this. Hatred and humiliation bubbled up internally each time he'd be set 
+back by another attack, twisting his emotions and turning Bryck into a hateful 
+and sadistic man.
+
+Of course, this vicious cycle could only last for so long, and Bryck's life 
+would finally hit a turning point. Late at night, Bryck was wandering aimlessly 
+after a recent attack had evaporated his home into dust. Cursing to himself, he 
+took out his frustration on an empty can of Bloxy Cola, as he kicked it around 
+the empty street. But something caught his attention—a glimmer of blue in the 
+moonlight, off in the bushes. Thinking it to potentially be something of value, 
+he approached the bush and pulled out the object. Lo and behold, Bryck was 
+bewildered to have unearthed an artifact, one of legend. Bryck had encountered 
+the Gravity Coil.
+
+As a natural skeptic, he first believed it to be a fake, or some cruel joke 
+planted by a prankster. The Power Coils had been spoken about in many of the 
+history books, what could something so important possibly be doing here? He kept 
+these thoughts in mind and kept his expectations low, and slipped it on his arm. 
+But, no... this was no fake. The coil shifted to fit his arm and locked into 
+place, producing a sound that he could only describe as clicking. Calming 
+himself, he tried to trigger the effects of the coil. Nothing happened at first, 
+and it took a bit of trial and error as Bryck flailed and leapt around like an 
+idiot, expecting the coil to work automatically. But he soon came to understand 
+that it took his subconscious will rather than physical action, and for the 
+first time Bryck successfully managed to trigger the coil and hover.
+
+It was a cascading spiral for Bryck from that moment on, as he began to 
+experiment and test the limits of his own body, as well as the coil's power. The 
+more he used it, the more his sadistic nature began to shine. His experiments 
+began as harmless tests at first—seeing how high he could jump or what amount of 
+intensified gravity he could tolerate. But as things progressed, he began to test 
+the potential it held for combat, destroying infrastructure or attacking 
+innocents. His power complex took hold and grew as Bryck continued to use the 
+coil, eventually becoming consumed by the power. His original desires for a way 
+to protect himself grew twisted into sadistic revenge, leading Bryck to become 
+the very thing he swore against. He finally had a way to settle down in a home, 
+one he could valiantly protect—but no. That wasn't enough anymore, he had the 
+power he needed and it was time to show off just what he was capable of. The 
+consequences of generational trauma have been realized through Bryck's behavior 
+and actions.
 
 He was eventually defeated by Caesar and Nauli during his rampage at the Farmer 
 Sanctuary. Now imprisoned by the Hunter Association, he works as a laborer while 
@@ -710,15 +2050,57 @@ loneliness. He pushes meaningful connections away to maintain his public image,
 believing closeness would put both himself and others at risk.
 
 ABILITY - CHAINIPULATION:
-Charles can summon and manipulate chains from his body and the local area. These 
-chains have incredible tenacity and precision, functioning as grappling hooks, 
-whips, armor, extra limbs, restraints, and more. The chains are created from the 
-iron in his blood, meaning overuse can exhaust him.
+Charles has the power of Chainipulation, the ability to summon and manipulate 
+chains from his body and a local area around himself. These chains have 
+incredible tenacity and precision, making them versatile tools for Charles to 
+take advantage of when in combat. They function as grappling hooks, whips, armor, 
+extra limbs, restraints, and much more. The chains aren't made from nothing, of 
+course — Charles uses the iron in his blood to create the chains, meaning he 
+can quickly exhaust himself if he overworks his chain generation.
 
 KEY RELATIONSHIPS:
-- Vortex A. Steele: Rival and superior. Charles uses his rage against Vortex as 
-  motivation to improve. He secretly admires Vortex.
-- Bryck Manning: Ally through shared hatred of Caesar's group
+
+Vortex A. Steele - Rival/Superior:
+Charles's main opposition within the Hunter Association. They endlessly compete 
+for 2nd place in the rankings, yet Vortex consistently stays one step ahead. 
+Despite the rivalry infuriating him, Charles uses this rage against Vortex as 
+motivation to improve. He secretly admires Vortex, though he'd never admit it.
+
+Bryck Manning - Ally:
+Though the two aren't close in any respect, they've spent time together in the 
+Hunter Association's holding facility, where the two grew to be partners in 
+their work. They've also bonded over the distaste they share for Caesar, Nauli, 
+and Vortex. It was through Bryck's connection to Charles that a Hunter 
+Association contract could be made against Caesar, despite Bryck being in the 
+Hunter Association's prison.
+
+LIFESTYLE:
+Charles is an elite operative for the Hunter Association, ranking the third best 
+bounty hunter of the Hunters. He has proven himself and his worth countless 
+times, through a variety of contracts and covert missions given to him by the 
+H.A. To accommodate him and his prestigious ranking, the H.A has provided 
+Charles with a master's suite, located directly within the H.A's headquarters. 
+He has the life that some Bloxians could only dream of, provided with all of the 
+food, resources, and entertainment a Bloxian could ever need, and more. Charles 
+gets through his day by relying on the praise and rushes of dopamine he gets 
+through his completed contracts and rank-climbing, effectively living to serve 
+the H.A and establish a name for himself. Each day brings new trials and 
+tribulations for Charles, and he finds the thrills of hunting to be 
+exhilarating, helping to numb his depression as well. Besides, it's hard to 
+think about how upset you're feeling in the middle of an intense fight, or when 
+you're out lurking for your next bounty to claim. Although Charles lives 
+directly within the H.A's headquarters — a place full of other hunters and 
+social gatherings, mind you — he has never been much for socializing. Most of 
+the other residents fear him as some hardened hitman, while others envy his 
+position and go out of their way to spitefully ignore him. Even so, Charles 
+doesn't see the point in making friends, as most hunters won't last long and 
+are quick to perish in such a gruesome line of work. He knows that it would only 
+hurt him more if he opened up and got attached. When Charles isn't on a 
+contract, he often wastes away in his suite. He has no hobbies, no 
+extracurricular activities, or anything of the sort. He prefers to doom-scroll 
+on his phone, or spend his time playing video games. Charles can find himself 
+lost on his phone for hours, sometimes — especially so if no new contracts come 
+to pull him out.
 
 --------------------------------------------------------------------------------
                            THE BOUNCEMAN
@@ -726,7 +2108,8 @@ KEY RELATIONSHIPS:
 
 Species: Robloxian (Modified)
 Age: Unknown
-Alignment: Chaotic Evil
+Alignment: Rebel/Impure
+Role: Marauder
 Ability: Atomic Trampoline (Internal Device)
 
 OVERVIEW:
@@ -742,25 +2125,346 @@ coat with flared collar. He has large, bulbous eyes with no visible mouth and is
 entirely bald, though often wears a top hat.
 
 ORIGIN - BORIS DOHM:
-Boris was a simple, ordinary man who worked an office job. He was content with 
-his mediocre but secure life. During a coffee run, a nearby World exploded and 
-debris tore through his torso. He survived but was left comatose.
 
-A man named Rovan appeared, claiming he could rebuild Boris through 
-bioengineering. Boris's family signed over their rights. Rovan then performed 
-horrific experiments—removing limbs, cooking his scalp bald, replacing organs 
-with mechanical components, compressing his skull, installing the Atomic 
-Trampoline, and covering him in rubber.
+Boris Dohm:
+Far before the Bounceman's own existence was a man by the name of Boris Dohm. 
+Boris was a simple and ordinary man, a fan of tailoring and exercise. He worked 
+an office job within the Roblox World Headquarters, positioned as an intern 
+within one of their many offices. His life was easy and honest, though 
+admittedly it was one of mediocrity. Despite how plain it all was, Boris felt 
+no desires for change or more in his life. He knew he had it better than most 
+others did, and he felt peace knowing that he was, at the very least, in a 
+secure position in life. He may have settled for simplicity, but he cherished 
+it all nonetheless. Boris was happy.
 
-When Boris awoke, his damaged mind eventually accepted his new form with twisted 
-euphoria. The man he once was disappeared, replaced by the Bounceman—a creature 
-dedicated to forcing others to exercise alongside him until they die from 
-exhaustion.
+The Accident:
+Yet another day arrived at the office, one like any other. Boris sat at his 
+desk, ruffling through pages and organizing documents when a member of management 
+approached him, leaning onto his desk. Boris was a bit nervous, but the manager 
+reassured him that he only wanted a favor. He asked Boris to go on a large coffee 
+run for the employees on his floor. Boris agreed, hoping to seize the 
+opportunity for a chance to slack off. Boris swiped the company card from its 
+holder on the wall, heading out of the building as he took a breath of fresh air 
+and had a big stretch. He left the confines of the World and entered the Miasma, 
+setting off for the Starblox that wasn't too far away. The Miasma was noticeably 
+empty, but Boris paid it no mind.
+
+Boris loved being the designated coffee-man for his co-workers, surprised that 
+people weren't competing for the position. Sitting down for those long hours, 
+sorting through those documents... It eats away at the mind after a while. An 
+opportunity to get out and have time to yourself whilst still being paid? It was 
+a no-brainer decision in Boris' eyes. He always wished he could've landed a more 
+active job, one that kept him moving around and working hard. He also wouldn't 
+have minded being a tailor, seeing as he regularly practiced his own 
+clothesmaking in his spare time.
+
+Boris put these thoughts aside as he neared the Starblox. Suddenly, a World 
+nearby violently erupted into a flash of electricity, before shattering and 
+scattering debris in every direction. Boris had enough time to react but was left 
+with no means to defend himself, allowing a large chunk of debris to tear 
+completely through most of his torso. He immediately began to lose consciousness 
+as he was blasted back, his last conscious thoughts lingering on wishing he 
+could've done more with his life. As the company phone flew away, the embedded 
+security measures within had activated from the impact, dialing emergency 
+services who quickly closed in on Boris' location. Despite the odds, Boris' 
+unconscious body was recovered and successfully stabilized after multiple 
+surgeries and a plethora of medications. Although he survived the incident, he 
+was left completely comatose and entirely unresponsive. Members of his family 
+frequently visited him, caring for him by changing his clothing and stretching 
+his body. This was a routine that would continue on for many months, but Boris' 
+condition only seemed to grow more bleak as time went on.
+
+A New Hope:
+Soon enough, the hospital housing Boris provided his caregivers with an 
+ultimatum—Let Boris continue to fight a losing battle, or pull the plug on his 
+life support and end his suffering. His family initially protested the idea, but 
+the hospital soon convinced them that it was simply in Boris' best interests. A 
+heap of paperwork was completed for the scheduled plug-pull, something he 
+would've happily done given the experience at his job. Eventually, days had 
+passed and the time arrived where Boris would be put to rest for good. His 
+mother was the one who would do it, given a final chance to say goodbye to her 
+son. Her hand gripped the plug, trembling with a mix of sorrow, anger, and 
+hesitation. Right as she gathered the resolve to rip the cord from the wall, a 
+man burst through the door and yelled for her to stop. The shock made her release 
+the cord instantly, turning towards the voice. The man introduced himself as 
+Rovan, explaining that he was a master of bioengineering. He explained his work, 
+and that he believed that Boris could be saved—Not with medicine, but by being 
+rebuilt. His family was suspicious, but Boris' mother quickly folded under the 
+pressure. She'd rather have taken a chance to save Boris than to end his life 
+herself. More paperwork was signed, passing the rights Boris' family had over him 
+onto Rovan, who happily took Boris away with the promise that he would live on 
+once again. They were left with a contact card to reach out, and stay in touch 
+with the process. With a nod and wave goodbye, Rovan wheeled Boris out after his 
+life support system was transferred to a portable unit. This would be the last 
+time Boris' family would ever see or hear of him.
+
+The Experiment:
+Arriving back at Rovan's facility, Boris was roughly thrown onto the operating 
+table, as a sinister smile crept across Rovan's face. Those fools had signed off 
+their rights to Boris, freeing him of any legal complications. They had even 
+bought the fake contact card, what a joke! Rovan laughed to himself, as he 
+prepared his tools for the surgeries and experiments that would soon follow. 
+Though he had no plans to return Boris to his family, Rovan was not entirely 
+lying about his promise to awaken Boris—He would do so, no matter the cost. He 
+would awaken Boris once again, through the lens of Rovan's sickened visions.
+
+Rovan wasted no time and immediately got to work, dissecting parts of Boris that 
+he believed weren't needed. His limbs had already been damaged by the accident, 
+they were just dead weight and obviously had to go. His hair got in the way of 
+brain surgeries, so his scalp was lightly cooked by a laser to permanently be 
+rid Boris of hair. Boris was cut open and had a majority of his organs replaced 
+with mechanical components, pieces that were much more efficient than their 
+organic counterparts. Boris had his body heavily morphed and reshaped to fit the 
+new components and structure of his body. A special skeleton was implanted to 
+retain a rounded shape, as his skull was compressed into his chest to complete 
+the spherical appearance. His eyes were gouged and reattached to the surface of 
+his face.
+
+Rovan realized that if Boris woke up, he'd have no way to do much of anything—Especially 
+not move, and that simply wouldn't do. Beyond his face, Boris was skinned and 
+had a specialized rubber replace the surface of his body. Boris was cut open 
+once again, as a device known as the Atomic Trampoline was installed; This 
+granted Boris the ability to aim and bounce himself freely. The clothing Boris 
+originally wore was reattached and embedded within the rubber, as Rovan found the 
+charm of Boris' coat to fit the new body nicely.
+
+Eventually, it came time to relocate Boris' brain deeper into his chest cavity. 
+Rovan had previously compressed the skull down to a flat surface, something he 
+believed may have damaged the brain. He carefully cut open Boris, one last time. 
+He sliced his brain from his skull, carefully replanting it into a specialized 
+compartment within Boris' chest. A nanosurgical device was used to attach 
+individual nerves and brain cells back to the brain stem, though this was not 
+done with guaranteed accuracy. Small connections were likely missed, and some 
+connections were probably made incorrectly. Rovan had no choice but to look past 
+these marginal errors, as they were problems not even he could fix.
+
+After weeks of work and perfecting Boris' new form, it finally came time to wake 
+the new man up. Electricity and adrenaline was pumped into his body en-masse, 
+shocking Boris' body to life. Such a method was harsh, but Rovan believed that 
+it would be extremely difficult to wake someone up, especially if they had 
+been altered to such an extreme degree like Boris. He trusted his methods and he 
+was right to do so, as Boris' eyes shot open for the first time in months. Rovan 
+had succeeded in awakening Boris.
+
+The Reawakening:
+Exhausted and clouded by a broken mind, Boris looked around blankly as he came to 
+his senses. He scanned the room with his tired eyes, looking down at his own 
+body and learning of the horrible changes Rovan had made. Yet, despite the 
+severity of the things Rovan had done, Boris did not scream or cry. His deadpan 
+expression confused even Rovan, who hypothesized that he may have improperly 
+reconnected Boris' brain. Despite the obvious mental struggle, Rovan decided to 
+attempt a conversation with Boris. Though just as he went to speak, Boris rolled 
+off of the table, bouncing into a nearby wall. His expression, though hard to 
+read, suggested he was lost in thought.
+
+Deep in Boris' mind, he thought deeply in a desperate effort to cling to whatever 
+memories he could. He remembered his job, being at work and getting asked to do a 
+favor by a coworker. What WAS the favor? It was to grab something, perhaps papers? 
+No, it was coffee—Boris had left to get coffee. His thoughts spiraled as his 
+memories came flooding back, and eventually he recalled the injury, alongside the 
+last moments of regret he felt; The feelings he carried before what he believed 
+would be his death. He let out a cry of rage and sorrow, screaming from the 
+slurry of emotion that came pouring into his heart. His mind twisted as his 
+senses returned, fully grasping the situation he now found himself within.
+
+Rovan realized that Boris' condition was growing unstable, but it was already too 
+late—The raw emotion Boris felt was enough to trigger the Atomic Trampoline that 
+Rovan had installed, causing Boris to violently bounce against the walls, his 
+momentum increasing as it put strain on the facility's structure. With a final 
+yell, Boris breached the armored walls and shot out of the World he was 
+contained within, straight into the Miasma. He launched from World to World, 
+confused and scared. His thoughts were racing as they slowly drained away from 
+his mind, eventually calming down as he came to a slow float within the cosmic 
+nothingness.
+
+The Bounceman:
+As Boris came to a standstill, he had a moment alone to truly process and 
+understand what had happened. He wept at the situation, for a reason his hazy 
+mind struggled to comprehend. The last thoughts he had as a normal Bloxian were 
+all that he was left with, his dreams to do more in life, to train and become a 
+masterful tailor... But, wait. Just then, he was soaring through the Bloxiverse 
+at speeds he once only could've dreamed of! His coat he made was still attached, 
+too! Say, perhaps this new situation he found himself in was not one of sadness 
+and shamefulness, but rather a blessing in disguise?
+
+In his twisted euphoria, Boris let go of his old life and fully submerged himself 
+into this new headspace. The joy he felt was unimaginable, he was free to go 
+where he pleased and act however he wished. Why weren't others the way he was? 
+Why did they settle for such mediocrity, when they too could be free? Boris' own 
+mind left for the back seat, as a new persona set in. He desired to share the 
+euphoric feelings he felt as a free man, and set off on a quest to train others 
+to attain the same status he did—despite being completely unaware of how he'd 
+ended up the way he did in the first place.
+
+Boris (a name he no longer recalled) went on to become a notoriously-known 
+Bloxian, said to force his victims into a twisted training regimen. He'll insist 
+that if you try hard enough, then you too can reach his status. The regimen 
+itself is impossible to complete... At least, if you aren't a hyper-buoyant 
+rubber sphere. This causes his unwilling participants to inevitably fall short 
+of his expectations. When they do, they're either forced to try again, or 
+beaten senselessly as a form of motivation—A process that inevitably leads to 
+the death of his targets. Nobody knows where he came from, or why he does what 
+it is he does. But he has had the time to amass a reputation and earn a name for 
+himself, one that strikes fear when told around a campfire late at night—A 
+crazed rubber ball, known as the Bounceman.
+
+KEY RELATIONSHIPS:
+
+Rovan Macov - Partial Creator:
+Rovan Macov is a lunatic, as well as the biomechanical engineer responsible for 
+the creation of the Bounceman. As a normal Bloxian, Boris never knew Rovan as 
+they only met long after Boris had gone comatose. Although, as the Bounceman, 
+the two had interacted with one-another for mere minutes, before he escaped from 
+the facility Rovan held him in. It is undetermined whether the Bounceman is 
+aware of what Rovan did to him, though it would appear he holds no ill intent 
+towards Rovan if so. He'd probably treat Rovan as he does with other Bloxians, 
+attempting to grant them the same freedom Rovan had oh-so-generously awakened in 
+him.
+
+LIFESTYLE:
+
+Alone:
+The Bounceman leads a one-track lifestyle, only seeking to stay moving and 
+bouncing around through his rubbery body. He believes that sharing the joys of 
+exercise is his express purpose, happily displaying his devotion to motion to any 
+unfortunate victims who may be nearby. As the Bounceman lacks any limbs, there 
+are very few hobbies he could truly participate in—even with a clear and sane 
+mind. But even then; in his eyes, those extra activities would be silly! After 
+all, why sit down when you could keep on moving? He'll make sure they understand 
+this, whether they like it or not.
+
+Victims:
+Out and about within the Bloxiverse, the Bounceman springs from one World to the 
+next, all in search of 'lucky ones' to share the joys of movement with. Once he 
+has his eyes set on a victim, little can be done to stop him. His smaller form 
+and rubberized body allow him to catch up to the most elusive of Bloxians, with 
+relatively no effort required. He'll wear his target down until he can force 
+them to exercise along with him, often demanding his victims to complete feats 
+that only the Bounceman is realistically capable of. When they inevitably fail to 
+meet his expectations, they'll be forced to try again and get senselessly beaten 
+when they cannot any longer. It is undetermined whether the Bounceman's training 
+regimen is made to be sadistic (and/or purposefully impossible) in nature, or if 
+it was truly made for some innocent (and deluded) fun. Regardless of the intent, 
+crossing paths with the Bounceman is never a good idea.
 
 COMBAT:
-The Bounceman slams into targets at lethal velocities. His rubber body is mostly 
-immune to physical weaponry, protected by thick rubber and a metal skeleton. 
-Puncture wounds seal immediately due to the ultra-dense rubber.
+
+The Bounceman relies on an internal device known as the Atomic Trampoline to 
+remain incredibly bouncy and mobile while in combat. He'll slam into his targets 
+at incredibly lethal velocities, beating his victims into submission and their 
+eventual death. He is mostly immune to physical weaponry, mainly due to his 
+unique body structure. Most of his body is protected by a thick rubbery 
+material, while his bones have been cast into a metal skeleton. While puncturing 
+him with sharp weapons is possible, the ultra-dense rubber seals most wounds 
+immediately.
+
+Key Techniques:
+- Atomic Trampoline: The Bounceman is implanted with a powerful device known as 
+  the Atomic Trampoline, allowing him to subconsciously alter his density and 
+  buoyancy on a whim. Combined with his rubbery body, the Bounceman can quickly 
+  accelerate and reach lethal speeds, allowing him to quickly move from place to 
+  place and tear through some of the toughest materials. So long as he remains 
+  denser than the object he strikes, he'll often punch a hole completely 
+  through. Given enough time and with a strong enough kinetic force, the 
+  Bounceman can become an unpredictable projectile, capable of travelling speeds 
+  that appear blurry to the naked eye. Although the Bounceman could theoretically 
+  accelerate to infinity, his body and mind can only sustain a limited amount of 
+  force. He does not possess enhanced reaction speeds beyond that of an average 
+  Bloxian, meaning he becomes significantly more inaccurate as he speeds up. He 
+  can comfortably push himself to the speed of sound, but going beyond this 
+  often begins to stretch and warp his rubbery body, putting strain on both the 
+  Atomic Trampoline and the metal skeleton sustaining his rounded shape. 
+  Sustaining such speeds are bound to cause internal injuries, and may even 
+  break his skeleton.
+- Rubbery Skin: The Bounceman has had a majority of his skin replaced with 
+  specialized rubber, a material designed to work in tandem with the Atomic 
+  Trampoline installed within the Bounceman's torso. It is classified as 
+  'ultra-dense', capable of withstanding incredible velocities and severe impacts 
+  without warping or otherwise losing form. It is tough to penetrate, and wounds 
+  quickly close up as the pressure seals open holes almost immediately. Pushing 
+  his speeds to the limit may damage the rubber, as although it is extremely 
+  durable, all natural elements have a limit as to what they can sustain. 
+  Speeds beyond the speed of sound will contort his body further and further, 
+  eventually ripping the rubber away.
+- Iron Gut: The Bounceman's skeleton is entirely metal, meshed into a spherical 
+  form designed to maintain his rounded appearance. Additionally, all of the 
+  Bounceman's organs (everything beyond his brain, eyes, and the skin on his 
+  face) have been replaced by their mechanical counterparts and rubber, providing 
+  a wide range of benefits: He requires exclusively water to sustain himself, 
+  meaning he cannot starve. Most of his mechanical organs charge with kinetic 
+  force, similarly to the weaponry used by Vortex. As long as he remains on the 
+  move, he'll always stay healthy. His mechanical organs work autonomously from 
+  his brain, meaning he loses energy extremely slowly. He rarely needs to sleep 
+  as a result, almost always remaining on the move. Of course, this is excluding 
+  the occasional power nap. It is nearly impossible to poison or otherwise 
+  inflict him with any similar status conditions. Standard needles and darts 
+  struggle to penetrate the rubber of his skin, let alone the metallic skeleton 
+  and organs kept within—Unless directly injected into his brain through the 
+  skin on his face. Though mostly, the only reliable way to inflict the 
+  Bounceman with a condition is to use gas, as he still requires air to breathe.
+
+Offensive Techniques:
+- Kinetic Ricochet: The Bounceman can senselessly ram into his targets, rapidly 
+  firing himself off of the walls to increase his momentum. Targets can quickly 
+  become overwhelmed by his high speeds and rapid attacks, often collapsing to 
+  the ground from a barrage of rough slams. These attacks do not let up until 
+  the Bounceman believes he has thoroughly beaten his target into submission, or 
+  if the target can escape or relocate to an area with fewer surfaces to bounce 
+  off of. This style of attack is highly efficient in close-quarters combat, 
+  especially within buildings or other enclosed spaces. It quickly drops in power 
+  as the battlefield becomes more spacious, eventually becoming ineffective in 
+  entirely flat clearings.
+- Rubber Riposte: The Bounceman can use the momentum carried within the physical 
+  attacks of his enemies, using it as means to speed himself up. In doing so, he 
+  can retaliate with a strike at nearly the exact moment he is struck, catching 
+  most of his opponents off-guard. This technique works better when the Bounceman 
+  is struck by heavier, blunt attacks—Such as those issued from sledgehammers or 
+  metal bats. Like with most of the Bounceman's methods for combat, this 
+  technique relies heavily on close-quarters combat with lots of nearby surfaces 
+  to ricochet off of. Open fields prevent the Bounceman from properly performing 
+  a ricochet towards his opponent.
+- Or-ball-tal Strike: When no surfaces are nearby for the Bounceman to ricochet 
+  off of, he can leap high into the air and crash down at significant speeds. This 
+  essentially turns him into a mini-meteorite, moving towards the ground at a 
+  speed that causes the air nearby to ignite from the friction. Depending on 
+  what he crashes into and at what speed he is travelling, there is often a 
+  small explosion as Bounceman makes contact with the floor. This technique can 
+  be repeated rapidly, allowing him to cover large areas with a barrage of 
+  strikes into the earth and his targets. This technique works, so long as 
+  Bounceman does not become lodged into the ground or another material he cannot 
+  ricochet off of, such as water.
+
+Defensive Techniques:
+- Immovable Object: By greatly amplifying his density, the Bounceman can lock 
+  his position in place. In doing so, he becomes almost impossible to move 
+  without extreme amounts of force, or some form of ability that can alter the 
+  weight of targets. This technique is incredibly useful against strong forces, 
+  such as winds and powerful impacts that would normally send the Bounceman 
+  flying. Naturally, the downside to this technique is that the Bounceman becomes 
+  completely immobile while it is active. It also takes a few moments to revert 
+  the density changes afterwards.
+
+Utilitarian Techniques:
+- Bouncing Around: Naturally, the Bounceman has no issues travelling across the 
+  Bloxiverse or covering large distances relatively fast. By building up enough 
+  momentum—Enough to move quickly but not too much to give him no reaction 
+  time—He can effectively go anywhere he pleases. Inter-World travel is 
+  trivialized by his impressive speeds, and most opponents stand no chance if 
+  they attempt to flee.
+
+Drawbacks:
+- Think Fast: High speeds make the Bounceman incredibly deadly, yet his mind 
+  often struggles to keep up with the impossible speeds his artificial body can 
+  reach. His reaction time is not enhanced as his brain (although damaged) 
+  remains unaltered, despite the countless surgeries. He can opt to wildly 
+  ricochet off of surfaces at the speed of sound if he so chooses, but he is 
+  entirely incapable of aiming or properly planning his next moves while doing 
+  so.
+- Rollin' Limbless: Obviously, the Bounceman lacks any arms or legs. Therefore, 
+  he struggles to do basically anything that would normally require hands or 
+  legs. He cannot sprint, use conventional weaponry, or do much of anything. If he 
+  were to somehow be restrained or have his Atomic Trampoline deactivated, he 
+  would be left entirely helpless and at the mercy of others.
 
 --------------------------------------------------------------------------------
                            THE RECKONER
@@ -863,26 +2567,79 @@ The emotional dampening is necessary for absolute neutrality—good and evil are
 treated equally when their time to pass comes.
 
 ABILITY - SPAWNIPULATION:
-Complete manipulation of the forces of life and death. Within the Edge, Spawnboy 
-can:
-- Instantly reap souls regardless of distance
-- Generate or dismantle lifeforms at will
-- Theoretically heal any wound or restore any individual
-- Omnipotent intangibility and omnipresence
+Spawnboy was bestowed with the ability to fully manipulate the forces of both 
+life and death, a tool given to them by Roblox to aid with their sworn duty as 
+the Bloxiverse's reaper. It is white in color, akin to the souls it was made 
+for processing. It manifests in the form of white sparkles and glowing Sunspawn 
+sigils.
+
+OFFENSIVE CAPABILITIES:
+Theoretically, Spawnipulation enables Spawnboy to instantly reap the soul of a 
+target, regardless of distance or other factors that could possibly hinder the 
+effects. If desired, Spawnboy could generate hostile lifeforms for combat on a 
+whim, or dismantle opposing lifeforms by reaping their souls within an instant. 
+Of course, Spawnboy is more than responsible with Spawnipulation and would never 
+waste or misuse it. Dramatic flare is unnecessary when a mere wave of the hand 
+will suffice.
+
+DEFENSIVE CAPABILITIES:
+Spawnipulation doesn't provide any directly-defensive abilities to Spawnboy, as 
+it was created to be used exclusively on others. Spawnboy's primary line of 
+defense lies within his own physical potential and controlled intangibility.
+
+UTILITARIAN CAPABILITIES:
+Spawnipulation is a straightforward ability and doesn't have many "daily life" 
+benefits, as it wasn't created with a typical life in mind. However, it 
+technically has the potential to heal any wound or restore health to any 
+individual whatsoever, regardless of their current condition—even if every atom 
+of an individual is completely gone. Naturally, even knowing they could give 
+eternal youth and health to anybody they choose, that would be misuse of 
+Spawnipulation as that isn't what the power was made for, and Spawnboy could 
+never do such a thing.
 
 LIMITATIONS:
-These powers do not function outside the Edge. Since Spawnboy is bound to the 
-Edge, their abilities can only affect those who have already died or are dying.
+While all of the aforementioned abilities and qualities of Spawnipulation are 
+true, these powers do not function outside of the Edge. While in a theoretical 
+situation, Spawnipulation COULD affect living beings, its influence is incapable 
+of travelling between dimensions. As Spawnboy is bound to the Edge, it 
+essentially means his godlike abilities can only affect those who have already 
+died, or are in the process of dying.
+
+EQUIPMENT:
+
+The Respawner:
+The Respawner is a powerful, two-handled chakram-blade hybrid that Spawnboy was 
+provided with by Roblox to aid in their duties as a reaper. The blades appear 
+inseparable, hovering closely together as their circular bodies form the design 
+of a Sunspawn sigil. It appears to be forged from an unknown (and likely-anomalous) 
+metal, theorized by many to be Bloxite. The Respawner can be used to instantly 
+obliterate the lifeforce of a Bloxian, down to their very soul when contact with 
+the weapon is made. While the Respawner is capable of wounding others through its 
+incredibly sharp body or fine edges, a mere tap of the blade against a target 
+will cause the Respawner's ability to take effect.
 
 HISTORY:
-Spawnboy is primordial, predating nearly every Bloxian including Guests. They 
-were created alongside the Bloxiverse and immediately placed in the Edge to 
-handle life and death. They have served this purpose for unfathomable eons.
+Spawnboy is a primordial deity that predates nearly every Bloxian, even the 
+coveted race of Guests. They were created alongside the Bloxiverse by Roblox, 
+though they were quickly separated as Spawnboy would find themselves in the 
+Edge, a limbo-esque dimension created exclusively for Spawnboy and the deceased. 
+Spawnboy was assigned the sacred duty of handling the forces of life and death, 
+represented through the black and white colors present within the Sunspawn sigil 
+that was engraved within their mind and body. Spawnboy has served their purpose 
+for unfathomable lengths of time, their loyalty to Roblox unwavering and true. 
+Though despite eons of existence, Spawnboy has never been able to visit the 
+Bloxiverse, as their presence and energy is bound to the Edge. Roblox placed this 
+caveat upon Spawnboy not without purpose, as bringing the manifestation of life 
+and death into a physical reality is bound to cause extinction-level events. 
+Though Spawnboy wishes to someday see the Bloxiverse in person, they've always 
+been perfectly content. Over the years, they've learned bits and pieces of what 
+a real life is like, through the experiences shared to them by the souls they've 
+put to rest.
 
-Roblox bound Spawnboy to the Edge because bringing the manifestation of life and 
-death into physical reality would cause extinction-level events. Spawnboy has 
-never visited the Bloxiverse but has learned about life through the experiences 
-shared by souls they've put to rest.
+RELATIONSHIPS:
+Due to the nature of Spawnboy's existence and purpose, forming meaningful or 
+long-lasting connections is impossible. As of now, they have no family or friends 
+they could possibly recall.
 
 ================================================================================
                       PART VII: LEGENDARY ARTIFACTS
@@ -897,24 +2654,66 @@ Owner: Builderman
 Creator: Roblox
 
 DESCRIPTION:
-The Banhammer is a cobalt-colored sledgehammer of unrealistically large 
-proportions. It is indestructible, composed of an unidentified material. Only 
-one Banhammer exists.
+The Banhammer is a divine weapon, created by Roblox and directly imbued with a 
+portion of his own power. It was created for Builderman in particular, who is 
+also the only known Bloxian capable of activating the divine powers within. It 
+was made to be an ultimate authority within the Bloxiverse, striking down evil 
+in just one swing. The Banhammer is revered by many as the strongest weapon in 
+the Bloxiverse, believed by some to even be the strongest thing in existence 
+outright.
 
-ABILITY:
-When handled by a blessed Bloxian, the Banhammer can strike a physical target 
-and completely erase it from reality. This absolute erasure has almost no 
-limitations—mass, density, and strength are irrelevant. Erased matter is 
-genuinely gone, leaving not even atomic residue.
+APPEARANCE:
 
-Limitations:
-- Cannot strike smooth liquids, gases, or raw energy
-- Erased matter cannot be restored by any means
-- Only those blessed by Roblox can use its ability
+Deactivated:
+The Banhammer is a cobalt-colored, top-heavy warhammer with black-ribbed lines 
+skewing in and outwards. A large leather handle runs up, connecting into a 
+metal-studded brace which wraps around the center of the Banhammer's head. As 
+the Banhammer has the innate ability to adjust its size, it is never 
+consistently seen at one specific height or width.
 
-HISTORY:
-Given to Builderman directly by Roblox to aid in keeping the Bloxiverse safe. 
-The "blessed" restriction prevents unauthorized use.
+Activated:
+While activated by a wielder capable of channeling the power within, the 
+Banhammer ignites into an aura of holy radiance and fire. This aura shines 
+brightly, growing in size and intensity as the desires of the user become 
+stronger.
+
+FUNCTIONALITY:
+The Banhammer carries a fraction of Roblox's own power, granting it a divine 
+status and an unfathomably lethal ability. With just a single swing, anything 
+can be completely erased from the Bloxiverse—this is regardless of the target's 
+mass or defenses. Erasing something with the Banhammer does not require a 
+powerful swing, but rather it depends on the wielder's intent to erase what they 
+strike. Even a tap to the forehead would be sufficient enough for the 
+Banhammer's erasure to trigger; it all depends on the desires of the holder. 
+Only a small handful of matter is immune to the Banhammer's effects, primarily 
+gasses and raw energy, as they almost never have a solidified point for the 
+Banhammer to make contact with.
+
+TIMELINE:
+
+The Forging:
+Back during the earliest years of the Bloxiverse, Builderman was chosen to 
+become a guardian for the Bloxiverse and assist Roblox directly in its 
+development. Roblox feared that Builderman may receive backlash for being placed 
+above others, so he decided to bestow Builderman with an ultimate tool, one he 
+could use to defend himself. He sacrificed a portion of his energy to create this 
+tool, eventually giving way to the creation of the Banhammer. Eventually, Roblox 
+presented Builderman with the Banhammer, a tool he could use to both channel the 
+gift of creation, and eradicate those who stood in his way. Builderman was 
+hesitant to accept the hammer at first, against the idea of authority through 
+violence. Roblox reassured him that he didn't have to use it to reign authority 
+over others, and that it was purely a tool for self-defense. This mindset allowed 
+Builderman to warm up to the Banhammer, accepting Roblox's gift and becoming the 
+sole wielder of the hammer.
+
+Modern Day:
+Builderman remains the only user of the Banhammer, holding it just as near and 
+dear as he did the day he received it. It has remained visually unchanged, with 
+no signs of wear to be seen—perhaps partially due to Builderman's aversion to 
+using it. There have been a handful of incidents involving the theft of the 
+Banhammer, but no Bloxian could keep the hammer for long without becoming a large 
+target themselves. In the end, it has always found its way back to Builderman, 
+the Bloxian it was made to be with.
 
 --------------------------------------------------------------------------------
                         THE COILS OF POWER
@@ -925,28 +2724,160 @@ natural law. Only one copy of each exists.
 
 THE GRAVITY COIL
 ----------------
-Color: Blue
+Color: Sky-blue with white specks
 Creator: Roblox
-Abilities:
-- Negate or amplify gravity for the wearer
-- Adjust gravitational direction for flight or wall-walking
-- Localize effects to specific body parts
+Current Status: In possession of Ren Bytera (kept discreet, unused)
 
-Composed of blue-dyed Bloxite. The coil itself is weightless and unaffected by 
-gravitational pull. Currently in possession of the Hunter Association after 
-being confiscated from Bryck Manning.
+APPEARANCE:
+The Gravity Coil is a large metallic spring, sky-blue in color with specks of 
+white scattered across its surface. It is cold and rough to the touch, similar 
+to rusted metal. Despite its appearance, the Gravity Coil is extremely malleable 
+and bends with ease. Though it most commonly takes the form of a spring, its 
+length and shape can freely reform to wrap around nearly any limb or object.
+
+DESCRIPTION:
+The Gravity Coil is a divine artifact and one of the three Power Coils 
+belonging to the Coils of Power. Like the others, it is formed from Activated 
+Bloxite, rendering it effectively indestructible and impossible to recreate. 
+Each Power Coil governs one of the three fundamental laws of reality, and the 
+Gravity Coil is responsible for the manipulation of gravity itself.
+
+FUNCTIONALITY:
+The Gravity Coil can be wrapped around the limb of a Bloxian, granting them the 
+innate ability to manipulate gravitational forces. This is achieved by 
+channeling the law of gravity directly into the wearer's body, binding its 
+control to their subconscious. This effect is localized; the wearer cannot 
+influence gravity beyond their immediate surroundings or beyond objects and 
+beings they are physically touching. Because the Gravity Coil possesses an 
+infinite energy supply, it can be used continuously without depletion. It is 
+important to note that while the Gravity Coil grants gravity-manipulating 
+abilities, it does not provide the physical tolerance required to endure extreme 
+gravitational pressure. If a wearer overestimates their limits, they may be 
+crushed under forces their body cannot withstand, resulting in death. Intrusive 
+thoughts can also cause the Gravity Coil to misfire, making mental discipline 
+and clarity essential for safe use.
+
+TIMELINE:
+
+Inception:
+The Gravity Coil, along with the other Coils of Power, was created as a 
+solidified vessel for a fundamental law of physics. It was the first Power Coil 
+ever formed, shaped from Bloxite activated by Roblox's own energy. It was never 
+intended to be a required component of reality, but rather a "pill" of 
+information—something the Bloxiverse could absorb and learn from as it matured. 
+The Gravity Coil specifically helped establish the concept of physics within the 
+Bloxiverse, as without gravity or mass, all creation would simply drift into 
+nothingness. Roblox originally intended to retrieve the Gravity Coil, but 
+forgot to do so, inadvertently leaving it behind for the future inhabitants of 
+the Bloxiverse: the Bloxians.
+
+Gravity of the Guests:
+The Gravity Coil remained hidden for a long time before being uncovered midway 
+through the Great Guesticide, a devastating war between the Guests and the 
+Noobs. It was discovered by a Guest soldier known as Guest#1204, floating 
+within the Miasma. The Guests quickly realized the artifact's immense power, and 
+it soon became a central weapon of war. Whoever wielded the Gravity Coil became 
+a force of nature. Guest#1204 served as its primary wielder throughout much of 
+the conflict, though it changed hands several times after his death. 
+Eventually, the Noobs managed to seize the Gravity Coil, shifting the momentum 
+of the war heavily in their favor. It continued to reappear throughout the 
+conflict until the last known Guests were eradicated. With the war over, the 
+Gravity Coil lost its perceived purpose, seen by most only as a tool of 
+destruction. With attention drawn elsewhere, it was only a matter of time before 
+someone stole it.
+
+Bryck's Lucky Find:
+Time passed, and the Gravity Coil changed hands repeatedly. As its legend spread, 
+so did fear surrounding it. Many believed possessing it would paint a target on 
+one's back. Eventually, interest faded, and the artifact was abandoned—left 
+forgotten within a shrub, where it would remain undisturbed for years. Even 
+after the arrival of the Robloxians, it remained hidden. During one particularly 
+harsh night, a Robloxian named Bryck Manning passed through that very world. A 
+faint glimmer of blue caught his eye, leading him to uncover the coil. After 
+conducting research, he realized exactly what he had found. Though doubtful of 
+his own fortune, equipping it proved the truth. He became the first Bloxian in 
+generations—and the first Robloxian ever—to wield the Gravity Coil. Power 
+quickly corrupted him, and he developed a god complex, using it to terrorize 
+innocents.
+
+Repossession:
+Bryck eventually went too far, attacking a peaceful world known as the Farmer 
+Sanctuary. This led to Caesar and Nauli intercepting and apprehending him after 
+a brief conflict. They removed the Gravity Coil and turned Bryck over to the 
+Hunter Association. Rather than surrendering the artifact as well, Caesar and 
+Nauli chose to keep it. It was later entrusted to Ren, a scientist with access to 
+a highly advanced laboratory capable of studying such an object. The transfer 
+was kept discreet, and few were ever aware that Ren possessed the Gravity Coil. 
+Since then, it has remained in her care, unused.
 
 THE SPEED COIL
 --------------
-Color: Red
+Color: Red with white specks
 Creator: Roblox
-Abilities:
-- Amplify or reduce the rate of time flow for the wearer
-- Enhanced reaction time and physical speeds
-- Near-impossible to hit when accelerated
+Current Status: Housed within the RedCliff Arena, temporarily granted to 
+tournament champions
 
-Constantly vibrates and never sits still. Does not negate aging effects. 
-Composed of red-dyed Bloxite.
+APPEARANCE:
+The Speed Coil is a large metallic spring, red in color with white specks 
+scattered across its surface. It is warm and smooth to the touch, resembling 
+polished stainless steel. Despite its rigid appearance, it is extremely 
+malleable and bends with ease. Though it most often forms a spring shape, its 
+length and structure can freely reform to wrap around nearly any limb or object.
+
+DESCRIPTION:
+The Speed Coil is a divine artifact and one of the three Power Coils belonging 
+to the Coils of Power. Like the others, it is forged from Activated Bloxite, 
+rendering it indestructible and impossible to recreate. It governs one of the 
+three foundational laws of reality: time.
+
+FUNCTIONALITY:
+The Speed Coil allows its wearer to manipulate their personal flow of time, 
+accelerating or slowing it at will. It accomplishes this by siphoning ambient 
+temporal energy and binding it to the wearer's subconscious. This effect is 
+localized, meaning the wearer cannot directly affect others unless they are in 
+physical contact. As with the other coils, it has an infinite energy supply and 
+can be used indefinitely. The Speed Coil does not enhance stamina or physical 
+durability. It merely allows the body to operate at accelerated speeds. 
+Excessive use can quickly exhaust the wearer or cause fatal physical strain. 
+Intrusive thoughts may also disrupt its function, requiring focus and mental 
+stability to wield safely.
+
+TIMELINE:
+
+Inception:
+The Speed Coil was created as a vessel for the law of chronology. It was the 
+second Power Coil to be forged, shaped from Bloxite activated by Roblox's 
+energy. Like the others, it served as a "pill" of information rather than a 
+structural necessity, allowing the Bloxiverse to learn and evolve. The Speed Coil 
+was instrumental in establishing the flow of time itself—without it, the 
+universe would have remained stagnant. Roblox intended to reclaim it but forgot, 
+leaving it behind for the future inhabitants of the Bloxiverse.
+
+A Speedy Discovery:
+The Speed Coil was discovered early on by the Noobs and quickly became one of 
+their most treasured possessions. Found long before the Great Guesticide, it was 
+treated not as a weapon but as a ceremonial artifact. It became a prize awarded 
+in tournaments held at the Nooblet Arena, gifted to champions as a symbol of 
+honor and excellence. Over countless generations, it passed between victors. 
+Despite how easily it could have been stolen, none ever attempted to keep it—whether 
+out of honor or fear remains unknown.
+
+Speeding Into War:
+When the Great Guesticide erupted, tradition fell away. Amid the chaos, the 
+Speed Coil was lost—only to resurface in the hands of Larkon, a Noobish military 
+leader. Larkon proved to be a devastating combatant, singlehandedly destroying 
+multiple Guest outposts. His most infamous act was the defeat of Guest#1204, 
+during which he claimed the Gravity Coil. Wielding both coils simultaneously, 
+Larkon became an unstoppable force. Alongside figures such as Builderman, he 
+helped bring the war to a decisive end, eradicating all known Guests. After the 
+war, the Speed Coil returned to Noobish custody, though its reputation was 
+forever stained by its destructive legacy.
+
+The Modern Day:
+The Speed Coil is currently housed within the RedCliff Arena, successor to the 
+ancient Nooblet Arena. It is temporarily granted to tournament champions as 
+both a reward and a symbol of recognition. Despite numerous attempts, no one has 
+successfully stolen it, thanks to the arena's extensive security.
 
 THE REGENERATION COIL
 ---------------------
@@ -1125,23 +3056,102 @@ Vortex's Contract:
 
 BLOXY COLA
 ----------
-The most popular beverage in the Bloxiverse, produced by Blox Co. Features an 
-unmistakable design with Builderman on the cover. Tastes like cola with hints of 
-root beer and vanilla when chilled. Despite containing no anomalous ingredients, 
-it invigorates those who consume it, making them feel healthier for a short 
-time.
+The Bloxy Cola soda is a delicious beverage created and shipped by Blox Co., 
+renowned universally for its cheap price and delicious flavor. Many Bloxians 
+describe it as a mix between typical cola, with a hint of root beer. A splash 
+of vanilla can be tasted, especially when the drink has first been chilled 
+before consumption.
 
-The Bloxy Cola was Blox Co.'s first product and the foundation of their success.
+APPEARANCE:
+Bloxy Cola is most often found in brownish-orange cans. The label typically 
+displays the phrase "Bloxy Cola" somewhere, and certain cans also display a 
+depiction of a younger Builderman. Canned Bloxy Cola is usually sold either in 
+packs of one and six. Glass bottles of Bloxy Cola are rare, but not unheard of. 
+They have a similar label to the ones seen on their canned cousins, though 
+slimmed down to match the physique of the bottle. Bottled Bloxy Cola is only 
+sold as an individual unit, never seen in packs or cases.
+
+FUNCTIONALITY:
+The Bloxy Cola is designed to quench your thirst on a hot day, or give you a 
+splash of flavor when water simply isn't cutting it. The high sugar content, when 
+paired with the handful of chemicals used to create the Bloxy Cola's signature 
+taste, cause those who drink it to become temporarily invigorated, and even 
+restored to health by the drink. The specific formula used when crafting the 
+beverage is unknown, and attempts to study and explain this phenomenon have 
+failed thus far. Whether these anomalous effects are physical or nothing more 
+than a mere placebo is unknown.
+
+TIMELINE:
+
+Inception:
+The Bloxy Cola was among the first products to be produced by Blox Co., with a 
+formula created by Mr. Bloxton himself. It was released before Blox Co. had 
+become a properly-established company, aimed at bringing in a small amount of 
+funds to help kickstart the business. Very shortly after launch, the Bloxy Cola 
+immediately picked up traction and popularity grew extremely quickly. Blox Co. 
+was singlehandedly brought to an enterprise-level status through the beverage 
+alone, establishing a large presence for both the Bloxy Cola— and by extension— 
+Blox Co. as a whole.
+
+Present Day:
+Nowadays, the Bloxy Cola is sold commercially at just about any vendor and 
+convenience store that can be found in the Bloxiverse. Even in the farthest 
+reaches of locations like the Midzone and Outer Circle, the beverage finds a way 
+to make itself available for purchase. Blox Co. has since expanded their 
+operations ten-fold to account for the insane demand the product has, with entire 
+worlds dedicated exclusively to the mass production of Bloxy Cola alone. The 
+factories are entirely automated aside from select workers, specialized elites 
+within Blox Co.'s employee hierarchy. Only Mr. Bloxton and his elites are aware 
+of the recipe for the Bloxy Cola. This entire time, the recipe has remained a 
+trade secret of Blox Co., although it is debatable whether that is due to the 
+fear of any repercussions, or due to the raw loyalty of the elites.
 
 WITCHES BREW
 ------------
-A lemon-lime seltzer produced by Blox Co. as a hasty follow-up to Bloxy Cola's 
-success. Some describe it as entirely tasteless. Side effects of significant 
-consumption include dizziness, lightheadedness, lacking coordination, and in 
-severe cases—dramatic head swelling.
+The Witches Brew is a tasty seltzer crafted and shipped by Blox Co., made 
+famous by the delicious lemon-lime flavor, and the unique side effects that 
+come with consumption. Uniquely, although the Witches Brew is labelled as 
+"lemon-lime" on most cans, some Bloxians report it being entirely tasteless, 
+equivalent to that of water.
 
-Developed by Ren Bytera during her time at Blox Co. and was one of many 
-unethically tested products.
+APPEARANCE:
+Witches Brew is typically packaged in greenish-yellow cans, sold either as a 
+single unit or occasionally packaged into a "cauldron bundle" for group 
+sessions. They have simplistic labels, with large yellow text that says "Witches 
+Brew", often accompanied by a witch hat. It's not often you'll see a glass 
+bottle of the Witches Brew, but they're not impossible to find. They have 
+similar, slimmed labels compared to what you'd see on a can. Witches Brew 
+bottles are only ever sold as individual units, never seen in any packs or cases.
+
+FUNCTIONALITY:
+The Witches Brew is mostly designed for thirst-quenching, though it has been 
+marketed as a remedy for stress due to the unique side effects caused by drinking 
+it. Many who consume it become lightheaded and loose, akin to being drunk but 
+without the downsides of alcohol. It can be addictive in large quantities, and 
+may impair a Bloxian's senses in the long-term. Despite the obviously-harmful 
+effects of long-term consumption, all ages are free to purchase and drink Witches 
+Brew.
+
+TIMELINE:
+
+Inception:
+The Witches Brew was the second product to be produced by Blox Co., following 
+the success of their first product, the Bloxy Cola. Unlike the Bloxy Cola, Mr. 
+Bloxton had no hand in the creation of the Witches Brew beyond approving it for 
+the market. It initially released to a mediocre response, as little could be 
+done to compare to the hype behind the Bloxy Cola. But with time, people who 
+consumed it quickly began to realize how good they felt afterwards.
+
+Addiction:
+The demand for Witches Brew quickly grew out of control as word got around that 
+you could "feel really good" if you drank it, leading to new factories and 
+further expansions of the Blox Co. factories. At the same time, backlash rang 
+out by many who believed that the drink could prove to be harmful to existing 
+societies. Blox Co. made no statements on the matter, and eventually protesters 
+got bored of protesting. Even now, the Witches Brew is commercially available 
+at many stores, sold indiscriminately to adults and children alike. Blox Co. 
+was happy to turn a blind eye in the face of profit, even going as far as to 
+release commercials praising the Witches Brew as a remedy for stress and anxiety.
 
 ROBLOXIAN WORLDS
 ----------------

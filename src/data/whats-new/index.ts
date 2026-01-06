@@ -2,6 +2,19 @@ import { WhatsNewEntry } from "@/types/whats-new-types";
 
 export const whatsNewEntries: WhatsNewEntry[] = [
   {
+    id: "topbar-timeline-update",
+    date: "2025-01-27",
+    title: "The Topbar & Timeline Update",
+    description: "The first episode of The Lore has been introduced to the Plot Timeline, alongside an overhaul which reworks the sidebar into a topbar!",
+    changes: [
+      "Added Chapter 1 / Episode 1 of The Lore's Plot Timeline! There is finally a clear vision of what the pilot will be! All of those pesky AI-generated filler entries are gone, I shouldn't have let them stay there in the first place.",
+      "The sidebar has been replaced by a topbar instead, similarly to what the old Lore website used to use! This bar takes up less space both horizontally and vertically, reducing clutter by a wide margin.",
+      "The mobile variant of the site has recieved a handful of improvements, including an updated sidebar and button logic changes to make navigation feel smoother and easier overall.",
+      "Some characters had incorrect archetypes that weren't properly updated, so all (available) entries now display the correct typing!"
+    ],
+    isNew: true
+  },
+  {
     id: "characteristics-coils-update",
     date: "2026-01-01",
     title: "The Characteristics & Coils Update",

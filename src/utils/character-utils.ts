@@ -19,6 +19,7 @@ export const getCharacterData = (character: WikiEntry) => {
     age: character.age || "Unknown",
     alignment: character.alignment || "Unknown",
     role: character.role,
+    archetype: character.archetype,
     quote: character.quote || { text: "", context: "" },
     carousel: character.carouselImages || [],
     sections: character.sections || {

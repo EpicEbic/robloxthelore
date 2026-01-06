@@ -1,6 +1,9 @@
 import { Info } from "lucide-react";
 import { ArchetypeGrid } from "@/components/statistics/archetype-grid";
 import { PhysicalStatsGrid } from "@/components/statistics/physical-stats-grid";
+import { Separator } from "@/components/ui/separator";
+import { QandAItem } from "@/components/q-and-a-item";
+import { statisticsQAndAEntries } from "@/data/q-and-a/statistics-q-and-a";
 
 export default function StatisticInfoPage() {
   return (
@@ -25,6 +28,22 @@ export default function StatisticInfoPage() {
         {/* Physical Statistics Section */}
         <PhysicalStatsGrid />
       </div>
+
+      <Separator className="my-12 max-w-3xl mx-auto" />
+
+      {/* Questions & Answers Section */}
+      <section>
+        <h2 className="text-3xl font-semibold mb-6 text-foreground animate-slide-in text-center">Questions & Answers</h2>
+        <div className="relative max-w-3xl mx-auto">
+          {statisticsQAndAEntries.map((item, index) => (
+            <QandAItem 
+              key={item.id}
+              item={item}
+              isLast={index === statisticsQAndAEntries.length - 1}
+            />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

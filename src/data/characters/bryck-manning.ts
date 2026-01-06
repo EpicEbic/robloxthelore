@@ -18,6 +18,8 @@ export const bryckManning: WikiEntry = {
   species: "Robloxian",
   age: "28",
   alignment: "Neutral / Evil",
+  role: "Marauder",
+  archetype: "marauder",
   combatStyles: [
     {
       id: "standard",

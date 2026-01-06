@@ -305,3 +305,8 @@ export function getArchetypeByAlignment(
     (a) => a.column === normalizedColumn && a.row === normalizedRow
   );
 }
+
+// Helper function to get archetype by ID
+export function getArchetypeById(id: string): Archetype | undefined {
+  return ARCHETYPES.find((a) => a.id === id.toLowerCase().trim());
+}

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { memo } from "react";
 import { motion } from "framer-motion";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
-import { getArchetypeByAlignment } from "@/data/character-archetypes";
+import { getArchetypeByAlignment, getArchetypeById } from "@/data/character-archetypes";
 
 // Cell colors for archetypes (matching the statistics page grid)
 // Converted from grid colors to button-friendly gradients
@@ -111,21 +111,44 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
 
   // Parse alignment and get archetype
   const getArchetypeData = () => {
-    if (!entry.alignment) return null;
+    if (!entry.alignment && !entry.archetype) return null;
     
-    const alignmentParts = entry.alignment.split("/").map(s => s.trim().toLowerCase());
-    const column = alignmentParts[0] || "neutral";
-    const row = alignmentParts[1] || "neutral";
+    let archetype;
+    let column: string;
+    let row: string;
     
-    const archetype = getArchetypeByAlignment(column, row);
+    if (entry.archetype) {
+      // Use the character's defined archetype
+      archetype = getArchetypeById(entry.archetype);
+      if (archetype) {
+        column = archetype.column;
+        row = archetype.row;
+      } else {
+        // Fallback to alignment if archetype ID not found
+        if (!entry.alignment) return null;
+        const alignmentParts = entry.alignment.split("/").map(s => s.trim().toLowerCase());
+        column = alignmentParts[0] || "neutral";
+        row = alignmentParts[1] || "neutral";
+        archetype = getArchetypeByAlignment(column, row);
+      }
+    } else {
+      // Parse alignment string (e.g., "Chaotic/Good" -> column: "chaotic", row: "good")
+      const alignmentParts = entry.alignment!.split("/").map(s => s.trim().toLowerCase());
+      column = alignmentParts[0] || "neutral";
+      row = alignmentParts[1] || "neutral";
+      
+      archetype = getArchetypeByAlignment(column, row);
+    }
+    
     const cellColor = CELL_COLORS[column]?.[row] || CELL_COLORS.neutral.neutral;
+    const alignmentParts = [column, row];
     
     return { archetype, cellColor, alignmentParts };
   };
 
   // Alignment tokens styled like entry pages with archetype
   const renderAlignment = () => {
-    if (!entry.alignment) return null;
+    if (!entry.alignment && !entry.archetype) return null;
     
     const data = getArchetypeData();
     if (!data) return null;
@@ -147,7 +170,7 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
           </span>
         )}
         {/* Alignment badges (secondary) */}
-        {entry.alignment.split("/").map((align, index) => (
+        {(data.archetype ? [data.archetype.columnLabel, data.archetype.rowLabel] : entry.alignment!.split("/")).map((align, index) => (
           <span
             key={index}
             className={cn(

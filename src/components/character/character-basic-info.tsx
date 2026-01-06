@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Info, Calendar, Scale, X, Quote, Compass } from "lucide-react";
-import { getArchetypeByAlignment } from "@/data/character-archetypes";
+import { getArchetypeByAlignment, getArchetypeById } from "@/data/character-archetypes";
 import { cn } from "@/lib/utils";
 
 // Convert grid colors (row-first) to button-friendly gradients (column-first)
@@ -69,18 +69,40 @@ interface CharacterBasicInfoProps {
   species: string;
   age: number | string;
   alignment: string;
+  archetypeId?: string;
 }
 
-export function CharacterBasicInfo({ species, age, alignment }: CharacterBasicInfoProps) {
+export function CharacterBasicInfo({ species, age, alignment, archetypeId }: CharacterBasicInfoProps) {
   const [showArchetypeCard, setShowArchetypeCard] = useState(false);
   
-  // Parse alignment string (e.g., "Chaotic/Good" -> column: "chaotic", row: "good")
-  const alignmentParts = alignment.split("/").map(s => s.trim().toLowerCase());
-  const column = alignmentParts[0] || "neutral";
-  const row = alignmentParts[1] || "neutral";
+  // Get archetype: use archetypeId if provided, otherwise derive from alignment
+  let archetype;
+  let column: string;
+  let row: string;
   
-  // Get the archetype for this alignment
-  const archetype = getArchetypeByAlignment(column, row);
+  if (archetypeId) {
+    // Use the character's defined archetype
+    archetype = getArchetypeById(archetypeId);
+    if (archetype) {
+      column = archetype.column;
+      row = archetype.row;
+    } else {
+      // Fallback to alignment if archetype ID not found
+      const alignmentParts = alignment.split("/").map(s => s.trim().toLowerCase());
+      column = alignmentParts[0] || "neutral";
+      row = alignmentParts[1] || "neutral";
+      archetype = getArchetypeByAlignment(column, row);
+    }
+  } else {
+    // Parse alignment string (e.g., "Chaotic/Good" -> column: "chaotic", row: "good")
+    const alignmentParts = alignment.split("/").map(s => s.trim().toLowerCase());
+    column = alignmentParts[0] || "neutral";
+    row = alignmentParts[1] || "neutral";
+    
+    // Get the archetype for this alignment
+    archetype = getArchetypeByAlignment(column, row);
+  }
+  
   const cellColor = CELL_COLORS[column]?.[row] || CELL_COLORS.neutral.neutral;
   
   return (
@@ -137,8 +159,8 @@ export function CharacterBasicInfo({ species, age, alignment }: CharacterBasicIn
                     {archetype.name}
                   </button>
                 )}
-                {/* Alignment badges */}
-                {alignment.split("/").map((align, index) => (
+                {/* Alignment badges - use archetype subtypes if available, otherwise use alignment */}
+                {(archetype ? [archetype.columnLabel, archetype.rowLabel] : alignment.split("/")).map((align, index) => (
                   <span 
                     key={index} 
                     className={cn(

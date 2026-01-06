@@ -19,7 +19,8 @@ export const theBounceman: WikiEntry = {
   species: "Robloxian (Modified)",
   age: "Unknown",
   alignment: "Rebel/Impure",
-  role: "Marauder",
+  role: "Convict",
+  archetype: "convict",
   
   combatStyles: [
     {

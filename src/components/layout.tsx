@@ -1,7 +1,6 @@
 
 import { ReactNode, useEffect, useRef } from "react";
-import { WikiSidebar } from "@/components/wiki-sidebar";
-import { SidebarProvider, SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
+import { WikiTopNav } from "@/components/wiki-sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
@@ -13,8 +12,6 @@ function LayoutContent({ children }: LayoutProps) {
   const isMobile = useIsMobile();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollPositionRef = useRef<number>(0);
-  const { open: sidebarOpen } = useSidebar();
-  const prevSidebarOpenRef = useRef(sidebarOpen);
   const prevIsMobileRef = useRef(isMobile);
 
   // Save and restore scroll position when size changes
@@ -39,16 +36,6 @@ function LayoutContent({ children }: LayoutProps) {
       }
     };
 
-    // Save scroll position when sidebar state changes
-    if (prevSidebarOpenRef.current !== sidebarOpen) {
-      saveScrollPosition();
-      prevSidebarOpenRef.current = sidebarOpen;
-      // Restore after layout updates
-      requestAnimationFrame(() => {
-        restoreScrollPosition();
-      });
-    }
-
     // Save scroll position when mobile state changes
     if (prevIsMobileRef.current !== isMobile) {
       saveScrollPosition();
@@ -58,7 +45,7 @@ function LayoutContent({ children }: LayoutProps) {
         restoreScrollPosition();
       });
     }
-  }, [sidebarOpen, isMobile]);
+  }, [isMobile]);
 
   // Handle window resize - only trigger on actual window resizes, not content height changes
   useEffect(() => {
@@ -96,19 +83,13 @@ function LayoutContent({ children }: LayoutProps) {
   }, []);
 
   return (
-    <div className="min-h-screen flex w-full dark text-foreground bg-background">
-      <WikiSidebar />
-      <div 
+    <div className="min-h-screen flex flex-col w-full dark text-foreground bg-background">
+      <WikiTopNav />
+      <div
         ref={scrollContainerRef}
-        className="flex-1 overflow-auto flex flex-col custom-scrollbar" 
+        className="flex-1 overflow-auto flex flex-col custom-scrollbar"
         id="main-scroll-container"
       >
-        {/* Mobile sidebar trigger - always visible on mobile */}
-        {isMobile && (
-          <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border p-2 md:hidden">
-            <SidebarTrigger className="h-10 w-10" />
-          </div>
-        )}
         <main className="relative flex-1">
           {children}
         </main>
@@ -118,9 +99,5 @@ function LayoutContent({ children }: LayoutProps) {
 }
 
 export function Layout({ children }: LayoutProps) {
-  return (
-    <SidebarProvider>
-      <LayoutContent>{children}</LayoutContent>
-    </SidebarProvider>
-  );
+  return <LayoutContent>{children}</LayoutContent>;
 }

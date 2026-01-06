@@ -230,6 +230,7 @@ export interface WikiEntry {
   age?: string;
   alignment?: string;
   role?: string;
+  archetype?: string; // Archetype ID (e.g., "marauder", "convict", "altruist")
   carouselImages?: {
     url: string;
     caption: string;
