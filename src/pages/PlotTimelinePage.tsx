@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { BookOpen } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 type TimelineAct = {
   title: string;
@@ -383,99 +384,133 @@ Somewhere far away, a bag of groceries drifted weightlessly throughout the Miasm
 
 export default function PlotTimelinePage() {
   return (
-    <div className="relative overflow-hidden">
-      {/* Background glow / grid */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.06),transparent_25%),radial-gradient(circle_at_80%_30%,rgba(255,215,0,0.04),transparent_30%),radial-gradient(circle_at_50%_80%,rgba(255,255,255,0.04),transparent_25%)]" />
-
-      <div className="container mx-auto px-4 py-10 space-y-8 relative z-10">
-        <div className="text-center space-y-3">
-        <h1 className="text-4xl font-bold">The Lore&apos;s Timeline</h1>
-        <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-          View a detailed breakdown of each part and chapter for The Lore!
-        </p>
+    <div className="min-h-screen relative">
+      <div className="container mx-auto px-4 py-12 max-w-6xl relative z-10">
+        {/* Hero Section */}
+        <div className="text-center mb-12 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
+            <BookOpen className="w-8 h-8 text-primary" />
+          </div>
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            The Lore&apos;s Timeline
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            View a detailed breakdown of each part and chapter for The Lore! Follow the story as it unfolds across the Bloxiverse.
+          </p>
         </div>
 
-        <Card className="border-primary/20 shadow-2xl shadow-primary/10 bg-card/95 backdrop-blur">
-          <CardHeader className="pb-4 text-center">
-            <CardTitle className="text-2xl font-semibold">Timeline</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Accordion type="multiple" className="space-y-4">
-              {parts.map((part, pIdx) => (
-                <AccordionItem
-                  key={part.part}
-                  value={part.part}
-                  className="border border-border/60 rounded-lg px-3 bg-card/70 shadow-sm"
-                >
-                  <AccordionTrigger className="py-3 text-left text-lg font-semibold">
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <div className="px-3 py-1 rounded-full bg-primary/20 text-primary font-bold text-sm shadow">
-                        {part.part}
-                      </div>
-                      {part.description && (
-                        <span className="text-sm text-muted-foreground">{part.description}</span>
-                      )}
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="pt-2">
-                    <Accordion type="multiple" className="space-y-2">
-                      {part.chapters.map((ch, cIdx) => (
-                        <AccordionItem
-                          key={`${part.part}-${ch.chapter}`}
-                          value={`${part.part}-${ch.chapter}`}
-                          className="border border-border/40 rounded-md bg-card/60"
-                        >
-                          <AccordionTrigger className="py-2 px-3 text-left hover:bg-primary/5 rounded-md">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <div className="px-2 py-0.5 rounded-full border text-xs">
-                                {ch.chapter}
-                              </div>
-                              <span className="font-semibold text-sm">{ch.title}</span>
-                              {ch.date && <span className="text-xs text-muted-foreground">{ch.date}</span>}
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent className="pt-1 pb-3 px-3 space-y-3">
-                            {ch.description && (
-                              <p className="text-sm text-foreground font-medium">{ch.description}</p>
+        {/* Timeline Content */}
+        <div className="space-y-6">
+          <Accordion type="multiple" className="space-y-6">
+            {parts.map((part, pIdx) => (
+              <motion.div
+                key={part.part}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: pIdx * 0.1 }}
+              >
+                <Card className="rounded-2xl shadow-xl border-2 backdrop-blur-sm overflow-hidden bg-card/95">
+                  <AccordionItem value={part.part} className="border-0">
+                    <CardHeader className="pb-4">
+                      <AccordionTrigger className="hover:no-underline p-0">
+                        <div className="flex items-center gap-4 w-full">
+                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center flex-shrink-0">
+                            <BookOpen className="w-5 h-5 text-white" />
+                          </div>
+                          <div className="flex items-center gap-3 flex-1 min-w-0">
+                            <Badge variant="secondary" className="px-3 py-1.5 bg-primary/20 text-primary border-primary/30 font-bold text-sm flex-shrink-0">
+                              {part.part}
+                            </Badge>
+                            {part.description && (
+                              <span className="text-sm text-muted-foreground truncate">{part.description}</span>
                             )}
-                            {ch.acts && ch.acts.length > 0 ? (
-                              <div className="space-y-4">
-                                {ch.acts.map((act, aIdx) => (
-                                  <motion.div
-                                    key={`${part.part}-${ch.chapter}-act-${aIdx}`}
-                                    initial={{ opacity: 0, y: 4 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.2, delay: 0.05 + cIdx * 0.02 + pIdx * 0.05 + aIdx * 0.03 }}
-                                    className="rounded-md border border-border/40 bg-card/80 p-4 shadow-inner"
-                                  >
-                                    <h4 className="text-sm font-semibold text-foreground mb-2">{act.title}</h4>
-                                    <div className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                                      {act.content}
+                          </div>
+                        </div>
+                      </AccordionTrigger>
+                    </CardHeader>
+                    <AccordionContent className="px-6 pb-6">
+                      <div className="space-y-4 pt-2">
+                        <Accordion type="multiple" className="space-y-4">
+                          {part.chapters.map((ch, cIdx) => (
+                            <motion.div
+                              key={`${part.part}-${ch.chapter}`}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.2, delay: cIdx * 0.05 }}
+                            >
+                              <Card className="rounded-xl border-2 border-zinc-300/50 bg-zinc-800/40 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-200">
+                                <AccordionItem
+                                  value={`${part.part}-${ch.chapter}`}
+                                  className="border-0"
+                                >
+                                  <AccordionTrigger className="px-5 py-4 hover:bg-primary/5 rounded-lg transition-colors">
+                                    <div className="flex items-center gap-3 flex-wrap w-full text-left">
+                                      <div className="w-8 h-8 rounded-lg bg-zinc-700/60 border border-zinc-300/30 flex items-center justify-center flex-shrink-0">
+                                        <span className="text-xs font-bold text-zinc-300">{cIdx + 1}</span>
+                                      </div>
+                                      <Badge variant="outline" className="px-2.5 py-1 text-xs font-semibold border-zinc-300/50 bg-background/50 text-zinc-300">
+                                        {ch.chapter}
+                                      </Badge>
+                                      <span className="font-semibold text-base flex-1">{ch.title}</span>
+                                      {ch.date && (
+                                        <span className="text-xs text-muted-foreground bg-muted/70 px-2.5 py-1 rounded-md border border-border/50">
+                                          {ch.date}
+                                        </span>
+                                      )}
                                     </div>
-                                  </motion.div>
-                                ))}
-                              </div>
-                            ) : ch.narration ? (
-                              <motion.div
-                                initial={{ opacity: 0, y: 4 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.2, delay: 0.05 + cIdx * 0.02 + pIdx * 0.05 }}
-                                className="rounded-md border border-border/40 bg-card/80 p-3 text-sm text-muted-foreground leading-relaxed shadow-inner"
-                              >
-                                {ch.narration}
-                              </motion.div>
-                            ) : null}
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </CardContent>
-        </Card>
+                                  </AccordionTrigger>
+                                  <AccordionContent className="px-5 pb-5 pt-3">
+                                    {ch.description && (
+                                      <div className="mb-5 pb-4 border-b border-border/40">
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                          {ch.description}
+                                        </p>
+                                      </div>
+                                    )}
+                                    {ch.acts && ch.acts.length > 0 ? (
+                                      <div className="space-y-4">
+                                        {ch.acts.map((act, aIdx) => (
+                                          <motion.div
+                                            key={`${part.part}-${ch.chapter}-act-${aIdx}`}
+                                            initial={{ opacity: 0, y: 8 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.2, delay: aIdx * 0.05 }}
+                                            className="rounded-lg border-2 border-zinc-300/30 bg-card/70 backdrop-blur-sm p-5 shadow-md hover:shadow-lg transition-all duration-200"
+                                          >
+                                            <div className="flex items-center gap-3 mb-4">
+                                              <div className="w-1.5 h-8 bg-gradient-to-b from-zinc-300/60 to-zinc-400/30 rounded-full flex-shrink-0"></div>
+                                              <h4 className="text-base font-semibold text-foreground">{act.title}</h4>
+                                            </div>
+                                            <div className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line pl-5">
+                                              {act.content}
+                                            </div>
+                                          </motion.div>
+                                        ))}
+                                      </div>
+                                    ) : ch.narration ? (
+                                      <motion.div
+                                        initial={{ opacity: 0, y: 8 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="rounded-lg border-2 border-border/40 bg-card/70 backdrop-blur-sm p-4 text-sm text-muted-foreground leading-relaxed shadow-sm"
+                                      >
+                                        {ch.narration}
+                                      </motion.div>
+                                    ) : null}
+                                  </AccordionContent>
+                                </AccordionItem>
+                              </Card>
+                            </motion.div>
+                          ))}
+                        </Accordion>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Card>
+              </motion.div>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </div>
   );
