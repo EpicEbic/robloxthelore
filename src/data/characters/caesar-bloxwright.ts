@@ -12,6 +12,7 @@ export const caesarBloxwright: WikiEntry = {
   subcategory: "protagonist",
   imageUrl: "/lovable-uploads/eddd95a1-b4e5-4b4a-8f64-6fbd33ab1d03.png",
   lastUpdated: "2025-05-20",
+  part: "Part 1",
   relatedEntries: ["nauli-parter"],
   quote: {
     text: "I don't fight for peace because I have to, I fight for peace because I want to.",

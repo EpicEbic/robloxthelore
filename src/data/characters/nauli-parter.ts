@@ -12,6 +12,7 @@ export const nauliParter: WikiEntry = {
   subcategory: "protagonist",
   imageUrl: "/lovable-uploads/1cd20d3c-e29b-4fe3-8a40-e4732259983b.png",
   lastUpdated: "2025-07-29",
+  part: "Part 1",
   relatedEntries: ["caesar-bloxwright", "vortex-a-steele", "ren-bytera", "bryck-manning"],
   quote: {
     text: "Hurry up, I didn't come here just to dawdle. Fight me.",

@@ -12,6 +12,7 @@ export const spawnboy: WikiEntry = {
   subcategory: "evil",
   imageUrl: "/lovable-uploads/6cac9730-bc76-4327-8c29-d7821f7f377b.png",
   lastUpdated: "2025-08-26",
+  part: "TEMP",
   quote: {
     text: "Friend, take my hand. You've passed on, but now is the time to reflect on the life you've lived—don't lay here and die, not yet.",
     context: "Spawnboy, offering condolences and a pick-me-up for a fallen Bloxian."

@@ -11,6 +11,7 @@ export const charlesStudson: WikiEntry = {
   subcategory: "minor-antagonist",
   imageUrl: "/lovable-uploads/6c376c29-2559-4b37-b51e-f6f6a8df3647.png",
   lastUpdated: "2025-01-26",
+  part: "TEMP",
   
   // Character-specific fields
   quote: {

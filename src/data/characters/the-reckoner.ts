@@ -13,6 +13,7 @@ export const theReckoner: WikiEntry = {
   category: "character",
   subcategory: "major-antagonist",
   lastUpdated: "2025-01-26",
+  part: "TEMP",
   
   quote: {
     text: "...",

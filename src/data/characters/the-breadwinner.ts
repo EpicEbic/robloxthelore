@@ -11,6 +11,7 @@ export const theBreadwinner: WikiEntry = {
   subcategory: "noncanon",
   imageUrl: "/lovable-uploads/1e7da8d1-d02a-42ea-a374-4267cd912e99.png",
   lastUpdated: "2025-06-16",
+  part: "TEMP",
   relatedEntries: [],
   quote: {
     text: "You want a piece of me? Huh, pal!? ...no, really. Do you?",

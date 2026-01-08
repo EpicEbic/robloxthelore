@@ -12,6 +12,7 @@ export const vortexASteele: WikiEntry = {
   subcategory: "protagonist",
   imageUrl: "/lovable-uploads/1eb00c46-6380-421c-85e0-473d69b1d989.png",
   lastUpdated: "2025-05-26",
+  part: "Part 1",
   quote: {
     text: "The clock is ticking, man. If you value your life, you'd best get on with yappin' already.",
     context: "Vortex, threatening a target during his interrogation after capturing them."

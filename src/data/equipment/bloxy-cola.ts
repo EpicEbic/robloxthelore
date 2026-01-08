@@ -9,6 +9,7 @@ export const bloxyCola: WikiEntry = {
   category: "equipment",
   subcategory: "standard",
   lastUpdated: "2025-12-21",
+  part: "Part 1",
   imageUrl: "/images/bloxy-cola-can-1.png",
   
   carouselImages: [

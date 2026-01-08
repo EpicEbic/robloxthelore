@@ -12,6 +12,7 @@ export const renBytera: WikiEntry = {
   subcategory: "neutral",
   imageUrl: "/lovable-uploads/3965c781-d5ba-46fa-9e9c-254fae05c32e.png",
   lastUpdated: "2025-08-12",
+  part: "Part 1",
   relatedEntries: ["nauli-parter", "vortex-a-steele", "bloxxanne-whelder"],
   quote: {
     text: "Psst, wanna make some quick Robux, stranger? I'd just need you for a few... experiments. Don't worry—it'd only hurt a little!",

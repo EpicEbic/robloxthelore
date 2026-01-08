@@ -85,5 +85,6 @@ export const theBanhammer: WikiEntry = {
       "The Banhammer is based off of a Roblox gear of the same name."
     ]
   },
-  lastUpdated: "2025-01-26"
+  lastUpdated: "2025-01-26",
+  part: "TEMP"
 };

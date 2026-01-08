@@ -217,6 +217,7 @@ export interface WikiEntry {
   content: string;
   category: CategoryType;
   subcategory: Subcategory;
+  part?: string; // Part assignment (e.g., "Part 1", "TEMP")
   imageUrl?: string;
   relatedEntries?: string[];
   lastUpdated: string;

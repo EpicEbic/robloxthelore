@@ -11,6 +11,7 @@ export const bryckManning: WikiEntry = {
   subcategory: "minor-antagonist",
   imageUrl: "/images/bryck-manning-uncoiled-1.png",
   lastUpdated: "2025-01-08",
+  part: "Part 1",
   quote: {
     text: "I finally have some power for myself, so tell me—why the HELL would I give that up!?",
     context: "Bryck, arguing with Caesar after he asked Bryck to remove the Gravity Coil and surrender."

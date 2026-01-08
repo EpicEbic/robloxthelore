@@ -31,8 +31,8 @@ const LOCKED_ENTRIES = [
   'the-breadwinner'
 ];
 
-// Valid secret phrases to track
-const VALID_PHRASES = ['minion', 'whybother'];
+// Valid secret phrases to track (with page restrictions)
+const ALL_PHRASES = ['minion', 'whybother', 'salad', 'unlock'];
 
 export function EasterEggProvider({ children }: EasterEggProviderProps) {
   const [isMinionMode, setIsMinionMode] = useState(false);
@@ -54,15 +54,22 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
   // Check if we're on Caesar's entry page
   const isOnCaesarPage = location.pathname === '/entry/caesar-bloxwright';
 
-  // Check if a character matches any valid phrase
+  // Get valid phrases based on current page (for checking if phrase can be typed)
+  const getValidPhrases = (): string[] => {
+    // Allow typing all phrases, but activation will be page-specific
+    return ALL_PHRASES;
+  };
+
+  // Check if a character matches any valid phrase (allows typing all phrases)
   const checkCharacterMatch = (currentText: string, newChar: string): boolean => {
+    const validPhrases = getValidPhrases();
     // If we have existing text, check if adding the new char continues a valid phrase
     if (currentText) {
       const newText = currentText + newChar;
-      return VALID_PHRASES.some(phrase => phrase.startsWith(newText));
+      return validPhrases.some(phrase => phrase.startsWith(newText));
     }
     // If we're starting fresh, check if the new char could start any valid phrase
-    return VALID_PHRASES.some(phrase => phrase.startsWith(newChar));
+    return validPhrases.some(phrase => phrase.startsWith(newChar));
   };
 
   // Reset typing indicator after timeout
@@ -111,6 +118,36 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
           if (typingTimeoutRef.current) {
             clearTimeout(typingTimeoutRef.current);
           }
+        } else if (newTypingText === 'salad') {
+          if (isOnCaesarPage) {
+            setIsCaesarSaladMode(!isCaesarSaladMode);
+            setTypingText('');
+            setIsTypingVisible(false);
+            if (typingTimeoutRef.current) {
+              clearTimeout(typingTimeoutRef.current);
+            }
+          } else {
+            // Show error if not on Caesar's page
+            setIsTypingError(true);
+            setTimeout(() => {
+              setTypingText('');
+              setIsTypingError(false);
+              setIsTypingVisible(false);
+            }, 1000);
+            if (typingTimeoutRef.current) {
+              clearTimeout(typingTimeoutRef.current);
+            }
+          }
+        } else if (newTypingText === 'unlock') {
+          // Unlock all locked entries
+          setUnlockedEntries(new Set(LOCKED_ENTRIES));
+          // Unlock Tournament feature
+          setIsTournamentUnlocked(true);
+          setTypingText('');
+          setIsTypingVisible(false);
+          if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+          }
         }
       } else {
         // Invalid character - show error with the incorrect character, then reset
@@ -153,7 +190,7 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
         clearTimeout(typingTimeoutRef.current);
       }
     };
-  }, [keySequence, isMinionMode, isCaesarSaladMode, isOnCaesarPage, navigate, typingText]);
+    }, [keySequence, isMinionMode, isCaesarSaladMode, isOnCaesarPage, navigate, typingText, location.pathname]);
 
   // Reset Caesar salad mode when leaving Caesar's page
   useEffect(() => {

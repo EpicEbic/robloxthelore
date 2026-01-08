@@ -8,6 +8,9 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { WikiProvider } from "@/contexts/wiki-context";
 import { EasterEggProvider } from "@/contexts/easter-egg-context";
 import { ParticleSettingsProvider } from "@/contexts/particle-settings-context";
+import { PartProvider } from "@/contexts/part-context";
+import { LockProvider, useLock } from "@/contexts/lock-context";
+import { LockScreen } from "@/components/lock-screen";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Layout } from "@/components/layout";
 import { AnimatePresence, motion } from "framer-motion";
@@ -30,7 +33,7 @@ import PlotTimelinePage from "./pages/PlotTimelinePage";
 
 const queryClient = new QueryClient();
 
-const App = () => {
+const AppContent = () => {
   const location = useLocation();
   const prevPathnameRef = React.useRef(location.pathname);
   
@@ -46,45 +49,67 @@ const App = () => {
   }, [location.pathname]);
 
   return (
+    <Layout>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={location.pathname}
+          initial={shouldFade ? { opacity: 0 } : undefined}
+          animate={{ opacity: 1 }}
+          exit={shouldFade ? { opacity: 0 } : undefined}
+          transition={shouldFade ? { duration: 0.25, ease: 'easeInOut' } : { duration: 0 }}
+        >
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/category/:categoryType" element={<CategoryPage />} />
+            <Route path="/category/:categoryType/:subcategory" element={<CategoryPage />} />
+            <Route path="/entry/:id" element={<EntryPage />} />
+            <Route path="/statistics" element={<StatisticInfoPage />} />
+            <Route path="/comparison" element={<ComparisonPage />} />
+            <Route path="/tournament" element={<TournamentPage />} />
+            <Route path="/world" element={<WorldMapPage />} />
+            <Route path="/whats-new" element={<WhatsNewPage />} />
+            <Route path="/plot-timeline" element={<PlotTimelinePage />} />
+            <Route path="/secret" element={<SecretPage />} />
+            <Route path="/secret-alternate" element={<AlternateSecretPage />} />
+            <Route path="/secret-l" element={<SecretLPage />} />
+            <Route path="/whybother" element={<WhyBotherPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
+    </Layout>
+  );
+};
+
+const App = () => {
+  const { isUnlocked, unlock } = useLock();
+
+  if (!isUnlocked) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <TooltipProvider>
+            <LockScreen onUnlock={unlock} />
+          </TooltipProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    );
+  }
+
+  return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
           <Toaster />
           <Sonner />
           <ParticleSettingsProvider>
-            <EasterEggProvider>
-              <WikiProvider>
-                <Layout>
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    key={location.pathname}
-                    initial={shouldFade ? { opacity: 0 } : undefined}
-                    animate={{ opacity: 1 }}
-                    exit={shouldFade ? { opacity: 0 } : undefined}
-                    transition={shouldFade ? { duration: 0.25, ease: 'easeInOut' } : { duration: 0 }}
-                  >
-                    <Routes location={location} key={location.pathname}>
-                      <Route path="/" element={<HomePage />} />
-                      <Route path="/category/:categoryType" element={<CategoryPage />} />
-                      <Route path="/category/:categoryType/:subcategory" element={<CategoryPage />} />
-                      <Route path="/entry/:id" element={<EntryPage />} />
-                      <Route path="/statistics" element={<StatisticInfoPage />} />
-                      <Route path="/comparison" element={<ComparisonPage />} />
-                      <Route path="/tournament" element={<TournamentPage />} />
-                      <Route path="/world" element={<WorldMapPage />} />
-                      <Route path="/whats-new" element={<WhatsNewPage />} />
-                      <Route path="/plot-timeline" element={<PlotTimelinePage />} />
-                      <Route path="/secret" element={<SecretPage />} />
-                      <Route path="/secret-alternate" element={<AlternateSecretPage />} />
-                      <Route path="/secret-l" element={<SecretLPage />} />
-                      <Route path="/whybother" element={<WhyBotherPage />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </motion.div>
-                </AnimatePresence>
-              </Layout>
-            </WikiProvider>
-          </EasterEggProvider>
+            <PartProvider>
+              <EasterEggProvider>
+                <WikiProvider>
+                  <AppContent />
+                </WikiProvider>
+              </EasterEggProvider>
+            </PartProvider>
           </ParticleSettingsProvider>
         </TooltipProvider>
       </ThemeProvider>
@@ -92,4 +117,8 @@ const App = () => {
   );
 };
 
-export default App;
+export default () => (
+  <LockProvider>
+    <App />
+  </LockProvider>
+);

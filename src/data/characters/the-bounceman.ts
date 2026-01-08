@@ -11,6 +11,7 @@ export const theBounceman: WikiEntry = {
   subcategory: "minor-antagonist",
   imageUrl: "/images/bounceman.png", // Placeholder - will be updated when images are added
   lastUpdated: "2025-01-27",
+  part: "TEMP",
   
   quote: {
     text: "Why sit down when you could keep on moving?",

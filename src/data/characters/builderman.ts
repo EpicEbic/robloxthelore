@@ -11,6 +11,7 @@ export const builderman: WikiEntry = {
   category: "character",
   subcategory: "neutral",
   lastUpdated: "2025-01-26",
+  part: "TEMP",
   
   quote: {
     text: "A mansion? A rocket? A city? The only limit is my imagination!",

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useWiki, CategoryType, Subcategory } from "@/contexts/wiki-context";
 import { WikiEntryCard } from "@/components/wiki-entry-card";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SearchBar } from "@/components/search-bar";
 import { getSubcategoryLabel, getDefaultSubcategory } from "@/data/categories";
 import { useMemo } from "react";
@@ -73,14 +73,14 @@ const CategoryPage = () => {
   }, [categories, validatedCategoryType, validatedSubcategory]);
 
   return (
-    <div className="container mx-auto px-4 py-8 animate-fade-in">
+    <div className="container mx-auto px-4 py-12 max-w-6xl">
       <CategoryHero 
         categoryType={validatedCategoryType}
         categoryLabel={categoryLabel}
         subcategoryLabel={subcategoryLabel}
       />
 
-      <div className="flex justify-center mb-10">
+      <div className="flex justify-center mb-12">
         <SearchBar />
       </div>
 
@@ -88,12 +88,35 @@ const CategoryPage = () => {
         // Grouped display for "All Characters"
         <div className="space-y-8">
           {groupedEntries.map(([subcategory, subcategoryEntries]) => (
-            <div key={subcategory} className="space-y-4">
-              <h2 className="text-2xl font-semibold text-muted-foreground">
-                {getSubcategoryLabel("character", subcategory)}
-              </h2>
+            <Card key={subcategory} className="rounded-2xl shadow-xl border-2 backdrop-blur-sm overflow-hidden">
+              <CardHeader>
+                <CardTitle className="text-2xl font-semibold">
+                  {getSubcategoryLabel("character", subcategory)}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {subcategoryEntries.map((entry, index) => (
+                    <div 
+                      key={entry.id} 
+                      className="opacity-0 animate-card-fade-in"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      <WikiEntryCard entry={entry} imageDelay={index * 0.1 + 0.2} />
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        // Standard display for specific subcategories
+        <Card className="rounded-2xl shadow-xl border-2 backdrop-blur-sm overflow-hidden">
+          <CardContent className="pt-6">
+            {entries.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {subcategoryEntries.map((entry, index) => (
+                {entries.map((entry, index) => (
                   <div 
                     key={entry.id} 
                     className="opacity-0 animate-card-fade-in"
@@ -103,28 +126,13 @@ const CategoryPage = () => {
                   </div>
                 ))}
               </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        // Standard display for specific subcategories
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {entries.length > 0 ? (
-            entries.map((entry, index) => (
-              <div 
-                key={entry.id} 
-                className="opacity-0 animate-card-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <WikiEntryCard entry={entry} imageDelay={index * 0.1 + 0.2} />
+            ) : (
+              <div className="p-6 text-center">
+                <p className="text-muted-foreground">No entries found for this category.</p>
               </div>
-            ))
-          ) : (
-            <Card className="col-span-1 md:col-span-2 lg:col-span-3 p-6 text-center">
-              <p>No entries found for this category.</p>
-            </Card>
-          )}
-        </div>
+            )}
+          </CardContent>
+        </Card>
       )}
     </div>
   );

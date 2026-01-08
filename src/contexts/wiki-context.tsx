@@ -1,7 +1,8 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useMemo } from "react";
 import { WikiEntry, CategoryType, Subcategory, CategoryStructure } from "@/types/wiki-types";
 import { CATEGORIES } from "@/data/categories";
 import { sampleWikiEntries } from "@/data/sample-wiki-entries";
+import { usePart } from "./part-context";
 
 // Context interface
 interface WikiContextType {
@@ -19,7 +20,19 @@ const WikiContext = createContext<WikiContextType | undefined>(undefined);
 
 export const WikiProvider = ({ children }: { children: ReactNode }) => {
   console.log("WikiProvider rendering...");
-  const [entries, setEntries] = useState<WikiEntry[]>(sampleWikiEntries);
+  const [allEntries, setAllEntries] = useState<WikiEntry[]>(sampleWikiEntries);
+  
+  // Get current part from PartContext (PartProvider should wrap this)
+  const { currentPart } = usePart();
+  
+  // Filter entries by current part
+  const entries = useMemo(() => {
+    return allEntries.filter(entry => {
+      // If entry has no part field, default to TEMP
+      const entryPart = entry.part || "TEMP";
+      return entryPart === currentPart;
+    });
+  }, [allEntries, currentPart]);
 
   const addEntry = (entryData: Omit<WikiEntry, "id" | "lastUpdated">) => {
     const newEntry: WikiEntry = {
@@ -27,11 +40,11 @@ export const WikiProvider = ({ children }: { children: ReactNode }) => {
       id: Date.now().toString(),
       lastUpdated: new Date().toISOString().split('T')[0]
     };
-    setEntries([...entries, newEntry]);
+    setAllEntries([...allEntries, newEntry]);
   };
 
   const updateEntry = (updatedEntry: WikiEntry) => {
-    setEntries(entries.map(entry => 
+    setAllEntries(allEntries.map(entry => 
       entry.id === updatedEntry.id 
         ? { ...updatedEntry, lastUpdated: new Date().toISOString().split('T')[0] } 
         : entry
@@ -39,7 +52,7 @@ export const WikiProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const deleteEntry = (id: string) => {
-    setEntries(entries.filter(entry => entry.id !== id));
+    setAllEntries(allEntries.filter(entry => entry.id !== id));
   };
 
   const getEntriesByCategory = (category: CategoryType, subcategory?: Subcategory) => {

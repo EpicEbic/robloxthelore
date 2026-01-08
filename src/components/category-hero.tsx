@@ -16,7 +16,7 @@ export function CategoryHero({ categoryType, categoryLabel, subcategoryLabel }: 
   return (
     <div
       className={cn(
-        "p-8 lg:p-12 rounded-xl mb-8 text-center text-primary-foreground relative overflow-hidden shadow-lg",
+        "p-8 lg:p-12 rounded-2xl mb-8 text-center text-primary-foreground relative overflow-hidden shadow-xl border-2 border-primary/20",
         `bg-wiki-${categoryType}`
       )}
     >

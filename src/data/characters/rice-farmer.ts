@@ -12,6 +12,7 @@ export const riceFarmer: WikiEntry = {
   subcategory: "neutral",
   imageUrl: "/images/rice-1.png",
   lastUpdated: "2025-01-26",
+  part: "Part 1",
   relatedEntries: ["caesar-bloxwright", "nauli-parter"],
   
   quote: {

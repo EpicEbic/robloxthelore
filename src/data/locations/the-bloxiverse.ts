@@ -9,6 +9,7 @@ export const theBloxiverse: WikiEntry = {
   category: "location",
   subcategory: "bloxiverse",
   lastUpdated: "2025-01-26",
+  part: "TEMP",
   imageUrl: "/lovable-uploads/9b6c3a4f-423f-4f75-9401-8acb69eafdbe.png",
   locationType: "Reality / Multiverse",
   locationSize: "Cosmic",

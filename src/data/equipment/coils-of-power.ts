@@ -8,6 +8,7 @@ export const coilsOfPower: WikiEntry = {
   category: "equipment",
   subcategory: "artifacts",
   lastUpdated: "2025-01-26",
+  part: "Part 1",
   imageUrl: "/images/Coils-Of-Power-1.png",
   carouselImages: [
     {

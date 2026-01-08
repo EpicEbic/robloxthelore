@@ -16,6 +16,7 @@ Bloxxanne works tirelessly alongside Builderman—a relationship built on deep m
   subcategory: "neutral", // Deuteragonist/Deuteragonist-aligned
   imageUrl: "/lovable-uploads/3ea92f5c-1d6f-4cff-b39a-a2b6f7e1ae5d.png",
   lastUpdated: new Date().toISOString().split('T')[0],
+  part: "TEMP",
   quote: {
     text: "You're 'da boss, boss! I'll get on it right away!",
     context: "Bloxxanne, confirming Builderman's request for a new project."

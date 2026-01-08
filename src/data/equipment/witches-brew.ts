@@ -9,6 +9,7 @@ export const witchesBrew: WikiEntry = {
   category: "equipment",
   subcategory: "standard",
   lastUpdated: "2025-01-26",
+  part: "TEMP",
   imageUrl: "/images/witches-brew-can-1.png",
   
   carouselImages: [

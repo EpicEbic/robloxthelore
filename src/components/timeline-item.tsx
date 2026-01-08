@@ -36,7 +36,7 @@ export function TimelineItem({ item, isLast }: TimelineItemProps) {
       {/* Content */}
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger asChild>
-          <Card className="bg-card/50 border-2 border-transparent transition-all duration-300 shadow-lg cursor-pointer">
+          <Card className="bg-card/80 border-2 border-border/50 hover:border-primary/50 transition-all duration-300 shadow-lg cursor-pointer rounded-xl">
             <CardHeader>
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <CardTitle className="text-xl font-bold text-left">{item.title}</CardTitle>

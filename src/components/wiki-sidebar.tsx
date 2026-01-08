@@ -14,10 +14,33 @@ import { CategoryType, Subcategory } from "@/contexts/wiki-context";
 import { useParticleSettings } from "@/contexts/particle-settings-context";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { usePart } from "@/contexts/part-context";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface WikiTopNavProps {
   className?: string;
 }
+
+// Part Selector Component
+function PartSelector() {
+  const { currentPart, setCurrentPart, availableParts } = usePart();
+
+  return (
+    <Select value={currentPart} onValueChange={(value) => setCurrentPart(value as "Part 1" | "TEMP")}>
+      <SelectTrigger className="w-[100px] h-8 text-xs border-border/50 bg-background/50">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {availableParts.map((part) => (
+          <SelectItem key={part} value={part}>
+            {part}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
+
 export function WikiTopNav({
   className
 }: WikiTopNavProps) {
@@ -99,9 +122,12 @@ export function WikiTopNav({
       <div className={cn("flex items-center justify-between w-full px-6 bg-background/95 backdrop-blur-md border-b border-border/50 transition-all duration-300", navBarVisible ? "py-3 opacity-100" : "py-0 h-0 opacity-0 overflow-hidden")}>
         {/* Left Section - Title and Main Navigation */}
         <div className="flex items-center space-x-8">
-        <Link to="/" className="flex items-center space-x-3 group">
-          <h1 className="font-bold text-xl text-foreground group-hover:text-primary transition-colors duration-200">The Lore</h1>
-        </Link>
+        <div className="flex items-center space-x-3">
+          <Link to="/" className="group">
+            <h1 className="font-bold text-xl text-foreground group-hover:text-primary transition-colors duration-200">The Lore</h1>
+          </Link>
+          <PartSelector />
+        </div>
 
         <div className="flex items-center space-x-1">
           {/* Categories */}
@@ -272,10 +298,13 @@ export function WikiTopNav({
           <SheetContent side="left" className="w-[300px] sm:w-[400px] p-0 flex flex-col">
             <div className="flex flex-col h-full overflow-y-auto custom-scrollbar">
               <div className="p-4 border-b border-border/50">
-                <Link to="/" className="flex items-center space-x-3 group" onClick={() => setMobileMenuOpen(false)}>
-                  <Home className="h-5 w-5 text-primary" />
-                  <h2 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">The Lore</h2>
-                </Link>
+                <div className="flex items-center justify-between">
+                  <Link to="/" className="flex items-center space-x-3 group" onClick={() => setMobileMenuOpen(false)}>
+                    <Home className="h-5 w-5 text-primary" />
+                    <h2 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">The Lore</h2>
+                  </Link>
+                  <PartSelector />
+                </div>
               </div>
 
               {/* Plot Timeline */}
@@ -372,9 +401,12 @@ export function WikiTopNav({
           </SheetContent>
         </Sheet>
 
-        <Link to="/" className="flex items-center space-x-2 group">
-          <h1 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">The Lore</h1>
-        </Link>
+        <div className="flex items-center space-x-2">
+          <Link to="/" className="group">
+            <h1 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">The Lore</h1>
+          </Link>
+          <PartSelector />
+        </div>
       </div>
 
       {/* Right Section - Action Buttons */}
