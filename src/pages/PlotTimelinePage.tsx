@@ -384,8 +384,7 @@ Somewhere far away, a bag of groceries drifted weightlessly throughout the Miasm
 
 export default function PlotTimelinePage() {
   return (
-    <div className="min-h-screen relative">
-      <div className="container mx-auto px-4 py-12 max-w-6xl relative z-10">
+    <div className="container mx-auto px-4 py-12 max-w-6xl">
         {/* Hero Section */}
         <div className="text-center mb-12 animate-fade-in">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
@@ -409,64 +408,55 @@ export default function PlotTimelinePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: pIdx * 0.1 }}
               >
-                <Card className="rounded-2xl shadow-xl border-2 backdrop-blur-sm overflow-hidden bg-card/95">
+                <Card className="rounded-2xl shadow-xl border-2 bg-card/95 backdrop-blur-sm overflow-hidden">
                   <AccordionItem value={part.part} className="border-0">
-                    <CardHeader className="pb-4">
+                    <CardHeader>
                       <AccordionTrigger className="hover:no-underline p-0">
-                        <div className="flex items-center gap-4 w-full">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center flex-shrink-0">
-                            <BookOpen className="w-5 h-5 text-white" />
-                          </div>
-                          <div className="flex items-center gap-3 flex-1 min-w-0">
-                            <Badge variant="secondary" className="px-3 py-1.5 bg-primary/20 text-primary border-primary/30 font-bold text-sm flex-shrink-0">
-                              {part.part}
-                            </Badge>
-                            {part.description && (
-                              <span className="text-sm text-muted-foreground truncate">{part.description}</span>
-                            )}
-                          </div>
+                        <div className="flex items-center gap-3 flex-wrap w-full">
+                          <Badge variant="secondary" className="px-3 py-1 bg-zinc-700/60 text-zinc-300 border-zinc-300/30 font-bold">
+                            {part.part}
+                          </Badge>
+                          {part.description && (
+                            <span className="text-sm text-muted-foreground">{part.description}</span>
+                          )}
                         </div>
                       </AccordionTrigger>
                     </CardHeader>
-                    <AccordionContent className="px-6 pb-6">
-                      <div className="space-y-4 pt-2">
-                        <Accordion type="multiple" className="space-y-4">
-                          {part.chapters.map((ch, cIdx) => (
-                            <motion.div
-                              key={`${part.part}-${ch.chapter}`}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.2, delay: cIdx * 0.05 }}
-                            >
-                              <Card className="rounded-xl border-2 border-zinc-300/50 bg-zinc-800/40 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-200">
-                                <AccordionItem
-                                  value={`${part.part}-${ch.chapter}`}
-                                  className="border-0"
-                                >
-                                  <AccordionTrigger className="px-5 py-4 hover:bg-primary/5 rounded-lg transition-colors">
-                                    <div className="flex items-center gap-3 flex-wrap w-full text-left">
-                                      <div className="w-8 h-8 rounded-lg bg-zinc-700/60 border border-zinc-300/30 flex items-center justify-center flex-shrink-0">
-                                        <span className="text-xs font-bold text-zinc-300">{cIdx + 1}</span>
+                    <AccordionContent>
+                      <CardContent className="pt-0">
+                        <div className="space-y-4">
+                          <Accordion type="multiple" className="space-y-3">
+                            {part.chapters.map((ch, cIdx) => (
+                              <motion.div
+                                key={`${part.part}-${ch.chapter}`}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.2, delay: cIdx * 0.05 }}
+                              >
+                                <Card className="rounded-xl border border-zinc-300/50 bg-zinc-800/40 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                                  <AccordionItem
+                                    value={`${part.part}-${ch.chapter}`}
+                                    className="border-0"
+                                  >
+                                    <AccordionTrigger className="px-5 py-3 hover:bg-primary/5 rounded-lg transition-colors">
+                                      <div className="flex items-center gap-3 flex-wrap w-full text-left">
+                                        <Badge variant="outline" className="px-2.5 py-0.5 text-xs font-semibold border-zinc-300/30 text-zinc-300 bg-zinc-700/60">
+                                          {ch.chapter}
+                                        </Badge>
+                                        <span className="font-semibold text-base flex-1">{ch.title}</span>
+                                        {ch.date && (
+                                          <span className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded-md">
+                                            {ch.date}
+                                          </span>
+                                        )}
                                       </div>
-                                      <Badge variant="outline" className="px-2.5 py-1 text-xs font-semibold border-zinc-300/50 bg-background/50 text-zinc-300">
-                                        {ch.chapter}
-                                      </Badge>
-                                      <span className="font-semibold text-base flex-1">{ch.title}</span>
-                                      {ch.date && (
-                                        <span className="text-xs text-muted-foreground bg-muted/70 px-2.5 py-1 rounded-md border border-border/50">
-                                          {ch.date}
-                                        </span>
-                                      )}
-                                    </div>
-                                  </AccordionTrigger>
-                                  <AccordionContent className="px-5 pb-5 pt-3">
-                                    {ch.description && (
-                                      <div className="mb-5 pb-4 border-b border-border/40">
-                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                    </AccordionTrigger>
+                                    <AccordionContent className="px-5 pb-5 pt-2">
+                                      {ch.description && (
+                                        <p className="text-sm text-muted-foreground mb-4 leading-relaxed pb-3 border-b border-border/30">
                                           {ch.description}
                                         </p>
-                                      </div>
-                                    )}
+                                      )}
                                     {ch.acts && ch.acts.length > 0 ? (
                                       <div className="space-y-4">
                                         {ch.acts.map((act, aIdx) => (
@@ -475,13 +465,13 @@ export default function PlotTimelinePage() {
                                             initial={{ opacity: 0, y: 8 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.2, delay: aIdx * 0.05 }}
-                                            className="rounded-lg border-2 border-zinc-300/30 bg-card/70 backdrop-blur-sm p-5 shadow-md hover:shadow-lg transition-all duration-200"
+                                            className="rounded-lg border border-zinc-300/30 bg-zinc-800/60 backdrop-blur-sm p-5 shadow-sm hover:shadow-md transition-shadow"
                                           >
-                                            <div className="flex items-center gap-3 mb-4">
-                                              <div className="w-1.5 h-8 bg-gradient-to-b from-zinc-300/60 to-zinc-400/30 rounded-full flex-shrink-0"></div>
+                                            <div className="flex items-center gap-2 mb-3">
+                                              <div className="w-1 h-6 bg-gradient-to-b from-zinc-300/60 to-zinc-400/30 rounded-full"></div>
                                               <h4 className="text-base font-semibold text-foreground">{act.title}</h4>
                                             </div>
-                                            <div className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line pl-5">
+                                            <div className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line pl-3">
                                               {act.content}
                                             </div>
                                           </motion.div>
@@ -491,19 +481,20 @@ export default function PlotTimelinePage() {
                                       <motion.div
                                         initial={{ opacity: 0, y: 8 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="rounded-lg border-2 border-border/40 bg-card/70 backdrop-blur-sm p-4 text-sm text-muted-foreground leading-relaxed shadow-sm"
+                                        transition={{ duration: 0.2, delay: cIdx * 0.02 + pIdx * 0.05 }}
+                                        className="rounded-md border border-border/40 bg-card/80 p-3 text-sm text-muted-foreground leading-relaxed shadow-inner"
                                       >
                                         {ch.narration}
                                       </motion.div>
                                     ) : null}
-                                  </AccordionContent>
-                                </AccordionItem>
-                              </Card>
-                            </motion.div>
-                          ))}
-                        </Accordion>
-                      </div>
+                                    </AccordionContent>
+                                  </AccordionItem>
+                                </Card>
+                              </motion.div>
+                            ))}
+                          </Accordion>
+                        </div>
+                      </CardContent>
                     </AccordionContent>
                   </AccordionItem>
                 </Card>
@@ -511,7 +502,6 @@ export default function PlotTimelinePage() {
             ))}
           </Accordion>
         </div>
-      </div>
     </div>
   );
 }

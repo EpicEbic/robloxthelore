@@ -1,6 +1,6 @@
 import { InteractiveBloxiverseMap } from "@/components/world/interactive-bloxiverse-map";
-import { Card } from "@/components/ui/card";
-import { Info } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Info, Globe } from "lucide-react";
 import { LocationThemeProvider, useLocationTheme } from "@/contexts/location-theme-context";
 import { CharacterParticles } from "@/components/effects/character-particles";
 import { AnimatePresence, motion } from "framer-motion";
@@ -28,37 +28,51 @@ const WorldMapPageContent = () => {
         </AnimatePresence>
       </div>
 
-      <div className="relative z-10 min-h-screen w-full p-4 md:p-8">
-        <div className="max-w-7xl mx-auto space-y-6">
-          {/* Header */}
-          <div className="text-center space-y-2">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+      <div className="relative z-10 min-h-screen w-full">
+        <div className="container mx-auto px-4 py-12 max-w-6xl">
+          {/* Hero Section */}
+          <div className="text-center mb-12 animate-fade-in">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
+              <Globe className="w-8 h-8 text-primary" />
+            </div>
+            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
               The Bloxiverse
             </h1>
-            <p className="text-lg text-muted-foreground">Interactive Map</p>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Explore the interactive map of the Bloxiverse. Navigate through segments, discover worlds, and learn about the cosmic structure of reality.
+            </p>
           </div>
 
-          {/* Instructions */}
-          <Card className="bg-card/95 backdrop-blur-sm border border-border/50 p-4">
-            <div className="flex items-start gap-3">
-              <Info className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-              <div className="space-y-1">
-                <p className="text-foreground/90 text-sm md:text-base">
-                  <strong>Click and drag</strong> to pan around the map.{" "}
-                  <strong>Scroll to zoom</strong> in and out.{" "}
-                  <strong>Click on segments</strong> to learn more about each area of the Bloxiverse.{" "}
-                  <strong>Click on worlds</strong> to view detailed information about Robloxian Worlds.
-                </p>
-              </div>
-            </div>
-          </Card>
+          <div className="space-y-8">
+            {/* Instructions */}
+            <Card className="rounded-2xl shadow-xl border-2 backdrop-blur-sm overflow-hidden">
+              <CardHeader>
+                <CardTitle className="text-2xl font-semibold flex items-center gap-2">
+                  <Info className="h-5 w-5 text-primary" />
+                  How to Navigate
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <p>
+                    <strong className="text-foreground">Desktop:</strong> Click and drag to pan, scroll to zoom, click segments/worlds for details.
+                  </p>
+                  <p>
+                    <strong className="text-foreground">Mobile:</strong> Drag to pan, pinch to zoom, tap segments/worlds for details.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
 
-          {/* Map Container */}
-          <Card className="bg-card/95 backdrop-blur-sm border border-border/50 overflow-hidden">
-            <div className="w-full h-[70vh] md:h-[80vh]">
-              <InteractiveBloxiverseMap />
-            </div>
-          </Card>
+            {/* Map Container */}
+            <Card className="rounded-2xl shadow-xl border-2 backdrop-blur-sm overflow-hidden">
+              <CardContent className="p-0">
+                <div className="w-full h-[70vh] md:h-[80vh] relative overflow-hidden">
+                  <InteractiveBloxiverseMap />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

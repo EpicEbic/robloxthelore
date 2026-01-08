@@ -28,8 +28,14 @@ export const WikiProvider = ({ children }: { children: ReactNode }) => {
   // Filter entries by current part
   const entries = useMemo(() => {
     return allEntries.filter(entry => {
-      // If entry has no part field, default to TEMP
       const entryPart = entry.part || "TEMP";
+      
+      // Explicitly exclude Part 1 entries from TEMP view
+      if (currentPart === "TEMP" && entryPart === "Part 1") {
+        return false;
+      }
+      
+      // Only show entries that match the current part
       return entryPart === currentPart;
     });
   }, [allEntries, currentPart]);
@@ -64,7 +70,8 @@ export const WikiProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const getEntryById = (id: string) => {
-    return entries.find(entry => entry.id === id);
+    // Search in allEntries to allow access to entries from any part via direct link
+    return allEntries.find(entry => entry.id === id);
   };
 
   const searchEntries = (query: string) => {

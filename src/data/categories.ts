@@ -8,11 +8,11 @@ export const CATEGORIES: CategoryStructure[] = [
     label: "Characters",
     subcategories: [
       { value: "all", label: "All Characters" },
-      { value: "protagonist", label: "Protagonist" },
-      { value: "neutral", label: "Deuteragonist" },
-      { value: "evil", label: "Neutralist" },
-      { value: "minor-antagonist", label: "Minor Antagonist" },
-      { value: "major-antagonist", label: "Major Antagonist" },
+      { value: "protagonist", label: "Protagonists" },
+      { value: "neutral", label: "Deuteragonists" },
+      { value: "evil", label: "Neutralists" },
+      { value: "minor-antagonist", label: "Minor Antagonists" },
+      { value: "major-antagonist", label: "Major Antagonists" },
       { value: "noncanon", label: "Non-Canon" }
     ]
   },
@@ -30,8 +30,6 @@ export const CATEGORIES: CategoryStructure[] = [
     label: "Locations",
     subcategories: [
       { value: "all", label: "All Locations" },
-      { value: "world-map", label: "World Map" },
-      { value: "bloxiverse", label: "The Bloxiverse" },
       { value: "primarylocations", label: "Primary Locations" },
       { value: "secondarylocations", label: "Secondary Locations" }
     ]

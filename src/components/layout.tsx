@@ -83,7 +83,7 @@ function LayoutContent({ children }: LayoutProps) {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col w-full dark text-foreground bg-background">
+    <div className="min-h-screen flex flex-col w-full dark text-foreground" style={{ background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)' }}>
       <WikiTopNav />
       <div
         ref={scrollContainerRef}

@@ -42,6 +42,7 @@ function generateDistributedDots(
   segments: Array<{ id: string; startRadius: number; endRadius: number }>,
   rng: SeededRandom,
   innerBufferRadius: number,
+  heartBoundary: number,
   minDistance: number = 8
 ): Dot[] {
   const dots: Dot[] = [];
@@ -59,13 +60,18 @@ function generateDistributedDots(
     'the-null-zone': 0, // Does not exist
   };
 
-  // Define size ranges per segment for visual variety
+  // Define size ranges per segment for visual variety (increased variety)
   const segmentSizeRanges: Record<string, [number, number]> = {
-    'the-inner-circle': [1.8, 3.2],
-    'the-midzone': [2.0, 3.8],
-    'the-outer-circle': [2.4, 4.2],
-    'the-banlands': [2.8, 4.6],
+    'the-inner-circle': [1.5, 3.8],
+    'the-midzone': [1.8, 4.5],
+    'the-outer-circle': [2.2, 5.0],
+    'the-banlands': [2.6, 5.5],
   };
+
+  // Dithering parameters - fade zone extends from heart boundary
+  const ditherStartRadius = heartBoundary;
+  const ditherEndRadius = heartBoundary + 400; // Fade over 400 units
+  const ditherRange = ditherEndRadius - ditherStartRadius;
 
   let dotId = 0;
 
@@ -89,8 +95,8 @@ function generateDistributedDots(
           const minRadius = Math.max(segment.startRadius, innerBufferRadius);
           radius = minRadius + t * (segment.endRadius - minRadius);
         } else if (segment.id === 'the-inner-circle') {
-          // Evenly distributed but dense
-          const minRadius = Math.max(segment.startRadius, innerBufferRadius);
+          // Evenly distributed but dense - allow some dots closer to heart for dithering
+          const minRadius = heartBoundary; // Start from heart boundary for dithering effect
           radius = minRadius + rng.next() * (segment.endRadius - minRadius);
         } else {
           // Sparse segments - more random
@@ -102,12 +108,30 @@ function generateDistributedDots(
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
         
-        // Random size and opacity
+        // Random size and base opacity
         const sizeRange = segmentSizeRanges[segment.id] || [2.0, 3.5];
         const size = sizeRange[0] + rng.next() * (sizeRange[1] - sizeRange[0]);
-        const opacity = 0.4 + rng.next() * 0.4; // 0.4-0.8 for better visibility
+        let baseOpacity = 0.4 + rng.next() * 0.4; // 0.4-0.8 for better visibility
 
-        const newDot: Dot = { x, y, size, opacity, id: dotId };
+        // Apply dithering fade based on distance from heart
+        if (radius < ditherEndRadius) {
+          const distanceFromHeart = radius - ditherStartRadius;
+          if (distanceFromHeart < ditherRange) {
+            // Fade out as we approach the heart
+            // Use smoothstep for natural falloff
+            const t = Math.max(0, Math.min(1, distanceFromHeart / ditherRange));
+            const fadeFactor = t * t * (3 - 2 * t); // Smoothstep function
+            baseOpacity *= fadeFactor;
+            
+            // Also reduce size slightly near heart for more natural look
+            if (fadeFactor < 0.5) {
+              // Further reduce opacity for very close dots
+              baseOpacity *= fadeFactor * 2;
+            }
+          }
+        }
+
+        const newDot: Dot = { x, y, size, opacity: baseOpacity, id: dotId };
 
         // Check if this dot overlaps with any existing dots
         const overlaps = dots.some(existingDot => 
@@ -143,7 +167,7 @@ export function DecorativeDots({
     if (typeof window === 'undefined') return;
 
     const rng = new SeededRandom(42);
-    const dots = generateDistributedDots(segments, rng, innerBufferRadius);
+    const dots = generateDistributedDots(segments, rng, innerBufferRadius, heartBoundary);
     const viewSize = maxRadius * 2.4;
     const offset = maxRadius * 1.2;
     const targetTextureSize = Math.min(4096, Math.max(1024, Math.ceil(viewSize / 4)));
@@ -165,9 +189,13 @@ export function DecorativeDots({
       const drawX = (dot.x + offset) * scaleFactor;
       const drawY = (dot.y + offset) * scaleFactor;
       const drawSize = Math.max(1.2, dot.size * scaleFactor * 2.5);
+      
+      // Use the pre-calculated opacity from dithering (already includes fade)
+      // Only add a small boost for visibility, but respect the dithering fade
+      const alpha = Math.min(1, dot.opacity * 0.9 + 0.1);
+      
       ctx.beginPath();
       ctx.arc(drawX, drawY, drawSize, 0, Math.PI * 2);
-      const alpha = Math.min(1, dot.opacity + 0.15);
       ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
       ctx.fill();
     });
@@ -178,7 +206,7 @@ export function DecorativeDots({
     return () => {
       setTextureUrl(null);
     };
-  }, [segments, maxRadius]);
+  }, [segments, maxRadius, heartBoundary, innerBufferRadius]);
 
   if (!textureUrl) {
     return null;

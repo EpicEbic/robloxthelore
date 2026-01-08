@@ -18,8 +18,18 @@ export function InteractiveBloxiverseMap() {
   const [hoveredSegment, setHoveredSegment] = useState<string | null>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
   const [dragMoved, setDragMoved] = useState(false);
+  const [isZooming, setIsZooming] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  
+  // Touch/pinch gesture state
+  const touchStateRef = useRef<{
+    touches: Touch[];
+    lastDistance: number;
+    lastCenter: { x: number; y: number };
+    initialZoom: number;
+    initialPan: { x: number; y: number };
+  } | null>(null);
 
   const minZoom = 0.5;
   const maxZoom = 5;
@@ -33,7 +43,7 @@ export function InteractiveBloxiverseMap() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Prevent page scroll when hovering over map
+  // Smooth zoom with wheel
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -43,11 +53,15 @@ export function InteractiveBloxiverseMap() {
       e.stopPropagation();
       if (!hasAnimated) return;
 
-      const scaleFactor = e.deltaY > 0 ? 0.9 : 1.1;
+      setIsZooming(true);
+      const scaleFactor = e.deltaY > 0 ? 0.92 : 1.08;
       setZoom((prev) => {
         const next = prev * scaleFactor;
         return Math.max(minZoom, Math.min(maxZoom, next));
       });
+      
+      // Reset zooming state after transition
+      setTimeout(() => setIsZooming(false), 300);
     };
 
     container.addEventListener('wheel', preventScroll, { passive: false });
@@ -100,20 +114,141 @@ export function InteractiveBloxiverseMap() {
     }
   };
 
+  // Calculate distance between two touches
+  const getTouchDistance = (touch1: Touch, touch2: Touch): number => {
+    const dx = touch2.clientX - touch1.clientX;
+    const dy = touch2.clientY - touch1.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  // Calculate center point between two touches
+  const getTouchCenter = (touch1: Touch, touch2: Touch): { x: number; y: number } => {
+    return {
+      x: (touch1.clientX + touch2.clientX) / 2,
+      y: (touch1.clientY + touch2.clientY) / 2,
+    };
+  };
+
+  // Touch event handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!hasAnimated) return;
+    
+    const touches = Array.from(e.touches);
+    
+    if (touches.length === 2) {
+      // Pinch gesture
+      e.preventDefault();
+      const distance = getTouchDistance(touches[0], touches[1]);
+      const center = getTouchCenter(touches[0], touches[1]);
+      
+      touchStateRef.current = {
+        touches,
+        lastDistance: distance,
+        lastCenter: center,
+        initialZoom: zoom,
+        initialPan: pan,
+      };
+      setIsZooming(true);
+    } else if (touches.length === 1) {
+      // Single touch - pan
+      const touch = touches[0];
+      setIsDragging(true);
+      setDragMoved(false);
+      setDragStart({ x: touch.clientX - pan.x, y: touch.clientY - pan.y });
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!hasAnimated) return;
+    
+    const touches = Array.from(e.touches);
+    
+    if (touches.length === 2 && touchStateRef.current) {
+      // Pinch zoom
+      e.preventDefault();
+      const distance = getTouchDistance(touches[0], touches[1]);
+      const center = getTouchCenter(touches[0], touches[1]);
+      const scale = distance / touchStateRef.current.lastDistance;
+      
+      const newZoom = Math.max(minZoom, Math.min(maxZoom, touchStateRef.current.initialZoom * scale));
+      setZoom(newZoom);
+      
+      // Adjust pan to zoom towards the pinch center
+      const container = containerRef.current;
+      if (container) {
+        const rect = container.getBoundingClientRect();
+        const centerX = center.x - rect.left - rect.width / 2;
+        const centerY = center.y - rect.top - rect.height / 2;
+        
+        const zoomDelta = newZoom / touchStateRef.current.initialZoom;
+        const newPanX = centerX - (centerX - touchStateRef.current.initialPan.x) * zoomDelta;
+        const newPanY = centerY - (centerY - touchStateRef.current.initialPan.y) * zoomDelta;
+        
+        setPan({ x: newPanX, y: newPanY });
+      }
+      
+      touchStateRef.current.lastDistance = distance;
+      touchStateRef.current.lastCenter = center;
+    } else if (touches.length === 1 && isDragging) {
+      // Single touch pan
+      const touch = touches[0];
+      const deltaX = touch.clientX - dragStart.x;
+      const deltaY = touch.clientY - dragStart.y;
+
+      if (!dragMoved) {
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        if (distance > 5) {
+          setDragMoved(true);
+        }
+      }
+
+      setPan({
+        x: touch.clientX - dragStart.x,
+        y: touch.clientY - dragStart.y,
+      });
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!hasAnimated) return;
+    
+    const touches = Array.from(e.touches);
+    
+    if (touches.length < 2) {
+      touchStateRef.current = null;
+      setIsZooming(false);
+    }
+    
+    if (touches.length === 0) {
+      const wasDragging = isDragging;
+      setIsDragging(false);
+      
+      // If it was a tap (not a drag), allow click events to propagate
+      // The dragMoved check in click handlers will prevent accidental clicks after dragging
+      if (dragMoved) {
+        setTimeout(() => setDragMoved(false), 0);
+      }
+    }
+  };
+
   const handleZoomIn = () => {
     if (!hasAnimated) return;
+    setIsZooming(true);
     setZoom((prev) => {
       const next = prev * 1.15;
       return Math.min(maxZoom, next);
     });
+    setTimeout(() => setIsZooming(false), 300);
   };
 
   const handleZoomOut = () => {
     if (!hasAnimated) return;
+    setIsZooming(true);
     setZoom((prev) => {
       const next = prev / 1.15;
       return Math.max(minZoom, next);
     });
+    setTimeout(() => setIsZooming(false), 300);
   };
 
   const handleSegmentClick = (segment: BloxiverseSegment) => {
@@ -142,7 +277,7 @@ export function InteractiveBloxiverseMap() {
           variant="outline"
           size="icon"
           onClick={handleZoomIn}
-          className="bg-card/95 backdrop-blur-sm"
+          className="bg-card/95 backdrop-blur-sm border-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
           title="Zoom In"
           disabled={!hasAnimated}
         >
@@ -152,7 +287,7 @@ export function InteractiveBloxiverseMap() {
           variant="outline"
           size="icon"
           onClick={handleZoomOut}
-          className="bg-card/95 backdrop-blur-sm"
+          className="bg-card/95 backdrop-blur-sm border-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
           title="Zoom Out"
           disabled={!hasAnimated}
         >
@@ -163,25 +298,35 @@ export function InteractiveBloxiverseMap() {
       {/* SVG Map */}
       <div
         ref={containerRef}
-        className="w-full h-full overflow-hidden"
+        className="w-full h-full touch-none"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         style={{
           cursor: hasAnimated ? (isDragging ? 'grabbing' : 'grab') : 'default',
           userSelect: 'none',
+          WebkitUserSelect: 'none',
+          touchAction: 'none',
           pointerEvents: hasAnimated ? 'auto' : 'none',
+          position: 'relative',
         }}
       >
         <svg
           ref={svgRef}
           viewBox={`${-maxRadius * 1.2} ${-maxRadius * 1.2} ${maxRadius * 2.4} ${maxRadius * 2.4}`}
           className="w-full h-full"
+          preserveAspectRatio="xMidYMid meet"
           style={{
             transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-            transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            transition: (isDragging || isZooming) ? 'none' : 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
             animation: hasAnimated ? 'none' : 'expandMap 0.8s ease-out forwards',
+            willChange: (isDragging || isZooming) ? 'transform' : 'auto',
+            transformOrigin: 'center center',
+            overflow: 'visible',
           }}
         >
           {/* Decorative Dots */}
@@ -200,41 +345,94 @@ export function InteractiveBloxiverseMap() {
               <g key={segment.id}>
                 {/* The Heart - Solid filled circle */}
                 {isHeart ? (
-                  <circle
-                    cx={0}
-                    cy={0}
-                    r={segment.endRadius}
-                    fill={segment.color}
-                    opacity={0}
-                    className="segment-heart cursor-pointer"
-                    style={{
-                      animation: `fadeInHeart 0.6s ease-out ${animationDelay}ms forwards`,
-                      transition: 'opacity 0.2s ease',
-                      filter: 'drop-shadow(0 0 15px rgba(255,255,255,0.5))',
-                    }}
-                    onMouseEnter={() => setHoveredSegment(segment.id)}
-                    onMouseLeave={() => setHoveredSegment(null)}
-                    onClick={() => handleSegmentClick(segment)}
-                  />
+                  <>
+                    <circle
+                      cx={0}
+                      cy={0}
+                      r={segment.endRadius}
+                      fill={segment.color}
+                      opacity={0}
+                      className="segment-heart cursor-pointer"
+                      style={{
+                        animation: `fadeInHeart 0.6s ease-out ${animationDelay}ms forwards`,
+                        transition: 'opacity 0.2s ease',
+                        filter: 'drop-shadow(0 0 15px rgba(255,255,255,0.5))',
+                      }}
+                      onMouseEnter={() => setHoveredSegment(segment.id)}
+                      onMouseLeave={() => setHoveredSegment(null)}
+                      onClick={() => handleSegmentClick(segment)}
+                    />
+                    {/* White outline for heart */}
+                    <circle
+                      cx={0}
+                      cy={0}
+                      r={segment.endRadius}
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="2"
+                      vectorEffect="non-scaling-stroke"
+                      opacity={0}
+                      style={{
+                        animation: `fadeInHeart 0.6s ease-out ${animationDelay}ms forwards`,
+                        transition: 'opacity 0.2s ease',
+                        pointerEvents: 'none',
+                      }}
+                    />
+                  </>
                 ) : (
                   /* Other segments - Rings */
-                  <circle
-                    cx={0}
-                    cy={0}
-                    r={(segment.startRadius + segment.endRadius) / 2}
-                    fill="none"
-                    stroke={segment.color}
-                    strokeWidth={segment.endRadius - segment.startRadius}
-                    opacity={0}
-                    className="segment-ring cursor-pointer"
-                    style={{
-                      animation: `fadeInSegment 0.6s ease-out ${animationDelay}ms forwards`,
-                      transition: 'opacity 0.2s ease',
-                    }}
-                    onMouseEnter={() => setHoveredSegment(segment.id)}
-                    onMouseLeave={() => setHoveredSegment(null)}
-                    onClick={() => handleSegmentClick(segment)}
-                  />
+                  <>
+                    <circle
+                      cx={0}
+                      cy={0}
+                      r={(segment.startRadius + segment.endRadius) / 2}
+                      fill="none"
+                      stroke={segment.color}
+                      strokeWidth={segment.endRadius - segment.startRadius}
+                      vectorEffect="non-scaling-stroke"
+                      opacity={0}
+                      className="segment-ring cursor-pointer"
+                      style={{
+                        animation: `fadeInSegment 0.6s ease-out ${animationDelay}ms forwards`,
+                        transition: 'opacity 0.2s ease',
+                      }}
+                      onMouseEnter={() => setHoveredSegment(segment.id)}
+                      onMouseLeave={() => setHoveredSegment(null)}
+                      onClick={() => handleSegmentClick(segment)}
+                    />
+                    {/* White outline for ring segments - inner edge */}
+                    <circle
+                      cx={0}
+                      cy={0}
+                      r={segment.startRadius}
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      vectorEffect="non-scaling-stroke"
+                      opacity={0}
+                      style={{
+                        animation: `fadeInSegment 0.6s ease-out ${animationDelay}ms forwards`,
+                        transition: 'opacity 0.2s ease',
+                        pointerEvents: 'none',
+                      }}
+                    />
+                    {/* White outline for ring segments - outer edge */}
+                    <circle
+                      cx={0}
+                      cy={0}
+                      r={segment.endRadius}
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      vectorEffect="non-scaling-stroke"
+                      opacity={0}
+                      style={{
+                        animation: `fadeInSegment 0.6s ease-out ${animationDelay}ms forwards`,
+                        transition: 'opacity 0.2s ease',
+                        pointerEvents: 'none',
+                      }}
+                    />
+                  </>
                 )}
 
                 {/* Segment Label */}

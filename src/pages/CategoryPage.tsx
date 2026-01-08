@@ -89,12 +89,12 @@ const CategoryPage = () => {
         <div className="space-y-8">
           {groupedEntries.map(([subcategory, subcategoryEntries]) => (
             <Card key={subcategory} className="rounded-2xl shadow-xl border-2 backdrop-blur-sm overflow-hidden">
-              <CardHeader>
+              <CardHeader className="pb-3 pt-4">
                 <CardTitle className="text-2xl font-semibold">
                   {getSubcategoryLabel("character", subcategory)}
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {subcategoryEntries.map((entry, index) => (
                     <div 
