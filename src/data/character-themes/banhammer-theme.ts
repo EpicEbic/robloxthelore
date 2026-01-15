@@ -16,6 +16,19 @@ export const banhammerTheme: CharacterTheme = {
     card: 'linear-gradient(145deg, #1a0a0a 0%, #1a1a2a 50%, #1a2a3a 100%)',
     accent: 'linear-gradient(45deg, #fbbf24 0%, #fcd34d 100%)',
   },
+  glow: {
+    primary: '#3b82f6',
+    secondary: '#fbbf24',
+    intensity: 'intense',
+    blur: 14,
+    spread: 3,
+  },
+  glass: {
+    blur: 10,
+    opacity: 0.14,
+    borderOpacity: 0.22,
+    tint: '#3b82f6',
+  },
   particles: {
     type: 'none',
     color: '#3b82f6',
@@ -28,4 +41,3 @@ export const banhammerTheme: CharacterTheme = {
     opacity: 0.1,
   },
 };
-

@@ -5,30 +5,7 @@ import { Button } from "@/components/ui/button";
 import { OptimizedImage } from "@/components/ui/optimized-image";
 import { X, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-// Character icon mapping - circular character icons
-const characterIcons: Record<string, string> = {
-  "caesar-bloxwright": "/images/character-icons/caesar-bloxwright-icon.png",
-  "nauli-parter": "/images/character-icons/nauli-parter-icon.png",
-  "vortex-a-steele": "/images/character-icons/vortex-a-steele-icon.png",
-  "rice-farmer": "/images/character-icons/rice-farmer-icon.png",
-  "ren-bytera": "/images/character-icons/ren-bytera-icon.png",
-  "bryck-manning": "/images/character-icons/bryck-manning-icon.png",
-  "spawnboy": "/images/character-icons/spawnboy-icon.png",
-  "builderman": "/images/character-icons/builderman-icon.png",
-  "bloxxanne-whelder": "/images/character-icons/bloxxanne-whelder-icon.png",
-  "charles-studson": "/images/character-icons/charles-studson-icon.png",
-  "the-reckoner": "/images/character-icons/the-reckoner-icon.png",
-  "the-breadwinner": "/images/character-icons/the-breadwinner-icon.png",
-  "the-bounceman": "/images/character-icons/bounceman-icon.png",
-  "rovan-macov": "/images/rovanicon.png",
-  "peaches": "/images/character-icons/peaches-icon.png",
-  "whyeet": "/images/character-icons/whyeet-icon.png",
-};
-
-const getCharacterIcon = (characterId: string): string => {
-  return characterIcons[characterId] || "/placeholder.svg";
-};
+import { getCharacterIcon } from "@/utils/character-utils";
 
 interface RelationshipSelectorProps {
   currentCharacter: WikiEntry;

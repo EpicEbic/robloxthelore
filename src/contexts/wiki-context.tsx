@@ -19,7 +19,6 @@ interface WikiContextType {
 const WikiContext = createContext<WikiContextType | undefined>(undefined);
 
 export const WikiProvider = ({ children }: { children: ReactNode }) => {
-  console.log("WikiProvider rendering...");
   const [allEntries, setAllEntries] = useState<WikiEntry[]>(sampleWikiEntries);
   
   // Get current part from PartContext (PartProvider should wrap this)
@@ -89,8 +88,6 @@ export const WikiProvider = ({ children }: { children: ReactNode }) => {
     categories: CATEGORIES
   };
 
-  console.log("WikiProvider context value:", contextValue);
-
   return (
     <WikiContext.Provider value={contextValue}>
       {children}
@@ -99,11 +96,8 @@ export const WikiProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useWiki = () => {
-  console.log("useWiki called...");
   const context = useContext(WikiContext);
-  console.log("useWiki context:", context);
   if (!context) {
-    console.error("useWiki must be used within a WikiProvider - context is undefined");
     throw new Error("useWiki must be used within a WikiProvider");
   }
   return context;

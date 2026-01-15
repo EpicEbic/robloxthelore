@@ -20,29 +20,23 @@ export const LocationThemeProvider: React.FC<LocationThemeProviderProps> = ({
   locationId 
 }) => {
   const [currentTheme, setCurrentTheme] = useState<CharacterTheme | null>(null);
-  
-  console.log('LocationThemeProvider rendered with locationId:', locationId);
 
   const applyTheme = (theme: CharacterTheme) => {
-    console.log('Applying location theme:', theme);
     const root = document.documentElement;
     
     // Apply color variables (using character- prefix for compatibility)
     Object.entries(theme.colors).forEach(([key, value]) => {
       root.style.setProperty(`--character-${key}`, value);
-      console.log(`Set --character-${key}: ${value}`);
     });
     
     // Apply gradient variables
     Object.entries(theme.gradients).forEach(([key, value]) => {
       root.style.setProperty(`--character-gradient-${key}`, value);
-      console.log(`Set --character-gradient-${key}: ${value}`);
     });
     
     // Add theme class to body
     document.body.className = document.body.className.replace(/character-theme-[\w-]+/g, '');
     document.body.classList.add(`character-theme-${theme.id}`);
-    console.log('Added body class:', `character-theme-${theme.id}`);
     
     setCurrentTheme(theme);
   };
@@ -75,21 +69,17 @@ export const LocationThemeProvider: React.FC<LocationThemeProviderProps> = ({
 
   // Load theme when locationId changes
   useEffect(() => {
-    console.log('LocationThemeProvider: locationId changed to:', locationId);
     if (locationId) {
       // Dynamic import to avoid circular dependencies
       import('@/data/location-themes').then(({ getLocationTheme }) => {
         const theme = getLocationTheme(locationId);
-        console.log('Loaded theme for', locationId, ':', theme);
         if (theme) {
           applyTheme(theme);
         } else {
-          console.log('No theme found for', locationId, ', resetting theme');
           resetTheme();
         }
       });
     } else {
-      console.log('No locationId, resetting theme');
       resetTheme();
     }
 
@@ -126,4 +116,3 @@ export const useLocationTheme = (): LocationThemeContextType => {
   }
   return context;
 };
-

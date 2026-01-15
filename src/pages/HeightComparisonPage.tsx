@@ -1,33 +1,11 @@
 import React, { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Ruler, X, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useWiki } from "@/contexts/wiki-context";
-import { WikiEntry } from "@/types/wiki-types";
-
-// Character icon mapping - circular character icons (same as archetype system)
-const characterIcons: Record<string, string> = {
-  "caesar-bloxwright": "/images/character-icons/caesar-bloxwright-icon.png",
-  "nauli-parter": "/images/character-icons/nauli-parter-icon.png",
-  "vortex-a-steele": "/images/character-icons/vortex-a-steele-icon.png",
-  "rice-farmer": "/images/character-icons/rice-farmer-icon.png",
-  "ren-bytera": "/images/character-icons/ren-bytera-icon.png",
-  "bryck-manning": "/images/character-icons/bryck-manning-icon.png",
-  "spawnboy": "/images/character-icons/spawnboy-icon.png",
-  "builderman": "/images/character-icons/builderman-icon.png",
-  "bloxxanne-whelder": "/images/character-icons/bloxxanne-whelder-icon.png",
-  "charles-studson": "/images/character-icons/charles-studson-icon.png",
-  "the-reckoner": "/images/character-icons/the-reckoner-icon.png",
-  "the-breadwinner": "/images/character-icons/the-breadwinner-icon.png",
-  "the-bounceman": "/images/character-icons/bounceman-icon.png",
-};
-
-const getCharacterIcon = (characterId: string): string | null => {
-  return characterIcons[characterId] || null;
-};
+import { getCharacterIcon } from "@/utils/character-utils";
 
 // Height data for characters (in studs - Roblox measurement unit)
 const CHARACTER_HEIGHTS: Record<string, number> = {
@@ -154,18 +132,18 @@ export default function HeightComparisonPage() {
           Height Comparison
         </h1>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Compare the heights of up to 4 characters using a stud-based measurement grid. All measurements are in Roblox studs.
+          Compare the heights and sizes of up to 4 characters, displayed in a variety of different measurements.
         </p>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-5">
+      <div className="grid gap-8 lg:grid-cols-7">
         {/* Character Selection */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-3">
           <Card className="rounded-2xl shadow-xl border-2 bg-card/95 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-xl">Select Characters</CardTitle>
               <p className="text-sm text-muted-foreground">
-                Choose up to 4 characters to compare heights. Click on character icons to add them to the comparison.
+                You can pick up to 4 characters to compare the heights of! Click on one to add them to the comparison lineup!
               </p>
             </CardHeader>
             <CardContent>
@@ -267,19 +245,7 @@ export default function HeightComparisonPage() {
                           </div>
                         </div>
 
-                        {isSelected && (
-                          <div className="absolute inset-0 bg-primary/20 rounded-xl flex items-center justify-center">
-                            <Badge variant="secondary" className="text-xs">
-                              Selected
-                            </Badge>
-                          </div>
-                        )}
 
-                        {isDisabled && !isSelected && (
-                          <div className="absolute inset-0 bg-muted/80 rounded-xl flex items-center justify-center">
-                            <span className="text-xs text-muted-foreground">Max 4</span>
-                          </div>
-                        )}
                       </button>
                     );
                   })}
@@ -290,12 +256,12 @@ export default function HeightComparisonPage() {
         </div>
 
         {/* Height Comparison Grid */}
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-4">
           <Card className="rounded-2xl shadow-xl border-2 bg-card/95 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-xl">Height Comparison Grid</CardTitle>
+              <CardTitle className="text-xl">Height Comparison Lineup</CardTitle>
               <p className="text-sm text-muted-foreground">
-                Characters are displayed on a stud-based measurement grid. Each unit represents 1 stud (Roblox's measurement system).
+                Characters you've selected will be displayed here, sized accordingly to their actual height.
               </p>
             </CardHeader>
             <CardContent>
@@ -404,7 +370,7 @@ export default function HeightComparisonPage() {
                   <div className="mt-6 p-4 bg-muted/20 rounded-lg">
                     <h4 className="font-semibold text-sm mb-2">Measurement Guide</h4>
                     <div className="text-xs text-muted-foreground space-y-1">
-                      <div>• 1 stud = 28 centimeters</div>
+                      <div>• One stud is equal to 28cm / 11 inches.</div>
                       <div>• Images are scaled to show relative heights</div>
                       <div>• Measurements shown in studs, centimeters, and feet/inches</div>
                     </div>

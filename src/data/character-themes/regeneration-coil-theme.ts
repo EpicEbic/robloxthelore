@@ -16,18 +16,30 @@ export const regenerationCoilTheme: CharacterTheme = {
     card: 'linear-gradient(145deg, #1a0a0a 0%, #1a2a1a 50%, #2a3a2a 100%)',
     accent: 'linear-gradient(45deg, #22c55e 0%, #4ade80 50%, #ffffff 100%)',
   },
+  glow: {
+    primary: '#22c55e',
+    secondary: '#4ade80',
+    intensity: 'subtle',
+    blur: 10,
+    spread: 2,
+  },
+  glass: {
+    blur: 8,
+    opacity: 0.12,
+    borderOpacity: 0.18,
+    tint: '#22c55e',
+  },
   particles: {
     type: 'squiggle',
     color: '#4ade80',
     intensity: 0.6,
     speed: 0.3,
     count: 350,
-    rotationSpeedMultiplier: 0.4, // Slower/gentle rotation speed
-    scrollDirection: 'down', // Scroll downwards
+    rotationSpeedMultiplier: 0.4,
+    scrollDirection: 'down',
   },
   patterns: {
     type: 'organic',
     opacity: 0.12,
   },
 };
-

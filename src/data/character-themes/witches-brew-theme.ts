@@ -16,9 +16,22 @@ export const witchesBrewTheme: CharacterTheme = {
     card: 'linear-gradient(145deg, #1a0a0a 0%, #1a2a1a 100%)',
     accent: 'linear-gradient(45deg, #fbbf24 0%, #ffffff 100%)',
   },
+  glow: {
+    primary: '#22c55e',
+    secondary: '#fbbf24',
+    intensity: 'moderate',
+    blur: 12,
+    spread: 2,
+  },
+  glass: {
+    blur: 8,
+    opacity: 0.14,
+    borderOpacity: 0.22,
+    tint: '#22c55e',
+  },
   particles: {
     type: 'flow',
-    color: '#22c55e',      // Green bubbles
+    color: '#22c55e',
     intensity: 0.8,
     speed: 2.0,
     count: 450,
@@ -28,4 +41,3 @@ export const witchesBrewTheme: CharacterTheme = {
     opacity: 0.1,
   },
 };
-

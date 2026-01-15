@@ -16,6 +16,7 @@ import { CharacterParticles } from "@/components/effects/character-particles";
 import { useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
+import { useThemeStyles } from "@/hooks/use-theme-styles";
 
 const EntryPageContent = () => {
   const { id } = useParams<{ id: string }>();
@@ -43,6 +44,9 @@ const EntryPageContent = () => {
   // Use location theme for locations, character theme for characters
   const currentTheme = entry?.category === 'location' ? locationTheme : characterTheme;
 
+  // Apply theme's glow/glass CSS variables to the document root
+  useThemeStyles(currentTheme);
+
   // Memoize related entries calculation
   const relatedEntries = useMemo(() => {
     if (!entry) return [];
@@ -69,7 +73,6 @@ const EntryPageContent = () => {
     );
   }
 
-  console.log('EntryPageContent: currentTheme =', currentTheme);
   
   return (
     <div className="character-theme-container min-h-screen relative">
@@ -174,9 +177,6 @@ const EntryPage = () => {
   const { id } = useParams<{ id: string }>();
   const { getEntryById } = useWiki();
   const entry = getEntryById(id || "");
-
-  console.log('EntryPage: id =', id, 'entry =', entry);
-
   // Use appropriate theme provider based on entry category
   if (entry?.category === 'location') {
     return (

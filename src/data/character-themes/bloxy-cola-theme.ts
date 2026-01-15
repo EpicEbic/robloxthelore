@@ -16,6 +16,19 @@ export const bloxyColaTheme: CharacterTheme = {
     card: 'linear-gradient(145deg, #1a0a0a 0%, #2a1a0a 100%)',
     accent: 'linear-gradient(45deg, #fbbf24 0%, #ffffff 100%)',
   },
+  glow: {
+    primary: '#ea580c',
+    secondary: '#fbbf24',
+    intensity: 'moderate',
+    blur: 12,
+    spread: 2,
+  },
+  glass: {
+    blur: 8,
+    opacity: 0.14,
+    borderOpacity: 0.2,
+    tint: '#ea580c',
+  },
   particles: {
     type: 'flow',
     color: '#d2b48c',
@@ -28,4 +41,3 @@ export const bloxyColaTheme: CharacterTheme = {
     opacity: 0.1,
   },
 };
-

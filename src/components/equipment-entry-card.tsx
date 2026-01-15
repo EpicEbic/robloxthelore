@@ -1,14 +1,12 @@
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
 import { WikiEntry } from "@/contexts/wiki-context";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { EquipmentHeader } from "@/components/equipment/equipment-header";
-import { EquipmentBasicInfo } from "@/components/equipment/equipment-basic-info";
+import { EntryHeader, EntryInfoBar } from "@/components/entry";
 import { EquipmentImageCarousel } from "@/components/equipment/equipment-image-carousel";
 import { EquipmentContentTabs } from "@/components/equipment/equipment-content-tabs";
 import { EquipmentTabbedMultiEntry } from "@/components/equipment/equipment-tabbed-multi-entry";
 import { EquipmentOverviewOption, EquipmentTimelineOption } from "@/types/wiki-types";
-import { motion } from "framer-motion";
+import { GlassPanel } from "@/components/ui/glass-panel";
 
 interface EquipmentSections {
   overview?: string[] | any[];
@@ -61,21 +59,27 @@ export function EquipmentEntryCard({ equipment }: EquipmentEntryCardProps) {
   };
   
   return (
-    <div
-      className="w-full max-w-[1400px] mx-auto"
-    >
-      <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl" style={{
-        borderLeftColor: 'var(--wiki-equipment)'
-      }}>
-        
+    <div className="w-full max-w-[1400px] mx-auto">
+      {/* Main Entry Card with Glass Styling */}
+      <GlassPanel
+        variant="elevated"
+        glow
+        glowIntensity="subtle"
+        rounded="xl"
+        padding="none"
+        className="min-h-full flex flex-col"
+      >
+        {/* Header Section */}
         <div className="overflow-hidden rounded-t-xl">
-          <EquipmentHeader 
+          <EntryHeader 
             title={equipment.title} 
             quote={equipment.quote}
+            entryType="equipment"
           />
           
-          <EquipmentBasicInfo 
-            subcategory={equipment.subcategory}
+          <EntryInfoBar
+            entryType="equipment"
+            equipmentSubcategory={equipment.subcategory}
           />
         </div>
         
@@ -121,7 +125,7 @@ export function EquipmentEntryCard({ equipment }: EquipmentEntryCardProps) {
             
           </div>
         )}
-      </Card>
+      </GlassPanel>
     </div>
   );
 }

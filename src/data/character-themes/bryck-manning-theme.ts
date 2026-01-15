@@ -28,4 +28,3 @@ export const bryckManningTheme: CharacterTheme = {
     opacity: 0.1,
   },
 };
-

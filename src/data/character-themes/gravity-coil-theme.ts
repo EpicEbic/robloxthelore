@@ -16,18 +16,30 @@ export const gravityCoilTheme: CharacterTheme = {
     card: 'linear-gradient(145deg, #1a0a0a 0%, #1a1a2a 50%, #2a2a3a 100%)',
     accent: 'linear-gradient(45deg, #3b82f6 0%, #60a5fa 50%, #ffffff 100%)',
   },
+  glow: {
+    primary: '#3b82f6',
+    secondary: '#60a5fa',
+    intensity: 'moderate',
+    blur: 12,
+    spread: 2,
+  },
+  glass: {
+    blur: 8,
+    opacity: 0.14,
+    borderOpacity: 0.2,
+    tint: '#3b82f6',
+  },
   particles: {
     type: 'squiggle',
     color: '#60a5fa',
     intensity: 0.7,
     speed: 0.5,
     count: 400,
-    rotationSpeedMultiplier: 1.0, // Medium/standard rotation speed
-    scrollDirection: 'up', // Scroll upwards
+    rotationSpeedMultiplier: 1.0,
+    scrollDirection: 'up',
   },
   patterns: {
     type: 'energy',
     opacity: 0.15,
   },
 };
-

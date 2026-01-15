@@ -16,18 +16,30 @@ export const speedCoilTheme: CharacterTheme = {
     card: 'linear-gradient(145deg, #1a0a0a 0%, #2a1a1a 50%, #3a2a2a 100%)',
     accent: 'linear-gradient(45deg, #ef4444 0%, #f87171 50%, #ffffff 100%)',
   },
+  glow: {
+    primary: '#ef4444',
+    secondary: '#f87171',
+    intensity: 'intense',
+    blur: 14,
+    spread: 3,
+  },
+  glass: {
+    blur: 8,
+    opacity: 0.14,
+    borderOpacity: 0.22,
+    tint: '#ef4444',
+  },
   particles: {
     type: 'squiggle',
     color: '#f87171',
     intensity: 0.7,
     speed: 1.2,
     count: 500,
-    rotationSpeedMultiplier: 2.0, // Quick/accelerated rotation speed
-    scrollDirection: 'left', // Scroll from right to left
+    rotationSpeedMultiplier: 2.0,
+    scrollDirection: 'left',
   },
   patterns: {
     type: 'energy',
     opacity: 0.15,
   },
 };
-

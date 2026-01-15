@@ -47,6 +47,58 @@ svg.icon-theme-exempt {
   fill: none !important;
 }
 
+/* ========================================
+   ARCHETYPE CARD EXEMPTION
+   The archetype card must be completely immune to character themes.
+   We use CSS custom properties set on the container via inline styles,
+   then reference them with !important to override theme styling.
+   
+   The component sets these CSS variables on the container:
+   --archetype-text-color: The archetype's text color
+   --archetype-icon-color: The archetype's icon color (same as text)
+   ======================================== */
+
+/* Override ALL text elements inside archetype card using CSS variables */
+body[class*="character-theme-"] .archetype-card-exempt h1,
+body[class*="character-theme-"] .archetype-card-exempt h2,
+body[class*="character-theme-"] .archetype-card-exempt h3,
+body[class*="character-theme-"] .archetype-card-exempt h4,
+body[class*="character-theme-"] .archetype-card-exempt h5,
+body[class*="character-theme-"] .archetype-card-exempt h6 {
+  color: var(--archetype-text-color, #ffffff) !important;
+}
+
+body[class*="character-theme-"] .archetype-card-exempt p,
+body[class*="character-theme-"] .archetype-card-exempt span,
+body[class*="character-theme-"] .archetype-card-exempt div {
+  color: var(--archetype-body-color, rgba(255, 255, 255, 0.9)) !important;
+}
+
+body[class*="character-theme-"] .archetype-card-exempt button {
+  color: var(--archetype-body-color, rgba(255, 255, 255, 0.9)) !important;
+}
+
+/* Override ALL SVG/Lucide icons inside archetype card using CSS variables */
+body[class*="character-theme-"] .archetype-card-exempt svg,
+body[class*="character-theme-"] .archetype-card-exempt [class*="lucide"],
+body[class*="character-theme-"] .archetype-card-exempt svg *,
+body[class*="character-theme-"] .archetype-card-exempt path,
+body[class*="character-theme-"] .archetype-card-exempt line,
+body[class*="character-theme-"] .archetype-card-exempt circle,
+body[class*="character-theme-"] .archetype-card-exempt polyline,
+body[class*="character-theme-"] .archetype-card-exempt polygon,
+body[class*="character-theme-"] .archetype-card-exempt rect {
+  color: var(--archetype-icon-color, #ffffff) !important;
+  stroke: var(--archetype-icon-color, #ffffff) !important;
+  fill: none !important;
+}
+
+/* Archetype button in info bar - force white text */
+body[class*="character-theme-"] .archetype-button,
+body[class*="character-theme-"] button.archetype-button {
+  color: #ffffff !important;
+}
+
 /* Base theme container */
 .character-theme-container {
   background: var(--character-gradient-background, var(--background));

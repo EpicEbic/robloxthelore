@@ -1,4 +1,4 @@
-import { User, Home, Heart, Sword, Swords, Zap, ScrollText, Shirt, Drama, Shield, Wrench, AlertTriangle, Clock, HandMetal, HandFist, ArrowRightFromLine, BookOpen, Sparkles, Target, ShieldCheck, Briefcase, FileText } from "lucide-react";
+import { User, Home, Heart, Sword, Swords, Zap, ScrollText, Shirt, Drama, Shield, Wrench, AlertTriangle, Clock, HandFist, ArrowRightFromLine, BookOpen, Sparkles, Target, ShieldCheck, Briefcase, FileText } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -372,18 +372,18 @@ export function CharacterContentTabs({
                       className="bg-card rounded-xl p-8 border min-w-0 min-h-[120px] relative"
                       style={{ transition: 'none' }}
                     >
-                      <div className="flex items-start justify-between mb-4 gap-4">
-                        <h2 className="text-2xl font-semibold flex items-center gap-2 flex-shrink-0">
-                          <Shirt className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                      <div className="flex items-center justify-between mb-3">
+                        <h2 className="text-2xl font-semibold flex items-center gap-2">
+                          <Shirt className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                           Appearance
                         </h2>
-                        <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
+                        {appearances.length > 1 && onAppearanceChange && (
                           <CharacterAppearanceSwitcher
                             appearances={appearances}
                             currentAppearance={currentAppearance}
-                            onAppearanceChange={onAppearanceChange || (() => {})}
+                            onAppearanceChange={onAppearanceChange}
                           />
-                        </div>
+                        )}
                       </div>
                       <div 
                         className="text-foreground/90 min-w-0 text-base"

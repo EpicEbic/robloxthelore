@@ -16,6 +16,19 @@ export const buildermanTheme: CharacterTheme = {
     card: 'linear-gradient(145deg, #1a0a0a 0%, #2a1a0a 50%, #1a1a2a 100%)',
     accent: 'linear-gradient(45deg, #f97316 0%, #fbbf24 50%, #1e3a8a 100%)',
   },
+  glow: {
+    primary: '#f97316',
+    secondary: '#fbbf24',
+    intensity: 'moderate',
+    blur: 14,
+    spread: 3,
+  },
+  glass: {
+    blur: 10,
+    opacity: 0.14,
+    borderOpacity: 0.2,
+    tint: '#f97316',
+  },
   particles: {
     type: 'none',
     color: '#f97316',
@@ -28,4 +41,3 @@ export const buildermanTheme: CharacterTheme = {
     opacity: 0.1,
   },
 };
-

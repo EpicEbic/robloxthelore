@@ -15,10 +15,6 @@ interface MultiItemTabsProps {
 export function MultiItemTabs({ item, coilColor, currentEntryId }: MultiItemTabsProps) {
   const isMobile = useIsMobile();
 
-  // Debug logging to see what data we're receiving
-  console.log("MultiItemTabs received item:", item);
-  console.log("Item sections:", item.sections);
-
   return (
     <Tabs defaultValue="overview" className="w-full">
       <TabsList className={`mb-6 ${isMobile ? 'grid grid-cols-2 h-auto gap-2 p-1' : 'inline-flex h-auto p-0 gap-1'} bg-muted rounded-md`}>

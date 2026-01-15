@@ -47,7 +47,7 @@ export function CharacterCarouselItem({
   return (
     <CarouselItem key={`${currentAppearance}-${item.url}-${index}`}>
       <div className="p-1">
-        <AspectRatio ratio={3 / 4} className="overflow-hidden rounded-md bg-muted/20">
+        <AspectRatio ratio={3 / 4} className="overflow-hidden rounded-xl border border-border/30 bg-card/60 backdrop-blur-sm shadow-lg">
           <div className="relative w-full h-full">
             <OptimizedImage
               key={`${imageSrc}-${hoveredIndex}-${isPermanentlyChanged}`}
@@ -68,7 +68,7 @@ export function CharacterCarouselItem({
             />
           </div>
         </AspectRatio>
-        <div className="text-center mt-2 p-2 bg-muted/30 rounded-md animate-fade-in" style={{ animationDelay: `${0.7 + index * 0.5}s` }}>
+        <div className="text-center mt-3 p-3 bg-card/60 backdrop-blur-sm rounded-xl border border-border/30 animate-fade-in" style={{ animationDelay: `${0.7 + index * 0.5}s` }}>
           <p className="text-sm break-words">{item.caption}</p>
         </div>
       </div>

@@ -20,29 +20,23 @@ export const CharacterThemeProvider: React.FC<CharacterThemeProviderProps> = ({
   characterId 
 }) => {
   const [currentTheme, setCurrentTheme] = useState<CharacterTheme | null>(null);
-  
-  console.log('CharacterThemeProvider rendered with characterId:', characterId);
 
   const applyTheme = (theme: CharacterTheme) => {
-    console.log('Applying theme:', theme);
     const root = document.documentElement;
     
     // Apply color variables
     Object.entries(theme.colors).forEach(([key, value]) => {
       root.style.setProperty(`--character-${key}`, value);
-      console.log(`Set --character-${key}: ${value}`);
     });
     
     // Apply gradient variables
     Object.entries(theme.gradients).forEach(([key, value]) => {
       root.style.setProperty(`--character-gradient-${key}`, value);
-      console.log(`Set --character-gradient-${key}: ${value}`);
     });
     
     // Add theme class to body
     document.body.className = document.body.className.replace(/character-theme-[a-z0-9-]+/g, '').trim();
     document.body.classList.add(`character-theme-${theme.id}`);
-    console.log('Added body class:', `character-theme-${theme.id}`);
     
     setCurrentTheme(theme);
   };
@@ -75,21 +69,17 @@ export const CharacterThemeProvider: React.FC<CharacterThemeProviderProps> = ({
 
   // Load theme when characterId changes
   useEffect(() => {
-    console.log('CharacterThemeProvider: characterId changed to:', characterId);
     if (characterId) {
       // Dynamic import to avoid circular dependencies
       import('@/data/character-themes').then(({ getCharacterTheme }) => {
         const theme = getCharacterTheme(characterId);
-        console.log('Loaded theme for', characterId, ':', theme);
         if (theme) {
           applyTheme(theme);
         } else {
-          console.log('No theme found for', characterId, ', resetting theme');
           resetTheme();
         }
       });
     } else {
-      console.log('No characterId, resetting theme');
       resetTheme();
     }
 

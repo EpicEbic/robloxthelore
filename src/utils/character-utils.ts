@@ -1,5 +1,28 @@
-
 import { WikiEntry } from "@/contexts/wiki-context";
+
+// Centralized character icon mapping - used across multiple components
+export const CHARACTER_ICONS: Record<string, string> = {
+  "caesar-bloxwright": "/images/character-icons/caesar-bloxwright-icon.png",
+  "nauli-parter": "/images/character-icons/nauli-parter-icon.png",
+  "vortex-a-steele": "/images/character-icons/vortex-a-steele-icon.png",
+  "rice-farmer": "/images/character-icons/rice-farmer-icon.png",
+  "ren-bytera": "/images/character-icons/ren-bytera-icon.png",
+  "bryck-manning": "/images/character-icons/bryck-manning-icon.png",
+  "spawnboy": "/images/character-icons/spawnboy-icon.png",
+  "builderman": "/images/character-icons/builderman-icon.png",
+  "bloxxanne-whelder": "/images/character-icons/bloxxanne-whelder-icon.png",
+  "charles-studson": "/images/character-icons/charles-studson-icon.png",
+  "the-reckoner": "/images/character-icons/the-reckoner-icon.png",
+  "the-breadwinner": "/images/character-icons/the-breadwinner-icon.png",
+  "the-bounceman": "/images/character-icons/bounceman-icon.png",
+  "rovan-macov": "/images/rovanicon.png",
+  "peaches": "/images/character-icons/peaches-icon.png",
+  "whyeet": "/images/character-icons/whyeet-icon.png",
+};
+
+export const getCharacterIcon = (characterId: string, fallback: string = "/placeholder.svg"): string => {
+  return CHARACTER_ICONS[characterId] || fallback;
+};
 
 export interface AppearanceOption {
   id: string;
@@ -72,26 +95,18 @@ export const getAlignmentColor = (align: string) => {
 };
 
 export const getImagesForAppearance = (appearances: AppearanceOption[], currentAppearance: string, fallbackImages: { url: string; caption: string }[]) => {
-  console.log('Getting images for appearance:', currentAppearance);
-  console.log('Available appearances:', appearances);
-  
   let selectedAppearance = appearances.find(app => app.id === currentAppearance);
   
   // If the requested appearance doesn't exist, use the first available appearance
   if (!selectedAppearance && appearances.length > 0) {
-    console.log('Requested appearance not found, using first available appearance');
     selectedAppearance = appearances[0];
   }
   
-  console.log('Selected appearance:', selectedAppearance);
-  
   // If the selected appearance has specific images, use those
   if (selectedAppearance?.images && selectedAppearance.images.length > 0) {
-    console.log('Using appearance-specific images:', selectedAppearance.images);
     return selectedAppearance.images;
   }
   
-  console.log('Using fallback images:', fallbackImages);
   // Otherwise, use fallback images (should be empty for multi-appearance characters)
   return fallbackImages;
 };

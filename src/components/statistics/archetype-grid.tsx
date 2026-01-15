@@ -1,33 +1,12 @@
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ARCHETYPES, ARCHETYPE_COLUMNS, ARCHETYPE_ROWS, Archetype } from "@/data/character-archetypes";
-import { Users, X, Quote, Compass } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Users } from "lucide-react";
 import { allCharacters } from "@/data/characters";
 import { usePart } from "@/contexts/part-context";
-
-// Character icon mapping - circular character icons
-const characterIcons: Record<string, string> = {
-  "caesar-bloxwright": "/images/character-icons/caesar-bloxwright-icon.png",
-  "nauli-parter": "/images/character-icons/nauli-parter-icon.png",
-  "vortex-a-steele": "/images/character-icons/vortex-a-steele-icon.png",
-  "rice-farmer": "/images/character-icons/rice-farmer-icon.png",
-  "ren-bytera": "/images/character-icons/ren-bytera-icon.png",
-  "bryck-manning": "/images/character-icons/bryck-manning-icon.png",
-  "spawnboy": "/images/character-icons/spawnboy-icon.png",
-  "builderman": "/images/character-icons/builderman-icon.png",
-  "bloxxanne-whelder": "/images/character-icons/bloxxanne-whelder-icon.png",
-  "charles-studson": "/images/character-icons/charles-studson-icon.png",
-  "the-reckoner": "/images/character-icons/the-reckoner-icon.png",
-  "the-breadwinner": "/images/character-icons/the-breadwinner-icon.png",
-  "the-bounceman": "/images/character-icons/bounceman-icon.png",
-};
-
-const getCharacterIcon = (characterId: string): string | null => {
-  return characterIcons[characterId] || null;
-};
+import { ExpandedArchetypeCard, ArchetypeCharacter } from "@/components/ui/expanded-archetype-card";
+import { getCharacterIcon } from "@/utils/character-utils";
 
 // 2D Color mapping based on both column and row (matching the reference image)
 // Each cell has a unique color blending column (Lawful→Chaotic) and row (Good→Evil)
@@ -96,16 +75,12 @@ export function ArchetypeGrid() {
   const [selectedArchetype, setSelectedArchetype] = useState<Archetype | null>(null);
   const { currentPart } = usePart();
 
-  const cellColor = selectedArchetype 
-    ? CELL_COLORS[selectedArchetype.row]?.[selectedArchetype.column] 
-    : null;
-
   // Get characters belonging to the selected archetype, filtered by current part
-  const archetypeCharacters = useMemo(() => {
+  const archetypeCharacters = useMemo((): ArchetypeCharacter[] => {
     if (!selectedArchetype) return [];
     
-    return allCharacters.filter(
-      (character) => {
+    return allCharacters
+      .filter((character) => {
         const characterPart = character.part || "TEMP";
         
         // Filter by part: only show characters from the current part
@@ -120,8 +95,12 @@ export function ArchetypeGrid() {
           character.category === "character" &&
           character.archetype === selectedArchetype.id
         );
-      }
-    );
+      })
+      .map((character) => ({
+        id: character.id,
+        title: character.title,
+        iconUrl: getCharacterIcon(character.id),
+      }));
   }, [selectedArchetype, currentPart]);
 
   return (
@@ -143,166 +122,15 @@ export function ArchetypeGrid() {
           "relative",
           selectedArchetype ? "overflow-hidden" : "overflow-visible"
         )}>
-          {/* Expanded Archetype View - takes over the entire grid space */}
+          {/* Expanded Archetype View - using shared component */}
           {selectedArchetype && (
-            <div 
-              className={cn(
-                "absolute inset-0 z-10 rounded-xl border-2 overflow-hidden animate-in fade-in zoom-in-95 duration-200",
-                cellColor?.bg,
-                cellColor?.border
-              )}
-            >
-              {/* Background decorative elements */}
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className={cn(
-                  "absolute -top-24 -right-24 w-48 h-48 rounded-full opacity-10",
-                  cellColor?.border.replace("border-", "bg-")
-                )} />
-                <div className={cn(
-                  "absolute -bottom-16 -left-16 w-32 h-32 rounded-full opacity-10",
-                  cellColor?.border.replace("border-", "bg-")
-                )} />
-              </div>
-
-              {/* Close button */}
-              <button
-                onClick={() => setSelectedArchetype(null)}
-                className={cn(
-                  "absolute top-4 right-4 p-2 rounded-full z-20 transition-all duration-200",
-                  "hover:bg-white/10 hover:scale-110",
-                  cellColor?.border
-                )}
-              >
-                <X className={cn("w-5 h-5", cellColor?.text)} />
-              </button>
-
-              {/* Content */}
-              <div className="relative h-full flex flex-col p-3 sm:p-4 md:p-6 overflow-y-auto">
-                {/* Header Section */}
-                <div className="flex items-start gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4 md:mb-6">
-                  {/* Icon */}
-                  <div className={cn(
-                    "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0",
-                    "border-2",
-                    cellColor?.border,
-                    cellColor?.bg
-                  )}>
-                    <Compass className={cn("w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7", cellColor?.text)} />
-                  </div>
-                  
-                  {/* Title and Badges */}
-                  <div className="flex-1 min-w-0">
-                    <h3 className={cn("text-lg sm:text-xl md:text-3xl font-bold tracking-tight mb-1 sm:mb-2", cellColor?.text)}>
-                      {selectedArchetype.name}
-                    </h3>
-                    <div className="flex flex-wrap gap-1 sm:gap-2">
-                      <Badge 
-                        variant="outline" 
-                        className={cn(
-                          "text-[10px] sm:text-xs font-medium px-2 py-0.5 sm:px-3 sm:py-1",
-                          cellColor?.border,
-                          cellColor?.text
-                        )}
-                      >
-                        {selectedArchetype.columnLabel}
-                      </Badge>
-                      <Badge 
-                        variant="outline" 
-                        className={cn(
-                          "text-[10px] sm:text-xs font-medium px-2 py-0.5 sm:px-3 sm:py-1",
-                          cellColor?.border,
-                          cellColor?.text
-                        )}
-                      >
-                        {selectedArchetype.rowLabel}
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Divider */}
-                <div className={cn(
-                  "h-px w-full mb-3 sm:mb-4 md:mb-6",
-                  cellColor?.border.replace("border-", "bg-"),
-                  "opacity-40"
-                )} />
-
-                {/* Description Section */}
-                <div className="flex-1 flex items-start gap-2 sm:gap-3 md:gap-4">
-                  <Quote className={cn("w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 shrink-0 opacity-40 mt-0.5 sm:mt-1", cellColor?.text)} />
-                  <div className="flex-1">
-                    <p className={cn(
-                      "text-sm sm:text-base md:text-lg leading-relaxed font-light",
-                      "text-foreground/90"
-                    )}>
-                      {selectedArchetype.description || (
-                        <span className="italic text-muted-foreground">No description available yet.</span>
-                      )}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Characters Section */}
-                {archetypeCharacters.length > 0 && (
-                  <div className="mt-3 sm:mt-4 md:mt-6 pt-2 sm:pt-3 md:pt-4 border-t border-white/10">
-                    <h4 className={cn(
-                      "text-sm sm:text-base md:text-lg font-semibold mb-2 sm:mb-3 md:mb-4",
-                      cellColor?.text
-                    )}>
-                      Characters belonging to this Archetype:
-                    </h4>
-                    <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
-                      {archetypeCharacters.map((character) => {
-                        const iconUrl = getCharacterIcon(character.id);
-                        return (
-                          <div key={character.id} className="flex flex-col items-center gap-1 sm:gap-2">
-                            <Link
-                              to={`/entry/${character.id}`}
-                              className={cn(
-                                "relative group rounded-full overflow-hidden border-2 transition-all duration-200",
-                                "hover:scale-110 hover:shadow-lg",
-                                "w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16",
-                                cellColor?.border
-                              )}
-                            >
-                              {iconUrl ? (
-                                <img
-                                  src={iconUrl}
-                                  alt={character.title}
-                                  className="w-full h-full object-cover"
-                                />
-                              ) : (
-                                <div className={cn(
-                                  "w-full h-full flex items-center justify-center",
-                                  cellColor?.bg
-                                )}>
-                                  <Users className={cn("w-5 h-5 sm:w-6 sm:h-6", cellColor?.text)} />
-                                </div>
-                              )}
-                            </Link>
-                            {/* Character name below icon */}
-                            <span className={cn(
-                              "text-[10px] sm:text-xs text-center font-medium max-w-[60px] sm:max-w-[80px] md:max-w-[100px]",
-                              "line-clamp-2 leading-tight",
-                              cellColor?.text || "text-foreground"
-                            )}>
-                              {character.title}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {/* Footer hint */}
-                <div className="mt-3 sm:mt-4 md:mt-6 pt-2 sm:pt-3 md:pt-4 border-t border-white/10">
-                  <p className="text-[10px] sm:text-xs text-muted-foreground text-center">
-                    Press the X button to return to the grid
-                  </p>
-                </div>
-              </div>
-            </div>
+            <ExpandedArchetypeCard
+              archetype={selectedArchetype}
+              onClose={() => setSelectedArchetype(null)}
+              characters={archetypeCharacters}
+              overlay={true}
+              className="animate-in fade-in zoom-in-95 duration-200"
+            />
           )}
 
           {/* Normal Grid View */}

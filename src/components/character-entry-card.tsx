@@ -1,15 +1,13 @@
 
-import { useState, useEffect } from "react";
-import { Card } from "@/components/ui/card";
+import { useState } from "react";
 import { WikiEntry } from "@/contexts/wiki-context";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { getCharacterData } from "@/utils/character-utils";
-import { CharacterHeader } from "@/components/character/character-header";
-import { CharacterBasicInfo } from "@/components/character/character-basic-info";
+import { EntryHeader, EntryInfoBar } from "@/components/entry";
 import { CharacterImageCarousel } from "@/components/character/character-image-carousel";
 import { CharacterContentTabs } from "@/components/character/character-content-tabs";
 import { AppearanceOption, PersonalityOption } from "@/types/wiki-types";
-import { motion } from "framer-motion";
+import { GlassPanel } from "@/components/ui/glass-panel";
  
 
 // Keeping the interface for backwards compatibility
@@ -113,10 +111,6 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
   const [currentTab, setCurrentTab] = useState('general');
   const [lifestyleHistoryView, setLifestyleHistoryView] = useState<'lifestyle' | 'history'>('lifestyle');
   const [combatView, setCombatView] = useState<'physical' | 'ability'>('physical');
-  
-  console.log('Character data appearances:', characterData.appearances);
-  console.log('Current appearance set to:', currentAppearance);
-  
   // Extract only character-specific sections
   const characterSections: CharacterSections = {
     overview: character.sections?.overview || [],
@@ -138,29 +132,33 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
   };
   
   return (
-    <div 
-      className="w-full max-w-[1400px] mx-auto"
-    >
-      <Card className="shadow-lg border-l-4 bg-card/95 backdrop-blur-sm min-h-full flex flex-col rounded-xl" style={{
-        borderLeftColor: 'var(--wiki-character)'
-      }}>
-        
-        <div className="rounded-t-xl">
-          <CharacterHeader 
+    <div className="w-full max-w-[1400px] mx-auto">
+      {/* Main Entry Card with Glass Styling */}
+      <GlassPanel
+        variant="elevated"
+        glow
+        glowIntensity="subtle"
+        rounded="xl"
+        padding="none"
+        className="min-h-full flex flex-col"
+      >
+        {/* Header Section */}
+        <div className="rounded-t-xl overflow-hidden">
+          <EntryHeader 
             title={character.title} 
-            quote={characterData.quote} 
+            quote={characterData.quote}
+            entryType="character"
           />
           
-          <div className="px-6">
-            <CharacterBasicInfo
-              species={characterData.species}
-              age={characterData.age}
-              height={characterData.height}
-              status={characterData.status}
-              alignment={characterData.alignment}
-              archetypeId={characterData.archetype}
-            />
-          </div>
+          <EntryInfoBar
+            entryType="character"
+            species={characterData.species}
+            age={characterData.age}
+            height={characterData.height}
+            status={characterData.status}
+            alignment={characterData.alignment}
+            archetypeId={characterData.archetype}
+          />
         </div>
         
         {/* Main Content - Mobile: Vertical Stack, Desktop: Side by Side */}
@@ -218,7 +216,7 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
           </div>
           
         </div>
-      </Card>
+      </GlassPanel>
     </div>
   );
 }

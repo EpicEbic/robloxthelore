@@ -16,16 +16,28 @@ export const bouncemanTheme: CharacterTheme = {
     card: 'linear-gradient(145deg, #1a0a0a 0%, #2a1a1a 100%)',
     accent: 'linear-gradient(45deg, #dc2626 0%, #991b1b 100%)',
   },
+  glow: {
+    primary: '#dc2626',
+    secondary: '#991b1b',
+    intensity: 'moderate',
+    blur: 12,
+    spread: 2,
+  },
+  glass: {
+    blur: 8,
+    opacity: 0.14,
+    borderOpacity: 0.22,
+    tint: '#dc2626',
+  },
   particles: {
     type: 'bounce',
-    color: '#dc2626',        // Red particles
-    intensity: 0.8,          // Slightly reduced intensity
-    speed: 0.5,              // Slow scroll
-    count: 80,               // More particles for polka-dot pattern
+    color: '#dc2626',
+    intensity: 0.8,
+    speed: 0.5,
+    count: 80,
   },
   patterns: {
     type: 'geometric',
     opacity: 0.1,
   },
 };
-

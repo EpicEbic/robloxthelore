@@ -27,11 +27,6 @@ export class ParticleSpawner {
     // Use proper per-frame spawn chance (divide by 60 to convert from per-second to per-frame)
     const adjustedSpawnChance = particleConfig.spawnChance / 60; // Convert per-second to per-frame at 60fps
     
-    // Debug logging for Vortex speed particles
-    if (theme.id === 'vortex-a-steele' && particleType === 'speed') {
-      console.log(`Vortex speed spawn: chance=${particleConfig.spawnChance}, adjusted=${adjustedSpawnChance}, side=${side}, particles=${sideParticles.length}/${particleConfig.maxParticles}`);
-    }
-    
     // Random chance to spawn based on configuration
     return Math.random() < adjustedSpawnChance;
   }

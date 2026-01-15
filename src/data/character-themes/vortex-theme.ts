@@ -16,6 +16,19 @@ export const vortexTheme: CharacterTheme = {
     card: 'linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%)',
     accent: 'linear-gradient(45deg, #a855f7 0%, #9333ea 100%)',
   },
+  glow: {
+    primary: '#a855f7',
+    secondary: '#9333ea',
+    intensity: 'moderate',
+    blur: 14,
+    spread: 3,
+  },
+  glass: {
+    blur: 10,
+    opacity: 0.12,
+    borderOpacity: 0.25,
+    tint: '#a855f7',
+  },
   particles: {
     type: 'speed',
     color: '#a855f7',

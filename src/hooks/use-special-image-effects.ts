@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGlitchEffect } from './use-glitch-effect';
@@ -25,23 +24,15 @@ export const useSpecialImageEffects = () => {
   }, []);
 
   const handleThirdImageClick = () => {
-    console.log("Special image clicked! Current path:", window.location.pathname);
-    
     if (isSpecialEffectPage()) {
-      console.log("Triggering glitch effect and navigation...");
       setIsPermanentlyChanged(true);
       triggerGlitch(() => {
-        console.log("Navigating to The Reckoner...");
         navigate("/entry/the-reckoner");
       });
-    } else {
-      console.log("Not on special effect page, click ignored");
     }
   };
 
   const handleMouseEnter = (index: number) => {
-    console.log("Mouse entered image:", index, "Current path:", window.location.pathname);
-    
     // Only apply special hover effects on Builderman page
     if (isSpecialEffectPage()) {
       const isBuildermanPage = window.location.pathname === "/entry/builderman";
@@ -50,7 +41,6 @@ export const useSpecialImageEffects = () => {
       const isSpecialImage = isBuildermanPage && index === 2;
       
       if (isSpecialImage) {
-        console.log("Starting hover timer for special image");
         // Clear any existing timeout
         if (hoverTimeoutRef.current) {
           clearTimeout(hoverTimeoutRef.current);
@@ -58,7 +48,6 @@ export const useSpecialImageEffects = () => {
         
         // Set a new timeout for 1 second
         hoverTimeoutRef.current = setTimeout(() => {
-          console.log(`Setting hovered index to ${index} after 1 second delay`);
           setHoveredIndex(index);
         }, 1000);
       }
@@ -66,7 +55,6 @@ export const useSpecialImageEffects = () => {
   };
 
   const handleMouseLeave = () => {
-    console.log("Mouse left image");
     // Clear the timeout if mouse leaves before 1 second
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);

@@ -28,4 +28,3 @@ export const renByteraTheme: CharacterTheme = {
     opacity: 0.15,
   },
 };
-

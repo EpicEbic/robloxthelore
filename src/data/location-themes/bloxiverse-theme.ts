@@ -16,6 +16,19 @@ export const bloxiverseTheme: CharacterTheme = {
     card: 'linear-gradient(145deg, #2d1b4e 0%, #3d2b5e 100%)',
     accent: 'linear-gradient(45deg, #e879f9 0%, #f0abfc 50%, #ffffff 100%)',
   },
+  glow: {
+    primary: '#e879f9',
+    secondary: '#f0abfc',
+    intensity: 'intense',
+    blur: 16,
+    spread: 4,
+  },
+  glass: {
+    blur: 10,
+    opacity: 0.16,
+    borderOpacity: 0.25,
+    tint: '#e879f9',
+  },
   particles: {
     type: 'cosmic-wave',
     color: '#e879f9',
@@ -28,4 +41,3 @@ export const bloxiverseTheme: CharacterTheme = {
     opacity: 0.12,
   },
 };
-
