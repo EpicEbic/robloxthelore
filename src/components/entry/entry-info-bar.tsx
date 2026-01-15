@@ -155,7 +155,7 @@ export function EntryInfoBar({
     >
       {/* Character Info Bar */}
       {entryType === 'character' && !showArchetypeCard && (
-        <div className="flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x divide-border/30">
+        <div className="flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x divide-border/60">
           {species && <InfoItem icon={Info} label="Species" value={species} />}
           {age && <InfoItem icon={Calendar} label="Age" value={age} />}
           {height && <InfoItem icon={Ruler} label="Height" value={height} />}
@@ -225,7 +225,7 @@ export function EntryInfoBar({
 
       {/* Location Info Bar */}
       {entryType === 'location' && (
-        <div className="flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x divide-border/30">
+        <div className="flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x divide-border/60">
           <InfoItem icon={MapPin} label="Type" value={locationType || "Unknown"} />
           <InfoItem icon={Layers} label="Size" value={locationSize || "Unknown"} />
           <InfoItem icon={Globe} label="Region" value={locationRegion || "Unknown"} />
