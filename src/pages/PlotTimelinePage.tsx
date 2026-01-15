@@ -377,6 +377,206 @@ Nauli's expression showed hesitation, but she decided that it was best explained
 Somewhere far away, a bag of groceries drifted weightlessly throughout the Miasma, forgotten in the chaos. The small comforts it carried would never reach their destination.`
           }
         ]
+      },
+      {
+        chapter: "Chapter 3",
+        title: "Deep Cuts",
+        summary: "Caesar recovers from his recent battle with Vortex, as Nauli goes on a reconnaissance mission to gather more information on the Power Coils.",
+        description: "Caesar recovers from his recent battle with Vortex, as Nauli goes on a reconnaissance mission to gather more information on the Power Coils.",
+        acts: [
+          {
+            title: "Act I: Lingering Wounds",
+            content: `Day rose on the island, golden light spilling through the cabin window and pulling Caesar from his sleep. He had been confined to rest since the night before, ever since his encounter with Vortex had ended with a bullet in his shoulder. fabric was bound tightly around the wound, stiff and uncomfortable, darkened where blood had soaked through and dried overnight. The bullet still lay within him, a constant temptation for Caesar to remove it with the Flow. He chose not to, wary that extracting it without proper treatment would likely cause more harm than relief.
+
+As he groggily rubbed at his eyes and fully came to his senses, he noticed Nauli sitting in a chair beside his bed.
+
+She was already awake. A tray of soup rested on his reading desk, steam still rising from the bowl. It took a moment for her to realize that Caesar had awoken, but once she did, her attention shifted to him immediately, her focus settling on his condition and the state of his bandages. This gentler, nurturing side of Nauli was not something seen often, but Caesar had always been fond of it. The care was evident in her eyes and in the restraint of her movements. It stood in sharp contrast to the cold, guarded demeanor she wore around nearly everyone else.
+
+The severity of the injury became clear the moment Caesar tried to move. His right arm refused to cooperate, the smallest adjustment sending sharp pain up through his shoulder and into his neck. He was no stranger to pain, having endured more than most, but this was different. The bullet had carved deeper than anything he had faced in quite some time, a feat few could manage against someone as resilient as he was. Nauli urged him to stay put, to rest properly and allow the wound time to close. Predictably, Caesar refused. The island still needed tending, and routine was one of the few things he trusted to keep his mind calm and steady. Nauli hesitated before ultimately relenting, wary that forcing him might only worsen the injury.
+
+Before any work could begin, Caesar sat down and ate the soup she had prepared.
+
+While he ate, Nauli slipped quietly back into his room and retrieved his tablet. She flipped through his contacts, copying down the information for one name in particular: Rice Farmer. She wasted no time reaching out afterward, explaining Caesar's condition and his stubborn insistence on continuing his duties regardless. She asked for a simple favor—only that Rice come by for the day to keep a watchful eye on Caesar and help him manage his workload.
+
+Rice accepted without hesitation. It was an easy request to honor after everything Caesar and Nauli had done for him and the Farmer Sanctuary during Bryck's attack.
+
+Nauli returned the tablet to its place and made her way back into the dining room just as Caesar finished his meal, rinsing the dish and setting it in the sink. She lingered in the doorway, watching him struggle into his coat and adjust the strap holding pressure against his shoulder. He was nearly out the door when she finally intervened, finding the perfect excuse to stall him.
+
+She had yet to explain everything Ren had uncovered about the device hidden in the cellar. Simply mentioning it was enough to stop him, his attention immediately drawn to whatever Nauli had learned during her visit.
+
+They remained inside for a while longer as Nauli laid out her findings in full. The device they had secured was the Gravity Coil, and according to Ren, it was not the only one. It belonged to a set of three, collectively known as the Coils of Power. Each was bound to a fundamental force of reality, and gravity was only the beginning. If something as significant as the Gravity Coil had fallen into the hands of a small-time criminal like Bryck, then it was reasonable to assume that the remaining two were already circulating—or that far more capable forces had begun searching for them.
+
+Caesar listened closely, the unease he had felt since Bryck's defeat settling into something heavier. These were not common tools or curiosities. They were temptations. Invitations. Power, waiting to be claimed. If they chose not to pursue it, others certainly would. Nauli made her intentions clear. She wanted to locate the remaining coils and hide them away, just as they had done with the first. To do that, she would need information—rumors, patterns, anything she could gather by asking around and investigating.
+
+Caesar agreed. If someone as incompetent as Bryck could cause that much destruction with the Gravity Coil alone, he didn't want to imagine what capable hands could do with the others.
+
+Their discussion was interrupted as the island's boundary opened, Rice Farmer emerging into the clearing just outside the cabin. The timing was convenient; Nauli had just finished sharing what she knew. With Rice present to keep a close watch, she excused herself to move on. She gave Caesar one last look before stepping away, her eyes lingering briefly on his bandaged shoulder, before turning toward the edge of the island.
+
+With a final wave, Nauli disappeared into the Miasma, her search underway.
+
+Behind her, the island settled back into routine. Caesar and Rice gathered tools and began their rounds, simple tasks filling the space where worry had taken hold. For now, there was peace. Yet beneath it all, something had shifted.
+
+The Gravity Coil was no longer just an artifact they had contained.
+
+It was a warning.`
+          },
+          {
+            title: "Act II: A Traveling History",
+            content: `Caesar and Rice worked side by side under the sun, tending to the land. Tasks were chosen carefully, favoring those that required patience more than strength. Soil was turned gently as shoots were trimmed. Heavy buckets of water were traded for a much lighter watering can. The wound in Caesar's shoulder made itself known with every movement. A constant, dull ache that reminded him of his injury, though Rice's assistance helped ease the strain.
+
+Rice kept a close eye on Caesar, reassuring him often and making sure he was holding up. He offered help whenever Caesar faltered, though otherwise allowed him to work independently. The island did not require much of them today, and that was a mercy. Over time, Caesar grew numb to the pain, relaxed by the routine and Rice's companionship.
+
+The two bickered casually as they worked, conversing about plants and various gardening strategies. Much of their time was spent giggling over the names of imaginary fruit hybrids—the Plumon (plum-lemon) and the Gary (grape-cherry) among their personal favorites.
+
+While Caesar distracted himself with work and Rice's company, Nauli remained on the move elsewhere.
+
+Her path led her across many different worlds, each with their own structure and environment. Some were lively and crowded, others nearly barren or completely desolate. She did not need to linger long. Her antennae drew in ambient thoughts and impressions from those nearby, filtering away the irrelevant noise until only useful information remained.
+
+Slowly but surely, a pattern began to emerge.
+
+Mentions of tournaments. Of prizes too valuable to circulate freely, awarded to champions as symbols of dominance. Artifacts displayed proudly rather than hidden away, granted through spectacle and strength alike. These rewards were consistently tied to a single location.
+
+Again and again, one name rang out.
+
+The Red-Cliff Arena.
+
+Descriptions of the arena varied from one individual to the next, shaped by personal experience and rumor, but the general concept remained consistent. A theatrical arena of competition and entertainment, constructed by a Noobish faction known as the Knights of Red-Cliff. Gladiatorial combat, Olympic-style tournaments, and public performances were all held within its walls. Money and powerful artifacts were among the prizes awarded to outstanding competitors. Whether one—or both—of the remaining Power Coils were among those prizes remained unclear.
+
+The implications unsettled her.
+
+If a Power Coil had found its way there, it was not hidden.
+
+It was being flaunted openly, for everyone to see.
+
+Nauli quickened her pace, beginning the journey home just as Caesar and Rice were finishing their work for the day.
+
+They rested beneath the shade of a tree, satisfied with what they had accomplished. The sky darkened into shades of orange as the sun began to set, and their conversation gradually drifted towards something more personal.
+
+Caesar spoke of his past.
+
+He explained that he had once lived without any powers at all, no different from countless other Bloxians—ordinary, helpless, and small in the grand scope of the Bloxiverse. His life had been a quiet one, spent alone with his island and his gardens. He admitted that such a lifestyle was lonely, but also confessed to his fear of the universe beyond his home. News broadcasts and reports painted the realm as violent and cruel. The island felt safer by comparison.
+
+Until one day, it wasn't.
+
+Caesar's expression darkened as he described the day his powers awakened.
+
+A stranger had invaded his home without warning. The attack was sudden and overwhelming. His walls were torn open as the intruder burst through, tackling Caesar and dragging him through the breach. He was beaten relentlessly until his body no longer responded. His supplies were looted, his gardens trampled and stripped bare. Caesar could only watch as everything he had built was taken from him.
+
+Fear came first. Then sorrow.
+
+Finally, he felt rage.
+
+As his consciousness began to slip, something deep within him flared to life. He struggled to recall the details clearly. He remembered sparks, distorted gravity, violent surges of force. He remembered the attacker struggling. But by the time Caesar had come to his senses, the land around him had been torn apart. The intruder was gone, the crate of stolen supplies abandoned nearby.
+
+Caesar never learned what became of the man, but he doubted that the attacker had survived.
+
+Rice listened in awe, thanking Caesar for trusting him with something so personal. Caesar made it clear that he felt no pride in what had happened that day. That moment marked a turning point in his life. From then on, he resolved to use his powers to protect those who could not protect themselves.
+
+Rice began to open up about his own past, but was cut off by rustling in the nearby bushes.
+
+Then he stepped into view—Vortex.
+
+He approached calmly, greeting Caesar and introducing himself to Rice. Caesar immediately noticed that the injuries from their previous encounter were gone. There were no lingering marks, no sign of damage at all. After brief formalities, Vortex offered an apology for his intrusion on the island.
+
+He held out a small vial and handed it to Caesar. Inside was a glowing liquid, a bright neon green.
+
+Vortex explained that it was concentrated magic, compressed to fit within the vial. It had been created by a healer affiliated with the Hunter Association, a woman responsible for maintaining the health of their hunters and staff. The substance was potent, capable of rapidly mending most injuries. He admitted that Caesar had no reason to trust him, but insisted that he wished to make amends for what he had done.
+
+After a brief hesitation, Caesar chose to trust him and drank the vial in full.
+
+The effect was immediate.
+
+Warmth surged through his shoulder as the pain dissolved almost instantly. Flesh knitted together as the wound sealed, the pressure forcing the bullet outward. It fell onto the grass with a dull thud. What little pain remained faded rapidly, leaving only a torn hole in the fabric of his shirt.
+
+With his debt settled, Vortex gave a single nod and turned to leave.
+
+Caesar stopped him, asking him to stay for a while. There was no obligation—only an invitation. Curious, Vortex accepted.
+
+The three spent time together, talking casually. Rice jokingly suggested another fight so he could see their strength firsthand. To his surprise, both Caesar and Vortex agreed. What followed was lighthearted and controlled sparring. Caesar tested his newly restored shoulder, surprised by how natural the movement felt. The injury was already little more than a memory.
+
+As they traded blows, Caesar noticed a pattern. Vortex's movements were unnaturally fast—but only at times. Curious, Caesar began to theorize on what was at play. He placed a bet, asking if Vortex had some muscle-based ability. Vortex laughed and revealed the truth.
+
+He could manipulate time.
+
+The reveal quickly reframed everything in Caesar's eyes—the afterimages, the impossible speed, the way Vortex had seemed to be everywhere at once. Caesar was taken aback, though the explanation made their previous encounter far easier to understand.
+
+When Caesar pressed to see the full extent of his powers, Vortex declined. Manipulating time in such a way was taxing on his body, even weaker levels. Caesar accepted this without arguing, unwilling to push friendly sparring into something reckless.
+
+As their bout continued, another conflict was already taking shape elsewhere.`
+          },
+          {
+            title: "Act III: A Quiet Violence",
+            content: `As Nauli traveled through the Miasma, she felt a disturbance before she saw it. Her antennae picked up on traces of fear and desperation, a sickening aura that was radiating from a nearby world. Minds were scrambling in an uncoordinated panic. She adjusted her path to pass through the world, entering from the far edge.
+
+Inside was a small settlement under the dark of night, a collection of shelters. housing for Bloxians without a World of their own to call home. Supplies were being stripped away and loaded into containers by a group of outlaws. They worked quickly, unconcerned by the locals. They were clearly invading this World, and Nauli would not stand for it.
+
+She observed from cover, preparing her next moves.
+
+She snuck silently, carefully threading between the buildings and shadowed terrain. Her psychic influence felt her surroundings, mapping the layout in her mind. She took note of any Bloxians, carefully filtering friend from foe. One by one, she quietly rushed each bandit. A small knife from her waist was drawn, slipping cleanly into the necks of her targets. The bodies of the raiders began to fall more and more, dragged aside and hidden from view.
+
+Her mind flickered to Caesar, knowing that he would've preferred restraint. To capture and show them mercy.
+
+Nauli did not share such patience.
+
+As the numbers thinned, the raiders grew aware of Nauli's presence. Their resistance mounted, as gunfire rang across the alleys. Nauli pressed forward, weaving between cover and exploiting any moments of hesitation that she could. Waves of psychic power were shot towards her attackers, dropping their focus and causing hallucinations. Tens of armed Naulis appeared to charge at them, though only one knife was needed to put them to rest.
+
+Still, as Nauli continued to liberate the shelter, one Bloxian appeared unbothered by her tricks.
+
+Karblox Jones.
+
+He made himself known deliberately, stepping into view with his weapon drawn and his posture relaxed. He was a clean-cut man, a fedora casting shade on his eyes in the moonlight. Unlike the others, Nauli could sense his hardened mind. He was focused, and his conviction made him difficult to sway with her powers. It was clear that she'd need to confront the man directly, though his pistol kept her at a controlled distance.
+
+The fight between them stretched longer than her battle with his lackeys combined.
+
+Nauli adapted to Karblox, pressing closer and forcing him into a tightly-knit alleyway. She feinted attacks through her powers, masking her true movements. Illusions drew his attention just long enough to create an opening for her blade to connect.
+
+She did not waste it.
+
+Her knife pierced his chest cleanly, a decisive strike that pierced his core, causing it to shatter. Karblox muttered a few hateful words, before collapsing to the ground in silence. With his core broken, Karblox lost his form and broke down, dissolving into light.
+
+What few lackeys remained had seen their leader fall. They fled without hesitation, abandoning the World.
+
+Nauli stood alone as her breathing slowly steadied after the battle. Blood coated her clothes and hands. She went from room to room, ensuring the survivors were safe, and that what supplies remained were returned. Only then did she turn away, disgusted in her current state. Wiping her hands at her jacket to no avail, she resumed her trip home.
+
+Nauli later emerged onto the island, wringing her jacket of blood. Caesar, Vortex and Rice now sat along the porch of the cabin, chatting idly. Caesar noticed her almost immediately, rushing towards her before his thoughts could catch up. He feared the worst, seeing her covered in blood. Relief followed soon after, as he quickly realized that the blood covering her body was not her own. Even so, he checked her thoroughly, scanning for injuries. Aside from bruises and scrapes, she was perfectly okay.
+
+Vortex spoke up, asking if 'bloody mary' was going to introduce herself. Nauli's attention immediately shifted towards the unknown man.
+
+Tension snapped the moment she registered the unfamiliar face. Caesar's casual acknowledgement of who Vortex was-- and how he was responsible for the bullet in Caesar's shoulder-- was enough for her to lunge at Vortex without hesitation. Vortex instinctively went to dodge, but Caesar projected the Flow to stop her in place, gently gliding her back to his side.
+
+Knowing Nauli would just attack again, he decided to show her proof. He pulled his jacket off to reveal part of his bare chest and shoulder.
+
+The wound was gone.
+
+Nauli slowly calmed down, her curiosity piqued as Vortex began to explain. He had brought healing magic from the Hunter Association to correct his wrongdoing. Nauli was skeptical, but she did not ignore the effort. Her thanks was half-baked, with clear undertones of hatred.
+
+Vortex admitted the truth, that making amends was very out of character for someone as himself. Caesar was an exception, he found him to be a noble inspiration and wished to amend what he had hurt.
+
+Nauli turned her attention towards Rice next, thanking him for watching over Caesar during her mission. Rice thanked her in return. The day had been peaceful and enjoyable. Rice hoped he could return again sometime. With a wave goodbye, Rice parted with the group and left to return to the sanctuary.
+
+Vortex lingered for a few moments, as though he wished to say something.
+
+He thanked Caesar for the invitation to stay, such a break was a welcome change from the routine of his duties as a hunter. But work wouldn't progress without his service, and he promised that their paths would likely cross again.
+
+Without waiting for a response, Vortex vanished in a burst of purple energy.
+
+At last, the island was quiet.
+
+Nauli wasted no time and explained the situation to Caesar. The Red-Cliff Arena stood as their strongest lead, a Noobish facility that was closer to the center of the Bloxiverse. She wanted to go alongside Caesar to investigate, and potentially take any Power Coils they'd find right then and there. Caesar wasn't too sure about the idea, but stayed silent and let her continue.
+
+Nauli recounted her encounter with Karblox and his goons. Caesar was troubled by the unnecessary risk she had taken on her own, frustrated that she didn't ask for his help.
+
+Nauli stood by her decision, insisting that a delay would've cost those innocents both their lives and resources. She was capable, and it was handled perfectly in the end.
+
+Caesar did not argue further.
+
+They said their goodnights after discussions came to a close. Caesar retreated to his cabin as Nauli headed for the lake to wash her body and clothing of blood.
+
+Tomorrow, they would figure out a solid game plan.
+
+But for tonight, they could relax.`
+          }
+        ]
       }
     ]
   }

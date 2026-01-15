@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Info, Calendar, Scale, X, Quote, Compass } from "lucide-react";
+import { Info, Calendar, Scale, X, Quote, Compass, Ruler } from "lucide-react";
 import { getArchetypeByAlignment, getArchetypeById } from "@/data/character-archetypes";
 import { cn } from "@/lib/utils";
+
 
 // Convert grid colors (row-first) to button-friendly gradients (column-first)
 // Grid uses: good.lawful, good.social, etc.
@@ -60,6 +61,20 @@ const ALIGNMENT_BADGE_COLORS: Record<string, string> = {
   evil: "bg-gradient-to-r from-red-800/60 to-red-900/60 border-red-500/50",
 };
 
+// Convert height to different units
+const formatHeight = (studs: number) => {
+  const cm = studs * 28;
+  const inches = cm * 0.393701;
+  const feet = Math.floor(inches / 12);
+  const remainingInches = Math.round((inches % 12) * 10) / 10;
+
+  return {
+    studs: Math.round(studs * 10) / 10,
+    cm: Math.round(cm * 10) / 10,
+    feetInches: `${feet}'${remainingInches}"`
+  };
+};
+
 function getAlignmentBadgeColor(align: string): string {
   const normalizedAlign = align.trim().toLowerCase();
   return ALIGNMENT_BADGE_COLORS[normalizedAlign] || ALIGNMENT_BADGE_COLORS.neutral;
@@ -68,18 +83,20 @@ function getAlignmentBadgeColor(align: string): string {
 interface CharacterBasicInfoProps {
   species: string;
   age: number | string;
+  height?: string;
+  status?: string;
   alignment: string;
   archetypeId?: string;
 }
 
-export function CharacterBasicInfo({ species, age, alignment, archetypeId }: CharacterBasicInfoProps) {
+export function CharacterBasicInfo({ species, age, height, status, alignment, archetypeId }: CharacterBasicInfoProps) {
   const [showArchetypeCard, setShowArchetypeCard] = useState(false);
-  
+
   // Get archetype: use archetypeId if provided, otherwise derive from alignment
   let archetype;
   let column: string;
   let row: string;
-  
+
   if (archetypeId) {
     // Use the character's defined archetype
     archetype = getArchetypeById(archetypeId);
@@ -98,11 +115,11 @@ export function CharacterBasicInfo({ species, age, alignment, archetypeId }: Cha
     const alignmentParts = alignment.split("/").map(s => s.trim().toLowerCase());
     column = alignmentParts[0] || "neutral";
     row = alignmentParts[1] || "neutral";
-    
+
     // Get the archetype for this alignment
     archetype = getArchetypeByAlignment(column, row);
   }
-  
+
   const cellColor = CELL_COLORS[column]?.[row] || CELL_COLORS.neutral.neutral;
   
   return (
@@ -122,7 +139,7 @@ export function CharacterBasicInfo({ species, age, alignment, archetypeId }: Cha
               </div>
             </div>
           </div>
-          
+
           {/* Age */}
           <div className="flex items-center gap-4 p-5 flex-1">
             <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-gray-100 to-gray-300 flex-shrink-0 shadow-lg">
@@ -135,7 +152,37 @@ export function CharacterBasicInfo({ species, age, alignment, archetypeId }: Cha
               </div>
             </div>
           </div>
-          
+
+          {/* Height */}
+          {height && (
+            <div className="flex items-center gap-4 p-5 flex-1">
+              <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-gray-100 to-gray-300 flex-shrink-0 shadow-lg">
+                <Ruler className="h-5 w-5 icon-force-black" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-0.5">Height</div>
+                <div className="text-base font-semibold text-foreground">
+                  {height}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Status */}
+          {status && (
+            <div className="flex items-center gap-4 p-5 flex-1">
+              <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-gray-100 to-gray-300 flex-shrink-0 shadow-lg">
+                <Info className="h-5 w-5 icon-force-black" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-0.5">Status</div>
+                <div className="text-base font-semibold text-foreground">
+                  {status}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Alignment & Archetype */}
           <div className="flex items-center gap-4 p-5 flex-1">
             <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-gray-100 to-gray-300 flex-shrink-0 shadow-lg">
@@ -143,13 +190,13 @@ export function CharacterBasicInfo({ species, age, alignment, archetypeId }: Cha
             </div>
             <div className="min-w-0 flex-1">
               <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1.5">Alignment</div>
-              <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex flex-col gap-2">
                 {/* Archetype button */}
                 {archetype && (
                   <button
                     onClick={() => setShowArchetypeCard(true)}
                     className={cn(
-                      "px-4 py-2 rounded-full text-sm font-semibold shadow-md transition-all duration-200 text-force-white",
+                      "px-4 py-2 rounded-full text-sm font-semibold shadow-md transition-all duration-200 text-force-white self-start",
                       "hover:scale-105 hover:shadow-lg cursor-pointer",
                       "border-2",
                       cellColor.bg,
@@ -160,17 +207,19 @@ export function CharacterBasicInfo({ species, age, alignment, archetypeId }: Cha
                   </button>
                 )}
                 {/* Alignment badges - use archetype subtypes if available, otherwise use alignment */}
-                {(archetype ? [archetype.columnLabel, archetype.rowLabel] : alignment.split("/")).map((align, index) => (
-                  <span 
-                    key={index} 
-                    className={cn(
-                      "px-3 py-1.5 text-xs font-medium rounded-full border text-force-white",
-                      getAlignmentBadgeColor(align)
-                    )}
-                  >
-                    {align.trim()}
-                  </span>
-                ))}
+                <div className="flex items-center gap-2 flex-wrap">
+                  {(archetype ? [archetype.columnLabel, archetype.rowLabel] : alignment.split("/")).map((align, index) => (
+                    <span
+                      key={index}
+                      className={cn(
+                        "px-3 py-1.5 text-xs font-medium rounded-full border text-force-white",
+                        getAlignmentBadgeColor(align)
+                      )}
+                    >
+                      {align.trim()}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -179,7 +228,7 @@ export function CharacterBasicInfo({ species, age, alignment, archetypeId }: Cha
 
       {/* Expanded View - Archetype Card (fills the entire info bar space) */}
       {showArchetypeCard && archetype && (
-        <div 
+        <div
           className={cn(
             "relative p-6 min-h-[120px] text-force-white",
             cellColor.bg,

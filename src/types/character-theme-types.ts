@@ -24,13 +24,13 @@ export interface CharacterTheme {
     scrollDirection?: 'up' | 'down' | 'left' | 'right'; // Scroll direction for spiral patterns (default 'down')
   };
   patterns: {
-    type: 'geometric' | 'organic' | 'energy' | 'none';
+    type: 'geometric' | 'organic' | 'energy' | 'mechanical' | 'none';
     opacity: number;
   };
 }
 
 export type ParticleType = 'flow' | 'sparkle' | 'wave' | 'orb' | 'radio' | 'speed' | 'clock' | 'lightning' | 'grain' | 'cosmic-wave' | 'stardust' | 'shooting-star' | 'bounce' | 'bubble' | 'squiggle' | 'none';
-export type PatternType = 'geometric' | 'organic' | 'energy' | 'none';
+export type PatternType = 'geometric' | 'organic' | 'energy' | 'mechanical' | 'none';
 
 export interface Particle {
   x: number;

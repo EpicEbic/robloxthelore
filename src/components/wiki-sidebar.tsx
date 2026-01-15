@@ -3,14 +3,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Separator } from "@/components/ui/separator";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ChevronDown, ChevronUp, GitCompare, BarChart3, ArrowLeft, Globe, Settings, Trophy, Menu, Home } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
-import { CategoryType, Subcategory } from "@/contexts/wiki-context";
+import { CategoryType } from "@/contexts/wiki-context";
 import { useParticleSettings } from "@/contexts/particle-settings-context";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -23,6 +22,7 @@ interface WikiTopNavProps {
 // Part Selector Component
 function PartSelector() {
   const { currentPart, setCurrentPart } = usePart();
+  const { isTournamentUnlocked } = useEasterEgg();
 
   return (
     <div className="flex items-center">
@@ -30,18 +30,23 @@ function PartSelector() {
         variant={currentPart === "Part 1" ? "default" : "outline"}
         size="sm"
         onClick={() => setCurrentPart("Part 1")}
-        className="h-6 sm:h-6 md:h-7 px-1.5 sm:px-1.5 md:px-2 text-xs !rounded-l-xl !rounded-r-none border-r-0"
+        className={cn(
+          "h-6 sm:h-6 md:h-7 px-1.5 sm:px-1.5 md:px-2 text-xs",
+          isTournamentUnlocked ? "!rounded-l-xl !rounded-r-none border-r-0" : "!rounded-xl"
+        )}
       >
         1
       </Button>
-      <Button
-        variant={currentPart === "TEMP" ? "default" : "outline"}
-        size="sm"
-        onClick={() => setCurrentPart("TEMP")}
-        className="h-6 sm:h-6 md:h-7 px-1.5 sm:px-1.5 md:px-2 text-xs !rounded-r-xl !rounded-l-none"
-      >
-        T
-      </Button>
+      {isTournamentUnlocked && (
+        <Button
+          variant={currentPart === "TEMP" ? "default" : "outline"}
+          size="sm"
+          onClick={() => setCurrentPart("TEMP")}
+          className="h-6 sm:h-6 md:h-7 px-1.5 sm:px-1.5 md:px-2 text-xs !rounded-r-xl !rounded-l-none"
+        >
+          T
+        </Button>
+      )}
     </div>
   );
 }
@@ -331,16 +336,6 @@ export function WikiTopNav({
                           >
                             {subcategory.label}
                           </Link>
-                          {/* Insert The Bloxiverse after "All Locations" */}
-                          {category.type === "location" && index === 0 && (
-                            <Link
-                              to="/entry/the-bloxiverse"
-                              onClick={() => handleSubcategoryClick(category.type)}
-                              className="block select-none rounded-lg px-3 py-2 text-sm leading-none no-underline outline-none transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                            >
-                              The Bloxiverse
-                            </Link>
-                          )}
                         </div>
                       );
                     })}
@@ -375,6 +370,9 @@ export function WikiTopNav({
                 <div className="flex flex-col gap-1">
                   <Link to="/statistics" onClick={() => handleSubcategoryClick("tools")} className="block select-none rounded-lg px-3 py-2 text-sm leading-none no-underline outline-none transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                     Statistics
+                  </Link>
+                  <Link to="/height-comparison" onClick={() => handleSubcategoryClick("tools")} className="block select-none rounded-lg px-3 py-2 text-sm leading-none no-underline outline-none transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                    Height Comparison
                   </Link>
                   <Link to="/world" onClick={() => handleSubcategoryClick("tools")} className="block select-none rounded-lg px-3 py-2 text-sm leading-none no-underline outline-none transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                     World Map
@@ -485,23 +483,20 @@ export function WikiTopNav({
               <Menu className="h-4 w-4" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] sm:w-[400px] p-0 flex flex-col">
+          <SheetContent side="left" className="w-[300px] sm:w-[400px] p-0 flex flex-col mobile-sidebar">
             <div className="flex flex-col h-full overflow-y-auto custom-scrollbar">
               <div className="p-4 border-b border-border/50">
-                <div className="flex items-center justify-between">
-                  <Link to="/" className="flex items-center space-x-3 group" onClick={() => setMobileMenuOpen(false)}>
-                    <Home className="h-5 w-5 text-primary" />
-                    <h2 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">The Lore</h2>
-                  </Link>
-                  <PartSelector />
-                </div>
+                <Link to="/" className="flex items-center space-x-3 group" onClick={() => setMobileMenuOpen(false)}>
+                  <Home className="h-5 w-5 text-primary" />
+                  <h2 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">The Lore</h2>
+                </Link>
               </div>
 
               {/* Plot Timeline */}
               <div className="p-4 space-y-2 border-b border-border/30">
                 <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Quick Access</h3>
                 <Link to="/plot-timeline" onClick={() => setMobileMenuOpen(false)}>
-                  <div className="px-3 py-2 rounded-lg border border-transparent hover:border-border/50 hover:bg-card/50 transition-all duration-200">
+                  <div className="px-3 py-2 rounded-lg mobile-sidebar-link">
                     <div className="font-medium text-sm text-foreground">Plot Timeline</div>
                     <div className="text-xs text-muted-foreground mt-0.5">View detailed episode breakdowns</div>
                   </div>
@@ -515,7 +510,7 @@ export function WikiTopNav({
                   <div key={category.type} className="space-y-2">
                     <Collapsible open={openCategories[category.type]} onOpenChange={() => toggleCategory(category.type)}>
                       <CollapsibleTrigger asChild>
-                        <Button variant="ghost" className="w-full justify-between px-1 py-2 h-auto rounded-lg hover:bg-accent/50 transition-all duration-200">
+                        <Button variant="ghost" className="w-full justify-between px-1 py-2 h-auto rounded-lg mobile-sidebar-button">
                           <h4 className="font-semibold text-sm text-foreground">{category.label}</h4>
                           <ChevronDown className={cn("h-4 w-4 transition-transform duration-200 text-foreground/60", openCategories[category.type] ? "rotate-180" : "rotate-0")} />
                         </Button>
@@ -529,20 +524,10 @@ export function WikiTopNav({
                                 <Link
                                   to={target}
                                   onClick={() => setMobileMenuOpen(false)}
-                                  className="block px-3 py-2 rounded-lg border border-transparent hover:border-border/50 hover:bg-card/50 transition-all duration-200"
+                                  className="block px-3 py-2 rounded-lg mobile-sidebar-link"
                                 >
                                   <div className="font-medium text-sm text-foreground">{subcategory.label}</div>
                                 </Link>
-                                {/* Insert The Bloxiverse after "All Locations" */}
-                                {category.type === "location" && index === 0 && (
-                                  <Link
-                                    to="/entry/the-bloxiverse"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="block px-3 py-2 rounded-lg border border-transparent hover:border-border/50 hover:bg-card/50 transition-all duration-200"
-                                  >
-                                    <div className="font-medium text-sm text-foreground">The Bloxiverse</div>
-                                  </Link>
-                                )}
                               </div>
                             );
                           })}
@@ -565,7 +550,7 @@ export function WikiTopNav({
                 <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Tools</h3>
                 <div className="space-y-1">
                   <Link to="/statistics" onClick={() => setMobileMenuOpen(false)}>
-                    <div className="flex items-center px-3 py-2 rounded-lg border border-transparent hover:border-border/50 hover:bg-card/50 transition-all duration-200">
+                    <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
                       <BarChart3 className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
                       <div>
                         <div className="font-medium text-sm text-foreground">Statistics</div>
@@ -574,7 +559,7 @@ export function WikiTopNav({
                     </div>
                   </Link>
                   <Link to="/world" onClick={() => setMobileMenuOpen(false)}>
-                    <div className="flex items-center px-3 py-2 rounded-lg border border-transparent hover:border-border/50 hover:bg-card/50 transition-all duration-200">
+                    <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
                       <Globe className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
                       <div>
                         <div className="font-medium text-sm text-foreground">World Map</div>
@@ -584,7 +569,7 @@ export function WikiTopNav({
                   </Link>
                   {isTournamentUnlocked && (
                     <Link to="/comparison" onClick={() => setMobileMenuOpen(false)}>
-                      <div className="flex items-center px-3 py-2 rounded-lg border border-transparent hover:border-border/50 hover:bg-card/50 transition-all duration-200">
+                      <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
                         <GitCompare className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
                         <div>
                           <div className="font-medium text-sm text-foreground">Comparison</div>
@@ -595,7 +580,7 @@ export function WikiTopNav({
                   )}
                   {isTournamentUnlocked && (
                     <Link to="/tournament" onClick={() => setMobileMenuOpen(false)}>
-                      <div className="flex items-center px-3 py-2 rounded-lg border border-transparent hover:border-border/50 hover:bg-card/50 transition-all duration-200">
+                      <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
                         <Trophy className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
                         <div>
                           <div className="font-medium text-sm text-foreground">Tournament</div>

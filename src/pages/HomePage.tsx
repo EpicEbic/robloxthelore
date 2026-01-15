@@ -1,6 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { SearchBar } from "@/components/search-bar";
 import { WikiEntryCard } from "@/components/wiki-entry-card";
 import { CategoryCard } from "@/components/category-card";
 import { useWiki } from "@/contexts/wiki-context";
@@ -15,6 +14,7 @@ import { TimelineItem } from "@/components/timeline-item";
 import { QandAItem } from "@/components/q-and-a-item";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
 import { Separator } from "@/components/ui/separator";
+import { WikiEntry } from "@/types/wiki-types";
 
 const HomePage = () => {
   // Sort entries by date (newest first) 
@@ -33,11 +33,17 @@ const HomePage = () => {
     return entries.filter(entry => isEntryUnlocked(entry.id));
   }, [entries, isEntryUnlocked]);
 
-  // Generate 3 random entries (excluding The Reckoner)
-  const randomEntries = useMemo(() => {
-    if (availableEntries.length === 0) return [];
-    const shuffled = [...availableEntries].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 3);
+  // Use state for random entries to prevent re-shuffling on navigation
+  const [randomEntries, setRandomEntries] = useState<WikiEntry[]>([]);
+  const hasInitialized = useRef(false);
+
+  // Generate random entries only once on initial mount
+  useEffect(() => {
+    if (!hasInitialized.current && availableEntries.length > 0) {
+      const shuffled = [...availableEntries].sort(() => Math.random() - 0.5);
+      setRandomEntries(shuffled.slice(0, 3));
+      hasInitialized.current = true;
+    }
   }, [availableEntries]);
   const handleViewRandomEntry = () => {
     if (availableEntries.length === 0) return;
@@ -91,8 +97,17 @@ const HomePage = () => {
         </p>
       </div>
       
-      <div className="flex justify-center mb-12 animate-scale-in" style={{ animationDelay: '100ms' }}>
-        <SearchBar />
+      <Separator className="my-12 max-w-3xl mx-auto" />
+      
+      <div className="flex flex-col items-center justify-center mb-12 animate-scale-in" style={{ animationDelay: '100ms' }}>
+        <div className="text-center max-w-3xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-flash-red">
+            SPOILERS AHEAD!
+          </h2>
+          <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+            Browse this website at your own risk, you may easily spoil yourself on the plot or certain events! For the best experience, you should check up on the Plot Timeline before going to any entry. If you REALLY want to wait, I'd avoid this place entirely until the webcomic begins production.
+          </p>
+        </div>
       </div>
 
       <div className="space-y-8">

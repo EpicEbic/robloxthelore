@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { whatsNewEntries } from "@/data/whats-new";
 import { qAndAEntries } from "@/data/q-and-a";
 import { TimelineItem } from "@/components/timeline-item";
@@ -8,8 +8,28 @@ import { ArrowLeft, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChangeCategory } from "@/types/whats-new-types";
+import { cn } from "@/lib/utils";
+
+const categoryLabels: Record<ChangeCategory, string> = {
+  new: "New",
+  changes: "Changes",
+  fixes: "Fixes",
+  removals: "Removals",
+  others: "Others",
+};
+
+const categoryColors: Record<ChangeCategory, string> = {
+  new: "bg-green-500/20 text-green-600 dark:text-green-400 border-green-500/30 hover:bg-green-500/30",
+  changes: "bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/30 hover:bg-blue-500/30",
+  fixes: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-500/30 hover:bg-yellow-500/30",
+  removals: "bg-red-500/20 text-red-600 dark:text-red-400 border-red-500/30 hover:bg-red-500/30",
+  others: "bg-purple-500/20 text-purple-600 dark:text-purple-400 border-purple-500/30 hover:bg-purple-500/30",
+};
 
 const WhatsNewPage = () => {
+  const [selectedCategory, setSelectedCategory] = useState<ChangeCategory | null>(null);
+  
   const sortedWhatsNewEntries = useMemo(() => {
     return [...whatsNewEntries].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }, []);
@@ -43,6 +63,33 @@ const WhatsNewPage = () => {
         <Card className="rounded-2xl shadow-xl border-2 backdrop-blur-sm overflow-hidden">
           <CardHeader>
             <CardTitle className="text-3xl font-semibold text-center">Update History</CardTitle>
+            {/* Category Filters */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
+              <Button
+                variant={selectedCategory === null ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedCategory(null)}
+                className="rounded-xl transition-all"
+              >
+                All
+              </Button>
+              {(Object.keys(categoryLabels) as ChangeCategory[]).map((category) => (
+                <Button
+                  key={category}
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedCategory(selectedCategory === category ? null : category)}
+                  className={cn(
+                    "rounded-xl transition-all border-2",
+                    selectedCategory === category 
+                      ? categoryColors[category] + " font-semibold" 
+                      : "hover:bg-muted/50"
+                  )}
+                >
+                  {categoryLabels[category]}
+                </Button>
+              ))}
+            </div>
           </CardHeader>
           <CardContent>
             <div className="relative max-w-3xl mx-auto">
@@ -51,6 +98,7 @@ const WhatsNewPage = () => {
                   key={item.id}
                   item={item}
                   isLast={index === sortedWhatsNewEntries.length - 1}
+                  selectedCategory={selectedCategory}
                 />
               ))}
             </div>

@@ -7,6 +7,7 @@ import { SegmentPopup } from "./segment-popup";
 import { WorldPopup } from "./world-popup";
 import { Button } from "@/components/ui/button";
 import { Plus, Minus } from "lucide-react";
+import { LocationContentStyles } from "@/components/location/location-content-styles";
 
 export function InteractiveBloxiverseMap() {
   const [zoom, setZoom] = useState(1);
@@ -33,8 +34,8 @@ export function InteractiveBloxiverseMap() {
 
   const minZoom = 0.5;
   const maxZoom = 5;
-  // Use The Null Boundary as max radius (exclude The Null Zone)
-  const maxRadius = BLOXIVERSE_SEGMENTS.find(seg => seg.id === 'the-null-boundary')?.endRadius || 1600;
+  // Use The Null Boundary as max radius (Null Zone is hidden)
+  const maxRadius = BLOXIVERSE_SEGMENTS.find(seg => seg.id === 'the-null-boundary')?.endRadius || 6520;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -48,26 +49,48 @@ export function InteractiveBloxiverseMap() {
     const container = containerRef.current;
     if (!container) return;
 
-    const preventScroll = (e: WheelEvent) => {
+    let rafId: number | null = null;
+    let lastWheelTime = 0;
+
+    const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       e.stopPropagation();
       if (!hasAnimated) return;
 
-      setIsZooming(true);
-      const scaleFactor = e.deltaY > 0 ? 0.92 : 1.08;
-      setZoom((prev) => {
-        const next = prev * scaleFactor;
-        return Math.max(minZoom, Math.min(maxZoom, next));
+      const now = Date.now();
+      const timeSinceLastWheel = now - lastWheelTime;
+      lastWheelTime = now;
+
+      // Throttle wheel events to prevent excessive updates
+      if (timeSinceLastWheel < 16) return; // ~60fps
+
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+
+      rafId = requestAnimationFrame(() => {
+        setIsZooming(true);
+        const scaleFactor = e.deltaY > 0 ? 0.92 : 1.08;
+        setZoom((prev) => {
+          const next = prev * scaleFactor;
+          return Math.max(minZoom, Math.min(maxZoom, next));
+        });
+        
+        // Reset zooming state after a short delay
+        setTimeout(() => {
+          setIsZooming(false);
+        }, 150);
+        rafId = null;
       });
-      
-      // Reset zooming state after transition
-      setTimeout(() => setIsZooming(false), 300);
     };
 
-    container.addEventListener('wheel', preventScroll, { passive: false });
+    container.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
-      container.removeEventListener('wheel', preventScroll);
+      container.removeEventListener('wheel', handleWheel);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
     };
   }, [minZoom, maxZoom, hasAnimated]);
 
@@ -271,6 +294,7 @@ export function InteractiveBloxiverseMap() {
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
+      <LocationContentStyles />
       {/* Zoom Controls */}
       <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
         <Button
@@ -313,6 +337,7 @@ export function InteractiveBloxiverseMap() {
           touchAction: 'none',
           pointerEvents: hasAnimated ? 'auto' : 'none',
           position: 'relative',
+          overflow: 'hidden',
         }}
       >
         <svg
@@ -324,9 +349,7 @@ export function InteractiveBloxiverseMap() {
             transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
             transition: (isDragging || isZooming) ? 'none' : 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
             animation: hasAnimated ? 'none' : 'expandMap 0.8s ease-out forwards',
-            willChange: (isDragging || isZooming) ? 'transform' : 'auto',
             transformOrigin: 'center center',
-            overflow: 'visible',
           }}
         >
           {/* Decorative Dots */}
@@ -336,33 +359,159 @@ export function InteractiveBloxiverseMap() {
             animationDelay={1000}
           />
 
-          {/* Segment Rings */}
-          {BLOXIVERSE_SEGMENTS.filter(seg => seg.id !== 'the-null-zone').map((segment, index) => {
+          {/* Single Unified Gradient Definition */}
+          <defs>
+            <radialGradient 
+              id="bloxiverse-gradient" 
+              cx="0" 
+              cy="0" 
+              r={maxRadius}
+              gradientUnits="userSpaceOnUse"
+            >
+              {/* Heart - White at center (0 to 480) */}
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset={`${(480 / maxRadius) * 100}%`} stopColor="#ffffff" />
+              {/* Inner Circle - Light Blue (480 to 1280) */}
+              <stop offset={`${(480 / maxRadius) * 100}%`} stopColor="#93c5fd" />
+              <stop offset={`${(1280 / maxRadius) * 100}%`} stopColor="#93c5fd" />
+              {/* Midzone - Darker Blue to Purple (1280 to 2400) */}
+              <stop offset={`${(1280 / maxRadius) * 100}%`} stopColor="#3b82f6" />
+              <stop offset={`${(2400 / maxRadius) * 100}%`} stopColor="#7c3aed" />
+              {/* Outer Circle - Pink (2400 to 3600) */}
+              <stop offset={`${(2400 / maxRadius) * 100}%`} stopColor="#ec4899" />
+              <stop offset={`${(3600 / maxRadius) * 100}%`} stopColor="#ec4899" />
+              {/* Banlands - Red (3600 to 4800) */}
+              <stop offset={`${(3600 / maxRadius) * 100}%`} stopColor="#ef4444" />
+              <stop offset={`${(4800 / maxRadius) * 100}%`} stopColor="#ef4444" />
+              {/* Void - Darker Grey (4800 to 6200) */}
+              <stop offset={`${(4800 / maxRadius) * 100}%`} stopColor="#4b5563" />
+              <stop offset={`${(6200 / maxRadius) * 100}%`} stopColor="#4b5563" />
+              {/* Null Boundary - Lighter Grey (6200 to 6520) */}
+              <stop offset={`${(6200 / maxRadius) * 100}%`} stopColor="#9ca3af" />
+              <stop offset="100%" stopColor="#9ca3af" />
+            </radialGradient>
+            
+            {/* Masks for creating rings from filled circles */}
+            {BLOXIVERSE_SEGMENTS.filter(seg => seg.id !== 'the-heart' && seg.id !== 'the-null-zone').map((segment) => (
+              <mask key={`mask-${segment.id}`} id={`mask-${segment.id}`}>
+                <circle cx={0} cy={0} r={segment.endRadius} fill="white" />
+                <circle cx={0} cy={0} r={segment.startRadius} fill="black" />
+              </mask>
+            ))}
+            
+            {/* Curved text paths for segment labels */}
+            {BLOXIVERSE_SEGMENTS.filter(seg => seg.id !== 'the-heart' && seg.id !== 'the-null-zone').map((segment) => {
+              // Calculate the exact center point of the ring (middle between start and end radius)
+              const centerRadius = (segment.startRadius + segment.endRadius) / 2;
+              // Position at the vertical center of the ring (negative Y because SVG Y increases downward)
+              // Add a small offset for Null Boundary to align better with its zone
+              const verticalOffset = segment.id === 'the-null-boundary' ? 20 : 0;
+              const centerY = -centerRadius + verticalOffset;
+              
+              // Create a subtle horizontal arc path that curves slightly
+              // The arc spans horizontally with a gentle upward curve
+              // For a quadratic curve, to ensure the midpoint is at centerY, we need to adjust the control point
+              const arcWidth = centerRadius * 0.6; // Width of the arc
+              const arcHeight = centerRadius * 0.08; // Subtle curve height
+              const startX = -arcWidth;
+              const startY = centerY + arcHeight; // Start slightly below center
+              const endX = arcWidth;
+              const endY = centerY + arcHeight; // End slightly below center
+              const controlX = 0;
+              const controlY = centerY - arcHeight; // Control point above center
+              // This creates a symmetric curve where the midpoint (at 50% offset) will be at centerY
+              
+              return (
+                <path
+                  key={`text-path-${segment.id}`}
+                  id={`text-path-${segment.id}`}
+                  d={`M ${startX} ${startY} Q ${controlX} ${controlY} ${endX} ${endY}`}
+                  fill="none"
+                  stroke="none"
+                />
+              );
+            })}
+          </defs>
+
+          {/* Segment Rings - Render in reverse order so inner segments are on top */}
+          {[...BLOXIVERSE_SEGMENTS].filter(seg => seg.id !== 'the-null-zone').reverse().map((segment, index) => {
             const animationDelay = 600 + index * 100;
             const isHeart = segment.id === 'the-heart';
 
             return (
               <g key={segment.id}>
-                {/* The Heart - Solid filled circle */}
+                {/* The Heart - Solid filled circle with gradient */}
                 {isHeart ? (
                   <>
+                    {/* Invisible hit area for Heart */}
                     <circle
                       cx={0}
                       cy={0}
                       r={segment.endRadius}
-                      fill={segment.color}
+                      fill="transparent"
                       opacity={0}
-                      className="segment-heart cursor-pointer"
+                      className="cursor-pointer"
+                      style={{
+                        pointerEvents: 'all',
+                      }}
+                      onMouseEnter={(e) => {
+                        const svg = e.currentTarget.ownerSVGElement;
+                        if (!svg) return;
+                        const pt = svg.createSVGPoint();
+                        pt.x = e.clientX;
+                        pt.y = e.clientY;
+                        const svgPt = pt.matrixTransform(svg.getScreenCTM()?.inverse());
+                        const distance = Math.sqrt(svgPt.x ** 2 + svgPt.y ** 2);
+                        if (distance <= segment.endRadius) {
+                          setHoveredSegment(segment.id);
+                        }
+                      }}
+                      onMouseMove={(e) => {
+                        const svg = e.currentTarget.ownerSVGElement;
+                        if (!svg) return;
+                        const pt = svg.createSVGPoint();
+                        pt.x = e.clientX;
+                        pt.y = e.clientY;
+                        const svgPt = pt.matrixTransform(svg.getScreenCTM()?.inverse());
+                        const distance = Math.sqrt(svgPt.x ** 2 + svgPt.y ** 2);
+                        if (distance <= segment.endRadius) {
+                          setHoveredSegment(segment.id);
+                        } else {
+                          setHoveredSegment(null);
+                        }
+                      }}
+                      onMouseLeave={() => setHoveredSegment(null)}
+                      onClick={(e) => {
+                        const svg = e.currentTarget.ownerSVGElement;
+                        if (!svg) return;
+                        const pt = svg.createSVGPoint();
+                        pt.x = e.clientX;
+                        pt.y = e.clientY;
+                        const svgPt = pt.matrixTransform(svg.getScreenCTM()?.inverse());
+                        const distance = Math.sqrt(svgPt.x ** 2 + svgPt.y ** 2);
+                        if (distance <= segment.endRadius) {
+                          handleSegmentClick(segment);
+                        }
+                      }}
+                    />
+                    {/* Visible Heart */}
+                    <circle
+                      cx={0}
+                      cy={0}
+                      r={segment.endRadius}
+                      fill="url(#bloxiverse-gradient)"
+                      opacity={0}
+                      className="segment-heart"
                       style={{
                         animation: `fadeInHeart 0.6s ease-out ${animationDelay}ms forwards`,
-                        transition: 'opacity 0.2s ease',
-                        filter: 'drop-shadow(0 0 15px rgba(255,255,255,0.5))',
+                        transition: 'opacity 0.2s ease, filter 0.2s ease',
+                        filter: hoveredSegment === segment.id 
+                          ? 'brightness(1.3) drop-shadow(0 0 25px rgba(255,255,255,0.8))' 
+                          : 'drop-shadow(0 0 15px rgba(255,255,255,0.5))',
+                        pointerEvents: 'none',
                       }}
-                      onMouseEnter={() => setHoveredSegment(segment.id)}
-                      onMouseLeave={() => setHoveredSegment(null)}
-                      onClick={() => handleSegmentClick(segment)}
                     />
-                    {/* White outline for heart */}
+                    {/* White outline at Heart boundary */}
                     <circle
                       cx={0}
                       cy={0}
@@ -370,65 +519,97 @@ export function InteractiveBloxiverseMap() {
                       fill="none"
                       stroke="white"
                       strokeWidth="2"
-                      vectorEffect="non-scaling-stroke"
                       opacity={0}
+                      vectorEffect="non-scaling-stroke"
                       style={{
-                        animation: `fadeInHeart 0.6s ease-out ${animationDelay}ms forwards`,
-                        transition: 'opacity 0.2s ease',
+                        animation: `fadeInSegment 0.6s ease-out ${animationDelay + 100}ms forwards`,
                         pointerEvents: 'none',
                       }}
                     />
                   </>
                 ) : (
-                  /* Other segments - Rings */
+                  /* Other segments - Rings with gradient using filled circles and mask */
                   <>
+                    {/* Invisible hit area - only responds to mouse events within the ring */}
                     <circle
                       cx={0}
                       cy={0}
-                      r={(segment.startRadius + segment.endRadius) / 2}
-                      fill="none"
-                      stroke={segment.color}
-                      strokeWidth={segment.endRadius - segment.startRadius}
-                      vectorEffect="non-scaling-stroke"
+                      r={segment.endRadius}
+                      fill="transparent"
                       opacity={0}
-                      className="segment-ring cursor-pointer"
+                      className="cursor-pointer"
                       style={{
-                        animation: `fadeInSegment 0.6s ease-out ${animationDelay}ms forwards`,
-                        transition: 'opacity 0.2s ease',
+                        pointerEvents: 'all',
                       }}
-                      onMouseEnter={() => setHoveredSegment(segment.id)}
+                      onMouseEnter={(e) => {
+                        // Calculate distance from center to determine if mouse is in this segment's ring
+                        const svg = e.currentTarget.ownerSVGElement;
+                        if (!svg) return;
+                        const pt = svg.createSVGPoint();
+                        pt.x = e.clientX;
+                        pt.y = e.clientY;
+                        const svgPt = pt.matrixTransform(svg.getScreenCTM()?.inverse());
+                        const distance = Math.sqrt(svgPt.x ** 2 + svgPt.y ** 2);
+                        if (distance >= segment.startRadius && distance <= segment.endRadius) {
+                          setHoveredSegment(segment.id);
+                        }
+                      }}
+                      onMouseMove={(e) => {
+                        const svg = e.currentTarget.ownerSVGElement;
+                        if (!svg) return;
+                        const pt = svg.createSVGPoint();
+                        pt.x = e.clientX;
+                        pt.y = e.clientY;
+                        const svgPt = pt.matrixTransform(svg.getScreenCTM()?.inverse());
+                        const distance = Math.sqrt(svgPt.x ** 2 + svgPt.y ** 2);
+                        if (distance >= segment.startRadius && distance <= segment.endRadius) {
+                          setHoveredSegment(segment.id);
+                        } else {
+                          setHoveredSegment(null);
+                        }
+                      }}
                       onMouseLeave={() => setHoveredSegment(null)}
-                      onClick={() => handleSegmentClick(segment)}
+                      onClick={(e) => {
+                        const svg = e.currentTarget.ownerSVGElement;
+                        if (!svg) return;
+                        const pt = svg.createSVGPoint();
+                        pt.x = e.clientX;
+                        pt.y = e.clientY;
+                        const svgPt = pt.matrixTransform(svg.getScreenCTM()?.inverse());
+                        const distance = Math.sqrt(svgPt.x ** 2 + svgPt.y ** 2);
+                        if (distance >= segment.startRadius && distance <= segment.endRadius) {
+                          handleSegmentClick(segment);
+                        }
+                      }}
                     />
-                    {/* White outline for ring segments - inner edge */}
+                    {/* Visible gradient ring */}
                     <circle
                       cx={0}
                       cy={0}
-                      r={segment.startRadius}
-                      fill="none"
-                      stroke="white"
-                      strokeWidth="1.5"
-                      vectorEffect="non-scaling-stroke"
+                      r={segment.endRadius}
+                      fill="url(#bloxiverse-gradient)"
+                      mask={`url(#mask-${segment.id})`}
                       opacity={0}
+                      className="segment-ring"
                       style={{
                         animation: `fadeInSegment 0.6s ease-out ${animationDelay}ms forwards`,
-                        transition: 'opacity 0.2s ease',
+                        transition: 'opacity 0.2s ease, filter 0.2s ease',
+                        filter: hoveredSegment === segment.id ? 'brightness(1.3) drop-shadow(0 0 20px rgba(255,255,255,0.6))' : 'none',
                         pointerEvents: 'none',
                       }}
                     />
-                    {/* White outline for ring segments - outer edge */}
+                    {/* White outline at segment boundary */}
                     <circle
                       cx={0}
                       cy={0}
                       r={segment.endRadius}
                       fill="none"
                       stroke="white"
-                      strokeWidth="1.5"
-                      vectorEffect="non-scaling-stroke"
+                      strokeWidth="2"
                       opacity={0}
+                      vectorEffect="non-scaling-stroke"
                       style={{
-                        animation: `fadeInSegment 0.6s ease-out ${animationDelay}ms forwards`,
-                        transition: 'opacity 0.2s ease',
+                        animation: `fadeInSegment 0.6s ease-out ${animationDelay + 100}ms forwards`,
                         pointerEvents: 'none',
                       }}
                     />
@@ -436,23 +617,44 @@ export function InteractiveBloxiverseMap() {
                 )}
 
                 {/* Segment Label */}
-                <text
-                  x={0}
-                  y={isHeart ? 0 : -(segment.startRadius + segment.endRadius) / 2}
-                  textAnchor="middle"
-                  dominantBaseline={isHeart ? "middle" : "auto"}
-                  fill={isHeart ? "#1a0a2e" : "white"}
-                  fontSize={isHeart ? "200" : "150"}
-                  fontWeight="bold"
-                  opacity={0}
-                  style={{
-                    animation: `fadeInSegment 0.6s ease-out ${animationDelay + 200}ms forwards`,
-                    pointerEvents: 'none',
-                    textShadow: isHeart ? 'none' : '0 10px 28px rgba(0,0,0,0.85)',
-                  }}
-                >
-                  {segment.title}
-                </text>
+                {isHeart ? (
+                  <text
+                    x={0}
+                    y={0}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fill="#1a0a2e"
+                    fontSize="200"
+                    fontWeight="bold"
+                    opacity={0}
+                    style={{
+                      animation: `fadeInSegment 0.6s ease-out ${animationDelay + 200}ms forwards`,
+                      pointerEvents: 'none',
+                    }}
+                  >
+                    {segment.title}
+                  </text>
+                ) : (
+                  <text
+                    fill="white"
+                    fontSize="150"
+                    fontWeight="bold"
+                    opacity={0}
+                    style={{
+                      animation: `fadeInSegment 0.6s ease-out ${animationDelay + 200}ms forwards`,
+                      pointerEvents: 'none',
+                      textShadow: '0 10px 28px rgba(0,0,0,0.85)',
+                    }}
+                  >
+                    <textPath
+                      href={`#text-path-${segment.id}`}
+                      startOffset="50%"
+                      textAnchor="middle"
+                    >
+                      {segment.title}
+                    </textPath>
+                  </text>
+                )}
               </g>
             );
           })}
@@ -520,12 +722,33 @@ export function InteractiveBloxiverseMap() {
           }
         }
 
-        .segment-ring:hover {
-          opacity: 0.5 !important;
+        /* Hover effects are now handled via inline styles using hoveredSegment state */
+
+        @keyframes nullZoneWave {
+          0%, 100% {
+            stroke-dasharray: 50 30;
+            stroke-dashoffset: 0;
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+          }
+          25% {
+            stroke-dasharray: 60 20;
+            stroke-dashoffset: 25;
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.8));
+          }
+          50% {
+            stroke-dasharray: 70 25;
+            stroke-dashoffset: 50;
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.7));
+          }
+          75% {
+            stroke-dasharray: 60 20;
+            stroke-dashoffset: 25;
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.8));
+          }
         }
 
-        .segment-heart:hover {
-          opacity: 1 !important;
+        .null-zone-wave {
+          filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
         }
       `}</style>
     </div>

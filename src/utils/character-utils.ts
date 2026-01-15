@@ -17,6 +17,8 @@ export const getCharacterData = (character: WikiEntry) => {
     name: character.title,
     species: character.species || "Robloxian",
     age: character.age || "Unknown",
+    height: character.height || undefined,
+    status: character.status || undefined,
     alignment: character.alignment || "Unknown",
     role: character.role,
     archetype: character.archetype,

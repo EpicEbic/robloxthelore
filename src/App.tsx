@@ -23,6 +23,7 @@ import SecretPage from "./pages/SecretPage";
 import AlternateSecretPage from "./pages/AlternateSecretPage";
 import SecretLPage from "./pages/SecretLPage";
 import WhyBotherPage from "./pages/WhyBotherPage";
+import OldFriendPage from "./pages/OldFriendPage";
 import NotFound from "./pages/NotFound";
 import { ComparisonPage } from "./pages/ComparisonPage";
 import { TournamentPage } from "./pages/TournamentPage";
@@ -30,6 +31,7 @@ import StatisticInfoPage from "./pages/StatisticInfoPage";
 import WhatsNewPage from "./pages/WhatsNewPage";
 import WorldMapPage from "./pages/WorldMapPage";
 import PlotTimelinePage from "./pages/PlotTimelinePage";
+import HeightComparisonPage from "./pages/HeightComparisonPage";
 
 const queryClient = new QueryClient();
 
@@ -69,10 +71,12 @@ const AppContent = () => {
             <Route path="/world" element={<WorldMapPage />} />
             <Route path="/whats-new" element={<WhatsNewPage />} />
             <Route path="/plot-timeline" element={<PlotTimelinePage />} />
+            <Route path="/height-comparison" element={<HeightComparisonPage />} />
             <Route path="/secret" element={<SecretPage />} />
             <Route path="/secret-alternate" element={<AlternateSecretPage />} />
             <Route path="/secret-l" element={<SecretLPage />} />
             <Route path="/whybother" element={<WhyBotherPage />} />
+            <Route path="/oldfriend" element={<OldFriendPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </motion.div>

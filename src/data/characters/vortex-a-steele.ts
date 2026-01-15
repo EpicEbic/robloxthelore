@@ -19,8 +19,11 @@ export const vortexASteele: WikiEntry = {
   },
   species: "Noob",
   age: "21",
+  height: "5 studs",
+  status: "Alive",
   alignment: "Lawful/Neutral",
   role: "Judge",
+  archetype: "judge",
   carouselImages: [
     {
       url: "/lovable-uploads/1eb00c46-6380-421c-85e0-473d69b1d989.png",
@@ -288,6 +291,10 @@ export const vortexASteele: WikiEntry = {
     }
   ],
   sections: {
+    overview: [
+      "Vortex A. Steele is one of the three main protagonists of The Lore, serving as a high-ranking Bounty Hunter for the Hunter Association. His role in the story centers around his partnership with Caesar Bloxwright, as the two work together to navigate the dangerous world of the Bloxiverse while facing various threats and challenges.",
+      "Vortex's ability to manipulate time through Chronipulation makes him a crucial asset in combat situations, and his sharp wit and tactical thinking often prove invaluable to the team's success."
+    ],
     combatStyles: [
       {
         id: "standard",

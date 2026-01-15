@@ -22,17 +22,15 @@ interface EasterEggProviderProps {
 
 // List of locked entry IDs
 const LOCKED_ENTRIES = [
-  'ren-bytera',
   'bloxxanne-whelder',
   'spawnboy',
   'charles-studson',
-  'bryck-manning',
   'the-reckoner',
   'the-breadwinner'
 ];
 
 // Valid secret phrases to track (with page restrictions)
-const ALL_PHRASES = ['minion', 'whybother', 'salad', 'unlock'];
+const ALL_PHRASES = ['minion', 'whybother', 'oldfriend', 'salad', 'unlock'];
 
 export function EasterEggProvider({ children }: EasterEggProviderProps) {
   const [isMinionMode, setIsMinionMode] = useState(false);
@@ -113,6 +111,13 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
           }
         } else if (newTypingText === 'whybother') {
           navigate('/whybother');
+          setTypingText('');
+          setIsTypingVisible(false);
+          if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+          }
+        } else if (newTypingText === 'oldfriend') {
+          navigate('/oldfriend');
           setTypingText('');
           setIsTypingVisible(false);
           if (typingTimeoutRef.current) {

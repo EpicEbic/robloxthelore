@@ -1,10 +1,17 @@
+export type ChangeCategory = "new" | "changes" | "fixes" | "removals" | "others";
+
+export interface CategorizedChange {
+  text: string;
+  category: ChangeCategory;
+}
+
 export interface WhatsNewEntry {
   id: string;
   date: string;
   title: string;
   description: string;
   link?: string;
-  changes?: string[];
+  changes?: CategorizedChange[];
   isNew?: boolean; // For highlighting recent entries
 }
 

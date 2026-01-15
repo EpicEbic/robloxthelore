@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useParallax } from "@/hooks/use-parallax";
 import { getDefaultSubcategory } from "@/data/categories";
 import { usePart } from "@/contexts/part-context";
 
@@ -50,7 +49,6 @@ const getSubcategoryDescription = (categoryType: string, subcategoryLabel: strin
 };
 
 export function CategoryHero({ categoryType, categoryLabel, subcategoryLabel }: CategoryHeroProps) {
-  const parallaxOffset = useParallax(0.2);
   const { currentPart } = usePart();
   const description = getSubcategoryDescription(categoryType, subcategoryLabel, currentPart);
   
@@ -65,7 +63,7 @@ export function CategoryHero({ categoryType, categoryLabel, subcategoryLabel }: 
       <div className="absolute inset-0 bg-grid-pattern opacity-10" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
       
-      <div className="relative z-10" style={{ transform: `translateY(${parallaxOffset}px)` }}>
+      <div className="relative z-10">
         <h1 className="text-4xl lg:text-6xl font-bold tracking-tight animate-fade-in">{subcategoryLabel}</h1>
         {description && (
           <p className="text-sm lg:text-base mt-2 opacity-90 animate-fade-in anim-delay-100">{description}</p>

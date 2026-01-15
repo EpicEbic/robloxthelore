@@ -20,7 +20,7 @@ const characterIcons: Record<string, string> = {
   "charles-studson": "/images/character-icons/charles-studson-icon.png",
   "the-reckoner": "/images/character-icons/the-reckoner-icon.png",
   "the-breadwinner": "/images/character-icons/the-breadwinner-icon.png",
-  "the-bounceman": "/images/bouncemanicon.png",
+  "the-bounceman": "/images/character-icons/bounceman-icon.png",
   "rovan-macov": "/images/rovanicon.png",
   "peaches": "/images/character-icons/peaches-icon.png",
   "whyeet": "/images/character-icons/whyeet-icon.png",

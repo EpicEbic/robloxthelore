@@ -229,6 +229,8 @@ export interface WikiEntry {
   };
   species?: string;
   age?: string;
+  height?: string; // Height in studs (e.g., "8 studs")
+  status?: string; // Character status (e.g., "Alive", "Deceased")
   alignment?: string;
   role?: string;
   archetype?: string; // Archetype ID (e.g., "marauder", "convict", "altruist")

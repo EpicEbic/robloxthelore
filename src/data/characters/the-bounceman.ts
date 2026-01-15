@@ -1,5 +1,5 @@
 import { WikiEntry } from "@/types/wiki-types";
-import { createCombatStats } from "@/components/character/character-stat-chart";
+import { createCharacterStats, createCombatStats } from "@/components/character/character-stat-chart";
 
 export const theBounceman: WikiEntry = {
   id: "the-bounceman",
@@ -19,6 +19,8 @@ export const theBounceman: WikiEntry = {
   },
   species: "Robloxian (Modified)",
   age: "Unknown",
+  height: "1.75 studs",
+  status: "Alive",
   alignment: "Rebel/Impure",
   role: "Convict",
   archetype: "convict",
@@ -76,6 +78,10 @@ export const theBounceman: WikiEntry = {
   ],
   
   sections: {
+    overview: [
+      "The Bounceman is a character in The Lore whose role and significance in the plot are explored through his unique abilities and interactions with other characters. His presence adds variety to the cast and contributes to the world's diverse range of characters.",
+      "The Bounceman's character serves to expand the lore and provide additional perspectives on the Bloxiverse and its inhabitants."
+    ],
     appearance: [
       {
         id: "default",
@@ -382,11 +388,6 @@ export const theBounceman: WikiEntry = {
     ]
   },
   
-  stats: {
-    offense: { label: "B", value: 4 },
-    defense: { label: "A", value: 5 },
-    utility: { label: "S", value: 6 },
-    potential: { label: "D", value: 2 }
-  }
+  stats: createCharacterStats("B", "A", "S", "D")
 };
 

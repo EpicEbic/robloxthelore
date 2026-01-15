@@ -1,5 +1,5 @@
 import { WikiEntry } from "@/types/wiki-types";
-import { createCombatStats } from "@/components/character/character-stat-chart";
+import { createCharacterStats, createCombatStats } from "@/components/character/character-stat-chart";
 
 export const bryckManning: WikiEntry = {
   id: "bryck-manning",
@@ -18,6 +18,8 @@ export const bryckManning: WikiEntry = {
   },
   species: "Robloxian",
   age: "28",
+  height: "6.25 studs",
+  status: "Alive",
   alignment: "Neutral / Evil",
   role: "Marauder",
   archetype: "marauder",
@@ -63,6 +65,10 @@ export const bryckManning: WikiEntry = {
     }
   ],
   sections: {
+    overview: [
+      "Bryck Manning is an antagonist in The Lore, a criminal operating in the Outer Circle who holds a deep grudge against Caesar Bloxwright. His role in the story centers around his attempts to eliminate Caesar, having placed a bounty on his head that led to Vortex's initial contract.",
+      "Bryck's bitterness and hatred drive much of the conflict in the Outer Circle, and his actions create significant challenges for the protagonists as they navigate the dangerous criminal underworld."
+    ],
     combatStyles: [
       {
         id: "standard",
@@ -176,18 +182,30 @@ export const bryckManning: WikiEntry = {
       }
     ],
     history: [
-      "Bryck Manning has lived a life shaped by misfortune and uncertainty. It's already common knowledge that the Bloxiverse is a dangerous place for many, but Bryck was truly dealt the shorter end of the stick in life. From birth, he was essentially always on the run. Each time he'd settle down and find a place he's happy with, some force of nature (or a Bloxian with sour intent) would quickly destroy whatever Bryck had managed to make for himself. This routine became commonplace for Bryck, much to his dismay. The severity and frequency of Bryck's assaults would suggest that they were targeted attacks, but this isn't the case. Unfortunately, he really is just unlucky.",
-      "Bryck has always sought a means to defend himself, some way to fight back against the cruelty. But as a mere powerless Bloxian, there was only so much he could do. Bryck tried exercising and excessive training at the gym, and while this did help—it was never enough. No amount of physical strength could truly best a Bloxian gifted with a powerful ability, and Bryck came to understand and despise this. Hatred and humiliation bubbled up internally each time he'd be set back by another attack, twisting his emotions and turning Bryck into a hateful and sadistic man.",
-      "Of course, this vicious cycle could only last for so long, and Bryck's life would finally hit a turning point. Late at night, Bryck was wandering aimlessly after a recent attack had evaporated his home into dust. Cursing to himself, he took out his frustration on an empty can of Bloxy Cola, as he kicked it around the empty street. But something caught his attention—a glimmer of blue in the moonlight, off in the bushes. Thinking it to potentially be something of value, he approached the bush and pulled out the object. Lo and behold, Bryck was bewildered to have unearthed an artifact, one of legend. Bryck had encountered the Gravity Coil.",
-      "As a natural skeptic, he first believed it to be a fake, or some cruel joke planted by a prankster. The Power Coils had been spoken about in many of the history books, what could something so important possibly be doing here? He kept these thoughts in mind and kept his expectations low, and slipped it on his arm. But, no... this was no fake. The coil shifted to fit his arm and locked into place, producing a sound that he could only describe as clicking. Calming himself, he tried to trigger the effects of the coil. Nothing happened at first, and it took a bit of trial and error as Bryck flailed and leapt around like an idiot, expecting the coil to work automatically. But he soon came to understand that it took his subconscious will rather than physical action, and for the first time Bryck successfully managed to trigger the coil and hover.",
-      "It was a cascading spiral for Bryck from that moment on, as he began to experiment and test the limits of his own body, as well as the coil's power. The more he used it, the more his sadistic nature began to shine. His experiments began as harmless tests at first—seeing how high he could jump or what amount of intensified gravity he could tolerate. But as things progressed, he began to test the potential it held for combat, destroying infrastructure or attacking innocents. His power complex took hold and grew as Bryck continued to use the coil, eventually becoming consumed by the power.",
-      "His original desires for a way to protect himself grew twisted into sadistic revenge, leading Bryck to become the very thing he swore against. He finally had a way to settle down in a home, one he could valiantly protect—but no. That wasn't enough anymore, he had the power he needed and it was time to show off just what he was capable of. The consequences of generational trauma have been realized through Bryck's behavior and actions."
-    ],
-    relationships: [
-      "Charles Studson - Ally: Though the two aren't close in any respect, they've spent time together in the Hunter Association's holding facility, where the two grew to be partners in their work. They've also bonded over the distaste they share for Caesar, Nauli, and Vortex. It was through Bryck's connection to Charles that a Hunter Association contract could be made against Caesar, despite Bryck being in the Hunter Association's prison.",
-      "Caesar Bloxwright - Enemy: Caesar (alongside Nauli) were the ones to successfully subdue and capture Bryck, before transferring him to the Hunter Association's facility. Bryck's petty mindset desired nothing but revenge, though there was little that could be done from inside of prison. Through his connection to Charles, Bryck had a hit placed on Caesar which was eventually taken on by Vortex.",
-      "Nauli Bloxwright - Enemy: Nauli (alongside Caesar) were the ones to successfully incapacitate Bryck during his rampage in the Farmer Sanctuary, though Nauli only served to support Caesar throughout the battle. Though Bryck despises Nauli, his hatred was far more focused on the petty revenge he wished to bring upon Caesar instead.",
-      "Vortex A. Steele - Enemy: Bryck has a distaste for Vortex after he had failed to complete Bryck's contract against Caesar. While normally it would've ended there, Bryck was enraged to learn that on top of failing the contract against Caesar, he had also gone on to become Caesar's close friend."
+      {
+        id: "misfortune",
+        label: "A Life of Misfortune",
+        description: [
+          "Bryck Manning has lived a life shaped by misfortune and uncertainty. It's already common knowledge that the Bloxiverse is a dangerous place for many, but Bryck was truly dealt the shorter end of the stick in life. From birth, he was essentially always on the run. Each time he'd settle down and find a place he's happy with, some force of nature (or a Bloxian with sour intent) would quickly destroy whatever Bryck had managed to make for himself. This routine became commonplace for Bryck, much to his dismay. The severity and frequency of Bryck's assaults would suggest that they were targeted attacks, but this isn't the case. Unfortunately, he really is just unlucky.",
+          "Bryck has always sought a means to defend himself, some way to fight back against the cruelty. But as a mere powerless Bloxian, there was only so much he could do. Bryck tried exercising and excessive training at the gym, and while this did help—it was never enough. No amount of physical strength could truly best a Bloxian gifted with a powerful ability, and Bryck came to understand and despise this. Hatred and humiliation bubbled up internally each time he'd be set back by another attack, twisting his emotions and turning Bryck into a hateful and sadistic man."
+        ]
+      },
+      {
+        id: "the-gravity-coil",
+        label: "The Gravity Coil",
+        description: [
+          "Of course, this vicious cycle could only last for so long, and Bryck's life would finally hit a turning point. Late at night, Bryck was wandering aimlessly after a recent attack had evaporated his home into dust. Cursing to himself, he took out his frustration on an empty can of Bloxy Cola, as he kicked it around the empty street. But something caught his attention—a glimmer of blue in the moonlight, off in the bushes. Thinking it to potentially be something of value, he approached the bush and pulled out the object. Lo and behold, Bryck was bewildered to have unearthed an artifact, one of legend. Bryck had encountered the Gravity Coil.",
+          "As a natural skeptic, he first believed it to be a fake, or some cruel joke planted by a prankster. The Power Coils had been spoken about in many of the history books, what could something so important possibly be doing here? He kept these thoughts in mind and kept his expectations low, and slipped it on his arm. But, no... this was no fake. The coil shifted to fit his arm and locked into place, producing a sound that he could only describe as clicking. Calming himself, he tried to trigger the effects of the coil. Nothing happened at first, and it took a bit of trial and error as Bryck flailed and leapt around like an idiot, expecting the coil to work automatically. But he soon came to understand that it took his subconscious will rather than physical action, and for the first time Bryck successfully managed to trigger the coil and hover."
+        ]
+      },
+      {
+        id: "spiral-into-darkness",
+        label: "Spiral Into Darkness",
+        description: [
+          "It was a cascading spiral for Bryck from that moment on, as he began to experiment and test the limits of his own body, as well as the coil's power. The more he used it, the more his sadistic nature began to shine. His experiments began as harmless tests at first—seeing how high he could jump or what amount of intensified gravity he could tolerate. But as things progressed, he began to test the potential it held for combat, destroying infrastructure or attacking innocents. His power complex took hold and grew as Bryck continued to use the coil, eventually becoming consumed by the power.",
+          "His original desires for a way to protect himself grew twisted into sadistic revenge, leading Bryck to become the very thing he swore against. He finally had a way to settle down in a home, one he could valiantly protect—but no. That wasn't enough anymore, he had the power he needed and it was time to show off just what he was capable of. The consequences of generational trauma have been realized through Bryck's behavior and actions."
+        ]
+      }
     ],
     relationshipsData: {
       "caesar-bloxwright": {
@@ -221,14 +239,11 @@ export const bryckManning: WikiEntry = {
         ]
       }
     },
-    combat: [
-      `
-Bryck is an average fighter with minimal combat intelligence. His light training at the gym has been shown to help him in combat, but he is ultimately outclassed by basic weapons, stronger fighters, or those with an ability.
-      `
-    ],
     trivia: [
       "Bryck Manning's design is loosely inspired by the outfit worn by Steve Burns in the kids animated series, Blue's Clues.",
       "Bryck was originally planned to be a Noob, but things got changed around in the last minute and Ren Bytera was turned into a noob instead."
     ]
-  }
+  },
+  
+  stats: createCharacterStats("E", "D", "C", "D")
 };

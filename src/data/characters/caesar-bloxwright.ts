@@ -20,8 +20,11 @@ export const caesarBloxwright: WikiEntry = {
   },
   species: "Robloxian",
   age: "24",
+  height: "8 studs",
+  status: "Alive",
   alignment: "Chaotic/Good",
   role: "Chaperone",
+  archetype: "chaperone",
   carouselImages: [
     {
       url: "/lovable-uploads/178545b6-1a7e-4ec0-ba7c-b7c3472a7b06.png",
@@ -83,6 +86,10 @@ export const caesarBloxwright: WikiEntry = {
     },
   ],
   sections: {
+    overview: [
+      "Caesar Bloxwright is the primary protagonist of The Lore, a vigilante who operates in the Outer Circle of the Bloxiverse. His story follows his journey from a lone vigilante to a key member of a team working to protect the Bloxiverse from various threats.",
+      "Caesar's overwhelming physical strength and unwavering determination make him a formidable fighter, though his lack of speed and precision often require him to rely on strategy and teamwork to overcome faster opponents."
+    ],
     combatStyles: [
       {
         id: "standard",
@@ -246,10 +253,6 @@ export const caesarBloxwright: WikiEntry = {
         ]
       }
     },
-    combat: [
-      "Caesar's overwhelming size and bulwark build grant him incredible physical strength and durability, qualities which are only enhanced further by his ability. Caesar relies on slow, yet sturdy and incredibly lethal blows to quickly dispatch enemies that get caught in his path. Caesar is a juggernaut, backed by power that is not to be taken lightly.",
-      "Though Caesar has incredible physical potential, he lacks immensely in speed and reflexes. Opponents with proper agility and dexterity will have almost no issues avoiding Caesar and his slow-moving attacks, unless he is able to accurately predict or trick a target into attacking to counter them. The physical 'weight' added by his ability only draws back the speed of his movement further, as he exchanges mobility for lethality."
-    ],
     abilityData: {
       overview: {
         text: [

@@ -1,4 +1,4 @@
-import { User, Home, Heart, Sword, Swords, Zap, ScrollText, Shirt, Drama, Shield, Wrench, AlertTriangle, Clock, HandMetal, HandFist, ArrowRightFromLine, BookOpen, Sparkles, Target, ShieldCheck, Briefcase } from "lucide-react";
+import { User, Home, Heart, Sword, Swords, Zap, ScrollText, Shirt, Drama, Shield, Wrench, AlertTriangle, Clock, HandMetal, HandFist, ArrowRightFromLine, BookOpen, Sparkles, Target, ShieldCheck, Briefcase, FileText } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,7 @@ import { AbilityCategory } from "./ability-category";
 import { CombatStyleCategory } from "./combat-style-category";
 
 interface CharacterSections {
+  overview?: string[]; // Plot relevance and simple information
   appearance?: string | AppearanceOption[]; // Made optional to match the interface in character-entry-card.tsx
   personality?: string[] | PersonalityOption[];
   lifestyle?: string[];
@@ -105,6 +106,12 @@ export function CharacterContentTabs({
   const [isCombatFading, setIsCombatFading] = useState(false);
   const combatFadeTimeoutRef = useRef<number | null>(null);
 
+  // State for Profile view switcher (Overview, Appearance, Personality)
+  const [profileView, setProfileView] = useState<'overview' | 'appearance' | 'personality'>('overview');
+  const [displayProfileView, setDisplayProfileView] = useState<'overview' | 'appearance' | 'personality'>('overview');
+  const [isProfileFading, setIsProfileFading] = useState(false);
+  const profileFadeTimeoutRef = useRef<number | null>(null);
+
   // State for Lifestyle/History switcher in Timeline tab
   const [timelineView, setTimelineView] = useState<'lifestyle' | 'history'>('lifestyle');
   const [displayTimelineView, setDisplayTimelineView] = useState<'lifestyle' | 'history'>('lifestyle');
@@ -122,6 +129,21 @@ export function CharacterContentTabs({
     (sections.defensiveCapabilities && sections.defensiveCapabilities.length > 0) ||
     (sections.utilitarianCapabilities && sections.utilitarianCapabilities.length > 0) ||
     (sections.drawbacks && sections.drawbacks.length > 0);
+
+  // Set default profile view based on available content (only on mount)
+  useEffect(() => {
+    if (sections.overview && sections.overview.length > 0) {
+      setProfileView('overview');
+      setDisplayProfileView('overview');
+    } else if (appearances.length > 0 || sections.appearance) {
+      setProfileView('appearance');
+      setDisplayProfileView('appearance');
+    } else if (personalities.length > 0 || sections.personality) {
+      setProfileView('personality');
+      setDisplayProfileView('personality');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Force physical view when character has no abilities
   useEffect(() => {
@@ -237,7 +259,7 @@ export function CharacterContentTabs({
         <TabsList className="mb-6 w-full flex flex-wrap justify-center lg:w-auto lg:mx-auto gap-3 p-3 h-auto rounded-xl">
           <TabsTrigger value="general" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
             <User className="h-5 w-5 flex-shrink-0" />
-            <span>Overview</span>
+            <span>Profile</span>
           </TabsTrigger>
           <TabsTrigger value="timeline" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
             <ArrowRightFromLine className="h-5 w-5 flex-shrink-0" />
@@ -264,61 +286,146 @@ export function CharacterContentTabs({
               className="pr-4"
               style={{ transition: 'none' }}
             >
-              <TabsContent value="general" className="space-y-4 mt-0">
-                <div 
-                  className="bg-card rounded-xl p-8 border min-w-0 min-h-[120px] relative"
-                  style={{ transition: 'none' }}
-                >
-                  <div className="flex items-start justify-between mb-4 gap-4">
-                    <h2 className="text-2xl font-semibold flex items-center gap-2 flex-shrink-0">
-                      <Shirt className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+              <TabsContent value="general" className="mt-0 space-y-4">
+                {/* Profile View Switcher Buttons */}
+                <div className="flex items-center justify-center mb-4">
+                  <div className="flex gap-2">
+                    <Button
+                      variant={profileView === 'overview' ? 'default' : 'outline'}
+                      onClick={() => {
+                        if (profileView === 'overview') return;
+                        setIsProfileFading(true);
+                        profileFadeTimeoutRef.current && window.clearTimeout(profileFadeTimeoutRef.current);
+                        profileFadeTimeoutRef.current = window.setTimeout(() => {
+                          setDisplayProfileView('overview');
+                          setProfileView('overview');
+                          setIsProfileFading(false);
+                        }, 180);
+                      }}
+                      className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
+                    >
+                      <FileText className="h-5 w-5" />
+                      Overview
+                    </Button>
+                    <Button
+                      variant={profileView === 'appearance' ? 'default' : 'outline'}
+                      onClick={() => {
+                        if (profileView === 'appearance') return;
+                        setIsProfileFading(true);
+                        profileFadeTimeoutRef.current && window.clearTimeout(profileFadeTimeoutRef.current);
+                        profileFadeTimeoutRef.current = window.setTimeout(() => {
+                          setDisplayProfileView('appearance');
+                          setProfileView('appearance');
+                          setIsProfileFading(false);
+                        }, 180);
+                      }}
+                      className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
+                    >
+                      <Shirt className="h-5 w-5" />
                       Appearance
-                    </h2>
-                    <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
-                      <CharacterAppearanceSwitcher
-                        appearances={appearances}
-                        currentAppearance={currentAppearance}
-                        onAppearanceChange={onAppearanceChange || (() => {})}
-                      />
-                    </div>
-                  </div>
-                  <div 
-                    className="text-foreground/90 min-w-0 text-base"
-                  >
-                    {getCurrentAppearanceDescription().map((paragraph, idx) => (
-                      <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                        <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                      </p>
-                    ))}
+                    </Button>
+                    <Button
+                      variant={profileView === 'personality' ? 'default' : 'outline'}
+                      onClick={() => {
+                        if (profileView === 'personality') return;
+                        setIsProfileFading(true);
+                        profileFadeTimeoutRef.current && window.clearTimeout(profileFadeTimeoutRef.current);
+                        profileFadeTimeoutRef.current = window.setTimeout(() => {
+                          setDisplayProfileView('personality');
+                          setProfileView('personality');
+                          setIsProfileFading(false);
+                        }, 180);
+                      }}
+                      className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
+                    >
+                      <Drama className="h-5 w-5" />
+                      Personality
+                    </Button>
                   </div>
                 </div>
 
-                <div 
-                  className="bg-card rounded-xl p-6 border min-w-0"
-                  style={{ transition: 'none' }}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <h2 className="text-2xl font-semibold flex items-center gap-2">
-                      <Drama className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
-                      Personality
-                    </h2>
-                    {personalities.length > 0 && onPersonalityChange && (
-                      <CharacterPersonalitySwitcher
-                        personalities={personalities}
-                        currentPersonality={currentPersonality}
-                        onPersonalityChange={onPersonalityChange}
-                      />
-                    )}
-                  </div>
-                  <div 
-                    className="text-foreground/90 min-w-0 text-base"
-                  >
-                    {getCurrentPersonalityDescription().map((paragraph, idx) => (
-                      <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                        <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                      </p>
-                    ))}
-                  </div>
+                {/* Content with fade transition */}
+                <div style={{ opacity: isProfileFading ? 0 : 1, transition: 'opacity 200ms ease' }}>
+                  {displayProfileView === 'overview' && sections.overview && sections.overview.length > 0 && (
+                    <div 
+                      className="bg-card rounded-xl p-8 border min-w-0 min-h-[120px] relative"
+                      style={{ transition: 'none' }}
+                    >
+                      <h2 className="text-2xl font-semibold flex items-center gap-2 mb-4">
+                        <FileText className="h-6 w-6 text-primary-foreground flex-shrink-0" />
+                        Overview
+                      </h2>
+                      <div 
+                        className="text-foreground/90 min-w-0 text-base"
+                      >
+                        {sections.overview.map((paragraph, idx) => (
+                          <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {displayProfileView === 'appearance' && (
+                    <div 
+                      className="bg-card rounded-xl p-8 border min-w-0 min-h-[120px] relative"
+                      style={{ transition: 'none' }}
+                    >
+                      <div className="flex items-start justify-between mb-4 gap-4">
+                        <h2 className="text-2xl font-semibold flex items-center gap-2 flex-shrink-0">
+                          <Shirt className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                          Appearance
+                        </h2>
+                        <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
+                          <CharacterAppearanceSwitcher
+                            appearances={appearances}
+                            currentAppearance={currentAppearance}
+                            onAppearanceChange={onAppearanceChange || (() => {})}
+                          />
+                        </div>
+                      </div>
+                      <div 
+                        className="text-foreground/90 min-w-0 text-base"
+                      >
+                        {getCurrentAppearanceDescription().map((paragraph, idx) => (
+                          <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {displayProfileView === 'personality' && (
+                    <div 
+                      className="bg-card rounded-xl p-6 border min-w-0"
+                      style={{ transition: 'none' }}
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <h2 className="text-2xl font-semibold flex items-center gap-2">
+                          <Drama className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                          Personality
+                        </h2>
+                        {personalities.length > 0 && onPersonalityChange && (
+                          <CharacterPersonalitySwitcher
+                            personalities={personalities}
+                            currentPersonality={currentPersonality}
+                            onPersonalityChange={onPersonalityChange}
+                          />
+                        )}
+                      </div>
+                      <div 
+                        className="text-foreground/90 min-w-0 text-base"
+                      >
+                        {getCurrentPersonalityDescription().map((paragraph, idx) => (
+                          <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </TabsContent>
               

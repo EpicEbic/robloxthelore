@@ -1,16 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useWiki, CategoryType, Subcategory } from "@/contexts/wiki-context";
 import { WikiEntryCard } from "@/components/wiki-entry-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { SearchBar } from "@/components/search-bar";
 import { getSubcategoryLabel, getDefaultSubcategory } from "@/data/categories";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { CategoryHero } from "@/components/category-hero";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
 
 const CategoryPage = () => {
   const { categoryType, subcategory: subcategoryParam } = useParams<{ categoryType: string; subcategory?: string }>();
-  
+  const navigate = useNavigate();
+
   const { getEntriesByCategory, categories } = useWiki();
   const { isEntryUnlocked } = useEasterEgg();
 
@@ -32,6 +32,13 @@ const CategoryPage = () => {
 
     return { validatedCategoryType: validCategoryType, validatedSubcategory: validSubcategory };
   }, [categoryType, subcategoryParam, categories]);
+
+  // Redirect to The Bloxiverse entry if subcategory is the-bloxiverse
+  useEffect(() => {
+    if (validatedCategoryType === "location" && validatedSubcategory === "the-bloxiverse") {
+      navigate("/entry/the-bloxiverse");
+    }
+  }, [validatedCategoryType, validatedSubcategory, navigate]);
 
   // Memoize entries to avoid recalculation (show all entries, locked ones will be greyed out in WikiEntryCard)
   const entries = useMemo(() => {
@@ -79,10 +86,6 @@ const CategoryPage = () => {
         categoryLabel={categoryLabel}
         subcategoryLabel={subcategoryLabel}
       />
-
-      <div className="flex justify-center mb-12">
-        <SearchBar />
-      </div>
 
       {groupedEntries ? (
         // Grouped display for "All Characters"

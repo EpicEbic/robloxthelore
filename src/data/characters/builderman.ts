@@ -19,9 +19,11 @@ export const builderman: WikiEntry = {
   },
   species: "Noob",
   age: "N/A (Divine Youth)",
+  height: "5 studs",
+  status: "Alive",
   alignment: "Lawful/Good",
   role: "Paladin",
-  
+  archetype: "paladin",
   carouselImages: [
     {
       url: "/images/builderman-modern-1.png",
@@ -118,6 +120,10 @@ export const builderman: WikiEntry = {
   ],
   abilityCarouselImages: [],
   sections: {
+    overview: [
+      "Builderman is the leader of the Buildermen faction, a group responsible for creating and maintaining Worlds throughout the Bloxiverse. He was personally chosen by Roblox and granted the divine power of Creation, making him one of the most powerful beings in existence.",
+      "Despite his immense power and responsibilities, Builderman struggles with PTSD from past wars and longs for the return of Roblox, who disappeared without warning. His relationship with Bloxxanne Whelder serves as a source of support and companionship in his difficult role."
+    ],
     combatStyles: [
       {
         id: "standard",

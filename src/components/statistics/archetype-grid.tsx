@@ -1,9 +1,33 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ARCHETYPES, ARCHETYPE_COLUMNS, ARCHETYPE_ROWS, Archetype } from "@/data/character-archetypes";
 import { Users, X, Quote, Compass } from "lucide-react";
+import { Link } from "react-router-dom";
+import { allCharacters } from "@/data/characters";
+import { usePart } from "@/contexts/part-context";
+
+// Character icon mapping - circular character icons
+const characterIcons: Record<string, string> = {
+  "caesar-bloxwright": "/images/character-icons/caesar-bloxwright-icon.png",
+  "nauli-parter": "/images/character-icons/nauli-parter-icon.png",
+  "vortex-a-steele": "/images/character-icons/vortex-a-steele-icon.png",
+  "rice-farmer": "/images/character-icons/rice-farmer-icon.png",
+  "ren-bytera": "/images/character-icons/ren-bytera-icon.png",
+  "bryck-manning": "/images/character-icons/bryck-manning-icon.png",
+  "spawnboy": "/images/character-icons/spawnboy-icon.png",
+  "builderman": "/images/character-icons/builderman-icon.png",
+  "bloxxanne-whelder": "/images/character-icons/bloxxanne-whelder-icon.png",
+  "charles-studson": "/images/character-icons/charles-studson-icon.png",
+  "the-reckoner": "/images/character-icons/the-reckoner-icon.png",
+  "the-breadwinner": "/images/character-icons/the-breadwinner-icon.png",
+  "the-bounceman": "/images/character-icons/bounceman-icon.png",
+};
+
+const getCharacterIcon = (characterId: string): string | null => {
+  return characterIcons[characterId] || null;
+};
 
 // 2D Color mapping based on both column and row (matching the reference image)
 // Each cell has a unique color blending column (Lawful→Chaotic) and row (Good→Evil)
@@ -70,10 +94,35 @@ const COLUMN_LABEL_COLORS: Record<string, string> = {
 
 export function ArchetypeGrid() {
   const [selectedArchetype, setSelectedArchetype] = useState<Archetype | null>(null);
+  const { currentPart } = usePart();
 
   const cellColor = selectedArchetype 
     ? CELL_COLORS[selectedArchetype.row]?.[selectedArchetype.column] 
     : null;
+
+  // Get characters belonging to the selected archetype, filtered by current part
+  const archetypeCharacters = useMemo(() => {
+    if (!selectedArchetype) return [];
+    
+    return allCharacters.filter(
+      (character) => {
+        const characterPart = character.part || "TEMP";
+        
+        // Filter by part: only show characters from the current part
+        if (currentPart === "TEMP" && characterPart === "Part 1") {
+          return false; // Explicitly exclude Part 1 entries from TEMP view
+        }
+        if (characterPart !== currentPart) {
+          return false; // Only show characters that match the current part
+        }
+        
+        return (
+          character.category === "character" &&
+          character.archetype === selectedArchetype.id
+        );
+      }
+    );
+  }, [selectedArchetype, currentPart]);
 
   return (
     <Card className="rounded-2xl shadow-xl border-2 backdrop-blur-sm">
@@ -192,6 +241,59 @@ export function ArchetypeGrid() {
                     </p>
                   </div>
                 </div>
+
+                {/* Characters Section */}
+                {archetypeCharacters.length > 0 && (
+                  <div className="mt-3 sm:mt-4 md:mt-6 pt-2 sm:pt-3 md:pt-4 border-t border-white/10">
+                    <h4 className={cn(
+                      "text-sm sm:text-base md:text-lg font-semibold mb-2 sm:mb-3 md:mb-4",
+                      cellColor?.text
+                    )}>
+                      Characters belonging to this Archetype:
+                    </h4>
+                    <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
+                      {archetypeCharacters.map((character) => {
+                        const iconUrl = getCharacterIcon(character.id);
+                        return (
+                          <div key={character.id} className="flex flex-col items-center gap-1 sm:gap-2">
+                            <Link
+                              to={`/entry/${character.id}`}
+                              className={cn(
+                                "relative group rounded-full overflow-hidden border-2 transition-all duration-200",
+                                "hover:scale-110 hover:shadow-lg",
+                                "w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16",
+                                cellColor?.border
+                              )}
+                            >
+                              {iconUrl ? (
+                                <img
+                                  src={iconUrl}
+                                  alt={character.title}
+                                  className="w-full h-full object-cover"
+                                />
+                              ) : (
+                                <div className={cn(
+                                  "w-full h-full flex items-center justify-center",
+                                  cellColor?.bg
+                                )}>
+                                  <Users className={cn("w-5 h-5 sm:w-6 sm:h-6", cellColor?.text)} />
+                                </div>
+                              )}
+                            </Link>
+                            {/* Character name below icon */}
+                            <span className={cn(
+                              "text-[10px] sm:text-xs text-center font-medium max-w-[60px] sm:max-w-[80px] md:max-w-[100px]",
+                              "line-clamp-2 leading-tight",
+                              cellColor?.text || "text-foreground"
+                            )}>
+                              {character.title}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
 
                 {/* Footer hint */}
                 <div className="mt-3 sm:mt-4 md:mt-6 pt-2 sm:pt-3 md:pt-4 border-t border-white/10">

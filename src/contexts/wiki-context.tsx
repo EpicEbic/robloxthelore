@@ -12,7 +12,7 @@ interface WikiContextType {
   deleteEntry: (id: string) => void;
   getEntriesByCategory: (category: CategoryType, subcategory?: Subcategory) => WikiEntry[];
   getEntryById: (id: string) => WikiEntry | undefined;
-  searchEntries: (query: string) => WikiEntry[];
+  getAllEntries: () => WikiEntry[];
   categories: CategoryStructure[];
 }
 
@@ -74,25 +74,18 @@ export const WikiProvider = ({ children }: { children: ReactNode }) => {
     return allEntries.find(entry => entry.id === id);
   };
 
-  const searchEntries = (query: string) => {
-    const normalizedQuery = query.toLowerCase();
-    return entries.filter(entry => 
-      // Exclude The Reckoner from search results
-      entry.id !== "the-reckoner" &&
-      (entry.title.toLowerCase().includes(normalizedQuery) || 
-      entry.description.toLowerCase().includes(normalizedQuery) ||
-      entry.content.toLowerCase().includes(normalizedQuery))
-    );
+  const getAllEntries = () => {
+    return allEntries;
   };
 
-  const contextValue = { 
-    entries, 
-    addEntry, 
-    updateEntry, 
-    deleteEntry, 
+  const contextValue = {
+    entries,
+    addEntry,
+    updateEntry,
+    deleteEntry,
     getEntriesByCategory,
     getEntryById,
-    searchEntries,
+    getAllEntries,
     categories: CATEGORIES
   };
 

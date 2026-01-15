@@ -20,8 +20,11 @@ export const nauliParter: WikiEntry = {
   },
   species: "Robloxian",
   age: "23",
+  height: "6 studs",
+  status: "Alive",
   alignment: "Rebel/Moral",
   role: "Protestor",
+  archetype: "protestor",
   carouselImages: [
     {
       url: "/images/nauli-tactical-1.png",
@@ -85,6 +88,10 @@ export const nauliParter: WikiEntry = {
     }
   ],
   sections: {
+    overview: [
+      "Nauli Parter is one of the three main protagonists of The Lore, an assassin-turned-guardian who plays a crucial role in the story's narrative. Her transformation from a cold-blooded killer to a protector reflects the series' themes of redemption and growth.",
+      "Nauli's combat expertise and strategic mind make her a valuable ally, and her complex past adds depth to her character arc as she navigates the challenges of her new role."
+    ],
     appearance: [
       {
         id: "tactical",

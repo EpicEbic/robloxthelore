@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 interface LockContextType {
   isUnlocked: boolean;
@@ -8,17 +8,8 @@ interface LockContextType {
 
 const LockContext = createContext<LockContextType | undefined>(undefined);
 
-const STORAGE_KEY = "lore-unlock-status";
-
 export const LockProvider = ({ children }: { children: ReactNode }) => {
-  const [isUnlocked, setIsUnlocked] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved === "true";
-  });
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, isUnlocked.toString());
-  }, [isUnlocked]);
+  const [isUnlocked, setIsUnlocked] = useState(false);
 
   const unlock = () => {
     setIsUnlocked(true);

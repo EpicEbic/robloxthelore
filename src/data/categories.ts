@@ -31,7 +31,8 @@ export const CATEGORIES: CategoryStructure[] = [
     subcategories: [
       { value: "all", label: "All Locations" },
       { value: "primarylocations", label: "Primary Locations" },
-      { value: "secondarylocations", label: "Secondary Locations" }
+      { value: "secondarylocations", label: "Secondary Locations" },
+      { value: "the-bloxiverse", label: "The Bloxiverse" }
     ]
   },
   {

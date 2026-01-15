@@ -13,8 +13,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 }) => {
   const { particlesEnabled } = useParticleSettings();
   
-  // Early return if particles are disabled
-  if (!particlesEnabled) {
+  // Early return if particles are disabled (unless it's a pattern-only theme like Builderman, Ren, or Bryck)
+  if (!particlesEnabled && theme.particles.type !== 'none' && theme.id !== 'builderman' && theme.id !== 'ren-bytera' && theme.id !== 'bryck-manning') {
     return null;
   }
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -24,6 +24,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
   const scrollOffsetRef = useRef<number>(0); // For bounce pattern scrolling
   const spiralScrollOffsetRef = useRef<number>(0); // Separate scroll offset for spirals (never resets)
   const rotationTimeRef = useRef<number>(0); // Continuous rotation time for spirals
+  const renHexGridOffsetRef = useRef<number>(0); // Scroll offset for Ren's hexagon grid (never resets)
+  const bryckBarOffsetRef = useRef<number>(0); // Scroll offset for Bryck's bars (never resets)
   const [opacity, setOpacity] = useState(0);
   const prevThemeIdRef = useRef<string>('');
   const fadeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -95,6 +97,33 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
     switch (particles.type) {
       case 'grain': {
+        // For Bryck: horizontal black bars that scroll down
+        if (theme.id === 'bryck-manning') {
+          const barWidth = canvas.width; // Full width of canvas
+          const barHeight = 25; // Fixed height for all bars
+          // Distribute bars evenly across the page height and above
+          const spacing = (canvas.height * 2) / particles.count; // Space across 2x canvas height
+          const currentIndex = particlesRef.current.filter(p => p.type === 'grain').length;
+          const baseY = -canvas.height * 1.5; // Start well above view
+          const offsetY = spacing * currentIndex; // Evenly spaced vertically
+          
+          return {
+            x: 0, // Start at left edge
+            y: baseY + offsetY, // Evenly spaced vertically
+            vx: 0, // No horizontal movement
+            vy: baseSpeed * 0.6, // Same speed for all bars
+            size: Math.max(barWidth, barHeight),
+            opacity: 0.3, // Semi-transparent (consistent opacity)
+            color: particles.color,
+            life: 0,
+            maxLife: 1200, // Consistent lifespan
+            type: 'grain',
+            width: barWidth,
+            height: barHeight,
+            angle: 0, // No rotation for bars
+            swayPhase: 0
+          };
+        }
         // Falling rice grain: small capsule with slight rotation and sway
         const width = 2 + Math.random() * 1.5; // 2-3.5px
         const height = 5 + Math.random() * 3; // 5-8px
@@ -412,6 +441,14 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       // Update position based on type
       switch (particle.type) {
         case 'grain': {
+          // For Bryck: maintain semi-transparent opacity, no fading
+          if (theme.id === 'bryck-manning') {
+            particle.x += (particle.vx || 0);
+            particle.y += Math.max(0.4, particle.vy);
+            // Keep consistent semi-transparent opacity throughout life
+            particle.opacity = 0.3;
+            break;
+          }
           // Straight downward fall
           particle.x += (particle.vx || 0);
           particle.y += Math.max(0.4, particle.vy);
@@ -716,7 +753,7 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) {
-      setCanvasSupported(false);
+        setCanvasSupported(false);
       return;
     }
 
@@ -965,6 +1002,225 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       return; // Skip particle rendering for Builderman
     }
 
+    // Special rendering for Bryck Manning horizontal bars (seamless looping)
+    if (theme.id === 'bryck-manning' && theme.particles.type === 'grain') {
+      // Ensure canvas is properly sized
+      if (canvas.width === 0 || canvas.height === 0) {
+        canvas.width = canvas.offsetWidth || window.innerWidth;
+        canvas.height = canvas.offsetHeight || window.innerHeight;
+      }
+      
+      const barHeight = 30; // Reduced by half (60 / 2)
+      const barSpacing = canvas.height / theme.particles.count; // Even spacing
+      
+      // Seamless looping: bars scroll off bottom and reload at top
+      const wrappedBarOffsetY = bryckBarOffsetRef.current % barSpacing;
+      const scrolledBarCellsY = Math.floor(bryckBarOffsetRef.current / barSpacing);
+      
+      ctx.save();
+      ctx.globalAlpha = 0.3; // Semi-transparent
+      ctx.fillStyle = theme.particles.color;
+      
+      // Draw bars covering visible area plus extra for seamless wrap
+      const barsToDraw = Math.ceil(canvas.height / barSpacing) + 2;
+      
+      for (let i = -1; i < barsToDraw; i++) {
+        const y = (i * barSpacing) - wrappedBarOffsetY;
+        
+        // Only draw if visible
+        if (y > -barHeight && y < canvas.height + barHeight) {
+          ctx.fillRect(0, y - barHeight / 2, canvas.width, barHeight);
+        }
+      }
+      
+      ctx.restore();
+      return; // Skip particle rendering for bar pattern
+    }
+
+    // Special rendering for Ren Bytera hexagon grid pattern
+    if (theme.id === 'ren-bytera' && theme.patterns && theme.patterns.type === 'mechanical') {
+      // Ensure canvas is properly sized
+      if (canvas.width === 0 || canvas.height === 0) {
+        canvas.width = canvas.offsetWidth || window.innerWidth;
+        canvas.height = canvas.offsetHeight || window.innerHeight;
+      }
+      
+      const hexGridOpacity = 0.25; // Base opacity
+      const baseHexRadius = 20; // Base radius
+      const hexSpacingX = baseHexRadius * 4; // Horizontal spacing (heavily increased to prevent overlap)
+      const hexSpacingY = baseHexRadius * Math.sqrt(3) * 2; // Vertical spacing for hexagonal tiling (heavily increased to prevent overlap)
+      
+      // Seamless looping: pattern loops from top to bottom
+      // Create a fixed pattern that repeats at canvas height
+      // The offset continuously increases, and we use modulo to wrap positions seamlessly
+      const gridSpacing = hexSpacingY; // Use vertical spacing as base for wrapping
+      const wrappedHexOffsetY = renHexGridOffsetRef.current % gridSpacing;
+      
+      // Calculate how many full grid cells we've scrolled (for maintaining grid identity)
+      const scrolledHexCellsY = Math.floor(renHexGridOffsetRef.current / gridSpacing);
+      
+      ctx.save();
+      
+      // Large buffer zones to ensure hexagons teleport off-screen, never visible during transition
+      const bufferSize = canvas.height * 2; // Large buffer above and below
+      
+      // Calculate how many rows we need to cover visible area + buffers
+      const totalHeight = canvas.height + bufferSize * 2;
+      const hexCols = Math.ceil(canvas.width / hexSpacingX) + 3;
+      const hexRows = Math.ceil(totalHeight / hexSpacingY) + 4; // Enough rows to cover total height
+      
+      // Use current time for random flickering
+      const currentTime = Date.now() * 0.001; // Time in seconds
+      
+      // Pattern height for seamless looping - use canvas height as the repeat point
+      // Hexagons will wrap when fully off-screen (both top and bottom)
+      const patternHeight = canvas.height;
+      // Calculate how many rows fit in the pattern height for wrapping grid identity
+      const patternRows = Math.ceil(patternHeight / hexSpacingY);
+      
+      for (let col = -2; col < hexCols; col++) {
+        for (let row = -2; row < hexRows; row++) {
+          // Calculate the true grid identity for this hexagon
+          // Wrap gridRow to ensure the pattern repeats seamlessly
+          const gridCol = col;
+          const rawGridRow = row + scrolledHexCellsY; // Add scrolled cells to maintain identity
+          const gridRow = ((rawGridRow % patternRows) + patternRows) % patternRows; // Wrap to create seamless loop
+          
+          // Use grid identity to determine properties (consistent across frames)
+          const hexSeed = (gridCol * 73856093) ^ (gridRow * 19349663); // Hash for consistency
+          
+          // Glow is independent of flickering - most hexagons have some level of natural glow
+          // Glow intensity varies from very strong to faint
+          const glowSeed = (hexSeed * 13) % 100; // 0-99 for glow variation
+          const hasGlow = glowSeed < 85; // ~85% of hexagons have some glow
+          
+          // Glow intensity varies from very strong (3.0) to faint (0.3)
+          // Create a smooth distribution across the range
+          let glowIntensity = 0;
+          if (hasGlow) {
+            if (glowSeed < 10) {
+              // Very strong glow (~10%)
+              glowIntensity = 2.5 + (glowSeed / 10) * 0.5; // 2.5 to 3.0
+            } else if (glowSeed < 25) {
+              // Strong glow (~15%)
+              glowIntensity = 1.8 + ((glowSeed - 10) / 15) * 0.7; // 1.8 to 2.5
+            } else if (glowSeed < 45) {
+              // Moderate glow (~20%)
+              glowIntensity = 1.2 + ((glowSeed - 25) / 20) * 0.6; // 1.2 to 1.8
+            } else if (glowSeed < 65) {
+              // Light glow (~20%)
+              glowIntensity = 0.7 + ((glowSeed - 45) / 20) * 0.5; // 0.7 to 1.2
+            } else {
+              // Faint glow (~20%)
+              glowIntensity = 0.3 + ((glowSeed - 65) / 20) * 0.4; // 0.3 to 0.7
+            }
+          }
+          
+          // Size variation: 0.85x to 1.15x (reduced range to prevent overlap)
+          const sizeVariation = 0.85 + ((hexSeed % 5) / 5) * 0.3;
+          const currentHexRadius = baseHexRadius * sizeVariation;
+          
+          // Neon sign-like flickering: some hexagons flicker (independent of glow)
+          // Each hexagon has a unique flicker timing and pattern based on its seed
+          const flickerSeed = (hexSeed * 17) % 1000; // Unique flicker pattern per hexagon
+          const flickerType = flickerSeed % 5; // Different flicker types (0-4)
+          const shouldFlicker = flickerType < 3; // ~60% of hexagons flicker
+          
+          let flickerAmount = 0;
+          if (shouldFlicker) {
+            // Create neon sign-like flicker patterns
+            const flickerPhase = (flickerSeed * 0.1) % (Math.PI * 2); // Unique phase offset
+            const flickerSpeed = 2 + (flickerType * 0.5); // Different speeds for variety
+            
+            if (flickerType === 0) {
+              // Quick rhythmic flicker (like a neon sign with a loose connection)
+              const flickerWave = Math.sin(currentTime * flickerSpeed * 3 + flickerPhase);
+              flickerAmount = flickerWave > 0.7 ? (flickerWave - 0.7) * 0.4 : 0; // Sharp flicker
+            } else if (flickerType === 1) {
+              // Slow pulsing flicker (like a neon sign warming up)
+              const flickerWave = (Math.sin(currentTime * flickerSpeed + flickerPhase) + 1) / 2;
+              flickerAmount = (flickerWave > 0.5 ? flickerWave : 0.5) * 0.3 - 0.15; // Pulsing effect
+            } else {
+              // Random occasional flicker (like a neon sign with intermittent issues)
+              const flickerCycle = (currentTime * flickerSpeed * 0.5 + flickerPhase) % 4;
+              if (flickerCycle > 3.5) {
+                const flickerIntensity = (flickerCycle - 3.5) * 2; // Quick flicker
+                flickerAmount = Math.sin(flickerIntensity * Math.PI) * 0.25;
+              }
+            }
+          }
+          
+          const hexOpacity = Math.max(0.15, Math.min(0.5, hexGridOpacity + flickerAmount));
+          
+          // Calculate position with seamless looping
+          // Use gridRow for hexagonal tiling offset to maintain consistency
+          const x = (col * hexSpacingX) + (gridRow % 2 === 0 ? 0 : hexSpacingX * 0.5);
+          // Calculate Y position: start from buffer zone above, scroll down
+          // Position hexagons to cover the entire range including buffers
+          let y = (row * hexSpacingY) - wrappedHexOffsetY - bufferSize;
+          
+          // Wrap hexagons that scroll off the bottom - teleport them to top (off-screen)
+          // Only wrap when fully off-screen below the visible area
+          if (y >= canvas.height + bufferSize) {
+            // Teleport from bottom to top (off-screen, in the negative buffer zone)
+            y -= totalHeight;
+          }
+          
+          // Only draw if visible (within the visible canvas area: 0 to canvas.height)
+          // Allow a small margin for partial visibility at edges
+          const margin = currentHexRadius * 2;
+          if (x > -margin && x < canvas.width + margin && 
+              y > -margin && y < canvas.height + margin) {
+            
+            ctx.save();
+            ctx.globalAlpha = hexOpacity;
+            
+            // Add glow effect with varying intensities (independent of flickering)
+            if (hasGlow && glowIntensity > 0) {
+              ctx.shadowBlur = 10 * glowIntensity; // Scale blur based on intensity
+              ctx.shadowColor = '#22c55e';
+              // Vary stroke color based on glow intensity for more visual variety
+              if (glowIntensity >= 2.0) {
+                ctx.strokeStyle = '#4ade80'; // Very bright green for strong glow
+              } else if (glowIntensity >= 1.5) {
+                ctx.strokeStyle = '#34d399'; // Bright green for moderate-strong glow
+              } else if (glowIntensity >= 1.0) {
+                ctx.strokeStyle = '#22c55e'; // Standard green for moderate glow
+              } else if (glowIntensity >= 0.5) {
+                ctx.strokeStyle = '#16a34a'; // Slightly darker green for light glow
+              } else {
+                ctx.strokeStyle = '#15803d'; // Darker green for faint glow
+              }
+            } else {
+              ctx.shadowBlur = 0;
+              ctx.strokeStyle = '#22c55e';
+            }
+            ctx.lineWidth = 2;
+            
+            // Draw hexagon
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+              const angle = (i * Math.PI) / 3;
+              const hexX = x + Math.cos(angle) * currentHexRadius;
+              const hexY = y + Math.sin(angle) * currentHexRadius;
+              if (i === 0) {
+                ctx.moveTo(hexX, hexY);
+              } else {
+                ctx.lineTo(hexX, hexY);
+              }
+            }
+            ctx.closePath();
+            ctx.stroke();
+            
+            ctx.restore();
+          }
+        }
+      }
+      
+      ctx.restore();
+      return; // Skip particle rendering for hexagon grid pattern
+    }
+
     // Skip rendering on low performance mode occasionally
     if (performanceMode === 'low' && Math.random() > 0.7) {
       return;
@@ -980,6 +1236,25 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
       switch (particle.type) {
         case 'grain': {
+          // For Bryck: draw horizontal black bars
+          if (theme.id === 'bryck-manning') {
+            const canvas = canvasRef.current;
+            if (!canvas) break;
+            const barWidth = canvas.width; // Full width
+            const barHeight = particle.height || 25; // Small height
+            ctx.save();
+            ctx.globalAlpha = particle.opacity;
+            ctx.fillStyle = particle.color;
+            // Draw horizontal bar (rectangle) spanning full width
+            ctx.fillRect(
+              0, // Start at left edge
+              particle.y - barHeight / 2, // Center vertically on particle position
+              barWidth,
+              barHeight
+            );
+            ctx.restore();
+            break;
+          }
           // Draw rotated capsule (rounded rect) to represent a rice grain
           const w = particle.width || Math.max(1, particle.size * 0.35);
           const h = particle.height || Math.max(3, particle.size * 0.8);
@@ -1490,6 +1765,20 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       const scrollSpeed = (theme.particles.speed || 0.5) * (deltaTime / 16.67); // Normalize to 60fps
       spiralScrollOffsetRef.current += scrollSpeed;
     }
+    
+    // Update Ren Bytera hexagon grid scroll offset continuously (frame-rate independent, never resets)
+    // Don't use modulo here - let it grow continuously, use modulo only in rendering
+    if (theme.id === 'ren-bytera' && theme.patterns && theme.patterns.type === 'mechanical') {
+      const hexGridScrollSpeed = (0.3 * deltaTime) / 16.67; // Normalize to 60fps (scrolls downward)
+      renHexGridOffsetRef.current += hexGridScrollSpeed;
+    }
+    
+    // Update Bryck Manning bar scroll offset continuously (frame-rate independent, never resets)
+    // Don't use modulo here - let it grow continuously, use modulo only in rendering
+    if (theme.id === 'bryck-manning' && theme.particles.type === 'grain') {
+      const barScrollSpeed = ((theme.particles.speed || 0.6) * deltaTime) / 16.67; // Normalize to 60fps (scrolls downward)
+      bryckBarOffsetRef.current += barScrollSpeed;
+    }
 
     checkPerformance(currentTime);
     updateParticles(deltaTime);
@@ -1513,8 +1802,8 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
       fadeTimeoutRef.current = setTimeout(() => {
         setOpacity(1);
         // Force fallback if no particles appear after 3 seconds
-        // Skip this check for bounce, squiggle types and Builderman since they use pattern rendering, not individual particles
-        if (theme.particles.type === 'bounce' || theme.particles.type === 'squiggle' || theme.id === 'builderman') {
+        // Skip this check for bounce, squiggle types, Builderman, Ren, and Bryck since they use pattern rendering, not individual particles
+        if (theme.particles.type === 'bounce' || theme.particles.type === 'squiggle' || theme.id === 'builderman' || theme.id === 'ren-bytera' || theme.id === 'bryck-manning') {
           return;
         }
         setTimeout(() => {
@@ -1626,8 +1915,9 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
     
     // Force fallback if no particles appear after 3 seconds
     // Skip this check for bounce and squiggle types since they use pattern rendering, not individual particles
+    // Also skip for Ren since it uses pattern rendering
     let fallbackTimeout: NodeJS.Timeout | undefined;
-    if (theme.particles.type !== 'bounce' && theme.particles.type !== 'squiggle' && theme.id !== 'builderman') {
+    if (theme.particles.type !== 'bounce' && theme.particles.type !== 'squiggle' && theme.id !== 'builderman' && theme.id !== 'ren-bytera') {
       fallbackTimeout = setTimeout(() => {
         if (particlesRef.current.length === 0 && !forceFallback) {
           setForceFallback(true);
@@ -1655,13 +1945,14 @@ export const CharacterParticles: React.FC<CharacterParticlesProps> = ({
 
   // Allow rendering for Builderman even with 'none' particles type since we render blueprint grid pattern
   // Also allow rendering for bounce and squiggle types since they use pattern rendering
-  if (theme.particles.type === 'none' && theme.id !== 'builderman' && theme.particles.type !== 'bounce' && theme.particles.type !== 'squiggle') {
+  // Allow rendering for Ren Bytera and Builderman since they render patterns
+  if (theme.particles.type === 'none' && theme.id !== 'builderman' && theme.id !== 'ren-bytera' && theme.particles.type !== 'bounce' && theme.particles.type !== 'squiggle') {
     return null;
   }
 
   // Fallback for canvas-unsupported browsers, very low performance, or forced fallback
   // Skip fallback check for bounce, squiggle types and Builderman since they use pattern rendering, not individual particles
-  if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0 && theme.particles.type !== 'bounce' && theme.particles.type !== 'squiggle' && theme.id !== 'builderman')) {
+  if (!canvasSupported || forceFallback || (performanceMode === 'low' && particlesRef.current.length === 0 && theme.particles.type !== 'bounce' && theme.particles.type !== 'squiggle' && theme.id !== 'builderman' && theme.id !== 'ren-bytera')) {
     return (
       <div 
         className={className}

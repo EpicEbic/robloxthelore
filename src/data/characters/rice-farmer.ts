@@ -21,9 +21,11 @@ export const riceFarmer: WikiEntry = {
   },
   species: "Noob",
   age: "55",
+  height: "5 studs",
+  status: "Alive",
   alignment: "Neutral/Moral",
   role: "Altruist",
-  
+  archetype: "altruist",
   carouselImages: [
     {
       url: "/images/rice-1.png",
@@ -172,6 +174,10 @@ export const riceFarmer: WikiEntry = {
   ],
   
   sections: {
+    overview: [
+      "Rice Farmer is a supporting character in The Lore, known for his agricultural expertise and connection to the world's food supply. His role in the story provides insight into the daily lives of civilians in the Bloxiverse and the challenges they face.",
+      "Rice Farmer's character adds depth to the world-building, showcasing the various professions and lifestyles that exist beyond the main conflict and action of the series."
+    ],
     appearance: [
       {
         id: "standard",

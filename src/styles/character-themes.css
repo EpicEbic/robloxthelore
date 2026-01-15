@@ -68,7 +68,9 @@ body.character-theme-builderman,
 body.character-theme-the-banhammer,
 body.character-theme-gravity-coil,
 body.character-theme-speed-coil,
-body.character-theme-regeneration-coil {
+body.character-theme-regeneration-coil,
+body.character-theme-ren-bytera,
+body.character-theme-bryck-manning {
   background: var(--character-gradient-background, var(--background));
   color: var(--character-text, var(--foreground));
   transition: background 0.5s ease, color 0.5s ease;
@@ -142,6 +144,13 @@ body.character-theme-the-bloxiverse button {
 
 body.character-theme-the-bloxiverse button svg {
   color: #e879f9 !important;
+}
+
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-the-bloxiverse [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
 }
 
 body.character-theme-the-bloxiverse .card,
@@ -493,6 +502,13 @@ body.character-theme-caesar-bloxwright button svg {
   color: #60a5fa !important;
 }
 
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-caesar-bloxwright [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
+}
+
 /* Override basic info component text to be white */
 body.character-theme-caesar-bloxwright .bg-muted\/20 div {
   color: white !important;
@@ -563,6 +579,13 @@ body.character-theme-nauli-parter button {
 
 body.character-theme-nauli-parter button svg {
   color: #16a34a !important;
+}
+
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-nauli-parter [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
 }
 
 body.character-theme-nauli-parter .card,
@@ -658,6 +681,13 @@ body.character-theme-rice-farmer button {
 
 body.character-theme-rice-farmer button svg {
   color: #3a7ca5 !important;
+}
+
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-rice-farmer [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
 }
 
 body.character-theme-rice-farmer .card,
@@ -764,6 +794,13 @@ body.character-theme-bloxy-cola button svg {
   color: #06b6d4 !important;
 }
 
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-bloxy-cola [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
+}
+
 body.character-theme-bloxy-cola .card,
 body.character-theme-bloxy-cola [class*="card"],
 body.character-theme-bloxy-cola .bg-card {
@@ -823,6 +860,13 @@ body.character-theme-witches-brew button svg {
   color: #ef4444 !important;
 }
 
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-witches-brew [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
+}
+
 body.character-theme-witches-brew .card,
 body.character-theme-witches-brew [class*="card"],
 body.character-theme-witches-brew .bg-card {
@@ -879,6 +923,13 @@ body.character-theme-builderman button {
 
 body.character-theme-builderman button svg {
   color: #ef4444 !important;
+}
+
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-builderman [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
 }
 
 body.character-theme-builderman .card,
@@ -962,6 +1013,13 @@ body.character-theme-the-banhammer button {
 
 body.character-theme-the-banhammer button svg {
   color: #fbbf24 !important;
+}
+
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-the-banhammer [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
 }
 
 body.character-theme-the-banhammer .card,
@@ -1054,6 +1112,13 @@ body.character-theme-vortex-a-steele button {
 body.character-theme-vortex-a-steele button svg {
   color: #a855f7 !important;
   stroke: #a855f7 !important;
+}
+
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-vortex-a-steele [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
 }
 
 /* Target icons with text-primary-foreground class specifically */
@@ -1313,6 +1378,13 @@ body.character-theme-the-bounceman button {
 body.character-theme-the-bounceman button svg {
   color: #ef4444 !important;
   stroke: #ef4444 !important;
+}
+
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-the-bounceman [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
 }
 
 body.character-theme-the-bounceman .card,
@@ -1768,6 +1840,144 @@ body.character-theme-regeneration-coil .bg-card {
   border-color: #22c55e !important;
 }
 
+/* Ren Bytera Theme */
+.character-theme-container.character-theme-ren-bytera {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 20%, #2a2a2a 35%, #1a1a1a 50%, #2a2a2a 65%, #1a1a1a 80%, #0a0a0a 100%);
+}
+
+body.character-theme-ren-bytera {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 20%, #2a2a2a 35%, #1a1a1a 50%, #2a2a2a 65%, #1a1a1a 80%, #0a0a0a 100%);
+}
+
+body.character-theme-ren-bytera h1,
+body.character-theme-ren-bytera h2,
+body.character-theme-ren-bytera h3,
+body.character-theme-ren-bytera h4,
+body.character-theme-ren-bytera h5,
+body.character-theme-ren-bytera h6 {
+  color: #ffffff !important;
+}
+
+body.character-theme-ren-bytera p {
+  color: #ffffff !important;
+}
+
+body.character-theme-ren-bytera div {
+  color: #ffffff !important;
+}
+
+body.character-theme-ren-bytera .card span,
+body.character-theme-ren-bytera [class*="card"] span {
+  color: #ffffff !important;
+}
+
+body.character-theme-ren-bytera a {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-ren-bytera a:hover {
+  color: #fcd34d !important;
+}
+
+body.character-theme-ren-bytera svg,
+body.character-theme-ren-bytera [class*="lucide"] {
+  color: #22c55e !important;
+  stroke: #22c55e !important;
+  fill: none !important;
+}
+
+body.character-theme-ren-bytera button {
+  color: #fbbf24 !important;
+}
+
+body.character-theme-ren-bytera button svg {
+  color: #22c55e !important;
+}
+
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-ren-bytera [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
+}
+
+body.character-theme-ren-bytera .card,
+body.character-theme-ren-bytera [class*="card"],
+body.character-theme-ren-bytera .bg-card {
+  background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%) !important;
+}
+
+/* ========================================
+   BRYCK MANNING THEME
+   Green and Black with Blue Accents
+   ======================================== */
+
+.character-theme-container.character-theme-bryck-manning {
+  background: linear-gradient(135deg, #000000 0%, #0a0f0a 20%, #1a2a1a 35%, #0a0f0a 50%, #1a2a1a 65%, #0a0f0a 80%, #000000 100%);
+}
+
+body.character-theme-bryck-manning {
+  background: linear-gradient(135deg, #000000 0%, #0a0f0a 20%, #1a2a1a 35%, #0a0f0a 50%, #1a2a1a 65%, #0a0f0a 80%, #000000 100%);
+}
+
+body.character-theme-bryck-manning h1,
+body.character-theme-bryck-manning h2,
+body.character-theme-bryck-manning h3,
+body.character-theme-bryck-manning h4,
+body.character-theme-bryck-manning h5,
+body.character-theme-bryck-manning h6 {
+  color: #ffffff !important;
+}
+
+body.character-theme-bryck-manning p {
+  color: #ffffff !important;
+}
+
+body.character-theme-bryck-manning div {
+  color: #ffffff !important;
+}
+
+body.character-theme-bryck-manning .card span,
+body.character-theme-bryck-manning [class*="card"] span {
+  color: #ffffff !important;
+}
+
+body.character-theme-bryck-manning a {
+  color: #22c55e !important;
+}
+
+body.character-theme-bryck-manning a:hover {
+  color: #4ade80 !important;
+}
+
+body.character-theme-bryck-manning svg,
+body.character-theme-bryck-manning [class*="lucide"] {
+  color: #3b82f6 !important;
+  stroke: #3b82f6 !important;
+  fill: none !important;
+}
+
+body.character-theme-bryck-manning button {
+  color: #22c55e !important;
+}
+
+body.character-theme-bryck-manning button svg {
+  color: #3b82f6 !important;
+}
+
+/* Mobile sidebar buttons - only text color, preserve Button variant styles */
+body.character-theme-bryck-manning [data-state][data-side] button[class*="ghost"] {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
+}
+
+body.character-theme-bryck-manning .card,
+body.character-theme-bryck-manning [class*="card"],
+body.character-theme-bryck-manning .bg-card {
+  background: linear-gradient(145deg, #0a0f0a 0%, #1a2a1a 50%, #0a0f0a 100%) !important;
+}
+
 /* ========================================
    THEME EXEMPTION OVERRIDES
    These rules MUST come at the end to override
@@ -1828,5 +2038,114 @@ body[class*="character-theme-"] .text-force-black *,
 [class*="character-theme-"] .text-force-black,
 [class*="character-theme-"] .text-force-black * {
   color: #1f2937 !important;
+}
+
+/* ========================================
+   MOBILE SIDEBAR BUTTON EXEMPTIONS
+   Mobile sidebar buttons and links should only have
+   colored text, not borders or backgrounds
+   ======================================== */
+
+/* Target all buttons within mobile sidebar - remove borders and backgrounds */
+/* This must override all theme-specific button styles */
+body[class*="character-theme-"] .mobile-sidebar button,
+body[class*="character-theme-"] .mobile-sidebar button[class*="ghost"],
+body[class*="character-theme-"] .mobile-sidebar .mobile-sidebar-button,
+body[class*="character-theme-"] .mobile-sidebar button[type="button"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
+  border-style: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  outline-width: 0 !important;
+  -webkit-box-shadow: none !important;
+}
+
+/* Target all link divs within mobile sidebar - remove borders and backgrounds */
+body[class*="character-theme-"] .mobile-sidebar .mobile-sidebar-link,
+body[class*="character-theme-"] .mobile-sidebar a .mobile-sidebar-link,
+body[class*="character-theme-"] .mobile-sidebar [class*="mobile-sidebar-link"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
+  border-style: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  outline-width: 0 !important;
+  -webkit-box-shadow: none !important;
+}
+
+/* Hover state for mobile sidebar buttons - subtle background only, no borders */
+body[class*="character-theme-"] .mobile-sidebar button:hover,
+body[class*="character-theme-"] .mobile-sidebar button[class*="ghost"]:hover,
+body[class*="character-theme-"] .mobile-sidebar .mobile-sidebar-button:hover,
+body[class*="character-theme-"] .mobile-sidebar button[type="button"]:hover {
+  background: hsl(var(--accent) / 0.1) !important;
+  background-color: hsl(var(--accent) / 0.1) !important;
+  border: none !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
+  border-style: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+/* Hover state for mobile sidebar links - subtle background only, no borders */
+body[class*="character-theme-"] .mobile-sidebar .mobile-sidebar-link:hover,
+body[class*="character-theme-"] .mobile-sidebar a:hover .mobile-sidebar-link,
+body[class*="character-theme-"] .mobile-sidebar [class*="mobile-sidebar-link"]:hover {
+  background: hsl(var(--accent) / 0.1) !important;
+  background-color: hsl(var(--accent) / 0.1) !important;
+  border: none !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
+  border-style: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+/* Focus and active states for buttons */
+body[class*="character-theme-"] .mobile-sidebar button:focus,
+body[class*="character-theme-"] .mobile-sidebar button:active,
+body[class*="character-theme-"] .mobile-sidebar button:focus-visible,
+body[class*="character-theme-"] .mobile-sidebar button[class*="ghost"]:focus,
+body[class*="character-theme-"] .mobile-sidebar button[class*="ghost"]:active,
+body[class*="character-theme-"] .mobile-sidebar button[class*="ghost"]:focus-visible,
+body[class*="character-theme-"] .mobile-sidebar .mobile-sidebar-button:focus,
+body[class*="character-theme-"] .mobile-sidebar .mobile-sidebar-button:active,
+body[class*="character-theme-"] .mobile-sidebar .mobile-sidebar-button:focus-visible,
+body[class*="character-theme-"] .mobile-sidebar button[type="button"]:focus,
+body[class*="character-theme-"] .mobile-sidebar button[type="button"]:active,
+body[class*="character-theme-"] .mobile-sidebar button[type="button"]:focus-visible {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
+  border-style: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+/* Focus and active states for links */
+body[class*="character-theme-"] .mobile-sidebar .mobile-sidebar-link:focus,
+body[class*="character-theme-"] .mobile-sidebar .mobile-sidebar-link:active,
+body[class*="character-theme-"] .mobile-sidebar a:focus .mobile-sidebar-link,
+body[class*="character-theme-"] .mobile-sidebar a:active .mobile-sidebar-link {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
+  border-style: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  -webkit-box-shadow: none !important;
 }
 

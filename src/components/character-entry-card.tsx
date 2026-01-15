@@ -34,6 +34,8 @@ export interface CharacterInfo {
   image?: string; // Keep for backwards compatibility
   species?: string;
   age?: number | string;
+  height?: string;
+  status?: string;
   alignment?: string;
   appearance?: string;
 }
@@ -117,6 +119,7 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
   
   // Extract only character-specific sections
   const characterSections: CharacterSections = {
+    overview: character.sections?.overview || [],
     appearance: character.sections?.appearance,
      personality: character.sections?.personality || [],
     lifestyle: character.sections?.lifestyle || [],
@@ -149,9 +152,11 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
           />
           
           <div className="px-6">
-            <CharacterBasicInfo 
+            <CharacterBasicInfo
               species={characterData.species}
               age={characterData.age}
+              height={characterData.height}
+              status={characterData.status}
               alignment={characterData.alignment}
               archetypeId={characterData.archetype}
             />
