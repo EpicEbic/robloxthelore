@@ -26,6 +26,15 @@ svg.icon-force-white {
   fill: none !important;
 }
 
+/* Diff badge icons - always white */
+.diff-badge-icon,
+.diff-badge-icon svg,
+svg.diff-badge-icon {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
 /* Force white text - exempt from ALL theme coloring */
 .text-force-white,
 .text-force-white * {

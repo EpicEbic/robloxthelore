@@ -5,15 +5,9 @@
  * 
  * ## Architecture
  * 
- * The stats system is divided into two domains:
- * 1. **Physical Stats** - Measure a character's raw physical capabilities
- *    - Categories: Strength, Durability, Agility, Precision, Intelligence
- *    - Each category has 4 subcategories (20 total subcategories)
- * 
- * 2. **Ability Stats** - Measure the power and versatility of abilities
- *    - Categories: Offense, Defense, Utility, Potential
- *    - Offense, Defense, and Utility have 3 subcategories each (9 total)
- *    - Potential has no subcategories
+ * The stats system measures a character's raw physical capabilities:
+ * - Categories: Strength, Durability, Agility, Precision, Intelligence
+ * - Each category has 4 subcategories (20 total subcategories)
  * 
  * ## Grades
  * 
@@ -32,7 +26,6 @@
  * ```typescript
  * import { 
  *   createPhysicalStats, 
- *   createAbilityStats,
  *   getStatDescription,
  *   GRADE_COLORS 
  * } from "@/lib/stats";
@@ -45,7 +38,7 @@
  * });
  * 
  * // Get description for a grade
- * const desc = getStatDescription("power", "B", "physical");
+ * const desc = getStatDescription("power", "B");
  * // => "This Bloxian's power enables them to destroy entire buildings through their fists alone."
  * ```
  */
@@ -63,11 +56,6 @@ export type {
   PhysicalCategoryKey,
   PhysicalSubcategoryKey,
   PhysicalStats,
-  AbilityCategoryKey,
-  AbilitySubcategoryKey,
-  AbilityStats,
-  StatDomain,
-  AnyStatKey,
   GradeDescriptions,
   StatDescriptionMap
 } from "./types";
@@ -102,19 +90,6 @@ export {
 } from "./physical-stats";
 
 // =============================================================================
-// ABILITY STAT EXPORTS
-// =============================================================================
-
-export {
-  ABILITY_CATEGORIES,
-  ABILITY_STAT_DESCRIPTIONS,
-  getAbilityCategory,
-  getAbilitySubcategory,
-  getAbilityStatDescription,
-  getAbilityStatDefinition
-} from "./ability-stats";
-
-// =============================================================================
 // HELPER EXPORTS
 // =============================================================================
 
@@ -122,14 +97,10 @@ export {
   createStatGrade,
   createPhysicalStats,
   createCombatStats,      // Alias for createPhysicalStats
-  createAbilityStats,
-  createCharacterStats,   // Alias for createAbilityStats
   getStatDescription,
   getStatDefinition,
   getStatFullInfo,
   getSubcategoryGrade,
   isPhysicalSubcategory,
-  isAbilitySubcategory,
   getParentCategoryKey
 } from "./helpers";
-

@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const bloxxanneWhelder: WikiEntry = {
   id: "bloxxanne-whelder",
@@ -152,6 +152,5 @@ export const bloxxanneWhelder: WikiEntry = {
     ]
   },
   
-  relatedEntries: ["builderman", "ren-bytera"],
-  stats: createCharacterStats("F", "F", "E", "B")
+  relatedEntries: ["builderman", "ren-bytera"]
 };

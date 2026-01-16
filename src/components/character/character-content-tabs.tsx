@@ -11,7 +11,7 @@ import { CharacterPersonalitySwitcher } from "./character-personality-switcher";
 import { CharacterLifestyleSwitcher } from "./character-lifestyle-switcher";
 import { CharacterHistorySwitcher } from "./character-history-switcher";
 import { CharacterDevelopmentSwitcher } from "./character-development-switcher";
-import { createCharacterStats, createCombatStats, CharacterStats, CombatStats } from "./character-stat-chart";
+import { createCombatStats, CombatStats } from "./character-stat-chart";
 import { AutoLinkedText } from "@/components/ui/auto-linked-text";
 import { AppearanceOption, PersonalityOption, HistoryOption, DevelopmentOption, CombatStyleOption, WikiEntry } from "@/types/wiki-types";
 import { RelationshipSelector } from "./relationship-selector";
@@ -62,7 +62,6 @@ interface CharacterContentTabsProps {
   onCombatStyleChange?: (styleId: string) => void;
   characterId?: string;
   abilityName?: string;
-  stats?: CharacterStats;
   combatStats?: CombatStats;
   onTabChange?: (tabValue: string) => void;
   currentEntryId?: string;
@@ -92,7 +91,6 @@ export function CharacterContentTabs({
   onCombatStyleChange,
   characterId,
   abilityName,
-  stats,
   combatStats,
   onTabChange,
   currentEntryId,
@@ -760,13 +758,6 @@ export function CharacterContentTabs({
 
                   {hasAbilities && displayCombatView === 'ability' && (
                     <div className="space-y-4">
-                      {/* Ability Stats Card Grid */}
-                      <StatsCardGrid
-                        stats={stats || createCharacterStats("A", "A", "A", "A")}
-                        isPhysical={false}
-                        title={abilityName ? `${abilityName} Statistics` : "Ability Statistics"}
-                      />
-                      
                       {/* Ability Techniques */}
                       {sections.abilityData ? (
                         <TechniqueTabs

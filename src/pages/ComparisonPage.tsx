@@ -15,9 +15,10 @@ import { DualThemeProvider, useDualTheme } from "@/contexts/dual-theme-context";
 import { DualCharacterParticles } from "@/components/effects/dual-character-particles-v2";
 import { getCharacterTheme } from "@/data/character-themes";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
+import { isEntryDisabled } from "@/utils/disabled-entries";
 function ComparisonPageContent() {
   const { applyDualTheme, resetDualTheme } = useDualTheme();
-  const { isEntryUnlocked } = useEasterEgg();
+  const { isEntryUnlocked, enabledEntries } = useEasterEgg();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [selectedEntries, setSelectedEntries] = useState<{
     slot1: WikiEntry | null;
@@ -263,7 +264,7 @@ function ComparisonPageContent() {
                             entry={entry} 
                             isDragging={activeId === entry.id} 
                             isSelected={isEntrySelected(entry.id)} 
-                            isDisabled={!isEntryUnlocked(entry.id)} 
+                            isDisabled={!isEntryUnlocked(entry.id) || isEntryDisabled(entry.id, enabledEntries)} 
                             onEntryClick={handleEntryClick} 
                             slotNumber={selectedEntries.slot1?.id === entry.id ? 1 : selectedEntries.slot2?.id === entry.id ? 2 : null} 
                           />

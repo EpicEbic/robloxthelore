@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const riceFarmer: WikiEntry = {
   id: "rice-farmer",
@@ -437,5 +437,4 @@ export const riceFarmer: WikiEntry = {
     ]
   },
   
-  stats: createCharacterStats("F", "F", "F", "F")
 };

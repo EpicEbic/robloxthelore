@@ -9,10 +9,7 @@ import type {
   GradeLabel, 
   StatGrade, 
   PhysicalStats, 
-  PhysicalSubcategoryKey,
-  AbilityStats,
-  AbilitySubcategoryKey,
-  StatDomain
+  PhysicalSubcategoryKey
 } from "./types";
 import { GRADE_VALUES } from "./grades";
 import { 
@@ -20,11 +17,6 @@ import {
   getPhysicalStatDefinition,
   getPhysicalSubcategory 
 } from "./physical-stats";
-import { 
-  getAbilityStatDescription, 
-  getAbilityStatDefinition,
-  getAbilitySubcategory 
-} from "./ability-stats";
 
 // =============================================================================
 // STAT CREATION HELPERS
@@ -84,47 +76,6 @@ export function createPhysicalStats(
  */
 export const createCombatStats = createPhysicalStats;
 
-/**
- * Create ability stats from grade labels
- * 
- * @param offense - Main offense grade
- * @param defense - Main defense grade
- * @param utility - Main utility grade
- * @param potential - Main potential grade
- * @param subcategories - Optional object with subcategory-specific grades
- */
-export function createAbilityStats(
-  offense: GradeLabel,
-  defense: GradeLabel,
-  utility: GradeLabel,
-  potential: GradeLabel,
-  subcategories?: Partial<Record<AbilitySubcategoryKey, GradeLabel>>
-): AbilityStats {
-  const stats: AbilityStats = {
-    offense: createStatGrade(offense),
-    defense: createStatGrade(defense),
-    utility: createStatGrade(utility),
-    potential: createStatGrade(potential)
-  };
-  
-  if (subcategories) {
-    const subcategoryStats: Partial<Record<AbilitySubcategoryKey, StatGrade>> = {};
-    for (const [key, grade] of Object.entries(subcategories)) {
-      if (grade) {
-        subcategoryStats[key as AbilitySubcategoryKey] = createStatGrade(grade);
-      }
-    }
-    stats.subcategories = subcategoryStats;
-  }
-  
-  return stats;
-}
-
-/**
- * Alias for createAbilityStats for backward compatibility
- */
-export const createCharacterStats = createAbilityStats;
-
 // =============================================================================
 // DESCRIPTION LOOKUP HELPERS
 // =============================================================================
@@ -133,39 +84,24 @@ export const createCharacterStats = createAbilityStats;
  * Get the grade description for a stat
  * 
  * This is the main function to use for looking up what a grade means for a specific stat.
- * It automatically handles the distinction between physical and ability stats.
  * 
- * @param statKey - The stat key (e.g., "power", "toughness", "guard")
+ * @param statKey - The stat key (e.g., "power", "toughness")
  * @param grade - The grade label (e.g., "B", "A", "S")
- * @param domain - Which stat domain: "physical" or "ability"
  */
 export function getStatDescription(
   statKey: string, 
-  grade: GradeLabel, 
-  domain: StatDomain
+  grade: GradeLabel
 ): string {
-  if (domain === "physical") {
-    return getPhysicalStatDescription(statKey, grade);
-  } else {
-    return getAbilityStatDescription(statKey, grade);
-  }
+  return getPhysicalStatDescription(statKey, grade);
 }
 
 /**
  * Get the stat definition (what the stat measures)
  * 
- * @param statKey - The stat key (e.g., "power", "toughness", "guard")
- * @param domain - Which stat domain: "physical" or "ability"
+ * @param statKey - The stat key (e.g., "power", "toughness")
  */
-export function getStatDefinition(
-  statKey: string, 
-  domain: StatDomain
-): string {
-  if (domain === "physical") {
-    return getPhysicalStatDefinition(statKey);
-  } else {
-    return getAbilityStatDefinition(statKey);
-  }
+export function getStatDefinition(statKey: string): string {
+  return getPhysicalStatDefinition(statKey);
 }
 
 /**
@@ -173,18 +109,16 @@ export function getStatDefinition(
  * 
  * Useful for displaying expanded stat information.
  * 
- * @param statKey - The stat key (e.g., "power", "toughness", "guard")
+ * @param statKey - The stat key (e.g., "power", "toughness")
  * @param grade - The grade label (e.g., "B", "A", "S")
- * @param domain - Which stat domain: "physical" or "ability"
  */
 export function getStatFullInfo(
   statKey: string, 
-  grade: GradeLabel, 
-  domain: StatDomain
+  grade: GradeLabel
 ): { definition: string; gradeDescription: string } {
   return {
-    definition: getStatDefinition(statKey, domain),
-    gradeDescription: getStatDescription(statKey, grade, domain)
+    definition: getStatDefinition(statKey),
+    gradeDescription: getStatDescription(statKey, grade)
   };
 }
 
@@ -196,7 +130,7 @@ export function getStatFullInfo(
  * Get a subcategory's stat grade, falling back to the main category if not defined
  */
 export function getSubcategoryGrade(
-  stats: PhysicalStats | AbilityStats,
+  stats: PhysicalStats,
   subcategoryKey: string,
   mainCategoryKey: string
 ): StatGrade {
@@ -224,25 +158,9 @@ export function isPhysicalSubcategory(statKey: string): boolean {
 }
 
 /**
- * Check if a stat key is an ability stat subcategory
- */
-export function isAbilitySubcategory(statKey: string): boolean {
-  return getAbilitySubcategory(statKey) !== undefined;
-}
-
-/**
  * Get the parent category key for a subcategory
  */
-export function getParentCategoryKey(
-  statKey: string, 
-  domain: StatDomain
-): string | undefined {
-  if (domain === "physical") {
-    const result = getPhysicalSubcategory(statKey);
-    return result?.category.key;
-  } else {
-    const result = getAbilitySubcategory(statKey);
-    return result?.category.key;
-  }
+export function getParentCategoryKey(statKey: string): string | undefined {
+  const result = getPhysicalSubcategory(statKey);
+  return result?.category.key;
 }
-

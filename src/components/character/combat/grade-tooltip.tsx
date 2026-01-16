@@ -8,18 +8,16 @@ import {
 } from "@/components/ui/tooltip";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// Import from the new unified stats system
+// Import from the unified stats system
 import { 
   GradeLabel, 
   GRADE_COLORS, 
-  StatDomain,
   getStatDescription 
 } from "@/lib/stats";
 
 interface GradeTooltipProps {
   grade: GradeLabel;
   statKey: string;
-  domain?: StatDomain;  // New: specify whether this is a physical or ability stat
   children?: React.ReactNode;
   className?: string;
   showBadge?: boolean;
@@ -29,7 +27,6 @@ interface GradeTooltipProps {
 export function GradeTooltip({
   grade,
   statKey,
-  domain = "physical",  // Default to physical for backward compatibility
   children,
   className,
   showBadge = true,
@@ -38,8 +35,8 @@ export function GradeTooltip({
   const [isOpen, setIsOpen] = React.useState(false);
   const isMobile = useIsMobile();
   
-  // Use the new unified stats system for description lookup
-  const description = getStatDescription(statKey, grade, domain);
+  // Use the unified stats system for description lookup
+  const description = getStatDescription(statKey, grade);
   const gradeColor = GRADE_COLORS[grade];
   
   const sizeClasses = {

@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const spawnboy: WikiEntry = {
   id: "spawnboy",
@@ -218,6 +218,5 @@ export const spawnboy: WikiEntry = {
     ]
   },
   
-  abilityName: "Spawnipulation",
-  stats: createCharacterStats("Ø", "F", "S", "F")
+  abilityName: "Spawnipulation"
 };

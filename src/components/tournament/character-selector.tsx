@@ -11,6 +11,8 @@ import { getSubcategoryLabel } from "@/data/categories";
 import { DraggableEntryCard } from "@/components/comparison/draggable-entry-card";
 import { DndContext, DragEndEvent, DragStartEvent, PointerSensor, useSensor, useSensors, DragOverlay } from "@dnd-kit/core";
 import { PreviewBracket } from "./preview-bracket";
+import { isEntryDisabled } from "@/utils/disabled-entries";
+import { useEasterEgg } from "@/contexts/easter-egg-context";
 
 interface CharacterSelectorProps {
   availableCharacters: WikiEntry[];
@@ -27,6 +29,7 @@ export function CharacterSelector({
   onSelectionChange,
   onStartTournament,
 }: CharacterSelectorProps) {
+  const { enabledEntries } = useEasterEgg();
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const sensors = useSensors(
@@ -228,6 +231,7 @@ export function CharacterSelector({
                   {entries.map((character) => {
                     const isSelected = isEntrySelected(character.id);
                     const selectedIndex = selectedCharacters.findIndex(c => c.id === character.id);
+                    const disabled = isEntryDisabled(character.id, enabledEntries);
                     
                     return (
                       <DraggableEntryCard
@@ -235,6 +239,7 @@ export function CharacterSelector({
                         entry={character}
                         isSelected={isSelected}
                         isDragging={activeId === character.id}
+                        isDisabled={disabled}
                         onEntryClick={handleCharacterSelect}
                         slotNumber={isSelected ? selectedIndex + 1 : null}
                       />

@@ -1,5 +1,5 @@
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const theBounceman: WikiEntry = {
   id: "the-bounceman",
@@ -388,6 +388,5 @@ export const theBounceman: WikiEntry = {
     ]
   },
   
-  stats: createCharacterStats("B", "A", "S", "D")
 };
 

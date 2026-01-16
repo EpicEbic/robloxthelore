@@ -1,5 +1,5 @@
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const bryckManning: WikiEntry = {
   id: "bryck-manning",
@@ -245,5 +245,4 @@ export const bryckManning: WikiEntry = {
     ]
   },
   
-  stats: createCharacterStats("E", "D", "C", "D")
 };

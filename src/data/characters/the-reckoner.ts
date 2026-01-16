@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const theReckoner: WikiEntry = {
   id: "the-reckoner",
@@ -191,6 +191,5 @@ export const theReckoner: WikiEntry = {
     ]
   },
   
-  abilityName: "The Reckoning",
-  stats: createCharacterStats("Ø", "Ø", "S", "Ø")
+  abilityName: "The Reckoning"
 };

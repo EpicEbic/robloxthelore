@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const renBytera: WikiEntry = {
   id: "ren-bytera",
@@ -301,5 +301,4 @@ export const renBytera: WikiEntry = {
     ]
   },
   
-  stats: createCharacterStats("F", "D", "D", "S")
 };

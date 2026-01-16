@@ -165,19 +165,17 @@ export function EquipmentContentTabs({
                     <div 
                       className="bg-card rounded-xl p-8 border min-w-0 min-h-[120px] relative"
                     >
-                      <div className="flex items-start justify-between mb-4 gap-4">
+                      <div className="flex items-center justify-between mb-4 gap-4">
                         <h2 className="text-2xl font-semibold flex items-center gap-2 flex-shrink-0">
                           <Image className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                           Appearance
                         </h2>
                         {Array.isArray(sections.appearance) && typeof sections.appearance[0] === 'object' && (
-                          <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
-                            <EquipmentAppearanceSwitcher
-                              appearances={sections.appearance as EquipmentOverviewOption[]}
-                              currentAppearance={currentAppearance}
-                              onAppearanceChange={setCurrentAppearance}
-                            />
-                          </div>
+                          <EquipmentAppearanceSwitcher
+                            appearances={sections.appearance as EquipmentOverviewOption[]}
+                            currentAppearance={currentAppearance}
+                            onAppearanceChange={setCurrentAppearance}
+                          />
                         )}
                       </div>
                       <div 

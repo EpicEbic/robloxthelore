@@ -9,6 +9,7 @@ import { memo } from "react";
 import { motion } from "framer-motion";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
 import { getArchetypeByAlignment, getArchetypeById } from "@/data/character-archetypes";
+import { isEntryDisabled } from "@/utils/disabled-entries";
 
 // Cell colors for archetypes (matching the statistics page grid)
 // Converted from grid colors to button-friendly gradients
@@ -76,8 +77,9 @@ interface WikiEntryCardProps {
 }
 
 export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0 }: WikiEntryCardProps) {
-  const { isEntryUnlocked } = useEasterEgg();
+  const { isEntryUnlocked, enabledEntries } = useEasterEgg();
   const isLocked = !isEntryUnlocked(entry.id);
+  const isDisabled = isEntryDisabled(entry.id, enabledEntries);
 
   // Get the appropriate image for character entries
   const getImageUrl = () => {
@@ -192,7 +194,7 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
     <motion.div layoutId={`entry-${entry.id}-card`} className="h-full">
       <Card className={cn(
         "overflow-hidden h-full group border-l-4 rounded-xl flex flex-col",
-        isLocked ? "opacity-50 grayscale cursor-not-allowed" : "card-hover-character"
+        (isLocked || isDisabled) ? "opacity-50 grayscale cursor-not-allowed" : "card-hover-character"
       )} 
         style={{ borderLeftColor: `var(--wiki-${entry.category})` }}>
           {imageUrl && (
@@ -232,7 +234,7 @@ export const WikiEntryCard = memo(function WikiEntryCard({ entry, imageDelay = 0
       </motion.div>
   );
 
-  if (isLocked) {
+  if (isLocked || isDisabled) {
     return cardContent;
   }
 

@@ -297,25 +297,6 @@ export interface WikiEntry {
   // New field for multi-item equipment entries
   multiItems?: MultiItem[];
   
-  // Stats for character analysis
-  stats?: {
-    offense: { label: string; value: number };
-    defense: { label: string; value: number };
-    utility: { label: string; value: number };
-    potential: { label: string; value: number };
-    subcategories?: {
-      power?: { label: string; value: number };
-      penetration?: { label: string; value: number };
-      potency?: { label: string; value: number };
-      guard?: { label: string; value: number };
-      evasion?: { label: string; value: number };
-      mitigation?: { label: string; value: number };
-      versatility?: { label: string; value: number };
-      support?: { label: string; value: number };
-      manipulation?: { label: string; value: number };
-    };
-  };
-  
   // Ability name for character entries
   abilityName?: string;
 }

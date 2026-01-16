@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const vortexASteele: WikiEntry = {
   id: "vortex-a-steele",
@@ -1135,6 +1135,5 @@ export const vortexASteele: WikiEntry = {
     ]
   },
   
-  abilityName: "Chronipulation",
-  stats: createCharacterStats("D", "E", "A", "B")
+  abilityName: "Chronipulation"
 };

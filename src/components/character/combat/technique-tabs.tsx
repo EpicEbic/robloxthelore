@@ -45,8 +45,9 @@ export function TechniqueTabs({
   className
 }: TechniqueTabsProps) {
   const tabs = isAbility ? ABILITY_TABS : COMBAT_STYLE_TABS;
-  const title = isAbility ? (abilityName || "Ability") : (styleName || "Combat Style");
+  const baseName = isAbility ? (abilityName || "Ability") : (styleName || "Combat Style");
   const isMobile = useIsMobile();
+  const [activeTab, setActiveTab] = React.useState<string>("");
 
   // Filter to only show tabs that have content
   const availableTabs = React.useMemo(() => {
@@ -69,6 +70,41 @@ export function TechniqueTabs({
 
   // Default to first available tab
   const defaultTab = availableTabs.length > 0 ? availableTabs[0].id : "overview";
+  
+  // Initialize activeTab with defaultTab when available
+  React.useEffect(() => {
+    if (defaultTab && !activeTab) {
+      setActiveTab(defaultTab);
+    }
+  }, [defaultTab, activeTab]);
+  
+  // Generate dynamic title based on active tab
+  const getDynamicTitle = React.useCallback((tabId: string): string => {
+    const tabConfig = tabs.find(t => t.id === tabId);
+    if (!tabConfig) return baseName;
+    
+    switch (tabId) {
+      case "overview":
+        return `${baseName} Overview`;
+      case "passives":
+        return `${baseName} Passives`;
+      case "offensive":
+        return `${baseName} Offensive Techniques`;
+      case "defensive":
+        return `${baseName} Defensive Techniques`;
+      case "utilitarian":
+        return `${baseName} Utility Techniques`;
+      case "ultimate":
+        return `${baseName} Ultimate`;
+      case "drawbacks":
+        return `${baseName} Drawbacks`;
+      default:
+        return `${baseName} ${tabConfig.label}`;
+    }
+  }, [baseName, tabs]);
+  
+  // Current title based on active tab
+  const currentTitle = getDynamicTitle(activeTab || defaultTab);
 
   if (!data || availableTabs.length === 0) {
     return (
@@ -96,7 +132,7 @@ export function TechniqueTabs({
         {/* Header */}
         <div className="px-4 sm:px-6 pt-4 sm:pt-6 pb-3 border-b border-border/30">
           <h3 className="text-lg sm:text-xl font-bold text-foreground">
-            {title}
+            {getDynamicTitle("overview")}
           </h3>
         </div>
 
@@ -123,14 +159,14 @@ export function TechniqueTabs({
         className
       )}
     >
-      {/* Header */}
+      {/* Header - Dynamic title based on active tab */}
       <div className="px-4 sm:px-6 pt-4 sm:pt-6 pb-3 border-b border-border/30">
         <h3 className="text-lg sm:text-xl font-bold text-foreground">
-          {title} Techniques
+          {currentTitle}
         </h3>
       </div>
 
-      <Tabs defaultValue={defaultTab} className="w-full">
+      <Tabs defaultValue={defaultTab} className="w-full" onValueChange={setActiveTab}>
         {/* Tab bar - centered, vertical on mobile */}
         <div className="border-b border-border/30 px-2 sm:px-4 py-2 flex justify-center">
           <TabsList 

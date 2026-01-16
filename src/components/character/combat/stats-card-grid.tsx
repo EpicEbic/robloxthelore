@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { HelpCircle } from "lucide-react";
-import { StatCard, PotentialCard } from "./stat-card";
+import { StatCard } from "./stat-card";
 import { EntryDropdown } from "@/components/ui/entry-dropdown";
 import { CombatStyleOption } from "@/types/wiki-types";
 import {
@@ -11,30 +11,34 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-// Import from the new unified stats system
+// Import from the unified stats system
 import { 
   GradeLabel,
   StatGrade,
   PhysicalStats,
-  AbilityStats,
   PHYSICAL_CATEGORIES,
-  ABILITY_CATEGORIES
+  GRADE_VALUES
 } from "@/lib/stats";
 
 interface StatsCardGridProps {
-  stats: PhysicalStats | AbilityStats;
-  isPhysical: boolean;
+  stats: PhysicalStats;
+  isPhysical?: boolean; // Kept for backwards compatibility, but always true now
   title?: string;
   className?: string;
-  // Combat style props (only for physical stats)
+  // Combat style props
   combatStyles?: CombatStyleOption[];
   currentCombatStyle?: string;
   onCombatStyleChange?: (styleId: string) => void;
 }
 
+// Type for grade differences
+export interface GradeDifference {
+  diff: number; // positive = improvement, negative = decrease
+}
+
 export function StatsCardGrid({
   stats,
-  isPhysical,
+  isPhysical = true,
   title,
   className,
   combatStyles,
@@ -43,30 +47,81 @@ export function StatsCardGrid({
 }: StatsCardGridProps) {
   const [isTooltipOpen, setIsTooltipOpen] = React.useState(false);
   
-  // Use the appropriate categories from the unified stats system
-  const categories = isPhysical ? PHYSICAL_CATEGORIES : ABILITY_CATEGORIES;
-  const displayTitle = title || (isPhysical ? "Physical Statistics" : "Ability Statistics");
+  const categories = PHYSICAL_CATEGORIES;
+  
+  // Get the current combat style label for the title
+  const currentStyleLabel = React.useMemo(() => {
+    if (!combatStyles || !currentCombatStyle) return null;
+    return combatStyles.find(s => s.id === currentCombatStyle)?.label;
+  }, [combatStyles, currentCombatStyle]);
+  
+  // Title: Use combat style name + "Statistics" if available
+  const displayTitle = title || (currentStyleLabel ? `${currentStyleLabel} Statistics` : "Physical Statistics");
+  
+  // Get the base (default/standard) combat style stats for comparison
+  const baseStats = React.useMemo(() => {
+    if (!combatStyles || combatStyles.length === 0) return null;
+    // Default to "standard" style, or fallback to first style
+    const defaultStyle = combatStyles.find(s => s.id === "standard") || combatStyles[0];
+    return defaultStyle.combatStats;
+  }, [combatStyles]);
+  
+  // Calculate grade difference between current and base
+  const getGradeDiff = React.useCallback((currentGrade: GradeLabel, baseGrade: GradeLabel | undefined): GradeDifference | null => {
+    if (!baseGrade) return null;
+    const currentValue = GRADE_VALUES[currentGrade];
+    const baseValue = GRADE_VALUES[baseGrade];
+    const diff = currentValue - baseValue;
+    if (diff === 0) return null;
+    return { diff };
+  }, []);
+  
+  // Check if we should show differences (only when not viewing base style)
+  const showDifferences = React.useMemo(() => {
+    if (!combatStyles || combatStyles.length <= 1 || !currentCombatStyle) return false;
+    const defaultStyleId = combatStyles.find(s => s.id === "standard")?.id || combatStyles[0].id;
+    return currentCombatStyle !== defaultStyleId;
+  }, [combatStyles, currentCombatStyle]);
 
-  // Get main category stat grade
-  const getMainGrade = (categoryKey: string): GradeLabel => {
+  // Get main category stat grade and difference
+  const getMainGradeInfo = (categoryKey: string): { grade: GradeLabel; diff: GradeDifference | null } => {
     const statData = stats[categoryKey as keyof typeof stats] as StatGrade | undefined;
-    return statData?.label || "F";
+    const grade = statData?.label || "F";
+    
+    // Calculate diff from base stats
+    let diff: GradeDifference | null = null;
+    if (showDifferences && baseStats) {
+      const baseStatData = baseStats[categoryKey as keyof typeof baseStats] as StatGrade | undefined;
+      diff = getGradeDiff(grade, baseStatData?.label);
+    }
+    
+    return { grade, diff };
   };
 
-  // Get subcategory stats for a category
+  // Get subcategory stats for a category with differences
   const getSubstats = (category: typeof categories[0]) => {
     return category.subcategories.map((subcat) => {
       // First check if there's a specific subcategory stat
       const subcatStat = stats.subcategories?.[subcat.key as keyof NonNullable<typeof stats.subcategories>];
       // Fall back to main category stat
       const mainStat = stats[category.key as keyof typeof stats] as StatGrade | undefined;
-      const grade = subcatStat?.label || mainStat?.label || "F";
+      const grade = (subcatStat?.label || mainStat?.label || "F") as GradeLabel;
+      
+      // Calculate diff from base stats
+      let diff: GradeDifference | null = null;
+      if (showDifferences && baseStats) {
+        const baseSubcatStat = baseStats.subcategories?.[subcat.key as keyof NonNullable<typeof baseStats.subcategories>];
+        const baseMainStat = baseStats[category.key as keyof typeof baseStats] as StatGrade | undefined;
+        const baseGrade = baseSubcatStat?.label || baseMainStat?.label;
+        diff = getGradeDiff(grade, baseGrade);
+      }
       
       return {
         key: subcat.key,
         label: subcat.label,
-        grade: grade as GradeLabel,
-        description: subcat.description  // This is now properly typed from the unified system
+        grade,
+        description: subcat.description,
+        diff
       };
     });
   };
@@ -111,18 +166,15 @@ export function StatsCardGrid({
               </TooltipTrigger>
               <TooltipContent className="max-w-xs p-3" side="bottom">
                 <p className="text-sm">
-                  {isPhysical 
-                    ? "Physical statistics measure raw physical capabilities without ability enhancement. Click any grade badge to see detailed descriptions."
-                    : "Ability statistics measure the effectiveness of a character's special powers. Click any grade badge for details."
-                  }
+                  Physical statistics measure raw physical capabilities without ability enhancement. Click any grade badge to see detailed descriptions.
                 </p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </div>
 
-        {/* Combat Style Dropdown (only for physical stats) */}
-        {isPhysical && combatStyles && combatStyles.length > 1 && onCombatStyleChange && (
+        {/* Combat Style Dropdown */}
+        {combatStyles && combatStyles.length > 1 && onCombatStyleChange && (
           <EntryDropdown
             options={combatStyleOptions}
             value={currentCombatStyle || combatStyles[0].id}
@@ -135,24 +187,19 @@ export function StatsCardGrid({
 
       {/* Stats Card Grid - Stacked vertically for better readability */}
       <div className="flex flex-col gap-3">
-        {categories.map((category) => (
-          <StatCard
-            key={category.key}
-            categoryKey={category.key}
-            categoryLabel={category.label}
-            categoryDescription={category.description}
-            mainGrade={getMainGrade(category.key)}
-            substats={getSubstats(category)}
-            isAbility={!isPhysical}
-          />
-        ))}
-        
-        {/* Potential card for ability stats */}
-        {!isPhysical && (
-          <PotentialCard 
-            grade={(stats as AbilityStats).potential?.label || "F"} 
-          />
-        )}
+        {categories.map((category) => {
+          const mainInfo = getMainGradeInfo(category.key);
+          return (
+            <StatCard
+              key={category.key}
+              categoryKey={category.key}
+              categoryLabel={category.label}
+              categoryDescription={category.description}
+              mainGrade={mainInfo.grade}
+              substats={getSubstats(category)}
+            />
+          );
+        })}
       </div>
     </div>
   );

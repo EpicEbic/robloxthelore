@@ -71,8 +71,7 @@ function TechniqueAccordionItem({
         "rounded-xl overflow-hidden",
         "bg-background/40 backdrop-blur-sm",
         "border border-border/50",
-        "transition-all duration-200",
-        isExpanded && "border-border shadow-md"
+        "transition-all duration-200"
       )}
     >
       {/* Accordion Header */}
@@ -85,7 +84,7 @@ function TechniqueAccordionItem({
           "px-4 py-3",
           "transition-colors duration-200",
           "hover:bg-background/60",
-          "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-inset",
+          "focus:outline-none",
           "group"
         )}
       >

@@ -52,17 +52,15 @@ export function LocationSegmentsTab({
         {currentSegmentData && (
           <div className="leading-relaxed space-y-4">
             {/* Header with title and dropdown switcher */}
-            <div className="flex justify-between items-start mb-6 border-b border-border pb-4">
+            <div className="flex items-center justify-between mb-6 border-b border-border pb-4">
               <h2 className="text-2xl font-semibold text-primary force-text-wrap">
                 {currentSegmentData.title}
               </h2>
-              <div className="ml-4 flex-shrink-0">
-                <LocationSegmentsSwitcher
-                  segments={segments}
-                  currentSegment={currentSegment}
-                  onSegmentChange={onSegmentChange}
-                />
-              </div>
+              <LocationSegmentsSwitcher
+                segments={segments}
+                currentSegment={currentSegment}
+                onSegmentChange={onSegmentChange}
+              />
             </div>
             
             {/* Display the formatted content paragraphs - constant static effect for The Null Zone */}

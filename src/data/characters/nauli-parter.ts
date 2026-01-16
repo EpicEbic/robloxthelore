@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const nauliParter: WikiEntry = {
   id: "nauli-parter",
@@ -385,6 +385,5 @@ export const nauliParter: WikiEntry = {
     ]
   },
   
-  abilityName: "Pathokinesis",
-  stats: createCharacterStats("F", "F", "C", "C")
+  abilityName: "Pathokinesis"
 };

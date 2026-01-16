@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const theBreadwinner: WikiEntry = {
   id: "the-breadwinner",
@@ -181,6 +181,5 @@ export const theBreadwinner: WikiEntry = {
     ]
   },
   
-  abilityName: "Breadipulation",
-  stats: createCharacterStats("F", "S", "E", "D")
+  abilityName: "Breadipulation"
 };

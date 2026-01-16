@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const charlesStudson: WikiEntry = {
   id: "charles-studson",
@@ -212,6 +212,5 @@ export const charlesStudson: WikiEntry = {
   },
   
   abilityName: "Chainipulation",
-  relatedEntries: ["vortex-a-steele"],
-  stats: createCharacterStats("D", "C", "C", "B")
+  relatedEntries: ["vortex-a-steele"]
 };

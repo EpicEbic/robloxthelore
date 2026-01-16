@@ -1,11 +1,11 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const caesarBloxwright: WikiEntry = {
   id: "caesar-bloxwright",
   title: "Caesar Bloxwright",
-  description: "Caesar is kindhearted, caring, and highly respectful by nature. He deeply values his family and friends, adopting a protective nature toward those he has grown close to.",
+  description: "Caesar Bloxwright is one of the three protagonists of The Lore, a vigilante operating within the Outer Circle of the Bloxiverse. His journey throughout Part 1 follows he, Nauli and eventually Vortex as they attempt to collect and lock away the Coils of Power after discovering their existence. He forms connections throughout his journey, while trying to keep his undeveloped powers at bay.",
   preview: "A towering giant, with an equivocally-sized heart. A vigilante, dedicated to his quest to rid the Bloxiverse of evil.",
   content: "",
   category: "character",
@@ -15,14 +15,14 @@ export const caesarBloxwright: WikiEntry = {
   part: "Part 1",
   relatedEntries: ["nauli-parter"],
   quote: {
-    text: "I don't fight for peace because I have to, I fight for peace because I want to.",
-    context: "Caesar, proclaiming to his enemy as to why he fights for the sake of peace."
+    text: "That's a shallow way of thinking, assuming I do this purely for the profit. I don't want others to suffer at the hands of people like you, and THAT is my motive. Wherever you're locked up, I hope you take a long time to think about your actions, and resolve to change.",
+    context: "Caesar, scolding Bryck as he passes him off to associates of the Hunter Association."
   },
   species: "Robloxian",
-  age: "24",
-  height: "8 studs",
+  age: "25",
+  height: "8 Studs",
   status: "Alive",
-  alignment: "Chaotic/Good",
+  alignment: "Chaperone",
   role: "Chaperone",
   archetype: "chaperone",
   carouselImages: [
@@ -38,28 +38,28 @@ export const caesarBloxwright: WikiEntry = {
   combatStyles: [
     {
       id: "standard",
-      label: "Standard",
+      label: "Unarmed",
       description: [
-        "Caesar's overwhelming size and bulwark build grant him incredible physical strength and durability, qualities which are only enhanced further by his ability. Caesar relies on slow, yet sturdy and incredibly lethal blows to quickly dispatch enemies that get caught in his path. Caesar is a juggernaut, backed by power that is not to be taken lightly.",
-        "Though Caesar has incredible physical potential, he lacks immensely in speed and reflexes. Opponents with proper agility and dexterity will have almost no issues avoiding Caesar and his slow-moving attacks, unless he is able to accurately predict or trick a target into attacking to counter them."
+        "Caesar is a slow, yet sturdy fighter who relies on his remarkable strength to quickly put down his enemies in just a few hits. He is much larger than the average Bloxian, making him physically imposing towards most. He is naturally tough, capable of enduring injuries that would incapacitate or even kill other Bloxians.",
+        "Caesar's big weakness becomes obvious when facing quick or fast-acting opponents, as he is a rather slow fighter. He often struggles with his reflexes, unable to weave or dodge out of most attacks. Without careful planning and predicting, fast targets will have almost no issue avoiding Caesar's deadly fists, especially if they can fight while remaining out of range."
       ],
       combatStats: createCombatStats(
         "B", // Strength: Main category average
-        "B", // Durability: Main category average
+        "C", // Durability: Main category average
         "E", // Agility: Main category average
         "D", // Precision: Main category average
-        "E", // Intelligence: Main category average
+        "D", // Intelligence: Main category average
         {
           // Strength subcategories
           power: "B",
-          lift: "B",
+          lift: "C",
           penetration: "C",
-          intensity: "D",
+          intensity: "E",
           // Durability subcategories
-          toughness: "B",
+          toughness: "C",
           vitality: "B",
-          thermostability: "D",
-          esotolerance: "B",
+          thermostability: "C",
+          esotolerance: "C",
           // Agility subcategories
           swiftness: "E",
           acceleration: "E",
@@ -67,14 +67,14 @@ export const caesarBloxwright: WikiEntry = {
           endurance: "C",
           // Precision subcategories
           accuracy: "D",
-          range: "D",
-          dexterity: "E",
+          range: "E",
+          dexterity: "F",
           reactivity: "D",
           // Intelligence subcategories
           tactility: "D",
-          wisdom: "E",
-          foresight: "D",
-          sanity: "E"
+          wisdom: "D",
+          foresight: "C",
+          sanity: "D"
         }
       )
     }
@@ -87,16 +87,15 @@ export const caesarBloxwright: WikiEntry = {
   ],
   sections: {
     overview: [
-      "Caesar Bloxwright is the primary protagonist of The Lore, a vigilante who operates in the Outer Circle of the Bloxiverse. His story follows his journey from a lone vigilante to a key member of a team working to protect the Bloxiverse from various threats.",
-      "Caesar's overwhelming physical strength and unwavering determination make him a formidable fighter, though his lack of speed and precision often require him to rely on strategy and teamwork to overcome faster opponents."
+      "Caesar Bloxwright is one of the three protagonists of The Lore, a vigilante operating within the Outer Circle of the Bloxiverse. His journey throughout Part 1 follows he, Nauli and eventually Vortex as they attempt to collect and lock away the Coils of Power after discovering their existence. He forms connections throughout his journey, while trying to keep his undeveloped powers at bay."
     ],
     combatStyles: [
       {
         id: "standard",
-        label: "Standard",
+        label: "Unarmed",
         description: [
-          "Caesar's overwhelming physical strength and bulwark build make him a slower, yet hard-hitting tank of a fighter. Caesar may be imprecise, but his attacks carry impressive power that can easily prove lethal for fragile or unexpecting opponents. He is a juggernaut, with punches that are not to be taken lightly.",
-          "Caesar falters in his speed and reflexes, struggling heavily to keep up with quicker targets or those with sharp reflexes. Without thinking ahead and outsmarting his enemies, they'll often have no trouble weaving and evading any of his attacks."
+          "Caesar is a slow, yet sturdy fighter who relies on his remarkable strength to quickly put down his enemies in just a few hits. He is much larger than the average Bloxian, making him physically imposing towards most. He is naturally tough, capable of enduring injuries that would incapacitate or even kill other Bloxians.",
+          "Caesar's big weakness becomes obvious when facing quick or fast-acting opponents, as he is a rather slow fighter. He often struggles with his reflexes, unable to weave or dodge out of most attacks. Without careful planning and predicting, fast targets will have almost no issue avoiding Caesar's deadly fists, especially if they can fight while remaining out of range."
         ],
         combatStats: createCombatStats(
           "B", // Strength: Main category average
@@ -131,7 +130,104 @@ export const caesarBloxwright: WikiEntry = {
             foresight: "D",
             sanity: "E"
           }
-        )
+        ),
+        combatStyleData: {
+          passives: {
+            techniques: [
+              {
+                id: "healthy-and-hearty",
+                title: "Healthy and Hearty",
+                description: [
+                  "Caesar's larger stature—when paired with his daily regimen and healthy eating—has drastically improved his natural health. This allows him to resist disease and weaker poisons without much difficulty."
+                ]
+              }
+            ]
+          },
+          offensive: {
+            techniques: [
+              {
+                id: "ripquake-impact",
+                title: "Ripquake Impact",
+                description: [
+                  "By throwing his fist forward into the ground with all of his might, Caesar can cause small tremors, knocking lighter targets off-balance. It can be useful in a pinch to stagger multiple targets nearby, or disrupt a target too quick to hit with conventional attacks."
+                ]
+              },
+              {
+                id: "gale-sweep",
+                title: "Gale Sweep",
+                description: [
+                  "By sweeping the air with his leg, Caesar can create a strong current of wind capable of blowing back lighter targets. It also works as a great way to throw sand, dust or other small debris into the air, obscuring the vision of his enemies. The kick itself carries a lot of momentum, making it (obviously) painful to be struck by."
+                ]
+              }
+            ]
+          },
+          defensive: {
+            techniques: [
+              {
+                id: "iron-stance",
+                title: "Iron Stance",
+                description: [
+                  "By adjusting his posture and bracing himself, Caesar can tolerate a significant amount of force, allowing him to remain sturdy and locked into place."
+                ]
+              },
+              {
+                id: "immobility-oath",
+                title: "Immobility Oath",
+                description: [
+                  "Caesar rips into the terrain around himself with his bare hands, rooting into place and fully committing to defense. His breathing slows and his muscles tense, his body adapting to become a living bulwark. Although this technique takes time to prepare, Caesar's tense muscles and rooted state make him near-impossible to move or injure with physical force alone, knives struggling to cut his flesh."
+                ]
+              }
+            ]
+          },
+          drawbacks: {
+            techniques: [
+              {
+                id: "slow-and-unsteady",
+                title: "Slow and Unsteady",
+                description: [
+                  "Caesar is much larger than other Bloxians, and naturally lacks any flexibility. His top speeds are faster than a typical civilian, but not by far. He may have a high amount of endurance, but his slower pacing makes him easier to outmatch and overwhelm."
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    development: [
+      {
+        id: "chpt-1",
+        label: "Chpt. 1: Gravity of the Situation",
+        description: [
+          "Caesar spends most of the morning tending to his routine around the island. He passes by Nauli's tent and wakes her up for breakfast midway, and she joins him as the two make their way back to his cabin. Caesar sits down to flip through the channels on TV as Nauli prepares breakfast, where he comes across a news broadcast. He and Nauli both learn of the Farmer Sanctuary, and an ongoing attack by a Bloxian known as Bryck Manning. They agree to set out and put a stop to Bryck before he can cause any more destruction.",
+          "Caesar and Nauli eventually arrive at the sanctuary and immediately intercept Bryck. Caesar is left to deal with Bryck as Nauli rounds the locals and calms them down, while Caesar is left to confront and—if necessary—apprehend Bryck. Though Caesar tries to reason with Bryck, he is unable to do so and a fight breaks out. This drags on for some time until Nauli is able to return and intervene, inhibiting Bryck with her abilities and enabling Caesar to pry Bryck of the Gravity Coil.",
+          "With Bryck de-powered, Caesar spends time chatting with one of the locals—Rice Farmer—while Nauli ties Bryck up. Eventually, he and Nauli take Bryck and leave in search for a place to drop him off. They eventually settle on the Hunter Association, turning him in and going to leave. As they're leaving, an associate comes and explains to he and Nauli that a bounty had been amassed by Bryck, and that they have earned it. Caesar refuses, but Nauli quickly takes it on behalf of both of them.",
+          "Caesar and Nauli return home, where Caesar notices that Nauli is carrying a bag she didn't have before. He asks and discovers that she kept the Gravity Coil, planning to do some further research. He and Nauli say their goodbyes as Caesar returns to his cabin for the night."
+        ]
+      },
+      {
+        id: "chpt-2",
+        label: "Chpt. 2: Time's Up",
+        description: [
+          "Caesar wakes up restless after the night before, his thoughts lingering on the coil. His morning routine passes as normal, though Caesar chooses to let Nauli sleep this time around, opting to make breakfast himself. He finishes up, and heads back to his cabin only to discover the front door ajar. He is immediately put on-guard, but eventually relaxes as it is discovered that Nauli was inside cooking breakfast for the two of them. As they eat, Nauli discusses her plans to meet up with an old friend to run tests, and determine what the Gravity Coil is.",
+          "Caesar hesitates but eventually agrees, before being tasked by Nauli to do some grocery shopping with the bounty they had received after apprehending Bryck. Caesar hesitates and tells Nauli that he'd prefer to go read, but is eventually convinced after being tempted with the idea of Bloxy Cola. The two confirm their plans, as Caesar splits with Nauli to go shopping while her research is underway.",
+          "Caesar eventually arrives at a mall, where he goes from store to store. He gets caught up in a handful of decisions, naturally indecisive. He picks out a handful of spices and other goods, alongside a handful of glass-bottled Bloxy Cola to enjoy later. Throughout his trip, he gets the sense that someone or something is following him, but he passes it as paranoia as the trip begins home. On the way however, he is ambushed by a mysterious figure as the two crash into an abandoned world nearby.",
+          "Combat began instantly as Caesar was rushed by the attacker. His abilities were forced out as he went onto the defense, forming barriers and constructs to prevent injury. This works initially, though the attacker quickly begins to use stronger weaponry, drawing a powerful revolver that fires rounds capable of piercing Caesar's armor. Eventually, a bullet manages to slide past his defenses and embeds itself in his shoulder, forcing Caesar to his knees from the pain.",
+          "Caesar finally snaps as his ability is fully unleashed, the ground around he and the attacker ripping from the violent surges of gravity and electricity. Unleashing a pulse, the man is grabbed and restrained mid-air, before being slammed repeatedly into the ground. Eventually, Caesar launches him into a rocky wall, believing the fight is over. The man retaliates one final time however, landing a single punch which proves futile in injuring Caesar. Grabbing and launching the man away, Caesar pulls him back to his fist before issuing a decisive blow and ending the fight.",
+          "The man is restrained as Caesar rests, steadying his breathing as his powers slowly start to calm down. The man awakens as Caesar begins to talk with him, eventually developing a mutual understanding of one another. It is revealed that Caesar had inadvertently claimed the bounty of Bryck, which the man who attacked him was after. Caesar frees the man who then introduces himself as Vortex, a hunter belonging to the Hunter Association. After their goodbyes, Vortex nods before disappearing in a flash of purple light.",
+          "Caesar stays back and recovers for a few more minutes, but eventually sets off for home and emerges into the island later. Nauli has already arrived home, and quickly sees that he is exhausted and has a bullet lodged deep within his shoulder. She helps him inside and puts him to rest in his bed, insisting that she'll cover what she learned with Ren in the morning."
+        ]
+      },
+      {
+        id: "chpt-3",
+        label: "Chpt. 3: Deep Cuts",
+        description: [
+          "Caesar has rested since his encounter with Vortex yesterday, but is significantly inhibited by the wound and bullet in his shoulder. Nauli urges him to rest, but he insists on completing his morning duties. Nauli argues, but ultimately cannot stop him as he gets ready for the day. As he eats soup prepared by her, Nauli slips away and calls for Rice Farmer to come and keep a watch on Caesar as he works. Rice Farmer agrees, and begins the journey to the island. As Caesar is leaving, she distracts him by discussing what she had learned about the coil they collected.",
+          "Caesar is informed that it is one of the three Power Coils, legendary artifacts that can manipulate different laws of reality. She explains her plan to leave and gather intel by travelling to a handful of different places, to which Caesar is worried for her, but agrees. It is then that Rice Farmer shows up, as Nauli says her goodbyes and leaves on her mission while Caesar and Rice begin the daily chores of the island.",
+          "Caesar and Rice work slowly and casually with each other, making conversation as Caesar tests the limits of his arm after the shoulder injury. It does not take them long to finish up his duties despite the setback, and he and Rice go to relax and chat until Nauli's return. As they make conversation, Caesar slowly opens up about his history prior to having powers. He explains to Rice about the attack on his home, and the near-death experience that caused his latent powers to activate.",
+          "Rice goes to share his own history, but both of them are interrupted by Vortex as he emerges onto the island. He hands Caesar a vial of green liquid, explaining that it is healing magic. Caesar eventually drinks the vial and his body recovers almost immediately, the bullet ejecting from his body as the wound seals. Caesar is thankful and invites Vortex to stick around, leading to friendly sparring to pass the time.",
+          "Eventually, they go to relax on the porch of his cabin just as Nauli returns, though she is covered in blood. Caesar fears the worst, but eventually realizes that the blood is not her own. After he calms down and introduces Vortex to Nauli, Rice and Vortex both part ways with the group to return home. Caesar and Nauli discuss her findings, mentioning that she wishes to investigate the Red-Cliff Arena. She also explains why she's covered in blood, detailing her experience with Karblox Jones and his lackeys.",
+          "Caesar is upset that Nauli didn't come to him for extra help, though is more happy to see that she's alright than anything. They say their goodnights as Caesar returns to the cabin and Nauli leaves for the lake to wash her body and clothes of blood."
+        ]
       }
     ],
     history: [
@@ -139,26 +235,15 @@ export const caesarBloxwright: WikiEntry = {
         id: "creation",
         label: "Creation",
         description: [
-          "Caesar was born closer to one of Roblox's final waves of new Robloxians, cast into an already-crumbling society that was struggling to fully adjust to the new race. Caesar fled any and all conflict initially, eventually finding himself in the Outer Ring where he would soon go on to create a World. He imagined an island, floating atop an expanse of infinite sea, with a cycle of day and night like he had seen in other Worlds. From this vision, the World that would come to be known as \"Caesar's Isle\" was born.",
-          "Despite living in the Outer Ring, a notorious 'danger zone' for the Bloxiverse, Caesar lived a quiet and fulfilling life. Though, Caesar found it to be rather empty at times, for he had made no friends or family on his path. Despite this, Caesar always felt gratefulness, knowing that his situation in life always could've been far, far worse."
+          "Caesar was born closer to the final waves of Robloxians, cast into an already-crumbling society that was struggling to adapt to the influx of new Bloxians. Caesar fled as far as he could amidst the conflict, before eventually settling into the Outer Circle and forming his World, Caesar's Isle. Settled far away from the ongoing chaos of the segments closer to the Heart, Caesar was fortunate and lucky enough to sit mostly idle as the dust settled."
         ]
       },
       {
         id: "awakening",
         label: "Awakening",
         description: [
-          "Some time after Caesar had established his World in the Outer Ring, a notorious faction known as the Exploiters began to appear, making waves on the news as a dangerous and fear-mongering faction that had no issues pillaging and usurping control of other Worlds for their own nefarious plans. Caesar thought little of it initially, until a fateful day where he too would be assaulted by a small squad of scouting Exploiters.",
-          "They attacked suddenly, without warning or restraint. Caesar did his best to resist, but his efforts were futile. He had strength, but that wouldn't be enough to best people who could fly, teleport, and do all kinds of harmful things that Caesar could barely wrap his head around at the time. They beat him senselessly, tarnishing his island and destroying his home in their efforts to look for valuables.",
-          "Caesar fully believed he'd die that day, as the ground cracked from being pummeled into it. But inside, on the brink of life and death, something latent awoke within Caesar. An electric static, deep within his soul—as though commanding him to stand and fight. A second wind allowed Caesar to arise, and he unleashed the Electrogravitic Flow for the first time. In his hazy and senseless state, he can only partially recall the events that transpired after that moment. Even so, Caesar is certain of at least one thing—the group of Exploiters who attacked him did not survive.",
-          "After recovering from the assault and resting in his now-dilapidated cabin, Caesar reflected on what had occurred during the attack. He realized how lucky he was to have survived, and that a likely-countless amount of other victims would not. A new and burning desire lit up in Caesar's mind, and it was decided. Caesar would dedicate himself to the training of his body and powers, to become a sworn defender and vigilante for those who could not defend themselves."
-        ]
-      },
-      {
-        id: "vigilante",
-        label: "Vigilante",
-        description: [
-          "Following the attack and Caesar's subsequent awakening, he would begin rigorous training to hone his powers and body for combat. It took effort and time to figure out how exactly the Flow functioned, but eventually Caesar had developed a basic grasp of its skillset. He took note of the strain it put on his body, and developed a technique that primarily relies on his physical strength instead of his powers alone.",
-          "After gaining confidence, he finally set out into the Bloxiverse for the first time, beginning his hunt for criminals up to no good. Most opponents fell with little effort, as Caesar came to realize just how powerful he really was. Some took effort, sure, but most would fall eventually. At times, the power would get to Caesar's head, and he'd reflect and wonder if such strength is what led so many others down the dark paths they led."
+          "Before Caesar had any known powers, he was ambushed by an unknown assailant and had his world ransacked for supplies. He was beaten violently until his body could no longer move, forced to watch and wallow in his sadness and rage. This near-death experience was enough to awaken his latent abilities, allowing him to make a comeback and lay waste to the attacker in a berserk state.",
+          "Caesar's memories of the incident are extremely hazy, but it is presumed that the man did not survive against Caesar. The experience marked a turning point in his life, leading him to resolve to protect others, so they would not have to go through the terrible experience that Caesar once did."
         ]
       }
     ],
@@ -167,14 +252,14 @@ export const caesarBloxwright: WikiEntry = {
         id: "coated",
         label: "Coated",
         description: [
-          "Caesar Bloxwright is an extremely tall and widely-built Robloxian, dressed in a black, white-collared trench coat with a grey bowtie clipped at his neck. He has long sleeves, which slit into fingerless gloves at their ends. He has messily-parted, jet black hair with portions poking out and sticking up. Despite having no bangs or obstructions covering his eyes beyond circular glasses, a shadow always appears to hide them from view, even if a light source is directly shined in his face."
+          "Caesar Bloxwright is an extremely tall and widely-built Robloxian, a majority of his body covered by a black overcoat, white-collared with a grey bowtie clipped on. He has long sleeves which extend into fingerless gloves. Underneath his coat is a black sweater and dark pants, belted into place at his waist. He has messily-parted dark hair, with small strands sticking up at their ends. Despite having no bangs or obstructions covering his face (beyond a pair of circular glasses), a faint shadow always seems to linger where his eyes should be—even if a light source is directly shined in his face."
         ]
       },
       {
         id: "casual",
         label: "Casual",
         description: [
-          "Caesar Bloxwright is an extremely tall and widely-built Robloxian. Outside of combat or when spending time casually at home or with his allies and friends, he'll wear a simplistic outfit consisting of a black t-shirt and grey sweatpants. He has messily-parted, jet black hair with portions poking out and sticking up. Despite having no bangs or obstructions covering his eyes beyond circular glasses, a shadow always appears to hide them from view, even if a light source is directly shined in his face."
+          "Caesar Bloxwright is an extremely tall and widely-built Robloxian. While relaxing around his island or spending time casually with friends, he'll often ditch his coat in favor of lighter and more comfortable clothing. He wears a black t-shirt and grey jogging pants. He still wears circular glasses, and his eyes remain covered by a looming shadow despite the lack of obstructions."
         ],
         images: [
           {
@@ -186,19 +271,19 @@ export const caesarBloxwright: WikiEntry = {
     ],
     personality: [
       {
-        id: "standard",
-        label: "Standard",
+        id: "typical",
+        label: "Typical",
         description: [
-          "Caesar is a walking definition of both empathy and resolve. He is a loyal protector whose heart is as strong as his fists, carrying a deep-rooted sense of love and loyalty for those he values. He is very down-to-earth and quick-witted, usually capable of remaining calm under decent amounts of pressure. In most cases, he'll often adopt a protective role towards his family and friends, going as far as to throw his life on the line if a dire situation deems it necessary. His sense of self-preservation is weak so long as someone who matters to him is at risk."
+          "Caesar is a walking example of empathy and resolve. Although quieter by nature, he isn't shy to speak up or act when it comes to his feelings, his decisions guided by strong emotions. He carries a deep-rooted sense of love and loyalty for those he values, and only wants what is best for them, even to his own detriment. He naturally adopts a protective role towards his family and friends, happy to throw his life on the line or push himself to the limit if a dire situation deems it necessary. His sense of self-preservation is weak, so long as anything that matters to him is at risk.",
+          "As Caesar is emotionally-driven in all aspects of his life, he is very easy to manipulate or stir up, especially when it comes to something or someone he values. He is quick to break down and become enraged if something valued is threatened or hurt, often leading him to think irrationally or make decisions with reckless abandon. He does his best to keep his mind under control, but his body tends to act without waiting for thought."
         ]
       },
       {
-        id: "power-abuse",
-        label: "Power Abuse",
+        id: "overload",
+        label: "Overload",
         description: [
-          "As Caesar pushes the limits of both his body and abilities, the strain and sheer power causes him to lose his composure, as sanity slips away from his mind. In desperate situations such as these, Caesar has a tendency to enter a berserk-like state, drastically altering his behavior and personality.",
-          "The previously-witty and mindful Caesar is replaced with bloodlust, blind rage and sadism. The thrill of combat usurps his mind and body, as he'll relentlessly and violently assault his opponents using reckless tactics and unrefined techniques. While Caesar retains enough of his mentality to avoid intentionally bringing harm to his loved ones or allies, his reckless behavior makes him a danger to his immediate surroundings due to the volatile and destructive nature of his abilities.",
-          "In most cases, Caesar's rampage will either end after the target has been defeated, he becomes exhausted/incapacitated, or is calmed down by another Bloxian. Regardless of how it ends, Caesar often laments and reflects negatively on his behavior, finding it unbecoming and degrading."
+          "Caesar's ability can heavily influence his mind as it is pushed further and further, causing him to grow lost in the heat of battle and begin to act recklessly. If he doesn't carefully manage his psyche and maintain self control, he'll lose himself completely as his mind surrenders to the sheer power. In this state, Caesar goes berserk; He'll attack his enemies with little consideration for himself, nor his allies or loved ones. He is driven solely by bloodlust and raw motivation, urged by his own powers to lay waste to any that oppose his goals. He acts maniacal and completely unreasonable, nearly impossible to sway with logic nor emotion.",
+          "This fever often lasts until Caesar exhausts himself of stamina, or until his target(s) becomes incapacitated or deceased. When he comes to his senses, he lacks memories or clear recollection of what occurred while he was berserk, but he often expresses regret at such degrading behavior."
         ]
       }
     ],
@@ -207,14 +292,16 @@ export const caesarBloxwright: WikiEntry = {
         id: "at-home",
         label: "At Home",
         description: [
-          "Despite the potential to live a lavish and rich lifestyle, Caesar prefers to live humbly on an empty island belonging only to him. He'll happily spend his days wandering the island on long walks, or catering to one of his many gardens. He enjoys the quiet, lounging around in the sun or the moonlight, spending time with his friends in peace. Even if problems happen to arise in his daily living, most are trivialized by his overwhelming strength and abilities. If enemy Bloxians weren't frequently invading his World, Caesar's life truly would be one of luxury."
+          "Caesar lives within his Robloxian World, known simply as Caesar's Isle. Within this forested and mountainous island, he dwells within a small cabin of his own creation. Each day he sticks to a daily routine, running rounds of his island to inspect and check up on a handful of chores. He'll check the supports of his cabin, before watering and turning the soils of his gardens. He navigates the island in a large looped path as this process is completed, inspecting lamposts along the way and refilling their oil for the coming nights.",
+          "He enjoys reading and writing at his desk, or relaxing with his favorite beverage, the Bloxy Cola. He'll often relax and watch TV on his couch, frequently inviting the other resident of the island—Nauli Parter—to spend time with him. She's often responsible for cooking their meals, as Caesar struggles to prepare anything actually tasty."
         ]
       },
       {
         id: "vigilante",
-        label: "Vigilante",
+        label: "The Vigilante",
         description: [
-          "Caesar believes that his natural gifts were that of fate, and that they are to be used as a tool to make the Bloxiverse a better place. Either alone, or alongside his allies Nauli and Vortex, he'll travel the Bloxiverse in search of villainy to apprehend, operating as a self-proclaimed vigilante. Whenever he subdues a criminal, he'll typically turn them in to the Hunter Association or another holding facility. Despite being offered a position and an extremely high rate of pay by these elite factions, Caesar refuses any and all offers. He acts out of heart and desire, not because he is being paid or praised for doing so, and taking a position at any faction would taint this mindset."
+          "Caesar has set himself on a noble path in life, to act as a protector for those who cannot defend themselves. He too has known what it is like to be helpless and defenseless, aiming to prevent as many as he can from suffering the same fate. Backed by his immense strength and powerful ability, he'll often seek out danger directly, apprehending threats and saving innocents from terror and destruction. Caesar dedicated himself to this way of life from the moment he had developed his powers, which emerged during a near-death encounter on his island a few years prior. He has taken the opportunity to learn how to hone and manage his skills along the way, improving little by little with each battle.",
+          "Though Caesar initially worked alone, he eventually met and paired up with Nauli as they shared similar goals. His group would grow again later on, after an encounter and subsequent battle with Vortex. Though this relationship began rocky initially, Vortex was eventually trusted as all three began to work in tandem."
         ]
       }
     ],
@@ -222,68 +309,46 @@ export const caesarBloxwright: WikiEntry = {
       "nauli-parter": {
         status: "Close Friend & Ally",
         history: [
-          "Caesar and Nauli met a few years ago, during an unexpected encounter at a restaurant. Caesar spotted Nauli rummaging through the trash for scraps on his way inside the building, and decided to buy and bring her a proper meal.",
-          "This single act of kindness touched Nauli's heart, quickly breaking through her defensive walls as nobody had truly noticed or cared for her. For the first time in a long while, she felt safe enough to open up and the two began to chat over their meals. Their interests in one another only grew as they came to realize their shared values and goals, wishing for peace in the Bloxiverse.",
-          "From then on, the pair worked together in almost all aspects, with Caesar relying on Nauli's strategizing and Nauli relying on Caesar's brute strength to take down stronger opponents through their combined efforts. Nauli also began to spend time on Caesar's Isle, breathing a sigh of relief at a place to relax and call home."
+          "Caesar and Nauli originally met during an unexpected encounter at a restaurant. He found Nauli rummaging through trash for scraps, offering to buy her a meal as the two began to chat. As they opened up more with one another, it quickly became apparent that they had similar fields of work and aspirations. Though Nauli was unsure of Caesar at first, they went on to establish a strong friendship as they began working together and grew to trust one another.",
+          "Caesar knew Nauli was mostly homeless, and eventually constructed a simple campsite within his island for her to stay at. She would go on to make this her permanent home in the coming months, and continues to live there to this day."
         ]
       },
       "vortex-a-steele": {
-        status: "Former Enemy, Close Friend & Ally",
+        status: "Friend & Ally",
         history: [
-          "Initially, Vortex was contracted by the Hunter Association to eliminate Caesar due to a hit placed on him by Bryck Manning. Vortex successfully hunted down Caesar, and the two engaged in combat.",
-          "Their fight was valiant and hard-fought, but both sides came to the realization that their powers and strengths cancel out one another, and the two mutually agreed to stop fighting. With a moment to chat and actually relax, the two expressed their ideals and morals, quickly learning that they're rather alike.",
-          "Though skeptical and uncertain, both placed trust in one another and agreed to peace and cooperation. Vortex cancelled his contract, though this was not the end of his interactions with Caesar—quite the opposite. Caesar met Vortex on occasion from then on out, teaming up to handle tougher contracts that demanded more firepower than what he and his friend Nauli could provide alone.",
-          "The three have worked multiple times as an efficient and balanced trio, backed equally by strength, smarts, and speed."
+          "Caesar and Vortex met one another on poor terms, as he attacked Caesar during their first physical encounter. Caesar had inadvertently claimed the bounty of Bryck Manning when surrendering him to the Hunter Association, unknowingly stealing a paid contract from Vortex. The two fought until Caesar eventually overpowered Vortex and both Bloxians calmed down. After a bit of clearing the air and coming to an understanding of one another, they mutually agreed to call a truce as Vortex left.",
+          "Vortex inevitably returned later on to make amends, providing Caesar with an elixir to treat the injuries he had caused, clearing his conscience and calling things even. Vortex ended up sticking around after this, and has since begun to pair up with him on occasion. Caesar isn't too closely-knit with Vortex, but their trust and bond has slowly been forming as time goes on."
         ]
       },
       "rice-farmer": {
-        status: "Close Friend",
+        status: "Friend",
         history: [
-          "Rice was among one of the many victims Caesar had saved from being terrorized, particularly during an attack from Bryck on the Farmer Sanctuary, a peaceful World where a family of farmers grow tons of food for themselves and Bloxians in need.",
-          "Caesar and Rice continued to chat long after Caesar had already saved him, and the two have spent many days together since. Caesar was introduced to the ways of agriculture through Rice, which later led to Caesar's inspiration for starting his many gardens.",
-          "Rice has been a great source of comfort and calm for Caesar, as Rice is very down-to-earth and easy to be around."
+          "Caesar and Rice met after Caesar apprehended Bryck Manning during their fight at the Farmer Sanctuary, Rice's home. Caesar and Rice formed a small connection during their brief conversation, and Rice has occasionally appeared to assist or spend time with Caesar as a thank-you for his service. Caesar admires Rice for his wisdom and genuineness."
         ]
       },
       "bryck-manning": {
-        status: "Defeated Enemy",
+        status: "Captured Enemy",
         history: [
-          "Caesar and Nauli ventured out to the Farmer Sanctuary after seeing its ongoing attack on the news, at the hands of Bryck Manning.",
-          "The two arrived, and with some effort successfully subdued Bryck and removed his source of power, the Gravity Coil. Afterwards, the Gravity Coil was handed off to Ren Bytera for examination while Bryck was sent to the Hunter Association for processing and eventual imprisonment.",
-          "Bryck has held a grudge and strong vengeance for Caesar, unbeknownst to him."
+          "Caesar and Bryck had an intense battle within the Farmer Sanctuary, eventually leading to Caesar apprehending Bryck and providing him to the Hunter Association. Bryck has since been imprisoned, though not before he could tip off an angry Vortex as to who had claimed his bounty, which lead to Vortex's attack on Caesar.",
+          "Though powerless and unable to do much in his current situation, Bryck now resides within the Hunter Association's prison and vows to get back at Caesar. However, Caesar remains blissfully unaware of Bryck's plans for revenge."
         ]
       }
     },
     abilityData: {
       overview: {
         text: [
-          "Caesar's body acts as a perfect host and conduit for an anomalous source of power, formally known as the Electrogravitic Flow or 'The Flow' for short. The Flow manifests as a sharp, contorting plasma that ripples in blue across his entire body.",
-          "Through the Flow, Caesar can generate and discharge electrified plasma towards targets or his surroundings, allowing him to heavily damage targets or manipulate any local magnetic and gravitational forces his energy surrounds. This ability has a wide variety of applications in almost all aspects, making Caesar a versatile fighter who can tolerate combat in almost any environments while remaining both formidable and dangerous.",
-          "Despite the strengths the Flow offers, Caesar has yet to properly master the Flow or unlock any of its real potential, limiting his capabilities."
+          "Caesar's body acts as a host and conduit for an anomalous source of power, formally known as the Electrogravitic Flow and informally known as the Flow. It manifests as a sky-blue plasma, smoothly rippling across his entire body and projecting itself onto areas he wishes to manipulate.",
+          "The Flow enables Caesar to generate and discharge electrified plasma, capable of manipulating his own gravity or the gravity of his surroundings. This essentially grants him a powerful form of telekinesis, capable of controlling the battlefield, all while amplifying Caesar's movements to strengthen his attacks or hold his ground.",
+          "Though the Flow has clear potential for growth, Caesar is a beginner and finds it difficult to properly control. The natural influence of the Flow seeps into his mind as he continues to use it, requiring him to act carefully; Lest he lose himself to the power and go berserk."
         ]
       },
       passives: {
         techniques: [
           {
-            id: "generative-gravity",
-            title: "Generative Gravity",
+            id: "self-generative-gravity",
+            title: "Self-Generative Gravity",
             description: [
-              "The Flow can manipulate the flow of magnetism and gravity on areas or objects it comes into contact with, and this extends to Caesar's own body. This prevents him from being affected by gravitational anomalies, such as Black Holes or other abilities that affect the forces of gravity."
-            ]
-          },
-          {
-            id: "living-leaking-battery",
-            title: "Living, Leaking Battery",
-            description: [
-              "Caesar's body acts essentially as both a generator and battery for the Flow, as it gets passively replenished as Caesar rests or eats food. Occasionally, the build-up of power within Caesar's body becomes overwhelming, causing him to forcibly eject extra energy if he doesn't frequently make use of his ability.",
-              "While this is manageable if Caesar consistently fights or remembers to discharge his extra energy, forgetting often means extensive property damage and injuries to anyone in his immediate surroundings."
-            ]
-          },
-          {
-            id: "overdrive",
-            title: "Overdrive",
-            description: [
-              "When Caesar is in a life-threatening situation or his adrenaline is pumping, the Flow goes into overdrive and begins mass-producing additional energy. This allows Caesar to push his limits and keep fighting even while exhausted.",
-              "However, abusing these limits can cause Caesar to grow ill and become susceptible to going berserk from the Flow's influence until he eventually collapses from exhaustion."
+              "Caesar's body does not follow the standard laws of physics, as the Flow constantly lingers within his vessel. The Flow automatically detects incoming dangers, such as deadly levels of gravity, and mitigates the effects. This allows Caesar to tolerate extreme conditions that would crush or stretch others—such as close proximity to the Heart of the Bloxiverse."
             ]
           }
         ]
@@ -291,27 +356,32 @@ export const caesarBloxwright: WikiEntry = {
       offensive: {
         techniques: [
           {
-            id: "discharge",
-            title: "Discharge",
+            id: "absolute-mass",
+            title: "Absolute Mass",
             description: [
-              "Charging the Flow into his hands, Caesar can discharge energy into his surroundings or towards targets, shocking them and making them susceptible to Caesar's gravity manipulation. This enables him to use a form of telekinesis, freely throwing his opponents or slowing them down greatly if they lack the physical strength to overpower the effects.",
-              "Heavier targets require Caesar to discharge larger quantities of energy, making them harder to manipulate and using more of Caesar's stamina and Flow reserves."
+              "By unleashing waves of plasma and gravity onto his targets, Caesar can control their density, subsequently increasing or decreasing their weight. Primarily, this technique is used to restrain or slow targets down, increasing their mass and forcing them to the ground. This makes them easier to attack or apprehend, although it is extremely tiresome to hold down a target for long, especially if the target is trying to resist the effect."
             ]
           },
           {
-            id: "electropulse",
-            title: "Electropulse",
+            id: "cosmic-whip",
+            title: "Cosmic Whip",
             description: [
-              "Caesar can channel the Flow across his entire body, and discharge a wave of energy into his surroundings, shocking them and allowing him to gain control over the flow of gravity and magnetism in his immediate surroundings temporarily.",
-              "Gaining control over gravity through this method is far less refined than discharging onto specific targets, though it is highly effective if Caesar is facing multiple opponents."
+              "Caesar can project a tether-like whip, formed out of hardened plasma. He can fire it towards targets, and yank them inwards to strike. He can choose to swing the whip to injure his targets, shocking and lacerating anything struck. The whip can also be utilized as a handy restraint, allowing Caesar to bind targets to himself, other Bloxians, or the environment."
+            ]
+          },
+          {
+            id: "density-discharge",
+            title: "Density Discharge",
+            description: [
+              "Caesar siphons a significant amount of mass into his body, slowing his movements to a crawl as his body buckles from overwhelming weight. After a sufficient amount of mass has been collected, Caesar then unleashes a violent surge of raw kinetic force. This blast is capable of rupturing anything in his immediate vicinity, launching back whatever happened to be caught nearby.",
+              "Caesar can localize a discharge to just one of his limbs if necessary, allowing him to use the rest of his body as it builds up force. Naturally, a one-limb discharge is significantly less powerful compared to a full-body discharge."
             ]
           },
           {
             id: "self-amplification",
             title: "Self-Amplification",
             description: [
-              "Caesar can freely manipulate his own weight due to his generative gravity, allowing him to amplify the weight of his limbs or entire body. By channeling the Flow with specific timings in tandem with his own movements, Caesar can seriously increase the power behind his physical attacks. With enough momentum, Caesar can successfully breach thick walls, and rip armored doors from their hinges.",
-              "Caesar needs to remain mindful of how much he amplifies his body, as his body may not be able to adjust properly if he increases his weight too much, causing him to collapse under the pressure."
+              "Caesar can utilize the mass-altering properties of the Flow to increase the power behind his punches and kicks, allowing him to strike with ground-trembling force while using only half the effort necessary."
             ]
           }
         ]
@@ -319,31 +389,17 @@ export const caesarBloxwright: WikiEntry = {
       defensive: {
         techniques: [
           {
-            id: "hard-light-armor",
-            title: "Hard-Light Armor",
+            id: "hard-light-constructs",
+            title: "Hard-Light Constructs",
             description: [
-              "Caesar can generate and compress his energy into solid, \"hard-light\" armor that affixes to his body and protects him from both blunt-force trauma and electricity. Depending on how much energy was poured into the barrier, hard-light armor can protect Caesar anywhere from weaker firearms, all the way to small explosions before cracking or shattering from the damage.",
-              "Maintaining hard-light armor is incredibly draining of Caesar's energy and can quickly exhaust him if his defenses are shattered multiple times in a row in quick succession. Additionally, hard-light armor can be incredibly heavy, reducing Caesar's speed even further."
+              "Caesar can create solid barriers, formed through the compression of the Flow's plasma. The shapes and behaviors of these constructs vary significantly, allowing Caesar to create a variety of different constructs for different situations. Caesar can form basic walls or domes, or even go as far as to create entire sets of armor out of his plasma, lining his body to provide extra defense."
             ]
           },
           {
-            id: "hard-light-barriers",
-            title: "Hard-Light Barriers",
+            id: "telekinesis",
+            title: "Telekinesis",
             description: [
-              "Similarly to how Caesar can generate hard-light armor, he can also generate constructs formed of this energy to project protective barriers or shielding to defend allies from an attack. This shielding has the same properties as Caesar's hard-light armor, defending targets from damage up to small explosives and electricity.",
-              "Caesar cannot generate hard-light armor if he is currently projecting his energy into shielding for another target, as his focus must remain on the shield due to it not being connected to his body, unlike hard-light armor."
-            ]
-          }
-        ]
-      },
-      utilitarian: {
-        techniques: [
-          {
-            id: "pseudo-telekinesis",
-            title: "Pseudo-Telekinesis",
-            description: [
-              "When objects or areas are imbued with Caesar's energy, he can freely channel the gravity and magnetism of them, allowing him to toss targets around or weigh them down drastically. It can also be utilized for simple tasks in his daily life, fetching items from far away or allowing him to hold things without needing to use his hand.",
-              "Naturally, the more objects he manipulates, the higher the energy requirement becomes. While it's relatively easy to hold a large quantity of small objects, particularly heavy objects can quickly push his limits if held for long periods of time."
+              "The Flow acts as a simple form of telekinesis, allowing Caesar to do basic actions from a distance. Grabbing food mid-air before it can hit the floor, pulling something out-of-reach into his hands or any other menial tasks are doable. His precision with telekinesis is poor, he could not type quickly on a keyboard or write with a pen and paper."
             ]
           }
         ]
@@ -354,49 +410,34 @@ export const caesarBloxwright: WikiEntry = {
             id: "rapid-energy-consumption",
             title: "Rapid Energy Consumption",
             description: [
-              "A majority of the Flow's abilities require serious amounts of Caesar's stamina to remain effective, and overuse can quickly put him out of commission if he isn't careful."
+              "The Flow is exhausting to use, especially when pushed to its limits. Careful stamina management and sparing use of the Flow is necessary to perform effectively in combat."
             ]
           },
           {
             id: "weighed-down",
             title: "Weighed Down",
             description: [
-              "The Flow carries an extremely heavy weight that Caesar must endure to effectively use the Flow, and it only worsens as Caesar attempts larger-scaled attacks or attacks of a higher potency. Techniques such as the hard-light armor are especially taxing on Caesar's body, often slowing his speeds to a crawl, and rarely immobilizing him entirely."
+              "The Flow has a natural weight of its own, and is partially responsible for why Caesar is naturally slow."
             ]
           },
           {
-            id: "mental-corruption",
-            title: "Mental Corruption",
+            id: "corruptive-polarity",
+            title: "Corruptive Polarity",
             description: [
-              "If Caesar becomes too lost in combat or pushes his ability far beyond safe limits, he can become susceptible to mental corruption, leading to Caesar going berserk. In this state, Caesar becomes incredibly dangerous to remain around, regardless of if you are a friend or foe.",
-              "Though Caesar's mentality remains intact-enough to differentiate between an ally and an enemy, his attacks and the Flow's effects are greatly amplified and pose a serious risk for any Bloxians in his immediate surroundings, including Caesar himself.",
-              "This rampage tends to last until Caesar is calmed down, incapacitated, or becomes exhausted. Afterwards, Caesar becomes greatly limited in terms of strength, and the Flow often goes completely offline to recover from Caesar's abuse."
+              "As the Flow carries an electrical current, it intercepts with the electric signals in Caesar's brain and slowly influences his mind. The more the Flow is used, the more this effect takes a hold of his psyche. This ends up leading into confusion and behavioral issues, inevitably leading to Caesar going berserk."
             ]
           }
         ]
       }
     },
     trivia: [
-      "Caesar is ambidextrous—he can comfortably use both hands for just about any task.",
-      "Caesar's favorite drink is Bloxy Cola, with creamy milk being a close second.",
-      "Caesar has an irrational fear of spiders, and bugs in general.",
-      "Caesar was the first character made for The Lore, and has gone through several redesigns and total reworks. His creation date goes as far back as 2020!"
+      "Caesar is ambidextrous, meaning that he can comfortably use both hands for just about any task. He developed this skill through the time spent tending to his island.",
+      "Caesar's favorite beverage is the Bloxy Cola, and would probably substitute it for water if he were rich enough.",
+      "Caesar has a fear of spiders, and bugs in general.",
+      "Caesar was the first character to be made for The Lore, and has gone through several redesigns, rewrites, and reworks. His creation date goes as far back as 2020!"
     ]
   },
   
-  abilityName: "The Electrogravitic Flow",
-  stats: createCharacterStats("C", "B", "C", "S", {
-    // Offense subcategories
-    power: "C",
-    penetration: "C",
-    potency: "D",
-    // Defense subcategories
-    guard: "B",
-    evasion: "D",
-    mitigation: "C",
-    // Utility subcategories
-    versatility: "C",
-    support: "D",
-    manipulation: "C"
-  })
+  abilityName: "The Electrogravitic Flow"
 };
+

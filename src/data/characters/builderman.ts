@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/lib/stats";
+import { createCombatStats } from "@/lib/stats";
 
 export const builderman: WikiEntry = {
   id: "builderman",
@@ -598,6 +598,5 @@ export const builderman: WikiEntry = {
     ]
   },
   
-  abilityName: "Creation",
-  stats: createCharacterStats("S", "A", "Ø", "A")
+  abilityName: "Creation"
 };

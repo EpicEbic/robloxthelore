@@ -17,6 +17,7 @@ import { useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
 import { useThemeStyles } from "@/hooks/use-theme-styles";
+import { isEntryDisabled } from "@/utils/disabled-entries";
 
 const EntryPageContent = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,16 +25,16 @@ const EntryPageContent = () => {
   const { getEntryById, entries } = useWiki();
   const { currentTheme: characterTheme } = useCharacterTheme();
   const { currentTheme: locationTheme } = useLocationTheme();
-  const { isEntryUnlocked } = useEasterEgg();
+  const { isEntryUnlocked, enabledEntries } = useEasterEgg();
   
   const entry = getEntryById(id || "");
   
-  // Check if entry is locked
-  if (entry && !isEntryUnlocked(entry.id)) {
+  // Check if entry is locked or disabled
+  if (entry && (!isEntryUnlocked(entry.id) || isEntryDisabled(entry.id, enabledEntries))) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold mb-4">Entry Locked</h1>
-        <p className="mb-6">This entry is currently locked and cannot be accessed.</p>
+        <h1 className="text-3xl font-bold mb-4">Entry Unavailable</h1>
+        <p className="mb-6">This entry is currently unavailable and cannot be accessed.</p>
         <Button onClick={() => navigate("/")} variant="default">
           Back to Home
         </Button>

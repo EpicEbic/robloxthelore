@@ -7,7 +7,6 @@
  *   GRADE_VALUES,
  *   GRADE_COLORS,
  *   PHYSICAL_CATEGORIES,
- *   ABILITY_CATEGORIES,
  *   // ...etc
  * } from "@/lib/stats";
  * 
@@ -33,36 +32,21 @@ export {
   type PhysicalCategoryKey,
   type PhysicalSubcategoryKey,
   
-  // Ability stats  
-  ABILITY_CATEGORIES,
-  ABILITY_STAT_DESCRIPTIONS,
-  type AbilityStats,
-  type AbilityCategoryKey,
-  type AbilitySubcategoryKey,
-  
   // Helper functions
   createPhysicalStats,
   createCombatStats,
-  createAbilityStats,
-  createCharacterStats,
   getStatDescription,
   getStatDefinition,
   getStatFullInfo
 } from "@/lib/stats";
 
 // Legacy alias - maps old name to new export
-// The old STAT_GRADE_DESCRIPTIONS combined physical and ability descriptions
-// Now you should use PHYSICAL_STAT_DESCRIPTIONS or ABILITY_STAT_DESCRIPTIONS
-import { PHYSICAL_STAT_DESCRIPTIONS, ABILITY_STAT_DESCRIPTIONS } from "@/lib/stats";
+import { PHYSICAL_STAT_DESCRIPTIONS } from "@/lib/stats";
 
 /**
- * @deprecated Use PHYSICAL_STAT_DESCRIPTIONS or ABILITY_STAT_DESCRIPTIONS instead.
- * This merged object is provided only for backward compatibility.
+ * @deprecated Use PHYSICAL_STAT_DESCRIPTIONS instead.
+ * This is provided only for backward compatibility.
  */
 export const STAT_GRADE_DESCRIPTIONS = {
-  ...PHYSICAL_STAT_DESCRIPTIONS,
-  // For ability stats, provide both prefixed and non-prefixed versions for compatibility
-  ...ABILITY_STAT_DESCRIPTIONS,
-  "ability-power": ABILITY_STAT_DESCRIPTIONS.power,
-  "ability-penetration": ABILITY_STAT_DESCRIPTIONS.penetration,
+  ...PHYSICAL_STAT_DESCRIPTIONS
 };

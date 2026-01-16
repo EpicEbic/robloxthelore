@@ -2,7 +2,7 @@
  * Stats System - Type Definitions
  * 
  * This file contains all type definitions for the unified stats system.
- * Both physical (combat) stats and ability stats use these shared types.
+ * Physical (combat) stats use these shared types.
  */
 
 // =============================================================================
@@ -97,55 +97,6 @@ export interface PhysicalStats {
 }
 
 // =============================================================================
-// ABILITY STAT TYPES
-// =============================================================================
-
-/** Ability stat main category keys */
-export type AbilityCategoryKey = 
-  | "offense" 
-  | "defense" 
-  | "utility" 
-  | "potential";
-
-/** All ability stat subcategory keys */
-export type AbilitySubcategoryKey =
-  // Offense subcategories
-  | "power"
-  | "penetration"
-  | "potency"
-  // Defense subcategories
-  | "guard"
-  | "evasion"
-  | "mitigation"
-  // Utility subcategories
-  | "versatility"
-  | "support"
-  | "manipulation";
-
-/** Ability stats structure with main categories */
-export interface AbilityStats {
-  offense: StatGrade;
-  defense: StatGrade;
-  utility: StatGrade;
-  potential: StatGrade;
-  subcategories?: Partial<Record<AbilitySubcategoryKey, StatGrade>>;
-}
-
-// =============================================================================
-// STAT DOMAIN TYPE
-// =============================================================================
-
-/** Identifies which stat domain a stat belongs to */
-export type StatDomain = "physical" | "ability";
-
-/** Union of all possible stat keys */
-export type AnyStatKey = 
-  | PhysicalCategoryKey 
-  | PhysicalSubcategoryKey 
-  | AbilityCategoryKey 
-  | AbilitySubcategoryKey;
-
-// =============================================================================
 // DESCRIPTION LOOKUP TYPES
 // =============================================================================
 
@@ -154,4 +105,3 @@ export type GradeDescriptions = Record<GradeLabel, string>;
 
 /** Complete description map for all stats in a domain */
 export type StatDescriptionMap = Record<string, GradeDescriptions>;
-

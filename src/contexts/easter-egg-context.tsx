@@ -12,6 +12,9 @@ interface EasterEggContextType {
   unlockEntry: (entryId: string) => void;
   isEntryUnlocked: (entryId: string) => boolean;
   isTournamentUnlocked: boolean;
+  enabledEntries: Set<string>;
+  enableEntry: (entryId: string) => void;
+  isEntryEnabled: (entryId: string) => boolean;
 }
 
 const EasterEggContext = createContext<EasterEggContextType | undefined>(undefined);
@@ -38,6 +41,7 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
   const [keySequence, setKeySequence] = useState('');
   const [unlockedEntries, setUnlockedEntries] = useState<Set<string>>(new Set());
   const [isTournamentUnlocked, setIsTournamentUnlocked] = useState(false);
+  const [enabledEntries, setEnabledEntries] = useState<Set<string>>(new Set());
   
   // Typing indicator state
   const [typingText, setTypingText] = useState('');
@@ -146,6 +150,22 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
         } else if (newTypingText === 'unlock') {
           // Unlock all locked entries
           setUnlockedEntries(new Set(LOCKED_ENTRIES));
+          // Enable all disabled entries
+          setEnabledEntries(new Set([
+            "nauli-parter",
+            "vortex-a-steele",
+            "rice-farmer",
+            "ren-bytera",
+            "spawnboy",
+            "charles-studson",
+            "bryck-manning",
+            "the-reckoner",
+            "builderman",
+            "bloxxanne-whelder",
+            "the-breadwinner",
+            "the-bounceman",
+            "coils-of-power"
+          ]));
           // Unlock Tournament feature
           setIsTournamentUnlocked(true);
           setTypingText('');
@@ -182,6 +202,22 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
       } else if (newSequence.includes('unlock')) {
         // Unlock all locked entries
         setUnlockedEntries(new Set(LOCKED_ENTRIES));
+        // Enable all disabled entries
+        setEnabledEntries(new Set([
+          "nauli-parter",
+          "vortex-a-steele",
+          "rice-farmer",
+          "ren-bytera",
+          "spawnboy",
+          "charles-studson",
+          "bryck-manning",
+          "the-reckoner",
+          "builderman",
+          "bloxxanne-whelder",
+          "the-breadwinner",
+          "the-bounceman",
+          "coils-of-power"
+        ]));
         // Unlock Tournament feature
         setIsTournamentUnlocked(true);
         setKeySequence(''); // Reset sequence after activation
@@ -217,6 +253,14 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
     return unlockedEntries.has(entryId);
   };
 
+  const enableEntry = (entryId: string) => {
+    setEnabledEntries(prev => new Set([...prev, entryId]));
+  };
+
+  const isEntryEnabled = (entryId: string) => {
+    return enabledEntries.has(entryId);
+  };
+
   const value = {
     isMinionMode,
     minionGifUrl,
@@ -225,7 +269,10 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
     unlockedEntries,
     unlockEntry,
     isEntryUnlocked,
-    isTournamentUnlocked
+    isTournamentUnlocked,
+    enabledEntries,
+    enableEntry,
+    isEntryEnabled
   };
 
   return (
