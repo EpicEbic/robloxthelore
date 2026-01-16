@@ -14,7 +14,7 @@ export function LockScreen({ onUnlock }: LockScreenProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Secret combination - can be changed
-    const SECRET_COMBINATION = "EpicEbicSaysLetMeIn";
+    const SECRET_COMBINATION = "TEMPORARY";
     
     if (input.trim() === SECRET_COMBINATION) {
       onUnlock();

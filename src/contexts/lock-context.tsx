@@ -9,7 +9,7 @@ interface LockContextType {
 const LockContext = createContext<LockContextType | undefined>(undefined);
 
 export const LockProvider = ({ children }: { children: ReactNode }) => {
-  const [isUnlocked, setIsUnlocked] = useState(true);
+  const [isUnlocked, setIsUnlocked] = useState(false);
 
   const unlock = () => {
     setIsUnlocked(true);
