@@ -1,6 +1,6 @@
 
 import { WikiEntry } from "@/types/wiki-types";
-import { createCharacterStats, createCombatStats } from "@/components/character/character-stat-chart";
+import { createCharacterStats, createCombatStats } from "@/lib/stats";
 
 export const riceFarmer: WikiEntry = {
   id: "rice-farmer",

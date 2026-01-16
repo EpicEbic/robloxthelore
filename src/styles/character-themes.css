@@ -58,6 +58,29 @@ svg.icon-theme-exempt {
    --archetype-icon-color: The archetype's icon color (same as text)
    ======================================== */
 
+/* CRITICAL: Prevent archetype card backgrounds from being overridden by theme card rules */
+/* This must use very high specificity to override [class*="card"] rules */
+body[class*="character-theme-"] .archetype-card-exempt,
+body[class*="character-theme-"] .archetype-card-exempt.archetype-card-exempt,
+body.character-theme-caesar-bloxwright .archetype-card-exempt,
+body.character-theme-nauli-parter .archetype-card-exempt,
+body.character-theme-rice-farmer .archetype-card-exempt,
+body.character-theme-vortex-a-steele .archetype-card-exempt,
+body.character-theme-bloxy-cola .archetype-card-exempt,
+body.character-theme-witches-brew .archetype-card-exempt,
+body.character-theme-builderman .archetype-card-exempt,
+body.character-theme-the-banhammer .archetype-card-exempt,
+body.character-theme-the-bloxiverse .archetype-card-exempt,
+body.character-theme-ren-bytera .archetype-card-exempt,
+body.character-theme-bryck-manning .archetype-card-exempt,
+body.character-theme-coils-of-power .archetype-card-exempt,
+body.character-theme-regeneration-coil .archetype-card-exempt {
+  /* Use !important with inline style inheritance */
+  /* The inline style sets 'background' directly, this prevents override */
+  background: var(--archetype-bg-gradient) !important;
+  border-color: var(--archetype-border-color) !important;
+}
+
 /* Override ALL text elements inside archetype card using CSS variables */
 body[class*="character-theme-"] .archetype-card-exempt h1,
 body[class*="character-theme-"] .archetype-card-exempt h2,
@@ -2090,6 +2113,35 @@ body[class*="character-theme-"] .text-force-black *,
 [class*="character-theme-"] .text-force-black,
 [class*="character-theme-"] .text-force-black * {
   color: #1f2937 !important;
+}
+
+/* ========================================
+   MOBILE SIDEBAR CONTAINER STYLING
+   The mobile sidebar itself must have a solid background
+   ======================================== */
+
+/* Force mobile sidebar container to have solid background - use a solid dark color */
+body[class*="character-theme-"] .mobile-sidebar,
+body[class*="character-theme-"] [data-state][data-side] .mobile-sidebar,
+body[class*="character-theme-"] [role="dialog"] .mobile-sidebar,
+.mobile-sidebar {
+  background: #09090b !important;
+  background-color: #09090b !important;
+}
+
+/* Force SheetContent (mobile sidebar parent) to have solid background */
+body[class*="character-theme-"] [data-state="open"][data-side="left"],
+body[class*="character-theme-"] [data-state="open"][data-side="right"],
+body[class*="character-theme-"] [role="dialog"][data-state="open"] {
+  background: #09090b !important;
+  background-color: #09090b !important;
+}
+
+/* Override any gradient or transparent backgrounds on sidebar */
+body[class*="character-theme-"] .mobile-sidebar *,
+body[class*="character-theme-"] [data-state="open"][data-side="left"] *,
+body[class*="character-theme-"] [data-state="open"][data-side="right"] * {
+  background-image: none !important;
 }
 
 /* ========================================

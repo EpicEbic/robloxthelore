@@ -1,70 +1,23 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-interface StatGrade {
-  label: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-  value: number; // 0-7 for easier programming
-}
+// Import types and helpers from the unified stats system
+import { 
+  GradeLabel,
+  StatGrade,
+  PhysicalStats,
+  AbilityStats,
+  GRADE_VALUES,
+  createPhysicalStats,
+  createAbilityStats
+} from "@/lib/stats";
 
-interface CharacterStats {
-  offense: StatGrade;
-  defense: StatGrade;
-  utility: StatGrade;
-  potential: StatGrade;
-  // Optional subcategory-specific stats - if not provided, subcategories inherit from main category
-  subcategories?: {
-    // Offense subcategories
-    power?: StatGrade;
-    penetration?: StatGrade;
-    potency?: StatGrade;
-    // Defense subcategories
-    guard?: StatGrade;
-    evasion?: StatGrade;
-    mitigation?: StatGrade;
-    // Utility subcategories
-    versatility?: StatGrade;
-    support?: StatGrade;
-    manipulation?: StatGrade;
-  };
-}
+// Re-export types for backward compatibility
+export type CharacterStats = AbilityStats;
+export type CombatStats = PhysicalStats;
 
-interface CombatStats {
-  strength: StatGrade;
-  durability: StatGrade;
-  agility: StatGrade;
-  precision: StatGrade;
-  intelligence: StatGrade;
-  // Optional subcategory-specific stats - if not provided, subcategories inherit from main category
-  subcategories?: {
-    // Strength (Offense) subcategories
-    power?: StatGrade;
-    lift?: StatGrade;
-    penetration?: StatGrade;
-    intensity?: StatGrade;
-    // Durability (Defense) subcategories
-    toughness?: StatGrade;
-    vitality?: StatGrade;
-    thermostability?: StatGrade;
-    esotolerance?: StatGrade;
-    // Agility subcategories
-    swiftness?: StatGrade;
-    acceleration?: StatGrade;
-    flexibility?: StatGrade;
-    endurance?: StatGrade;
-    // Precision subcategories
-    accuracy?: StatGrade;
-    range?: StatGrade;
-    dexterity?: StatGrade;
-    reactivity?: StatGrade;
-    // Intelligence subcategories
-    tactility?: StatGrade;
-    wisdom?: StatGrade;
-    foresight?: StatGrade;
-    sanity?: StatGrade;
-  };
-}
-
-export type { CharacterStats, CombatStats };
+// Re-export helper functions for backward compatibility
+export { createPhysicalStats as createCombatStats, createAbilityStats as createCharacterStats } from "@/lib/stats";
 
 interface CharacterStatChartProps {
   stats: CharacterStats;
@@ -78,17 +31,6 @@ interface CombatStatChartProps {
   characterId?: string;
   className?: string;
 }
-
-const GRADE_VALUES = {
-  "F": 0,
-  "E": 1,
-  "D": 2,
-  "C": 3,
-  "B": 4,
-  "A": 5,
-  "S": 6,
-  "Ø": 7
-} as const;
 
 const STAT_LABELS = {
   offense: "Offense",
@@ -260,96 +202,5 @@ export function CombatStatChart({ stats, characterId, className }: CombatStatCha
   );
 }
 
-// Helper function to create stats object easily
-export function createCharacterStats(
-  offense: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
-  defense: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F", 
-  utility: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
-  potential: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
-  subcategories?: {
-    power?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    penetration?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    potency?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    guard?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    evasion?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    mitigation?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    versatility?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    support?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    manipulation?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-  }
-): CharacterStats {
-  const baseStats: CharacterStats = {
-    offense: { label: offense, value: GRADE_VALUES[offense] },
-    defense: { label: defense, value: GRADE_VALUES[defense] },
-    utility: { label: utility, value: GRADE_VALUES[utility] },
-    potential: { label: potential, value: GRADE_VALUES[potential] }
-  };
-  
-  if (subcategories) {
-    const subcategoryStats: any = {};
-    Object.entries(subcategories).forEach(([key, grade]) => {
-      if (grade) {
-        subcategoryStats[key] = { label: grade, value: GRADE_VALUES[grade] };
-      }
-    });
-    return { ...baseStats, subcategories: subcategoryStats };
-  }
-  
-  return baseStats;
-}
-
-// Helper function to create combat stats object easily
-export function createCombatStats(
-  strength: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
-  durability: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
-  agility: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
-  precision: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
-  intelligence: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F",
-  subcategories?: {
-    // Strength (Offense) subcategories
-    power?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    lift?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    penetration?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    intensity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    // Durability (Defense) subcategories
-    toughness?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    vitality?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    thermostability?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    esotolerance?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    // Agility subcategories
-    swiftness?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    acceleration?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    flexibility?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    endurance?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    // Precision subcategories
-    accuracy?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    range?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    dexterity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    reactivity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    // Intelligence subcategories
-    tactility?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    wisdom?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    foresight?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-    sanity?: "Ø" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
-  }
-): CombatStats {
-  const baseStats: CombatStats = {
-    strength: { label: strength, value: GRADE_VALUES[strength] },
-    durability: { label: durability, value: GRADE_VALUES[durability] },
-    agility: { label: agility, value: GRADE_VALUES[agility] },
-    precision: { label: precision, value: GRADE_VALUES[precision] },
-    intelligence: { label: intelligence, value: GRADE_VALUES[intelligence] }
-  };
-  
-  if (subcategories) {
-    const subcategoryStats: any = {};
-    Object.entries(subcategories).forEach(([key, grade]) => {
-      if (grade) {
-        subcategoryStats[key] = { label: grade, value: GRADE_VALUES[grade] };
-      }
-    });
-    return { ...baseStats, subcategories: subcategoryStats };
-  }
-  
-  return baseStats;
-}
+// Note: createCharacterStats and createCombatStats are now re-exported from @/lib/stats
+// See the re-export at the top of this file for backward compatibility

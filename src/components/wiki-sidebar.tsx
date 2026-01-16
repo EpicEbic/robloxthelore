@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect } from "react";
+import { useMemo, useState, useRef, useEffect, useCallback, memo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,143 @@ import { useParticleSettings } from "@/contexts/particle-settings-context";
 import { useEasterEgg } from "@/contexts/easter-egg-context";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { usePart } from "@/contexts/part-context";
+
+// Sidebar content component with its own state to prevent re-animation of parent Sheet
+interface MobileSidebarContentProps {
+  closeSidebar: () => void;
+  isTournamentUnlocked: boolean;
+}
+
+function MobileSidebarContent({
+  closeSidebar,
+  isTournamentUnlocked
+}: MobileSidebarContentProps) {
+  // Category state is managed here to prevent parent re-renders
+  const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(
+    CATEGORIES.reduce((acc, category) => ({
+      ...acc,
+      [category.type]: true
+    }), {})
+  );
+
+  const toggleCategory = useCallback((category: CategoryType) => {
+    setOpenCategories(prev => ({
+      ...prev,
+      [category]: !prev[category]
+    }));
+  }, []);
+
+  return (
+    <div className="flex flex-col h-full overflow-y-auto custom-scrollbar">
+      <div className="p-4 border-b border-border/50">
+        <Link to="/" className="flex items-center space-x-3 group" onClick={closeSidebar}>
+          <Home className="h-5 w-5 text-primary" />
+          <h2 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">The Lore</h2>
+        </Link>
+      </div>
+
+      {/* Plot Timeline */}
+      <div className="p-4 space-y-2 border-b border-border/30">
+        <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Quick Access</h3>
+        <Link to="/plot-timeline" onClick={closeSidebar}>
+          <div className="px-3 py-2 rounded-lg mobile-sidebar-link">
+            <div className="font-medium text-sm text-foreground">Plot Timeline</div>
+            <div className="text-xs text-muted-foreground mt-0.5">View detailed episode breakdowns</div>
+          </div>
+        </Link>
+      </div>
+
+      {/* Categories */}
+      <div className="p-4 space-y-4 flex-1">
+        <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Browse Categories</h3>
+        {CATEGORIES.map((category, categoryIndex) => (
+          <div key={category.type} className="space-y-2">
+            <Collapsible open={openCategories[category.type]} onOpenChange={() => toggleCategory(category.type)}>
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" className="w-full justify-between px-1 py-2 h-auto rounded-lg mobile-sidebar-button">
+                  <h4 className="font-semibold text-sm text-foreground">{category.label}</h4>
+                  <ChevronDown className={cn("h-4 w-4 transition-transform duration-200 text-foreground/60", openCategories[category.type] ? "rotate-180" : "rotate-0")} />
+                </Button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="overflow-hidden transition-all duration-300 ease-in-out data-[state=closed]:animate-collapse-up data-[state=open]:animate-collapse-down">
+                <div className="pl-3 space-y-1 mt-1">
+                  {category.subcategories.map((subcategory) => {
+                    const target = `/category/${category.type}/${subcategory.value}`;
+                    return (
+                      <div key={`${category.type}-${subcategory.value}`}>
+                        <Link
+                          to={target}
+                          onClick={closeSidebar}
+                          className="block px-3 py-2 rounded-lg mobile-sidebar-link"
+                        >
+                          <div className="font-medium text-sm text-foreground">{subcategory.label}</div>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
+            {/* Divider between categories (except after the last one) */}
+            {categoryIndex < CATEGORIES.length - 1 && (
+              <div className="h-px bg-border/30 my-2 rounded-full" />
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Divider before Tools */}
+      <div className="h-px bg-border/30 mx-4 rounded-full" />
+
+      {/* Tools */}
+      <div className="p-4 space-y-2 border-t border-border/30">
+        <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Tools</h3>
+        <div className="space-y-1">
+          <Link to="/statistics" onClick={closeSidebar}>
+            <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
+              <BarChart3 className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
+              <div>
+                <div className="font-medium text-sm text-foreground">Statistics</div>
+                <div className="text-xs text-muted-foreground">View detailed statistics</div>
+              </div>
+            </div>
+          </Link>
+          <Link to="/world" onClick={closeSidebar}>
+            <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
+              <Globe className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
+              <div>
+                <div className="font-medium text-sm text-foreground">World Map</div>
+                <div className="text-xs text-muted-foreground">Explore the Bloxiverse</div>
+              </div>
+            </div>
+          </Link>
+          {isTournamentUnlocked && (
+            <Link to="/comparison" onClick={closeSidebar}>
+              <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
+                <GitCompare className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
+                <div>
+                  <div className="font-medium text-sm text-foreground">Comparison</div>
+                  <div className="text-xs text-muted-foreground">Compare different entries</div>
+                </div>
+              </div>
+            </Link>
+          )}
+          {isTournamentUnlocked && (
+            <Link to="/tournament" onClick={closeSidebar}>
+              <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
+                <Trophy className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
+                <div>
+                  <div className="font-medium text-sm text-foreground">Tournament</div>
+                  <div className="text-xs text-muted-foreground">Participate in tournaments</div>
+                </div>
+              </div>
+            </Link>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 interface WikiTopNavProps {
   className?: string;
@@ -66,10 +203,6 @@ export function WikiTopNav({
 
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(CATEGORIES.reduce((acc, category) => ({
-    ...acc,
-    [category.type]: true
-  }), {}));
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [navBarVisible, setNavBarVisible] = useState(() => {
     const saved = localStorage.getItem('navBarVisible');
@@ -243,12 +376,9 @@ export function WikiTopNav({
   // Use mobile view if hook says mobile OR if content overflows
   const isMobile = isMobileHook || hasOverflow;
 
-  const toggleCategory = (category: CategoryType) => {
-    setOpenCategories(prev => ({
-      ...prev,
-      [category]: !prev[category]
-    }));
-  };
+  const closeSidebar = useCallback(() => {
+    setMobileMenuOpen(false);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -484,114 +614,10 @@ export function WikiTopNav({
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-[300px] sm:w-[400px] p-0 flex flex-col mobile-sidebar">
-            <div className="flex flex-col h-full overflow-y-auto custom-scrollbar">
-              <div className="p-4 border-b border-border/50">
-                <Link to="/" className="flex items-center space-x-3 group" onClick={() => setMobileMenuOpen(false)}>
-                  <Home className="h-5 w-5 text-primary" />
-                  <h2 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">The Lore</h2>
-                </Link>
-              </div>
-
-              {/* Plot Timeline */}
-              <div className="p-4 space-y-2 border-b border-border/30">
-                <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Quick Access</h3>
-                <Link to="/plot-timeline" onClick={() => setMobileMenuOpen(false)}>
-                  <div className="px-3 py-2 rounded-lg mobile-sidebar-link">
-                    <div className="font-medium text-sm text-foreground">Plot Timeline</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">View detailed episode breakdowns</div>
-                  </div>
-                </Link>
-              </div>
-
-              {/* Categories */}
-              <div className="p-4 space-y-4 flex-1">
-                <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Browse Categories</h3>
-                {CATEGORIES.map((category, categoryIndex) => (
-                  <div key={category.type} className="space-y-2">
-                    <Collapsible open={openCategories[category.type]} onOpenChange={() => toggleCategory(category.type)}>
-                      <CollapsibleTrigger asChild>
-                        <Button variant="ghost" className="w-full justify-between px-1 py-2 h-auto rounded-lg mobile-sidebar-button">
-                          <h4 className="font-semibold text-sm text-foreground">{category.label}</h4>
-                          <ChevronDown className={cn("h-4 w-4 transition-transform duration-200 text-foreground/60", openCategories[category.type] ? "rotate-180" : "rotate-0")} />
-                        </Button>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="overflow-hidden transition-all duration-300 ease-in-out data-[state=closed]:animate-collapse-up data-[state=open]:animate-collapse-down">
-                        <div className="pl-3 space-y-1 mt-1">
-                          {category.subcategories.map((subcategory, index) => {
-                            const target = `/category/${category.type}/${subcategory.value}`;
-                            return (
-                              <div key={`${category.type}-${subcategory.value}`}>
-                                <Link
-                                  to={target}
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className="block px-3 py-2 rounded-lg mobile-sidebar-link"
-                                >
-                                  <div className="font-medium text-sm text-foreground">{subcategory.label}</div>
-                                </Link>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
-                    {/* Divider between categories (except after the last one) */}
-                    {categoryIndex < CATEGORIES.length - 1 && (
-                      <div className="h-px bg-border/30 my-2 rounded-full" />
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Divider before Tools */}
-              <div className="h-px bg-border/30 mx-4 rounded-full" />
-
-              {/* Tools */}
-              <div className="p-4 space-y-2 border-t border-border/30">
-                <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Tools</h3>
-                <div className="space-y-1">
-                  <Link to="/statistics" onClick={() => setMobileMenuOpen(false)}>
-                    <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
-                      <BarChart3 className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
-                      <div>
-                        <div className="font-medium text-sm text-foreground">Statistics</div>
-                        <div className="text-xs text-muted-foreground">View detailed statistics</div>
-                      </div>
-                    </div>
-                  </Link>
-                  <Link to="/world" onClick={() => setMobileMenuOpen(false)}>
-                    <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
-                      <Globe className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
-                      <div>
-                        <div className="font-medium text-sm text-foreground">World Map</div>
-                        <div className="text-xs text-muted-foreground">Explore the Bloxiverse</div>
-                      </div>
-                    </div>
-                  </Link>
-                  {isTournamentUnlocked && (
-                    <Link to="/comparison" onClick={() => setMobileMenuOpen(false)}>
-                      <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
-                        <GitCompare className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
-                        <div>
-                          <div className="font-medium text-sm text-foreground">Comparison</div>
-                          <div className="text-xs text-muted-foreground">Compare different entries</div>
-                        </div>
-                      </div>
-                    </Link>
-                  )}
-                  {isTournamentUnlocked && (
-                    <Link to="/tournament" onClick={() => setMobileMenuOpen(false)}>
-                      <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
-                        <Trophy className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
-                        <div>
-                          <div className="font-medium text-sm text-foreground">Tournament</div>
-                          <div className="text-xs text-muted-foreground">Participate in tournaments</div>
-                        </div>
-                      </div>
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </div>
+            <MobileSidebarContent
+              closeSidebar={closeSidebar}
+              isTournamentUnlocked={isTournamentUnlocked}
+            />
           </SheetContent>
         </Sheet>
 

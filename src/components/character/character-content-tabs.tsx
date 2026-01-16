@@ -1,4 +1,4 @@
-import { User, Home, Heart, Sword, Swords, Zap, ScrollText, Shirt, Drama, Shield, Wrench, AlertTriangle, Clock, HandFist, ArrowRightFromLine, BookOpen, Sparkles, Target, ShieldCheck, Briefcase, FileText } from "lucide-react";
+import { User, Home, Heart, Sword, Swords, Zap, ScrollText, Shirt, Drama, Shield, Wrench, AlertTriangle, Clock, HandFist, ArrowRightFromLine, BookOpen, Sparkles, Target, ShieldCheck, Briefcase, FileText, Film } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -10,23 +10,23 @@ import { CharacterAppearanceSwitcher } from "./character-appearance-switcher";
 import { CharacterPersonalitySwitcher } from "./character-personality-switcher";
 import { CharacterLifestyleSwitcher } from "./character-lifestyle-switcher";
 import { CharacterHistorySwitcher } from "./character-history-switcher";
-import { CharacterCombatStyleSwitcher } from "./character-combat-style-switcher";
-import { CharacterStatBarChart } from "./character-stat-bar-chart";
+import { CharacterDevelopmentSwitcher } from "./character-development-switcher";
 import { createCharacterStats, createCombatStats, CharacterStats, CombatStats } from "./character-stat-chart";
 import { AutoLinkedText } from "@/components/ui/auto-linked-text";
-import { AppearanceOption, PersonalityOption, HistoryOption, CombatStyleOption, WikiEntry } from "@/types/wiki-types";
+import { AppearanceOption, PersonalityOption, HistoryOption, DevelopmentOption, CombatStyleOption, WikiEntry } from "@/types/wiki-types";
 import { RelationshipSelector } from "./relationship-selector";
 import { RelationshipDisplay } from "./relationship-display";
 import { sampleWikiEntries } from "@/data/sample-wiki-entries";
-import { AbilityCategory } from "./ability-category";
-import { CombatStyleCategory } from "./combat-style-category";
+// New combat section components
+import { StatsCardGrid, TechniqueTabs } from "./combat";
 
 interface CharacterSections {
   overview?: string[]; // Plot relevance and simple information
   appearance?: string | AppearanceOption[]; // Made optional to match the interface in character-entry-card.tsx
   personality?: string[] | PersonalityOption[];
   lifestyle?: string[];
-  history?: string[];
+  history?: string[]; // Major events/backstory
+  development?: string[]; // Per-episode character information
   relationships?: string[];
   relationshipsData?: any;
   combat?: string[];
@@ -54,6 +54,9 @@ interface CharacterContentTabsProps {
   histories?: HistoryOption[];
   currentHistory?: string;
   onHistoryChange?: (historyId: string) => void;
+  developments?: DevelopmentOption[];
+  currentDevelopment?: string;
+  onDevelopmentChange?: (developmentId: string) => void;
   combatStyles?: CombatStyleOption[];
   currentCombatStyle?: string;
   onCombatStyleChange?: (styleId: string) => void;
@@ -63,7 +66,7 @@ interface CharacterContentTabsProps {
   combatStats?: CombatStats;
   onTabChange?: (tabValue: string) => void;
   currentEntryId?: string;
-  onLifestyleHistoryViewChange?: (view: 'lifestyle' | 'history') => void;
+  onTimelineViewChange?: (view: 'development' | 'history') => void;
   onCombatViewChange?: (view: 'physical' | 'ability') => void;
 }
 
@@ -81,6 +84,9 @@ export function CharacterContentTabs({
   histories = [],
   currentHistory = 'pre-arrest',
   onHistoryChange,
+  developments = [],
+  currentDevelopment = 'default',
+  onDevelopmentChange,
   combatStyles = [],
   currentCombatStyle = 'standard',
   onCombatStyleChange,
@@ -90,7 +96,7 @@ export function CharacterContentTabs({
   combatStats,
   onTabChange,
   currentEntryId,
-  onLifestyleHistoryViewChange,
+  onTimelineViewChange,
   onCombatViewChange
 }: CharacterContentTabsProps) {
   const isMobile = useIsMobile();
@@ -106,15 +112,15 @@ export function CharacterContentTabs({
   const [isCombatFading, setIsCombatFading] = useState(false);
   const combatFadeTimeoutRef = useRef<number | null>(null);
 
-  // State for Profile view switcher (Overview, Appearance, Personality)
-  const [profileView, setProfileView] = useState<'overview' | 'appearance' | 'personality'>('overview');
-  const [displayProfileView, setDisplayProfileView] = useState<'overview' | 'appearance' | 'personality'>('overview');
+  // State for Profile view switcher (Overview, Appearance, Personality, Lifestyle)
+  const [profileView, setProfileView] = useState<'overview' | 'appearance' | 'personality' | 'lifestyle'>('overview');
+  const [displayProfileView, setDisplayProfileView] = useState<'overview' | 'appearance' | 'personality' | 'lifestyle'>('overview');
   const [isProfileFading, setIsProfileFading] = useState(false);
   const profileFadeTimeoutRef = useRef<number | null>(null);
 
-  // State for Lifestyle/History switcher in Timeline tab
-  const [timelineView, setTimelineView] = useState<'lifestyle' | 'history'>('lifestyle');
-  const [displayTimelineView, setDisplayTimelineView] = useState<'lifestyle' | 'history'>('lifestyle');
+  // State for Development/History switcher in Timeline tab
+  const [timelineView, setTimelineView] = useState<'development' | 'history'>('development');
+  const [displayTimelineView, setDisplayTimelineView] = useState<'development' | 'history'>('development');
   const [isTimelineFading, setIsTimelineFading] = useState(false);
   const timelineFadeTimeoutRef = useRef<number | null>(null);
 
@@ -214,6 +220,20 @@ export function CharacterContentTabs({
     return sections.history || [];
   };
 
+  // Get current development description
+  const getCurrentDevelopmentDescription = () => {
+    // For simple string array development, just return the sections.development
+    if (Array.isArray(sections.development) && sections.development.length > 0 && typeof sections.development[0] === 'string') {
+      return sections.development as string[];
+    }
+    // For dropdown-based development (episode selection)
+    if (developments && developments.length > 0) {
+      const current = developments.find(dev => dev.id === currentDevelopment);
+      return current?.description || developments[0]?.description || [];
+    }
+    return sections.development || [];
+  };
+
   const getCurrentCombatStyleDescription = () => {
     if (combatStyles.length > 0) {
       const current = combatStyles.find(style => style.id === currentCombatStyle);
@@ -256,26 +276,26 @@ export function CharacterContentTabs({
   return (
     <div className="min-h-0 flex flex-col">
       <Tabs defaultValue="general" className="w-full h-full flex flex-col" onValueChange={handleTabChange}>
-        <TabsList className="mb-6 w-full flex flex-wrap justify-center lg:w-auto lg:mx-auto gap-3 p-3 h-auto rounded-xl">
-          <TabsTrigger value="general" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
-            <User className="h-5 w-5 flex-shrink-0" />
-            <span>Profile</span>
+        <TabsList className="mb-6 w-full flex flex-wrap justify-center lg:w-auto lg:mx-auto gap-1 sm:gap-1.5 p-1.5 sm:p-2 h-auto">
+          <TabsTrigger value="general" className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-4 py-2 sm:py-2.5">
+            <User className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+            <span className="hidden sm:inline">Profile</span>
           </TabsTrigger>
-          <TabsTrigger value="timeline" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
-            <ArrowRightFromLine className="h-5 w-5 flex-shrink-0" />
-            <span>Timeline</span>
+          <TabsTrigger value="timeline" className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-4 py-2 sm:py-2.5">
+            <ArrowRightFromLine className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+            <span className="hidden sm:inline">Timeline</span>
           </TabsTrigger>
-          <TabsTrigger value="relationships" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
-            <Heart className="h-5 w-5 flex-shrink-0" />
-            <span>Relationships</span>
+          <TabsTrigger value="relationships" className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-4 py-2 sm:py-2.5">
+            <Heart className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+            <span className="hidden sm:inline">Relationships</span>
           </TabsTrigger>
-          <TabsTrigger value="combat" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
-            <Swords className="h-5 w-5 flex-shrink-0" />
-            <span>Combat</span>
+          <TabsTrigger value="combat" className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-4 py-2 sm:py-2.5">
+            <Swords className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+            <span className="hidden sm:inline">Combat</span>
           </TabsTrigger>
-          <TabsTrigger value="trivia" className="flex items-center gap-2 text-sm sm:text-base px-4 py-3 sm:py-4 rounded-xl whitespace-nowrap">
-            <ScrollText className="h-5 w-5 flex-shrink-0" />
-            <span>Trivia</span>
+          <TabsTrigger value="trivia" className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm px-2.5 sm:px-4 py-2 sm:py-2.5">
+            <ScrollText className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+            <span className="hidden sm:inline">Trivia</span>
           </TabsTrigger>
         </TabsList>
         
@@ -289,7 +309,7 @@ export function CharacterContentTabs({
               <TabsContent value="general" className="mt-0 space-y-4">
                 {/* Profile View Switcher Buttons */}
                 <div className="flex items-center justify-center mb-4">
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2 justify-center">
                     <Button
                       variant={profileView === 'overview' ? 'default' : 'outline'}
                       onClick={() => {
@@ -302,10 +322,10 @@ export function CharacterContentTabs({
                           setIsProfileFading(false);
                         }, 180);
                       }}
-                      className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
+                      className="flex items-center gap-2 rounded-xl text-sm sm:text-base px-3 sm:px-4 py-2"
                     >
-                      <FileText className="h-5 w-5" />
-                      Overview
+                      <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
+                      <span className="hidden sm:inline">Overview</span>
                     </Button>
                     <Button
                       variant={profileView === 'appearance' ? 'default' : 'outline'}
@@ -319,10 +339,10 @@ export function CharacterContentTabs({
                           setIsProfileFading(false);
                         }, 180);
                       }}
-                      className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
+                      className="flex items-center gap-2 rounded-xl text-sm sm:text-base px-3 sm:px-4 py-2"
                     >
-                      <Shirt className="h-5 w-5" />
-                      Appearance
+                      <Shirt className="h-4 w-4 sm:h-5 sm:w-5" />
+                      <span className="hidden sm:inline">Appearance</span>
                     </Button>
                     <Button
                       variant={profileView === 'personality' ? 'default' : 'outline'}
@@ -336,10 +356,27 @@ export function CharacterContentTabs({
                           setIsProfileFading(false);
                         }, 180);
                       }}
-                      className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
+                      className="flex items-center gap-2 rounded-xl text-sm sm:text-base px-3 sm:px-4 py-2"
                     >
-                      <Drama className="h-5 w-5" />
-                      Personality
+                      <Drama className="h-4 w-4 sm:h-5 sm:w-5" />
+                      <span className="hidden sm:inline">Personality</span>
+                    </Button>
+                    <Button
+                      variant={profileView === 'lifestyle' ? 'default' : 'outline'}
+                      onClick={() => {
+                        if (profileView === 'lifestyle') return;
+                        setIsProfileFading(true);
+                        profileFadeTimeoutRef.current && window.clearTimeout(profileFadeTimeoutRef.current);
+                        profileFadeTimeoutRef.current = window.setTimeout(() => {
+                          setDisplayProfileView('lifestyle');
+                          setProfileView('lifestyle');
+                          setIsProfileFading(false);
+                        }, 180);
+                      }}
+                      className="flex items-center gap-2 rounded-xl text-sm sm:text-base px-3 sm:px-4 py-2"
+                    >
+                      <Home className="h-4 w-4 sm:h-5 sm:w-5" />
+                      <span className="hidden sm:inline">Lifestyle</span>
                     </Button>
                   </div>
                 </div>
@@ -426,64 +463,15 @@ export function CharacterContentTabs({
                       </div>
                     </div>
                   )}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="timeline" className="mt-0 space-y-4">
-                {/* Lifestyle/History Switcher Buttons */}
-                {sections.history && Array.isArray(sections.history) && sections.history.length > 0 && (
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="flex gap-2">
-                      <Button
-                        variant={timelineView === 'lifestyle' ? 'default' : 'outline'}
-                        onClick={() => {
-                          if (timelineView === 'lifestyle') return;
-                          setIsTimelineFading(true);
-                          timelineFadeTimeoutRef.current && window.clearTimeout(timelineFadeTimeoutRef.current);
-                          timelineFadeTimeoutRef.current = window.setTimeout(() => {
-                            setDisplayTimelineView('lifestyle');
-                            setTimelineView('lifestyle');
-                            onLifestyleHistoryViewChange?.('lifestyle');
-                            setIsTimelineFading(false);
-                          }, 180);
-                        }}
-                        className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
-                      >
-                        <Home className="h-5 w-5" />
-                        Lifestyle
-                      </Button>
-                      <Button
-                        variant={timelineView === 'history' ? 'default' : 'outline'}
-                        onClick={() => {
-                          if (timelineView === 'history') return;
-                          setIsTimelineFading(true);
-                          timelineFadeTimeoutRef.current && window.clearTimeout(timelineFadeTimeoutRef.current);
-                          timelineFadeTimeoutRef.current = window.setTimeout(() => {
-                            setDisplayTimelineView('history');
-                            setTimelineView('history');
-                            onLifestyleHistoryViewChange?.('history');
-                            setIsTimelineFading(false);
-                          }, 180);
-                        }}
-                        className="flex items-center gap-2 rounded-xl text-base px-4 py-2"
-                      >
-                        <Clock className="h-5 w-5" />
-                        History
-                      </Button>
-                    </div>
-                  </div>
-                )}
 
-                {/* Content with fade transition */}
-                <div style={{ opacity: isTimelineFading ? 0 : 1, transition: 'opacity 200ms ease' }}>
-                  {displayTimelineView === 'lifestyle' && (
-                <div 
-                  className="bg-card rounded-xl p-6 border min-w-0"
-                  style={{ transition: 'none' }}
-                >
-                      <div className="flex justify-between items-center mb-3">
+                  {displayProfileView === 'lifestyle' && (
+                    <div 
+                      className="bg-card rounded-xl p-6 border min-w-0"
+                      style={{ transition: 'none' }}
+                    >
+                      <div className="flex items-center justify-between mb-3">
                         <h2 className="text-2xl font-semibold flex items-center gap-2">
-                          <Home className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                          <Home className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                           Lifestyle
                         </h2>
                         {lifestyles.length > 1 && onLifestyleChange && (
@@ -505,15 +493,100 @@ export function CharacterContentTabs({
                       </div>
                     </div>
                   )}
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="timeline" className="mt-0 space-y-4">
+                {/* Development/History Switcher Buttons */}
+                {((sections.history && Array.isArray(sections.history) && sections.history.length > 0) || 
+                  (sections.development && Array.isArray(sections.development) && sections.development.length > 0) ||
+                  (developments && developments.length > 0)) && (
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="flex gap-2">
+                      <Button
+                        variant={timelineView === 'development' ? 'default' : 'outline'}
+                        onClick={() => {
+                          if (timelineView === 'development') return;
+                          setIsTimelineFading(true);
+                          timelineFadeTimeoutRef.current && window.clearTimeout(timelineFadeTimeoutRef.current);
+                          timelineFadeTimeoutRef.current = window.setTimeout(() => {
+                            setDisplayTimelineView('development');
+                            setTimelineView('development');
+                            onTimelineViewChange?.('development');
+                            setIsTimelineFading(false);
+                          }, 180);
+                        }}
+                        className="flex items-center gap-2 rounded-xl text-sm sm:text-base px-3 sm:px-4 py-2"
+                      >
+                        <Film className="h-4 w-4 sm:h-5 sm:w-5" />
+                        <span className="hidden sm:inline">Development</span>
+                      </Button>
+                      <Button
+                        variant={timelineView === 'history' ? 'default' : 'outline'}
+                        onClick={() => {
+                          if (timelineView === 'history') return;
+                          setIsTimelineFading(true);
+                          timelineFadeTimeoutRef.current && window.clearTimeout(timelineFadeTimeoutRef.current);
+                          timelineFadeTimeoutRef.current = window.setTimeout(() => {
+                            setDisplayTimelineView('history');
+                            setTimelineView('history');
+                            onTimelineViewChange?.('history');
+                            setIsTimelineFading(false);
+                          }, 180);
+                        }}
+                        className="flex items-center gap-2 rounded-xl text-sm sm:text-base px-3 sm:px-4 py-2"
+                      >
+                        <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
+                        <span className="hidden sm:inline">History</span>
+                      </Button>
+                    </div>
+                  </div>
+                )}
 
-                  {sections.history && Array.isArray(sections.history) && sections.history.length > 0 && displayTimelineView === 'history' && (
-                <div 
-                  className="bg-card rounded-xl p-6 border min-w-0"
-                  style={{ transition: 'none' }}
-                >
+                {/* Content with fade transition */}
+                <div style={{ opacity: isTimelineFading ? 0 : 1, transition: 'opacity 200ms ease' }}>
+                  {displayTimelineView === 'development' && (
+                    <div 
+                      className="bg-card rounded-xl p-6 border min-w-0"
+                      style={{ transition: 'none' }}
+                    >
+                      <div className="flex justify-between items-center mb-3">
+                        <h2 className="text-2xl font-semibold flex items-center gap-2">
+                          <Film className="h-6 w-6 text-primary-foreground flex-shrink-0" />
+                          Development
+                        </h2>
+                        {developments.length > 1 && onDevelopmentChange && (
+                          <CharacterDevelopmentSwitcher 
+                            developments={developments}
+                            currentDevelopment={currentDevelopment}
+                            onDevelopmentChange={onDevelopmentChange}
+                          />
+                        )}
+                      </div>
+                      <div 
+                        className="text-foreground/90 min-w-0 text-base"
+                      >
+                        {getCurrentDevelopmentDescription().length > 0 ? (
+                          getCurrentDevelopmentDescription().map((paragraph, idx) => (
+                            <p key={idx} className="mb-4 text-left break-words whitespace-normal overflow-wrap-anywhere">
+                              <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                            </p>
+                          ))
+                        ) : (
+                          <p className="text-muted-foreground italic">No development information available yet.</p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {displayTimelineView === 'history' && (
+                    <div 
+                      className="bg-card rounded-xl p-6 border min-w-0"
+                      style={{ transition: 'none' }}
+                    >
                       <div className="flex items-center justify-between mb-3">
                         <h2 className="text-2xl font-semibold flex items-center gap-2">
-                          <Clock className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                          <Clock className="h-6 w-6 text-primary-foreground flex-shrink-0" />
                           History
                         </h2>
                         {histories.length > 1 && onHistoryChange && (
@@ -527,11 +600,15 @@ export function CharacterContentTabs({
                       <div 
                         className="text-foreground/90 min-w-0 text-base"
                       >
-                        {getCurrentHistoryDescription().map((paragraph, idx) => (
-                          <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                            <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                          </p>
-                        ))}
+                        {getCurrentHistoryDescription().length > 0 ? (
+                          getCurrentHistoryDescription().map((paragraph, idx) => (
+                            <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                              <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                            </p>
+                          ))
+                        ) : (
+                          <p className="text-muted-foreground italic">No history information available yet.</p>
+                        )}
                       </div>
                     </div>
                   )}
@@ -630,194 +707,86 @@ export function CharacterContentTabs({
                 {/* Content with fade transition */}
                 <div style={{ opacity: isCombatFading ? 0 : 1, transition: 'opacity 200ms ease' }}>
                   {displayCombatView === 'physical' && (
-                    <>
-                      {/* Combat Stat Chart */}
-                      <CharacterStatBarChart 
-                        stats={getCurrentCombatStats() || createCombatStats("A", "A", "A", "A", "A")} 
-                        characterId={characterId}
-                        abilityName="Physical"
-                        isPhysicalStats={true}
-                        className="mb-4"
-                        currentCombatStyle={currentCombatStyle}
+                    <div className="space-y-4">
+                      {/* Physical Stats Card Grid */}
+                      <StatsCardGrid
+                        stats={getCurrentCombatStats() || createCombatStats("A", "A", "A", "A", "A")}
+                        isPhysical={true}
                         combatStyles={combatStyles}
+                        currentCombatStyle={currentCombatStyle}
                         onCombatStyleChange={onCombatStyleChange}
                       />
                       
-                      {/* Combat Style Categories */}
+                      {/* Combat Style Techniques */}
                       {(() => {
                         const currentCombatStyleData = combatStyles.find(s => s.id === currentCombatStyle)?.combatStyleData;
+                        const styleName = combatStyles.find(s => s.id === currentCombatStyle)?.label;
                         
                         if (currentCombatStyleData) {
                           return (
-                    <div 
-                      className="bg-card rounded-xl p-6 border min-w-0 relative"
-                    >
-                              <div className="flex items-center justify-between mb-4 gap-4">
-                                <h2 className="text-2xl font-semibold flex items-center gap-2">
-                                  <HandFist className="h-6 w-6 text-primary-foreground flex-shrink-0" />
-                                  {combatStyles.find(s => s.id === currentCombatStyle)?.label || "Combat Style"}
-                                </h2>
-                              </div>
-                              
-                              <div className="space-y-4">
-                                <CombatStyleCategory
-                                  title={`${combatStyles.find(s => s.id === currentCombatStyle)?.label || "Combat Style"} Overview`}
-                                  icon={BookOpen}
-                                  category={currentCombatStyleData.overview}
-                                  currentEntryId={currentEntryId}
-                                />
-                                
-                                <CombatStyleCategory
-                                  title="Passives"
-                                  icon={Sparkles}
-                                  category={currentCombatStyleData.passives}
-                                  currentEntryId={currentEntryId}
-                                />
-                                
-                                <CombatStyleCategory
-                                  title="Offensive Techniques"
-                                  icon={Sword}
-                                  category={currentCombatStyleData.offensive}
-                                  currentEntryId={currentEntryId}
-                                />
-                                
-                                <CombatStyleCategory
-                                  title="Defensive Techniques"
-                                  icon={ShieldCheck}
-                                  category={currentCombatStyleData.defensive}
-                                  currentEntryId={currentEntryId}
-                                />
-                                
-                                <CombatStyleCategory
-                                  title="Utilitarian Techniques"
-                                  icon={Briefcase}
-                                  category={currentCombatStyleData.utilitarian}
-                                  currentEntryId={currentEntryId}
-                                />
-                                
-                                <CombatStyleCategory
-                                  title="Drawbacks"
-                                  icon={AlertTriangle}
-                                  category={currentCombatStyleData.drawbacks}
-                                  currentEntryId={currentEntryId}
-                                />
+                            <TechniqueTabs
+                              data={currentCombatStyleData}
+                              isAbility={false}
+                              styleName={styleName}
+                              currentEntryId={currentEntryId}
+                            />
+                          );
+                        }
+                        
+                        // Fallback: Show legacy description if no structured data
+                        const description = getCurrentCombatStyleDescription();
+                        if (description && description.length > 0) {
+                          return (
+                            <div className="rounded-2xl bg-card/80 backdrop-blur-sm border border-border/50 p-4 sm:p-6">
+                              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                                <HandFist className="h-5 w-5" />
+                                {styleName || "Combat Style"}
+                              </h3>
+                              <div className="text-foreground/90 space-y-3">
+                                {description.map((paragraph, idx) => (
+                                  <p key={idx} className="text-sm sm:text-base leading-relaxed">
+                                    <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
+                                  </p>
+                                ))}
                               </div>
                             </div>
                           );
                         }
                         
-                        // Fallback to old description format
-                        return (
-                          <div 
-                            className="bg-card rounded-xl p-6 border min-w-0 relative"
-                          >
-                            <div className="flex items-start justify-between mb-4 gap-4">
-                              <h2 className="text-2xl font-semibold flex items-center gap-2 flex-shrink-0">
-                                <HandFist className="h-6 w-6 text-primary-foreground flex-shrink-0" />
-                                Combat Style
-                              </h2>
-                              <div className="flex-shrink-0 min-w-0 flex-1 max-w-xs">
-                                <CharacterCombatStyleSwitcher
-                                  combatStyles={combatStyles || []}
-                                  currentStyle={currentCombatStyle}
-                                  onStyleChange={onCombatStyleChange || (() => {})}
-                                />
-                              </div>
-                            </div>
-                            <div 
-                              className="text-foreground/90 min-w-0 text-base"
-                            >
-                              {getCurrentCombatStyleDescription().map((paragraph, idx) => (
-                                <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
-                                  <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
-                                </p>
-                              ))}
-                            </div>
-                          </div>
-                        );
+                        return null;
                       })()}
-                    </>
+                    </div>
                   )}
 
                   {hasAbilities && displayCombatView === 'ability' && (
                     <div className="space-y-4">
-                      {/* Ability Stat Chart */}
-                      <CharacterStatBarChart 
-                        stats={stats || createCharacterStats("A", "A", "A", "A")} 
-                        characterId={characterId}
-                        abilityName={abilityName}
-                        isPhysicalStats={false}
-                        className="mb-4"
+                      {/* Ability Stats Card Grid */}
+                      <StatsCardGrid
+                        stats={stats || createCharacterStats("A", "A", "A", "A")}
+                        isPhysical={false}
+                        title={abilityName ? `${abilityName} Statistics` : "Ability Statistics"}
                       />
                       
-                      {/* New Structured Ability Layout */}
+                      {/* Ability Techniques */}
                       {sections.abilityData ? (
-                        <div className="bg-card rounded-xl p-6 border min-w-0 relative">
-                          <div className="space-y-4">
-                            <AbilityCategory
-                              title="Overview"
-                              icon={BookOpen}
-                              category={sections.abilityData.overview}
-                              currentEntryId={currentEntryId}
-                            />
-                            
-                            <AbilityCategory
-                              title="Passives"
-                              icon={Sparkles}
-                              category={sections.abilityData.passives}
-                              currentEntryId={currentEntryId}
-                            />
-                            
-                            <AbilityCategory
-                              title="Offensive Techniques"
-                              icon={Target}
-                              category={sections.abilityData.offensive}
-                              currentEntryId={currentEntryId}
-                            />
-                            
-                            <AbilityCategory
-                              title="Defensive Techniques"
-                              icon={ShieldCheck}
-                              category={sections.abilityData.defensive}
-                              currentEntryId={currentEntryId}
-                            />
-                            
-                            <AbilityCategory
-                              title="Utilitarian Techniques"
-                              icon={Briefcase}
-                              category={sections.abilityData.utilitarian}
-                              currentEntryId={currentEntryId}
-                            />
-                            
-                            {sections.abilityData.ultimate && (
-                              <AbilityCategory
-                                title="Ultimate Techniques"
-                                icon={Zap}
-                                category={sections.abilityData.ultimate}
-                                currentEntryId={currentEntryId}
-                              />
-                            )}
-                            
-                            <AbilityCategory
-                              title="Drawbacks"
-                              icon={AlertTriangle}
-                              category={sections.abilityData.drawbacks}
-                              currentEntryId={currentEntryId}
-                            />
-                          </div>
-                        </div>
+                        <TechniqueTabs
+                          data={sections.abilityData}
+                          isAbility={true}
+                          abilityName={abilityName}
+                          currentEntryId={currentEntryId}
+                        />
                       ) : (
-                        <>
-                          {/* Legacy Abilities Section - fallback for existing data */}
+                        // Legacy fallback for unstructured ability data
+                        <div className="rounded-2xl bg-card/80 backdrop-blur-sm border border-border/50 p-4 sm:p-6 space-y-4">
                           {sections.abilities && sections.abilities.length > 0 && (
-                            <div className="bg-card rounded-xl p-6 border min-w-0">
-                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
-                                <Zap className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                            <div>
+                              <h3 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                                <Zap className="h-5 w-5" />
                                 Ability Details
-                              </h2>
-                              <div className="text-foreground/90 min-w-0 text-base">
-                                {sections.abilities?.map((paragraph, idx) => (
-                                  <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                              </h3>
+                              <div className="text-foreground/90 space-y-3">
+                                {sections.abilities.map((paragraph, idx) => (
+                                  <p key={idx} className="text-sm sm:text-base leading-relaxed">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                                   </p>
                                 ))}
@@ -826,14 +795,14 @@ export function CharacterContentTabs({
                           )}
                           
                           {sections.abilityDetails && sections.abilityDetails.length > 0 && (
-                            <div className="bg-card rounded-xl p-6 border min-w-0">
-                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
-                                <ScrollText className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                            <div>
+                              <h3 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                                <ScrollText className="h-5 w-5" />
                                 Ability Details
-                              </h2>
-                              <div className="text-foreground/90 min-w-0 text-base">
-                                {sections.abilityDetails?.map((paragraph, idx) => (
-                                  <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                              </h3>
+                              <div className="text-foreground/90 space-y-3">
+                                {sections.abilityDetails.map((paragraph, idx) => (
+                                  <p key={idx} className="text-sm sm:text-base leading-relaxed">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                                   </p>
                                 ))}
@@ -842,14 +811,14 @@ export function CharacterContentTabs({
                           )}
                           
                           {sections.offensiveCapabilities && sections.offensiveCapabilities.length > 0 && (
-                            <div className="bg-card rounded-xl p-6 border min-w-0">
-                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
-                                <Sword className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                            <div>
+                              <h3 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                                <Sword className="h-5 w-5" />
                                 Offensive Capabilities
-                              </h2>
-                              <div className="text-foreground/90 min-w-0 text-base">
-                                {sections.offensiveCapabilities?.map((paragraph, idx) => (
-                                  <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                              </h3>
+                              <div className="text-foreground/90 space-y-3">
+                                {sections.offensiveCapabilities.map((paragraph, idx) => (
+                                  <p key={idx} className="text-sm sm:text-base leading-relaxed">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                                   </p>
                                 ))}
@@ -858,14 +827,14 @@ export function CharacterContentTabs({
                           )}
                           
                           {sections.defensiveCapabilities && sections.defensiveCapabilities.length > 0 && (
-                            <div className="bg-card rounded-xl p-6 border min-w-0">
-                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
-                                <Shield className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                            <div>
+                              <h3 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                                <Shield className="h-5 w-5" />
                                 Defensive Capabilities
-                              </h2>
-                              <div className="text-foreground/90 min-w-0 text-base">
-                                {sections.defensiveCapabilities?.map((paragraph, idx) => (
-                                  <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                              </h3>
+                              <div className="text-foreground/90 space-y-3">
+                                {sections.defensiveCapabilities.map((paragraph, idx) => (
+                                  <p key={idx} className="text-sm sm:text-base leading-relaxed">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                                   </p>
                                 ))}
@@ -874,14 +843,14 @@ export function CharacterContentTabs({
                           )}
                           
                           {sections.utilitarianCapabilities && sections.utilitarianCapabilities.length > 0 && (
-                            <div className="bg-card rounded-xl p-6 border min-w-0">
-                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
-                                <Wrench className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                            <div>
+                              <h3 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                                <Wrench className="h-5 w-5" />
                                 Utilitarian Capabilities
-                              </h2>
-                              <div className="text-foreground/90 min-w-0 text-base">
-                                {sections.utilitarianCapabilities?.map((paragraph, idx) => (
-                                  <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                              </h3>
+                              <div className="text-foreground/90 space-y-3">
+                                {sections.utilitarianCapabilities.map((paragraph, idx) => (
+                                  <p key={idx} className="text-sm sm:text-base leading-relaxed">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                                   </p>
                                 ))}
@@ -890,21 +859,21 @@ export function CharacterContentTabs({
                           )}
                           
                           {sections.drawbacks && sections.drawbacks.length > 0 && (
-                            <div className="bg-card rounded-xl p-6 border min-w-0">
-                              <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
-                                <AlertTriangle className="h-6 w-6 text-primary-foreground flex-shrink-0 " />
+                            <div>
+                              <h3 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                                <AlertTriangle className="h-5 w-5" />
                                 Drawbacks
-                              </h2>
-                              <div className="text-foreground/90 min-w-0 text-base">
-                                {sections.drawbacks?.map((paragraph, idx) => (
-                                  <p key={idx} className="mb-4 break-words whitespace-normal overflow-wrap-anywhere">
+                              </h3>
+                              <div className="text-foreground/90 space-y-3">
+                                {sections.drawbacks.map((paragraph, idx) => (
+                                  <p key={idx} className="text-sm sm:text-base leading-relaxed">
                                     <AutoLinkedText text={paragraph} currentEntryId={currentEntryId} />
                                   </p>
                                 ))}
                               </div>
                             </div>
                           )}
-                        </>
+                        </div>
                       )}
                     </div>
                   )}

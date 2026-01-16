@@ -118,7 +118,7 @@ export const EquipmentImageCarousel = memo(function EquipmentImageCarousel({
         
         {displayImages.length > 1 && (
           <div className="mt-4 space-y-3">
-            {/* Progress bars */}
+            {/* Progress bars with fade effect */}
             <div className="flex justify-center gap-1.5 px-4">
               {displayImages.map((_, index) => (
                 <button
@@ -129,10 +129,10 @@ export const EquipmentImageCarousel = memo(function EquipmentImageCarousel({
                 >
                   <div
                     className={cn(
-                      "h-full rounded-full transition-all duration-300",
+                      "h-full w-full rounded-full transition-opacity duration-300",
                       index === current
-                        ? "w-full bg-primary shadow-[0_0_8px_rgba(var(--glow-color-rgb),0.5)]"
-                        : "w-0 bg-primary/50"
+                        ? "opacity-100 bg-primary shadow-[0_0_8px_rgba(var(--glow-color-rgb),0.5)]"
+                        : "opacity-0 bg-primary/50"
                     )}
                   />
                 </button>

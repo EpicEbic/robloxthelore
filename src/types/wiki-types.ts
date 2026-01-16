@@ -56,6 +56,17 @@ export interface LifestyleOption {
   }[];
 }
 
+// Development option for per-episode character information
+export interface DevelopmentOption {
+  id: string;
+  label: string; // Episode name (e.g., "Chapter 1: Awakening")
+  description: string[];
+  images?: {
+    url: string;
+    caption: string;
+  }[];
+}
+
 // Equipment section option interfaces
 export interface EquipmentOverviewOption {
   id: string;
@@ -253,6 +264,7 @@ export interface WikiEntry {
     appearance?: string | AppearanceOption[];
     personality?: string[] | PersonalityOption[];
     history?: string[] | HistoryOption[];
+    development?: string[] | DevelopmentOption[]; // Per-episode character information
     combatStyles?: CombatStyleOption[];
     lifestyle?: string[] | LifestyleOption[];
     relationships?: string[];

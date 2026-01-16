@@ -1,4 +1,4 @@
-import { PillSwitcher } from "@/components/ui/pill-switcher";
+import { EntryDropdown } from "@/components/ui/entry-dropdown";
 import { HistoryOption } from "@/types/wiki-types";
 
 interface CharacterHistorySwitcherProps {
@@ -23,11 +23,11 @@ export function CharacterHistorySwitcher({
   }));
 
   return (
-    <PillSwitcher
+    <EntryDropdown
       options={options}
       value={currentHistory}
       onChange={onHistoryChange}
-      size="sm"
+      placeholder="Select Event"
     />
   );
 }

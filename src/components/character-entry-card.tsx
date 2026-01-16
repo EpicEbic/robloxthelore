@@ -6,7 +6,7 @@ import { getCharacterData } from "@/utils/character-utils";
 import { EntryHeader, EntryInfoBar } from "@/components/entry";
 import { CharacterImageCarousel } from "@/components/character/character-image-carousel";
 import { CharacterContentTabs } from "@/components/character/character-content-tabs";
-import { AppearanceOption, PersonalityOption } from "@/types/wiki-types";
+import { AppearanceOption, PersonalityOption, DevelopmentOption } from "@/types/wiki-types";
 import { GlassPanel } from "@/components/ui/glass-panel";
  
 
@@ -44,6 +44,7 @@ interface CharacterSections {
   personality?: string[] | PersonalityOption[];
   lifestyle?: string[] | any[]; // Updated to handle LifestyleOption[]
   history?: string[] | any[]; // Updated to handle HistoryOption[]
+  development?: string[] | any[]; // Per-episode character information
   relationships?: string[];
   relationshipsData?: any;
   combat?: string[];
@@ -108,16 +109,26 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
     }
     return 'standard';
   });
+  const [currentDevelopment, setCurrentDevelopment] = useState(() => {
+    if (Array.isArray(character.sections?.development) && character.sections.development.length > 0) {
+      const firstDevelopment = character.sections.development[0];
+      if (typeof firstDevelopment === 'object' && 'id' in firstDevelopment) {
+        return firstDevelopment.id;
+      }
+    }
+    return 'default';
+  });
   const [currentTab, setCurrentTab] = useState('general');
-  const [lifestyleHistoryView, setLifestyleHistoryView] = useState<'lifestyle' | 'history'>('lifestyle');
+  const [timelineView, setTimelineView] = useState<'development' | 'history'>('development');
   const [combatView, setCombatView] = useState<'physical' | 'ability'>('physical');
   // Extract only character-specific sections
   const characterSections: CharacterSections = {
     overview: character.sections?.overview || [],
     appearance: character.sections?.appearance,
-     personality: character.sections?.personality || [],
+    personality: character.sections?.personality || [],
     lifestyle: character.sections?.lifestyle || [],
     history: character.sections?.history || [],
+    development: character.sections?.development || [],
     relationships: character.sections?.relationships || [],
     relationshipsData: character.sections?.relationshipsData,
     combat: character.sections?.combat || [],
@@ -168,51 +179,54 @@ export function CharacterEntryCard({ character }: CharacterEntryCardProps) {
           
           <div className="min-w-0 w-full" style={{ height: 'fit-content' }}>
             <CharacterImageCarousel 
-            images={character.carouselImages || []}
-            appearances={characterData.appearances}
-            currentAppearance={currentAppearance}
-            combatStyles={character.sections?.combatStyles as any}
-            currentCombatStyle={currentCombatStyle}
-            currentTab={currentTab}
-            abilityImages={character.abilityCarouselImages}
-            lifestyles={Array.isArray(character.sections?.lifestyle) && typeof character.sections.lifestyle[0] === 'object' ? character.sections.lifestyle as any[] : []}
-            currentLifestyle={currentLifestyle}
-            histories={Array.isArray(character.sections?.history) && typeof character.sections.history[0] === 'object' ? character.sections.history as any[] : []}
-            currentHistory={currentHistory}
-            lifestyleHistoryView={lifestyleHistoryView}
-            combatView={combatView}
-          />
+              images={character.carouselImages || []}
+              appearances={characterData.appearances}
+              currentAppearance={currentAppearance}
+              combatStyles={character.sections?.combatStyles as any}
+              currentCombatStyle={currentCombatStyle}
+              currentTab={currentTab}
+              abilityImages={character.abilityCarouselImages}
+              lifestyles={Array.isArray(character.sections?.lifestyle) && typeof character.sections.lifestyle[0] === 'object' ? character.sections.lifestyle as any[] : []}
+              currentLifestyle={currentLifestyle}
+              histories={Array.isArray(character.sections?.history) && typeof character.sections.history[0] === 'object' ? character.sections.history as any[] : []}
+              currentHistory={currentHistory}
+              timelineView={timelineView}
+              combatView={combatView}
+            />
           </div>
           
           <div 
             className="min-w-0 w-full"
           >
             <CharacterContentTabs 
-            sections={characterSections} 
-            appearances={characterData.appearances}
-            currentAppearance={currentAppearance}
-            onAppearanceChange={setCurrentAppearance}
-            personalities={Array.isArray(character.sections?.personality) && typeof character.sections.personality[0] === 'object' ? character.sections.personality as PersonalityOption[] : []}
-            currentPersonality={currentPersonality}
-        onPersonalityChange={setCurrentPersonality}
-        lifestyles={Array.isArray(character.sections?.lifestyle) && typeof character.sections.lifestyle[0] === 'object' ? character.sections.lifestyle as any[] : []}
-        currentLifestyle={currentLifestyle}
-        onLifestyleChange={setCurrentLifestyle}
-        histories={Array.isArray(character.sections?.history) && typeof character.sections.history[0] === 'object' ? character.sections.history as any[] : []}
-        currentHistory={currentHistory}
-        onHistoryChange={setCurrentHistory}
-        combatStyles={character.sections?.combatStyles || []}
-        currentCombatStyle={currentCombatStyle}
-        onCombatStyleChange={setCurrentCombatStyle}
-            characterId={character.id}
-            abilityName={character.abilityName}
-            stats={character.stats as any}
-            combatStats={character.sections?.combatStyles?.find(style => style.id === currentCombatStyle)?.combatStats}
-            onTabChange={setCurrentTab}
-            currentEntryId={character.id}
-            onLifestyleHistoryViewChange={setLifestyleHistoryView}
-            onCombatViewChange={setCombatView}
-          />
+              sections={characterSections} 
+              appearances={characterData.appearances}
+              currentAppearance={currentAppearance}
+              onAppearanceChange={setCurrentAppearance}
+              personalities={Array.isArray(character.sections?.personality) && typeof character.sections.personality[0] === 'object' ? character.sections.personality as PersonalityOption[] : []}
+              currentPersonality={currentPersonality}
+              onPersonalityChange={setCurrentPersonality}
+              lifestyles={Array.isArray(character.sections?.lifestyle) && typeof character.sections.lifestyle[0] === 'object' ? character.sections.lifestyle as any[] : []}
+              currentLifestyle={currentLifestyle}
+              onLifestyleChange={setCurrentLifestyle}
+              histories={Array.isArray(character.sections?.history) && typeof character.sections.history[0] === 'object' ? character.sections.history as any[] : []}
+              currentHistory={currentHistory}
+              onHistoryChange={setCurrentHistory}
+              developments={Array.isArray(character.sections?.development) && typeof character.sections.development[0] === 'object' ? character.sections.development as DevelopmentOption[] : []}
+              currentDevelopment={currentDevelopment}
+              onDevelopmentChange={setCurrentDevelopment}
+              combatStyles={character.sections?.combatStyles || []}
+              currentCombatStyle={currentCombatStyle}
+              onCombatStyleChange={setCurrentCombatStyle}
+              characterId={character.id}
+              abilityName={character.abilityName}
+              stats={character.stats as any}
+              combatStats={character.sections?.combatStyles?.find(style => style.id === currentCombatStyle)?.combatStats}
+              onTabChange={setCurrentTab}
+              currentEntryId={character.id}
+              onTimelineViewChange={setTimelineView}
+              onCombatViewChange={setCombatView}
+            />
           </div>
           
         </div>

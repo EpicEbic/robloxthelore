@@ -11,7 +11,7 @@ interface PartContextType {
 const PartContext = createContext<PartContextType | undefined>(undefined);
 
 const STORAGE_KEY = "lore-current-part";
-const DEFAULT_PART: Part = "TEMP";
+const DEFAULT_PART: Part = "Part 1";
 
 export const PartProvider = ({ children }: { children: ReactNode }) => {
   const [currentPart, setCurrentPartState] = useState<Part>(() => {

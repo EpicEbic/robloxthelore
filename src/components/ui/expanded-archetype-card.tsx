@@ -117,6 +117,9 @@ export function ExpandedArchetypeCard({
     "--archetype-text-color": colors.textColor,
     "--archetype-body-color": "rgba(255, 255, 255, 0.9)",
     "--archetype-icon-color": colors.textColor,
+    // Background and border CSS variables for exemption rules
+    "--archetype-bg-gradient": colors.bgGradient,
+    "--archetype-border-color": colors.borderColor,
   } as React.CSSProperties;
 
   // Icon container styles

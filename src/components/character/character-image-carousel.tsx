@@ -26,7 +26,7 @@ interface CharacterImageCarouselProps {
   currentLifestyle?: string;
   histories?: any[];
   currentHistory?: string;
-  lifestyleHistoryView?: 'lifestyle' | 'history';
+  timelineView?: 'development' | 'history';
   combatView?: 'physical' | 'ability';
 }
 
@@ -42,7 +42,7 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
   currentLifestyle = 'default',
   histories = [],
   currentHistory = 'default',
-  lifestyleHistoryView = 'lifestyle',
+  timelineView = 'development',
   combatView = 'physical'
 }: CharacterImageCarouselProps) {
   const isMobile = useIsMobile();
@@ -75,14 +75,9 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
         }
       }
     }
-    // Use lifestyle or history images when on the timeline tab
+    // Use history images when on the timeline tab (development doesn't have images yet)
     if (currentTab === 'timeline') {
-      if (lifestyleHistoryView === 'lifestyle' && lifestyles && lifestyles.length > 0 && currentLifestyle) {
-        const currentLife = lifestyles.find(life => life.id === currentLifestyle);
-        if (currentLife?.images && currentLife.images.length > 0) {
-          return currentLife.images;
-        }
-      } else if (lifestyleHistoryView === 'history' && histories && histories.length > 0 && currentHistory) {
+      if (timelineView === 'history' && histories && histories.length > 0 && currentHistory) {
         const currentHist = histories.find(hist => hist.id === currentHistory);
         if (currentHist?.images && currentHist.images.length > 0) {
           return currentHist.images;
@@ -122,9 +117,7 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
     abilityImagesKey,
     combatStylesKey,
     currentCombatStyle,
-    lifestyleHistoryView,
-    lifestylesKey,
-    currentLifestyle,
+    timelineView,
     historiesKey,
     currentHistory,
     appearancesKey,
@@ -201,7 +194,7 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
         
         {displayImages.length > 1 && (
           <div className="mt-4 space-y-3">
-            {/* Progress bars */}
+            {/* Progress bars with fade effect */}
             <div className="flex justify-center gap-1.5 px-4">
               {displayImages.map((_, index) => (
                 <button
@@ -212,10 +205,10 @@ export const CharacterImageCarousel = memo(function CharacterImageCarousel({
                 >
                   <div
                     className={cn(
-                      "h-full rounded-full transition-all duration-300",
+                      "h-full w-full rounded-full transition-opacity duration-300",
                       index === current
-                        ? "w-full bg-primary shadow-[0_0_8px_rgba(var(--glow-color-rgb),0.5)]"
-                        : "w-0 bg-primary/50"
+                        ? "opacity-100 bg-primary shadow-[0_0_8px_rgba(var(--glow-color-rgb),0.5)]"
+                        : "opacity-0 bg-primary/50"
                     )}
                   />
                 </button>

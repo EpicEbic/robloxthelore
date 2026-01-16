@@ -17,22 +17,22 @@ export function MultiItemTabs({ item, coilColor, currentEntryId }: MultiItemTabs
 
   return (
     <Tabs defaultValue="overview" className="w-full">
-      <TabsList className={`mb-6 ${isMobile ? 'grid grid-cols-2 h-auto gap-2 p-1' : 'inline-flex h-auto p-0 gap-1'} bg-muted rounded-md`}>
-        <TabsTrigger value="overview" className={`flex items-center gap-2 ${isMobile ? 'text-sm px-3 py-3 rounded-md' : 'px-3 py-2 rounded-sm'}`}>
-          <Eye className="h-4 w-4" />
-          <span>General</span>
+      <TabsList className={`mb-6 ${isMobile ? 'grid grid-cols-4 h-auto gap-1 p-1.5' : 'inline-flex h-auto gap-1 p-1.5'}`}>
+        <TabsTrigger value="overview" className="flex items-center gap-1.5 text-xs sm:text-sm px-2.5 sm:px-3 py-2">
+          <Eye className="h-4 w-4 flex-shrink-0" />
+          <span className="hidden sm:inline">General</span>
         </TabsTrigger>
-        <TabsTrigger value="ability" className={`flex items-center gap-2 ${isMobile ? 'text-sm px-3 py-3 rounded-md' : 'px-3 py-2 rounded-sm'}`}>
-          <Zap className="h-4 w-4" />
-          <span>Ability</span>
+        <TabsTrigger value="ability" className="flex items-center gap-1.5 text-xs sm:text-sm px-2.5 sm:px-3 py-2">
+          <Zap className="h-4 w-4 flex-shrink-0" />
+          <span className="hidden sm:inline">Ability</span>
         </TabsTrigger>
-        <TabsTrigger value="history" className={`flex items-center gap-2 ${isMobile ? 'text-sm px-3 py-3 rounded-md' : 'px-3 py-2 rounded-sm'}`}>
-          <History className="h-4 w-4" />
-          <span>History</span>
+        <TabsTrigger value="history" className="flex items-center gap-1.5 text-xs sm:text-sm px-2.5 sm:px-3 py-2">
+          <History className="h-4 w-4 flex-shrink-0" />
+          <span className="hidden sm:inline">History</span>
         </TabsTrigger>
-        <TabsTrigger value="trivia" className={`flex items-center gap-2 ${isMobile ? 'text-sm px-3 py-3 rounded-md' : 'px-3 py-2 rounded-sm'}`}>
-          <ScrollText className="h-4 w-4" />
-          <span>Trivia</span>
+        <TabsTrigger value="trivia" className="flex items-center gap-1.5 text-xs sm:text-sm px-2.5 sm:px-3 py-2">
+          <ScrollText className="h-4 w-4 flex-shrink-0" />
+          <span className="hidden sm:inline">Trivia</span>
         </TabsTrigger>
       </TabsList>
       
