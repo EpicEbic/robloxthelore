@@ -1,8 +1,7 @@
 import { BodyPart, CoreData } from "@/data/bloxian-biology/body-parts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { X, Info } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import { X, Sparkles, BookOpen, Cog, GitCompareArrows } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface BodyPartInfoPanelProps {
   part?: BodyPart | CoreData;
@@ -19,70 +18,51 @@ export function BodyPartInfoPanel({ part, isCore = false, onClose }: BodyPartInf
   const lore = isCore ? (part as CoreData).lore : (part as BodyPart).lore;
   const r15R6Differences = isCore ? undefined : (part as BodyPart).r15R6Differences;
 
+  const sections = [
+    { icon: BookOpen, title: 'Description', content: description },
+    { icon: Cog, title: 'Function', content: functionText },
+    ...(!isCore && r15R6Differences ? [{ icon: GitCompareArrows, title: 'R15 vs R6', content: r15R6Differences }] : []),
+    ...(lore ? [{ icon: Sparkles, title: 'Lore', content: lore, italic: true }] : []),
+  ];
+
   return (
-    <Card className="w-full max-w-2xl mx-auto border-2 shadow-xl">
-      <CardHeader className="pb-4">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-2xl font-bold flex items-center gap-2">
-            <Info className="h-6 w-6 text-primary" />
-            {displayName}
-          </CardTitle>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            className="h-8 w-8 rounded-full"
-          >
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={part.id}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -12 }}
+        transition={{ duration: 0.25 }}
+        className="rounded-xl border border-border/50 bg-card/80 backdrop-blur-sm shadow-lg overflow-hidden"
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-border/30">
+          <div className="flex items-center gap-2.5">
+            {isCore && <Sparkles className="h-5 w-5 text-primary" />}
+            <h3 className="text-lg font-semibold text-foreground">{displayName}</h3>
+          </div>
+          <Button variant="ghost" size="icon" onClick={onClose} className="h-7 w-7 rounded-full hover:bg-muted">
             <X className="h-4 w-4" />
           </Button>
         </div>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        {/* Description */}
-        <div>
-          <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-            Description
-          </h3>
-          <p className="text-foreground leading-relaxed">{description}</p>
-        </div>
 
-        <Separator />
-
-        {/* Function */}
-        <div>
-          <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-            Function
-          </h3>
-          <p className="text-foreground leading-relaxed">{functionText}</p>
-        </div>
-
-        {/* R15/R6 Differences (only for body parts, not Core) */}
-        {!isCore && r15R6Differences && (
-          <>
-            <Separator />
-            <div>
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                R15 vs R6 Differences
-              </h3>
-              <p className="text-foreground leading-relaxed">{r15R6Differences}</p>
+        {/* Content sections */}
+        <div className="p-5 space-y-4">
+          {sections.map((section, i) => (
+            <div key={i}>
+              <div className="flex items-center gap-2 mb-1.5">
+                <section.icon className="h-3.5 w-3.5 text-muted-foreground" />
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  {section.title}
+                </span>
+              </div>
+              <p className={`text-sm leading-relaxed text-foreground/90 ${(section as any).italic ? 'italic text-foreground/70' : ''}`}>
+                {section.content}
+              </p>
             </div>
-          </>
-        )}
-
-        {/* Lore */}
-        {lore && (
-          <>
-            <Separator />
-            <div>
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                Lore
-              </h3>
-              <p className="text-foreground leading-relaxed italic">{lore}</p>
-            </div>
-          </>
-        )}
-      </CardContent>
-    </Card>
+          ))}
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
-

@@ -1,93 +1,94 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Activity, Info, Tag } from "lucide-react";
+import { Activity } from "lucide-react";
 import { InteractiveBloxianDiagram } from "@/components/bloxian-biology/interactive-bloxian-diagram";
+import { BodyPartInfoPanel } from "@/components/bloxian-biology/body-part-info-panel";
 import { BodyPart, CoreData } from "@/data/bloxian-biology/body-parts";
 import { cn } from "@/lib/utils";
 
 export default function BloxianBiologyPage() {
   const [bodyType, setBodyType] = useState<'r15' | 'r6'>('r15');
-  const [showLabels, setShowLabels] = useState(false);
   const [selectedPart, setSelectedPart] = useState<BodyPart | CoreData | null>(null);
+  const [isCoreSelected, setIsCoreSelected] = useState(false);
 
-  const handleBodyPartClick = (part: BodyPart | CoreData, isCore: boolean) => {
+  const handlePartSelect = (part: BodyPart | CoreData, isCore: boolean) => {
     setSelectedPart(part);
+    setIsCoreSelected(isCore);
+  };
+
+  const handleClose = () => {
+    setSelectedPart(null);
+    setIsCoreSelected(false);
   };
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-6xl">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
-          <Activity className="w-8 h-8 text-primary" />
+    <div className="container mx-auto px-4 py-12 max-w-5xl">
+      {/* Hero */}
+      <div className="text-center mb-10">
+        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 mb-4">
+          <Activity className="w-7 h-7 text-primary" />
         </div>
-        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
           Bloxian Biology
         </h1>
-        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          Explore the anatomy of Bloxians with interactive diagrams. Learn about the differences between R15 and R6 body types, and discover the mysterious Core that gives life to every Bloxian.
+        <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">
+          Explore the anatomy of Bloxians with interactive diagrams. Click on any body part or the Core to learn more about its function and lore.
         </p>
       </div>
 
-      <div className="space-y-6">
-        {/* Controls - Inline with diagram */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-          {/* Body Type Toggle */}
-          <div className="flex items-center gap-3">
-            <Label className="text-sm font-medium text-muted-foreground">
-              Body Type:
-            </Label>
-            <div className="flex gap-2">
-              <Button
-                variant={bodyType === 'r15' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setBodyType('r15')}
-                className={cn(
-                  "transition-all duration-200 min-w-[100px]",
-                  bodyType === 'r15' && "shadow-md"
-                )}
-              >
-                R15
-              </Button>
-              <Button
-                variant={bodyType === 'r6' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setBodyType('r6')}
-                className={cn(
-                  "transition-all duration-200 min-w-[100px]",
-                  bodyType === 'r6' && "shadow-md"
-                )}
-              >
-                R6
-              </Button>
-            </div>
-          </div>
+      {/* Body Type Toggle */}
+      <div className="flex justify-center gap-2 mb-8">
+        <Button
+          variant={bodyType === 'r15' ? 'default' : 'outline'}
+          size="sm"
+          onClick={() => { setBodyType('r15'); handleClose(); }}
+          className={cn("min-w-[80px] transition-all", bodyType === 'r15' && "shadow-md")}
+        >
+          R15
+        </Button>
+        <Button
+          variant={bodyType === 'r6' ? 'default' : 'outline'}
+          size="sm"
+          onClick={() => { setBodyType('r6'); handleClose(); }}
+          className={cn("min-w-[80px] transition-all", bodyType === 'r6' && "shadow-md")}
+        >
+          R6
+        </Button>
+      </div>
 
-          {/* Labels Toggle */}
-          <div className="flex items-center gap-3">
-            <Switch
-              id="show-labels"
-              checked={showLabels}
-              onCheckedChange={setShowLabels}
+      {/* Main content: diagram + info panel side by side on desktop */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        {/* Diagram */}
+        <div className="flex justify-center">
+          <div className="w-full max-w-[320px] md:max-w-[360px] rounded-xl border border-border/40 bg-card/50 backdrop-blur-sm p-6 shadow-sm">
+            <InteractiveBloxianDiagram
+              bodyType={bodyType}
+              onPartSelect={handlePartSelect}
             />
-            <Label htmlFor="show-labels" className="text-sm font-medium flex items-center gap-2 cursor-pointer">
-              <Tag className="h-4 w-4" />
-              Show Labels
-            </Label>
+            <p className="text-center text-xs text-muted-foreground mt-4">
+              {bodyType === 'r15' ? '15 body parts' : '6 body parts'} · Click to inspect
+            </p>
           </div>
         </div>
 
-        {/* Interactive Diagram */}
-        <InteractiveBloxianDiagram
-          bodyType={bodyType}
-          showLabels={showLabels}
-          onBodyPartClick={handleBodyPartClick}
-        />
+        {/* Info panel */}
+        <div className="min-h-[200px]">
+          {selectedPart ? (
+            <BodyPartInfoPanel
+              part={selectedPart}
+              isCore={isCoreSelected}
+              onClose={handleClose}
+            />
+          ) : (
+            <div className="rounded-xl border border-dashed border-border/40 bg-muted/20 p-8 text-center h-full flex flex-col items-center justify-center min-h-[200px]">
+              <Activity className="h-8 w-8 text-muted-foreground/40 mb-3" />
+              <p className="text-sm text-muted-foreground">
+                Select a body part to view details
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 }
-

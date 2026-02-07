@@ -10,6 +10,7 @@ export interface BodyPart {
 
 export interface CoreData {
   id: string;
+  name: string;
   position: { x: number; y: number; radius: number };
   description: string;
   function: string;
@@ -22,8 +23,46 @@ export interface BodyType {
   core: CoreData;
 }
 
-// R15 Body Parts (15 pieces) - Accurate to reference image
-// Coordinate system: 0-100 width, 0-100 height
+// ============================================================
+// R15 Body Type — 15 pieces
+// Coordinate system: viewBox 0 0 120 160
+// All values are carefully symmetric around centerX = 60
+// ============================================================
+
+const TORSO_W = 40;
+const TORSO_H = 32;
+const TORSO_X = 60 - TORSO_W / 2; // 40
+const HEAD_W = 18;
+const HEAD_H = 16;
+const HEAD_X = 60 - HEAD_W / 2; // 51
+const HEAD_Y = 2;
+const HEAD_GAP = 2; // gap between head bottom and torso top
+const TORSO_Y = HEAD_Y + HEAD_H + HEAD_GAP; // 20
+
+const ARM_W = 12;
+const UPPER_ARM_H = 22;
+const LOWER_ARM_H = 18;
+const HAND_W = ARM_W;
+const HAND_H = 5;
+const ARM_GAP = 2; // gap between arm and torso
+
+const LEFT_ARM_X = TORSO_X - ARM_W - ARM_GAP; // 26
+const RIGHT_ARM_X = TORSO_X + TORSO_W + ARM_GAP; // 82
+
+const PELVIS_H = 6;
+const PELVIS_Y = TORSO_Y + TORSO_H; // 52
+
+const LEG_W = 14;
+const LEG_GAP = 2; // gap between legs
+const UPPER_LEG_H = 22;
+const LOWER_LEG_H = 20;
+const FOOT_H = 5;
+const FOOT_W = LEG_W + 2;
+
+const LEFT_LEG_X = 60 - LEG_GAP / 2 - LEG_W; // 45
+const RIGHT_LEG_X = 60 + LEG_GAP / 2; // 61
+const LEG_Y = PELVIS_Y + PELVIS_H; // 58
+
 const r15Parts: BodyPart[] = [
   {
     id: 'head',
@@ -32,7 +71,7 @@ const r15Parts: BodyPart[] = [
     function: 'Houses the eyes, ears, and primary cognitive functions. The head is the center of perception and decision-making for a Bloxian.',
     r15R6Differences: 'In R15, the head is a separate piece that can move independently from the torso, allowing for more expressive animations.',
     lore: 'The head is considered the window to a Bloxian\'s Core, as facial expressions often reflect the state of their inner being.',
-    position: { x: 42, y: 2, width: 16, height: 14 } // Rounded rectangle, centered
+    position: { x: HEAD_X, y: HEAD_Y, width: HEAD_W, height: HEAD_H }
   },
   {
     id: 'torso',
@@ -41,7 +80,7 @@ const r15Parts: BodyPart[] = [
     function: 'Provides structural support for the arms and head. Contains the Core housing.',
     r15R6Differences: 'R15 has a single large torso piece, wider than it is tall, positioned directly below the head.',
     lore: 'The torso is where most Bloxians feel the strongest connection to their Core, as it\'s closest to the heart of their being.',
-    position: { x: 35, y: 16, width: 30, height: 18 } // Large rectangle, wider than tall
+    position: { x: TORSO_X, y: TORSO_Y, width: TORSO_W, height: TORSO_H }
   },
   {
     id: 'leftUpperArm',
@@ -50,7 +89,7 @@ const r15Parts: BodyPart[] = [
     function: 'Provides range of motion for the left arm, allowing for lifting and reaching actions.',
     r15R6Differences: 'R15 divides arms into upper and lower segments, creating more realistic arm movement.',
     lore: 'The left side is often associated with receiving and intuition in Bloxian culture.',
-    position: { x: 20, y: 16, width: 10, height: 16 } // Vertical, attached to upper left of torso
+    position: { x: LEFT_ARM_X, y: TORSO_Y, width: ARM_W, height: UPPER_ARM_H }
   },
   {
     id: 'leftLowerArm',
@@ -59,7 +98,7 @@ const r15Parts: BodyPart[] = [
     function: 'Enables fine motor control and precise hand movements.',
     r15R6Differences: 'Separate from the upper arm in R15, allowing for independent elbow movement.',
     lore: 'Lower arms are where Bloxians channel their creative energy into physical action.',
-    position: { x: 18, y: 32, width: 8, height: 14 } // Smaller, below upper arm
+    position: { x: LEFT_ARM_X, y: TORSO_Y + UPPER_ARM_H, width: ARM_W, height: LOWER_ARM_H }
   },
   {
     id: 'leftHand',
@@ -68,7 +107,7 @@ const r15Parts: BodyPart[] = [
     function: 'Primary tool for interaction, allowing Bloxians to grasp, hold, and manipulate objects.',
     r15R6Differences: 'R15 includes separate hand pieces, enabling more detailed hand animations and gestures.',
     lore: 'Hands are considered extensions of the Core\'s will, translating intention into action.',
-    position: { x: 16, y: 46, width: 6, height: 8 } // Small at end of arm
+    position: { x: LEFT_ARM_X, y: TORSO_Y + UPPER_ARM_H + LOWER_ARM_H, width: HAND_W, height: HAND_H }
   },
   {
     id: 'rightUpperArm',
@@ -77,7 +116,7 @@ const r15Parts: BodyPart[] = [
     function: 'Provides range of motion for the right arm, typically the dominant side.',
     r15R6Differences: 'R15 divides arms into upper and lower segments for more natural movement.',
     lore: 'The right side is often associated with action and giving in Bloxian culture.',
-    position: { x: 70, y: 16, width: 10, height: 16 } // Vertical, attached to upper right of torso, symmetrical
+    position: { x: RIGHT_ARM_X, y: TORSO_Y, width: ARM_W, height: UPPER_ARM_H }
   },
   {
     id: 'rightLowerArm',
@@ -86,7 +125,7 @@ const r15Parts: BodyPart[] = [
     function: 'Enables fine motor control and precise hand movements on the dominant side.',
     r15R6Differences: 'Separate from the upper arm in R15, allowing for independent elbow movement.',
     lore: 'The right lower arm is where most Bloxians express their primary actions and intentions.',
-    position: { x: 74, y: 32, width: 8, height: 14 } // Smaller, below upper arm, symmetrical
+    position: { x: RIGHT_ARM_X, y: TORSO_Y + UPPER_ARM_H, width: ARM_W, height: LOWER_ARM_H }
   },
   {
     id: 'rightHand',
@@ -95,7 +134,7 @@ const r15Parts: BodyPart[] = [
     function: 'Primary tool for interaction and manipulation, often more dexterous than the left.',
     r15R6Differences: 'R15 includes separate hand pieces for more detailed animations.',
     lore: 'The right hand is seen as the instrument of a Bloxian\'s will, carrying out their Core\'s desires.',
-    position: { x: 78, y: 46, width: 6, height: 8 } // Small at end of arm, symmetrical
+    position: { x: RIGHT_ARM_X, y: TORSO_Y + UPPER_ARM_H + LOWER_ARM_H, width: HAND_W, height: HAND_H }
   },
   {
     id: 'pelvis',
@@ -104,7 +143,7 @@ const r15Parts: BodyPart[] = [
     function: 'Provides the base structure for leg attachment.',
     r15R6Differences: 'R15 has a separate pelvis piece, a thin horizontal rectangle below the torso.',
     lore: 'The pelvis represents stability and grounding, anchoring the Bloxian to the physical world.',
-    position: { x: 35, y: 34, width: 30, height: 4 } // Thin horizontal, spanning torso width
+    position: { x: TORSO_X, y: PELVIS_Y, width: TORSO_W, height: PELVIS_H }
   },
   {
     id: 'leftUpperLeg',
@@ -113,7 +152,7 @@ const r15Parts: BodyPart[] = [
     function: 'Provides support and mobility, enabling walking, running, and jumping.',
     r15R6Differences: 'R15 divides legs into upper and lower segments for more realistic movement.',
     lore: 'Legs represent a Bloxian\'s connection to the ground and their ability to move through the world.',
-    position: { x: 38, y: 38, width: 9, height: 18 } // Vertical, below pelvis, left side
+    position: { x: LEFT_LEG_X, y: LEG_Y, width: LEG_W, height: UPPER_LEG_H }
   },
   {
     id: 'leftLowerLeg',
@@ -122,7 +161,7 @@ const r15Parts: BodyPart[] = [
     function: 'Enables foot movement and provides additional support for locomotion.',
     r15R6Differences: 'Separate from the upper leg in R15, allowing for knee bending animations.',
     lore: 'Lower legs are where Bloxians ground themselves, connecting their Core to the earth.',
-    position: { x: 38, y: 56, width: 8, height: 16 } // Smaller, below upper leg
+    position: { x: LEFT_LEG_X, y: LEG_Y + UPPER_LEG_H, width: LEG_W, height: LOWER_LEG_H }
   },
   {
     id: 'leftFoot',
@@ -131,7 +170,7 @@ const r15Parts: BodyPart[] = [
     function: 'Primary contact point with the ground, enabling balance, walking, and standing.',
     r15R6Differences: 'R15 includes separate foot pieces, allowing for more natural foot placement and animation.',
     lore: 'Feet are considered the foundation of a Bloxian\'s physical presence, grounding their Core in reality.',
-    position: { x: 37, y: 72, width: 7, height: 6 } // Small at bottom
+    position: { x: LEFT_LEG_X - 1, y: LEG_Y + UPPER_LEG_H + LOWER_LEG_H, width: FOOT_W, height: FOOT_H }
   },
   {
     id: 'rightUpperLeg',
@@ -140,7 +179,7 @@ const r15Parts: BodyPart[] = [
     function: 'Provides support and mobility, working in tandem with the left leg.',
     r15R6Differences: 'R15 divides legs into multiple segments for more realistic movement.',
     lore: 'The right leg often carries more weight in movement, representing action and forward momentum.',
-    position: { x: 53, y: 38, width: 9, height: 18 } // Vertical, below pelvis, right side, symmetrical
+    position: { x: RIGHT_LEG_X, y: LEG_Y, width: LEG_W, height: UPPER_LEG_H }
   },
   {
     id: 'rightLowerLeg',
@@ -149,7 +188,7 @@ const r15Parts: BodyPart[] = [
     function: 'Enables foot movement and provides additional support for locomotion.',
     r15R6Differences: 'Separate from the upper leg in R15, allowing for knee bending animations.',
     lore: 'Lower legs ground the Bloxian, connecting their Core\'s energy to the physical world.',
-    position: { x: 54, y: 56, width: 8, height: 16 } // Smaller, below upper leg, symmetrical
+    position: { x: RIGHT_LEG_X, y: LEG_Y + UPPER_LEG_H, width: LEG_W, height: LOWER_LEG_H }
   },
   {
     id: 'rightFoot',
@@ -158,12 +197,38 @@ const r15Parts: BodyPart[] = [
     function: 'Primary contact point with the ground, enabling balance and movement.',
     r15R6Differences: 'R15 includes separate foot pieces for more natural foot placement.',
     lore: 'Feet anchor a Bloxian to the world, providing the foundation for all their actions.',
-    position: { x: 56, y: 72, width: 7, height: 6 } // Small at bottom, symmetrical
+    position: { x: RIGHT_LEG_X - 1, y: LEG_Y + UPPER_LEG_H + LOWER_LEG_H, width: FOOT_W, height: FOOT_H }
   }
 ];
 
-// R6 Body Parts (6 pieces) - Accurate to reference image
-// Coordinate system: 0-100 width, 0-100 height
+// ============================================================
+// R6 Body Type — 6 pieces
+// Coordinate system: viewBox 0 0 120 140
+// Symmetric around centerX = 60
+// ============================================================
+
+const R6_TORSO_W = 40;
+const R6_TORSO_H = 38;
+const R6_TORSO_X = 60 - R6_TORSO_W / 2;
+const R6_HEAD_W = 18;
+const R6_HEAD_H = 16;
+const R6_HEAD_X = 60 - R6_HEAD_W / 2;
+const R6_HEAD_Y = 2;
+const R6_TORSO_Y = R6_HEAD_Y + R6_HEAD_H + 2;
+
+const R6_ARM_W = 14;
+const R6_ARM_H = R6_TORSO_H;
+const R6_ARM_GAP = 2;
+const R6_LEFT_ARM_X = R6_TORSO_X - R6_ARM_W - R6_ARM_GAP;
+const R6_RIGHT_ARM_X = R6_TORSO_X + R6_TORSO_W + R6_ARM_GAP;
+
+const R6_LEG_W = 16;
+const R6_LEG_H = 42;
+const R6_LEG_GAP = 2;
+const R6_LEFT_LEG_X = 60 - R6_LEG_GAP / 2 - R6_LEG_W;
+const R6_RIGHT_LEG_X = 60 + R6_LEG_GAP / 2;
+const R6_LEG_Y = R6_TORSO_Y + R6_TORSO_H;
+
 const r6Parts: BodyPart[] = [
   {
     id: 'head',
@@ -172,7 +237,7 @@ const r6Parts: BodyPart[] = [
     function: 'Houses the eyes, ears, and primary cognitive functions. The head is the center of perception and decision-making for a Bloxian.',
     r15R6Differences: 'In R6, the head is simpler and moves as a single unit with the torso, creating a more classic Roblox appearance.',
     lore: 'The head is considered the window to a Bloxian\'s Core, as facial expressions often reflect the state of their inner being.',
-    position: { x: 42, y: 2, width: 16, height: 14 } // Rounded rectangle, centered
+    position: { x: R6_HEAD_X, y: R6_HEAD_Y, width: R6_HEAD_W, height: R6_HEAD_H }
   },
   {
     id: 'torso',
@@ -181,7 +246,7 @@ const r6Parts: BodyPart[] = [
     function: 'Central structure that supports the head, arms, and legs. Contains the Core, the heart and soul of every Bloxian.',
     r15R6Differences: 'R6 uses a single unified torso piece, creating a simpler, more blocky appearance compared to R15\'s segmented design.',
     lore: 'The torso is the most sacred part of a Bloxian, as it houses their Core—the essence of their being and consciousness.',
-    position: { x: 35, y: 16, width: 30, height: 22 } // Large rectangle, wider than tall
+    position: { x: R6_TORSO_X, y: R6_TORSO_Y, width: R6_TORSO_W, height: R6_TORSO_H }
   },
   {
     id: 'leftArm',
@@ -190,7 +255,7 @@ const r6Parts: BodyPart[] = [
     function: 'Provides range of motion and manipulation capabilities on the left side.',
     r15R6Differences: 'R6 uses a single arm piece, while R15 divides it into upper arm, lower arm, and hand segments.',
     lore: 'The left side is often associated with receiving and intuition in Bloxian culture.',
-    position: { x: 20, y: 16, width: 10, height: 22 } // Vertical, top edge aligned with torso top, same height as torso
+    position: { x: R6_LEFT_ARM_X, y: R6_TORSO_Y, width: R6_ARM_W, height: R6_ARM_H }
   },
   {
     id: 'rightArm',
@@ -199,7 +264,7 @@ const r6Parts: BodyPart[] = [
     function: 'Provides range of motion and manipulation capabilities, typically the dominant side.',
     r15R6Differences: 'R6 uses a single arm piece, creating a simpler but less flexible design than R15.',
     lore: 'The right side is often associated with action and giving in Bloxian culture.',
-    position: { x: 70, y: 16, width: 10, height: 22 } // Vertical, top edge aligned with torso top, symmetrical
+    position: { x: R6_RIGHT_ARM_X, y: R6_TORSO_Y, width: R6_ARM_W, height: R6_ARM_H }
   },
   {
     id: 'leftLeg',
@@ -208,7 +273,7 @@ const r6Parts: BodyPart[] = [
     function: 'Provides support and mobility, enabling walking, running, and jumping.',
     r15R6Differences: 'R6 uses a single leg piece, while R15 divides it into upper leg, lower leg, and foot segments.',
     lore: 'Legs represent a Bloxian\'s connection to the ground and their ability to move through the world.',
-    position: { x: 38, y: 38, width: 9, height: 28 } // Vertical, below torso, slightly taller than arms, gap between legs
+    position: { x: R6_LEFT_LEG_X, y: R6_LEG_Y, width: R6_LEG_W, height: R6_LEG_H }
   },
   {
     id: 'rightLeg',
@@ -217,14 +282,15 @@ const r6Parts: BodyPart[] = [
     function: 'Provides support and mobility, working in tandem with the left leg.',
     r15R6Differences: 'R6 uses a single leg piece, creating a simpler but less detailed design than R15.',
     lore: 'The right leg often carries more weight in movement, representing action and forward momentum.',
-    position: { x: 53, y: 38, width: 9, height: 28 } // Vertical, below torso, symmetrical, gap between legs
+    position: { x: R6_RIGHT_LEG_X, y: R6_LEG_Y, width: R6_LEG_W, height: R6_LEG_H }
   }
 ];
 
-// Core Data - Different positions for R15 and R6
+// Core Data
 const r15CoreData: CoreData = {
   id: 'core',
-  position: { x: 50, y: 22, radius: 3.5 }, // Upper portion of torso (y: 16 + height/4 = 16 + 18/4 ≈ 20.5, but visually upper)
+  name: 'Core',
+  position: { x: 60, y: TORSO_Y + TORSO_H * 0.35, radius: 4 },
   description: 'The Core is the heart and soul of every Bloxian, a small but powerful energy source located in the upper portion of the torso.',
   function: 'The Core is the source of a Bloxian\'s consciousness, life force, and connection to the Bloxiverse. It is what makes a Bloxian truly alive and aware.',
   lore: 'The Core is the most mysterious and important part of a Bloxian. It is said that when a Bloxian\'s Core is damaged or destroyed, they cease to exist entirely. The Core pulses with the rhythm of life itself, and its glow reflects the Bloxian\'s emotional and physical state. Some believe the Core contains fragments of the Bloxiverse itself, connecting each Bloxian to the greater cosmic order.'
@@ -232,7 +298,8 @@ const r15CoreData: CoreData = {
 
 const r6CoreData: CoreData = {
   id: 'core',
-  position: { x: 50, y: 27, radius: 3.5 }, // Middle of torso (y: 16 + height/2 = 16 + 22/2 = 27)
+  name: 'Core',
+  position: { x: 60, y: R6_TORSO_Y + R6_TORSO_H * 0.4, radius: 4.5 },
   description: 'The Core is the heart and soul of every Bloxian, a small but powerful energy source located in the center of the torso.',
   function: 'The Core is the source of a Bloxian\'s consciousness, life force, and connection to the Bloxiverse. It is what makes a Bloxian truly alive and aware.',
   lore: 'The Core is the most mysterious and important part of a Bloxian. It is said that when a Bloxian\'s Core is damaged or destroyed, they cease to exist entirely. The Core pulses with the rhythm of life itself, and its glow reflects the Bloxian\'s emotional and physical state. Some believe the Core contains fragments of the Bloxiverse itself, connecting each Bloxian to the greater cosmic order.'
@@ -249,4 +316,3 @@ export const R6_BODY_TYPE: BodyType = {
   parts: r6Parts,
   core: r6CoreData
 };
-
