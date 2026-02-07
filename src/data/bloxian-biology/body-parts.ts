@@ -34,34 +34,39 @@ const TORSO_H = 32;
 const TORSO_X = 60 - TORSO_W / 2; // 40
 const HEAD_W = 18;
 const HEAD_H = 16;
-const HEAD_X = 60 - HEAD_W / 2; // 51
+const HEAD_X = 60 - HEAD_W / 2;
 const HEAD_Y = 2;
-const HEAD_GAP = 2; // gap between head bottom and torso top
+const HEAD_GAP = 2;
 const TORSO_Y = HEAD_Y + HEAD_H + HEAD_GAP; // 20
-
-const ARM_W = 12;
-const UPPER_ARM_H = 22;
-const LOWER_ARM_H = 18;
-const HAND_W = ARM_W;
-const HAND_H = 5;
-const ARM_GAP = 2; // gap between arm and torso
-
-const LEFT_ARM_X = TORSO_X - ARM_W - ARM_GAP; // 26
-const RIGHT_ARM_X = TORSO_X + TORSO_W + ARM_GAP; // 82
 
 const PELVIS_H = 6;
 const PELVIS_Y = TORSO_Y + TORSO_H; // 52
 
-const LEG_W = 14;
-const LEG_GAP = 2; // gap between legs
-const UPPER_LEG_H = 22;
-const LOWER_LEG_H = 20;
+// Legs fill pelvis width: 2 * LEG_W + LEG_GAP = TORSO_W
+const SEG_GAP = 1; // gap between limb segments
+const LEG_GAP = 2; // gap between left and right leg
+const LEG_W = (TORSO_W - LEG_GAP) / 2; // 19
+const UPPER_LEG_H = 20;
+const LOWER_LEG_H = 18;
 const FOOT_H = 5;
-const FOOT_W = LEG_W + 2;
+const FOOT_W = LEG_W;
 
-const LEFT_LEG_X = 60 - LEG_GAP / 2 - LEG_W; // 45
-const RIGHT_LEG_X = 60 + LEG_GAP / 2; // 61
-const LEG_Y = PELVIS_Y + PELVIS_H; // 58
+// Arms same thickness as legs
+const ARM_W = LEG_W; // 19
+const ARM_GAP = 2; // gap between arm and torso
+// Arms must not extend past pelvis bottom: total arm ≤ TORSO_H + PELVIS_H = 38
+// 3 segments + 2 gaps: upper + lower + hand + 2*SEG_GAP ≤ 38
+const UPPER_ARM_H = 17;
+const LOWER_ARM_H = 14;
+const HAND_H = 5;
+// Total: 17 + 1 + 14 + 1 + 5 = 38 ✓
+
+const LEFT_ARM_X = TORSO_X - ARM_W - ARM_GAP;
+const RIGHT_ARM_X = TORSO_X + TORSO_W + ARM_GAP;
+
+const LEFT_LEG_X = 60 - LEG_GAP / 2 - LEG_W;
+const RIGHT_LEG_X = 60 + LEG_GAP / 2;
+const LEG_Y = PELVIS_Y + PELVIS_H;
 
 const r15Parts: BodyPart[] = [
   {
@@ -89,7 +94,7 @@ const r15Parts: BodyPart[] = [
     function: 'Provides range of motion for the left arm, allowing for lifting and reaching actions.',
     r15R6Differences: 'R15 divides arms into upper and lower segments, creating more realistic arm movement.',
     lore: 'The left side is often associated with receiving and intuition in Bloxian culture.',
-    position: { x: LEFT_ARM_X, y: TORSO_Y, width: ARM_W, height: UPPER_ARM_H }
+    position: { x: LEFT_ARM_X, y: TORSO_Y, width: ARM_W, height: UPPER_ARM_H }  // upper arm flush with torso top
   },
   {
     id: 'leftLowerArm',
@@ -98,7 +103,7 @@ const r15Parts: BodyPart[] = [
     function: 'Enables fine motor control and precise hand movements.',
     r15R6Differences: 'Separate from the upper arm in R15, allowing for independent elbow movement.',
     lore: 'Lower arms are where Bloxians channel their creative energy into physical action.',
-    position: { x: LEFT_ARM_X, y: TORSO_Y + UPPER_ARM_H, width: ARM_W, height: LOWER_ARM_H }
+    position: { x: LEFT_ARM_X, y: TORSO_Y + UPPER_ARM_H + SEG_GAP, width: ARM_W, height: LOWER_ARM_H }
   },
   {
     id: 'leftHand',
@@ -107,7 +112,7 @@ const r15Parts: BodyPart[] = [
     function: 'Primary tool for interaction, allowing Bloxians to grasp, hold, and manipulate objects.',
     r15R6Differences: 'R15 includes separate hand pieces, enabling more detailed hand animations and gestures.',
     lore: 'Hands are considered extensions of the Core\'s will, translating intention into action.',
-    position: { x: LEFT_ARM_X, y: TORSO_Y + UPPER_ARM_H + LOWER_ARM_H, width: HAND_W, height: HAND_H }
+    position: { x: LEFT_ARM_X, y: TORSO_Y + UPPER_ARM_H + SEG_GAP + LOWER_ARM_H + SEG_GAP, width: ARM_W, height: HAND_H }
   },
   {
     id: 'rightUpperArm',
@@ -116,7 +121,7 @@ const r15Parts: BodyPart[] = [
     function: 'Provides range of motion for the right arm, typically the dominant side.',
     r15R6Differences: 'R15 divides arms into upper and lower segments for more natural movement.',
     lore: 'The right side is often associated with action and giving in Bloxian culture.',
-    position: { x: RIGHT_ARM_X, y: TORSO_Y, width: ARM_W, height: UPPER_ARM_H }
+    position: { x: RIGHT_ARM_X, y: TORSO_Y, width: ARM_W, height: UPPER_ARM_H }  // symmetric
   },
   {
     id: 'rightLowerArm',
@@ -125,7 +130,7 @@ const r15Parts: BodyPart[] = [
     function: 'Enables fine motor control and precise hand movements on the dominant side.',
     r15R6Differences: 'Separate from the upper arm in R15, allowing for independent elbow movement.',
     lore: 'The right lower arm is where most Bloxians express their primary actions and intentions.',
-    position: { x: RIGHT_ARM_X, y: TORSO_Y + UPPER_ARM_H, width: ARM_W, height: LOWER_ARM_H }
+    position: { x: RIGHT_ARM_X, y: TORSO_Y + UPPER_ARM_H + SEG_GAP, width: ARM_W, height: LOWER_ARM_H }
   },
   {
     id: 'rightHand',
@@ -134,7 +139,7 @@ const r15Parts: BodyPart[] = [
     function: 'Primary tool for interaction and manipulation, often more dexterous than the left.',
     r15R6Differences: 'R15 includes separate hand pieces for more detailed animations.',
     lore: 'The right hand is seen as the instrument of a Bloxian\'s will, carrying out their Core\'s desires.',
-    position: { x: RIGHT_ARM_X, y: TORSO_Y + UPPER_ARM_H + LOWER_ARM_H, width: HAND_W, height: HAND_H }
+    position: { x: RIGHT_ARM_X, y: TORSO_Y + UPPER_ARM_H + SEG_GAP + LOWER_ARM_H + SEG_GAP, width: ARM_W, height: HAND_H }
   },
   {
     id: 'pelvis',
@@ -161,7 +166,7 @@ const r15Parts: BodyPart[] = [
     function: 'Enables foot movement and provides additional support for locomotion.',
     r15R6Differences: 'Separate from the upper leg in R15, allowing for knee bending animations.',
     lore: 'Lower legs are where Bloxians ground themselves, connecting their Core to the earth.',
-    position: { x: LEFT_LEG_X, y: LEG_Y + UPPER_LEG_H, width: LEG_W, height: LOWER_LEG_H }
+    position: { x: LEFT_LEG_X, y: LEG_Y + UPPER_LEG_H + SEG_GAP, width: LEG_W, height: LOWER_LEG_H }
   },
   {
     id: 'leftFoot',
@@ -170,7 +175,7 @@ const r15Parts: BodyPart[] = [
     function: 'Primary contact point with the ground, enabling balance, walking, and standing.',
     r15R6Differences: 'R15 includes separate foot pieces, allowing for more natural foot placement and animation.',
     lore: 'Feet are considered the foundation of a Bloxian\'s physical presence, grounding their Core in reality.',
-    position: { x: LEFT_LEG_X - 1, y: LEG_Y + UPPER_LEG_H + LOWER_LEG_H, width: FOOT_W, height: FOOT_H }
+    position: { x: LEFT_LEG_X, y: LEG_Y + UPPER_LEG_H + SEG_GAP + LOWER_LEG_H + SEG_GAP, width: FOOT_W, height: FOOT_H }
   },
   {
     id: 'rightUpperLeg',
@@ -188,7 +193,7 @@ const r15Parts: BodyPart[] = [
     function: 'Enables foot movement and provides additional support for locomotion.',
     r15R6Differences: 'Separate from the upper leg in R15, allowing for knee bending animations.',
     lore: 'Lower legs ground the Bloxian, connecting their Core\'s energy to the physical world.',
-    position: { x: RIGHT_LEG_X, y: LEG_Y + UPPER_LEG_H, width: LEG_W, height: LOWER_LEG_H }
+    position: { x: RIGHT_LEG_X, y: LEG_Y + UPPER_LEG_H + SEG_GAP, width: LEG_W, height: LOWER_LEG_H }
   },
   {
     id: 'rightFoot',
@@ -197,7 +202,7 @@ const r15Parts: BodyPart[] = [
     function: 'Primary contact point with the ground, enabling balance and movement.',
     r15R6Differences: 'R15 includes separate foot pieces for more natural foot placement.',
     lore: 'Feet anchor a Bloxian to the world, providing the foundation for all their actions.',
-    position: { x: RIGHT_LEG_X - 1, y: LEG_Y + UPPER_LEG_H + LOWER_LEG_H, width: FOOT_W, height: FOOT_H }
+    position: { x: RIGHT_LEG_X, y: LEG_Y + UPPER_LEG_H + SEG_GAP + LOWER_LEG_H + SEG_GAP, width: FOOT_W, height: FOOT_H }
   }
 ];
 
@@ -216,15 +221,16 @@ const R6_HEAD_X = 60 - R6_HEAD_W / 2;
 const R6_HEAD_Y = 2;
 const R6_TORSO_Y = R6_HEAD_Y + R6_HEAD_H + 2;
 
-const R6_ARM_W = 14;
+const R6_ARM_W = 16;
 const R6_ARM_H = R6_TORSO_H;
 const R6_ARM_GAP = 2;
 const R6_LEFT_ARM_X = R6_TORSO_X - R6_ARM_W - R6_ARM_GAP;
 const R6_RIGHT_ARM_X = R6_TORSO_X + R6_TORSO_W + R6_ARM_GAP;
 
-const R6_LEG_W = 16;
-const R6_LEG_H = 42;
+// Legs fill torso width: 2 * R6_LEG_W + R6_LEG_GAP = R6_TORSO_W
 const R6_LEG_GAP = 2;
+const R6_LEG_W = (R6_TORSO_W - R6_LEG_GAP) / 2; // 19
+const R6_LEG_H = 42;
 const R6_LEFT_LEG_X = 60 - R6_LEG_GAP / 2 - R6_LEG_W;
 const R6_RIGHT_LEG_X = 60 + R6_LEG_GAP / 2;
 const R6_LEG_Y = R6_TORSO_Y + R6_TORSO_H;
