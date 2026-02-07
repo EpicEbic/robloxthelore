@@ -24,6 +24,8 @@ import AlternateSecretPage from "./pages/AlternateSecretPage";
 import SecretLPage from "./pages/SecretLPage";
 import WhyBotherPage from "./pages/WhyBotherPage";
 import OldFriendPage from "./pages/OldFriendPage";
+import OnMyOwnPage from "./pages/OnMyOwnPage";
+import BloxianBiologyPage from "./pages/BloxianBiologyPage";
 import NotFound from "./pages/NotFound";
 import { ComparisonPage } from "./pages/ComparisonPage";
 import { TournamentPage } from "./pages/TournamentPage";
@@ -72,11 +74,13 @@ const AppContent = () => {
             <Route path="/whats-new" element={<WhatsNewPage />} />
             <Route path="/plot-timeline" element={<PlotTimelinePage />} />
             <Route path="/height-comparison" element={<HeightComparisonPage />} />
+            <Route path="/bloxian-biology" element={<BloxianBiologyPage />} />
             <Route path="/secret" element={<SecretPage />} />
             <Route path="/secret-alternate" element={<AlternateSecretPage />} />
             <Route path="/secret-l" element={<SecretLPage />} />
             <Route path="/whybother" element={<WhyBotherPage />} />
             <Route path="/oldfriend" element={<OldFriendPage />} />
+            <Route path="/onmyown" element={<OnMyOwnPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </motion.div>

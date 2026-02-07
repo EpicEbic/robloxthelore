@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, ChevronUp, GitCompare, BarChart3, ArrowLeft, Globe, Settings, Trophy, Menu, Home } from "lucide-react";
+import { ChevronDown, ChevronUp, GitCompare, BarChart3, ArrowLeft, Globe, Settings, Trophy, Menu, Home, Info, Ruler, Activity } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
 import { CategoryType } from "@/contexts/wiki-context";
 import { useParticleSettings } from "@/contexts/particle-settings-context";
@@ -99,12 +99,12 @@ function MobileSidebarContent({
         ))}
       </div>
 
-      {/* Divider before Tools */}
+      {/* Divider before Information */}
       <div className="h-px bg-border/30 mx-4 rounded-full" />
 
-      {/* Tools */}
+      {/* Information */}
       <div className="p-4 space-y-2 border-t border-border/30">
-        <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Tools</h3>
+        <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Information</h3>
         <div className="space-y-1">
           <Link to="/statistics" onClick={closeSidebar}>
             <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
@@ -115,6 +115,34 @@ function MobileSidebarContent({
               </div>
             </div>
           </Link>
+          <Link to="/height-comparison" onClick={closeSidebar}>
+            <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
+              <Ruler className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
+              <div>
+                <div className="font-medium text-sm text-foreground">Height Comparison</div>
+                <div className="text-xs text-muted-foreground">Compare character heights</div>
+              </div>
+            </div>
+          </Link>
+          <Link to="/bloxian-biology" onClick={closeSidebar}>
+            <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
+              <Activity className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
+              <div>
+                <div className="font-medium text-sm text-foreground">Bloxian Biology</div>
+                <div className="text-xs text-muted-foreground">Explore Bloxian anatomy</div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      {/* Divider before Tools */}
+      <div className="h-px bg-border/30 mx-4 rounded-full" />
+
+      {/* Tools */}
+      <div className="p-4 space-y-2 border-t border-border/30">
+        <h3 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider px-1">Tools</h3>
+        <div className="space-y-1">
           <Link to="/world" onClick={closeSidebar}>
             <div className="flex items-center px-3 py-2 rounded-lg mobile-sidebar-link">
               <Globe className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
@@ -480,8 +508,40 @@ export function WikiTopNav({
             </div>
           ))}
 
-          {/* Divider between Categories and Tools */}
+          {/* Divider between Categories and Information */}
           <div className="h-4 sm:h-5 md:h-6 w-px bg-border/30 mx-2 sm:mx-3 md:mx-4 rounded-full" />
+
+          {/* Information */}
+          <div className="relative z-[100]" data-dropdown>
+            <Button
+              variant="ghost"
+              className="bg-transparent hover:bg-accent/50 px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg border border-transparent hover:border-border/50 text-xs sm:text-xs md:text-sm font-medium h-auto"
+              onClick={(e) => handleCategoryClick("information", e)}
+            >
+              Information
+              <ChevronDown className={cn("ml-0.5 sm:ml-1 h-2.5 sm:h-3 w-2.5 sm:w-3 transition-transform duration-200", openDropdown === "information" && "rotate-180")} />
+            </Button>
+
+            {/* Dropdown Menu */}
+            {openDropdown === "information" && (
+              <div className="absolute left-0 top-full mt-2 w-[240px] p-2 rounded-xl bg-card border border-border/50 shadow-lg z-[100]">
+                <div className="flex flex-col gap-1">
+                  <Link to="/statistics" onClick={() => handleSubcategoryClick("information")} className="block select-none rounded-lg px-3 py-2 text-sm leading-none no-underline outline-none transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                    Statistics
+                  </Link>
+                  <Link to="/height-comparison" onClick={() => handleSubcategoryClick("information")} className="block select-none rounded-lg px-3 py-2 text-sm leading-none no-underline outline-none transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                    Height Comparison
+                  </Link>
+                  <Link to="/bloxian-biology" onClick={() => handleSubcategoryClick("information")} className="block select-none rounded-lg px-3 py-2 text-sm leading-none no-underline outline-none transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                    Bloxian Biology
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Divider between Information and Tools */}
+          <div className="h-4 sm:h-5 md:h-6 w-px bg-border/30 mx-1 sm:mx-1.5 md:mx-2 rounded-full" />
 
           {/* Tools */}
           <div className="relative z-[100]" data-dropdown>
@@ -498,12 +558,6 @@ export function WikiTopNav({
             {openDropdown === "tools" && (
               <div className="absolute left-0 top-full mt-2 w-[240px] p-2 rounded-xl bg-card border border-border/50 shadow-lg z-[100]">
                 <div className="flex flex-col gap-1">
-                  <Link to="/statistics" onClick={() => handleSubcategoryClick("tools")} className="block select-none rounded-lg px-3 py-2 text-sm leading-none no-underline outline-none transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                    Statistics
-                  </Link>
-                  <Link to="/height-comparison" onClick={() => handleSubcategoryClick("tools")} className="block select-none rounded-lg px-3 py-2 text-sm leading-none no-underline outline-none transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                    Height Comparison
-                  </Link>
                   <Link to="/world" onClick={() => handleSubcategoryClick("tools")} className="block select-none rounded-lg px-3 py-2 text-sm leading-none no-underline outline-none transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                     World Map
                   </Link>
@@ -521,8 +575,12 @@ export function WikiTopNav({
               </div>
             )}
           </div>
+        </div>
+        </div>
 
-          {/* Divider between Tools and Plot Timeline */}
+        {/* Right Section - Action Buttons */}
+        <div ref={rightSectionRef} className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-3 flex-shrink-0">
+          {/* Divider before Plot Timeline */}
           <div className="h-4 sm:h-5 md:h-6 w-px bg-border/30 mx-1 sm:mx-1.5 md:mx-2 rounded-full" />
 
           {/* Plot Timeline */}
@@ -533,11 +591,6 @@ export function WikiTopNav({
           >
             Plot Timeline
           </Button>
-        </div>
-        </div>
-
-        {/* Right Section - Action Buttons */}
-        <div ref={rightSectionRef} className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-3 flex-shrink-0">
         {/* Back Button - Entry pages or world map */}
         {(isEntryPage || isWorldMap) && (
           <Button

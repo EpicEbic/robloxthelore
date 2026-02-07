@@ -33,7 +33,7 @@ const LOCKED_ENTRIES = [
 ];
 
 // Valid secret phrases to track (with page restrictions)
-const ALL_PHRASES = ['minion', 'whybother', 'oldfriend', 'salad', 'unlock'];
+const ALL_PHRASES = ['minion', 'whybother', 'oldfriend', 'salad', 'unlock', 'onmyown'];
 
 export function EasterEggProvider({ children }: EasterEggProviderProps) {
   const [isMinionMode, setIsMinionMode] = useState(false);
@@ -127,6 +127,13 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
           if (typingTimeoutRef.current) {
             clearTimeout(typingTimeoutRef.current);
           }
+        } else if (newTypingText === 'onmyown') {
+          navigate('/onmyown');
+          setTypingText('');
+          setIsTypingVisible(false);
+          if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+          }
         } else if (newTypingText === 'salad') {
           if (isOnCaesarPage) {
             setIsCaesarSaladMode(!isCaesarSaladMode);
@@ -152,7 +159,7 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
           setUnlockedEntries(new Set(LOCKED_ENTRIES));
           // Enable all disabled entries
           setEnabledEntries(new Set([
-            "nauli-parter",
+            "myra-parter",
             "vortex-a-steele",
             "rice-farmer",
             "ren-bytera",
@@ -204,7 +211,7 @@ export function EasterEggProvider({ children }: EasterEggProviderProps) {
         setUnlockedEntries(new Set(LOCKED_ENTRIES));
         // Enable all disabled entries
         setEnabledEntries(new Set([
-          "nauli-parter",
+          "myra-parter",
           "vortex-a-steele",
           "rice-farmer",
           "ren-bytera",
