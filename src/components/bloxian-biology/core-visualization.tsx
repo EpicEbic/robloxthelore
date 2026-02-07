@@ -6,6 +6,7 @@ interface CoreVisualizationProps {
   isSelected?: boolean;
   isHovered?: boolean;
   onHover?: () => void;
+  onLeave?: () => void;
   onClick?: () => void;
   className?: string;
 }
@@ -15,45 +16,40 @@ export function CoreVisualization({
   isSelected = false,
   isHovered = false,
   onHover,
+  onLeave,
   onClick,
   className
 }: CoreVisualizationProps) {
   const { position } = core;
-  const clickableRadius = position.radius + 4; // Larger clickable area
 
   return (
     <g
       className={cn("cursor-pointer", className)}
       onMouseEnter={onHover}
+      onMouseLeave={onLeave}
       onClick={onClick}
     >
-      {/* Clickable outline area (invisible but clickable) */}
-      <circle
-        cx={position.x}
-        cy={position.y}
-        r={clickableRadius}
-        fill="transparent"
-        stroke="none"
-        className="pointer-events-auto"
-      />
-      
-      {/* Core circle - grey base that pulses white */}
+      {/* Glow effect */}
+      {(isSelected || isHovered) && (
+        <circle
+          cx={position.x}
+          cy={position.y}
+          r={position.radius + 3}
+          fill="none"
+          stroke="hsl(var(--primary) / 0.3)"
+          strokeWidth={1}
+          className="animate-pulse"
+        />
+      )}
       <circle
         cx={position.x}
         cy={position.y}
         r={position.radius}
-        className="core-pulse-white"
-        fill="rgb(156, 163, 175)"
-        stroke={cn(
-          isSelected
-            ? "hsl(var(--primary))"
-            : isHovered
-            ? "hsl(var(--primary) / 0.6)"
-            : "hsl(var(--foreground) / 0.5)"
-        )}
-        strokeWidth={isSelected ? "2" : "1.5"}
+        fill={isSelected ? "hsl(var(--primary) / 0.4)" : isHovered ? "hsl(var(--primary) / 0.25)" : "hsl(var(--muted-foreground) / 0.3)"}
+        stroke={isSelected ? "hsl(var(--primary))" : isHovered ? "hsl(var(--primary) / 0.6)" : "hsl(var(--foreground) / 0.5)"}
+        strokeWidth={isSelected ? 2 : 1.5}
+        style={{ transition: 'fill 0.2s, stroke 0.2s' }}
       />
     </g>
   );
 }
-
